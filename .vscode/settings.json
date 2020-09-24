@@ -1,0 +1,12 @@
+{
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#6afcc4",
+        "activityBar.background": "#08472f",
+        "titleBar.inactiveBackground": "#191c3f",
+        "titleBar.activeForeground": "#FFFFFF",
+        "dropdown.background" : "#000000",
+        "terminal.background":"#1d1d27"
+
+    },
+}  
