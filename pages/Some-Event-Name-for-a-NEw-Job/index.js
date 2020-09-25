@@ -28,7 +28,9 @@ const testEvent1 = (props) => {
        : 
        <div>
        <h1>{event_meta.EventJobName}</h1>
-       <h1>Client: {event_meta.client.ClientName}</h1>
+       <h1>Client: {!event_meta.client
+       ? "No Client Yet"
+        : event_meta.client.ClientName}</h1>
        </div>
         } 
       <h3>path: {router.pathname} </h3>

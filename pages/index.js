@@ -10,19 +10,25 @@ export default function Home() {
 
   // const eventJobs = data.eventJobs
 
+
   if(loading){
     return ( 
     <h1>Loading...</h1>
     )
-  }else { 
+  }
+  if(error){
+    return <p> There was an error loading the content.  Please contact system provider. <br/>
+    Error message: <strong> {error.message}</strong></p>
+
+  } else { 
     return(
       <div> 
-    <h1>Not Loading</h1>
+    <h1>All Event Jobs</h1>
    { data.eventJobs.map(j => (
      <div>
-      <Link href={j.eventUrl}>{j.eventUrl}</Link>
-      <br/>
-      <br/>
+    Event:       <Link href={j.eventUrl}>{j.EventJobName}</Link>
+          <br/>
+          <br/>
       </div>
       
       )

@@ -14,11 +14,12 @@ import { GET_ALL_EVENTS } from '../../queries/urlQueries';
      
           return (
               <div>
-               { JSON.stringify(meta)}
-              <h1> {events.EventName}</h1>
               {Object.keys(events).map(e => {
                 return (
-                  <p>{events[e].EventName}</p>
+                  <div> 
+                  <h1> {events[e].EventName}</h1>
+                  <p>Client Name: {(events[e].client) ? events[e].client.ClientName : "No Clients!"}</p>
+                </div>
                 )
               })}
               </div>
@@ -50,7 +51,7 @@ EventPage.getInitialProps = async ( ctx ) => {
             }
          }
     )
-    console.log(ctx)
+
     const meta = await data
     // By returning { props: posts }, the Blog component
     // will receive `posts` as a prop at build time

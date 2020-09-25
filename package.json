@@ -10,6 +10,9 @@
   "dependencies": {
     "@apollo/client": "^3.2.1",
     "apollo-boost": "^0.4.9",
+    "apollo-server-micro": "^2.18.1",
+    "cors": "^2.8.5",
+    "fs-extra": "^9.0.1",
     "graphql": "^15.3.0",
     "lodash": "^4.17.20",
     "next": "9.5.3",
