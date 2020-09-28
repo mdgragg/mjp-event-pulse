@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from 'next/router'
 import  Link  from 'next/link'
 import { useQuery, gql } from "@apollo/client";
@@ -7,21 +7,18 @@ import  _  from 'lodash';
 
 const testEvent1 = (props) => {
   const router = useRouter()
-  const [testParam, setTestParam] = useState(0);
+
+  let event_meta = {}
 
   const { loading, error, data } =  useQuery(GET_EVENT_META, {
     variables: { url: router.pathname.slice(1) },
   });
 
-  let event_meta = {}
   if(!loading){  
-    _.keys(data.eventJobs).map(answer => event_meta = data.eventJobs[answer])
+    _.keys(data.eventJobs).map(answer => 
+      event_meta = data.eventJobs[answer]) 
+
   }
-
-  console.log(event_meta)
-
-
-
   return (
     <div>
        { loading ? "loading..." 
@@ -43,7 +40,6 @@ const testEvent1 = (props) => {
           {info.EventName}
           </Link>
           </li>
-
       })}
       </ul>
     </div>

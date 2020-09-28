@@ -7,7 +7,7 @@ function handlePost(req, res) {
       
       console.log("Directory is created: ");
       console.log('\x1b[36m', result)
-      console.log('\x1b[33m', "at working directory:" +  process.cwd())
+      console.log(  "at working directory:" +  process.cwd())
       res.status(200).end(JSON.stringify({ 
             data : {
               workingDirectory: process.cwd(),

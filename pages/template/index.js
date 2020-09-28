@@ -6,19 +6,25 @@ import { useQuery, gql } from "@apollo/client";
 import  _  from 'lodash';
 
 const testEvent1 = (props) => {
+
   const router = useRouter()
-  
+  const [fetchedData, setFetchedData] = useState({ data: {} })
 
   const { loading, error, data } =  useQuery(GET_EVENT_META, {
     variables: { url: router.pathname.slice(1) },
   });
 
+  //define an object to use for rendering
+  let event_meta = useRef({})
 
-  let event_meta = {}
+
   if(!loading){  
     _.keys(data.eventJobs).map(answer => event_meta = data.eventJobs[answer])
-    const [fetchedData, setFetchedData] = useState({ event_meta })
   }
+
+  useEffect(()=>{
+    setFetchedData({eventdata : data})
+  }, [])
 
 
   return (
