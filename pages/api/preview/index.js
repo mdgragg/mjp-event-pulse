@@ -9,7 +9,7 @@ export default async function preview(req, res) {
   ) {
     return res.status(401).json({ message: 'Invalid token' })
   }
-  console.log(req.query.eventUrl)
+  console.log("request for preview link: " + req.query.eventUrl)
   // Fetch the headless CMS to check if the provided `slug` exists
   const url = await getEventByUrl(req.query.eventUrl)
 
@@ -20,12 +20,12 @@ export default async function preview(req, res) {
 
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({
-    isAuthenticatedTEST: false,
+    isAuthenticatedTEST: true,
     url: url
   })
 
   // Redirect to the path from the fetched post
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { Location: `/${url}/preview` })
+  res.writeHead(307, { Location: `/${url}/` })
   res.end()
 }

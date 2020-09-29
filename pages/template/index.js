@@ -13,7 +13,11 @@ const testEvent1 = (props) => {
   let event_meta = props.meta;
 
   let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
-  
+
+  const pushAdmin = () => {
+    router.push(router.pathname + '/admin')
+  }
+
   useEffect(() => {
     if (isAuthenticated) {
       setPreview(false);
@@ -54,7 +58,12 @@ const testEvent1 = (props) => {
       </div>
     );
   } else {
-    return <h1>You are not authenticated</h1>;
+    return (
+      <div> 
+    <h1>You are not authenticated</h1>
+    <button onClick={pushAdmin}>Log In</button>
+    </div>
+    );
   }
 };
 
