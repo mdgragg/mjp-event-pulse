@@ -44,25 +44,24 @@ export default function Home() {
       </p>
     );
   } else {
-      
-    let jobArray = []
-   
-    
-    jobArray.forEach(job => console.log(job))
     return (
-      <div>
+      <div className="single-event-wrapper">
         <h1>All Event Jobs</h1>
-      
+        <h2>{process.env.NEXT_PUBLIC_STRAPI_API_URL}</h2>
+        <div className="all-events-wrapper">
+        <ul> 
         {eventJobs.map(j => (
-          <div>
-            Event: <a href={j.eventUrl}>{j.EventJobName}</a>
+          <li key={j.id}>
+            Event: <Link href={j.eventUrl}>{j.EventJobName}</Link>
             <br />
             Client: {(j.client !== null) ?  j.client.ClientName : "no client"} 
             <br/>
             <br/>
 
-          </div>
+          </li>
         ))}
+        </ul>
+        </div>
       </div>
     );
   }

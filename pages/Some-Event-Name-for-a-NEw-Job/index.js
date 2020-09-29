@@ -20,28 +20,31 @@ const testEvent1 = (props) => {
 
   }
   return (
-    <div>
+    <div className="single-event-wrapper">
        { loading ? "loading..." 
        : 
        <div>
        <h1>{event_meta.EventJobName}</h1>
-       <h1>Client: {!event_meta.client
+       <h2>Client: {!event_meta.client
        ? "No Client Yet"
-        : event_meta.client.ClientName}</h1>
+        : event_meta.client.ClientName}</h2>
        </div>
         } 
       <h3>path: {router.pathname} </h3>
+      <div className = "all-events-wrapper">
       <h4>Events: </h4>
+
       <ul> 
       {_.keys(event_meta.events).map(event => {
         const info = event_meta.events[event]
-        return <li>
+        return <li key={info.id}>
           <Link href={`${router.pathname}/${info.slug}`}> 
           {info.EventName}
           </Link>
           </li>
       })}
       </ul>
+      </div>
     </div>
   );
 };

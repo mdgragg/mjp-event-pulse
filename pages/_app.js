@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/client";
 import { useApollo, initializeApollo } from "../lib/apolloClient";
 import { ALL_URL_QUERY } from "../queries/urlQueries";
-
+import "./demo-app.css"
 // import App from 'next/app'
 
 function MyApp({ Component, pageProps }) {
@@ -13,19 +13,21 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export async function getStaticProps() {
-  const apolloClient = initializeApollo();
+export async function getStaticProps(context) {
 
+  const apolloClient = initializeApollo();
+  
   await apolloClient.query({
     query: ALL_URL_QUERY,
   });
-
+  console.log(context)
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
     },
     revalidate: 1,
   };
+  
 }
 
 

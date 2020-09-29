@@ -16,7 +16,7 @@ import { GET_ALL_EVENTS } from '../../queries/urlQueries';
               <div>
               {Object.keys(events).map(e => {
                 return (
-                  <div> 
+                  <div key={events[e].id}> 
                   <h1> {events[e].EventName}</h1>
                   <p>Client Name: {(events[e].client) ? events[e].client.ClientName : "No Clients!"}</p>
                 </div>
