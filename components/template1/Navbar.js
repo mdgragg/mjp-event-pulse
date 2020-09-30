@@ -1,6 +1,6 @@
 const Navbar = (props) => {
     return(
-        <div>Hello World!</div>
+        <div>Navbar Component</div>
     )
 }
 

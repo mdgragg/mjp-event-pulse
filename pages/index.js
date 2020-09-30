@@ -1,11 +1,9 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import { gql, useQuery } from "@apollo/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-    
+  
   const { loading, data = {}, error } = useQuery(ALL_URL_QUERY);
   // const eventJobs = data.eventJobs
   
@@ -39,6 +37,7 @@ export default function Home() {
     );
   } else {
     return (
+  
       <div className="single-event-wrapper">
         <h1>All Event Jobs</h1>
         <h2>{process.env.NEXT_PUBLIC_STRAPI_API_URL}</h2>
@@ -57,6 +56,7 @@ export default function Home() {
         </ul>
         </div>
       </div>
+
     );
   }
 }

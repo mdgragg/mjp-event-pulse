@@ -1,34 +1,22 @@
-import { ApolloProvider } from "@apollo/client";
-import { useApollo, initializeApollo } from "../lib/apolloClient";
-import { ALL_URL_QUERY } from "../queries/urlQueries";
-import "./demo-app.css"
-// import App from 'next/app'
+import React from "react";
+import App, { Container } from "next/app";
+import {ApolloProviderComp} from './ApolloProviderComp'
+import withData from '../lib/withData'
+class MyApp extends App {
 
-function MyApp({ Component, pageProps }) {
-  const apolloClient = useApollo(pageProps.initialApolloState);
+  render(){ 
+
+  const { Component, pageProps } = this.props;
   return (
-    <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <Container> 
+      <ApolloProviderComp>
+              <Component {...pageProps} />
+      </ApolloProviderComp>
+    </Container>
   );
+  }
 }
 
-export async function getStaticProps(context) {
-
-  const apolloClient = initializeApollo();
-  
-  await apolloClient.query({
-    query: ALL_URL_QUERY,
-  });
-  console.log(context)
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-    revalidate: 1,
-  };
-  
-}
 
 
 // Only uncomment this method if you have blocking data requirements for
@@ -43,4 +31,4 @@ export async function getStaticProps(context) {
 //   return { ...appProps }
 // }
 
-export default MyApp;
+export default withData(MyApp);

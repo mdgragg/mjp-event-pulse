@@ -7,6 +7,7 @@ import _ from "lodash";
 import { getEventMeta, getEventByUrl } from "../../lib/api";
 
 import Admin from "./components/admin"
+import Page from "../../components/template1/Page";
 
 const testEvent1 = (props) => {
   const [isPreview, setPreview] = useState(props.meta.eventStatus.EventStatus === "Preview");
@@ -28,7 +29,9 @@ const testEvent1 = (props) => {
 
   if (!isPreview) {
     return (
+      <Page>
       <div className="single-event-wrapper">
+
         {/* {isPreview ? <p>This is a preview, it is not live</p> : ""} */}
         <div>
           <h1>{event_meta.EventJobName}</h1>
@@ -58,6 +61,7 @@ const testEvent1 = (props) => {
           </ul>
         </div>
       </div>
+      </Page>
     );
   } else {
     return (
