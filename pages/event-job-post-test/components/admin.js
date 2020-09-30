@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 const Admin = (props) => {
@@ -9,10 +8,11 @@ const Admin = (props) => {
         event.preventDefault()
         const un = event.target["username"].value
         const pw = event.target["password"].value
-        const url = router.pathname.slice(1,-6)
+        const url = router.pathname.slice(1)
       
         fetch(`http://localhost:3000/api/preview/?secret=${pw}&eventUrl=${url}`)
         .then(data => router.push(data.url))
+        .then(router.reload)
     }
   
         return (

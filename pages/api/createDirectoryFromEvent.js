@@ -8,7 +8,7 @@ function handlePost(req, res) {
       console.log("Directory is created: ");
       console.log('\x1b[36m', result)
       console.log(  "at working directory:" +  process.cwd())
-      res.status(200).end(JSON.stringify({ 
+      res.status(201).end(JSON.stringify({ 
             data : {
               workingDirectory: process.cwd(),
               createdDirectory: result
@@ -31,11 +31,10 @@ function handlePost(req, res) {
 export default (req, res) => {
   const { method } = req;
   console.log("request: ")
-  console.log(req)
+  console.log(req.body)
   switch (method) {
     case "GET":
       res.status(200).end("This endpoint is for creating a file structure");
-
       break;
     case "POST":
       console.log('Creating directory...')

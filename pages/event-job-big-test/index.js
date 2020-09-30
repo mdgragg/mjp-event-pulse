@@ -6,6 +6,8 @@ import { useQuery, gql } from "@apollo/client";
 import _ from "lodash";
 import { getEventMeta, getEventByUrl } from "../../lib/api";
 
+import Admin from "./components/admin"
+
 const testEvent1 = (props) => {
   const [isPreview, setPreview] = useState(props.meta.eventStatus.EventStatus === "Preview");
   const router = useRouter();
@@ -22,7 +24,7 @@ const testEvent1 = (props) => {
     if (isAuthenticated) {
       setPreview(false);
     }
-  }, []);
+  });
 
   if (!isPreview) {
     return (
@@ -59,10 +61,7 @@ const testEvent1 = (props) => {
     );
   } else {
     return (
-      <div> 
-    <h1>You are not authenticated</h1>
-    <button onClick={pushAdmin}>Log In</button>
-    </div>
+      <Admin/>
     );
   }
 };
