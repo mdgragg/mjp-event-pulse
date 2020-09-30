@@ -24,7 +24,7 @@ const testEvent1 = (props) => {
     if (isAuthenticated) {
       setPreview(false);
     }
-  });
+  }, []);
 
   if (!isPreview) {
     return (

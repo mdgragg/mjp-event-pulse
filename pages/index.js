@@ -5,26 +5,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-
-  
+    
   const { loading, data = {}, error } = useQuery(ALL_URL_QUERY);
   // const eventJobs = data.eventJobs
   
   const eventJobs = [];
 
-
   const [jobs, setJobs] = useState({jobs: {}})
 
-
     if(!loading){ 
-  
         Object.keys(data.eventJobs).map(jobs =>
-            // setEventJobs(eventJobs[jobs] = data.eventJobs[jobs])  
+        // setEventJobs(eventJobs[jobs] = data.eventJobs[jobs])  
           eventJobs.push(data.eventJobs[jobs])
-            )
+        )
         // setEventJobs({jobs: data.eventJobs})
-   
- 
     }
     useEffect(()=>{
       setJobs({jobs : eventJobs})

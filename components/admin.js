@@ -12,7 +12,6 @@ const Admin = (props) => {
       
         fetch(`http://localhost:3000/api/preview/?secret=${pw}&eventUrl=${url}`)
         .then(data => router.push(data.url))
-        .then(router.reload)
     }
   
         return (

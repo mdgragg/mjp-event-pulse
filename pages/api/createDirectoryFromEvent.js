@@ -19,14 +19,7 @@ function handlePost(req, res) {
   }
 
   const createdDir = createNewDirectory(req.body.dirName, req, res)
-  fse.copyFile('./pages/template/index.js', `${createdDir}/index.js`)
-    .then(()=>{
-      console.log("success copying ")
-    })
-    .catch(err => {
-      console.error(err)
-    })
-  fse.copyFile('./pages/template/[slug].js', `${createdDir}/[slug].js`)
+  fse.copy('./pages/template/', `${createdDir}/`)
     .then(()=>{
       console.log("success copying ")
     })
