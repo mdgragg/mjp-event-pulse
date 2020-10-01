@@ -19,7 +19,7 @@ function handlePost(req, res) {
   }
 
   const createdDir = createNewDirectory(req.body.dirName, req, res)
-  fse.copy('./pages/template/', `${createdDir}/`)
+  fse.copy('./pages/template1/', `${createdDir}/`)
     .then(()=>{
       console.log("success copying ")
     })

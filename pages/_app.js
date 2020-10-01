@@ -1,23 +1,22 @@
 import React from "react";
 import App, { Container } from "next/app";
-import {ApolloProviderComp} from './ApolloProviderComp'
-import withData from '../lib/withData'
+import { ApolloProviderComp } from "./ApolloProviderComp";
+import withData from "../lib/withData";
+import Meta from "./globals/Meta";
+import { GlobalStyle } from './globals/GlobalStyle'
 class MyApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+    return (
+     
+        <ApolloProviderComp>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </ApolloProviderComp>
 
-  render(){ 
-
-  const { Component, pageProps } = this.props;
-  return (
-
-      <ApolloProviderComp>
-              <Component {...pageProps} />
-      </ApolloProviderComp>
-
-  );
+    );
   }
 }
-
-
 
 // Only uncomment this method if you have blocking data requirements for
 // every single page in your application. This disables the ability to

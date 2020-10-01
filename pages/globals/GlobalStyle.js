@@ -1,8 +1,9 @@
 import { createGlobalStyle} from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
+  
     html{
         box-sizing: border-box;
-        font-size: 12px;
+        font-size: 16px;
         margin: 0;
         padding: 0;
     }
@@ -12,9 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     body{
         padding: 0;
         margin: 0;
-        font-size: 1.5rem;
         line-height: 2;
-        font-family: sans-serif;
+        font-family: Roboto, sans-serif;
+        /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 
     }
     h1{

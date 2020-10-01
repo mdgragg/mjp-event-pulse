@@ -5,6 +5,8 @@ import {fetchAPI, FetchAPI } from '../../queries/fetch'
 import React, { Component } from 'react';
 import { GET_ALL_EVENTS } from '../../queries/urlQueries';
   
+import { theme } from "./style";
+import Page from "../../components/template1/Page";
 
   //This page is rendered for every event belonging to Event Job
   const EventPage = ({meta}) => {
@@ -13,7 +15,7 @@ import { GET_ALL_EVENTS } from '../../queries/urlQueries';
 
      
           return (
-              <div>
+            <Page theme={theme}> 
               {Object.keys(events).map(e => {
                 return (
                   <div key={events[e].id}> 
@@ -22,7 +24,8 @@ import { GET_ALL_EVENTS } from '../../queries/urlQueries';
                 </div>
                 )
               })}
-              </div>
+            
+              </Page>
           );
   }
   

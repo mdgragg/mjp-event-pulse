@@ -20,7 +20,6 @@ export async function fetchAPI(query, { variables, preview } = {}) {
     }
 
     // json.data.events.map(e => console.log(e))
-    console.log(json.data)
 
     return json.data
   }

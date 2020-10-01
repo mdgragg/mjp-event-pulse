@@ -1,13 +1,17 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
+import { useQuery, gql } from "@apollo/client";
 // var array = require('lodash/array');
-// import _ from "lodash";
-import { getEventMeta } from "../../lib/api";
+import _ from "lodash";
+import { getEventMeta, getEventByUrl } from "../../lib/api";
+import {Grid, Card} from '@material-ui/core';
 
 import Admin from "./components/admin"
-import Navbar from "../../components/template1/Navbar"
-
+import Page from "../../components/template1/Page";
+import Navbar from "../../components/template1/Navbar";
+import VideoBox from "../../components/template1/VideoBox";
+import { theme } from './style'
 
 const testEvent1 = (props) => {
   const [isPreview, setPreview] = useState(props.meta.eventStatus.EventStatus === "Preview");
@@ -22,16 +26,17 @@ const testEvent1 = (props) => {
   }
 
   useEffect(() => {
-    if (isAuthenticated || process.env.NODE_ENV==='development') {
+    if (isAuthenticated) {
       setPreview(false);
     }
   });
 
   if (!isPreview) {
     return (
-      <Fragment> 
-      <div className={`single-event-wrapper`}>
-        <Navbar pages={props.meta}/>
+      <Page theme={theme}>
+        <Navbar/>
+      <div className="single-event-wrapper">
+
         {/* {isPreview ? <p>This is a preview, it is not live</p> : ""} */}
         <div>
           <h1>{event_meta.EventJobName}</h1>
@@ -42,13 +47,21 @@ const testEvent1 = (props) => {
               : event_meta.client.ClientName}
           </h2>
         </div>
-
+        <Grid container={true}>
+              <Grid item={true} md={6}>
+              <VideoBox/>
+              </Grid>
+              <Grid item={true} md={6}>
+                <Sidebar/>
+              </Grid>
+        </Grid>
+             
         <h3>path: {router.pathname} </h3>
         <div className="all-events-wrapper">
           <h4>Events: </h4>
 
           <ul>
-            {Object.keys(event_meta.events).map((event) => {
+            {_.keys(event_meta.events).map((event) => {
               const info = event_meta.events[event];
               return (
                 <li key={info.id}>
@@ -61,7 +74,7 @@ const testEvent1 = (props) => {
           </ul>
         </div>
       </div>
-      </Fragment>
+      </Page>
     );
   } else {
     return (
