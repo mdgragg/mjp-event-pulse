@@ -1,6 +1,10 @@
 const Navbar = (props) => {
     return(
-        <div>Navbar Component</div>
+        <StyledNav>
+           <div>
+
+           </div>
+        </StyledNav>
     )
 }
 
