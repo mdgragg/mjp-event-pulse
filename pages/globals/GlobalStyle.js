@@ -3,7 +3,7 @@ export const GlobalStyle = createGlobalStyle`
   
     html{
         box-sizing: border-box;
-        font-size: 16px;
+        font-size: 16px !important;
         margin: 0;
         padding: 0;
     }
@@ -22,5 +22,10 @@ export const GlobalStyle = createGlobalStyle`
     h1{
       margin: 0;
       padding: 0;
+    }
+
+    p{
+        font-family: Roboto;
+        font-weight: light;
     }
     `;

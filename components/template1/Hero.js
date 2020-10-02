@@ -20,7 +20,7 @@ const breatheAnimation = keyframes`
 
    width: 100%;
    height: ${(props) => props.theme.heroHeight};
-   background-color: #000;
+   background-color: rgba(0,0,0,0.5);
    overflow: hidden;
    color: white;
  `;
@@ -29,7 +29,6 @@ const Counter = styled.div`
 position: absolute;
 top: 50%;
 left: 50%;
-margin-top: 20px;
 transform: translate(-50%, 30px);
 text-align: center;
 font-weight: bold;
@@ -42,7 +41,7 @@ font-size: 2em;
 const StyledTypography = styled(Typography)`
 z-index: 100;
 position: absolute;
-top: 40%;
+top: 30%;
 text-align: center;
 width: 100%;
 `;
@@ -55,11 +54,12 @@ export default function Sidebar(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url("${props.bgImage}");
-    opacity: 0.25;
-    animation-name: ${breatheAnimation};
+    opacity: 0.5;
+    /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
     animation-duration: 20s;
     background-size: cover;
+    background-attachment: fixed;
     transform: scale(1.2);
     position: inherit;
     text-align: center;

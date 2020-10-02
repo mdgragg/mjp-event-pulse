@@ -1,5 +1,6 @@
 
 const template1Theme = {
+    pfont: "Roboto-Light",
     headerBg: "black",
     bg: "#F7F7F7",
     footerBg: "black",

@@ -10,6 +10,9 @@ const StyledPage = styled.div`
   background: ${props=> props.theme.bg};
   color: black;
   min-height: 100vh;
+  p{
+    font-family: ${props => props.theme.pfont};
+  }
 `;
 
 Router.onRouteChangeStart = () =>{

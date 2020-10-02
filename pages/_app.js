@@ -10,6 +10,7 @@ class MyApp extends App {
     return (
      
         <ApolloProviderComp>
+          <Meta/>
           <GlobalStyle />
           <Component {...pageProps} />
         </ApolloProviderComp>

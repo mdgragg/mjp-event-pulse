@@ -1,14 +1,16 @@
 import { gql, useQuery } from "@apollo/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
+import EventSearch from "./globals/EventSearch"
+import Header from "./globals/Header"
+import Footer from "./globals/Footer"
+import Page from "../components/template1/Page"
+import { theme } from "./globals/style";
 export default function Home() {
   
   const { loading, data = {}, error } = useQuery(ALL_URL_QUERY);
   // const eventJobs = data.eventJobs
-  
   const eventJobs = [];
-
   const [jobs, setJobs] = useState({jobs: {}})
 
     if(!loading){ 
@@ -37,26 +39,11 @@ export default function Home() {
     );
   } else {
     return (
-  
-      <div className="single-event-wrapper">
-        <h1>All Event Jobs</h1>
-        <h2>{process.env.NEXT_PUBLIC_STRAPI_API_URL}</h2>
-        <div className="all-events-wrapper">
-        <ul> 
-        {eventJobs.map(j => (
-          <li key={j.id}>
-            Event: <Link href={j.eventUrl}>{j.EventJobName}</Link>
-            <br />
-            Client: {(j.client !== null) ?  j.client.ClientName : "no client"} 
-            <br/>
-            <br/>
-
-          </li>
-        ))}
-        </ul>
-        </div>
-      </div>
-
+      <Page theme={theme}> 
+        <Header title="MJ Event Home"/>
+         <EventSearch events={eventJobs} />
+         <Footer/>
+      </Page>
     );
   }
 }
