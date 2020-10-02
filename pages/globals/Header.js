@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 
 const StyledHeader = styled.div`
-    height: 300px;
+    height: ${props => props.height};
     background-color: ${props => props.theme.headerBg};
     background-image: url('${props=> props.image}');
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: height 1s ease;
 
     h1{
         font-size: 100px;
@@ -19,9 +20,9 @@ const StyledHeader = styled.div`
 `
 const Header = (props) => {
   return (
-        <StyledHeader image={props.image}>
+      <StyledHeader image={props.image} height={props.height || '40vh'}>
       <center> <h1>  {props.title} </h1></center> 
-        </StyledHeader>     
+      </StyledHeader>     
     )};
 
 export default Header;

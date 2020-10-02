@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import Grow from '@material-ui/core/Grow';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -40,9 +40,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ListItem() {
+export default function ListItem( props ) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [isScrolled, setScrolled] = React.useState(false);
+
+  const handleScroll = (e) => {
+    if(window.scrollY > 960){ 
+      setScrolled(true)
+    }
+   
+  }
+  useEffect(()=>{
+    window.addEventListener('scroll', handleScroll)
+  })
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -50,6 +61,8 @@ export default function ListItem() {
 
   return (
     <Grid item={true}>
+    <Grow in={isScrolled}
+    {...(isScrolled ? { timeout: props.timeout || 0 } : {} )}> 
     <Card className={classes.root}>
       <CardHeader
         avatar={
@@ -117,6 +130,7 @@ export default function ListItem() {
         </CardContent>
       </Collapse>
     </Card>
+    </Grow>
     </Grid>
   );
 }

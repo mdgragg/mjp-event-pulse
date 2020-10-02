@@ -3,7 +3,7 @@ import  styled  from 'styled-components';
 const EventSearchWrap = styled.div` 
 
     width: 100%;
-    height: 450px;
+    height: 350px;
     margin-top: 100px;
     justify-content: center;
     align-items: center;

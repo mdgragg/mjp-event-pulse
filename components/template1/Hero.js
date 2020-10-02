@@ -7,6 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
+import Counter from './Counter'
 import { Fragment } from "react";
 
 const breatheAnimation = keyframes`
@@ -25,21 +26,8 @@ const breatheAnimation = keyframes`
    color: white;
  `;
 
-const Counter = styled.div`
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, 30px);
-text-align: center;
-font-weight: bold;
-
-background-color: black;
-padding: 0.5em;
-font-size: 2em;
-`;
-
 const StyledTypography = styled(Typography)`
-z-index: 100;
+z-index: 99;
 position: absolute;
 top: 30%;
 text-align: center;
@@ -54,7 +42,7 @@ export default function Sidebar(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url("${props.bgImage}");
-    opacity: 0.5;
+    opacity: 1;
     /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
     animation-duration: 20s;
@@ -64,7 +52,7 @@ export default function Sidebar(props) {
     position: inherit;
     text-align: center;
     margin: -5px -10px -10px -5px;
-  
+    z-index: 99;
 
     filter: saturate(0.7) blur(10px);
     ::after {
@@ -80,7 +68,7 @@ export default function Sidebar(props) {
       <StyledTypography variant="h2">
         {props.title} <br />
       </StyledTypography>
-      <Counter>Starts in 00h 35m 02s</Counter>
+      <Counter start={props.start[0].eventStartEnd.StartDateTime}/>
     </HeroHolder>
   );
 }

@@ -36,7 +36,7 @@ const testEvent1 = (props) => {
   let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated || process.env.NODE_ENV === 'development') {
       setPreview(false);
     }
   });
@@ -45,35 +45,58 @@ const testEvent1 = (props) => {
     return (
       <Page theme={theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        {/* <Header>
+        <Header theme={theme}>
           <Navbar info={event_meta} />
-        </Header> */}
+        </Header>
         <Hero
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
+          start={event_meta.events.filter(event => event.isMainEvent == true)}
         />
         <Body>
           <Section >
             <Grid container={true} spacing={3}>
-              <Grid item={true} md={9}>
+              <Grid item={true} md={9} sm={12}>
                 <VideoBox />
               </Grid>
-              <Grid item={true} md={3}>
-                <Sidebar />
+              <Grid item={true} md={3} sm={12}>
+                <Sidebar theme={theme}/>
               </Grid>
             </Grid>
           </Section>
 
-          <Banner />
+          <Banner color="#181818">
+
+          </Banner>
 
           <Section showButton={true} title="Speakers">
             <Grid container={true} spacing={3} justify={"center"}>
-              <ListItem md={4} />
-              <ListItem md={4} />
-              <ListItem md={4} />
+              <ListItem md={4} timeout={500}/>
+              <ListItem md={4} timeout={1000}/>
+              <ListItem md={4} timeout={2000}/>
             </Grid>
           </Section>
-          <Section showButton={true} title="Sponsors">
+          <Section showButton={true} title="Platinum Sponsors">
+            <Grid container={true} spacing={3} justify={"center"}>
+          
+            </Grid>
+          </Section>
+          <Section showButton={true} title="Gold Sponsors">
+            <Grid container={true} spacing={3} justify={"center"}>
+              <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/250/"></img>
+              </Grid>
+
+              <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/240/"></img>
+              </Grid>
+
+              <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/220/"></img>
+              </Grid>
+            </Grid>
+          </Section>
+          <Section showButton={false} title={`${event_meta.EventJobName} in the News`}>
             <Grid container={true} spacing={3} justify={"center"}>
               <ListItemSmall />
               <ListItemSmall />

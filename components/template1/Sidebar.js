@@ -9,17 +9,19 @@ height: ${props => props.theme.sidebarHeight};
 width: 100%;
 `;
 
-const StyledAppBar = styled(AppBar)`
-
+const SideCard = styled(Card)`
+@media (max-width: 768px){
+    margin: 2em;
+}
 `
 
 export default function Sidebar(props) {
     return(
-        <Card > 
-        <StyleSimpleTabs>
-            <SimpleTabs/>
+        <SideCard > 
+            <StyleSimpleTabs>
+                <SimpleTabs theme={props.theme}/>
             </StyleSimpleTabs>       
-        </Card>
+        </SideCard>
     )
 }
 

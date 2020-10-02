@@ -7,7 +7,7 @@ const Meta = (props) => (
         <meta charSet="utf-8" />
         <link rel="shortcut icon" href="/static/favicon.png"/>
         <link rel="stylesheet" href="/static/fonts/fonts.css" />
-        <link rel="stylesheet" href="/static/test.css" />
+        <link rel="stylesheet" href="/pages/globals/globals.css" />
         <link rel="stylesheet" type="text/css" href="/static/nprogress.css"/>
         <title> {props.title} </title>
         {/* {props.children} */}

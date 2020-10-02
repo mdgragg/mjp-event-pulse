@@ -24,8 +24,11 @@ export const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
 
-    p{
-        font-family: Roboto;
+    /* p {
+        font-family: 'Roboto' sans-serif;
         font-weight: light;
+    } */
+    .MuiTypography-body2{
+        font-family: Roboto, sans-serif;
     }
     `;
