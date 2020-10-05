@@ -6,12 +6,13 @@ import SimpleTabs from './Tabs'
 
 const StyleSimpleTabs = styled.div`
 height: ${props => props.theme.sidebarHeight};
+overflow: scroll;
 width: 100%;
 `;
 
 const SideCard = styled(Card)`
 @media (max-width: 768px){
-    margin: 2em;
+    margin: 15%;
 }
 `
 

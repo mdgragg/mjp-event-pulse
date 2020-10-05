@@ -1,4 +1,4 @@
-import {Grid} from "@material-ui/icons"
+import {Grid} from "@material-ui/core"
 
 export function InfoGrid(){
   

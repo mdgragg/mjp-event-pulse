@@ -29,6 +29,9 @@ const testEvent1 = (props) => {
     props.meta.eventStatus.EventStatus === "Preview"
   );
   const router = useRouter();
+  
+  const [hasStarted, setStarted] = useState(false)
+  
 
   const [sidbarState, toggleSidebar] = useState(null);
   let event_meta = props.meta;
@@ -39,7 +42,18 @@ const testEvent1 = (props) => {
     if (isAuthenticated || process.env.NODE_ENV === 'development') {
       setPreview(false);
     }
-  });
+
+  }, []);
+  useEffect(()=>{
+    let now = Date.now()
+    console.log("now: "+now)
+    let dateStart = (Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000)
+    console.log("start: "+ dateStart)
+    if(dateStart < now){
+      console.log('the event start time is less than now')
+      setStarted(true)
+    }
+  },[])
 
   if (!isPreview) {
     return (
@@ -49,6 +63,7 @@ const testEvent1 = (props) => {
           <Navbar info={event_meta} />
         </Header>
         <Hero
+          hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
           start={event_meta.events.filter(event => event.isMainEvent == true)}
@@ -57,7 +72,7 @@ const testEvent1 = (props) => {
           <Section >
             <Grid container={true} spacing={3}>
               <Grid item={true} md={9} sm={12}>
-                <VideoBox />
+                <VideoBox isStarted={hasStarted}/>
               </Grid>
               <Grid item={true} md={3} sm={12}>
                 <Sidebar theme={theme}/>
@@ -106,7 +121,7 @@ const testEvent1 = (props) => {
 
 
 
-          <EventSearch events={event_meta.events} />
+          <EventSearch currenthref={event_meta.eventUrl} events={event_meta.events} />
 
           <Section></Section>
         </Body>
@@ -115,7 +130,7 @@ const testEvent1 = (props) => {
           <div className="signoff"><center>Copyright 2020 Mill James</center></div>
           <div></div>
         </Footer>
-          
+{/*           
         <h3>path: {router.pathname} </h3>
 
        <ul>
@@ -123,13 +138,13 @@ const testEvent1 = (props) => {
             const info = event_meta.events[event];
             return (
               <li key={info.id}>
-                <Link href={`${router.pathname}/${info.slug}`}>
+                <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
                   {info.EventName}
                 </Link>
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </Page>
     );
   } else {

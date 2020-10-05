@@ -11,9 +11,12 @@ const StyledPage = styled.div`
   background: ${props=> props.theme.bg};
   color: ${props => props.theme.fontColor};
   min-height: 100vh;
+  z-index: 0;
   p{
     font-family: ${props => props.theme.pfont};
   }
+
+
 `;
 
 Router.onRouteChangeStart = () =>{
@@ -21,7 +24,7 @@ Router.onRouteChangeStart = () =>{
 
 }
 Router.onRouteChangeComplete = () => {
-  console.log("changing some stuff")
+ 
   NProgress.done()
 
 }

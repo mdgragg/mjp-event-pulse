@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import styled from 'styled-components';
+import styled, {ThemeContext} from 'styled-components';
 import {Grid, Paper, Card} from '@material-ui/core';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import { useState, useEffect} from 'react'
@@ -8,9 +8,24 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const StyledPaper = styled(Paper)` 
 background-color: black;
-padding: none;
+padding: 0;
 border: none;
-border-radius: none;
+border-radius: 0;
+&&.fixed{
+position: fixed;
+top: 2%;
+left: 2%;
+width: 350px;
+z-index:100;
+padding: 0;
+border-radius: 0;
+&&.fixed > div{
+    height: 200px;
+ 
+}
+}
+
+
 @media (max-width: 768px){
     background-color: rgba(0,0,0,0);
     box-shadow: none;
@@ -30,15 +45,41 @@ const VideoBox = (props) => {
     const StyledVideoBox = styled.div`
     height: ${props => props.theme.videoBoxHeight};
     background-color: rgba(0,0,0,0);
+
     @media (max-width: 768px){
     width: 100%;
     height: 350px;
     border-radius: 0;
+
+
 }
     `;
 
     const [vidShow, setVidShow] = useState(true)
+    const [isFixed, setFixed] = useState("")
+    const themeContext = React.useContext(ThemeContext);
 
+    const offsetVideoHeight = themeContext.videoBreakPoint;
+  
+
+    function calculateFixed(e){
+        if (this.pageYOffset >= offsetVideoHeight){
+            setFixed("fixed")
+        } else {
+            setFixed("")
+        }
+    }
+    useEffect(()=>{
+        function watchScroll(){
+        window.addEventListener('scroll', calculateFixed)
+    }
+    if(props.isStarted){
+        watchScroll();
+    }
+    return () => {
+        window.removeEventListener('scroll', calculateFixed)
+    }
+    })
     const FilterVideo = () => {
         if(vidShow){
             return( 
@@ -53,9 +94,9 @@ const VideoBox = (props) => {
 
     return(
       
-        <StyledPaper > 
+        <StyledPaper className={props.isStarted ? isFixed : ""}> 
         <StyledVideoBox>
-       <FilterVideo/>
+             <FilterVideo/>
         </StyledVideoBox>
         </StyledPaper>
 

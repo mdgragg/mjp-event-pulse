@@ -16,7 +16,9 @@ const template1Theme = {
     primary: "#181818",
     secondary: "#006AC1",
     sidebarHeight: "600px",
-    hover: "#BADA55"
+    hover: "#BADA55",
+    videoBreakPoint: 1330,
+    ...createMuiTheme()
 }
 
 

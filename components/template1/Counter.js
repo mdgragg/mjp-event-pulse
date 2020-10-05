@@ -52,13 +52,14 @@ export default function Counter(props) {
   useEffect(() => {
     let interval = setInterval(() => {
       calcTime(getRemainingTime(props.start));
-    });
+    })
+    // return clearInterval(interval);
   }, []);
   const [time, calcTime] = useState({});
 
   return (
     <MyCounter>
-      Starts in{" "}
+      Starts in:{" "}
       {` 
         ${pad(time.days)} Days
           ${pad(time.hours)}:

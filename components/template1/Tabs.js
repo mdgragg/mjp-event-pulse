@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { IconButton } from "@material-ui/core";
 import styled from "styled-components";
+import ScheduleItem from "./ScheduleItem"
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,7 +23,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -33,6 +35,7 @@ TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
+  className: PropTypes.string,
 };
 
 function a11yProps(index) {
@@ -55,7 +58,7 @@ const EventAppBar = styled(AppBar)`
 
 const AppTab = styled(Tab)`
 background-color: ${props => props.theme.primary};
-`
+`;
 
 export default function SimpleTabs(props) {
   const classes = useStyles();
@@ -66,21 +69,31 @@ export default function SimpleTabs(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <EventAppBar position="static" colorSeconday={"secondary"}>
+    <div >
+      <EventAppBar className="MuiBox-root" position="static" >
         <Tabs
           value={value}
           variant="fullWidth"
           onChange={handleChange}
           aria-label="event tabs"
-          indicatorColor="none"
+         
         >
           <AppTab label="Schedule" {...a11yProps(0)} />
           <AppTab label="Chat" {...a11yProps(1)} />
       
         </Tabs>
       </EventAppBar>
-      <TabPanel value={value} index={0}></TabPanel>
+      <TabPanel value={value} index={0} style={{overflow: "scroll"}}>
+
+        <ScheduleItem/>
+        <ScheduleItem/>
+        <ScheduleItem/>
+        <ScheduleItem/>
+        <ScheduleItem/>
+        <ScheduleItem/>
+
+
+      </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
       </TabPanel>

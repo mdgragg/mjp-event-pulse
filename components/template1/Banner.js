@@ -45,7 +45,7 @@ const Banner = (props) => {
         <Typography variant="h2" component="h2" style={{ color: "white" }}>
           SIGN UP
         </Typography>
-        <Typography variant="p" component="p" style={{ color: "white" }}>
+        <Typography variant="body1" component="p" style={{ color: "white" }}>
           We only need your name and email.
         </Typography>
       </div>

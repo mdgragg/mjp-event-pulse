@@ -1,4 +1,4 @@
-import FreeSolo from "./FreeSolo"
+import FreeSolo from "./subEventSearch/FreeSolo"
 import  styled  from 'styled-components';
 const EventSearchWrap = styled.div` 
     display: grid;
@@ -21,8 +21,7 @@ const EventResults = styled.div`
 const EventSearch = (props) => {
     return(
         <EventSearchWrap>
-          
-            <FreeSolo events={props.events}/>
+            <FreeSolo currenthref={props.currenthref} events={props.events}/>
         </EventSearchWrap>
     )
 }

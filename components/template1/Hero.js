@@ -68,7 +68,11 @@ export default function Sidebar(props) {
       <StyledTypography variant="h2">
         {props.title} <br />
       </StyledTypography>
-      <Counter start={props.start[0].eventStartEnd.StartDateTime}/>
+      {(!props.hasStarted) ? 
+      <Counter 
+      hasStarted={props.hasStarted} 
+      start={props.start[0].eventStartEnd.StartDateTime}/>
+ : ""}
     </HeroHolder>
   );
 }
