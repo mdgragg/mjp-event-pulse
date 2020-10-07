@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Router, useRouter } from "next/router";
-import Head  from 'next/head'
+import Head from "next/head";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
 // var array = require('lodash/array');
@@ -29,9 +29,8 @@ const testEvent1 = (props) => {
     props.meta.eventStatus.EventStatus === "Preview"
   );
   const router = useRouter();
-  
-  const [hasStarted, setStarted] = useState(false)
-  
+
+  const [hasStarted, setStarted] = useState(false);
 
   const [sidbarState, toggleSidebar] = useState(null);
   let event_meta = props.meta;
@@ -39,21 +38,21 @@ const testEvent1 = (props) => {
   let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
 
   useEffect(() => {
-    if (isAuthenticated || process.env.NODE_ENV === 'development') {
+    if (isAuthenticated || process.env.NODE_ENV === "development") {
       setPreview(false);
     }
-
   }, []);
-  useEffect(()=>{
-    let now = Date.now()
-    console.log("now: "+now)
-    let dateStart = (Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000)
-    console.log("start: "+ dateStart)
-    if(dateStart < now){
-      console.log('the event start time is less than now')
-      setStarted(true)
+  useEffect(() => {
+    let now = Date.now();
+    console.log("now: " + now);
+    let dateStart =
+      Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000;
+    console.log("start: " + dateStart);
+    if (dateStart < now) {
+      console.log("the event start time is less than now");
+      setStarted(true);
     }
-  },[])
+  }, []);
 
   if (!isPreview) {
     return (
@@ -66,52 +65,51 @@ const testEvent1 = (props) => {
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
-          start={event_meta.events.filter(event => event.isMainEvent == true)}
+          start={event_meta.events.filter((event) => event.isMainEvent == true)}
         />
         <Body>
-          <Section >
+          <Section>
             <Grid container={true} spacing={3}>
               <Grid item={true} md={9} sm={12}>
-                <VideoBox isStarted={hasStarted}/>
+                <VideoBox isStarted={hasStarted} />
               </Grid>
               <Grid item={true} md={3} sm={12}>
-                <Sidebar theme={theme}/>
+                <Sidebar theme={theme} />
               </Grid>
             </Grid>
           </Section>
 
-          <Banner color="#181818">
-
-          </Banner>
+          <Banner color="#181818"></Banner>
 
           <Section showButton={true} title="Speakers">
             <Grid container={true} spacing={3} justify={"center"}>
-              <ListItem md={4} timeout={500}/>
-              <ListItem md={4} timeout={1000}/>
-              <ListItem md={4} timeout={2000}/>
+              <ListItem md={4} timeout={500} />
+              <ListItem md={4} timeout={1000} />
+              <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
           <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={"center"}>
-          
-            </Grid>
+            <Grid container={true} spacing={3} justify={"center"}></Grid>
           </Section>
           <Section showButton={true} title="Gold Sponsors">
             <Grid container={true} spacing={3} justify={"center"}>
               <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/250/"></img>
+                <img src="http://lorempixel.com/350/250/"></img>
               </Grid>
 
               <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/240/"></img>
+                <img src="http://lorempixel.com/350/240/"></img>
               </Grid>
 
               <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/220/"></img>
+                <img src="http://lorempixel.com/350/220/"></img>
               </Grid>
             </Grid>
           </Section>
-          <Section showButton={false} title={`${event_meta.EventJobName} in the News`}>
+          <Section
+            showButton={false}
+            title={`${event_meta.EventJobName} in the News`}
+          >
             <Grid container={true} spacing={3} justify={"center"}>
               <ListItemSmall />
               <ListItemSmall />
@@ -119,32 +117,20 @@ const testEvent1 = (props) => {
             </Grid>
           </Section>
 
-
-
-          <EventSearch currenthref={event_meta.eventUrl} events={event_meta.events} />
+          <EventSearch
+            currenthref={event_meta.eventUrl}
+            events={event_meta.events}
+          />
 
           <Section></Section>
         </Body>
         <Footer>
           <div></div>
-          <div className="signoff"><center>Copyright 2020 Mill James</center></div>
+          <div className="signoff">
+            <center>Copyright 2020 Mill James</center>
+          </div>
           <div></div>
         </Footer>
-{/*           
-        <h3>path: {router.pathname} </h3>
-
-       <ul>
-          {_.keys(event_meta.events).map((event) => {
-            const info = event_meta.events[event];
-            return (
-              <li key={info.id}>
-                <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
-                  {info.EventName}
-                </Link>
-              </li>
-            );
-          })}
-        </ul> */}
       </Page>
     );
   } else {
