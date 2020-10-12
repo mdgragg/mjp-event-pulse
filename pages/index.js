@@ -10,6 +10,8 @@ import { theme } from "./globals/style";
 import { useRouter } from "next/router";
 import { Grid, Button } from "@material-ui/core";
 import { InfoGrid } from "./globals/InfoGrid"
+
+
 export default function Home() {
 
   const { loading, data = {}, error } = useQuery(ALL_URL_QUERY);

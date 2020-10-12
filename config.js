@@ -1,1 +1,1 @@
-export const endpoint = `http://localhost:1337/graphql`
+export const endpoint = `https://mills-james-event-cms.herokuapp.com/graphql`
