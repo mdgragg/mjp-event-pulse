@@ -43,11 +43,21 @@ const EventPage = ({ eventData }) => {
   );
 };
 
+export async function getStaticProps({ params }) {
+  // fetch data from CMS through params
+  const post = await getBlogItem(params.slug);
+  return {
+    props: {
+      post,
+    },
+  };
+}
+
 export async function getStaticPaths() {
   return {
     fallback: true,
-    paths: []
-  }
+    paths: [],
+  };
 }
 export default EventPage;
 // This function gets called at build time on server-side.
