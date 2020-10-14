@@ -26,6 +26,7 @@ const SingleExhibitor = (props) => {
   }-${now.getUTCDate()}`;
 
   const base_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}/messages`;
+  const featured_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}/featured-message`;
   //get messages if they exist
 
   const [messages, addMessages] = React.useState({});
@@ -42,10 +43,12 @@ const SingleExhibitor = (props) => {
   };
 
   const updateMessage = (m, keyval = {}) => {
-    let updated = messages[m];
+    let allMessages = { ...messages };
+    let updated = allMessages[m];
 
     updated[keyval.key] = keyval.value;
-    base.post(`${base_url}/${ident}/${m}`, {
+
+    base.post(`${base_url}/${m}`, {
       data: updated,
     });
   };
@@ -63,19 +66,16 @@ const SingleExhibitor = (props) => {
       message: question,
       response: "",
     };
-    // addMessages(m);
-    // base
     changeQuestion("");
-    base.post(`${base_url}/${ident}/${now}`, {
+    base.post(`${base_url}/${now}`, {
       data: m[now],
     });
 
     // addMessages(currentMessages);
   };
-  const isInit = React.useRef(true);
 
   useEffect(() => {
-    base.fetch(`${base_url}/${ident}`, {
+    base.fetch(`${base_url}`, {
       context: {
         setState: ({ messages }) => addMessages({ ...messages }),
         state: { messages },
@@ -87,7 +87,7 @@ const SingleExhibitor = (props) => {
   }, []);
 
   useEffect(() => {
-    let ref = base.syncState(`${base_url}/${ident}/`, {
+    let ref = base.syncState(`${base_url}`, {
       context: {
         setState: ({ messages }) => addMessages({ ...messages }),
         state: { messages },
@@ -123,7 +123,7 @@ const SingleExhibitor = (props) => {
         updateMessage(message, { key: "featured", value: false });
     });
 
-    base.post(`${base_url}/featured-message`, {
+    base.post(`${featured_url}`, {
       data: messages[m.id],
     });
   };
@@ -132,6 +132,7 @@ const SingleExhibitor = (props) => {
     let corres = Object.keys(messages).find(
       (message) => messages[message].timestamp === meta.timestamp
     );
+    console.log(meta);
     // if you select it to "hide" then it can no longer be featured
     if (info === false && meta.featured === true) {
       updateMessage(corres, { key: "featured", value: false });
@@ -141,14 +142,12 @@ const SingleExhibitor = (props) => {
 
   const handleResponse = (e, message_id) => {
     let allMessages = { ...messages };
-    allMessages[message_id].response = e.target.value;
-
-    addMessages({ ...allMessages });
+    updateMessage(message_id, { key: "response", value: e.target.value });
   };
-  const submitResponse = (message_id) => {
-    let response = messages[message_id].response;
 
-    updateMessage(message_id, { key: "response", value: response });
+  const submitResponse = (message_id, value) => {
+    console.log(value);
+    updateMessage(message_id, { key: "response", value: value });
   };
 
   const ChatGrid = styled(Grid)`
@@ -186,14 +185,16 @@ const SingleExhibitor = (props) => {
           <hr />
 
           <ChatGrid container={true}>
-            <Grid item={true} md={6}>
+            <Grid item={true} md={loggedIn ? 6 : 12}>
               <h2>Pinned Question From: {currentMessage[0]?.sender} </h2>
               <CurrentMessage message={currentMessage} />
 
               <h2>All Other Questions:</h2>
-              {Object.keys(messages).map((message) => {
+              {Object.keys(messages).map((message, id) => {
                 if (messages[message].public && !messages[message].featured) {
-                  return <CurrentMessage message={[messages[message]]} />;
+                  return (
+                    <CurrentMessage key={id} message={[messages[message]]} />
+                  );
                 }
               })}
               <input
@@ -220,6 +221,7 @@ const SingleExhibitor = (props) => {
                     addMessage={addMessage}
                     messages={messages}
                     question={question}
+                    submitResponse={submitResponse}
                   />
                 </>
               ) : (

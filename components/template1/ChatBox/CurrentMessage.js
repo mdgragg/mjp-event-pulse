@@ -7,7 +7,7 @@ const StyledMessage = styled.div`
   margin: 1em 0;
   min-height: 150px;
 
-  width: 500px;
+  width: 90%;
   .question {
     padding: 1em;
     background-color: #181818;

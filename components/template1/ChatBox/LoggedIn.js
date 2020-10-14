@@ -13,12 +13,11 @@ const LoggedIn = (props) => {
     addMessage,
     question,
   } = props;
-  return Object.keys(messages).map((message, id) => (
+  return Object.keys(messages).map((message, key) => (
     <>
       <Message
-        handleResponse={handleResponse}
-        key={id}
-        id={id}
+        changeResponse={handleResponse}
+        id={key}
         meta={messages[message]}
         handleShowHide={handleShowHide}
         handleSelect={handleSelect}

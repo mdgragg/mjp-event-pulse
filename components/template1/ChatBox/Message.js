@@ -37,81 +37,87 @@ const Response = styled.textarea`
   width: 100%;
   border: none;
   font-size: 18px;
-  :focus {
+  /* :focus {
     background-color: seashell;
-  }
+  } */
 `;
 
-const index = (props) => (
-  <Message>
-    <div className="controls">
-      <button onClick={() => props.handleSelect(props.meta)}>
+const index = (props) => {
+  const [response, changeResponse] = React.useState({ ...props.meta.response });
+
+  const handleResponseChange = (value) => {
+    changeResponse(value);
+  };
+  return (
+    <Message>
+      <div className="controls">
+        <button onClick={() => props.handleSelect(props.meta)}>
+          {" "}
+          Bring To Top{" "}
+        </button>
+        <label
+          onClick={(e) => {
+            e.stopPropagation();
+            props.handleShowHide(props.meta, true);
+          }}
+          htmlFor={`public--${props.id}`}
+        >
+          <input
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            id={`public--${props.id}`}
+            type="radio"
+            name={`public-private--${props.id}`}
+            checked={props.meta.public}
+          />
+          Show
+        </label>
+
+        <label
+          onClick={(e) => {
+            e.stopPropagation();
+            props.handleShowHide(props.meta, false);
+          }}
+          htmlFor={`private--${props.id}`}
+        >
+          <input
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            id={`private--${props.id}`}
+            type="radio"
+            name={`public-private--${props.id}`}
+            checked={!props.meta.public}
+          />
+          Hide
+        </label>
+      </div>
+      <div className="message-metadata">
         {" "}
-        Bring To Top{" "}
+        <span>From: </span>
+        {props.meta.sender}
+        <br />
+        {props.meta.id}{" "}
+      </div>
+
+      <div className="message"> {props.message} </div>
+      <Response
+        placeholder="your answer here..."
+        className="response"
+        defaultValue={props.meta.response}
+        onChange={(e) => {
+          handleResponseChange(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          props.submitResponse(props.meta.id, response);
+        }}
+      >
+        Submit Response
       </button>
-      <label
-        onClick={(e) => {
-          e.stopPropagation();
-          props.handleShowHide(props.meta, true);
-        }}
-        htmlFor={`public--${props.id}`}
-      >
-        <input
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          id={`public--${props.id}`}
-          type="radio"
-          name={`public-private--${props.id}`}
-          value="true"
-          checked={props.meta.public}
-        />
-        Show
-      </label>
-
-      <label
-        onClick={(e) => {
-          e.stopPropagation();
-          props.handleShowHide(props.meta, false);
-        }}
-        htmlFor={`private--${props.id}`}
-      >
-        <input
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          id={`private--${props.id}`}
-          type="radio"
-          name={`public-private--${props.id}`}
-          value="false"
-          checked={!props.meta.public}
-        />
-        Hide
-      </label>
-    </div>
-    <div className="message-metadata">
-      {" "}
-      <span>From: </span>
-      {props.meta.sender}
-      <br />
-      {props.meta.id.slice(0, -32)}{" "}
-    </div>
-
-    <div className="message"> {props.message} </div>
-    <Response
-      placeholder="your answer here..."
-      className="response"
-      value={props.meta.response}
-      onChange={(e) => props.handleResponse(e, props.meta.id)}
-    />
-    <button
-      onClick={() => {
-        props.submitResponse(props.meta.id);
-      }}
-    >
-      Submit Response
-    </button>
-  </Message>
-);
-
+    </Message>
+  );
+};
 export default index;
