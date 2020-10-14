@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Message from "./Message";
+import Message from "./UserMessage";
 
 const LoggedIn = (props) => {
   const {
@@ -9,15 +9,13 @@ const LoggedIn = (props) => {
     handleSelect,
     submitResponse,
     handleResponse,
-    handleMessage,
-    addMessage,
-    question,
   } = props;
-  return Object.keys(messages).map((message, key) => (
+  return Object.keys(messages).map((message, key = 0) => (
     <>
       <Message
         changeResponse={handleResponse}
-        id={key}
+        id={key + 1}
+        key={key + 1}
         meta={messages[message]}
         handleShowHide={handleShowHide}
         handleSelect={handleSelect}

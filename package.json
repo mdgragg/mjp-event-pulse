@@ -27,6 +27,7 @@
     "re-base": "^4.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-transition-group": "^4.4.1",
     "sass": "^1.26.11",
     "styled-components": "^4.4.0"
   },

@@ -1,5 +1,6 @@
 import base from "lib/firebase/base";
-
+import { fireBaseApp as fb } from "lib/firebase/base";
+import ReactCSSTransitionGroup from "react-transition-group";
 import React, { useEffect, setState, useRef } from "react";
 import { fetchAPI } from "lib/api/";
 import styled from "styled-components";
@@ -8,9 +9,8 @@ import Page from "components/template1/Page";
 import Body from "components/template1/Body";
 import Section from "components/template1/Section";
 import Footer from "components/template1/Footer";
-import Message from "components/template1/ChatBox/Message";
-import CurrentMessage from "components/template1/ChatBox/CurrentMessage";
 import LoggedIn from "components/template1/ChatBox/LoggedIn";
+import PublicChat from "components/template1/ChatBox/PublicChat";
 
 import { theme } from "../style";
 import { useRouter } from "next/router";
@@ -25,57 +25,31 @@ const SingleExhibitor = (props) => {
     now.getMonth() + 1
   }-${now.getUTCDate()}`;
 
-  const base_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}/messages`;
+  const base_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}`;
   const featured_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}/featured-message`;
   //get messages if they exist
 
   const [messages, addMessages] = React.useState({});
-  const [question, changeQuestion] = React.useState("question");
-  const [featuredMessage, changeFeaturedMessage] = React.useState("");
+
+  // const [featuredMessage, changeFeaturedMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   const [currentMessage, getCurrentMessage] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [showLoggedIn, setShowLoggedIn] = React.useState(false);
+  const questionRef = React.useRef();
+
+  const [question, changeQuestion] = React.useState("");
+
+  const [q, cq] = React.useState("");
 
   // const messageHook = useMessageHook({});
 
-  const handleMessage = (e) => {
-    changeQuestion(e.target.value);
-  };
-
-  const updateMessage = (m, keyval = {}) => {
-    let allMessages = { ...messages };
-    let updated = allMessages[m];
-
-    updated[keyval.key] = keyval.value;
-
-    base.post(`${base_url}/${m}`, {
-      data: updated,
-    });
-  };
-
-  const addMessage = () => {
-    let currentMessages = { ...messages };
-    let m = {};
-
-    m[now] = {
-      timestamp: Date.now(),
-      id: `${now}`,
-      public: false,
-      featured: false,
-      sender: "test",
-      message: question,
-      response: "",
-    };
-    changeQuestion("");
-    base.post(`${base_url}/${now}`, {
-      data: m[now],
-    });
-
-    // addMessages(currentMessages);
-  };
+  // const handleMessage = (e) => {
+  //   console.log(e.target.value);
+  // };
 
   useEffect(() => {
-    base.fetch(`${base_url}`, {
+    base.fetch(`${base_url}/messages`, {
       context: {
         setState: ({ messages }) => addMessages({ ...messages }),
         state: { messages },
@@ -87,7 +61,7 @@ const SingleExhibitor = (props) => {
   }, []);
 
   useEffect(() => {
-    let ref = base.syncState(`${base_url}`, {
+    let ref = base.syncState(`${base_url}/messages/`, {
       context: {
         setState: ({ messages }) => addMessages({ ...messages }),
         state: { messages },
@@ -110,7 +84,49 @@ const SingleExhibitor = (props) => {
       }
     });
     getCurrentMessage(result);
-  }, [messages]);
+  }, []);
+
+  useEffect(() => {
+    //get the endpoint to show present
+    base.listenTo(`${base_url}/logged-in`, {
+      context: {
+        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
+        state: showLoggedIn,
+      },
+      then(data) {
+        setShowLoggedIn(data);
+      },
+    });
+  });
+
+  const addQuestion = (q, sender) => {
+    // let currentMessages = { ...messages };
+    let m = {};
+
+    m[now] = {
+      timestamp: Date.now(),
+      id: `${now}`,
+      public: false,
+      featured: false,
+      sender: sender,
+      message: q,
+      response: "",
+    };
+
+    base.post(`${base_url}/messages/${now}`, {
+      data: m[now],
+    });
+  };
+  const updateMessage = (m, keyval = {}) => {
+    let allMessages = { ...messages };
+    let updated = allMessages[m];
+
+    updated[keyval.key] = keyval.value;
+
+    base.post(`${base_url}/messages/${m}`, {
+      data: updated,
+    });
+  };
 
   const handleSelect = (m) => {
     //first change the message to public if it is not
@@ -123,7 +139,7 @@ const SingleExhibitor = (props) => {
         updateMessage(message, { key: "featured", value: false });
     });
 
-    base.post(`${featured_url}`, {
+    base.post(`${base_url}/featured-message`, {
       data: messages[m.id],
     });
   };
@@ -150,12 +166,62 @@ const SingleExhibitor = (props) => {
     updateMessage(message_id, { key: "response", value: value });
   };
 
+  const logIn = (user, pass) => {
+    fb.auth()
+      .signInWithEmailAndPassword(user, pass)
+      .catch(function (error) {
+        // Handle Errors here.
+        console.log(error.message);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      })
+      .then(function (value) {
+        if (value) {
+          handleLoggedIn(true);
+        } else {
+          handleLoggedIn(false);
+        }
+      });
+  };
+
+  const logOut = () =>
+    fb
+      .auth()
+      .signOut()
+      .then(function () {
+        handleLoggedIn(false);
+      })
+      .catch(function (error) {
+        // An error happened.
+      });
+
+  const handleLoggedIn = (value) => {
+    base.post(`${base_url}/logged-in`, {
+      data: value,
+    });
+    setLoggedIn(value);
+  };
+
   const ChatGrid = styled(Grid)`
     /* @media all and (max-width: 900px) {
       padding: 2em;
     } */
   `;
+  const InRoom = styled.div`
+    width: 80px;
+    text-align: center;
+    font-weight: 800;
 
+    &&.true {
+      border: 2px solid #2bef83;
+      color: #2bef83;
+    }
+    &&.false {
+      border: 2px solid #f2400f;
+      color: #f2400f;
+    }
+  `;
   return (
     <Page theme={theme}>
       <Body>
@@ -163,51 +229,42 @@ const SingleExhibitor = (props) => {
           <h1>
             {exhibitor.FirstName} {exhibitor.LastName}
           </h1>
+          <InRoom className={showLoggedIn ? "true" : "false "}>
+            {showLoggedIn ? "Present" : "Absent"}
+          </InRoom>
           <h2>{event_job.EventJobName}</h2>
-          <label htmlFor="logged-in">Logged In</label>
+          <button onClick={() => logIn()}>Log In</button>
+          <button onClick={() => logOut()}>Log Out</button>
+          {/* <label htmlFor="logged-in">Log In</label>
           <input
+            key={"logged-in"}
             type="radio"
             name="authenticate"
             id="logged-in"
             onChange={(e) => {
-              setLoggedIn(true);
+              handleLoggedIn(true);
             }}
           />
-          <label htmlFor="logged-out">Logged Out</label>
+          <label htmlFor="logged-out">Log Out</label>
           <input
+            key={"logged-out"}
             type="radio"
             name="authenticate"
             id="logged-out"
             onChange={(e) => {
-              setLoggedIn(false);
+              handleLoggedIn(false);
             }}
-          />
+          /> */}
           <hr />
 
           <ChatGrid container={true}>
             <Grid item={true} md={loggedIn ? 6 : 12}>
-              <h2>Pinned Question From: {currentMessage[0]?.sender} </h2>
-              <CurrentMessage message={currentMessage} />
-
-              <h2>All Other Questions:</h2>
-              {Object.keys(messages).map((message, id) => {
-                if (messages[message].public && !messages[message].featured) {
-                  return (
-                    <CurrentMessage key={id} message={[messages[message]]} />
-                  );
-                }
-              })}
-              <input
-                type="text"
-                onChange={handleMessage}
-                onKeyUp={(e) => {
-                  if (e.key === "Enter") {
-                    addMessage();
-                  }
-                }}
-                value={question}
+              <PublicChat
+                messages={messages}
+                question={question}
+                addQuestion={addQuestion}
+                currentMessage={currentMessage}
               />
-              <button onClick={addMessage}>AddMessage</button>
             </Grid>
             <Grid item={true} md={6}>
               {loggedIn ? (
@@ -217,8 +274,8 @@ const SingleExhibitor = (props) => {
                     handleSelect={handleSelect}
                     handleShowHide={handleShowHide}
                     handleResponse={handleResponse}
-                    handleMessage={handleMessage}
-                    addMessage={addMessage}
+                    // handleMessage={handleMessage}
+                    // addMessage={addMessage}
                     messages={messages}
                     question={question}
                     submitResponse={submitResponse}
@@ -239,6 +296,7 @@ const SingleExhibitor = (props) => {
 export default SingleExhibitor;
 
 SingleExhibitor.getInitialProps = async (ctx) => {
+  console.log(ctx);
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {

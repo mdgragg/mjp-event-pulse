@@ -1,0 +1,15 @@
+.display-enter {
+    opacity: 0;
+}
+
+.display-enter-active {
+    opacity: 1;
+}
+
+.display-exit {
+    opacity: 1;
+}
+
+.display-exit-active {
+    opacity: 0;
+}

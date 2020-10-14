@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import "./transitions.module.css";
+import { CSSTransition } from "react-transition-group";
 
 const StyledMessage = styled.div`
   background-color: grey;
   margin: 1em 0;
+  transition: opacity 1s;
   min-height: 150px;
-
   width: 90%;
   .question {
     padding: 1em;
@@ -23,7 +25,18 @@ const StyledMessage = styled.div`
   }
 `;
 
-const Message = (props) => {
+const From = styled.span`
+  color: #2bef83;
+  font-weight: 800;
+`;
+
+const CurrentMessage = (props) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return setMounted(false);
+  });
   const { message } = props;
   const inner = message[0];
   const text = inner?.response;
@@ -31,9 +44,10 @@ const Message = (props) => {
     return (
       <StyledMessage>
         <div className="question">
-          Question: {inner?.message}
+          <strong>Question: </strong>
+          <br /> {inner?.message}
           <br />
-          From: {inner?.sender}
+          <From>From: {inner?.sender}</From>
         </div>
 
         <div className="response">
@@ -47,4 +61,4 @@ const Message = (props) => {
   }
 };
 
-export default Message;
+export default CurrentMessage;
