@@ -30,7 +30,7 @@ const From = styled.span`
   font-weight: 800;
 `;
 
-const CurrentMessage = (props) => {
+const PublicMessage = (props) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -61,4 +61,4 @@ const CurrentMessage = (props) => {
   }
 };
 
-export default CurrentMessage;
+export default PublicMessage;

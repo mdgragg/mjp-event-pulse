@@ -7,14 +7,7 @@ import QuestionSection from "./QuestionSection";
 import { Transition } from "react-transition-group";
 
 const PublicChat = (props) => {
-  const {
-    messages,
-    handleChangeQuestion,
-    question,
-    addQuestion,
-    currentMessage,
-    changeQuestion,
-  } = props;
+  const { messages, addQuestion } = props;
 
   const featuredMessage = Object.values(messages).filter(
     (v) => v.featured === true
@@ -42,7 +35,7 @@ const PublicChat = (props) => {
           );
         }
       })}
-      <QuestionSection addQuestion={addQuestion} />
+      <QuestionSection exhibitor={props.exhibitor} addQuestion={addQuestion} />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import base from "lib/firebase/base";
 import { fireBaseApp as fb } from "lib/firebase/base";
+import cookies from "next-cookies";
 import ReactCSSTransitionGroup from "react-transition-group";
 import React, { useEffect, setState, useRef } from "react";
 import { fetchAPI } from "lib/api/";
@@ -10,14 +11,17 @@ import Body from "components/template1/Body";
 import Section from "components/template1/Section";
 import Footer from "components/template1/Footer";
 import LoggedIn from "components/template1/ChatBox/LoggedIn";
+import LogInBox from "components/template1/ChatBox/LogInBox";
 import PublicChat from "components/template1/ChatBox/PublicChat";
+import ChatNav from "components/template1/ChatBox/ChatNav";
 
 import { theme } from "../style";
 import { useRouter } from "next/router";
 
 const SingleExhibitor = (props) => {
   const router = useRouter();
-  const { exhibitor } = props;
+  const { exhibitor, loggedIn, id } = props;
+
   const { event_job } = props.exhibitor.event;
 
   const now = new Date();
@@ -33,14 +37,10 @@ const SingleExhibitor = (props) => {
 
   // const [featuredMessage, changeFeaturedMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-  const [currentMessage, getCurrentMessage] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  // const [loggedIn, setLoggedIn] = React.useState(false);
   const [showLoggedIn, setShowLoggedIn] = React.useState(false);
-  const questionRef = React.useRef();
 
   const [question, changeQuestion] = React.useState("");
-
-  const [q, cq] = React.useState("");
 
   // const messageHook = useMessageHook({});
 
@@ -61,6 +61,25 @@ const SingleExhibitor = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(id);
+
+    if (loggedIn) {
+      if (id === exhibitor.id) {
+        base.post(`${base_url}/logged-in`, {
+          data: true,
+        });
+        setShowLoggedIn(true);
+      }
+    } else {
+      base.post(`${base_url}/logged-in`, {
+        data: false,
+      });
+      setShowLoggedIn(false);
+    }
+    return;
+  }, [exhibitor.id]);
+
+  useEffect(() => {
     let ref = base.syncState(`${base_url}/messages/`, {
       context: {
         setState: ({ messages }) => addMessages({ ...messages }),
@@ -77,16 +96,6 @@ const SingleExhibitor = (props) => {
   }, []);
 
   useEffect(() => {
-    let result = [];
-    Object.keys(messages).map((m) => {
-      if (messages[m].featured) {
-        result.push(messages[m]);
-      }
-    });
-    getCurrentMessage(result);
-  }, []);
-
-  useEffect(() => {
     //get the endpoint to show present
     base.listenTo(`${base_url}/logged-in`, {
       context: {
@@ -97,7 +106,7 @@ const SingleExhibitor = (props) => {
         setShowLoggedIn(data);
       },
     });
-  });
+  }, []);
 
   const addQuestion = (q, sender) => {
     // let currentMessages = { ...messages };
@@ -148,7 +157,7 @@ const SingleExhibitor = (props) => {
     let corres = Object.keys(messages).find(
       (message) => messages[message].timestamp === meta.timestamp
     );
-    console.log(meta);
+    // console.log(meta);
     // if you select it to "hide" then it can no longer be featured
     if (info === false && meta.featured === true) {
       updateMessage(corres, { key: "featured", value: false });
@@ -178,7 +187,11 @@ const SingleExhibitor = (props) => {
       })
       .then(function (value) {
         if (value) {
-          handleLoggedIn(true);
+          console.log(value);
+          document.cookie = `loggedIn=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
+          document.cookie = `id=${exhibitor.id}; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
+          router.reload();
+          // handleLoggedIn(true);
         } else {
           handleLoggedIn(false);
         }
@@ -190,18 +203,19 @@ const SingleExhibitor = (props) => {
       .auth()
       .signOut()
       .then(function () {
-        handleLoggedIn(false);
+        document.cookie = `loggedIn=false; expires=Thu, 14 Oct 2020 00:00:01 GMT`;
+        router.reload();
       })
       .catch(function (error) {
         // An error happened.
       });
 
-  const handleLoggedIn = (value) => {
-    base.post(`${base_url}/logged-in`, {
-      data: value,
-    });
-    setLoggedIn(value);
-  };
+  // const handleLoggedIn = (value) => {
+  //   base.post(`${base_url}/logged-in`, {
+  //     data: value,
+  //   });
+  //   setLoggedIn(value);
+  // };
 
   const ChatGrid = styled(Grid)`
     /* @media all and (max-width: 900px) {
@@ -225,6 +239,12 @@ const SingleExhibitor = (props) => {
   return (
     <Page theme={theme}>
       <Body>
+        <ChatNav
+          loggedIn={showLoggedIn}
+          logOut={logOut}
+          exhibitor={exhibitor}
+          handleLogin={logIn}
+        />
         <Section minHeight={"100vh"}>
           <h1>
             {exhibitor.FirstName} {exhibitor.LastName}
@@ -233,8 +253,7 @@ const SingleExhibitor = (props) => {
             {showLoggedIn ? "Present" : "Absent"}
           </InRoom>
           <h2>{event_job.EventJobName}</h2>
-          <button onClick={() => logIn()}>Log In</button>
-          <button onClick={() => logOut()}>Log Out</button>
+
           {/* <label htmlFor="logged-in">Log In</label>
           <input
             key={"logged-in"}
@@ -257,20 +276,20 @@ const SingleExhibitor = (props) => {
           /> */}
           <hr />
 
-          <ChatGrid container={true}>
+          <ChatGrid container spacing={2}>
             <Grid item={true} md={loggedIn ? 6 : 12}>
               <PublicChat
+                exhibitor={exhibitor}
                 messages={messages}
-                question={question}
                 addQuestion={addQuestion}
-                currentMessage={currentMessage}
               />
             </Grid>
             <Grid item={true} md={6}>
-              {loggedIn ? (
+              {showLoggedIn ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
                   <LoggedIn
+                    key={"logged-in-div"}
                     handleSelect={handleSelect}
                     handleShowHide={handleShowHide}
                     handleResponse={handleResponse}
@@ -296,7 +315,9 @@ const SingleExhibitor = (props) => {
 export default SingleExhibitor;
 
 SingleExhibitor.getInitialProps = async (ctx) => {
-  console.log(ctx);
+  const { loggedIn } = cookies(ctx);
+  const { id } = cookies(ctx);
+  console.log(loggedIn);
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {
@@ -333,9 +354,10 @@ SingleExhibitor.getInitialProps = async (ctx) => {
       },
     }
   );
+  // const login = loggedIn;
 
   const exhibitor = await data.exhibitors[0];
   // By returning { props: posts }, the Blog component
   // will receive `posts` as a prop at build time
-  return { exhibitor };
+  return { exhibitor, loggedIn, id };
 };

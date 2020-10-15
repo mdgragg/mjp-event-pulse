@@ -25,6 +25,8 @@ const QuestionSection = (props) => {
   };
   return (
     <>
+      <h2> Ask A Question to {props.exhibitor.FirstName} </h2>
+      <h4>Type Your Question Below</h4>
       <Question
         type="text"
         id="question"
@@ -39,6 +41,7 @@ const QuestionSection = (props) => {
         // ref={questionRef}
         // value={props.question}
       />
+      <h4>Your Name:</h4>
       <Sender
         type="text"
         id="sender"
@@ -46,8 +49,15 @@ const QuestionSection = (props) => {
           handleSender(e);
         }}
       />
-      <button onClick={() => props.addQuestion(question, sender)}>
-        AddMessage
+      <br />
+      <button
+        onClick={() => {
+          props.addQuestion(question, sender);
+          setQuestion("");
+          setSender("");
+        }}
+      >
+        Submit
       </button>
     </>
   );
