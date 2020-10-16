@@ -14,7 +14,7 @@ import LoggedIn from "components/template1/ChatBox/LoggedIn";
 import LogInBox from "components/template1/ChatBox/LogInBox";
 import PublicChat from "components/template1/ChatBox/PublicChat";
 import ChatNav from "components/template1/ChatBox/ChatNav";
-
+import ChatErrorBox from "components/template1/ChatBox/ChatErrorBox";
 import { theme } from "../style";
 import { useRouter } from "next/router";
 
@@ -41,7 +41,10 @@ const SingleExhibitor = (props) => {
   const [showLoggedIn, setShowLoggedIn] = React.useState(false);
 
   const [question, changeQuestion] = React.useState("");
-
+  const [errorBoxShow, setErrorBoxShow] = React.useState({
+    isShowing: false,
+    message: "",
+  });
   // const messageHook = useMessageHook({});
 
   // const handleMessage = (e) => {
@@ -61,23 +64,31 @@ const SingleExhibitor = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(id);
-
-    if (loggedIn) {
-      if (id === exhibitor.id) {
-        base.post(`${base_url}/logged-in`, {
-          data: true,
-        });
-        setShowLoggedIn(true);
-      }
+    if (loggedIn === true && exhibitor.id === id) {
+      base.post(`${base_url}/logged-in`, {
+        data: true,
+      });
+      setShowLoggedIn(true);
     } else {
       base.post(`${base_url}/logged-in`, {
         data: false,
       });
       setShowLoggedIn(false);
     }
-    return;
-  }, [exhibitor.id]);
+  }, []);
+
+  useEffect(() => {
+    //get the endpoint to show present
+    base.listenTo(`${base_url}/logged-in`, {
+      context: {
+        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
+        state: showLoggedIn,
+      },
+      then(data) {
+        setShowLoggedIn(data);
+      },
+    });
+  }, []);
 
   useEffect(() => {
     let ref = base.syncState(`${base_url}/messages/`, {
@@ -95,19 +106,6 @@ const SingleExhibitor = (props) => {
     // ref.then((result) => console.log(result));
   }, []);
 
-  useEffect(() => {
-    //get the endpoint to show present
-    base.listenTo(`${base_url}/logged-in`, {
-      context: {
-        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
-        state: showLoggedIn,
-      },
-      then(data) {
-        setShowLoggedIn(data);
-      },
-    });
-  }, []);
-
   const addQuestion = (q, sender) => {
     // let currentMessages = { ...messages };
     let m = {};
@@ -117,7 +115,8 @@ const SingleExhibitor = (props) => {
       id: `${now}`,
       public: false,
       featured: false,
-      sender: sender,
+      sender: sender.name,
+      senderEmail: sender.email,
       message: q,
       response: "",
     };
@@ -183,39 +182,43 @@ const SingleExhibitor = (props) => {
         console.log(error.message);
         var errorCode = error.code;
         var errorMessage = error.message;
+
         // ...
       })
       .then(function (value) {
         if (value) {
-          console.log(value);
+          base.post(`${base_url}/logged-in`, {
+            data: true,
+          });
           document.cookie = `loggedIn=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
           document.cookie = `id=${exhibitor.id}; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
           router.reload();
           // handleLoggedIn(true);
         } else {
-          handleLoggedIn(false);
+          displayError(
+            "Your username and password did not match the credentials needed."
+          );
         }
       });
   };
-
+  const displayError = (message) => {
+    setErrorBoxShow({ isShowing: true, message: message });
+    setTimeout(() => setErrorBoxShow({ isShowing: false, message: "" }), 2000);
+  };
   const logOut = () =>
     fb
       .auth()
       .signOut()
       .then(function () {
-        document.cookie = `loggedIn=false; expires=Thu, 14 Oct 2020 00:00:01 GMT`;
+        base.post(`${base_url}/logged-in`, {
+          data: false,
+        });
+        document.cookie = `loggedIn=false;`;
         router.reload();
       })
       .catch(function (error) {
-        // An error happened.
+        displayError(error);
       });
-
-  // const handleLoggedIn = (value) => {
-  //   base.post(`${base_url}/logged-in`, {
-  //     data: value,
-  //   });
-  //   setLoggedIn(value);
-  // };
 
   const ChatGrid = styled(Grid)`
     /* @media all and (max-width: 900px) {
@@ -239,6 +242,11 @@ const SingleExhibitor = (props) => {
   return (
     <Page theme={theme}>
       <Body>
+        {errorBoxShow.isShowing ? (
+          <ChatErrorBox errorMessage={errorBoxShow.message} />
+        ) : (
+          ""
+        )}
         <ChatNav
           loggedIn={showLoggedIn}
           logOut={logOut}
@@ -254,30 +262,10 @@ const SingleExhibitor = (props) => {
           </InRoom>
           <h2>{event_job.EventJobName}</h2>
 
-          {/* <label htmlFor="logged-in">Log In</label>
-          <input
-            key={"logged-in"}
-            type="radio"
-            name="authenticate"
-            id="logged-in"
-            onChange={(e) => {
-              handleLoggedIn(true);
-            }}
-          />
-          <label htmlFor="logged-out">Log Out</label>
-          <input
-            key={"logged-out"}
-            type="radio"
-            name="authenticate"
-            id="logged-out"
-            onChange={(e) => {
-              handleLoggedIn(false);
-            }}
-          /> */}
           <hr />
 
           <ChatGrid container spacing={2}>
-            <Grid item={true} md={loggedIn ? 6 : 12}>
+            <Grid item={true} md={loggedIn ? 6 : 12} sm={12}>
               <PublicChat
                 exhibitor={exhibitor}
                 messages={messages}
@@ -293,15 +281,13 @@ const SingleExhibitor = (props) => {
                     handleSelect={handleSelect}
                     handleShowHide={handleShowHide}
                     handleResponse={handleResponse}
-                    // handleMessage={handleMessage}
-                    // addMessage={addMessage}
                     messages={messages}
                     question={question}
                     submitResponse={submitResponse}
                   />
                 </>
               ) : (
-                <h2>You Are Not Logged In</h2>
+                ""
               )}
             </Grid>
           </ChatGrid>
@@ -317,7 +303,7 @@ export default SingleExhibitor;
 SingleExhibitor.getInitialProps = async (ctx) => {
   const { loggedIn } = cookies(ctx);
   const { id } = cookies(ctx);
-  console.log(loggedIn);
+
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {

@@ -19,11 +19,19 @@ const ExhibitorLink = styled.div`
     font-size: 18px;
     display: block;
     cursor: pointer;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    border: 1px solid #c4c4c4;
+    border-radius: 7px;
+    height: 100px;
+    padding: 20px;
+    transition: all 0.15s;
   }
   span {
     color: black;
     font-weight: 800;
+  }
+  :hover {
+    background-color: #e2e2e2;
   }
 `;
 const ExhibitorPage = (props) => {
@@ -37,20 +45,15 @@ const ExhibitorPage = (props) => {
         <Section>
           <h1>Exhibitor Index</h1>
           {Object.keys(event).map((e) => (
-            <>
-              <ExhibitorLink>
-                <Link
-                  key={event[e].id}
-                  href={`${router.pathname}/${event[e].id}`}
-                >
-                  <>
-                    {event[e].FirstName} {event[e].LastName} |{" "}
-                    <span> {event[e].ExhibitName.replace(/_/g, " ")}</span>
-                    <br />
-                  </>
-                </Link>
-              </ExhibitorLink>
-            </>
+            <ExhibitorLink
+              key={event[e].id}
+              onClick={() => router.push(`${router.pathname}/${event[e].id}`)}
+            >
+              <>
+                {event[e].FirstName} {event[e].LastName} <br />{" "}
+                <span> {event[e].ExhibitName.replace(/_/g, " ")}</span>
+              </>
+            </ExhibitorLink>
           ))}
         </Section>
       </Body>

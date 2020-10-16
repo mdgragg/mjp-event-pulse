@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import ReactCSSTransitionGroup from "react-transition-group";
 
-import { Button } from "@material-ui/core";
-const Message = styled.div`
-  background-color: aliceblue;
+import { Button, Card } from "@material-ui/core";
+const Message = styled(Card)`
+  background-color: white;
   position: relative;
   margin-bottom: 2em;
-  border: 1px solid grey;
+
   min-height: 150px;
   div {
     padding: 1em;
@@ -45,27 +45,48 @@ const Response = styled.textarea`
 `;
 const Controls = styled.div`
   height: 65px;
-  background-color: #f8f8f8;
-  color: #181818;
-  .label-wrapper {
-    right: 8px;
 
-    top: 8px;
-    position: absolute;
+  color: #181818;
+  width: auto;
+`;
+
+const ShowHide = styled.div`
+  font-size: 24px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  margin: 0 !important;
+  padding: 0 !important;
+  && > div {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .label {
     display: inline;
-    background-color: #cecece;
+  }
+  .controls {
+  }
 
   input {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
+    height: 20px;
+    width: 20px;
   }
-  input:checked + label {
-    background-color: #001544;
-    color: white;
+  span {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background-color: orange;
+  }
+  input:checked + span {
+    background-color: red;
   }
   label {
-    padding: 10px;
+    height: 20px;
+    width: 20px;
   }
 `;
+
 const ShowButton = styled(Button)`
   background-color: #0033c1;
   color: white;
@@ -84,46 +105,34 @@ const index = (props) => {
           {" "}
           Bring To Top{" "}
         </ShowButton>
-        <div className="label-wrapper">
-          <input
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            key={`public-${props.id}`}
-            id={`public--${props.id}`}
-            type="radio"
-            name={`public-private--${props.id}`}
-            checked={props.meta.public}
-          />
-          <label
-            onClick={(e) => {
-              e.stopPropagation();
-              props.handleShowHide(props.meta, true);
-            }}
-            htmlFor={`public--${props.id}`}
-          >
-            Show
-          </label>
-          <input
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            key={`private-${props.id}`}
-            id={`private--${props.id}`}
-            type="radio"
-            name={`public-private--${props.id}`}
-            checked={!props.meta.public}
-          />
-          <label
-            onClick={(e) => {
-              e.stopPropagation();
-              props.handleShowHide(props.meta, false);
-            }}
-            htmlFor={`private--${props.id}`}
-          >
-            Hide
-          </label>
-        </div>
+
+        <ShowHide>
+          <div className="controls">
+            <input
+              onClick={(e) => {
+                props.handleShowHide(props.meta, true);
+              }}
+              key={`public-${props.id}`}
+              id={`public--${props.id}`}
+              type="radio"
+              name={`public-private--${props.id}`}
+              checked={props.meta.public}
+            />
+            <label htmlFor={`public--${props.id}`}>Show</label>
+
+            <input
+              onClick={(e) => {
+                props.handleShowHide(props.meta, false);
+              }}
+              key={`private-${props.id}`}
+              id={`private--${props.id}`}
+              type="radio"
+              name={`public-private--${props.id}`}
+              checked={!props.meta.public}
+            />
+            <label htmlFor={`private--${props.id}`}>Hide</label>
+          </div>
+        </ShowHide>
       </Controls>
       <div className="message-metadata">
         {" "}
@@ -143,13 +152,13 @@ const index = (props) => {
           handleResponseChange(e.target.value);
         }}
       />
-      <button
+      <ShowButton
         onClick={() => {
           props.submitResponse(props.meta.id, response);
         }}
       >
         Submit Response
-      </button>
+      </ShowButton>
     </Message>
   );
 };
