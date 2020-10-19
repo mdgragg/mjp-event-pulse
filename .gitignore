@@ -9,6 +9,9 @@
 app.yaml
 action.yaml
 
+/app.yaml
+/action.yaml
+
 # testing
 /coverage
 
