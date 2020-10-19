@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+#gae stuff
+app.yaml
+action.yaml
+
 # testing
 /coverage
 
