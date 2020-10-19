@@ -1,1 +1,1 @@
-export const endpoint = `https://mills-james-event-cms.herokuapp.com/graphql`
+export const endpoint = `https://mills-james-event-cms.herokuapp.com/graphql`;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import CurrentMessage, { PinnedMessage } from "./PublicMessage";
+import OtherMessage, { PinnedMessage } from "./PublicMessage";
 import QuestionSection from "./QuestionSection";
 // import "./transitions.module.css";
 import { Grid, Card } from "@material-ui/core";
@@ -16,34 +16,40 @@ const PublicChat = (props) => {
   }, [messages]);
 
   return (
-    <>
+    <Grid container spacing={2}>
       {featuredMessage[0] ? (
-        <>
+        <Grid item md={8}>
           <h2>Pinned Question From: {featuredMessage[0].sender} </h2>
-
           <PinnedMessage message={featuredMessage} />
-        </>
+        </Grid>
       ) : (
-        <h2>No Featured Message</h2>
+        <Grid item md={8}>
+          <h2 style={{ color: "#867f8d" }}>No Featured Message</h2>
+        </Grid>
       )}
-      <hr />
-      <h2>All Other Questions:</h2>
-      <Grid container>
-        {Object.keys(messages).map((message, id) => {
-          if (messages[message].public && !messages[message].featured) {
-            return (
-              <Grid item md={4} sm={12} xs={12}>
-                <CurrentMessage
-                  key={`current-message--${id + 1}`}
-                  message={[messages[message]]}
-                />
-              </Grid>
-            );
-          }
-        })}
+      <Grid item md={8}>
+        <h2>All Other Questions:</h2>
       </Grid>
-      <QuestionSection exhibitor={props.exhibitor} addQuestion={addQuestion} />
-    </>
+
+      {Object.keys(messages).map((message, id) => {
+        if (messages[message].public && !messages[message].featured) {
+          return (
+            <Grid item md={6} sm={12} xs={12}>
+              <OtherMessage
+                key={`current-message--${id + 1}`}
+                message={[messages[message]]}
+              />
+            </Grid>
+          );
+        }
+      })}
+      <Grid item md={8} sm={12} xs={12}>
+        <QuestionSection
+          exhibitor={props.exhibitor}
+          addQuestion={addQuestion}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

@@ -9,17 +9,16 @@ import Section from "../components/template1/Section";
 import { theme } from "./globals/style";
 import { useRouter } from "next/router";
 import { Grid, Button } from "@material-ui/core";
-import { InfoGrid } from "./globals/InfoGrid"
-
+import { InfoGrid } from "./globals/InfoGrid";
 
 export default function Home() {
-
-  const { loading, data = {}, error } = useQuery(ALL_URL_QUERY);
+  const { loading, data, error } = useQuery(ALL_URL_QUERY);
   const eventJobs = [];
   const [jobs, setJobs] = useState({ jobs: {} });
   const [headerHeight, setHeaderHeight] = useState("100vh");
 
-  if (!loading) {
+  if (data) {
+    console.log(data);
     Object.keys(data.eventJobs).map((jobs) =>
       eventJobs.push(data.eventJobs[jobs])
     );
@@ -27,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     setJobs({ jobs: eventJobs });
     setTimeout(() => setHeaderHeight("30vh"), 500);
-  }, []);
+  }, [loading]);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -45,14 +44,13 @@ export default function Home() {
     return (
       <Page theme={theme}>
         <Header title="MJ Event Home" height={headerHeight} />
-       
+
         <Section>
-          <Grid container={true}> 
-          <Grid item={true} md={7} alignContent="center">
-        <EventSearch events={eventJobs} />
-         
-          </Grid>
-          <InfoGrid/>
+          <Grid container={true}>
+            <Grid item={true} md={7} alignContent="center">
+              <EventSearch events={eventJobs} />
+            </Grid>
+            <InfoGrid />
           </Grid>
         </Section>
         <Footer />

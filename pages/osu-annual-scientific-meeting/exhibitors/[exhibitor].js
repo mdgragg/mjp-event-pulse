@@ -38,18 +38,15 @@ const SingleExhibitor = (props) => {
   // const [featuredMessage, changeFeaturedMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   // const [loggedIn, setLoggedIn] = React.useState(false);
-  const [showLoggedIn, setShowLoggedIn] = React.useState(false);
+  const [showLoggedIn, setShowLoggedIn] = React.useState(
+    props.loggedIn || false
+  );
 
   const [question, changeQuestion] = React.useState("");
   const [errorBoxShow, setErrorBoxShow] = React.useState({
     isShowing: false,
     message: "",
   });
-  // const messageHook = useMessageHook({});
-
-  // const handleMessage = (e) => {
-  //   console.log(e.target.value);
-  // };
 
   useEffect(() => {
     base.fetch(`${base_url}/messages`, {
@@ -63,31 +60,35 @@ const SingleExhibitor = (props) => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   //get the endpoint to show present
+  //   const ref = base.listenTo(`${base_url}/logged-in`, {
+  //     context: {
+  //       setState: (showLoggedIn) => setShowLoggedIn(loggedIn),
+  //       state: showLoggedIn,
+  //     },
+  //     then(data) {
+  //       console.log("listen to use effect ran");
+  //     },
+  //   });
+  //   return base.removeBinding(ref);
+  // }, []);
+
   useEffect(() => {
-    if (loggedIn === true && exhibitor.id === id) {
+    if (loggedIn === "true" && exhibitor.id === id) {
       base.post(`${base_url}/logged-in`, {
         data: true,
       });
+      console.log("it is setting true");
       setShowLoggedIn(true);
-    } else {
+    } else if (loggedIn == false) {
       base.post(`${base_url}/logged-in`, {
         data: false,
       });
+    } else {
+      console.log("it is setting false");
       setShowLoggedIn(false);
     }
-  }, []);
-
-  useEffect(() => {
-    //get the endpoint to show present
-    base.listenTo(`${base_url}/logged-in`, {
-      context: {
-        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
-        state: showLoggedIn,
-      },
-      then(data) {
-        setShowLoggedIn(data);
-      },
-    });
   }, []);
 
   useEffect(() => {
@@ -187,11 +188,13 @@ const SingleExhibitor = (props) => {
       })
       .then(function (value) {
         if (value) {
-          base.post(`${base_url}/logged-in`, {
-            data: true,
-          });
-          document.cookie = `loggedIn=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
-          document.cookie = `id=${exhibitor.id}; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
+          var now = new Date();
+          var time = now.getTime();
+          time += 3600 * 1000;
+          now.setTime(time);
+          document.cookie = `loggedIn=true; expires=${now.toUTCString()};`;
+          // document.cookie = `loggedIn=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";`;
+          document.cookie = `id=${exhibitor.id}; expires=${now.toUTCString()};`;
           router.reload();
           // handleLoggedIn(true);
         } else {
@@ -214,6 +217,7 @@ const SingleExhibitor = (props) => {
           data: false,
         });
         document.cookie = `loggedIn=false;`;
+        setShowLoggedIn(false);
         router.reload();
       })
       .catch(function (error) {
@@ -257,22 +261,20 @@ const SingleExhibitor = (props) => {
           <h1>
             {exhibitor.FirstName} {exhibitor.LastName}
           </h1>
+          <h2>{event_job.EventJobName}</h2>s
           <InRoom className={showLoggedIn ? "true" : "false "}>
             {showLoggedIn ? "Present" : "Absent"}
           </InRoom>
-          <h2>{event_job.EventJobName}</h2>
-
           <hr />
-
-          <ChatGrid container spacing={2}>
-            <Grid item={true} md={loggedIn ? 6 : 12} sm={12}>
+          <ChatGrid container spacing={5}>
+            <Grid item={true} md={showLoggedIn ? 7 : 10} sm={12}>
               <PublicChat
                 exhibitor={exhibitor}
                 messages={messages}
                 addQuestion={addQuestion}
               />
             </Grid>
-            <Grid item={true} md={6}>
+            <Grid item={true} md={4}>
               {showLoggedIn ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
@@ -292,7 +294,7 @@ const SingleExhibitor = (props) => {
             </Grid>
           </ChatGrid>
         </Section>
-        <Footer></Footer>
+        <Footer>Back</Footer>
       </Body>
     </Page>
   );

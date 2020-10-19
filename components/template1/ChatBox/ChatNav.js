@@ -1,22 +1,33 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Button } from "@material-ui/core";
 import LogInBox from "./LogInBox";
 const MyChatNav = styled.nav`
   background-color: #181818;
-  height: 50px;
+  height: ${(props) => (props.focused ? "150px" : "50px")};
   color: white;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-right: 1em;
-  button {
+  transition: all 0.2s;
+  Button {
     margin-left: 1em;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    width: 80px;
+
+    height: 30px;
+    width: 100px;
+    font-size: 18px;
   }
+`;
+
+const LogInput = styled.input`
+  font-size: 18px;
+  font-family: Roboto;
+  margin: 0;
+  border: none;
+  margin-left: 10px;
+  min-height: 30px;
 `;
 
 const LoginSection = (props) => {
@@ -25,12 +36,11 @@ const LoginSection = (props) => {
   const [userValue, setUserValue] = React.useState("");
   const [passwordValue, setPasswordValue] = React.useState("");
 
-  useEffect(() => {});
   return !props.loggedIn ? (
     <div style={{ justifySelf: "flex-start" }}>
       {loginBoxShowing ? (
         <div>
-          <input
+          <LogInput
             key="login-email"
             type="text"
             placeholder="email"
@@ -38,33 +48,52 @@ const LoginSection = (props) => {
             value={userValue}
             onChange={(e) => setUserValue(e.target.value)}
           />
-          <input
+          <LogInput
             key="login-password"
             type="password"
             placeholder="password"
             name="password"
             value={passwordValue}
+            onFocus={() => props.setNavFocused(true)}
             onChange={(e) => setPasswordValue(e.target.value)}
           />
-          <button
+          <Button
+            variant="contained"
+            color="primary"
             key="submit-login-button"
-            onClick={() => props.handleLogin(userValue, passwordValue)}
+            onClick={() => {
+              props.setNavFocused(false);
+              props.handleLogin(userValue, passwordValue);
+            }}
           >
             Login
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
             key="cancel-login-button"
-            onClick={() => setLoginBoxShowing(false)}
+            onClick={() => {
+              props.setNavFocused(false);
+              setLoginBoxShowing(false);
+            }}
           >
             Cancel
-          </button>
+          </Button>
         </div>
       ) : (
         <div>
           Log In as {props.firstName}{" "}
-          <button key="login-button" onClick={() => setLoginBoxShowing(true)}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            key="login-button"
+            onClick={() => {
+              props.setNavFocused(true);
+              setLoginBoxShowing(true);
+            }}
+          >
             Log In
-          </button>
+          </Button>
         </div>
       )}
     </div>
@@ -79,9 +108,11 @@ const LoginSection = (props) => {
 };
 const ChatNav = (props) => {
   const { loggedIn } = props;
+  const [navFocused, setNavFocused] = React.useState(false);
   return (
-    <MyChatNav>
+    <MyChatNav focused={navFocused}>
       <LoginSection
+        setNavFocused={setNavFocused}
         loggedIn={loggedIn}
         firstName={props.exhibitor.FirstName}
         handleLogin={props.handleLogin}
