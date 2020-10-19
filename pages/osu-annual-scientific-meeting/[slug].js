@@ -5,9 +5,9 @@ import { fetchAPI } from "../../queries/fetch";
 import React, { Component } from "react";
 import { GET_ALL_EVENTS } from "../../queries/urlQueries";
 
-import { theme } from "./style";
+import { event_theme } from "./index";
 
-import Meta from "../globals/Meta";
+import Meta from "components/globals/Meta";
 import { Grid, Button } from "@material-ui/core";
 import Admin from "./components/admin";
 import Page from "../../components/template1/Page";
@@ -27,7 +27,7 @@ import EventSearch from "../../components/template1/EventSearch";
 const EventPage = ({ eventData }) => {
   const { EventName, id, client } = eventData;
   return (
-    <Page theme={theme}>
+    <Page theme={event_theme}>
       <Meta title={EventName}> </Meta>
       <Body>
         <Section title={EventName}>
@@ -42,16 +42,6 @@ const EventPage = ({ eventData }) => {
     </Page>
   );
 };
-
-export async function getStaticProps({ params }) {
-  // fetch data from CMS through params
-  const post = await getBlogItem(params.slug);
-  return {
-    props: {
-      post,
-    },
-  };
-}
 
 export async function getStaticPaths() {
   return {
