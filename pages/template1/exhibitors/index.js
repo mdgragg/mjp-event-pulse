@@ -1,10 +1,10 @@
 import React from "react";
-import { theme } from "../style";
+import { event_theme } from "../index";
 import { Router, useRouter } from "next/router";
 import EventSearch from "../../../components/template1/EventSearch";
 import Body from "../../../components/template1/Body";
 import Section from "../../../components/template1/Section";
-import Meta from "../../globals/Meta";
+import Meta from "components/globals/Meta";
 import { getEventExhibitors } from "../../../lib/api";
 
 import Link from "next/link";
@@ -39,7 +39,7 @@ const ExhibitorPage = (props) => {
   const event = props.meta;
 
   return (
-    <Page theme={theme}>
+    <Page theme={event_theme}>
       <Meta title="Exhibitors"> </Meta>
       <Body>
         <Section>

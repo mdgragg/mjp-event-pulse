@@ -15,7 +15,7 @@ import LogInBox from "components/template1/ChatBox/LogInBox";
 import PublicChat from "components/template1/ChatBox/PublicChat";
 import ChatNav from "components/template1/ChatBox/ChatNav";
 import ChatErrorBox from "components/template1/ChatBox/ChatErrorBox";
-import { theme } from "../style";
+import { event_theme } from "../index";
 import { useRouter } from "next/router";
 
 const SingleExhibitor = (props) => {
@@ -244,7 +244,7 @@ const SingleExhibitor = (props) => {
     }
   `;
   return (
-    <Page theme={theme}>
+    <Page theme={event_theme}>
       <Body>
         {errorBoxShow.isShowing ? (
           <ChatErrorBox errorMessage={errorBoxShow.message} />
@@ -261,7 +261,7 @@ const SingleExhibitor = (props) => {
           <h1>
             {exhibitor.FirstName} {exhibitor.LastName}
           </h1>
-          <h2>{event_job.EventJobName}</h2>s
+          <h2>{event_job.EventJobName}</h2>
           <InRoom className={showLoggedIn ? "true" : "false "}>
             {showLoggedIn ? "Present" : "Absent"}
           </InRoom>

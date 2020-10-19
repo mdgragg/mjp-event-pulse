@@ -1,13 +1,13 @@
 import { Router, useRouter } from "next/router";
 import { useQuery, gql } from "@apollo/client";
-import { fetchAPI, FetchAPI } from "../../queries/fetch";
+import { fetchAPI } from "../../queries/fetch";
 
 import React, { Component } from "react";
 import { GET_ALL_EVENTS } from "../../queries/urlQueries";
 
-import { theme } from "./style";
+import { event_theme } from "./index";
 
-import Meta from "../globals/Meta";
+import Meta from "components/globals/Meta";
 import { Grid, Button } from "@material-ui/core";
 import Admin from "./components/admin";
 import Page from "../../components/template1/Page";
@@ -27,28 +27,28 @@ import EventSearch from "../../components/template1/EventSearch";
 const EventPage = ({ eventData }) => {
   const { EventName, id, client } = eventData;
   return (
-    <Page theme={theme}>
+    <Page theme={event_theme}>
       <Meta title={EventName}> </Meta>
-
       <Body>
-          <Section title={EventName}>
-            <Grid container={true} spacing={3}>
-              <Grid item={true} md={12} sm={12}>
-                <VideoBox />
-              </Grid>
+        <Section title={EventName}>
+          <Grid container={true} spacing={3}>
+            <Grid item={true} md={12} sm={12}>
+              <VideoBox />
             </Grid>
-
-            <Button>
-        Back
-      </Button>
-          </Section>
-   
-    </Body>
-     
+          </Grid>
+          <Button>Back</Button>
+        </Section>
+      </Body>
     </Page>
   );
 };
 
+export async function getStaticPaths() {
+  return {
+    fallback: true,
+    paths: [],
+  };
+}
 export default EventPage;
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do

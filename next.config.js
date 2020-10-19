@@ -1,5 +1,6 @@
-// next.config.js
-// const withSass = require('@zeit/next-sass')
-// module.exports = withSass({
-//     cssModules: true
-// })
+module.exports = {
+  env: {
+    NEXT_PUBLIC_STRAPI_API_URL:
+      "https://mills-james-event-cms.herokuapp.com/graphql",
+  },
+};

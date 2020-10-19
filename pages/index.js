@@ -1,17 +1,17 @@
 import { gql, useQuery } from "@apollo/client";
-import Link from "next/link";
+import withApollo from "../lib/withApollo";
 import { useEffect, useState, useRef } from "react";
-import EventSearch from "./globals/EventSearch";
-import Header from "./globals/Header";
-import Footer from "./globals/Footer";
-import Page from "../components/template1/Page";
-import Section from "../components/template1/Section";
-import { theme } from "./globals/style";
-import { useRouter } from "next/router";
-import { Grid, Button } from "@material-ui/core";
-import { InfoGrid } from "./globals/InfoGrid";
+import EventSearch from "components/globals/EventSearch";
+import Header from "components/globals/Header";
+import Footer from "components/globals/Footer";
+import Page from "components/template1/Page";
+import Section from "components/template1/Section";
+import { theme } from "components/globals/style";
 
-export default function Home() {
+import { Grid, Button } from "@material-ui/core";
+import { InfoGrid } from "components/globals/InfoGrid";
+
+const Home = (props) => {
   const { loading, data, error } = useQuery(ALL_URL_QUERY);
   const eventJobs = [];
   const [jobs, setJobs] = useState({ jobs: {} });
@@ -44,7 +44,6 @@ export default function Home() {
     return (
       <Page theme={theme}>
         <Header title="MJ Event Home" height={headerHeight} />
-
         <Section>
           <Grid container={true}>
             <Grid item={true} md={7} alignContent="center">
@@ -57,7 +56,7 @@ export default function Home() {
       </Page>
     );
   }
-}
+};
 
 const ALL_URL_QUERY = gql`
   query jobs {
@@ -71,3 +70,5 @@ const ALL_URL_QUERY = gql`
     }
   }
 `;
+
+export default withApollo(Home);
