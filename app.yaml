@@ -2,7 +2,7 @@ env: standard
 runtime: nodejs10
 service: default
 
-handlers: 
-  -url: /.*
-  secure: always
-  script: auto
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
