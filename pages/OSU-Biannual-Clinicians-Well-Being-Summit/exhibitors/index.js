@@ -22,7 +22,7 @@ const ExhibitorLink = styled.div`
     margin-bottom: 10px;
     border: 1px solid #c4c4c4;
     border-radius: 7px;
-    height: 100px;
+    height: 150px;
     padding: 20px;
     transition: all 0.15s;
   }
@@ -50,8 +50,12 @@ const ExhibitorPage = (props) => {
               onClick={() => router.push(`${router.pathname}/${event[e].id}`)}
             >
               <>
-                {event[e].FirstName} {event[e].LastName} <br /> {event[e].Email}{" "}
+                <strong>
+                  {event[e].FirstName} {event[e].LastName}
+                </strong>
                 <br /> <span> {event[e].ExhibitName?.replace(/_/g, " ")}</span>
+                <br />
+                {event[e].Email} <br />
               </>
             </ExhibitorLink>
           ))}

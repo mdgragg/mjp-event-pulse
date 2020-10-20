@@ -40,7 +40,8 @@ const Navbar = (props) => {
           : props.info.client.ClientName}
       </h3>
       <MyButton
-        onClick={() => router.push(`${props.info.eventUrl}/exhibitors`)}
+        key={`exhibit-link--${props.info.id}`}
+        onClick={() => router.push(`${router.pathname}/exhibitors`)}
       >
         Exhibitors
       </MyButton>

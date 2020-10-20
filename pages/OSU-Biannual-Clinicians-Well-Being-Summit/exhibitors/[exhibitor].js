@@ -6,6 +6,12 @@ import React, { useEffect, setState, useRef } from "react";
 import { fetchAPI } from "lib/api/";
 import styled from "styled-components";
 import { Grid } from "@material-ui/core";
+import {
+  ArrowRight,
+  BackspaceOutlined,
+  Backup,
+  KeyboardArrowLeft,
+} from "@material-ui/icons";
 import Page from "components/template1/Page";
 import Body from "components/template1/Body";
 import Section from "components/template1/Section";
@@ -17,6 +23,7 @@ import ChatNav from "components/template1/ChatBox/ChatNav";
 import ChatErrorBox from "components/template1/ChatBox/ChatErrorBox";
 import { event_theme } from "../index";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const SingleExhibitor = (props) => {
   const router = useRouter();
@@ -259,11 +266,33 @@ const SingleExhibitor = (props) => {
         />
         <Section minHeight={"100vh"}>
           <Grid container>
+            <Grid item md={12}>
+              <Link
+                style={{ fontSize: "24px", color: "white" }}
+                href={`/${event_job.eventUrl}/exhibitors`}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "grey",
+                    cursor: "pointer",
+                    // backgroundColor: "black",
+                    padding: "5px",
+                    width: "130px",
+                  }}
+                >
+                  <KeyboardArrowLeft /> All Exhibitors
+                </div>
+              </Link>
+            </Grid>
+
             <Grid item md={4}>
               <h1>
                 {exhibitor.FirstName} {exhibitor.LastName}
               </h1>
-              <h2>{event_job.EventJobName}</h2>
+
+              <h2>{exhibitor.ExhibitName}</h2>
               <InRoom className={showLoggedIn ? "true" : "false "}>
                 {showLoggedIn ? "Present" : "Absent"}
               </InRoom>
@@ -271,6 +300,7 @@ const SingleExhibitor = (props) => {
             <Grid item md={8}>
               <iframe
                 height="500px"
+                frameBorder="1px"
                 width="100%"
                 src={`${exhibitor.Website}`}
                 title="Testing"
@@ -306,7 +336,7 @@ const SingleExhibitor = (props) => {
             </Grid>
           </ChatGrid>
         </Section>
-        <Footer>Back</Footer>
+        <Footer></Footer>
       </Body>
     </Page>
   );
@@ -327,6 +357,7 @@ SingleExhibitor.getInitialProps = async (ctx) => {
             LastName
             Company
             Website
+            ExhibitName
             id
             Website
             Email
