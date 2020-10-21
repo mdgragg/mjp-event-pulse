@@ -24,6 +24,7 @@ import ChatErrorBox from "components/template1/ChatBox/ChatErrorBox";
 import { event_theme } from "../index";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { BackButton } from "components/template1/Elements/";
 
 const SingleExhibitor = (props) => {
   const router = useRouter();
@@ -45,9 +46,7 @@ const SingleExhibitor = (props) => {
   // const [featuredMessage, changeFeaturedMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   // const [loggedIn, setLoggedIn] = React.useState(false);
-  const [showLoggedIn, setShowLoggedIn] = React.useState(
-    props.loggedIn || false
-  );
+  const [showLoggedIn, setShowLoggedIn] = React.useState(false);
 
   const [question, changeQuestion] = React.useState("");
   const [errorBoxShow, setErrorBoxShow] = React.useState({
@@ -67,20 +66,6 @@ const SingleExhibitor = (props) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   //get the endpoint to show present
-  //   const ref = base.listenTo(`${base_url}/logged-in`, {
-  //     context: {
-  //       setState: (showLoggedIn) => setShowLoggedIn(loggedIn),
-  //       state: showLoggedIn,
-  //     },
-  //     then(data) {
-  //       console.log("listen to use effect ran");
-  //     },
-  //   });
-  //   return base.removeBinding(ref);
-  // }, []);
-
   useEffect(() => {
     if (loggedIn === "true" && exhibitor.id === id) {
       base.post(`${base_url}/logged-in`, {
@@ -92,11 +77,22 @@ const SingleExhibitor = (props) => {
       base.post(`${base_url}/logged-in`, {
         data: false,
       });
-    } else {
-      console.log("it is setting false");
-      setShowLoggedIn(false);
     }
   }, []);
+
+  useEffect(() => {
+    //get the endpoint to show present
+    base.listenTo(`${base_url}/logged-in`, {
+      context: {
+        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
+        state: showLoggedIn,
+      },
+      then(data) {
+        console.log(data);
+        setShowLoggedIn(data);
+      },
+    });
+  });
 
   useEffect(() => {
     let ref = base.syncState(`${base_url}/messages/`, {
@@ -259,7 +255,7 @@ const SingleExhibitor = (props) => {
           ""
         )}
         <ChatNav
-          loggedIn={showLoggedIn}
+          loggedIn={loggedIn}
           logOut={logOut}
           exhibitor={exhibitor}
           handleLogin={logIn}
@@ -267,24 +263,7 @@ const SingleExhibitor = (props) => {
         <Section minHeight={"100vh"}>
           <Grid container>
             <Grid item md={12} spacing={5}>
-              <Link
-                style={{ fontSize: "24px", color: "white" }}
-                href={`/${event_job.eventUrl}/exhibitors`}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    color: "grey",
-                    cursor: "pointer",
-                    // backgroundColor: "black",
-                    padding: "5px",
-                    width: "130px",
-                  }}
-                >
-                  <KeyboardArrowLeft /> All Exhibitors
-                </div>
-              </Link>
+              <BackButton text="All Exhibitors" event_job={event_job} />
             </Grid>
 
             <Grid item md={4}>
@@ -297,7 +276,7 @@ const SingleExhibitor = (props) => {
                 {showLoggedIn ? "Present" : "Absent"}
               </InRoom>
             </Grid>
-            <Grid item md={8}>
+            <Grid item md={8} xs={12}>
               <iframe
                 height="500px"
                 frameBorder="1px"

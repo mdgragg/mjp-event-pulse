@@ -36,7 +36,7 @@ const LoginSection = (props) => {
   const [userValue, setUserValue] = React.useState("");
   const [passwordValue, setPasswordValue] = React.useState("");
 
-  return !props.loggedIn ? (
+  return props.loggedIn === "false" ? (
     <div style={{ justifySelf: "flex-start" }}>
       {loginBoxShowing ? (
         <div>
