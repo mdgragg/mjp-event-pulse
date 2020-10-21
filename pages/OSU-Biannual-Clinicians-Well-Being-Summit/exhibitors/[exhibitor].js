@@ -296,7 +296,7 @@ const SingleExhibitor = (props) => {
               />
             </Grid>
             <Grid item={true} md={4}>
-              {showLoggedIn ? (
+              {loggedIn ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
                   <LoggedIn
