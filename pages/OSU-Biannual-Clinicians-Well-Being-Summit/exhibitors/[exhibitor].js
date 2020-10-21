@@ -272,8 +272,8 @@ const SingleExhibitor = (props) => {
               </h1>
 
               <h2>{exhibitor.ExhibitName}</h2>
-              <InRoom className={showLoggedIn ? "true" : "false "}>
-                {showLoggedIn ? "Present" : "Absent"}
+              <InRoom className={showLoggedIn == true ? "true" : "false "}>
+                {showLoggedIn == true ? "Present" : "Absent"}
               </InRoom>
             </Grid>
             <Grid item md={8} xs={12}>
@@ -296,7 +296,7 @@ const SingleExhibitor = (props) => {
               />
             </Grid>
             <Grid item={true} md={4}>
-              {loggedIn === "true" ? (
+              {props.loggedIn === "true" ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
                   <LoggedIn
