@@ -92,7 +92,7 @@ const SingleExhibitor = (props) => {
         setShowLoggedIn(data);
       },
     });
-  });
+  }, []);
 
   useEffect(() => {
     let ref = base.syncState(`${base_url}/messages/`, {
