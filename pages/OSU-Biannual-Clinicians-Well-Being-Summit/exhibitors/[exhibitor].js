@@ -255,7 +255,7 @@ const SingleExhibitor = (props) => {
           ""
         )}
         <ChatNav
-          loggedIn={loggedIn}
+          loggedIn={props?.loggedIn}
           logOut={logOut}
           exhibitor={exhibitor}
           handleLogin={logIn}
@@ -296,7 +296,7 @@ const SingleExhibitor = (props) => {
               />
             </Grid>
             <Grid item={true} md={4}>
-              {props.loggedIn === "true" ? (
+              {props?.loggedIn === "true" ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
                   <LoggedIn
@@ -324,9 +324,11 @@ const SingleExhibitor = (props) => {
 export default SingleExhibitor;
 
 SingleExhibitor.getInitialProps = async (ctx) => {
-  const { loggedIn } = cookies(ctx);
+  let { loggedIn } = cookies(ctx);
   const { id } = cookies(ctx);
-
+  if (!loggedIn) {
+    loggedIn = "false";
+  }
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {

@@ -99,7 +99,7 @@ const LoginSection = (props) => {
         )}
       </div>
     );
-  } else if (loggedIn === "true") {
+  } else if (props.loggedIn === "true") {
     return (
       <div style={{ justifySelf: "flex-start" }}>
         Logged In as {props.firstName}{" "}
