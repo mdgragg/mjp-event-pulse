@@ -266,7 +266,7 @@ const SingleExhibitor = (props) => {
         />
         <Section minHeight={"100vh"}>
           <Grid container>
-            <Grid item md={12}>
+            <Grid item md={12} spacing={5}>
               <Link
                 style={{ fontSize: "24px", color: "white" }}
                 href={`/${event_job.eventUrl}/exhibitors`}
