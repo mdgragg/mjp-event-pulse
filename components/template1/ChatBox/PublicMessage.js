@@ -26,7 +26,7 @@ const Pin = styled(Card)`
   }
 `;
 const StyledMessage = styled.div`
-  font-size: 16px;
+  font-size: 12px;
   &&.open {
     min-height: 350px;
     transition: height 0.2s ease;

@@ -11,7 +11,7 @@ const PublicChat = (props) => {
   const [featuredMessage, setFeaturedMessage] = React.useState([]);
 
   useEffect(() => {
-    const value = Object.values(messages).filter((v) => v.featured === true);
+    const value = Object.values(messages).filter((v) => v.featured === "true");
     setFeaturedMessage(value);
   }, [messages]);
 
