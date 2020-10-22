@@ -93,7 +93,7 @@ const ShowButton = styled(Button)`
 `;
 
 const index = (props) => {
-  const [response, changeResponse] = React.useState({ ...props.meta.response });
+  const [response, changeResponse] = React.useState(...props.meta.response);
 
   const handleResponseChange = (value) => {
     changeResponse(value);

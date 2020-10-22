@@ -6,6 +6,12 @@ import React, { useEffect, setState, useRef } from "react";
 import { fetchAPI } from "lib/api/";
 import styled from "styled-components";
 import { Grid } from "@material-ui/core";
+import {
+  ArrowRight,
+  BackspaceOutlined,
+  Backup,
+  KeyboardArrowLeft,
+} from "@material-ui/icons";
 import Page from "components/template1/Page";
 import Body from "components/template1/Body";
 import Section from "components/template1/Section";
@@ -17,6 +23,8 @@ import ChatNav from "components/template1/ChatBox/ChatNav";
 import ChatErrorBox from "components/template1/ChatBox/ChatErrorBox";
 import { event_theme } from "../index";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { BackButton } from "components/template1/Elements/";
 
 const SingleExhibitor = (props) => {
   const router = useRouter();
@@ -38,9 +46,7 @@ const SingleExhibitor = (props) => {
   // const [featuredMessage, changeFeaturedMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   // const [loggedIn, setLoggedIn] = React.useState(false);
-  const [showLoggedIn, setShowLoggedIn] = React.useState(
-    props.loggedIn || false
-  );
+  const [showLoggedIn, setShowLoggedIn] = React.useState(false);
 
   const [question, changeQuestion] = React.useState("");
   const [errorBoxShow, setErrorBoxShow] = React.useState({
@@ -60,20 +66,6 @@ const SingleExhibitor = (props) => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   //get the endpoint to show present
-  //   const ref = base.listenTo(`${base_url}/logged-in`, {
-  //     context: {
-  //       setState: (showLoggedIn) => setShowLoggedIn(loggedIn),
-  //       state: showLoggedIn,
-  //     },
-  //     then(data) {
-  //       console.log("listen to use effect ran");
-  //     },
-  //   });
-  //   return base.removeBinding(ref);
-  // }, []);
-
   useEffect(() => {
     if (loggedIn === "true" && exhibitor.id === id) {
       base.post(`${base_url}/logged-in`, {
@@ -85,10 +77,21 @@ const SingleExhibitor = (props) => {
       base.post(`${base_url}/logged-in`, {
         data: false,
       });
-    } else {
-      console.log("it is setting false");
-      setShowLoggedIn(false);
     }
+  }, []);
+
+  useEffect(() => {
+    //get the endpoint to show present
+    base.listenTo(`${base_url}/logged-in`, {
+      context: {
+        setState: (showLoggedIn) => setShowLoggedIn(showLoggedIn),
+        state: showLoggedIn,
+      },
+      then(data) {
+        console.log(data);
+        setShowLoggedIn(data);
+      },
+    });
   }, []);
 
   useEffect(() => {
@@ -127,6 +130,7 @@ const SingleExhibitor = (props) => {
     });
   };
   const updateMessage = (m, keyval = {}) => {
+    console.log(keyval.value);
     let allMessages = { ...messages };
     let updated = allMessages[m];
 
@@ -165,14 +169,23 @@ const SingleExhibitor = (props) => {
     updateMessage(corres, { key: "public", value: info });
   };
 
-  const handleResponse = (e, message_id) => {
-    let allMessages = { ...messages };
-    updateMessage(message_id, { key: "response", value: e.target.value });
-  };
+  // const handleResponse = (e, message_id) => {
+  //   updateMessage(message_id, { key: "response", value: e.target.value });
+  // };
 
   const submitResponse = (message_id, value) => {
-    console.log(value);
-    updateMessage(message_id, { key: "response", value: value });
+    let allMessages = { ...messages };
+    console.log(typeof value);
+    let currentResponse = allMessages[message_id].response;
+
+    updateMessage(message_id, {
+      key: "response",
+      value: value,
+    });
+    updateMessage(message_id, {
+      key: "public",
+      value: true,
+    });
   };
 
   const logIn = (user, pass) => {
@@ -252,19 +265,37 @@ const SingleExhibitor = (props) => {
           ""
         )}
         <ChatNav
-          loggedIn={showLoggedIn}
+          loggedIn={props?.loggedIn}
           logOut={logOut}
           exhibitor={exhibitor}
           handleLogin={logIn}
         />
         <Section minHeight={"100vh"}>
-          <h1>
-            {exhibitor.FirstName} {exhibitor.LastName}
-          </h1>
-          <h2>{event_job.EventJobName}</h2>
-          <InRoom className={showLoggedIn ? "true" : "false "}>
-            {showLoggedIn ? "Present" : "Absent"}
-          </InRoom>
+          <Grid container>
+            <Grid item md={12} spacing={5}>
+              <BackButton text="All Exhibitors" event_job={event_job} />
+            </Grid>
+
+            <Grid item md={4}>
+              <h1>
+                {exhibitor.FirstName} {exhibitor.LastName}
+              </h1>
+
+              <h2>{exhibitor.ExhibitName}</h2>
+              <InRoom className={showLoggedIn == true ? "true" : "false "}>
+                {showLoggedIn == true ? "Present" : "Absent"}
+              </InRoom>
+            </Grid>
+            <Grid item md={8} xs={12}>
+              {/* <iframe
+                height="500px"
+                frameBorder="1px"
+                width="100%"
+                src={`${exhibitor.Website}`}
+                title="Testing"
+              ></iframe> */}
+            </Grid>
+          </Grid>
           <hr />
           <ChatGrid container spacing={5}>
             <Grid item={true} md={showLoggedIn ? 7 : 10} sm={12}>
@@ -275,14 +306,13 @@ const SingleExhibitor = (props) => {
               />
             </Grid>
             <Grid item={true} md={4}>
-              {showLoggedIn ? (
+              {props?.loggedIn === "true" ? (
                 <>
                   <h2>Only You Can See this {exhibitor.FirstName} </h2>
                   <LoggedIn
                     key={"logged-in-div"}
                     handleSelect={handleSelect}
                     handleShowHide={handleShowHide}
-                    handleResponse={handleResponse}
                     messages={messages}
                     question={question}
                     submitResponse={submitResponse}
@@ -294,7 +324,7 @@ const SingleExhibitor = (props) => {
             </Grid>
           </ChatGrid>
         </Section>
-        <Footer>Back</Footer>
+        <Footer></Footer>
       </Body>
     </Page>
   );
@@ -303,9 +333,11 @@ const SingleExhibitor = (props) => {
 export default SingleExhibitor;
 
 SingleExhibitor.getInitialProps = async (ctx) => {
-  const { loggedIn } = cookies(ctx);
+  let { loggedIn } = cookies(ctx);
   const { id } = cookies(ctx);
-
+  if (!loggedIn) {
+    loggedIn = "false";
+  }
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {
@@ -315,6 +347,7 @@ SingleExhibitor.getInitialProps = async (ctx) => {
             LastName
             Company
             Website
+            ExhibitName
             id
             Website
             Email

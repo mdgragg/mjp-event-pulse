@@ -168,14 +168,10 @@ const SingleExhibitor = (props) => {
     updateMessage(corres, { key: "public", value: info });
   };
 
-  const handleResponse = (e, message_id) => {
-    let allMessages = { ...messages };
-    updateMessage(message_id, { key: "response", value: e.target.value });
-  };
-
   const submitResponse = (message_id, value) => {
     console.log(value);
     updateMessage(message_id, { key: "response", value: value });
+    updateMessage(message_id, { key: "public", value: true });
   };
 
   const logIn = (user, pass) => {
@@ -303,7 +299,6 @@ const SingleExhibitor = (props) => {
                     key={"logged-in-div"}
                     handleSelect={handleSelect}
                     handleShowHide={handleShowHide}
-                    handleResponse={handleResponse}
                     messages={messages}
                     question={question}
                     submitResponse={submitResponse}
