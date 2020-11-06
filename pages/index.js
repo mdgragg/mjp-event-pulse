@@ -43,13 +43,15 @@ const Home = (props) => {
   } else {
     return (
       <Page theme={theme}>
-        <Header title="MJ Event Home" height={headerHeight} />
+        <Header title="MJP Events" height={headerHeight} />
         <Section>
-          <Grid container={true}>
-            <Grid item={true} md={7} alignContent="center">
+          <Grid container>
+            {/* <Grid item={true} md={7} alignContent="center">
               <EventSearch events={eventJobs} />
+            </Grid> */}
+            <Grid item={true} md={12} alignItems="flex-start">
+              <InfoGrid />
             </Grid>
-            <InfoGrid />
           </Grid>
         </Section>
         <Footer />

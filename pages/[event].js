@@ -3,27 +3,26 @@ import { Router, useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import { useQuery, gql } from "@apollo/client";
-import withApollo from "lib/withApollo";
 // var array = require('lodash/array');
 import _ from "lodash";
-import { getEventMeta, getEventByUrl } from "../../lib/api";
+import { getEventMeta, getEventByUrl, fetchAPI } from "../lib/api";
 import { Grid, Button } from "@material-ui/core";
-import Admin from "./components/admin";
-import Meta from "components/globals/Meta";
-import Page from "../../components/template1/Page";
-import Header from "../../components/template1/Header";
-import Navbar from "../../components/template1/Navbar";
-import Body from "../../components/template1/Body";
-import VideoBox from "../../components/template1/VideoBox";
-import Sidebar from "../../components/template1/Sidebar";
-import Banner from "../../components/template1/Banner";
-import Hero from "../../components/template1/Hero";
-import Footer from "../../components/template1/Footer";
 
-import ListItem from "../../components/template1/ListItem";
-import Section from "../../components/template1/Section";
-import ListItemSmall from "../../components/template1/ListItemSmall";
-import EventSearch from "../../components/template1/EventSearch";
+import Meta from "components/globals/Meta";
+import Page from "../components/template1/Page";
+import Header from "../components/template1/Header";
+import Navbar from "../components/template1/Navbar";
+import Body from "../components/template1/Body";
+import VideoBox from "../components/template1/VideoBox";
+import Sidebar from "../components/template1/Sidebar";
+import Banner from "../components/template1/Banner";
+import Hero from "../components/template1/Hero";
+import Footer from "../components/template1/Footer";
+
+import ListItem from "../components/template1/ListItem";
+import Section from "../components/template1/Section";
+import ListItemSmall from "../components/template1/ListItemSmall";
+import EventSearch from "../components/template1/EventSearch";
 
 export const event_theme = {
   // bg: '#BADA55'
@@ -40,18 +39,14 @@ const Template1 = (props) => {
   const [isPreview, setPreview] = useState(
     props.meta.eventStatus.EventStatus === "Preview"
   );
-  const { error, loading, data } = useQuery(gql`
-    query {
-      eventJobs {
-        eventUrl
-      }
-    }
-  `);
 
   const router = useRouter();
   const [hasStarted, setStarted] = useState(false);
   const [sidbarState, toggleSidebar] = useState(null);
   let event_meta = props.meta;
+
+  const the_start =
+    Date.parse(event_meta.eventJobStartEnd?.StartDateTime) || Date.now();
 
   let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
 
@@ -64,8 +59,7 @@ const Template1 = (props) => {
   useEffect(() => {
     let now = Date.now();
     console.log("now: " + now);
-    let dateStart =
-      Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000;
+    let dateStart = the_start - 18000000;
     console.log("start: " + dateStart);
     if (dateStart < now) {
       setStarted(true);
@@ -131,6 +125,7 @@ const Template1 = (props) => {
             <Grid container={true} spacing={3} justify={"center"}>
               <ListItemSmall />
               <ListItemSmall />
+              <ListItemSmall />
             </Grid>
           </Section>
 
@@ -166,11 +161,30 @@ const Template1 = (props) => {
       </Page>
     );
   } else {
-    return <Admin />;
+    return <h1> Error </h1>;
   }
 };
+export async function getStaticPaths() {
+  const { eventJobs } = await fetchAPI(`
+  query{
+    eventJobs{
+      eventUrl
+    }
+  }
+  `);
 
-export async function getServerSideProps(ctx) {
+  const paths = [];
+
+  eventJobs.forEach((job) => {
+    paths.push({ params: { event: job.eventUrl } });
+  });
+  console.log(paths);
+  return {
+    paths: paths,
+    fallback: false,
+  };
+}
+export async function getStaticProps(ctx) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -178,9 +192,9 @@ export async function getServerSideProps(ctx) {
 
   //get the event job data from our api
   let url;
-  !ctx.previewData ? (url = ctx.req.url.slice(1)) : (url = ctx.previewData.url);
+  !ctx.previewData ? (url = Router.pathname) : (url = ctx.previewData.url);
 
-  const eventData = await getEventMeta(url);
+  const eventData = await getEventMeta(ctx.params.event);
 
   //this is what will load as the "context" if we haven't come here through
   //our preview link
@@ -205,4 +219,4 @@ export async function getServerSideProps(ctx) {
   return values;
 }
 
-export default withApollo(Template1);
+export default Template1;

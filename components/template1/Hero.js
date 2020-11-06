@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import Counter from './Counter'
+import Counter from "./Counter";
 import { Fragment } from "react";
 
 const breatheAnimation = keyframes`
@@ -16,29 +16,26 @@ const breatheAnimation = keyframes`
 100% {transform: scale(1.2) }
 `;
 
- const HeroHolder = styled.div`
-   position: relative;
+const HeroHolder = styled.div`
+  position: relative;
 
-   width: 100%;
-   height: ${(props) => props.theme.heroHeight};
-   background-color: rgba(0,0,0,0.5);
-   overflow: hidden;
-   color: white;
- `;
-
-const StyledTypography = styled(Typography)`
-z-index: 99;
-position: absolute;
-top: 30%;
-text-align: center;
-width: 100%;
+  width: 100%;
+  height: ${(props) => props.theme.heroHeight};
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  color: white;
 `;
 
+const StyledTypography = styled(Typography)`
+  z-index: 99;
+  position: absolute;
+  top: 30%;
+  text-align: center;
+  width: 100%;
+`;
 
 export default function Sidebar(props) {
-
-
-
+  const start = props.start[0].eventStartEnd?.StartDateTime || Date.now();
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url("${props.bgImage}");
@@ -61,18 +58,17 @@ export default function Sidebar(props) {
     }
   `;
 
-
   return (
     <HeroHolder>
       <StyledHero></StyledHero>
       <StyledTypography variant="h2">
         {props.title} <br />
       </StyledTypography>
-      {(!props.hasStarted) ? 
-      <Counter 
-      hasStarted={props.hasStarted} 
-      start={props.start[0].eventStartEnd.StartDateTime}/>
- : ""}
+      {!props.hasStarted ? (
+        <Counter hasStarted={props.hasStarted} start={start} />
+      ) : (
+        ""
+      )}
     </HeroHolder>
   );
 }
