@@ -63,7 +63,7 @@ const Template1 = (props) => {
 
   useEffect(() => {
     let now = Date.now();
-    console.log("now: " + now);
+
     let dateStart =
       Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000;
     console.log("start: " + dateStart);
