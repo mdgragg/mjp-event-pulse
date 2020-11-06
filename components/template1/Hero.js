@@ -35,7 +35,7 @@ const StyledTypography = styled(Typography)`
 `;
 
 export default function Sidebar(props) {
-  const start = props.start[0].eventStartEnd?.StartDateTime || Date.now();
+  const start = props.start[0]?.eventStartEnd.StartDateTime || Date.now();
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url("${props.bgImage}");
