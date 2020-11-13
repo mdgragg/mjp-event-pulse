@@ -1,8 +1,11 @@
-import React from "react";
-import App, { Container } from "next/app";
-import Meta from "components/globals/Meta";
-import { GlobalStyle } from "components/globals/GlobalStyle";
-
+import React, { createContext, useState } from 'react';
+import App, { Container } from 'next/app';
+import Meta from 'components/globals/Meta';
+import { GlobalStyle } from 'components/globals/GlobalStyle';
+import UserContext from 'lib/context/UserContext';
+import cookies from 'next-cookies';
+import UserContextProvider from '../lib/context/UserContext';
+import { login } from '../lib/fetchCalls/login';
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -10,7 +13,9 @@ class MyApp extends App {
       <>
         <Meta />
         <GlobalStyle />
-        <Component {...pageProps} />
+        <UserContextProvider creds={this.props.creds}>
+          <Component {...pageProps} />
+        </UserContextProvider>
       </>
     );
   }
@@ -37,11 +42,20 @@ class MyApp extends App {
 // perform automatic static optimization, causing every page in your app to
 // be server-side rendered.
 //
+
 MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(appContext);
 
-  return { ...appProps };
+  const appProps = await App.getInitialProps(appContext);
+  let { creds } = cookies(appContext.ctx);
+
+  if (creds === undefined) {
+    creds = {};
+  }
+
+  // const loggedIn = await login(creds);
+  // console.log(loggedIn);
+  return { ...appProps, creds };
 };
 
 export default MyApp;
