@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 import {
   Grid,
   Card,
@@ -6,9 +6,9 @@ import {
   AppBar,
   Toolbar,
   Typography,
-} from "@material-ui/core";
-import Counter from "./Counter";
-import { Fragment } from "react";
+} from '@material-ui/core';
+import Counter from './Counter';
+import { Fragment } from 'react';
 
 const breatheAnimation = keyframes`
 0% { transform: scale(1.2) }
@@ -34,11 +34,10 @@ const StyledTypography = styled(Typography)`
   width: 100%;
 `;
 
-export default function Sidebar(props) {
-  const start = Date.now();
+export default function Hero(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
-    background-image: url("${props.bgImage}");
+    background-image: url('${props.bgImage}');
     opacity: 1;
     /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
@@ -65,9 +64,9 @@ export default function Sidebar(props) {
         {props.title} <br />
       </StyledTypography>
       {!props.hasStarted ? (
-        <Counter hasStarted={props.hasStarted} start={start} />
+        <Counter hasStarted={props.hasStarted} start={props.start} />
       ) : (
-        ""
+        ''
       )}
     </HeroHolder>
   );

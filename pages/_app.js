@@ -5,6 +5,7 @@ import { GlobalStyle } from 'components/globals/GlobalStyle';
 import UserContext from 'lib/context/UserContext';
 import cookies from 'next-cookies';
 import UserContextProvider from '../lib/context/UserContext';
+import AppContextProvider from '../lib/context/AppContext';
 import { login } from '../lib/fetchCalls/login';
 class MyApp extends App {
   render() {
@@ -13,9 +14,11 @@ class MyApp extends App {
       <>
         <Meta />
         <GlobalStyle />
-        <UserContextProvider creds={this.props.creds}>
-          <Component {...pageProps} />
-        </UserContextProvider>
+        <AppContextProvider>
+          <UserContextProvider loginData={this.props.loginData}>
+            <Component {...pageProps} />
+          </UserContextProvider>
+        </AppContextProvider>
       </>
     );
   }
@@ -49,13 +52,12 @@ MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
   let { creds } = cookies(appContext.ctx);
 
-  if (creds === undefined) {
-    creds = {};
-  }
+  creds === undefined ? (creds = {}) : null;
 
-  // const loggedIn = await login(creds);
-  // console.log(loggedIn);
-  return { ...appProps, creds };
+  return {
+    ...appProps,
+    loginData: { cookie_creds: creds },
+  };
 };
 
 export default MyApp;

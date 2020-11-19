@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
 import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
+import { AppContext } from 'lib/context/AppContext';
 import _ from 'lodash';
 import { getEventMeta, getEventByUrl } from '../../lib/api';
 import { Grid, Button } from '@material-ui/core';
@@ -35,20 +36,10 @@ export const event_theme = {
 const Template1 = (props) => {
   const { loginState, verify_main_event } = useContext(UserContext);
 
-  const { username, email, token } = props.creds;
-
-  const { error, loading, data } = useQuery(gql`
-    query {
-      eventJobs {
-        eventUrl
-      }
-    }
-  `);
-
   const router = useRouter();
   const [hasStarted, setStarted] = useState(false);
 
-  const [sidbarState, toggleSidebar] = useState(null);
+  const [verified, setVerified] = useState({ verified: false });
 
   let event_meta = props.meta;
   const { AuthRequired } = props.meta;
@@ -64,11 +55,13 @@ const Template1 = (props) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (AuthRequired) {
-  //     verify_main_event(props.meta);
-  //   }
-  // }, [loginState.creds]);
+  useEffect(() => {
+    if (AuthRequired) {
+      verify_main_event(props.meta).then((result) => {
+        setVerified({ verified: result });
+      });
+    }
+  }, [loginState.loggedIn]);
 
   const MainPage = () => {
     return (
@@ -166,12 +159,20 @@ const Template1 = (props) => {
   };
 
   if (AuthRequired) {
-    if (loginState.loggedIn) {
+    if (loginState.loggedIn && !verified.verified) {
+      return (
+        <div>
+          <h1>you are logged in but not verified for this event</h1>
+          <Link href="/me"> My Account</Link>
+          <LoginBox />
+        </div>
+      );
+    }
+    if (verified && loginState.loggedIn) {
       return <MainPage />;
     } else {
       return (
         <Page theme={event_theme}>
-          <h1> Yed</h1>
           <LoginBox />
         </Page>
       );
@@ -186,7 +187,6 @@ export async function getServerSideProps(ctx) {
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
-  const { creds } = cookies(ctx) || {};
 
   //get the event job data from our api
   let url = ctx.req.url.slice(1);
@@ -200,9 +200,8 @@ export async function getServerSideProps(ctx) {
   const values = {
     props: {
       //meta will be the props for the event
+
       meta: eventData,
-      creds: 'testing from page',
-      loginData: 'testing form page',
     },
   };
   return values;

@@ -1,72 +1,68 @@
-import { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import { useQuery, gql } from "@apollo/client";
-// var array = require('lodash/array');
-import _ from "lodash";
-import { getEventMeta, getEventByUrl, fetchAPI } from "../lib/api";
-import { Grid, Button } from "@material-ui/core";
-
-import Meta from "components/globals/Meta";
-import Page from "../components/template1/Page";
-import Header from "../components/template1/Header";
-import Navbar from "../components/template1/Navbar";
-import Body from "../components/template1/Body";
-import VideoBox from "../components/template1/VideoBox";
-import Sidebar from "../components/template1/Sidebar";
-import Banner from "../components/template1/Banner";
-import Hero from "../components/template1/Hero";
-import Footer from "../components/template1/Footer";
-
-import ListItem from "../components/template1/ListItem";
-import Section from "../components/template1/Section";
-import ListItemSmall from "../components/template1/ListItemSmall";
-import EventSearch from "../components/template1/EventSearch";
-
+import { useEffect, useState, useContext } from 'react';
+import { Router, useRouter } from 'next/router';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useQuery, gql } from '@apollo/client';
+import withApollo from 'lib/withApollo';
+import { UserContext } from 'lib/context/UserContext';
+import _ from 'lodash';
+import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { Grid, Button } from '@material-ui/core';
+import LoginBox from 'components/globals/Login';
+import Admin from 'components/admin';
+import Meta from 'components/globals/Meta';
+import Page from 'components/template1/Page';
+import Header from 'components/template1/Header';
+import Navbar from 'components/template1/Navbar';
+import Body from 'components/template1/Body';
+import VideoBox from 'components/template1/VideoBox';
+import Sidebar from 'components/template1/Sidebar';
+import Banner from 'components/template1/Banner';
+import Hero from 'components/template1/Hero';
+import Footer from 'components/template1/Footer';
+import { login, verify } from 'lib/fetchCalls/login';
+import ListItem from 'components/template1/ListItem';
+import Section from 'components/template1/Section';
+import ListItemSmall from 'components/template1/ListItemSmall';
+import EventSearch from 'components/template1/EventSearch';
+import cookies from 'next-cookies';
+import LoginPage from 'components/globals/Login/LoginPage';
 export const event_theme = {
   // bg: '#BADA55'
-  fontFamily: "Roboto",
+  fontFamily: 'Roboto',
 };
 
-//check if authorization is necessary
-
-//if necessary, provide a workflow for sign in or sign up
-
-//check if this person is authorized to see this page
-
 const Template1 = (props) => {
-  const [isPreview, setPreview] = useState(
-    props.meta.eventStatus.EventStatus === "Preview"
-  );
+  const { loginState, verify_main_event } = useContext(UserContext);
 
   const router = useRouter();
   const [hasStarted, setStarted] = useState(false);
-  const [sidbarState, toggleSidebar] = useState(null);
+
+  const [verified, setVerified] = useState({ verified: false });
+
   let event_meta = props.meta;
-
-  const the_start =
-    Date.parse(event_meta.eventJobStartEnd?.StartDateTime) || Date.now();
-
-  let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
-
-  useEffect(() => {
-    if (isAuthenticated || process.env.NODE_ENV === "development") {
-      setPreview(false);
-    }
-  }, []);
+  const { AuthRequired } = props.meta;
 
   useEffect(() => {
     let now = Date.now();
-    console.log("now: " + now);
-    let dateStart = the_start - 18000000;
-    console.log("start: " + dateStart);
+
+    let dateStart = now;
+
     if (dateStart < now) {
-      setStarted(true);
+      setStarted(false);
     }
   }, []);
 
-  if (!isPreview) {
+  useEffect(() => {
+    if (AuthRequired) {
+      verify_main_event(props.meta).then((result) => {
+        setVerified({ verified: result });
+        console.log('verified: ' + result);
+      });
+    }
+  }, [loginState.loggedIn]);
+
+  const MainPage = () => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
@@ -77,8 +73,8 @@ const Template1 = (props) => {
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
-          start={event_meta.events.filter((event) => event.isMainEvent == true)}
-        />
+          start={Date.now()}
+        ></Hero>
         <Body>
           <Section>
             <Grid container={true} spacing={3}>
@@ -94,17 +90,17 @@ const Template1 = (props) => {
           <Banner color="#181818"></Banner>
 
           <Section showButton={true} title="Speakers">
-            <Grid container={true} spacing={3} justify={"center"}>
+            <Grid container={true} spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
               <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
           <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={"center"}></Grid>
+            <Grid container={true} spacing={3} justify={'center'}></Grid>
           </Section>
           <Section showButton={true} title="Gold Sponsors">
-            <Grid container={true} spacing={3} justify={"center"}>
+            <Grid container={true} spacing={3} justify={'center'}>
               <Grid item={true} md={4}>
                 <img src="http://lorempixel.com/350/250/"></img>
               </Grid>
@@ -122,8 +118,7 @@ const Template1 = (props) => {
             showButton={false}
             title={`${event_meta.EventJobName} in the News`}
           >
-            <Grid container={true} spacing={3} justify={"center"}>
-              <ListItemSmall />
+            <Grid container={true} spacing={3} justify={'center'}>
               <ListItemSmall />
               <ListItemSmall />
             </Grid>
@@ -143,75 +138,75 @@ const Template1 = (props) => {
           </div>
           <div></div>
         </Footer>
-        {/*           
-        <h3>path: {router.pathname} </h3>
 
-       <ul>
-          {_.keys(event_meta.events).map((event) => {
+        <h3>path: {router.pathname} </h3>
+        <LoginBox />
+        <ul>
+          {_.keys(event_meta.events).map((event, key) => {
             const info = event_meta.events[event];
             return (
-              <li key={info.id}>
+              <li key={`li--${key}`}>
                 <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
                   {info.EventName}
                 </Link>
               </li>
             );
           })}
-        </ul> */}
+        </ul>
       </Page>
     );
+  };
+
+  if (AuthRequired) {
+    if (loginState.loggedIn && !verified.verified) {
+      return (
+        <Page theme={event_theme}>
+          <LoginPage>
+            <h1>you are logged in but not verified for this event</h1>
+            <Link href="/me"> My Account</Link>
+          </LoginPage>
+        </Page>
+      );
+    }
+    if (verified && loginState.loggedIn) {
+      return <MainPage />;
+    } else {
+      return (
+        <Page theme={event_theme}>
+          <LoginPage />
+        </Page>
+      );
+    }
   } else {
-    return <h1> Error </h1>;
+    return <MainPage />;
   }
 };
-export async function getStaticPaths() {
-  const { eventJobs } = await fetchAPI(`
-  query{
-    eventJobs{
-      eventUrl
-    }
-  }
-  `);
 
-  const paths = [];
-
-  eventJobs.forEach((job) => {
-    paths.push({ params: { event: job.eventUrl } });
-  });
-  console.log(paths);
-  return {
-    paths: paths,
-    fallback: false,
-  };
-}
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
 
   //get the event job data from our api
-  let url;
-  !ctx.previewData ? (url = Router.pathname) : (url = ctx.previewData.url);
+  let url = ctx.req.url.slice(1);
 
-  const eventData = await getEventMeta(ctx.params.event);
+  let eventData = await getEventMeta(url);
+  let mainEventData = {};
 
+  if (eventData === undefined) {
+    eventData = {};
+  } else {
+    mainEventData = await getMainEventMeta(eventData.id);
+  }
+  console.log(eventData);
   //this is what will load as the "context" if we haven't come here through
   //our preview link
-  const noctx = {
-    preview: eventData.eventStatus.EventStatus === "Preview",
-    previewData: {
-      isAuthenticatedTEST: false,
-    },
-  };
+
   //set the context object to whatever our api is saying
 
-  if (!ctx.preview) {
-    ctx = noctx;
-  }
   const values = {
     props: {
-      context: ctx,
       //meta will be the props for the event
       meta: eventData,
     },
@@ -219,4 +214,4 @@ export async function getStaticProps(ctx) {
   return values;
 }
 
-export default Template1;
+export default withApollo(Template1);

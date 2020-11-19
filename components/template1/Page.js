@@ -29,8 +29,9 @@ Router.onRouteChangeComplete = () => {
 const Page = (props) => {
   const { loading } = useContext(AppContext);
   //Material ui style provider for this theme
+
   {
-    if (loading) {
+    if (loading.loading) {
       return (
         <CssBaseline>
           <StylesProvider injectFirst>
@@ -38,7 +39,7 @@ const Page = (props) => {
             <ThemeProvider theme={template1Theme}>
               <ThemeProvider theme={props.theme}>
                 <StyledPage>
-                  <LoadingScreen />
+                  <LoadingScreen message={loading.message} />
                 </StyledPage>
               </ThemeProvider>
             </ThemeProvider>

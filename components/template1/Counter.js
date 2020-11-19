@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 import {
   Grid,
   Card,
@@ -6,8 +6,8 @@ import {
   AppBar,
   Toolbar,
   Typography,
-} from "@material-ui/core";
-import { useState, Fragment, useEffect } from "react";
+} from '@material-ui/core';
+import { useState, Fragment, useEffect } from 'react';
 
 const MyCounter = styled.div`
   position: absolute;
@@ -23,10 +23,9 @@ const MyCounter = styled.div`
 `;
 
 export default function Counter(props) {
-  
   function pad(value) {
     if (value < 10) {
-      return "0" + value;
+      return '0' + value;
     } else {
       return value;
     }
@@ -47,19 +46,18 @@ export default function Counter(props) {
     };
   }
 
-  // const theDate = new Date("October 17 2020 15:15:00 GMT-0400");
-
   useEffect(() => {
     let interval = setInterval(() => {
       calcTime(getRemainingTime(props.start));
-    })
-    // return clearInterval(interval);
+    });
+
+    return () => clearInterval(interval);
   }, []);
   const [time, calcTime] = useState({});
 
   return (
     <MyCounter>
-      Starts in:{" "}
+      Starts in:{' '}
       {` 
         ${pad(time.days)} Days
           ${pad(time.hours)}:
