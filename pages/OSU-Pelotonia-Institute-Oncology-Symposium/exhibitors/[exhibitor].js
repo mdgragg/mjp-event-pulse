@@ -5,7 +5,11 @@ import ReactCSSTransitionGroup from "react-transition-group";
 import React, { useEffect, setState, useRef } from "react";
 import { fetchAPI } from "lib/api/";
 import styled from "styled-components";
+<<<<<<< HEAD
 import { Grid, Paper } from "@material-ui/core";
+=======
+import { Grid } from "@material-ui/core";
+>>>>>>> 6f509d395f5378a3afcb06eea1cb494c0f7a60ad
 import {
   ArrowRight,
   BackspaceOutlined,
@@ -273,15 +277,23 @@ const SingleExhibitor = (props) => {
               </InRoom>
             </Grid>
             <Grid item md={8} xs={12}>
+<<<<<<< HEAD
               <Paper
+=======
+              <iframe
+>>>>>>> 6f509d395f5378a3afcb06eea1cb494c0f7a60ad
                 height="500px"
                 frameBorder="1px"
                 width="100%"
                 src={`${exhibitor.Website}`}
                 title="Testing"
+<<<<<<< HEAD
               >
                 Click to download the presentation: {exhibitor.ExhibitName}
               </Paper>
+=======
+              ></iframe>
+>>>>>>> 6f509d395f5378a3afcb06eea1cb494c0f7a60ad
             </Grid>
           </Grid>
           <hr />
