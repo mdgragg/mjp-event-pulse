@@ -1,12 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import App, { Container } from 'next/app';
 import Meta from 'components/globals/Meta';
 import { GlobalStyle } from 'components/globals/GlobalStyle';
-import UserContext from 'lib/context/UserContext';
+
 import cookies from 'next-cookies';
 import UserContextProvider from '../lib/context/UserContext';
 import AppContextProvider from '../lib/context/AppContext';
-import { login } from '../lib/fetchCalls/login';
+
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
