@@ -48,6 +48,7 @@ const Template1 = (props) => {
 
     let dateStart = main_event.eventStartEnd.StartDateTime;
 
+
     if (dateStart < now) {
       setStarted(false);
     }
@@ -139,20 +140,7 @@ const Template1 = (props) => {
           <div></div>
         </Footer>
 
-        <h3>path: {router.pathname} </h3>
         <LoginBox />
-        <ul>
-          {_.keys(event_meta.events).map((event, key) => {
-            const info = event_meta.events[event];
-            return (
-              <li key={`li--${key}`}>
-                <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
-                  {info.EventName}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
       </Page>
     );
   };
@@ -193,7 +181,10 @@ export async function getServerSideProps(ctx) {
 
   let eventData = await getEventMeta(url);
 
-  console.log(eventData);
+  if (!eventData) {
+    eventData = {};
+  }
+
   //this is what will load as the "context" if we haven't come here through
   //our preview link
 
@@ -203,6 +194,7 @@ export async function getServerSideProps(ctx) {
     props: {
       //meta will be the props for the event
       meta: eventData,
+      mainEvent: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
     },
   };
   return values;
