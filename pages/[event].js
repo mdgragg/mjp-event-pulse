@@ -7,9 +7,9 @@ import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
 import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { GET_MAIN_EVENT_META } from 'lib/gql-query';
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';
-import Admin from 'components/admin';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Header from 'components/template1/Header';
@@ -20,7 +20,6 @@ import Sidebar from 'components/template1/Sidebar';
 import Banner from 'components/template1/Banner';
 import Hero from 'components/template1/Hero';
 import Footer from 'components/template1/Footer';
-import { login, verify } from 'lib/fetchCalls/login';
 import ListItem from 'components/template1/ListItem';
 import Section from 'components/template1/Section';
 import ListItemSmall from 'components/template1/ListItemSmall';
@@ -36,17 +35,19 @@ const Template1 = (props) => {
   const { loginState, verify_main_event } = useContext(UserContext);
 
   const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
   const [hasStarted, setStarted] = useState(false);
-
   const [verified, setVerified] = useState({ verified: false });
 
   let event_meta = props.meta;
+  const main_event = props.meta.events[0];
   const { AuthRequired } = props.meta;
 
   useEffect(() => {
     let now = Date.now();
 
-    let dateStart = Date.parse(now) - 18000000;
+    let dateStart = main_event.eventStartEnd.StartDateTime;
+
 
     if (dateStart < now) {
       setStarted(false);
@@ -57,7 +58,6 @@ const Template1 = (props) => {
     if (AuthRequired) {
       verify_main_event(props.meta).then((result) => {
         setVerified({ verified: result });
-        console.log('verified: ' + result);
       });
     }
   }, [loginState.loggedIn]);
@@ -67,14 +67,16 @@ const Template1 = (props) => {
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
         <Header theme={event_theme}>
-          <Navbar info={event_meta} />
+          <Navbar info={main_event} />
         </Header>
+
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
-          start={Date.now()}
+          start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
+
         <Body>
           <Section>
             <Grid container={true} spacing={3}>
@@ -88,7 +90,6 @@ const Template1 = (props) => {
           </Section>
 
           <Banner color="#181818"></Banner>
-
           <Section showButton={true} title="Speakers">
             <Grid container={true} spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
@@ -179,11 +180,11 @@ export async function getServerSideProps(ctx) {
   let url = ctx.req.url.slice(1);
 
   let eventData = await getEventMeta(url);
-  let mainEventData = {};
 
   if (!eventData) {
     eventData = {};
   }
+
   //this is what will load as the "context" if we haven't come here through
   //our preview link
 
