@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import React from "react";
-import { Typography, FormControl, Button, Input } from "@material-ui/core";
+import styled from 'styled-components';
+import React from 'react';
+import { Typography, FormControl, Button, Input } from '@material-ui/core';
 
 const StyledBanner = styled.div`
   height: 300px;
@@ -42,26 +42,15 @@ const Banner = (props) => {
   return (
     <StyledBanner image={props.image} color={props.color}>
       <div>
-        <Typography variant="h2" component="h2" style={{ color: "white" }}>
+        <Typography variant="h2" component="h2" style={{ color: 'white' }}>
           SIGN UP
         </Typography>
-        <Typography variant="body1" component="p" style={{ color: "white" }}>
+        <Typography variant="body1" component="p" style={{ color: 'white' }}>
           We only need your name and email.
         </Typography>
       </div>
       <SignUp>
-        <MyInput
-          variant="outlined"
-          label="Name"
-          name="name"
-          placeholder="Your Name"
-        />
-        <MyInput
-          variant="outlined"
-          label="Name"
-          name="name"
-          placeholder="Your Email"
-        />
+        <Button>Sign Me Up</Button>
       </SignUp>
 
       {props.children}
