@@ -5,29 +5,27 @@ import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
 import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
-import { AppContext } from 'lib/context/AppContext';
 import _ from 'lodash';
-import { getEventMeta, getEventByUrl } from '../../lib/api';
+import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { GET_MAIN_EVENT_META } from 'lib/gql-query';
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';
-import Admin from './components/admin';
 import Meta from 'components/globals/Meta';
-import Page from '../../components/template1/Page';
-import Header from '../../components/template1/Header';
-import Navbar from '../../components/template1/Navbar';
-import Body from '../../components/template1/Body';
-import VideoBox from '../../components/template1/VideoBox';
-import Sidebar from '../../components/template1/Sidebar';
-import Banner from '../../components/template1/Banner';
-import Hero from '../../components/template1/Hero';
-import Footer from '../../components/template1/Footer';
-import { login, verify } from 'lib/fetchCalls/login';
-import ListItem from '../../components/template1/ListItem';
-import Section from '../../components/template1/Section';
-import ListItemSmall from '../../components/template1/ListItemSmall';
-import EventSearch from '../../components/template1/EventSearch';
+import Page from 'components/template1/Page';
+import Header from 'components/template1/Header';
+import Navbar from 'components/template1/Navbar';
+import Body from 'components/template1/Body';
+import VideoBox from 'components/template1/VideoBox';
+import Sidebar from 'components/template1/Sidebar';
+import Banner from 'components/template1/Banner';
+import Hero from 'components/template1/Hero';
+import Footer from 'components/template1/Footer';
+import ListItem from 'components/template1/ListItem';
+import Section from 'components/template1/Section';
+import ListItemSmall from 'components/template1/ListItemSmall';
+import EventSearch from 'components/template1/EventSearch';
 import cookies from 'next-cookies';
-
+import LoginPage from 'components/globals/Login/LoginPage';
 export const event_theme = {
   // bg: '#BADA55'
   fontFamily: 'Roboto',
@@ -37,20 +35,21 @@ const Template1 = (props) => {
   const { loginState, verify_main_event } = useContext(UserContext);
 
   const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
   const [hasStarted, setStarted] = useState(false);
-
   const [verified, setVerified] = useState({ verified: false });
 
   let event_meta = props.meta;
+  const main_event = props.meta.events[0];
   const { AuthRequired } = props.meta;
 
   useEffect(() => {
     let now = Date.now();
 
-    let dateStart = Date.parse(now) - 18000000;
+    let dateStart = main_event.eventStartEnd.StartDateTime;
 
-    if (true) {
-      setStarted(true);
+    if (dateStart < now) {
+      setStarted(false);
     }
   }, []);
 
@@ -67,14 +66,16 @@ const Template1 = (props) => {
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
         <Header theme={event_theme}>
-          <Navbar info={event_meta} />
+          <Navbar info={main_event} />
         </Header>
+
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
-          start={event_meta.events.filter((event) => event.isMainEvent == true)}
-        />
+          start={main_event.eventStartEnd.StartDateTime}
+        ></Hero>
+
         <Body>
           <Section>
             <Grid container={true} spacing={3}>
@@ -88,7 +89,6 @@ const Template1 = (props) => {
           </Section>
 
           <Banner color="#181818"></Banner>
-
           <Section showButton={true} title="Speakers">
             <Grid container={true} spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
@@ -139,20 +139,7 @@ const Template1 = (props) => {
           <div></div>
         </Footer>
 
-        <h3>path: {router.pathname} </h3>
         <LoginBox />
-        <ul>
-          {_.keys(event_meta.events).map((event, key) => {
-            const info = event_meta.events[event];
-            return (
-              <li key={`li--${key}`}>
-                <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
-                  {info.EventName}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
       </Page>
     );
   };
@@ -160,11 +147,12 @@ const Template1 = (props) => {
   if (AuthRequired) {
     if (loginState.loggedIn && !verified.verified) {
       return (
-        <div>
-          <h1>you are logged in but not verified for this event</h1>
-          <Link href="/me"> My Account</Link>
-          <LoginBox />
-        </div>
+        <Page theme={event_theme}>
+          <LoginPage>
+            <h1>you are logged in but not verified for this event</h1>
+            <Link href="/me"> My Account</Link>
+          </LoginPage>
+        </Page>
       );
     }
     if (verified && loginState.loggedIn) {
@@ -172,7 +160,7 @@ const Template1 = (props) => {
     } else {
       return (
         <Page theme={event_theme}>
-          <LoginBox />
+          <LoginPage />
         </Page>
       );
     }
@@ -190,7 +178,12 @@ export async function getServerSideProps(ctx) {
   //get the event job data from our api
   let url = ctx.req.url.slice(1);
 
-  const eventData = await getEventMeta(url);
+  let eventData = await getEventMeta(url);
+
+  if (!eventData) {
+    eventData = {};
+  }
+
   //this is what will load as the "context" if we haven't come here through
   //our preview link
 
@@ -199,8 +192,8 @@ export async function getServerSideProps(ctx) {
   const values = {
     props: {
       //meta will be the props for the event
-
       meta: eventData,
+      mainEvent: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
     },
   };
   return values;

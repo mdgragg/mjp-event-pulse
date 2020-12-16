@@ -1,37 +1,37 @@
-import { useEffect, useState, useRef } from "react";
-import { Router, useRouter } from "next/router";
-import Head from "next/head";
-import Link from "next/link";
-import { useQuery, gql } from "@apollo/client";
+import { useEffect, useState, useRef } from 'react';
+import { Router, useRouter } from 'next/router';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useQuery, gql } from '@apollo/client';
 // var array = require('lodash/array');
-import _ from "lodash";
-import { getEventMeta, getEventByUrl } from "../../lib/api";
-import { Grid, Button } from "@material-ui/core";
-import Admin from "./components/admin";
-import Meta from "components/globals/Meta";
-import Page from "../../components/template1/Page";
-import Header from "../../components/template1/Header";
-import Navbar from "../../components/template1/Navbar";
-import Body from "../../components/template1/Body";
-import VideoBox from "../../components/template1/VideoBox";
-import Sidebar from "../../components/template1/Sidebar";
-import Banner from "../../components/template1/Banner";
-import Hero from "../../components/template1/Hero";
-import Footer from "../../components/template1/Footer";
+import _ from 'lodash';
+import { getEventMeta, getEventByUrl } from '../../lib/api';
+import { Grid, Button } from '@material-ui/core';
+import Admin from './components/admin';
+import Meta from 'components/globals/Meta';
+import Page from '../../components/template1/Page';
+import Header from '../../components/template1/Header';
+import Navbar from '../../components/template1/Navbar';
+import Body from '../../components/template1/Body';
+import VideoBox from '../../components/template1/VideoBox';
+import Sidebar from '../../components/template1/Sidebar';
+import Banner from '../../components/template1/Banner';
+import Hero from '../../components/template1/Hero';
+import Footer from '../../components/template1/Footer';
 
-import ListItem from "../../components/template1/ListItem";
-import Section from "../../components/template1/Section";
-import ListItemSmall from "../../components/template1/ListItemSmall";
-import EventSearch from "../../components/template1/EventSearch";
+import ListItem from '../../components/template1/ListItem';
+import Section from '../../components/template1/Section';
+import ListItemSmall from '../../components/template1/ListItemSmall';
+import EventSearch from '../../components/template1/EventSearch';
 
 export const event_theme = {
   // bg: '#BADA55'
-  fontFamily: "Roboto",
+  fontFamily: 'Roboto',
 };
 
 const Template1 = (props) => {
   const [isPreview, setPreview] = useState(
-    props.meta.eventStatus.EventStatus === "Preview"
+    props.meta.eventStatus.EventStatus === 'Preview'
   );
 
   const router = useRouter();
@@ -42,19 +42,17 @@ const Template1 = (props) => {
   let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
 
   useEffect(() => {
-    if (isAuthenticated || process.env.NODE_ENV === "development") {
+    if (isAuthenticated || process.env.NODE_ENV === 'development') {
       setPreview(false);
     }
   }, []);
 
   useEffect(() => {
     let now = Date.now();
-    console.log("now: " + now);
-    let dateStart =
-      Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000;
-    console.log("start: " + dateStart);
-    if (dateStart < now) {
-      console.log("the event start time is less than now");
+
+    let dateStart = Date.parse(now);
+    console.log('start: ' + dateStart);
+    if (true) {
       setStarted(true);
     }
   }, []);
@@ -87,17 +85,17 @@ const Template1 = (props) => {
           <Banner color="#181818"></Banner>
 
           <Section showButton={true} title="Speakers">
-            <Grid container={true} spacing={3} justify={"center"}>
+            <Grid container={true} spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
               <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
           <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={"center"}></Grid>
+            <Grid container={true} spacing={3} justify={'center'}></Grid>
           </Section>
           <Section showButton={true} title="Gold Sponsors">
-            <Grid container={true} spacing={3} justify={"center"}>
+            <Grid container={true} spacing={3} justify={'center'}>
               <Grid item={true} md={4}>
                 <img src="http://lorempixel.com/350/250/"></img>
               </Grid>
@@ -115,7 +113,7 @@ const Template1 = (props) => {
             showButton={false}
             title={`${event_meta.EventJobName} in the News`}
           >
-            <Grid container={true} spacing={3} justify={"center"}>
+            <Grid container={true} spacing={3} justify={'center'}>
               <ListItemSmall />
               <ListItemSmall />
               <ListItemSmall />
@@ -175,7 +173,7 @@ export async function getStaticProps(context) {
   //this is what will load as the "context" if we haven't come here through
   //our preview link
   const noctx = {
-    preview: eventData.eventStatus.EventStatus === "Preview",
+    preview: eventData.eventStatus.EventStatus === 'Preview',
     previewData: {
       isAuthenticatedTEST: false,
     },
