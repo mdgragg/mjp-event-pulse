@@ -149,7 +149,7 @@ const Template1 = (props) => {
       return (
         <Page theme={event_theme}>
           <LoginPage>
-            <h1>you are logged in but not verified for this event</h1>
+            <p>you are logged in but not verified for this event</p>
             <Link href="/me"> My Account</Link>
           </LoginPage>
         </Page>
@@ -160,6 +160,7 @@ const Template1 = (props) => {
     } else {
       return (
         <Page theme={event_theme}>
+          <p>Please log in to view this event</p>
           <LoginPage />
         </Page>
       );

@@ -1,30 +1,28 @@
 import { Router, useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
-
-import React, { Component } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
 import { event_theme } from './index';
 import { getMetaForEvent } from 'lib/api';
 import Meta from 'components/globals/Meta';
 import { Grid, Button } from '@material-ui/core';
-import Admin from './components/admin';
 import Page from '../../components/template1/Page';
-import Header from '../../components/template1/Header';
-import Navbar from '../../components/template1/Navbar';
 import Body from '../../components/template1/Body';
 import VideoBox from '../../components/template1/VideoBox';
-import Sidebar from '../../components/template1/Sidebar';
-import Banner from '../../components/template1/Banner';
-import Hero from '../../components/template1/Hero';
-import Footer from '../../components/template1/Footer';
-import ListItem from '../../components/template1/ListItem';
+import { UserContext } from 'lib/context/UserContext';
 import Section from '../../components/template1/Section';
-import ListItemSmall from '../../components/template1/ListItemSmall';
-import EventSearch from '../../components/template1/EventSearch';
+
 //This page is rendered for every event belonging to Event Job
 const EventPage = ({ eventData }) => {
   const { EventName, id, client } = eventData;
-  return (
+  const { verify_event, loginState } = useContext(UserContext);
+
+  const [verified, setVerified] = useState(false);
+
+  useEffect(() => {
+    verify_event(eventData).then((res) => setVerified(res));
+  }, []);
+
+  return verified ? (
     <Page theme={event_theme}>
       <Meta title={EventName}> </Meta>
       <Body>
@@ -38,6 +36,8 @@ const EventPage = ({ eventData }) => {
         </Section>
       </Body>
     </Page>
+  ) : (
+    <h2>not verified</h2>
   );
 };
 
