@@ -1,15 +1,12 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Router, useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
-import { AppContext } from 'lib/context/AppContext';
+// var array = require('lodash/array');
 import _ from 'lodash';
 import { getEventMeta, getEventByUrl } from '../../lib/api';
 import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
 import Admin from './components/admin';
 import Meta from 'components/globals/Meta';
 import Page from '../../components/template1/Page';
@@ -21,12 +18,11 @@ import Sidebar from '../../components/template1/Sidebar';
 import Banner from '../../components/template1/Banner';
 import Hero from '../../components/template1/Hero';
 import Footer from '../../components/template1/Footer';
-import { login, verify } from 'lib/fetchCalls/login';
+
 import ListItem from '../../components/template1/ListItem';
 import Section from '../../components/template1/Section';
 import ListItemSmall from '../../components/template1/ListItemSmall';
 import EventSearch from '../../components/template1/EventSearch';
-import cookies from 'next-cookies';
 
 export const event_theme = {
   // bg: '#BADA55'
@@ -34,36 +30,34 @@ export const event_theme = {
 };
 
 const Template1 = (props) => {
-  const { loginState, verify_main_event } = useContext(UserContext);
+  const [isPreview, setPreview] = useState(
+    props.meta.eventStatus.EventStatus === 'Preview'
+  );
 
   const router = useRouter();
   const [hasStarted, setStarted] = useState(false);
-
-  const [verified, setVerified] = useState({ verified: false });
-
+  const [sidbarState, toggleSidebar] = useState(null);
   let event_meta = props.meta;
-  const { AuthRequired } = props.meta;
+
+  let isAuthenticated = props.context.previewData.isAuthenticatedTEST;
 
   useEffect(() => {
-    let now = Date.now();
-
-    let dateStart =
-      Date.parse(event_meta.eventJobStartEnd.StartDateTime) - 18000000;
-
-    if (dateStart < now) {
-      setStarted(true);
+    if (isAuthenticated || process.env.NODE_ENV === 'development') {
+      setPreview(false);
     }
   }, []);
 
   useEffect(() => {
-    if (AuthRequired) {
-      verify_main_event(props.meta).then((result) => {
-        setVerified({ verified: result });
-      });
-    }
-  }, [loginState.loggedIn]);
+    let now = Date.now();
 
-  const MainPage = () => {
+    let dateStart = Date.parse(now);
+    console.log('start: ' + dateStart);
+    if (true) {
+      setStarted(true);
+    }
+  }, []);
+
+  if (!isPreview) {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
@@ -122,6 +116,7 @@ const Template1 = (props) => {
             <Grid container={true} spacing={3} justify={'center'}>
               <ListItemSmall />
               <ListItemSmall />
+              <ListItemSmall />
             </Grid>
           </Section>
 
@@ -139,72 +134,63 @@ const Template1 = (props) => {
           </div>
           <div></div>
         </Footer>
-
+        {/*           
         <h3>path: {router.pathname} </h3>
-        <LoginBox />
-        <ul>
-          {_.keys(event_meta.events).map((event, key) => {
+
+       <ul>
+          {_.keys(event_meta.events).map((event) => {
             const info = event_meta.events[event];
             return (
-              <li key={`li--${key}`}>
+              <li key={info.id}>
                 <Link key={info.id} href={`${router.pathname}/${info.slug}`}>
                   {info.EventName}
                 </Link>
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </Page>
     );
-  };
-
-  if (AuthRequired) {
-    if (loginState.loggedIn && !verified.verified) {
-      return (
-        <div>
-          <h1>you are logged in but not verified for this event</h1>
-          <Link href="/me"> My Account</Link>
-          <LoginBox />
-        </div>
-      );
-    }
-    if (verified && loginState.loggedIn) {
-      return <MainPage />;
-    } else {
-      return (
-        <Page theme={event_theme}>
-          <LoginBox />
-        </Page>
-      );
-    }
   } else {
-    return <MainPage />;
+    return <Admin />;
   }
 };
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(context) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
 
   //get the event job data from our api
-  let url = ctx.req.url.slice(1);
+  let url;
+  !context.previewData
+    ? (url = Router.pathname)
+    : (url = context.previewData.url);
 
   const eventData = await getEventMeta(url);
+
   //this is what will load as the "context" if we haven't come here through
   //our preview link
-
+  const noctx = {
+    preview: eventData.eventStatus.EventStatus === 'Preview',
+    previewData: {
+      isAuthenticatedTEST: false,
+    },
+  };
   //set the context object to whatever our api is saying
 
+  if (!context.preview) {
+    context = noctx;
+  }
   const values = {
     props: {
+      context: context,
       //meta will be the props for the event
-
       meta: eventData,
     },
   };
   return values;
 }
 
-export default withApollo(Template1);
+export default Template1;

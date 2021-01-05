@@ -1,0 +1,20 @@
+{
+  "web": {
+    "client_id": "874499192960-1eenqr0a236he7fhgr0epg54sr0mg04v.apps.googleusercontent.com",
+    "project_id": "millsjameseventcms-testing",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "BTfvEJuMIsy5pNbzaimSIjoe",
+    "redirect_uris": [
+      "http://localhost:1234/",
+      "http://localhost:3000",
+      "https://accounts.google.com/o/oauth2/v2/auth"
+    ],
+    "javascript_origins": [
+      "https://792f39a73fba.ngrok.io",
+      "http://localhost:1234",
+      "http://localhost"
+    ]
+  }
+}
