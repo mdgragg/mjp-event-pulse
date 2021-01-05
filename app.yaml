@@ -1,4 +1,4 @@
-env: standard
+env: production
 runtime: nodejs10
 service: default
 
