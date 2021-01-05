@@ -7,7 +7,7 @@ import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
 import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-import { GET_MAIN_EVENT_META } from 'lib/gql-query';
+
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';
 import Meta from 'components/globals/Meta';
@@ -45,7 +45,9 @@ const Template1 = (props) => {
 
   useEffect(() => {
     let now = Date.now();
+
     let dateStart = main_event.eventStartEnd.StartDateTime;
+
     if (dateStart < now) {
       setStarted(false);
     }
@@ -147,7 +149,7 @@ const Template1 = (props) => {
       return (
         <Page theme={event_theme}>
           <LoginPage>
-            <h1>you are logged in but not verified for this event</h1>
+            <p>you are logged in but not verified for this event</p>
             <Link href="/me"> My Account</Link>
           </LoginPage>
         </Page>
@@ -158,6 +160,7 @@ const Template1 = (props) => {
     } else {
       return (
         <Page theme={event_theme}>
+          <p>Please log in to view this event</p>
           <LoginPage />
         </Page>
       );
