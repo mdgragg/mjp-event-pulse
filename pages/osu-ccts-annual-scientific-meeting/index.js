@@ -43,15 +43,15 @@ const Template1 = (props) => {
   const main_event = props.meta.events[0];
   const { AuthRequired } = props.meta;
 
-  useEffect(() => {
-    let now = Date.now();
+  // useEffect(() => {
+  //   let now = Date.now();
 
-    let dateStart = main_event.eventStartEnd.StartDateTime;
+  //   let dateStart = main_event.eventStartEnd.StartDateTime;
 
-    if (dateStart < now) {
-      setStarted(false);
-    }
-  }, []);
+  //   if (dateStart < now) {
+  //     setStarted(false);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (AuthRequired) {
@@ -73,7 +73,7 @@ const Template1 = (props) => {
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           bgImage="http://lorempixel.com/1500/500/"
-          start={main_event.eventStartEnd.StartDateTime}
+          start={Date.now()}
         ></Hero>
 
         <Body>

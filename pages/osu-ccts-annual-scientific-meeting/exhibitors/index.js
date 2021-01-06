@@ -44,17 +44,25 @@ const ExhibitorPage = (props) => {
       <Body>
         <Section>
           <h1>Exhibitor Index</h1>
-          {Object.keys(event).map((e) => (
-            <ExhibitorLink
-              key={event[e].id}
-              onClick={() => router.push(`${router.pathname}/${event[e].id}`)}
-            >
-              <>
-                {event[e].FirstName} {event[e].LastName} <br />{' '}
-                <span> {event[e].ExhibitName.replace(/_/g, ' ')}</span>
-              </>
-            </ExhibitorLink>
-          ))}
+
+          {Object.keys(event).length > 0
+            ? Object.keys(event).map((e) => (
+                <ExhibitorLink
+                  key={event[e].id ?? 'none'}
+                  onClick={() =>
+                    router.push(`${router.pathname}/${event[e].id}`)
+                  }
+                >
+                  <>
+                    {event[e].FirstName ?? ''} {event[e]?.LastName ?? ''} <br />{' '}
+                    <span>
+                      {' '}
+                      {event[e].ExhibitName?.replace(/_/g, ' ') ?? ''}
+                    </span>
+                  </>
+                </ExhibitorLink>
+              ))
+            : 'No Exhibitors'}
         </Section>
       </Body>
     </Page>
