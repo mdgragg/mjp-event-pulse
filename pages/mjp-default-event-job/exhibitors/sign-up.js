@@ -165,7 +165,7 @@ export async function getServerSideProps(ctx) {
   const id = ctx.query.id || null;
   let data;
 
-  data = await getExhibitorMeta(`${id}`);
+  data = await getExhibitorMeta(`${id.slice(0, 3)}`);
 
   return {
     props: { data }, // will be passed to the page component as props
