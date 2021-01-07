@@ -23,6 +23,7 @@ const ExhibitorForm = styled(Paper)`
     height: 100px;
     padding: 20px;
     transition: all 0.15s;
+    opacity: 1;
   }
   span {
     color: black;
@@ -30,6 +31,7 @@ const ExhibitorForm = styled(Paper)`
   }
   &&.submitting {
     background-color: #e2e2e2;
+    opacity: 0.5;
   }
 `;
 const ExhibitorUpload = ({ data }) => {
@@ -140,7 +142,7 @@ const ExhibitorUpload = ({ data }) => {
                 <DropzoneArea
                   dropzoneText="Please click to upload your video presentation (only video files accepted, limit 1 file 1GB)"
                   onChange={handleDropZone}
-                  acceptedFiles={['video/*']}
+                  acceptedFiles={['video/*', 'image/*']}
                   maxFileSize={1000000000}
                 />
                 <Button
