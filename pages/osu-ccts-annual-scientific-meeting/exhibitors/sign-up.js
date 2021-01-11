@@ -50,13 +50,6 @@ const ExhibitorUpload = ({ data }) => {
     submitting: false,
     submitted: false,
   });
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  useEffect(() => {
-    setOpen(true);
-  }, []);
 
   const handleDropZone = (files) => {
     setFile(files[0]);
@@ -164,21 +157,6 @@ const ExhibitorUpload = ({ data }) => {
           )}
         </Section>
       </Body>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        // autoHideDuration={6000}
-        onClose={handleClose}
-        message="Uploading..."
-        action={
-          <React.Fragment>
-            <CircularProgress variant="determinate" value={20} />
-          </React.Fragment>
-        }
-      />
     </Page>
   );
 };
