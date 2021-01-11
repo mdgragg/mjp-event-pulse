@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["107.11.155.216", "localhost:3000", "localhost:8000"],
+    "method": ["GET", "PUT", "POST"],
+    "responseHeader": ["HEADER"],
+    "maxAgeSeconds": 5000
+  }
+]

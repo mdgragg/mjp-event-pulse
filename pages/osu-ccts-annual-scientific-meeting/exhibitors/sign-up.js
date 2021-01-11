@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { event_theme } from '../index';
 import { useRouter } from 'next/router';
 import Body from '../../../components/template1/Body';
@@ -6,15 +6,23 @@ import Section from '../../../components/template1/Section';
 import Meta from 'components/globals/Meta';
 import { getExhibitorMeta } from '../../../lib/api';
 import { DropzoneArea } from 'material-ui-dropzone';
-
+import Dropzone from 'react-dropzone-uploader';
 import Page from '../../../components/template1/Page';
+import Uploader from '../../../components/globals/Uploader';
 
 import styled from 'styled-components';
-import { Button, Paper } from '@material-ui/core';
+import {
+  Button,
+  Paper,
+  Snackbar,
+  IconButton,
+  CircularProgress,
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 const ExhibitorForm = styled(Paper)`
   && {
-    font-size: 32px;
+    font-size: 18px;
     display: block;
     cursor: pointer;
     margin-bottom: 10px;
@@ -42,6 +50,13 @@ const ExhibitorUpload = ({ data }) => {
     submitting: false,
     submitted: false,
   });
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  useEffect(() => {
+    setOpen(true);
+  }, []);
 
   const handleDropZone = (files) => {
     setFile(files[0]);
@@ -122,7 +137,7 @@ const ExhibitorUpload = ({ data }) => {
               <ExhibitorForm
                 className={form.submitting ? 'submitting' : ''}
                 style={{
-                  width: '50%',
+                  width: '80%',
                   margin: 'auto',
                   minHeight: '400px',
                   display: 'flex',
@@ -131,7 +146,7 @@ const ExhibitorUpload = ({ data }) => {
                   justifyContent: 'center',
                 }}
               >
-                <label for="file">
+                <label>
                   Video file for{' '}
                   <strong>
                     {' '}
@@ -139,26 +154,31 @@ const ExhibitorUpload = ({ data }) => {
                   </strong>
                 </label>
                 <br />
-                <DropzoneArea
-                  dropzoneText="Please click to upload your video presentation (only video files accepted, limit 1 file 1GB)"
-                  onChange={handleDropZone}
-                  acceptedFiles={['video/*', 'image/*']}
-                  maxFileSize={1000000000}
+                <Uploader
+                  index="videoLink"
+                  fileName="info"
+                  url={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/exhibitors/${router.query.id}/upload`}
                 />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    handleUpload();
-                  }}
-                >
-                  Submit
-                </Button>
               </ExhibitorForm>
             </>
           )}
         </Section>
       </Body>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        // autoHideDuration={6000}
+        onClose={handleClose}
+        message="Uploading..."
+        action={
+          <React.Fragment>
+            <CircularProgress variant="determinate" value={20} />
+          </React.Fragment>
+        }
+      />
     </Page>
   );
 };
