@@ -28,6 +28,10 @@ const ExhibitorVideo = ({ source }) => {
         <source src={src} type={`video/${get_ext(src)}`} ref={videoRef} />
         Your browser does not support the video tag.
       </video>
+      <p>
+        Trouble seeing this video? You may need to{' '}
+        <a href={`${src}`}>download and view</a>.
+      </p>
     </div>
   );
 };
