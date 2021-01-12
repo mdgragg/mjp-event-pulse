@@ -56,7 +56,12 @@ const SingleExhibitor = (props) => {
       <Body>
         <Section minHeight={'100vh'}>
           <h1>{event_job.EventJobName}</h1>
-          <ExhibitorVideo source={exhibitor.KeyValue} />
+          {exhibitor.KeyValue.length > 0 ? (
+            <ExhibitorVideo source={exhibitor.KeyValue} />
+          ) : (
+            <h2 style={{ color: 'red' }}>No Video File Yet </h2>
+          )}
+
           <hr />
 
           <h1>{exhibitor.ExhibitName}</h1>
