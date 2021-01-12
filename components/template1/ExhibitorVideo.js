@@ -24,8 +24,6 @@ const ExhibitorVideo = ({ source }) => {
 
   return (
     <div>
-      <h1>Exhibitor Video</h1>
-
       <video width="100%" height="100%" controls autoPlay>
         <source src={src} type={`video/${get_ext(src)}`} ref={videoRef} />
         Your browser does not support the video tag.
