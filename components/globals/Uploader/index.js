@@ -82,7 +82,11 @@ const Uploader = (props) => {
       if (kill) {
         setTotalUpload({ ...totalUpload, showing: false });
         useVisualStatus('success! you can close this window');
-        update_exhibitor_upload(theFile.name, cloudUrl.path, router.query.id);
+        update_exhibitor_upload(
+          props.index,
+          cloudUrl.path.destination,
+          router.query.id
+        );
         break;
       }
     }
