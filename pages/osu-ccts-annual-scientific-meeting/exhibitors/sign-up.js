@@ -51,54 +51,6 @@ const ExhibitorUpload = ({ data }) => {
     submitted: false,
   });
 
-  const handleDropZone = (files) => {
-    setFile(files[0]);
-  };
-  const handleFileChange = (e) => {
-    console.log(e.target.files[0]);
-    setForm((prev) => ({
-      ...prev,
-      inputs: {
-        ...prev.inputs,
-        info: e.target.files[0],
-      },
-    }));
-  };
-
-  const handleUpload = async () => {
-    setForm((prev) => ({
-      ...prev,
-      submitting: true,
-    }));
-
-    const upload = new FormData();
-    upload.append('files.info', file, file.name);
-    const data = {};
-    upload.append('data', JSON.stringify(data));
-
-    fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/exhibitors/${router.query.id}/upload`,
-      {
-        method: 'PUT',
-        body: upload,
-      }
-    ).then((res) => {
-      if (res.ok) {
-        console.log(res);
-        setForm((prev) => ({
-          ...prev,
-          submitting: false,
-          submitted: true,
-          message: 'Thank you your file has been uploaded!',
-        }));
-      } else {
-        alert(
-          'there was a problem with your upload please refresh and try again'
-        );
-      }
-    });
-  };
-
   return (
     <Page theme={event_theme}>
       <Meta title="Exhibitors"> </Meta>
