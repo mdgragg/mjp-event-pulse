@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 
 import Dropzone from 'react-dropzone-uploader';
 import { LinearProgress } from '@material-ui/core';
-
+import { useRouter } from 'next/router';
+import { update_exhibitor_upload } from 'lib/fetchCalls/updateExhibitor';
 const Uploader = (props) => {
   const [visualStatus, useVisualStatus] = useState('');
-  const [cloudUrl, setCloudUrl] = useState('');
+  const [cloudUrl, setCloudUrl] = useState({ path: '', url: '' });
   const [totalUpload, setTotalUpload] = useState({ showing: false });
   const [uploadingFile, setUploadingFile] = useState(null);
+
+  const router = useRouter();
   // specify upload params and url for your files
   const getUploadParams = ({ file, meta }) => {
     const upload = new FormData();
@@ -25,18 +28,15 @@ const Uploader = (props) => {
       url: props.url,
       method: 'PUT',
       body: upload,
-      //   headers: {
-      //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA5ODY1MzI3LCJleHAiOjE2MTI0NTczMjd9.giUuwF4ZBaOyOBWAFfwuj1b1kaoICPIsJPFmlD5SGDg`,
-      //   },
     };
   };
 
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file, xhr }, status) => {
     if (status === 'done') {
-      useVisualStatus('');
       const res = JSON.parse(xhr.response);
-      setCloudUrl(res.message[0]);
+      console.log(res);
+      setCloudUrl({ path: res.packet, url: res.message[0] });
     }
   };
 
@@ -64,7 +64,7 @@ const Uploader = (props) => {
         h.append('content-length', 0);
       }
       h.append('Content-Range', `bytes ${start} - ${calc_end} / ${total}`);
-      await fetch(cloudUrl, {
+      await fetch(cloudUrl.url, {
         method: 'PUT',
         headers: h,
         body: chunk,
@@ -82,11 +82,11 @@ const Uploader = (props) => {
       if (kill) {
         setTotalUpload({ ...totalUpload, showing: false });
         useVisualStatus('success! you can close this window');
+        update_exhibitor_upload(theFile.name, cloudUrl.path, router.query.id);
         break;
       }
     }
-
-    console.log(files.map((f) => f.meta));
+    // console.log(files.map((f) => f.meta));
     allFiles.forEach((f) => f.remove());
   };
 
@@ -96,7 +96,6 @@ const Uploader = (props) => {
         <div>
           <p>{visualStatus}</p>
           <p>
-            {' '}
             Uploading <strong> {uploadingFile.name} </strong>to our servers...{' '}
             <br /> please do not close this window until complete!
           </p>
