@@ -12,9 +12,14 @@ const Uploader = (props) => {
   // specify upload params and url for your files
   const getUploadParams = ({ file, meta }) => {
     const upload = new FormData();
-    upload.append(`files.info`, file, file.name);
-    const data = { index: props.index };
-    upload.append('data', JSON.stringify(data));
+
+    upload.append(
+      'data',
+      JSON.stringify({
+        index: props.index,
+        fileName: file.name,
+      })
+    );
 
     return {
       url: props.url,
