@@ -44,7 +44,7 @@ const Uploader = (props) => {
   const handleSubmit = async (files, allFiles) => {
     var loaded = 0;
     let start = loaded;
-    var step = 83898000;
+    var step = 600000;
 
     var total = files[0].file.size;
     const theFile = files[0].file;
