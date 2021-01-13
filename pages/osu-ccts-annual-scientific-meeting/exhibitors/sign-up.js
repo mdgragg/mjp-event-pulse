@@ -102,7 +102,7 @@ const ExhibitorUpload = ({ data }) => {
                 }}
               >
                 <label>
-                  Video file for{' '}
+                  {selector.fileType} for{' '}
                   <strong>
                     {' '}
                     {data.FirstName} {data.LastName}
