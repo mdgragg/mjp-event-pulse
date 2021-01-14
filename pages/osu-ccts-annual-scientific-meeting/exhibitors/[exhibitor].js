@@ -1,5 +1,5 @@
-import React, { useEffect, setState, useRef } from 'react';
-import { getExhibitorMeta } from 'lib/api/';
+import React, { useEffect, useState } from 'react';
+import { getExhibitorMeta, getEventMetaMain, getEventMeta } from 'lib/api/';
 import styled from 'styled-components';
 
 import Page from 'components/template1/Page';
@@ -10,33 +10,31 @@ import Footer from 'components/template1/Footer';
 import { event_theme } from '../index';
 import { useRouter } from 'next/router';
 import ExhibitorVideo from 'components/template1/ExhibitorVideo';
+import { getKeyValue, calcHasStarted } from 'lib/helpers';
 
 const SingleExhibitor = (props) => {
   const router = useRouter();
-  const { exhibitor } = props;
+  const { exhibitor, eventData } = props;
 
   const { event_job } = props.exhibitor.event;
 
-  const now = new Date();
-  const ident = `${now.getFullYear()}-${
-    now.getMonth() + 1
-  }-${now.getUTCDate()}`;
+  const links = getKeyValue(exhibitor.KeyValue);
 
-  const base_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}`;
-  const featured_url = `${event_job.eventUrl}/exhibitors/${exhibitor.id}-${exhibitor.FirstName}${exhibitor.LastName}/featured-message`;
-  //get messages if they exist
+  const [eventStarted, setHasStarted] = useState(false);
 
-  const [messages, addMessages] = React.useState({});
-
-  // const [featuredMessage, changeFeaturedMessage] = React.useState("");
-  const [loading, setLoading] = React.useState(true);
-  // const [loggedIn, setLoggedIn] = React.useState(false);
-  const [showLoggedIn, setShowLoggedIn] = React.useState(
-    props.loggedIn || 'false'
-  );
-
-  const [question, changeQuestion] = React.useState('');
-
+  useEffect(() => {
+    let timer;
+    if (eventData.eventStartEnd) {
+      timer = setInterval(() => {
+        setHasStarted(calcHasStarted(eventData.eventStartEnd));
+      }, 1000);
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, []);
   const InRoom = styled.div`
     width: 80px;
     text-align: center;
@@ -44,6 +42,12 @@ const SingleExhibitor = (props) => {
 
     &&.true {
       border: 2px solid #2bef83;
+      color: #2bef83;
+      width: 250px;
+      cursor: pointer;
+    }
+    && > a {
+      text-decoration: none;
       color: #2bef83;
     }
     &&.false {
@@ -57,27 +61,45 @@ const SingleExhibitor = (props) => {
         <Section minHeight={'100vh'}>
           <h1>{event_job.EventJobName}</h1>
           {exhibitor.KeyValue.length > 0 ? (
-            <ExhibitorVideo source={exhibitor.KeyValue} />
+            <ExhibitorVideo
+              src={links.videoLink || ''}
+              caption={links.captionFile || ''}
+            />
           ) : (
             <h2 style={{ color: 'red' }}>No Video File Yet </h2>
           )}
 
           <hr />
-
-          <h1>{exhibitor.ExhibitName}</h1>
-
+          <h1 style={{ margin: 'auto' }}>{exhibitor.ExhibitName}</h1>
+          <hr />
           <h2>
             {exhibitor.FirstName} {exhibitor.LastName}
           </h2>
+          <InRoom className={eventStarted ? 'true' : 'false '}>
+            {eventStarted ? (
+              <a href={exhibitor.Website}>Office Hours Open (Click Here)</a>
+            ) : (
+              'Absent'
+            )}
+          </InRoom>
 
           <p>
             {exhibitor.Company} |{' '}
             <a href={exhibitor.Email}>{exhibitor.Email}</a>
           </p>
+
+          <p>
+            <strong>Primary Author: </strong>{' '}
+            {exhibitor.AdditionalDetails['Primary Author']} <br />
+            <strong>Additional Authors: </strong>{' '}
+            {exhibitor.AdditionalDetails['Additional Authors']} <br />
+            <strong>Abstract Category: </strong>{' '}
+            {exhibitor.AdditionalDetails['Abstract Category']}
+            <br />
+          </p>
+          <hr />
+          <h2>Abstract</h2>
           <p style={{ maxWidth: '800px' }}>{exhibitor.Bio}</p>
-          <InRoom className={showLoggedIn === 'true' ? 'true' : 'false '}>
-            {showLoggedIn === 'true' ? 'Office Hours' : 'Absent'}
-          </InRoom>
         </Section>
         <Footer>Back</Footer>
       </Body>
@@ -89,6 +111,9 @@ export default SingleExhibitor;
 
 export async function getServerSideProps(ctx) {
   const exhibitor = await getExhibitorMeta(ctx.query.exhibitor);
+  let eventData = await getEventMeta(exhibitor.event.slug);
+
+  eventData = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
   // let { loggedIn } = cookies(ctx);
   // const { id } = cookies(ctx) || null;
   // id === 'undefined' ? (id = null) : '';
@@ -98,7 +123,7 @@ export async function getServerSideProps(ctx) {
   let id = '';
   let loggedIn = false;
 
-  return { props: { exhibitor, loggedIn: loggedIn, id } };
+  return { props: { exhibitor, loggedIn: loggedIn, id, eventData } };
 }
 
 // SingleExhibitor.getInitialProps = async (ctx) => {

@@ -47,7 +47,7 @@ const ExhibitorUpload = ({ data }) => {
   const router = useRouter();
   const [selector, changeSelected] = useState({
     fileType: 'videoLink',
-    name: 'index',
+    name: 'Video Link',
   });
   const [file, setFile] = useState(null);
   const [form, setForm] = useState({
@@ -58,7 +58,7 @@ const ExhibitorUpload = ({ data }) => {
 
   const handleChange = (e) => {
     const name = e.target.name;
-    changeSelected({ ...selector, fileType: e.target.value });
+    changeSelected({ ...selector, fileType: e.target.value, name });
   };
 
   return (
@@ -142,9 +142,13 @@ const ExhibitorUpload = ({ data }) => {
 
 export async function getServerSideProps(ctx) {
   const id = ctx.query.id || null;
-  let data;
+  let data = await getExhibitorMeta(`${id.slice(0, 3)}`);
 
-  data = await getExhibitorMeta(`${id.slice(0, 3)}`);
+  let errorCode;
+  if (!data) {
+    errorCode = 404;
+    ctx.res.errorCode = errorCode;
+  }
 
   return {
     props: { data }, // will be passed to the page component as props

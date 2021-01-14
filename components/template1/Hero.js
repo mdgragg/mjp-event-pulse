@@ -21,7 +21,7 @@ const HeroHolder = styled.div`
 
   width: 100%;
   height: ${(props) => props.theme.heroHeight};
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 1);
   overflow: hidden;
   color: white;
 `;
@@ -38,7 +38,8 @@ export default function Hero(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url('${props.bgImage}');
-    opacity: 1;
+    opacity: 0.75;
+    background-color: black;
     /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
     animation-duration: 20s;
@@ -50,8 +51,9 @@ export default function Hero(props) {
     margin: -5px -10px -10px -5px;
     z-index: 99;
 
-    filter: saturate(0.7) blur(10px);
+    filter: blur(${props.blur}px);
     ::after {
+      background-color: black;
       filter: blur(0px);
       position: absolute;
     }

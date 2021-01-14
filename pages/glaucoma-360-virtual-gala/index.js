@@ -43,6 +43,9 @@ const Template1 = (props) => {
   const main_event = props.meta.events[0];
   const { AuthRequired } = props.meta;
 
+  const bgImage =
+    main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
+
   useEffect(() => {
     let now = Date.now();
 
@@ -65,14 +68,12 @@ const Template1 = (props) => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <Header theme={event_theme}>
-          <Navbar info={main_event} />
-        </Header>
 
         <Hero
+          blur={0}
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
-          bgImage="http://lorempixel.com/1500/500/"
+          bgImage={bgImage}
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
 
@@ -88,7 +89,6 @@ const Template1 = (props) => {
             </Grid>
           </Section>
 
-          <Banner color="#181818"></Banner>
           <Section showButton={true} title="Speakers">
             <Grid container={true} spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
@@ -96,9 +96,7 @@ const Template1 = (props) => {
               <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
-          <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={'center'}></Grid>
-          </Section>
+
           <Section showButton={true} title="Gold Sponsors">
             <Grid container={true} spacing={3} justify={'center'}>
               <Grid item={true} md={4}>
@@ -123,13 +121,6 @@ const Template1 = (props) => {
               <ListItemSmall />
             </Grid>
           </Section>
-
-          <EventSearch
-            currenthref={event_meta.eventUrl}
-            events={event_meta.events}
-          />
-
-          <Section></Section>
         </Body>
         <Footer>
           <div></div>

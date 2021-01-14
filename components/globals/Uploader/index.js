@@ -36,7 +36,11 @@ const Uploader = (props) => {
     if (status === 'done') {
       const res = JSON.parse(xhr.response);
       console.log(res);
-      setCloudUrl({ path: res.packet, url: res.message[0] });
+      setCloudUrl({
+        path: res.packet,
+        url: res.message.upload[0],
+        fileName: res.message.name,
+      });
     }
   };
 
@@ -122,7 +126,7 @@ const Uploader = (props) => {
             getUploadParams={getUploadParams}
             onChangeStatus={handleChangeStatus}
             onSubmit={handleSubmit}
-            accept="image/*,audio/*,video/*"
+            accept="image/*,audio/*,video/*,.vtt"
             disabled={(files) =>
               files.some((f) =>
                 ['preparing', 'getting_upload_params', 'uploading'].includes(

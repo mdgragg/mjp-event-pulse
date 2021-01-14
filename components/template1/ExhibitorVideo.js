@@ -1,8 +1,24 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { get_ext } from 'lib/helpers';
 
-const ExhibitorVideo = ({ source }) => {
+const ExVid = styled.div`
+  && > video::cue {
+    font-family: sans-serif;
+  }
+  && > video::-webkit-media-text-track-container {
+    // Style the container
+    max-width: 300px;
+  }
+
+  && > video::-webkit-media-text-track-display {
+    // Style the text itself
+    font-size: 0.5em;
+    font-family: sans-serif !important;
+  }
+`;
+
+const ExhibitorVideo = ({ source, src, caption }) => {
   const videoRef = useRef();
 
   const handleVidLoad = (e) => {
@@ -16,23 +32,32 @@ const ExhibitorVideo = ({ source }) => {
       videoRef.current.removeEventListener('loadeddata', handleVidLoad);
     };
   }, []);
-  const key = Object.keys(source).find(
-    (key) => source[key].key === 'videoLink'
-  );
-
-  const src = source[key].value;
 
   return (
-    <div>
-      <video width="100%" height="100%" controls autoPlay>
+    <ExVid>
+      <video
+        width="100%"
+        height="100%"
+        controls
+        autoPlay
+        preload="metadata"
+        crossOrigin="anonymous"
+      >
         <source src={src} type={`video/${get_ext(src)}`} ref={videoRef} />
         Your browser does not support the video tag.
+        <track
+          src={caption}
+          label="English"
+          kind="captions"
+          srcLang="en-us"
+          default
+        />
       </video>
       <p>
         Trouble seeing this video? You may need to{' '}
         <a href={`${src}`}>download and view</a>.
       </p>
-    </div>
+    </ExVid>
   );
 };
 
