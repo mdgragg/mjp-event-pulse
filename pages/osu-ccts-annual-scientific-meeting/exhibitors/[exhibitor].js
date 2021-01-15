@@ -85,7 +85,7 @@ const SingleExhibitor = (props) => {
 
           <p>
             {exhibitor.Company} |{' '}
-            <a href={exhibitor.Email}>{exhibitor.Email}</a>
+            <a href={`mailto:${exhibitor.Email}`}>{exhibitor.Email}</a>
           </p>
 
           <p>
