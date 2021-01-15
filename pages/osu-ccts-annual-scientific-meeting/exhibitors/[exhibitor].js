@@ -60,7 +60,8 @@ const SingleExhibitor = (props) => {
       <Body>
         <Section minHeight={'100vh'}>
           <h1>{event_job.EventJobName}</h1>
-          {exhibitor.KeyValue.length > 0 ? (
+
+          {links.videoLink ? (
             <ExhibitorVideo
               src={links.videoLink || ''}
               caption={links.captionFile || ''}
