@@ -78,7 +78,7 @@ const VideoBox = (props) => {
   return (
     <StyledPaper className={props.isStarted ? isFixed : ''}>
       <StyledVideoBox>
-        <FilterVideo vidShow={vidShow} />
+        <FilterVideo vidShow={vidShow} src={props.src} />
       </StyledVideoBox>
     </StyledPaper>
   );
@@ -88,14 +88,14 @@ const FilterVideo = (props) => {
   if (props.vidShow) {
     return (
       <CustomFrame
-        src={``}
+        src={props.src}
         frameborder="0"
         allow="autoplay; fullscreen"
         allowfullscreen
       />
     );
   } else {
-    return <h1> YED!</h1>;
+    return <div>No video...</div>;
   }
 };
 

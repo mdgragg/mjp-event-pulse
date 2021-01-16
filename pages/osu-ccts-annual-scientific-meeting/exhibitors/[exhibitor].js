@@ -11,16 +11,16 @@ import { event_theme } from '../index';
 import { useRouter } from 'next/router';
 import ExhibitorVideo from 'components/template1/ExhibitorVideo';
 import { getKeyValue, calcHasStarted } from 'lib/helpers';
-
+import { BackButton } from 'components/template1/Elements/';
 const SingleExhibitor = (props) => {
   const router = useRouter();
   const { exhibitor, eventData } = props;
-
+  const event_started = eventData.eventStartEnd || false;
   const { event_job } = props.exhibitor.event;
 
   const links = getKeyValue(exhibitor.KeyValue);
 
-  const [eventStarted, setHasStarted] = useState(false);
+  const [eventStarted, setHasStarted] = useState(calcHasStarted(event_started));
 
   useEffect(() => {
     let timer;
@@ -59,6 +59,7 @@ const SingleExhibitor = (props) => {
     <Page theme={event_theme}>
       <Body>
         <Section minHeight={'100vh'}>
+          <BackButton text="All Exhibitors" event_job={event_job} />
           <h1>{event_job.EventJobName}</h1>
 
           {links.videoLink ? (
@@ -108,73 +109,23 @@ const SingleExhibitor = (props) => {
   );
 };
 
-export default SingleExhibitor;
-
 export async function getServerSideProps(ctx) {
   const exhibitor = await getExhibitorMeta(ctx.query.exhibitor);
-  let eventData = await getEventMeta(exhibitor.event.slug);
 
-  eventData = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-  // let { loggedIn } = cookies(ctx);
-  // const { id } = cookies(ctx) || null;
-  // id === 'undefined' ? (id = null) : '';
-  // if (!loggedIn) {
-  //   loggedIn = 'false';
-  // }
-  let id = '';
-  let loggedIn = false;
+  if (!exhibitor) {
+    const { res } = ctx;
+    res.setHeader('location', './');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  } else {
+    let eventData = await getEventMeta(exhibitor.event.slug);
+    eventData = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  return { props: { exhibitor, loggedIn: loggedIn, id, eventData } };
+    let id = '';
+    let loggedIn = false;
+
+    return { props: { exhibitor, loggedIn: loggedIn, id, eventData } };
+  }
 }
-
-// SingleExhibitor.getInitialProps = async (ctx) => {
-//   let { loggedIn } = cookies(ctx);
-//   const { id } = cookies(ctx);
-//   if (!loggedIn) {
-//     loggedIn = 'false';
-//   }
-//   console.log(loggedIn);
-
-//   const data = await fetchAPI(
-//     `query getExhibitorDetail($id: String!){
-//         exhibitors(where: {
-//             id: $id
-//         }) {
-//             FirstName
-//             LastName
-//             Company
-//             Website
-//             id
-//             Website
-//             Email
-//             event {
-//               EventName
-//               slug
-//               event_job{
-//                 eventUrl
-//                 jobId
-//                 EventJobName
-
-//               }
-//             }
-//             Attachments{
-//               name
-//               url
-//               size
-//               ext
-//             }
-//           }
-//       }`,
-//     {
-//       variables: {
-//         id: ctx.query.exhibitor,
-//       },
-//     }
-//   );
-//   // const login = loggedIn;
-
-//   const exhibitor = await data.exhibitors[0];
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
-//   return { exhibitor, loggedIn, id };
-// };
+export default SingleExhibitor;

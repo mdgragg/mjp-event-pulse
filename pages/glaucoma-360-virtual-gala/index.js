@@ -48,8 +48,13 @@ const Template1 = (props) => {
   const bgImage =
     main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
 
+  const calcDate = (d) => {
+    let now = Date.now();
+    if (dateStart < now) {
+      setStarted(false);
+    }
+  };
   useEffect(() => {
-    console.log(Object.keys(window));
     let now = Date.now();
     let dateStart = main_event.eventStartEnd.StartDateTime;
     if (dateStart < now) {
@@ -140,7 +145,10 @@ const Template1 = (props) => {
           <Section minHeight={`100vh`}>
             <Grid container={true} spacing={3}>
               <Grid item={true} md={9} sm={12}>
-                <VideoBox isStarted={hasStarted} />
+                <VideoBox
+                  isStarted={true}
+                  src={`https://www.youtube.com/embed/0XNU9aYP86E`}
+                />
                 <GivingTherm />
               </Grid>
               <Grid item={true} md={3} sm={12}>
