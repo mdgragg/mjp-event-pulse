@@ -9,6 +9,7 @@ const StyledBanner = styled.div`
   flex-direction: space-around;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 100%;
   margin-top: 2em;
   left: 0;
@@ -42,18 +43,25 @@ const Banner = (props) => {
   return (
     <StyledBanner image={props.image} color={props.color}>
       <div>
-        <Typography variant="h2" component="h2" style={{ color: 'white' }}>
-          SIGN UP
+        <Typography
+          variant="h4"
+          component="h4"
+          style={{ color: props.secondary }}
+        >
+          {props.headerText}
         </Typography>
-        <Typography variant="body1" component="p" style={{ color: 'white' }}>
-          We only need your name and email.
+        <Typography
+          variant="body1"
+          component="p"
+          style={{
+            color: props.secondary,
+            fontSize: '1.25rem',
+            marginTop: '1rem',
+          }}
+        >
+          {props.children}
         </Typography>
       </div>
-      <SignUp>
-        <Button>Sign Me Up</Button>
-      </SignUp>
-
-      {props.children}
     </StyledBanner>
   );
 };

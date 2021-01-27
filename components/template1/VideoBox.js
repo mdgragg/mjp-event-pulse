@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import styled, { ThemeContext } from 'styled-components';
 import { Grid, Paper, Card } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import MenuIcon from '@material-ui/icons/Menu';
 
-const StyledPaper = styled(Paper)`
-  background-color: black;
+const StyledPaper = styled.div`
+  min-width: inherit;
   padding: 0;
   border: none;
   border-radius: 0;
@@ -16,6 +16,7 @@ const StyledPaper = styled(Paper)`
     top: 2%;
     left: 2%;
     width: 350px;
+    height: auto;
     z-index: 100;
     padding: 0;
     border-radius: 0;
@@ -32,17 +33,21 @@ const StyledPaper = styled(Paper)`
   }
 `;
 
-const CustomFrame = styled.iframe`
-  height: 100%;
-  width: 100%;
-  border: none;
-`;
-
 const VideoBox = (props) => {
   const StyledVideoBox = styled.div`
-    height: ${(props) => props.theme.videoBoxHeight};
-    background-color: rgba(0, 0, 0, 0);
-
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    && > iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
     @media (max-width: 768px) {
       width: 100%;
       height: 350px;
@@ -51,32 +56,31 @@ const VideoBox = (props) => {
   `;
 
   const [vidShow, setVidShow] = useState(true);
-  const [isFixed, setFixed] = useState('');
+
   const themeContext = React.useContext(ThemeContext);
 
   const offsetVideoHeight = themeContext.videoBreakPoint;
+  const wrapperRef = useRef();
 
   function calculateFixed(e) {
-    if (this.pageYOffset >= offsetVideoHeight) {
-      setFixed('fixed');
+    if (window.pageYOffset >= offsetVideoHeight) {
+      wrapperRef.current.classList.add('fixed');
     } else {
-      setFixed('');
+      wrapperRef.current.classList.remove('fixed');
     }
   }
   useEffect(() => {
-    function watchScroll() {
-      window.addEventListener('scroll', calculateFixed);
-    }
+    console.log('video mount');
     if (props.isStarted) {
-      watchScroll();
+      window.addEventListener('scroll', calculateFixed, { passive: true });
     }
     return () => {
       window.removeEventListener('scroll', calculateFixed);
     };
-  });
+  }, []);
 
   return (
-    <StyledPaper className={props.isStarted ? isFixed : ''}>
+    <StyledPaper ref={wrapperRef}>
       <StyledVideoBox>
         <FilterVideo vidShow={vidShow} src={props.src} />
       </StyledVideoBox>
@@ -84,16 +88,16 @@ const VideoBox = (props) => {
   );
 };
 
+const CustomFrame = styled.iframe`
+  border: none;
+`;
+
 const FilterVideo = (props) => {
+  useEffect(() => {
+    console.log('remounted');
+  }, []);
   if (props.vidShow) {
-    return (
-      <CustomFrame
-        src={props.src}
-        frameborder="0"
-        allow="autoplay; fullscreen"
-        allowfullscreen
-      />
-    );
+    return <CustomFrame src={props.src} frameborder="0" allowfullscreen />;
   } else {
     return <div>No video...</div>;
   }

@@ -17,6 +17,15 @@ const StyledPage = styled.div`
   p {
     font-family: ${(props) => props.theme.pfont};
   }
+  a {
+    text-decoration: none;
+    color: navy;
+    font-weight: 600;
+    margin-left: 2px;
+  }
+  a:hover {
+    color: grey;
+  }
 `;
 
 Router.onRouteChangeStart = () => {
