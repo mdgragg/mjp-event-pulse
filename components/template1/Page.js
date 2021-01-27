@@ -14,6 +14,8 @@ const StyledPage = styled.div`
   color: ${(props) => props.theme.fontColor};
   min-height: 100vh;
   z-index: 0;
+  width: 100vw;
+  overflow: hidden;
   p {
     font-family: ${(props) => props.theme.pfont};
   }

@@ -10,7 +10,7 @@ const StyledSection = styled.div`
   margin-left: auto;
   margin-right: auto;
   @media (max-width: 768px) {
-    padding: 2em;
+    padding: 1rem;
   }
   :nth-child(even) {
     background-color: #f2f2f2;

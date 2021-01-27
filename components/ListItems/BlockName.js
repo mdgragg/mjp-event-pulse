@@ -11,11 +11,11 @@ import Grow from '@material-ui/core/Grow';
 
 const BlockHolder = styled.div`
   height: 100px;
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
   &&.big {
     height: 150px;
-    min-width: 400px;
+    min-width: 100%;
     max-width: 400px;
     font-size: 1.75rem;
   }

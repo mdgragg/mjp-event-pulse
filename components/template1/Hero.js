@@ -24,27 +24,36 @@ const HeroHolder = styled.div`
   background-color: rgba(0, 0, 0, 1);
   overflow: hidden;
   color: white;
+  @media all and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const StyledTypography = styled(Typography)`
   z-index: 99;
   position: absolute;
-  top: 30%;
+  top: 25%;
   text-align: center;
-  width: 100%;
+  max-width: 900px;
+  left: 0;
+  right: 0;
+  font-weight: 800;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export default function Hero(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url('${props.bgImage}');
-    opacity: 0.75;
+    opacity: 0.65;
     background-color: black;
     /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
     animation-duration: 20s;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center center;
     transform: scale(1.2);
     position: inherit;
     text-align: center;

@@ -50,7 +50,7 @@ const VideoBox = (props) => {
     }
     @media (max-width: 768px) {
       width: 100%;
-      height: 350px;
+
       border-radius: 0;
     }
   `;

@@ -27,7 +27,7 @@ import CircleName from 'components/ListItems/CircleName';
 import CircleNameBig from 'components/ListItems/CircleNameBig';
 import Section from 'components/template1/Section';
 import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
+import ChatBox from 'components/template1/ChatBox';
 import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 import GivingTherm from 'components/assets/GivingTherm';
@@ -130,7 +130,11 @@ const Template1 = (props) => {
               <div>
                 <VideoBox
                   isStarted={true}
-                  src={`https://vimeo.com/event/642616/embed`}
+                  src={
+                    _.filter(main_event.streamLinks, (link) => {
+                      return link.Service === 'Vimeo';
+                    })[0].url
+                  }
                 />
                 <GivingTherm />
               </div>
@@ -148,7 +152,7 @@ const Template1 = (props) => {
                   }}
                   id="fr-placed-form-container-15123"
                 ></div>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '100%', overflow: 'hidden' }}>
                   <p
                     style={{
                       color: 'white',
@@ -163,6 +167,13 @@ const Template1 = (props) => {
                     />
                   </p>
                 </div>
+                <ChatBox
+                  src={
+                    _.filter(main_event.streamLinks, (link) => {
+                      return link.Service === 'VimeoChat';
+                    })[0].url
+                  }
+                />
               </div>
             </VideoAreaHolder>
           </Section>
