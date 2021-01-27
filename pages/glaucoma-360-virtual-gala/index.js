@@ -55,6 +55,9 @@ const VideoAreaHolder = styled.div`
 `;
 
 const Template1 = (props) => {
+  Template1.getInitialProps = async () => {
+    return;
+  };
   const { loginState, verify_main_event } = useContext(UserContext);
 
   const router = useRouter();
@@ -371,7 +374,7 @@ export async function getServerSideProps(ctx) {
   //get the event job data from our api
   let url = ctx.req.url.slice(1);
 
-  let eventData = await getEventMeta(url);
+  let eventData = await getEventMeta('glaucoma-360-virtual-gala');
 
   if (!eventData) {
     eventData = {};

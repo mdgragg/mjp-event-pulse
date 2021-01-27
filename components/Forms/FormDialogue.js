@@ -32,6 +32,12 @@ const StyledForm = styled.form`
   }
 `;
 
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  font-size: 1.25rem;
+  text-align: center;
+`;
 export default function FormDialog({ endpoint }) {
   const init = {
     firstName: '',
@@ -45,6 +51,11 @@ export default function FormDialog({ endpoint }) {
   };
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
+
+  const [formErrors, setFormErrors] = React.useState({
+    showing: false,
+    errors: [],
+  });
   const [values, setValues] = React.useState(init);
 
   const [open, setOpen] = React.useState(false);
@@ -79,6 +90,19 @@ export default function FormDialog({ endpoint }) {
 
   const handleSumbit = async () => {
     setFormLoading(true);
+    if (
+      values.phoneNumber === '' ||
+      values.email === '' ||
+      values.firstName === '' ||
+      values.lastName === '' ||
+      values.pledgeAmount === ''
+    ) {
+      setFormErrors({ showing: true });
+      setTimeout(() => {
+        setFormLoading(false);
+      }, 1000);
+      return;
+    }
     const submit_id = Date.now();
     console.log(values);
 
@@ -106,7 +130,7 @@ export default function FormDialog({ endpoint }) {
         pledge: true,
 
         form: {
-          id: 15124,
+          id: 15123,
           name: 'Custom Pledge Form',
         },
       },
@@ -146,6 +170,12 @@ export default function FormDialog({ endpoint }) {
         >
           Make Your Pledge
         </DialogTitle>
+        {formErrors.showing ? (
+          <Error>You did not fill out all the required fields!</Error>
+        ) : (
+          ''
+        )}
+
         <DialogContent>
           <DialogContentText>
             We will contact you after the event for further details. Your email
@@ -165,6 +195,7 @@ export default function FormDialog({ endpoint }) {
               type="text"
               value={values.firstName}
               onChange={handleChange}
+              required
             />
             <TextField
               margin="normal"
@@ -173,6 +204,7 @@ export default function FormDialog({ endpoint }) {
               type="test"
               value={values.lastName}
               onChange={handleChange}
+              required
             />
             <TextField
               margin="normal"
@@ -181,6 +213,7 @@ export default function FormDialog({ endpoint }) {
               type="email"
               value={values.email}
               onChange={handleChange}
+              required
             />
             <TextField
               margin="normal"
@@ -192,7 +225,7 @@ export default function FormDialog({ endpoint }) {
             />
 
             <FormControl>
-              <InputLabel htmlFor="formatted-text-mask-input">
+              <InputLabel htmlFor="formatted-text-mask-input" required>
                 Phone Number
               </InputLabel>
               <Input
@@ -201,6 +234,7 @@ export default function FormDialog({ endpoint }) {
                 onChange={handleChange}
                 id="formatted-text-mask-input"
                 inputComponent={TextMaskCustom}
+                required
               />
             </FormControl>
             <TextField
@@ -214,6 +248,7 @@ export default function FormDialog({ endpoint }) {
               InputProps={{
                 inputComponent: NumberFormatCustom,
               }}
+              required
             />
             <InputLabel htmlFor="anonymous">
               I want my pledge to be anonymous
