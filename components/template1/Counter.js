@@ -27,6 +27,7 @@ const MyCounter = styled.div`
 `;
 
 export default function Counter(props) {
+  const [started, setStarted] = useState(false);
   function pad(value) {
     if (value === 0) {
       return '';
@@ -55,20 +56,29 @@ export default function Counter(props) {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      calcTime(getRemainingTime(props.start));
+      const remaining = getRemainingTime(props.start);
+      console.log(remaining.total_remaining);
+      if (remaining.total_remaining < 0) {
+        setStarted(true);
+      } else {
+        calcTime(remaining);
+      }
     });
 
     return () => clearInterval(interval);
   }, []);
   const [time, calcTime] = useState({});
-
-  return (
-    <MyCounter>
-      {` 
-        ${time.days} Days
-          ${pad(time.hours)} ${time.hours === 0 ? '' : 'Hours'}
-          ${pad(time.minutes)} Minutes
-          ${pad(time.seconds)}`}
-    </MyCounter>
-  );
+  if (started) {
+    return '';
+  } else {
+    return (
+      <MyCounter>
+        {` 
+          ${time.days} Days
+            ${pad(time.hours)} ${time.hours === 0 ? '' : 'Hours'}
+            ${pad(time.minutes)} Minutes
+            ${pad(time.seconds)}`}
+      </MyCounter>
+    );
+  }
 }

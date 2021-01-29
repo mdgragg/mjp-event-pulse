@@ -80,6 +80,7 @@ const Template1 = (props) => {
   };
   useEffect(() => {
     let now = Date.now();
+
     let dateStart = main_event.eventStartEnd.StartDateTime;
     if (dateStart < now) {
       setStarted(false);
