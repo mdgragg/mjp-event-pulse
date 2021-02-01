@@ -120,7 +120,7 @@ const Template1 = (props) => {
         <Hero
           blur={0}
           hasStarted={hasStarted}
-          title={event_meta.EventJobName}
+          title={main_event.EventName}
           bgImage={bgImage}
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
