@@ -10,7 +10,7 @@ const template1Theme = {
   bg: '#F7F7F7',
   footerBg: 'black',
   headerHeight: '65px',
-  heroHeight: '600px',
+  heroHeight: '30vh',
   videoBoxHeight: '600px',
   primary: '#181818',
   secondary: '#006AC1',

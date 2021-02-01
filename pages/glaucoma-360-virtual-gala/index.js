@@ -126,7 +126,7 @@ const Template1 = (props) => {
         ></Hero>
 
         <Body>
-          <Section minHeight={`90vh`}>
+          <Section minHeight={`auto`}>
             <VideoAreaHolder>
               <div>
                 <VideoBox
@@ -153,7 +153,7 @@ const Template1 = (props) => {
                   }}
                   id="fr-placed-form-container-15123"
                 ></div>
-                <div style={{ width: '100%', overflow: 'hidden' }}>
+                <div style={{ width: '60%', overflow: 'hidden' }}>
                   <p
                     style={{
                       color: 'white',
@@ -162,19 +162,10 @@ const Template1 = (props) => {
                       fontSize: '1.25rem',
                     }}
                   >
-                    Need to make a pledge instead?{' '}
-                    <FormDialog
-                      endpoint={'https://grf-server-forms.herokuapp.com/sheet'}
-                    />
+                    It is not too late to make a gift <br />
+                    <strong>Support the Fund-A-Scientist Initiative</strong>
                   </p>
                 </div>
-                <ChatBox
-                  src={
-                    _.filter(main_event.streamLinks, (link) => {
-                      return link.Service === 'VimeoChat';
-                    })[0].url
-                  }
-                />
               </div>
             </VideoAreaHolder>
           </Section>
@@ -185,7 +176,12 @@ const Template1 = (props) => {
           >
             <p>
               {' '}
-              Call or text Nancy at <a href="tel:3236793797"> (323) 679-3797</a>
+              Please contact Nancy Graydon if you would to make a gift or pledge
+              at{' '}
+              <a href="mailto:ngraydon@glaucoma.org">
+                ngraydon@glaucoma.org
+              </a>{' '}
+              or call 415-986-3162 ext 231
             </p>
           </Banner>
 

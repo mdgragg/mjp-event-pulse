@@ -7,11 +7,13 @@ const ThermWrap = styled.div`
   margin-top: 80px;
   margin-bottom: 80px;
   height: auto;
+
   && > h3 {
     color: white;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: 1rem auto;
-    margin-left: calc(${(props) => props.width} - 40px);
+    /* margin-left: calc(${(props) => props.width} - 40px); */
+    text-align: center;
     transition: margin-left 3s ease;
   }
 `;
