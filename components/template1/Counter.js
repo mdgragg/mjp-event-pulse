@@ -30,7 +30,7 @@ export default function Counter(props) {
   const [started, setStarted] = useState(false);
   function pad(value) {
     if (value === 0) {
-      return '';
+      return ' ';
     }
     if (value < 10) {
       return '0' + value;
