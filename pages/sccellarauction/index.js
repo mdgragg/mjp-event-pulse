@@ -63,7 +63,7 @@ const Index = (props) => {
   };
 
   const bgImage =
-    main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
+    main_event.KeyValue[0].value || 'https://lorempixel.com/1920/1080/';
 
   useEffect(() => {
     const timeout = setInterval(() => {

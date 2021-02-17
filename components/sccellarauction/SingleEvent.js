@@ -51,7 +51,7 @@ const SingleEvent = (props) => {
   return (
     <Paper>
       <SingleEventWrap event_theme={event_theme}>
-        <EventThumbnail src="http://lorempixel.com/500/500/" />
+        <EventThumbnail src="https://lorempixel.com/500/500/" />
         <button>Click To Join</button>
         <MetaData>
           <p>Some description of the event to be provided</p>
