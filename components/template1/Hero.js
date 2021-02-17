@@ -46,16 +46,17 @@ export default function Hero(props) {
   const StyledHero = styled.div`
     height: ${(props) => props.theme.heroHeight};
     background-image: url('${props.bgImage}');
-    opacity: 0.65;
-    background-color: black;
+    opacity: ${(props) => props.theme.headerOpacity || 0.65};
+
     /* animation-name: ${breatheAnimation}; */
     animation-iteration-count: infinite;
     animation-duration: 20s;
     background-size: cover;
     background-attachment: fixed;
-    background-position: center center;
+    background-repeat: repeat;
+    background-position: center -400px;
     transform: scale(1.2);
-    position: inherit;
+    /* position: inherit; */
     text-align: center;
     margin: -5px -10px -10px -5px;
     z-index: 99;

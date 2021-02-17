@@ -20,10 +20,10 @@ const MyCounter = styled.div`
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0.5em;
-  font-size: 2em;
+  width: 400px;
+  font-size: 1.5em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 2rem;
 `;
 
 export default function Counter(props) {
@@ -45,6 +45,15 @@ export default function Counter(props) {
     const minutes = Math.floor((total_remaining / 1000 / 60) % 60);
     const hours = Math.floor((total_remaining / (1000 * 60 * 60)) % 24);
     const days = Math.floor(total_remaining / (1000 * 60 * 60 * 24));
+    if (total_remaining === 'undefined') {
+      return {
+        days: '',
+        hours: '',
+        minutes: '',
+        seconds: '',
+        total_remaining: '',
+      };
+    }
     return {
       days,
       hours,
@@ -55,30 +64,36 @@ export default function Counter(props) {
   }
 
   useEffect(() => {
+    // calcTime(getRemainingTime(props.start));
+
     let interval = setInterval(() => {
-      const remaining = getRemainingTime(props.start);
-      console.log(remaining.total_remaining);
+      let remaining = getRemainingTime(props.start);
       if (remaining.total_remaining < 0) {
         setStarted(true);
       } else {
         calcTime(remaining);
       }
-    });
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
-  const [time, calcTime] = useState({});
+
+  const [time, calcTime] = useState(getRemainingTime(props.start));
+
   if (started) {
     return '';
   } else {
     return (
-      <MyCounter>
-        {` 
-          ${time.days} Days
-            ${pad(time.hours)} ${time.hours === 0 ? '' : 'Hours'}
-            ${pad(time.minutes)} Minutes
-            ${pad(time.seconds)}`}
-      </MyCounter>
+      <>
+        {!time.days ? (
+          props.start
+        ) : (
+          <MyCounter>
+            {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}
+            {pad(time.minutes)} Minutes {pad(time.seconds)}
+          </MyCounter>
+        )}
+      </>
     );
   }
 }

@@ -26,9 +26,17 @@ import ListItemSmall from 'components/template1/ListItemSmall';
 import EventSearch from 'components/template1/EventSearch';
 import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
+import SingleEvent from '../../components/sccellarauction/SingleEvent';
+
 export const event_theme = {
   // bg: '#BADA55'
+  heroHeight: '30vh',
   fontFamily: 'Roboto',
+  headerOpacity: 9,
+  white: 'white',
+  blue: '#14204a',
+  red: 'red',
+  buttonColor: '#1f3c74',
 };
 
 const Index = (props) => {
@@ -54,6 +62,9 @@ const Index = (props) => {
     return bool;
   };
 
+  const bgImage =
+    main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
+
   useEffect(() => {
     const timeout = setInterval(() => {
       setStarted(calculateIfStarted());
@@ -70,68 +81,85 @@ const Index = (props) => {
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
-          bgImage="http://lorempixel.com/1500/500/"
+          bgImage={bgImage}
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
 
         <Body>
-          <Section>
-            <Grid container spacing={3}>
-              <Grid item={true} md={9} sm={12}>
-                <VideoBox isStarted={hasStarted} />
+          <Section title="Nominees Watch Party Rooms">
+            <Grid container spacing={3} justify={'center'}>
+              <Grid item spacing={3}>
+                <SingleEvent />
               </Grid>
-              <Grid item md={3} sm={12}>
-                <Sidebar theme={event_theme} />
+              <Grid item spacing={3}>
+                <SingleEvent />
+              </Grid>
+              <Grid item spacing={3}>
+                <SingleEvent />
+              </Grid>
+            </Grid>
+          </Section>
+          <Section title="School Watch Party Rooms">
+            <Grid container spacing={3} justify={'center'}>
+              <Grid item spacing={3}>
+                <SingleEvent />
+              </Grid>
+              <Grid item spacing={3}>
+                <SingleEvent />
+              </Grid>
+              <Grid item spacing={3}>
+                <SingleEvent />
               </Grid>
             </Grid>
           </Section>
 
-          <Banner color="#181818"></Banner>
-          <Section showButton title="Speakers">
+          <Banner
+            secondary={event_theme.white}
+            color={event_theme.blue}
+            headerText={'Need help?'}
+          >
+            <p style={{ maxWidth: '500px' }}>
+              {' '}
+              Please contact us if you are having trouble accessing the site:{' '}
+              <a style={{ color: 'white' }} href="">
+                help@help.com needs updated
+              </a>{' '}
+              or scroll below to see the help rooms.
+            </p>
+          </Banner>
+          <Section title="Help & Additional Rooms">
+            <Grid container spacing={3} justify={'center'}>
+              <Grid item md={4}>
+                <SingleEvent />
+              </Grid>
+              <Grid item md={4}>
+                <SingleEvent />
+              </Grid>
+              <Grid item md={4}>
+                <SingleEvent />
+              </Grid>
+            </Grid>
+          </Section>
+          <Section showButton title="Sponsors">
             <Grid container spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
               <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
-          <Section showButton title="Platinum Sponsors">
-            <Grid container spacing={3} justify={'center'}></Grid>
-          </Section>
-          <Section showButton title="Gold Sponsors">
-            <Grid container spacing={3} justify={'center'}>
-              <Grid item md={4}>
-                <img src="http://lorempixel.com/350/250/"></img>
-              </Grid>
 
-              <Grid item md={4}>
-                <img src="http://lorempixel.com/350/240/"></img>
-              </Grid>
-
-              <Grid item md={4}>
-                <img src="http://lorempixel.com/350/220/"></img>
-              </Grid>
-            </Grid>
+          <Section>
+            <EventSearch
+              currenthref={event_meta.eventUrl}
+              events={event_meta.events}
+            />
           </Section>
-          <Section showButton title={`${event_meta.EventJobName} in the News`}>
-            <Grid container spacing={3} justify={'center'}>
-              <ListItemSmall />
-              <ListItemSmall />
-            </Grid>
-          </Section>
-          <EventSearch
-            currenthref={event_meta.eventUrl}
-            events={event_meta.events}
-          />
-          <Section></Section>
         </Body>
         <Footer>
           <div></div>
-          <div className="signoff">
-            <center>Copyright 2020 Mill James</center>
-          </div>
+
           <div></div>
         </Footer>
-        <LoginBox />
       </Page>
     );
   };
@@ -151,14 +179,14 @@ const Index = (props) => {
 };
 
 export async function getServerSideProps(ctx) {
-  console.log(ctx.req.cookies);
+  //console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
   try {
-    let eventData = await getEventMeta('mjp-default-event-job');
+    let eventData = await getEventMeta('sccellarauction');
     const values = {
       props: {
         //meta will be the props for the event

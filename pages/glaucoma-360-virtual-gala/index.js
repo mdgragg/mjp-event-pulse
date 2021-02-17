@@ -58,7 +58,6 @@ const Template1 = (props) => {
   Template1.getInitialProps = async () => {
     return;
   };
-  const { loginState, verify_main_event } = useContext(UserContext);
 
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(true);
@@ -67,7 +66,7 @@ const Template1 = (props) => {
 
   let event_meta = props.meta;
   const main_event = props.meta.events[0];
-  const { AuthRequired } = props.meta;
+
   const [dialogueOpen, setDialogueOpen] = useState(false);
   const bgImage =
     main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
@@ -86,14 +85,6 @@ const Template1 = (props) => {
       setStarted(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (AuthRequired) {
-      verify_main_event(props.meta).then((result) => {
-        setVerified({ verified: result });
-      });
-    }
-  }, [loginState.loggedIn]);
 
   const MainPage = () => {
     return (
@@ -347,30 +338,7 @@ const Template1 = (props) => {
     );
   };
 
-  if (AuthRequired) {
-    if (loginState.loggedIn && !verified.verified) {
-      return (
-        <Page theme={event_theme}>
-          <LoginPage>
-            <p>you are logged in but not verified for this event</p>
-            <Link href="/me"> My Account</Link>
-          </LoginPage>
-        </Page>
-      );
-    }
-    if (verified && loginState.loggedIn) {
-      return <MainPage />;
-    } else {
-      return (
-        <Page theme={event_theme}>
-          <p>Please log in to view this event</p>
-          <LoginPage />
-        </Page>
-      );
-    }
-  } else {
-    return <MainPage />;
-  }
+  return <MainPage />;
 };
 
 export async function getServerSideProps(ctx) {

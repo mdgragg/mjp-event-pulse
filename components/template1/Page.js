@@ -48,7 +48,7 @@ const Page = (props) => {
           <StylesProvider injectFirst>
             {/* <uiThemeProvider theme={{theme}}>  */}
             <ThemeProvider theme={template1Theme}>
-              <ThemeProvider theme={props.theme}>
+              <ThemeProvider theme={props.theme || {}}>
                 <StyledPage>
                   <LoadingScreen message={loading.message} />
                 </StyledPage>
@@ -64,7 +64,7 @@ const Page = (props) => {
           <StylesProvider injectFirst>
             {/* <uiThemeProvider theme={{theme}}>  */}
             <ThemeProvider theme={template1Theme}>
-              <ThemeProvider theme={props.theme}>
+              <ThemeProvider theme={props.theme || {}}>
                 <StyledPage>{props.children}</StyledPage>
               </ThemeProvider>
             </ThemeProvider>

@@ -3,45 +3,49 @@ import { Router, useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
+import withApollo from '../../sccellarauction/node_modules/lib/withApollo';
+import { UserContext } from '../../sccellarauction/node_modules/lib/context/UserContext';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import {
+  getEventMeta,
+  getEventMetaMain,
+  getMainEventMeta,
+} from '../../sccellarauction/node_modules/lib/api';
 
 import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
-import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-import Header from 'components/template1/Header';
-import Navbar from 'components/template1/Navbar';
-import Body from 'components/template1/Body';
-import VideoBox from 'components/template1/VideoBox';
-import Sidebar from 'components/template1/Sidebar';
-import Banner from 'components/template1/Banner';
-import Hero from 'components/template1/Hero';
-import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
-import Section from 'components/template1/Section';
-import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
+import LoginBox from '../../sccellarauction/node_modules/components/globals/Login';
+import Meta from '../../sccellarauction/node_modules/components/globals/Meta';
+import Page from '../../sccellarauction/node_modules/components/template1/Page';
+import Header from '../../sccellarauction/node_modules/components/template1/Header';
+import Navbar from '../../sccellarauction/node_modules/components/template1/Navbar';
+import Body from '../../sccellarauction/node_modules/components/template1/Body';
+import VideoBox from '../../sccellarauction/node_modules/components/template1/VideoBox';
+import Sidebar from '../../sccellarauction/node_modules/components/template1/Sidebar';
+import Banner from '../../sccellarauction/node_modules/components/template1/Banner';
+import Hero from '../../sccellarauction/node_modules/components/template1/Hero';
+import Footer from '../../sccellarauction/node_modules/components/template1/Footer';
+import ListItem from '../../sccellarauction/node_modules/components/template1/ListItem';
+import Section from '../../sccellarauction/node_modules/components/template1/Section';
+import ListItemSmall from '../../sccellarauction/node_modules/components/template1/ListItemSmall';
+import EventSearch from '../../sccellarauction/node_modules/components/template1/EventSearch';
 import cookies from 'next-cookies';
-import LoginPage from 'components/globals/Login/LoginPage';
+import LoginPage from '../../sccellarauction/node_modules/components/globals/Login/LoginPage';
 export const event_theme = {
   // bg: '#BADA55'
   fontFamily: 'Roboto',
 };
 
-const Template1 = (props) => {
-  const { loginState, verify_main_event } = useContext(UserContext);
+const Index = (props) => {
+  const {
+    event_meta,
+    main_event,
+    event_meta: { AuthRequired },
+  } = props;
 
   const router = useRouter();
-  const [pageLoading, setPageLoading] = useState(true);
+
   const [hasStarted, setStarted] = useState(false);
   const [verified, setVerified] = useState({ verified: false });
-
-  let event_meta = props.meta;
-  const main_event = props.meta.events[0];
-  const { AuthRequired } = props.meta;
 
   useEffect(() => {
     let now = Date.now();
@@ -51,21 +55,10 @@ const Template1 = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (AuthRequired) {
-      verify_main_event(props.meta).then((result) => {
-        setVerified({ verified: result });
-      });
-    }
-  }, [loginState.loggedIn]);
-
   const MainPage = () => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <Header theme={event_theme}>
-          <Navbar info={main_event} />
-        </Header>
 
         <Hero
           hasStarted={hasStarted}
@@ -121,12 +114,10 @@ const Template1 = (props) => {
               <ListItemSmall />
             </Grid>
           </Section>
-
           <EventSearch
             currenthref={event_meta.eventUrl}
             events={event_meta.events}
           />
-
           <Section></Section>
         </Body>
         <Footer>
@@ -136,65 +127,50 @@ const Template1 = (props) => {
           </div>
           <div></div>
         </Footer>
-
         <LoginBox />
       </Page>
     );
   };
 
   if (AuthRequired) {
-    if (loginState.loggedIn && !verified.verified) {
-      return (
-        <Page theme={event_theme}>
-          <LoginPage>
-            <h1>you are logged in but not verified for this event</h1>
-            <Link href="/me"> My Account</Link>
-          </LoginPage>
-        </Page>
-      );
-    }
-    if (verified && loginState.loggedIn) {
-      return <MainPage />;
-    } else {
-      return (
-        <Page theme={event_theme}>
-          <LoginPage />
-        </Page>
-      );
-    }
+    return (
+      <Page theme={event_theme}>
+        <LoginPage>
+          <p>Auth Required</p>
+          <Link href="/me"> My Account</Link>
+        </LoginPage>
+      </Page>
+    );
   } else {
     return <MainPage />;
   }
 };
 
 export async function getServerSideProps(ctx) {
+  console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
-
-  //get the event job data from our api
-  let url = ctx.req.url.slice(1);
-
-  let eventData = await getEventMeta(url);
-
-  if (!eventData) {
-    eventData = {};
+  //   get the event job data from our api
+  try {
+    let eventData = await getEventMeta('mjp-default-event-job');
+    const values = {
+      props: {
+        //meta will be the props for the event
+        event_meta: eventData,
+        main_event: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
+      },
+    };
+    return values;
+  } catch (error) {
+    console.log('get static props error: ', error);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
   }
-
-  //this is what will load as the "context" if we haven't come here through
-  //our preview link
-
-  //set the context object to whatever our api is saying
-
-  const values = {
-    props: {
-      //meta will be the props for the event
-      meta: eventData,
-      mainEvent: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
-    },
-  };
-  return values;
 }
 
-export default withApollo(Template1);
+export default Index;

@@ -44,12 +44,6 @@ const NotLoggedIn = ({ values, setValues, handleLogIn }) => (
 );
 
 const LoginBox = (props) => {
-  const {
-    user_login,
-    logout,
-    loginState: { loggedIn, user_creds },
-  } = useContext(UserContext);
-
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -57,14 +51,13 @@ const LoginBox = (props) => {
 
   const handleLogIn = () => {
     console.log('handle log in', values);
-    user_login(values);
   };
 
   const logOutUser = () => {
-    logout();
+    console.log('log out here');
   };
 
-  if (loggedIn)
+  if (false)
     return (
       <LoggedIn
         user_creds={user_creds}

@@ -11,7 +11,6 @@ const StyledBanner = styled.div`
   justify-content: center;
   text-align: center;
   width: 100%;
-  margin-top: 2em;
   left: 0;
   background-color: ${(props) => props.color};
   /* background-image: url('${(props) => props.image}'); */
