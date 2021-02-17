@@ -129,13 +129,13 @@ const Index = (props) => {
           </Banner>
           <Section title="Help & Additional Rooms">
             <Grid container spacing={3} justify={'center'}>
-              <Grid item md={4}>
+              <Grid item>
                 <SingleEvent />
               </Grid>
-              <Grid item md={4}>
+              <Grid item>
                 <SingleEvent />
               </Grid>
-              <Grid item md={4}>
+              <Grid item>
                 <SingleEvent />
               </Grid>
             </Grid>
