@@ -142,9 +142,10 @@ const Index = (props) => {
           </Section>
           <Section showButton title="Sponsors">
             <Grid container spacing={3} justify={'center'}>
-              <ListItem md={4} timeout={500} />
+              <h2>Sponsor Info Will Go Here</h2>
+              {/* <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
-              <ListItem md={4} timeout={2000} />
+              <ListItem md={4} timeout={2000} /> */}
             </Grid>
           </Section>
 
