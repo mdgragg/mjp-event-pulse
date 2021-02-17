@@ -2,7 +2,7 @@ import { Router, useRouter } from 'next/router';
 import { useQuery, gql } from '@apollo/client';
 import React, { useContext, useEffect, useState } from 'react';
 import { event_theme } from './index';
-import { getMetaForEvent } from 'lib/api';
+import { getEventMeta } from 'lib/api';
 import Meta from 'components/globals/Meta';
 import { Grid, Button } from '@material-ui/core';
 import Page from '../../components/template1/Page';
@@ -46,7 +46,7 @@ export default EventPage;
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
 EventPage.getInitialProps = async (ctx) => {
-  const data = await getMetaForEvent(ctx.query.slug);
+  const data = await getEventMeta(ctx.query.slug);
 
   const eventData = await data;
   // By returning { props: posts }, the Blog component

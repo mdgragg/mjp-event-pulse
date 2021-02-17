@@ -26,7 +26,7 @@ import ListItemSmall from 'components/template1/ListItemSmall';
 import EventSearch from 'components/template1/EventSearch';
 import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
-import SingleEvent from '../../components/sccellarauction/SingleEvent';
+import SingleEvent from 'components/sccellarauction/SingleEvent';
 
 export const event_theme = {
   // bg: '#BADA55'

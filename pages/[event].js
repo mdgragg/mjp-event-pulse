@@ -6,7 +6,7 @@ import { useQuery, gql } from '@apollo/client';
 import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { getEventMeta, getMainEventMeta } from 'lib/api';
 
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';

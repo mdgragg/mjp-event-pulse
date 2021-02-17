@@ -10,7 +10,7 @@ import _ from 'lodash';
 import { getEventMeta, getEventByUrl } from '../../lib/api';
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';
-import Admin from './components/admin';
+
 import Meta from 'components/globals/Meta';
 import Page from '../../components/template1/Page';
 import Header from '../../components/template1/Header';
