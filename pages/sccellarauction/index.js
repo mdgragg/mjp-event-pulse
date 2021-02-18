@@ -40,13 +40,14 @@ export const event_theme = {
 };
 
 const Index = (props) => {
+  const router = useRouter();
+
   const {
     event_meta,
     main_event,
     event_meta: { AuthRequired },
+    main_event: { BreakoutSessions },
   } = props;
-
-  const router = useRouter();
 
   const [hasStarted, setStarted] = useState(false);
   const [verified, setVerified] = useState({ verified: false });
@@ -86,30 +87,30 @@ const Index = (props) => {
         ></Hero>
 
         <Body>
-          <Section title="Nominees Watch Party Rooms">
+          <Section>
             <Grid container spacing={3} justify={'center'}>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
+              {main_event.BreakoutSessions[1].map((session) => (
+                <Grid item>
+                  <SingleEvent
+                    title={session.Name}
+                    link={session.Link.url}
+                    description={session.Description}
+                  />
+                </Grid>
+              ))}
             </Grid>
           </Section>
-          <Section title="School Watch Party Rooms">
+          <Section>
             <Grid container spacing={3} justify={'center'}>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
-              <Grid item spacing={3}>
-                <SingleEvent />
-              </Grid>
+              {main_event.BreakoutSessions[2].map((session) => (
+                <Grid item>
+                  <SingleEvent
+                    title={session.Name}
+                    link={session.Link.url}
+                    description={session.Description}
+                  />
+                </Grid>
+              ))}
             </Grid>
           </Section>
 
@@ -127,34 +128,21 @@ const Index = (props) => {
               or scroll below to see the help rooms.
             </p>
           </Banner>
-          <Section title="Help & Additional Rooms">
-            <Grid container spacing={3} justify={'center'}>
-              <Grid item>
-                <SingleEvent />
+          {main_event.BreakoutSessions[3] && (
+            <Section>
+              <Grid container spacing={3} justify={'center'}>
+                {main_event.BreakoutSessions[3]?.map((session) => (
+                  <Grid item>
+                    <SingleEvent
+                      title={session.Name}
+                      link={session.Link.url}
+                      description={session.Description}
+                    />
+                  </Grid>
+                ))}
               </Grid>
-              <Grid item>
-                <SingleEvent />
-              </Grid>
-              <Grid item>
-                <SingleEvent />
-              </Grid>
-            </Grid>
-          </Section>
-          <Section showButton title="Sponsors">
-            <Grid container spacing={3} justify={'center'}>
-              <h2>Sponsor Info Will Go Here</h2>
-              {/* <ListItem md={4} timeout={500} />
-              <ListItem md={4} timeout={1000} />
-              <ListItem md={4} timeout={2000} /> */}
-            </Grid>
-          </Section>
-
-          <Section>
-            <EventSearch
-              currenthref={event_meta.eventUrl}
-              events={event_meta.events}
-            />
-          </Section>
+            </Section>
+          )}
         </Body>
         <Footer>
           <div></div>
@@ -188,11 +176,32 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
   try {
     let eventData = await getEventMeta('sccellarauction');
+
+    let main_event = eventData.events.filter(
+      (ev) => ev.isMainEvent === true
+    )[0];
+
+    //make breakout sessions array by category
+    let breakoutObj = {};
+
+    main_event.BreakoutSessions.forEach((sesh) => {
+      let key = Object.keys(breakoutObj).find(
+        (title) => title === sesh.Category
+      );
+      if (!key) {
+        breakoutObj[sesh.Category] = [sesh];
+      } else {
+        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
+      }
+    });
+
+    main_event.BreakoutSessions = breakoutObj;
+
     const values = {
       props: {
         //meta will be the props for the event
         event_meta: eventData,
-        main_event: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
+        main_event,
       },
     };
     return values;
