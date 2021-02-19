@@ -95,12 +95,7 @@ const Index = (props) => {
             <Grid container spacing={3} justify={'center'}>
               {main_event.BreakoutSessions[1].map((session) => (
                 <Grid item>
-                  <SingleEvent
-                    title={session.Name}
-                    link={session.Link?.url || ''}
-                    description={session.Description}
-                    thumbnail_url={session.Thumbnail?.url}
-                  />
+                  <SingleEvent session={session} />
                 </Grid>
               ))}
             </Grid>
@@ -109,12 +104,7 @@ const Index = (props) => {
             <Grid container spacing={3} justify={'center'}>
               {main_event.BreakoutSessions[2].map((session) => (
                 <Grid item>
-                  <SingleEvent
-                    title={session.Name}
-                    link={session.Link?.url || ''}
-                    description={session.Description}
-                    thumbnail_url={session.Thumbnail?.url}
-                  />
+                  <SingleEvent session={session} />
                 </Grid>
               ))}
             </Grid>
@@ -139,12 +129,7 @@ const Index = (props) => {
               <Grid container spacing={3} justify={'center'}>
                 {main_event.BreakoutSessions[3]?.map((session) => (
                   <Grid item>
-                    <SingleEvent
-                      title={session.Name}
-                      link={session.Link?.url || ''}
-                      description={session.Description}
-                      thumbnail_url={session.Thumbnail?.url}
-                    />
+                    <SingleEvent session={session} />
                   </Grid>
                 ))}
               </Grid>

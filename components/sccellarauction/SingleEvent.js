@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Link from 'next/link';
 import Index from 'pages/sccellarauction';
-
+import { toast } from 'react-toastify';
 const ThePaper = styled(Paper)`
   height: 100%;
   && a {
@@ -91,25 +91,42 @@ const MetaData = styled.div`
   display: block;
   padding: 1rem 0 3rem 0;
 `;
-
-const SingleEvent = ({ title, description = '', link, thumbnail_url }) => {
+const EventComponent = ({ session, handleLink, Wrap }) => {
+  const { Name, Description = '', Link, Thumbnail, Private } = session;
   return (
     <ThePaper>
-      <a href={`${link}`} target="_blank">
-        <SingleEventWrap>
-          {thumbnail_url ? (
-            <EventThumbnail src={thumbnail_url} />
-          ) : (
-            <PlaceholderThumb> {title} </PlaceholderThumb>
-          )}
+      {/* <a href={`${link.url}`} target="_blank"> */}
+      <SingleEventWrap>
+        {Thumbnail?.url ? (
+          <EventThumbnail src={Thumbnail.url} />
+        ) : (
+          <PlaceholderThumb> {Name} </PlaceholderThumb>
+        )}
 
-          <h3>{title}</h3>
+        <h3>{Name}</h3>
 
-          <MetaData>{description}</MetaData>
-          <button>Click To Join</button>
-        </SingleEventWrap>
-      </a>
+        <MetaData>{Description}</MetaData>
+        <button onClick={handleLink}>Click To Join</button>
+      </SingleEventWrap>
+      {/* </a> */}
     </ThePaper>
+  );
+};
+
+const SingleEvent = ({ session }) => {
+  // const { Name, Description = '', Thumbnail, Private } = session;
+  let link = session.Link?.url || '/';
+  const handleLink = () => {
+    toast.error('password required... coming soon');
+  };
+  if (session.Private) {
+    return <EventComponent session={session} handleLink={handleLink} />;
+  }
+  return (
+    <EventComponent
+      session={session}
+      handleLink={() => (window.location.href = link)}
+    />
   );
 };
 

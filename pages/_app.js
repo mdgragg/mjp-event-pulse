@@ -8,6 +8,9 @@ import cookies from 'next-cookies';
 import UserContextProvider from '../lib/context/UserContext';
 import AppContextProvider from '../lib/context/AppContext';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -17,6 +20,7 @@ class MyApp extends App {
         <GlobalStyle />
         <AppContextProvider>
           <UserContextProvider loginData={this.props.loginData}>
+            <ToastContainer />
             <Component {...pageProps} />
           </UserContextProvider>
         </AppContextProvider>
