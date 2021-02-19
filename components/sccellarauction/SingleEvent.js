@@ -19,7 +19,7 @@ const SingleEventWrap = styled.div`
   background-color: ${(props) => props.theme.blue};
   color: white;
   min-height: inherit;
-  height: inherit;
+  height: 100%;
   width: 350px;
   border-radius: 5px;
   padding: 10px;
@@ -92,7 +92,7 @@ const MetaData = styled.div`
   padding: 1rem 0 3rem 0;
 `;
 
-const SingleEvent = ({ title, description, link, thumbnail_url }) => {
+const SingleEvent = ({ title, description = '', link, thumbnail_url }) => {
   return (
     <ThePaper>
       <a href={`${link}`} target="_blank">
