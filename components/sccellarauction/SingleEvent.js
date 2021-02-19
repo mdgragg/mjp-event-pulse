@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
-
+import Link from 'next/link';
 import Index from 'pages/sccellarauction';
 
 const ThePaper = styled(Paper)`
   height: 100%;
+  && a {
+    margin: 0;
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const SingleEventWrap = styled.div`
@@ -83,25 +88,27 @@ const PlaceholderThumb = styled.div`
 const MetaData = styled.div`
   text-align: center;
   font-size: 1.25rem;
+  display: block;
+  padding: 1rem 0 3rem 0;
 `;
 
 const SingleEvent = ({ title, description, link, thumbnail_url }) => {
   return (
     <ThePaper>
-      <SingleEventWrap>
-        {thumbnail_url ? (
-          <EventThumbnail src={thumbnail_url} />
-        ) : (
-          <PlaceholderThumb> {title} </PlaceholderThumb>
-        )}
+      <a href={`${link}`} target="_blank">
+        <SingleEventWrap>
+          {thumbnail_url ? (
+            <EventThumbnail src={thumbnail_url} />
+          ) : (
+            <PlaceholderThumb> {title} </PlaceholderThumb>
+          )}
 
-        <h3>{title}</h3>
+          <h3>{title}</h3>
 
-        <MetaData>
-          <p>{description} </p>
-        </MetaData>
-        <button>Click To Join</button>
-      </SingleEventWrap>
+          <MetaData>{description}</MetaData>
+          <button>Click To Join</button>
+        </SingleEventWrap>
+      </a>
     </ThePaper>
   );
 };
