@@ -3,7 +3,7 @@ import App, { Container } from 'next/app';
 import Meta from 'components/globals/Meta';
 import { GlobalStyle } from 'components/globals/GlobalStyle';
 import 'react-dropzone-uploader/dist/styles.css';
-
+import './global.css';
 import cookies from 'next-cookies';
 import UserContextProvider from '../lib/context/UserContext';
 import AppContextProvider from '../lib/context/AppContext';

@@ -10,12 +10,12 @@ import Header from './Header';
 import AppContextProvider, { AppContext } from 'lib/context/AppContext';
 import LoadingScreen from '../globals/Loading';
 const StyledPage = styled.div`
-  background: ${(props) => props.theme.bg};
+  /* background: ${(props) => props.theme.bg}; */
   color: ${(props) => props.theme.fontColor};
   min-height: 100vh;
   z-index: 0;
   width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
   p {
     font-family: ${(props) => props.theme.pfont};
   }
@@ -39,6 +39,9 @@ Router.onRouteChangeComplete = () => {
 
 const Page = (props) => {
   const { loading } = useContext(AppContext);
+
+  const whole_theme = { ...template1Theme, ...props.theme };
+
   //Material ui style provider for this theme
 
   {
@@ -46,15 +49,11 @@ const Page = (props) => {
       return (
         <CssBaseline>
           <StylesProvider injectFirst>
-            {/* <uiThemeProvider theme={{theme}}>  */}
-            <ThemeProvider theme={template1Theme}>
-              <ThemeProvider theme={props.theme || {}}>
-                <StyledPage>
-                  <LoadingScreen message={loading.message} />
-                </StyledPage>
-              </ThemeProvider>
+            <ThemeProvider theme={whole_theme}>
+              <StyledPage>
+                <LoadingScreen message={loading.message} />
+              </StyledPage>
             </ThemeProvider>
-            {/* </uiThemeProvider> */}
           </StylesProvider>
         </CssBaseline>
       );
@@ -62,13 +61,9 @@ const Page = (props) => {
       return (
         <CssBaseline>
           <StylesProvider injectFirst>
-            {/* <uiThemeProvider theme={{theme}}>  */}
-            <ThemeProvider theme={template1Theme}>
-              <ThemeProvider theme={props.theme || {}}>
-                <StyledPage>{props.children}</StyledPage>
-              </ThemeProvider>
+            <ThemeProvider theme={whole_theme}>
+              <StyledPage>{props.children}</StyledPage>
             </ThemeProvider>
-            {/* </uiThemeProvider> */}
           </StylesProvider>
         </CssBaseline>
       );

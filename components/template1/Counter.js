@@ -27,7 +27,7 @@ const MyCounter = styled.div`
 `;
 
 export default function Counter(props) {
-  const [started, setStarted] = useState(false);
+  const { start, hasStarted } = props;
   function pad(value) {
     if (value === 0) {
       return ' ';
@@ -67,26 +67,22 @@ export default function Counter(props) {
     // calcTime(getRemainingTime(props.start));
 
     let interval = setInterval(() => {
-      let remaining = getRemainingTime(props.start);
-      if (remaining.total_remaining < 0) {
-        setStarted(true);
-      } else {
-        calcTime(remaining);
-      }
+      let remaining = getRemainingTime(start);
+      calcTime(remaining);
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const [time, calcTime] = useState(getRemainingTime(props.start));
+  const [time, calcTime] = useState(getRemainingTime(start));
 
-  if (started) {
+  if (hasStarted) {
     return '';
   } else {
     return (
       <>
         {!time.days ? (
-          props.start
+          start
         ) : (
           <MyCounter>
             {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}

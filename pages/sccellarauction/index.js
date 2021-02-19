@@ -28,17 +28,6 @@ import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 import SingleEvent from 'components/sccellarauction/SingleEvent';
 
-export const event_theme = {
-  // bg: '#BADA55'
-  heroHeight: '30vh',
-  fontFamily: 'Roboto',
-  headerOpacity: 9,
-  white: 'white',
-  blue: '#14204a',
-  red: 'red',
-  buttonColor: '#1f3c74',
-};
-
 const Index = (props) => {
   const router = useRouter();
 
@@ -49,22 +38,38 @@ const Index = (props) => {
     main_event: { BreakoutSessions },
   } = props;
 
-  const [hasStarted, setStarted] = useState(false);
+  const event_theme = {
+    // bg: '#BADA55'
+    heroHeight: '35vh',
+    fontFamily: 'Roboto',
+    headerOpacity: 0,
+    white: 'white',
+    blue: '#14204a',
+    red: 'red',
+    buttonColor: '#1f3c74',
+    headerFont: 'Akzidenz-Grotesque-Bold',
+    headerBgColor: 'red',
+    bgImage:
+      main_event.KeyValue[0].value || 'https://lorempixel.com/1920/1080/',
+  };
+
   const [verified, setVerified] = useState({ verified: false });
 
   const calculateIfStarted = () => {
-    let now = Date.now();
+    let now = new Date();
     const parsed_event_start = Date.parse(
       main_event.eventStartEnd.StartDateTime
     );
 
-    let bool = now >= main_event.eventStartEnd.StartDateTime;
+    let calc_time = parsed_event_start - now;
 
-    return bool;
+    if (calc_time <= 0) {
+      return true;
+    }
+    return false;
   };
 
-  const bgImage =
-    main_event.KeyValue[0].value || 'https://lorempixel.com/1920/1080/';
+  const [hasStarted, setStarted] = useState(calculateIfStarted());
 
   useEffect(() => {
     const timeout = setInterval(() => {
@@ -82,7 +87,6 @@ const Index = (props) => {
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
-          bgImage={bgImage}
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
 

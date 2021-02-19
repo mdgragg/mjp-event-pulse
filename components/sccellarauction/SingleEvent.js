@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
-import { event_theme } from '../../pages/sccellarauction';
+import Index from 'pages/sccellarauction';
 
 const ThePaper = styled(Paper)`
   height: 100%;
@@ -11,7 +11,7 @@ const ThePaper = styled(Paper)`
 
 const SingleEventWrap = styled.div`
   position: relative;
-  background-color: ${(props) => props.event_theme.blue};
+  background-color: ${(props) => props.theme.blue};
   color: white;
   min-height: inherit;
   height: inherit;
@@ -33,7 +33,7 @@ const SingleEventWrap = styled.div`
   }
 
   && button {
-    background: ${(props) => props.event_theme.buttonColor || '#1f3c74'};
+    background: ${(props) => props.theme.buttonColor || '#1f3c74'};
     height: 50px;
     margin: 0 auto;
     position: absolute;
@@ -46,11 +46,11 @@ const SingleEventWrap = styled.div`
     font-weight: 600;
     border: none;
     transition: all 0.2s;
-    color: ${(props) => props.event_theme.white};
+    color: ${(props) => props.theme.white};
     :hover {
       cursor: pointer;
       background-color: white;
-      color: ${(props) => props.event_theme.blue};
+      color: ${(props) => props.theme.blue};
     }
   }
   //for the button
@@ -63,7 +63,6 @@ const SingleEventWrap = styled.div`
 
 const EventThumbnail = styled.img`
   max-width: 100%;
-  border: 2px solid white;
 `;
 const PlaceholderThumb = styled.div`
   background: rgba(255, 255, 255, 0.25);
@@ -89,7 +88,7 @@ const MetaData = styled.div`
 const SingleEvent = ({ title, description, link, thumbnail_url }) => {
   return (
     <ThePaper>
-      <SingleEventWrap event_theme={event_theme}>
+      <SingleEventWrap>
         {thumbnail_url ? (
           <EventThumbnail src={thumbnail_url} />
         ) : (

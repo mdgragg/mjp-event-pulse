@@ -6,11 +6,37 @@ import { useState, useEffect, useRef } from 'react';
 
 import MenuIcon from '@material-ui/icons/Menu';
 
+const VideoPlaceholder = styled.div`
+  height: inherit;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  &&.fixed {
+    height: auto;
+    padding-top: 56.25%; /* 16:9 */
+    display: block;
+  }
+  &&.fixed > div {
+    position: fixed;
+    top: 2%;
+    left: 2%;
+    width: 350px;
+    height: auto;
+    z-index: 100;
+    padding: 0;
+    border-radius: 0;
+    /* &&.fixed > div {
+      height: 200px;
+    } */
+  }
+`;
+
 const StyledPaper = styled.div`
   min-width: inherit;
   padding: 0;
   border: none;
   border-radius: 0;
+
   &&.fixed {
     position: fixed;
     top: 2%;
@@ -20,9 +46,9 @@ const StyledPaper = styled.div`
     z-index: 100;
     padding: 0;
     border-radius: 0;
-    &&.fixed > div {
+    /* &&.fixed > div {
       height: 200px;
-    }
+    } */
   }
 
   @media (max-width: 768px) {
@@ -56,6 +82,7 @@ const VideoBox = (props) => {
   `;
 
   const [vidShow, setVidShow] = useState(true);
+  const [vidFixed, setVidFixed] = useState(false);
 
   const themeContext = React.useContext(ThemeContext);
 
@@ -70,7 +97,6 @@ const VideoBox = (props) => {
     }
   }
   useEffect(() => {
-    console.log('video mount');
     if (props.isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }
@@ -80,11 +106,13 @@ const VideoBox = (props) => {
   }, []);
 
   return (
-    <StyledPaper ref={wrapperRef}>
-      <StyledVideoBox>
-        <FilterVideo vidShow={vidShow} src={props.src} />
-      </StyledVideoBox>
-    </StyledPaper>
+    <VideoPlaceholder ref={wrapperRef}>
+      <StyledPaper>
+        <StyledVideoBox>
+          <FilterVideo vidShow={vidShow} src={props.src} />
+        </StyledVideoBox>
+      </StyledPaper>
+    </VideoPlaceholder>
   );
 };
 

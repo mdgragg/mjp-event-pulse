@@ -39,6 +39,7 @@ export const event_theme = {
   secondary: '#2997a9',
   pink: '#cc4e9d',
   blue: '#00a6c9',
+  videoBreakPoint: 960,
 };
 
 const VideoAreaHolder = styled.div`
@@ -59,31 +60,39 @@ const Template1 = (props) => {
     return;
   };
 
+  const { event_meta, main_event } = props;
+
   const router = useRouter();
   const [pageLoading, setPageLoading] = useState(true);
-  const [hasStarted, setStarted] = useState(false);
+
   const [verified, setVerified] = useState({ verified: false });
 
-  let event_meta = props.meta;
-  const main_event = props.meta.events[0];
-
   const [dialogueOpen, setDialogueOpen] = useState(false);
+
   const bgImage =
     main_event.KeyValue[0].value || 'http://lorempixel.com/1920/1080/';
 
-  const calcDate = (d) => {
-    let now = Date.now();
-    if (dateStart < now) {
-      setStarted(false);
-    }
-  };
-  useEffect(() => {
-    let now = Date.now();
+  const calculateIfStarted = () => {
+    let now = new Date();
+    const parsed_event_start = Date.parse(
+      main_event.eventStartEnd.StartDateTime
+    );
 
-    let dateStart = main_event.eventStartEnd.StartDateTime;
-    if (dateStart < now) {
-      setStarted(false);
+    let calc_time = parsed_event_start - now;
+
+    if (calc_time <= 0) {
+      return true;
     }
+    return false;
+  };
+  const [hasStarted, setStarted] = useState(calculateIfStarted());
+
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      setStarted(calculateIfStarted());
+    }, 1000);
+
+    return () => clearInterval(timeout);
   }, []);
 
   const MainPage = () => {
@@ -114,7 +123,9 @@ const Template1 = (props) => {
           title={main_event.EventName}
           bgImage={bgImage}
           start={main_event.eventStartEnd.StartDateTime}
-        ></Hero>
+        >
+          {' '}
+        </Hero>
 
         <Body>
           <Section minHeight={`auto`}>
@@ -340,35 +351,52 @@ const Template1 = (props) => {
 
   return <MainPage />;
 };
-
 export async function getServerSideProps(ctx) {
+  //console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
+  //   get the event job data from our api
+  try {
+    let eventData = await getEventMeta('glaucoma-360-virtual-gala');
 
-  //get the event job data from our api
-  let url = ctx.req.url.slice(1);
+    let main_event = eventData.events.filter(
+      (ev) => ev.isMainEvent === true
+    )[0];
 
-  let eventData = await getEventMeta('glaucoma-360-virtual-gala');
+    //make breakout sessions array by category
+    let breakoutObj = {};
 
-  if (!eventData) {
-    eventData = {};
+    main_event.BreakoutSessions.forEach((sesh) => {
+      let key = Object.keys(breakoutObj).find(
+        (title) => title === sesh.Category
+      );
+      if (!key) {
+        breakoutObj[sesh.Category] = [sesh];
+      } else {
+        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
+      }
+    });
+
+    main_event.BreakoutSessions = breakoutObj;
+
+    const values = {
+      props: {
+        //meta will be the props for the event
+        event_meta: eventData,
+        main_event,
+      },
+    };
+    return values;
+  } catch (error) {
+    console.log('get static props error: ', error);
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
   }
-
-  //this is what will load as the "context" if we haven't come here through
-  //our preview link
-
-  //set the context object to whatever our api is saying
-
-  const values = {
-    props: {
-      //meta will be the props for the event
-      meta: eventData,
-      mainEvent: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
-    },
-  };
-  return values;
 }
 
 export default withApollo(Template1);

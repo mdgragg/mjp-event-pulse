@@ -15,6 +15,7 @@ const StyledSection = styled.div`
   :nth-child(even) {
     background-color: #f2f2f2;
   }
+  z-index: 99;
   && .header-text {
     font-size: 3rem;
     color: ${(props) => props.headerColor};
