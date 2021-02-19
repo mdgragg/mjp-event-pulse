@@ -1,3 +1,12 @@
+const calcluate_api_url = () => {
+  console.log(
+    'pulling api data from: ',
+    process.env.NEXT_PUBLIC_STRAPI_API_URL
+  );
+  console.log();
+  return 'https://api.mjvirtualevents.com/';
+};
+calcluate_api_url();
 module.exports = {
   distDir: 'build',
   env: {

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development && next dev",
-    "stage": "NODE_ENV=production && next dev",
+    "stage": "NEXT_PUBLIC_ENV=staging && next dev",
     "build": "rm -rf ./build && NODE_ENV=production next build",
     "start": "NODE_ENV=production && next start -p 8080",
     "gcp-build": "next build",

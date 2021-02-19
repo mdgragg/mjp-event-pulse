@@ -10,9 +10,10 @@ const ThePaper = styled(Paper)`
 `;
 
 const SingleEventWrap = styled.div`
+  position: relative;
   background-color: ${(props) => props.event_theme.blue};
   color: white;
-  /* min-height: 450px; */
+  min-height: inherit;
   height: inherit;
   width: 350px;
   border-radius: 5px;
@@ -35,6 +36,10 @@ const SingleEventWrap = styled.div`
     background: ${(props) => props.event_theme.buttonColor || '#1f3c74'};
     height: 50px;
     margin: 0 auto;
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    right: 0;
     display: block;
     width: 200px;
     font-size: 1.25rem;
@@ -48,26 +53,55 @@ const SingleEventWrap = styled.div`
       color: ${(props) => props.event_theme.blue};
     }
   }
+  //for the button
+  :after {
+    display: block;
+    height: 50px;
+    content: ' ';
+  }
 `;
 
 const EventThumbnail = styled.img`
   max-width: 100%;
   border: 2px solid white;
 `;
+const PlaceholderThumb = styled.div`
+  background: rgba(255, 255, 255, 0.25);
+  /* position: absolute; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  text-align: center;
+  height: auto;
+  :after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+`;
 const MetaData = styled.div`
   text-align: center;
+  font-size: 1.25rem;
 `;
 
-const SingleEvent = ({ title, description, link }) => {
+const SingleEvent = ({ title, description, link, thumbnail_url }) => {
   return (
     <ThePaper>
       <SingleEventWrap event_theme={event_theme}>
-        <EventThumbnail src="https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fi.forbesimg.com%2Fmedia%2Flists%2Fcompanies%2Famerican-national-red-cross_416x416.jpg" />
+        {thumbnail_url ? (
+          <EventThumbnail src={thumbnail_url} />
+        ) : (
+          <PlaceholderThumb> {title} </PlaceholderThumb>
+        )}
+
         <h3>{title}</h3>
-        <button>Click To Join</button>
+
         <MetaData>
           <p>{description} </p>
         </MetaData>
+        <button>Click To Join</button>
       </SingleEventWrap>
     </ThePaper>
   );

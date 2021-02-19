@@ -93,8 +93,9 @@ const Index = (props) => {
                 <Grid item>
                   <SingleEvent
                     title={session.Name}
-                    link={session.Link.url}
+                    link={session.Link?.url || ''}
                     description={session.Description}
+                    thumbnail_url={session.Thumbnail?.url}
                   />
                 </Grid>
               ))}
@@ -106,8 +107,9 @@ const Index = (props) => {
                 <Grid item>
                   <SingleEvent
                     title={session.Name}
-                    link={session.Link.url}
+                    link={session.Link?.url || ''}
                     description={session.Description}
+                    thumbnail_url={session.Thumbnail?.url}
                   />
                 </Grid>
               ))}
@@ -135,8 +137,9 @@ const Index = (props) => {
                   <Grid item>
                     <SingleEvent
                       title={session.Name}
-                      link={session.Link.url}
+                      link={session.Link?.url || ''}
                       description={session.Description}
+                      thumbnail_url={session.Thumbnail?.url}
                     />
                   </Grid>
                 ))}
