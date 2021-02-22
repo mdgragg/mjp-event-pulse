@@ -94,7 +94,7 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3} justify={'center'}>
               {main_event.BreakoutSessions[1].map((session) => (
-                <Grid item>
+                <Grid item key={session.id}>
                   <SingleEvent session={session} />
                 </Grid>
               ))}
@@ -103,44 +103,33 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3} justify={'center'}>
               {main_event.BreakoutSessions[2].map((session) => (
-                <Grid item>
+                <Grid item key={session.id}>
                   <SingleEvent session={session} />
                 </Grid>
               ))}
             </Grid>
           </Section>
 
-          <Banner
-            secondary={event_theme.white}
-            color={event_theme.blue}
-            headerText={'Need help?'}
-          >
-            <p style={{ maxWidth: '500px' }}>
-              {' '}
-              Please contact us if you are having trouble accessing the site:{' '}
-              <a style={{ color: 'white' }} href="">
-                help@help.com needs updated
-              </a>{' '}
-              or scroll below to see the help rooms.
-            </p>
-          </Banner>
           {main_event.BreakoutSessions[3] && (
             <Section>
               <Grid container spacing={3} justify={'center'}>
                 {main_event.BreakoutSessions[3]?.map((session) => (
-                  <Grid item>
+                  <Grid item key={session.id}>
                     <SingleEvent session={session} />
                   </Grid>
                 ))}
               </Grid>
             </Section>
           )}
+          <Banner
+            secondary={event_theme.white}
+            color={event_theme.blue}
+            headerText={'2021 SC Cellar Auction'}
+          >
+            <p style={{ maxWidth: '500px' }}>VIP Landing and resource page.</p>
+          </Banner>
         </Body>
-        <Footer>
-          <div></div>
-
-          <div></div>
-        </Footer>
+        <Footer></Footer>
       </Page>
     );
   };
