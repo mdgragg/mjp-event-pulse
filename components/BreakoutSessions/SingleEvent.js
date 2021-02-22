@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 import Link from 'next/link';
 import Index from 'pages/sccellarauction';
-import { toast } from 'react-toastify';
+
+import PasswordOnly from '../Modals/PasswordOnly';
+
 const ThePaper = styled(Paper)`
   height: 100%;
   && a {
@@ -115,12 +117,30 @@ const EventComponent = ({ session, handleLink, Wrap }) => {
 
 const SingleEvent = ({ session }) => {
   // const { Name, Description = '', Thumbnail, Private } = session;
+
+  const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);
+
   let link = session.Link?.url || '/';
   const handleLink = () => {
-    toast.error('password required... coming soon');
+    setPasswordModalOpen(true);
   };
+
+  const handlePasswordModal = (value) => {
+    setPasswordModalOpen(value);
+  };
+
   if (session.Private) {
-    return <EventComponent session={session} handleLink={handleLink} />;
+    return (
+      <>
+        <EventComponent session={session} handleLink={handleLink} />
+        <PasswordOnly
+          open={passwordModalOpen}
+          setOpen={handlePasswordModal}
+          password={session.Password}
+          goToLink={() => (window.location.href = link)}
+        />
+      </>
+    );
   }
   return (
     <EventComponent

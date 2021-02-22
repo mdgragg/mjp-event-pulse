@@ -88,7 +88,7 @@ const Index = (props) => {
 
   const MainPage = () => {
     return (
-      <Page theme={comp_event_theme}>
+      <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
 
         <Hero
@@ -100,7 +100,7 @@ const Index = (props) => {
         <Body>
           <Section>
             <Grid container spacing={3} justify={'center'}>
-              {main_event.BreakoutSessions[1].map((session) => (
+              {BreakoutSessions[1].map((session) => (
                 <Grid item key={session.id}>
                   <SingleEvent session={session} />
                 </Grid>
@@ -109,7 +109,7 @@ const Index = (props) => {
           </Section>
           <Section>
             <Grid container spacing={3} justify={'center'}>
-              {main_event.BreakoutSessions[2].map((session) => (
+              {BreakoutSessions[2].map((session) => (
                 <Grid item key={session.id}>
                   <SingleEvent session={session} />
                 </Grid>
@@ -117,10 +117,10 @@ const Index = (props) => {
             </Grid>
           </Section>
 
-          {main_event.BreakoutSessions[3] && (
+          {BreakoutSessions[3] && (
             <Section>
               <Grid container spacing={3} justify={'center'}>
-                {main_event.BreakoutSessions[3]?.map((session) => (
+                {BreakoutSessions[3]?.map((session) => (
                   <Grid item key={session.id}>
                     <SingleEvent session={session} />
                   </Grid>
