@@ -26,7 +26,20 @@ import ListItemSmall from 'components/template1/ListItemSmall';
 import EventSearch from 'components/template1/EventSearch';
 import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
-import SingleEvent from 'components/sccellarauction/SingleEvent';
+import SingleEvent from 'components/BreakoutSessions/SingleEvent';
+
+export var event_theme = {
+  // bg: '#BADA55'
+  heroHeight: '35vh',
+  fontFamily: 'Roboto',
+  headerOpacity: 0,
+  white: 'white',
+  blue: '#14204a',
+  red: 'red',
+  buttonColor: '#1f3c74',
+  headerFont: 'Akzidenz-Grotesque-Bold',
+  headerBgColor: 'red',
+};
 
 const Index = (props) => {
   const router = useRouter();
@@ -38,17 +51,11 @@ const Index = (props) => {
     main_event: { BreakoutSessions },
   } = props;
 
-  const event_theme = {
-    // bg: '#BADA55'
-    heroHeight: '35vh',
-    fontFamily: 'Roboto',
-    headerOpacity: 0,
-    white: 'white',
-    blue: '#14204a',
-    red: 'red',
-    buttonColor: '#1f3c74',
-    headerFont: 'Akzidenz-Grotesque-Bold',
-    headerBgColor: 'red',
+  //add to the theme based on values here,
+  //this might be replaced in the future with a
+  //site builder thing
+  event_theme = {
+    ...event_theme,
     bgImage:
       main_event.KeyValue[0].value || 'https://lorempixel.com/1920/1080/',
   };
@@ -81,7 +88,7 @@ const Index = (props) => {
 
   const MainPage = () => {
     return (
-      <Page theme={event_theme}>
+      <Page theme={comp_event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
 
         <Hero
