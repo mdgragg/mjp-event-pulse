@@ -26,41 +26,49 @@ import ListItemSmall from 'components/template1/ListItemSmall';
 import EventSearch from 'components/template1/EventSearch';
 import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
-export const event_theme = {
-  // bg: '#BADA55'
-  fontFamily: 'Roboto',
+
+export var event_theme = {
+  heroHeight: null,
+  fontFamily: null,
+  headerOpacity: null,
+  white: null,
+  blue: null,
+  red: null,
+  buttonColor: null,
+  headerFont: null,
+  headerBgColor: null,
 };
 
 const Index = (props) => {
+  const router = useRouter();
+
   const {
     event_meta,
     main_event,
     event_meta: { AuthRequired },
+    main_event: { BreakoutSessions },
   } = props;
 
-  const router = useRouter();
-
-  const [hasStarted, setStarted] = useState(false);
-  const [verified, setVerified] = useState({ verified: false });
-
+  event_theme = {
+    ...event_theme,
+    bgImage:
+      main_event.KeyValue[0]?.value || 'https://lorempixel.com/1920/1080/',
+  };
   const calculateIfStarted = () => {
-    let now = Date.now();
+    let now = new Date();
     const parsed_event_start = Date.parse(
       main_event.eventStartEnd.StartDateTime
     );
 
-    let bool = now >= main_event.eventStartEnd.StartDateTime;
+    let calc_time = parsed_event_start - now;
 
-    return bool;
+    if (calc_time <= 0) {
+      return true;
+    }
+    return false;
   };
 
-  useEffect(() => {
-    const timeout = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-
-    return () => clearInterval(timeout);
-  }, []);
+  const [hasStarted, setStarted] = useState(calculateIfStarted());
 
   const MainPage = () => {
     return (
@@ -70,7 +78,6 @@ const Index = (props) => {
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
-          bgImage="http://lorempixel.com/1500/500/"
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
 
@@ -136,22 +143,11 @@ const Index = (props) => {
     );
   };
 
-  if (AuthRequired) {
-    return (
-      <Page theme={event_theme}>
-        <LoginPage>
-          <p>Auth Required</p>
-          <Link href="/me"> My Account</Link>
-        </LoginPage>
-      </Page>
-    );
-  } else {
-    return <MainPage />;
-  }
+  return <MainPage />;
 };
 
 export async function getServerSideProps(ctx) {
-  console.log(ctx.req.cookies);
+  //console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -159,11 +155,32 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
   try {
     let eventData = await getEventMeta('mjp-default-event-job');
+
+    let main_event = eventData.events.filter(
+      (ev) => ev.isMainEvent === true
+    )[0];
+
+    //make breakout sessions array by category
+    let breakoutObj = {};
+
+    main_event.BreakoutSessions.forEach((sesh) => {
+      let key = Object.keys(breakoutObj).find(
+        (title) => title === sesh.Category
+      );
+      if (!key) {
+        breakoutObj[sesh.Category] = [sesh];
+      } else {
+        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
+      }
+    });
+
+    main_event.BreakoutSessions = breakoutObj;
+
     const values = {
       props: {
         //meta will be the props for the event
         event_meta: eventData,
-        main_event: eventData.events.filter((ev) => ev.isMainEvent === true)[0],
+        main_event,
       },
     };
     return values;

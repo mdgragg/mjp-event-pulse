@@ -6,7 +6,7 @@ import { useQuery, gql } from '@apollo/client';
 import withApollo from 'lib/withApollo';
 import { UserContext } from 'lib/context/UserContext';
 import _ from 'lodash';
-import { getEventMeta, getMainEventMeta } from 'lib/api';
+import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
 
 import { Grid, Button } from '@material-ui/core';
 import LoginBox from 'components/globals/Login';
@@ -28,7 +28,7 @@ import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 
 export var event_theme = {
-  heroHeight: null,
+  heroHeight: '30vh',
   fontFamily: null,
   headerOpacity: null,
   white: null,
@@ -51,9 +51,9 @@ const Index = (props) => {
 
   event_theme = {
     ...event_theme,
-    bgImage:
-      main_event.KeyValue[0]?.value || 'https://lorempixel.com/1920/1080/',
+    bgImage: main_event.KeyValue[0]?.value || 'https://placehold.co/1920x1080',
   };
+
   const calculateIfStarted = () => {
     let now = new Date();
     const parsed_event_start = Date.parse(
@@ -70,75 +70,65 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
-  const Index = () => {
+  const MainPage = () => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <Header theme={event_theme}>
-          <Navbar info={main_event} />
-        </Header>
 
         <Hero
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
-          bgImage="http://lorempixel.com/1500/500/"
           start={main_event.eventStartEnd.StartDateTime}
         ></Hero>
 
         <Body>
           <Section>
-            <Grid container={true} spacing={3}>
-              <Grid item={true} md={9} sm={12}>
+            <Grid container spacing={3}>
+              <Grid item={true} md={8} sm={12}>
                 <VideoBox isStarted={hasStarted} />
               </Grid>
-              <Grid item={true} md={3} sm={12}>
-                <Sidebar theme={event_theme} />
+              <Grid item={true} md={4} sm={12}>
+                <VideoBox isStarted={hasStarted} />
               </Grid>
             </Grid>
           </Section>
 
-          <Banner color="#181818"></Banner>
-          <Section showButton={true} title="Speakers">
-            <Grid container={true} spacing={3} justify={'center'}>
+          <Banner color="blue"></Banner>
+          <Section showButton title="Speakers">
+            <Grid container spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
               <ListItem md={4} timeout={2000} />
             </Grid>
           </Section>
-          <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={'center'}></Grid>
+          <Section showButton title="Platinum Sponsors">
+            <Grid container spacing={3} justify={'center'}></Grid>
           </Section>
-          <Section showButton={true} title="Gold Sponsors">
-            <Grid container={true} spacing={3} justify={'center'}>
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/250/"></img>
+          <Section showButton title="Gold Sponsors">
+            <Grid container spacing={3} justify={'center'}>
+              <Grid item md={4}>
+                <img src="https://placehold.co/400"></img>
               </Grid>
 
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/240/"></img>
+              <Grid item md={4}>
+                <img src="https://placehold.co/400"></img>
               </Grid>
 
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/220/"></img>
+              <Grid item md={4}>
+                <img src="https://placehold.co/400"></img>
               </Grid>
             </Grid>
           </Section>
-          <Section
-            showButton={false}
-            title={`${event_meta.EventJobName} in the News`}
-          >
-            <Grid container={true} spacing={3} justify={'center'}>
+          <Section showButton title={`${event_meta.EventJobName} in the News`}>
+            <Grid container spacing={3} justify={'center'}>
               <ListItemSmall />
               <ListItemSmall />
             </Grid>
           </Section>
-
           <EventSearch
             currenthref={event_meta.eventUrl}
             events={event_meta.events}
           />
-
-          <Section></Section>
         </Body>
         <Footer>
           <div></div>
@@ -155,17 +145,15 @@ const Index = (props) => {
 };
 
 export async function getServerSideProps(ctx) {
+  //console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
-
-  //get the event job data from our api
-  let url = ctx.req.url.slice(1);
-  console.log(url);
-
+  //   get the event job data from our api
   try {
-    let eventData = await getEventMeta(url);
+    let eventData = await getEventMeta('sispringcelebration');
+
     let main_event = eventData.events.filter(
       (ev) => ev.isMainEvent === true
     )[0];

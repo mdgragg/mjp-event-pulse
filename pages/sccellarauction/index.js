@@ -1,36 +1,24 @@
 import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
-import Head from 'next/head';
+
 import Link from 'next/link';
-import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
+
 import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-
 import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-import Header from 'components/template1/Header';
-import Navbar from 'components/template1/Navbar';
 import Body from 'components/template1/Body';
-import VideoBox from 'components/template1/VideoBox';
-import Sidebar from 'components/template1/Sidebar';
-import Banner from 'components/template1/Banner';
-import Hero from 'components/template1/Hero';
+import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import HeroWithImage from 'components/Heroes/HeroWithImage';
 import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
 import Section from 'components/template1/Section';
-import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
-import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 import SingleEvent from 'components/BreakoutSessions/SingleEvent';
 
 export var event_theme = {
   // bg: '#BADA55'
-  heroHeight: '35vh',
+  heroHeight: '45vh',
   fontFamily: 'Roboto',
   headerOpacity: 0,
   white: 'white',
@@ -56,8 +44,7 @@ const Index = (props) => {
   //site builder thing
   event_theme = {
     ...event_theme,
-    bgImage:
-      main_event.KeyValue[0].value || 'https://lorempixel.com/1920/1080/',
+    bgImage: main_event.KeyValue[0].value || 'https://placehold.co/1920x1080',
   };
 
   const [verified, setVerified] = useState({ verified: false });
@@ -91,11 +78,12 @@ const Index = (props) => {
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
 
-        <Hero
+        <HeroWithImage
           hasStarted={hasStarted}
           title={event_meta.EventJobName}
           start={main_event.eventStartEnd.StartDateTime}
-        ></Hero>
+          imgSrc={main_event.KeyValue[1].value}
+        ></HeroWithImage>
 
         <Body>
           <Section>
@@ -128,15 +116,21 @@ const Index = (props) => {
               </Grid>
             </Section>
           )}
-          <Banner
-            secondary={event_theme.white}
-            color={event_theme.blue}
-            headerText={'2021 SC Cellar Auction'}
+          <BannerWithPicture
+            secondary={event_theme.blue}
+            color={event_theme.white}
+            headerText={'The 29th Annual Cellar Auction - A Red Cross Affair'}
+            imgUrl={`https://storage.googleapis.com/mjp-stream-public/sccellarauction/rfe-logo.png`}
           >
-            <p style={{ maxWidth: '500px' }}>VIP Landing and resource page.</p>
-          </Banner>
+            <div style={{ maxWidth: '500px', margin: 'auto' }}>
+              <center>
+                <p>March 6, 2021 - 6:30 pm</p>
+                <p>Sponsor & VIP Resource Page</p>
+                <p>Made Possible By:</p>
+              </center>
+            </div>
+          </BannerWithPicture>
         </Body>
-        <Footer></Footer>
       </Page>
     );
   };

@@ -13,7 +13,7 @@ const breatheAnimation = keyframes`
 const HeroHolder = styled.div`
   position: relative;
   width: 100%;
-  height: ${(props) => props.theme.heroHeight};
+  height: ${(props) => props.theme.heroHeight || '35vh'};
   background-color: white;
   overflow: hidden;
   color: white;

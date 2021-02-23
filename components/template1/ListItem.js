@@ -75,7 +75,7 @@ export default function ListItem(props) {
           />
           <CardMedia
             className={classes.media}
-            image="http://lorempixel.com/500/500/"
+            image="https://placehold.co/500"
             title="Paella dish"
           />
           <CardContent>

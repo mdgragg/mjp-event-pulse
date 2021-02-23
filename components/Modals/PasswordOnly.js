@@ -100,8 +100,8 @@ export default function FormDialog({ open, setOpen, password, goToLink }) {
         <DialogContent>
           <center>
             <DialogContentText>
-              This event requires a password. Please enter the password to
-              continue.
+              This event requires a password.
+              <br /> Please enter the password to continue.
             </DialogContentText>
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}

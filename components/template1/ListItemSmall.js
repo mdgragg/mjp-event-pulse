@@ -50,44 +50,44 @@ export default function ListItemSmall() {
 
   return (
     <Grid item={true}>
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
-      </CardContent>
-   
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              R
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+          title="Shrimp and Chorizo Paella"
+          subheader="September 14, 2016"
+        />
+        <CardMedia
+          className={classes.media}
+          image="https://placehold.co/400"
+          title="Paella dish"
+        />
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
+          <Typography variant="body2" color="textSecondary" component="p">
+            This impressive paella is a perfect party dish and a fun meal to
+            cook together with your guests. Add 1 cup of frozen peas along with
+            the mussels, if you like.
           </Typography>
-         
         </CardContent>
-      </Collapse>
-    </Card>
+
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>Method:</Typography>
+            <Typography paragraph>
+              Heat 1/2 cup of the broth in a pot until simmering, add saffron
+              and set aside for 10 minutes.
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
     </Grid>
   );
 }

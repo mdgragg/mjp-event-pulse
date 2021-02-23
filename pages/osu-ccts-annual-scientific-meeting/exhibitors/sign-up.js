@@ -58,6 +58,7 @@ const ExhibitorUpload = ({ data }) => {
 
   const handleChange = (e) => {
     const name = e.target.name;
+    console.log(e.target);
     changeSelected({ ...selector, fileType: e.target.value, name });
   };
 
@@ -89,6 +90,8 @@ const ExhibitorUpload = ({ data }) => {
               <center>
                 <h1>Exhibitor Sign Up</h1>
               </center>
+              <br />
+              <br />
               <ExhibitorForm
                 className={form.submitting ? 'submitting' : ''}
                 style={{
@@ -114,23 +117,30 @@ const ExhibitorUpload = ({ data }) => {
                   fileName="info"
                   url={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/exhibitors/${router.query.id}/upload`}
                 />
-                <FormControl variant="outlined">
-                  <InputLabel htmlFor="file-selector">File Type</InputLabel>
-                  <Select
-                    native
-                    value={selector.fileType}
-                    onChange={handleChange}
-                    label="File Type"
-                    inputProps={{
-                      name: 'fileType',
-                      id: 'file-selector',
-                    }}
-                  >
-                    <option aria-label="None" value="" />
-                    <option value={'videoLink'}>Video Link</option>
-                    <option value={'captionFile'}>Caption File</option>
-                  </Select>
-                </FormControl>
+                {/* <FormControl variant="outlined"> */}
+                <InputLabel
+                  htmlFor="file-selector"
+                  style={{ display: 'inline' }}
+                >
+                  File Type
+                </InputLabel>
+                <Select
+                  style={{ display: 'inline' }}
+                  native
+                  value={selector.fileType}
+                  onChange={handleChange}
+                  label="File Type"
+                  inputProps={{
+                    name: 'fileType',
+                    id: 'file-selector',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={'Video Link'}>Video Link</option>
+                  <option value={'Caption File'}>Caption File</option>
+                </Select>
+
+                {/* </FormControl> */}
               </ExhibitorForm>
             </>
           )}
