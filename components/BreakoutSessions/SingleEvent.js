@@ -92,6 +92,8 @@ const MetaData = styled.div`
   font-size: 1.25rem;
   display: block;
   padding: 1rem 0 3rem 0;
+  max-width: 80%;
+  margin: auto;
 `;
 const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
   const { Name, Description = '', Link, Thumbnail, Private } = session;

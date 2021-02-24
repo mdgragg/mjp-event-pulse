@@ -12,7 +12,7 @@ import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 import VideoBox from 'components/template1/VideoBox';
 
-import Banner from 'components/template1/Banner';
+import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Counter from 'components/Counters/Counter';
 import Footer from 'components/template1/Footer';
@@ -38,7 +38,7 @@ export var event_theme = {
 };
 const Index = (props) => {
   const router = useRouter();
-  console.log(router);
+
   const {
     event_meta,
     main_event,
@@ -118,7 +118,7 @@ const Index = (props) => {
         <Body>
           <Section>
             <Grid container spacing={3}>
-              <Grid item={true} md={8} sm={12}>
+              <Grid item={true} md={8} sm={12} xs={12}>
                 <VideoBox
                   isStarted={true}
                   src={'https://player.vimeo.com/video/448679350'}
@@ -132,24 +132,27 @@ const Index = (props) => {
                   Watch on Smart TV
                 </Button>
               </Grid>
-              <Grid item={true} md={4} sm={12}>
+              <Grid item={true} md={4} xs={12}>
                 <VideoBox isStarted={hasStarted} />
                 <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
                   To join the live auction, download the bidpal app and follow
                   along on your phone. Having trouble?
                 </p>
-                <Button
-                  style={{ margin: '2rem auto', display: 'block' }}
-                  color={'primary'}
-                  variant="outlined"
-                >
-                  Bidpal Help
-                </Button>
+                <a href="#bidpal-help">
+                  <Button
+                    style={{ margin: '2rem auto', display: 'block' }}
+                    color={'primary'}
+                    variant="outlined"
+                  >
+                    Bidpal Help
+                  </Button>
+                </a>
               </Grid>
             </Grid>
           </Section>
 
-          <Banner color={event_theme.blue}></Banner>
+          <BannerWithPicture color={event_theme.blue}></BannerWithPicture>
+          <span id="bidpal-help" />
           <Section title="Bidpal Resources">
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (

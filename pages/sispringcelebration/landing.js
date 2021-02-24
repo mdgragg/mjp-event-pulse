@@ -121,33 +121,31 @@ const Index = (props) => {
                   isStarted={true}
                   src={'https://player.vimeo.com/video/448679350'}
                 />
-
-                <Button
-                  style={{ margin: '2rem auto', display: 'block' }}
-                  color={'primary'}
-                  variant="outlined"
-                >
-                  Watch on Smart TV
-                </Button>
               </Grid>
               <Grid item={true} md={4} sm={12}>
-                <VideoBox isStarted={hasStarted} />
+                <VideoBox
+                  src={'https://bputil11.bidpal.net/Scoreboard/slideshow'}
+                  isStarted={hasStarted}
+                />
                 <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
                   To join the live auction, download the bidpal app and follow
                   along on your phone. Having trouble?
                 </p>
-                <Button
-                  style={{ margin: '2rem auto', display: 'block' }}
-                  color={'primary'}
-                  variant="outlined"
-                >
-                  Bidpal Help
-                </Button>
+                <a href="#bidpal-help">
+                  <Button
+                    style={{ margin: '2rem auto', display: 'block' }}
+                    color={'primary'}
+                    variant="outlined"
+                  >
+                    Bidpal Help
+                  </Button>
+                </a>
               </Grid>
             </Grid>
           </Section>
 
           <Section title="Bidpal Resources">
+            <span id="bidpal-help"></span>
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (
                 <Grid item key={session.id}>
