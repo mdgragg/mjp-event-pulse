@@ -147,7 +147,7 @@ const Index = (props) => {
             </Grid>
           </Section>
 
-          <Section showButton title="Bidpal Resources">
+          <Section title="Bidpal Resources">
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (
                 <Grid item key={session.id}>

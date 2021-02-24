@@ -150,11 +150,11 @@ const Index = (props) => {
           </Section>
 
           <Banner color={event_theme.blue}></Banner>
-          <Section showButton title="Bidpal Resources">
+          <Section title="Bidpal Resources">
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (
                 <Grid item key={session.id}>
-                  <SingleEvent session={session} />
+                  <SingleEvent buttonText="Click Here" session={session} />
                 </Grid>
               ))}
             </Grid>

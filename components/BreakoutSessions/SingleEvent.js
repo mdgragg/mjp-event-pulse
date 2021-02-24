@@ -115,7 +115,7 @@ const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
   );
 };
 
-const SingleEvent = ({ session }) => {
+const SingleEvent = ({ session, buttonText }) => {
   // const { Name, Description = '', Thumbnail, Private } = session;
 
   const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);
@@ -132,7 +132,11 @@ const SingleEvent = ({ session }) => {
   if (session.Private) {
     return (
       <>
-        <EventComponent session={session} handleLink={handleLink} />
+        <EventComponent
+          session={session}
+          buttonText={buttonText}
+          handleLink={handleLink}
+        />
         <PasswordOnly
           open={passwordModalOpen}
           setOpen={handlePasswordModal}
@@ -145,6 +149,7 @@ const SingleEvent = ({ session }) => {
   return (
     <EventComponent
       session={session}
+      buttonText={buttonText}
       handleLink={() => (window.location.href = link)}
     />
   );
