@@ -2,3 +2,18 @@
   src: url('../static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }
+
+button {
+  border: none;
+  min-height: 50px;
+  padding: 5px 18px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 1rem auto;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  cursor: pointer;
+}

@@ -29,6 +29,8 @@ import LoginPage from 'components/globals/Login/LoginPage';
 
 export var event_theme = {
   heroHeight: null,
+  videoBreakPoint: null,
+  maxSectionWidth: null,
   fontFamily: null,
   headerOpacity: null,
   white: null,

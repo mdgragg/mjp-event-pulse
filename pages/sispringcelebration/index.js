@@ -18,7 +18,8 @@ import Body from 'components/template1/Body';
 import VideoBox from 'components/template1/VideoBox';
 import Sidebar from 'components/template1/Sidebar';
 import Banner from 'components/template1/Banner';
-import Hero from 'components/template1/Hero';
+import FlexHero from 'components/Heroes/FlexHero';
+import Counter from 'components/Counters/Counter';
 import Footer from 'components/template1/Footer';
 import ListItem from 'components/template1/ListItem';
 import Section from 'components/template1/Section';
@@ -28,17 +29,21 @@ import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 
 export var event_theme = {
-  heroHeight: '30vh',
+  heroHeight: '25vh',
   fontFamily: null,
   headerOpacity: null,
+  videoBreakPoint: 700,
   white: null,
-  blue: null,
-  red: null,
+  blue: '#1e2c60',
+  buttonInfoColor: null,
+  buttonSuccessColor: null,
+  buttonDangerColor: 'tomato',
+  red: '#b71f39',
   buttonColor: null,
   headerFont: null,
-  headerBgColor: null,
+  headerBgColor: 'white',
+  maxSectionWidth: '1800px',
 };
-
 const Index = (props) => {
   const router = useRouter();
 
@@ -51,7 +56,6 @@ const Index = (props) => {
 
   event_theme = {
     ...event_theme,
-    bgImage: main_event.KeyValue[0]?.value || 'https://placehold.co/1920x1080',
   };
 
   const calculateIfStarted = () => {
@@ -75,26 +79,80 @@ const Index = (props) => {
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
 
-        <Hero
-          hasStarted={hasStarted}
-          title={event_meta.EventJobName}
-          start={main_event.eventStartEnd.StartDateTime}
-        ></Hero>
+        <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
+          <div>
+            <img
+              style={{ width: '120px' }}
+              src={main_event.KeyValue[0]?.value}
+            />
+          </div>
+          <div>
+            {' '}
+            <img
+              style={{ width: '600px' }}
+              src={main_event.KeyValue[1]?.value}
+            />
+          </div>
+          <div>
+            <center>
+              <h2
+                style={{
+                  fontWeight: '800',
+                  fontSize: '2rem',
+                  color: event_theme.red,
+                  margin: 'auto auto 0 auto',
+                }}
+              >
+                {' '}
+                STARTS IN
+              </h2>
+              <Counter
+                fontSize={'1rem'}
+                shadow={'0px'}
+                bgColor={event_theme.blue}
+                hasStarted={hasStarted}
+                start={main_event.eventStartEnd.StartDateTime}
+              />
+            </center>
+          </div>
+        </FlexHero>
 
         <Body>
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12}>
-                <VideoBox isStarted={hasStarted} />
+                <VideoBox
+                  isStarted={true}
+                  src={'https://player.vimeo.com/video/448679350'}
+                />
+
+                <Button
+                  style={{ margin: '2rem auto', display: 'block' }}
+                  color={'primary'}
+                  variant="outlined"
+                >
+                  Watch on Smart TV
+                </Button>
               </Grid>
               <Grid item={true} md={4} sm={12}>
                 <VideoBox isStarted={hasStarted} />
+                <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
+                  To join the live auction, download the bidpal app and follow
+                  along on your phone. Having trouble?
+                </p>
+                <Button
+                  style={{ margin: '2rem auto', display: 'block' }}
+                  color={'primary'}
+                  variant="outlined"
+                >
+                  Bidpal Help
+                </Button>
               </Grid>
             </Grid>
           </Section>
 
-          <Banner color="blue"></Banner>
-          <Section showButton title="Speakers">
+          <Banner color={event_theme.blue}></Banner>
+          <Section showButton title="Bidpal Resources">
             <Grid container spacing={3} justify={'center'}>
               <ListItem md={4} timeout={500} />
               <ListItem md={4} timeout={1000} />
@@ -104,31 +162,13 @@ const Index = (props) => {
           <Section showButton title="Platinum Sponsors">
             <Grid container spacing={3} justify={'center'}></Grid>
           </Section>
-          <Section showButton title="Gold Sponsors">
-            <Grid container spacing={3} justify={'center'}>
-              <Grid item md={4}>
-                <img src="https://placehold.co/400"></img>
-              </Grid>
 
-              <Grid item md={4}>
-                <img src="https://placehold.co/400"></img>
-              </Grid>
-
-              <Grid item md={4}>
-                <img src="https://placehold.co/400"></img>
-              </Grid>
-            </Grid>
-          </Section>
           <Section showButton title={`${event_meta.EventJobName} in the News`}>
             <Grid container spacing={3} justify={'center'}>
               <ListItemSmall />
               <ListItemSmall />
             </Grid>
           </Section>
-          <EventSearch
-            currenthref={event_meta.eventUrl}
-            events={event_meta.events}
-          />
         </Body>
         <Footer>
           <div></div>

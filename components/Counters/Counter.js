@@ -10,14 +10,15 @@ import {
 import { useState, Fragment, useEffect } from 'react';
 
 const MyCounter = styled.div`
-  box-shadow: 0px 0px 30px 0px black;
+  box-shadow: 0px 0px ${(props) => props.props.shadow || '30px'} 0px black;
   text-align: center;
   font-weight: bold;
   z-index: 99;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.5em;
-  width: 400px;
-  font-size: 1.5em;
+  max-width: 300px;
+  min-width: 299px;
+  font-size: ${(props) => props.props.fontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
@@ -80,7 +81,7 @@ export default function Counter(props) {
         {!time.days ? (
           start
         ) : (
-          <MyCounter>
+          <MyCounter props={props}>
             {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}
             {pad(time.minutes)} Minutes {pad(time.seconds)}
           </MyCounter>

@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Button } from '@material-ui/core';
 
 const StyledSection = styled.div`
-  padding: 3em;
+  padding: 2em;
   padding-bottom: 80px;
   width: 100%;
   min-height: ${(props) => props.minHeight || 'auto'};
@@ -49,7 +49,7 @@ const StyledSection = styled.div`
 `;
 
 const InnerContent = styled.div`
-  max-width: 1400px;
+  max-width: ${(props) => props.theme.maxSectionWidth || '1200px'};
   margin-left: auto;
   margin-right: auto;
 `;
