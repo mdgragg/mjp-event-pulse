@@ -147,7 +147,6 @@ const Index = (props) => {
             </Grid>
           </Section>
 
-          <Banner color={event_theme.blue}></Banner>
           <Section showButton title="Bidpal Resources">
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (
@@ -156,9 +155,6 @@ const Index = (props) => {
                 </Grid>
               ))}
             </Grid>
-          </Section>
-          <Section showButton title="Platinum Sponsors">
-            <Grid container spacing={3} justify={'center'}></Grid>
           </Section>
         </Body>
         <Footer></Footer>
@@ -198,14 +194,7 @@ export async function getServerSideProps(ctx) {
     });
 
     main_event.BreakoutSessions = breakoutObj;
-    console.log(eventData);
-    if (eventData.AuthRequired) {
-      return {
-        redirect: {
-          destination: 'sispringcelebration/landing',
-        },
-      };
-    }
+
     const values = {
       props: {
         //meta will be the props for the event

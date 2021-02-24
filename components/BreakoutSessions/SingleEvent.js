@@ -53,7 +53,7 @@ const SingleEventWrap = styled.div`
     font-weight: 600;
     border: none;
     transition: all 0.2s;
-    color: ${(props) => props.theme.white};
+    color: ${(props) => props.theme.buttonTextColor || 'white'};
     :hover {
       cursor: pointer;
       background-color: white;
