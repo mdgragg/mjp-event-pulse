@@ -45,11 +45,16 @@ export default EventPage;
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-EventPage.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const data = await getEventMeta(ctx.query.slug);
+  const eventData = data;
+  return {
+    redirect: {
+      destination: './',
+    },
+  };
 
-  const eventData = await data;
   // By returning { props: posts }, the Blog component
   // will receive `posts` as a prop at build time
   return { eventData };
-};
+}

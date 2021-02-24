@@ -151,12 +151,17 @@ const Index = (props) => {
             <Grid container spacing={3} justify={'center'}>
               {BreakoutSessions[1]?.map((session) => (
                 <Grid item key={session.id}>
-                  <SingleEvent session={session} />
+                  <SingleEvent session={session} buttonText="Click For Help" />
                 </Grid>
               ))}
             </Grid>
           </Section>
         </Body>
+        <center>
+          <Link href="./preview">
+            <p style={{ cursor: 'pointer', fontWeight: '800' }}>Log In</p>
+          </Link>
+        </center>
         <Footer></Footer>
       </Page>
     );

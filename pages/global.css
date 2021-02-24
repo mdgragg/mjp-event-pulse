@@ -5,15 +5,25 @@
 
 button {
   border: none;
-  min-height: 50px;
-  padding: 5px 18px;
-  font-size: 1.25rem;
-  font-weight: 800;
+  min-height: 35px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: capitalize;
   margin: 1rem auto;
   display: block;
   transition: all 0.2s ease;
+  outline: none;
+  font-family: 'Roboto';
 }
 
 button:hover {
   cursor: pointer;
+  border-radius: 30px;
+  background-color: azure;
+}
+
+button:focus {
+  outline: none;
 }

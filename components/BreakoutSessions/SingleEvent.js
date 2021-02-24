@@ -93,7 +93,7 @@ const MetaData = styled.div`
   display: block;
   padding: 1rem 0 3rem 0;
 `;
-const EventComponent = ({ session, handleLink, Wrap }) => {
+const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
   const { Name, Description = '', Link, Thumbnail, Private } = session;
   return (
     <ThePaper>
@@ -108,7 +108,7 @@ const EventComponent = ({ session, handleLink, Wrap }) => {
         <h3>{Name}</h3>
 
         <MetaData>{Description}</MetaData>
-        <button onClick={handleLink}>Click To Join</button>
+        <button onClick={handleLink}>{buttonText || 'Click To Join'}</button>
       </SingleEventWrap>
       {/* </a> */}
     </ThePaper>
