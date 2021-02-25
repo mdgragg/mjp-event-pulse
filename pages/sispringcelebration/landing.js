@@ -83,8 +83,8 @@ const Index = (props) => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-around',
-            height: '50vh',
-            marginBottom: '50vh',
+            height: '800px',
+            marginBottom: '200px',
             backgroundColor: 'white',
           }}
           hasStarted={hasStarted}
