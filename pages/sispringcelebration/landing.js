@@ -84,7 +84,7 @@ const Index = (props) => {
             alignItems: 'center',
             justifyContent: 'space-around',
             height: '800px',
-            marginBottom: '200px',
+            marginBottom: 'calc(100vh - 800px)',
             backgroundColor: 'white',
           }}
           hasStarted={hasStarted}
