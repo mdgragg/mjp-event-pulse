@@ -113,48 +113,7 @@ const Index = (props) => {
           </div>
         </FlexHero>
 
-        <Body>
-          <Section>
-            <Grid container spacing={3}>
-              <Grid item={true} md={8} sm={12}>
-                <VideoBox
-                  isStarted={true}
-                  src={'https://player.vimeo.com/video/448679350'}
-                />
-              </Grid>
-              <Grid item={true} md={4} sm={12}>
-                <VideoBox
-                  src={'https://bputil11.bidpal.net/Scoreboard/slideshow'}
-                  isStarted={hasStarted}
-                />
-                <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
-                  To join the live auction, download the bidpal app and follow
-                  along on your phone. Having trouble?
-                </p>
-                <a href="#bidpal-help">
-                  <Button
-                    style={{ margin: '2rem auto', display: 'block' }}
-                    color={'primary'}
-                    variant="outlined"
-                  >
-                    Bidpal Help
-                  </Button>
-                </a>
-              </Grid>
-            </Grid>
-          </Section>
-
-          <Section title="Bidpal Resources">
-            <span id="bidpal-help"></span>
-            <Grid container spacing={3} justify={'center'}>
-              {BreakoutSessions[1]?.map((session) => (
-                <Grid item key={session.id}>
-                  <SingleEvent session={session} buttonText="Click For Help" />
-                </Grid>
-              ))}
-            </Grid>
-          </Section>
-        </Body>
+        <Body></Body>
         <center>
           <Link href="./preview">
             <p style={{ cursor: 'pointer', fontWeight: '800' }}>Log In</p>
