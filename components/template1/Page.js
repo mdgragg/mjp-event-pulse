@@ -10,7 +10,7 @@ import Header from './Header';
 import AppContextProvider, { AppContext } from 'lib/context/AppContext';
 import LoadingScreen from '../globals/Loading';
 const StyledPage = styled.div`
-  /* background: ${(props) => props.theme.bg}; */
+  background: ${(props) => props.theme.bg};
   color: ${(props) => props.theme.fontColor};
   min-height: 100vh;
   z-index: 0;
@@ -39,11 +39,8 @@ Router.onRouteChangeComplete = () => {
 
 const Page = (props) => {
   const { loading } = useContext(AppContext);
-
   const whole_theme = { ...template1Theme, ...props.theme };
-
   //Material ui style provider for this theme
-
   {
     if (loading.loading) {
       return (

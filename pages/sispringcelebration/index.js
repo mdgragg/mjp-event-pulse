@@ -19,7 +19,8 @@ import Footer from 'components/template1/Footer';
 
 import Section from 'components/template1/Section';
 import SingleEvent from 'components/BreakoutSessions/SingleEvent';
-
+import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
+import CountUp from 'react-countup';
 export var event_theme = {
   heroHeight: '25vh',
   fontFamily: null,
@@ -133,7 +134,31 @@ const Index = (props) => {
                 </Button>
               </Grid>
               <Grid item={true} md={4} xs={12}>
-                <VideoBox isStarted={hasStarted} />
+                <ServerSentEvents
+                  endpoint="http://localhost:4444/auction"
+                  render={(data) => (
+                    <div style={{ textAlign: 'center', fontSize: '2rem' }}>
+                      <center>
+                        <h3>{data.name}</h3>
+
+                        <CountUp
+                          formattingFn={(value) =>
+                            Intl.NumberFormat('en-US', {
+                              style: 'currency',
+                              currency: 'USD',
+                              minimumFractionDigits: 0,
+                            }).format(value)
+                          }
+                          prefix="$ "
+                          separator=","
+                          duration={5}
+                          start={data.currentBid}
+                          end={data.currentBid}
+                        />
+                      </center>
+                    </div>
+                  )}
+                ></ServerSentEvents>
                 <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
                   To join the live auction, download the bidpal app and follow
                   along on your phone. Having trouble?

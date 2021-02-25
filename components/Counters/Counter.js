@@ -14,10 +14,11 @@ const MyCounter = styled.div`
   text-align: center;
   font-weight: bold;
   z-index: 99;
+  color: ${(props) => props.props.textColor || 'black'};
   background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.5em;
-  max-width: 300px;
-  min-width: 299px;
+  max-width: 340px;
+  min-width: 339px;
   font-size: ${(props) => props.props.fontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

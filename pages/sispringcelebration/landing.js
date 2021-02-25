@@ -27,6 +27,7 @@ import SingleEvent from 'components/BreakoutSessions/SingleEvent';
 
 export var event_theme = {
   heroHeight: '25vh',
+  bg: 'white',
   fontFamily: null,
   headerOpacity: null,
   videoBreakPoint: 700,
@@ -76,10 +77,22 @@ const Index = (props) => {
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
 
-        <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            height: '50vh',
+            marginBottom: '50vh',
+            backgroundColor: 'white',
+          }}
+          hasStarted={hasStarted}
+          title={event_meta.EventJobName}
+        >
           <div>
             <img
-              style={{ width: '120px' }}
+              style={{ width: '180px' }}
               src={main_event.KeyValue[0]?.value}
             />
           </div>
@@ -103,17 +116,17 @@ const Index = (props) => {
                 STARTS IN
               </h2>
               <Counter
-                fontSize={'1rem'}
+                fontSize={'1.5em'}
                 shadow={'0px'}
                 bgColor={event_theme.blue}
+                textColor="white"
                 hasStarted={hasStarted}
                 start={main_event.eventStartEnd.StartDateTime}
               />
             </center>
           </div>
-        </FlexHero>
+        </div>
 
-        <Body></Body>
         <center>
           <Link href="./preview">
             <p style={{ cursor: 'pointer', fontWeight: '800' }}>Log In</p>
