@@ -40,14 +40,18 @@ const HeaderInner = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
-  height: inherit;
+  height: 100%;
   /* text-align: center; */
   && img.inner-image {
     margin-left: auto;
     max-width: 70%;
+    max-height: 250px;
     margin-right: auto;
     margin-top: 3rem;
     z-index: 3;
+    @media all and (max-width: 900px) {
+      max-width: 95%;
+    }
   }
   && .counter-with-image {
     z-index: 100;

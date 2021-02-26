@@ -109,6 +109,7 @@ const Index = (props) => {
                 fontSize={'1rem'}
                 shadow={'0px'}
                 bgColor={event_theme.blue}
+                textColor={'white'}
                 hasStarted={hasStarted}
                 start={main_event.eventStartEnd.StartDateTime}
               />
@@ -152,8 +153,8 @@ const Index = (props) => {
                           prefix="$ "
                           separator=","
                           duration={5}
-                          start={data.currentBid}
-                          end={data.currentBid}
+                          start={data.currentBid - 100}
+                          end={data.currentBid || 0}
                         />
                       </center>
                     </div>
