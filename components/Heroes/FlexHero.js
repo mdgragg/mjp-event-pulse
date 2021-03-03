@@ -36,7 +36,7 @@ const HeroHolder = styled.div`
 const HeaderInner = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 90%;
   margin: auto;

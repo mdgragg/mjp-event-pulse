@@ -5,13 +5,14 @@ import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
 
 import { Grid, Button } from '@material-ui/core';
-import Link from 'next/link';
+import Link, { navigate } from 'next/link';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
-import VideoBox from 'components/template1/VideoBox';
-
+import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
+import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
+import FetchHtml from 'components/iFrames/FetchHtml';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Counter from 'components/Counters/Counter';
@@ -20,9 +21,12 @@ import Footer from 'components/template1/Footer';
 import Section from 'components/template1/Section';
 import SingleEvent from 'components/BreakoutSessions/SingleEvent';
 import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
-import CountUp from 'react-countup';
+import NameScroller from '../../components/RealTimeAssets/NameScroller';
+
+import NameTable from 'components/IndividualEventAssets/sispringcelebration/NameTable';
+import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
 export var event_theme = {
-  heroHeight: '25vh',
+  heroHeight: '22vh',
   fontFamily: null,
   headerOpacity: null,
   videoBreakPoint: 700,
@@ -82,38 +86,55 @@ const Index = (props) => {
         <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
           <div>
             <img
-              style={{ width: '120px' }}
+              style={{ width: '100%', maxWidth: '100px' }}
               src={main_event.KeyValue[0]?.value}
             />
           </div>
           <div>
             {' '}
             <img
-              style={{ width: '600px' }}
+              style={{ width: '100%', maxWidth: '500px' }}
               src={main_event.KeyValue[1]?.value}
             />
           </div>
           <div>
-            <center>
-              <h2
-                style={{
-                  fontWeight: '800',
-                  fontSize: '2rem',
-                  color: event_theme.red,
-                  margin: 'auto auto 0 auto',
-                }}
-              >
-                STARTS IN
-              </h2>
-              <Counter
-                fontSize={'1rem'}
-                shadow={'0px'}
-                bgColor={event_theme.blue}
-                textColor={'white'}
-                hasStarted={hasStarted}
-                start={main_event.eventStartEnd.StartDateTime}
-              />
-            </center>
+            {!hasStarted ? (
+              <center>
+                <h2
+                  style={{
+                    fontWeight: '800',
+                    fontSize: '2rem',
+                    color: event_theme.red,
+                    margin: 'auto auto 0 auto',
+                  }}
+                >
+                  STARTS IN
+                </h2>
+                <Counter
+                  fontSize={'1rem'}
+                  shadow={'0px'}
+                  bgColor={event_theme.blue}
+                  textColor={'white'}
+                  hasStarted={hasStarted}
+                  start={main_event.eventStartEnd.StartDateTime}
+                />
+              </center>
+            ) : (
+              <center>
+                <h2
+                  style={{
+                    fontWeight: '800',
+                    fontSize: '2rem',
+                    color: 'white',
+                    padding: '0.5rem',
+                    backgroundColor: event_theme.red,
+                    margin: 'auto auto 0 auto',
+                  }}
+                >
+                  Live Now
+                </h2>
+              </center>
+            )}
           </div>
         </FlexHero>
 
@@ -121,46 +142,131 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <VideoBox
-                  isStarted={true}
-                  src={'https://player.vimeo.com/video/448679350'}
+                <VideoBox__StickyTop
+                  isStarted={hasStarted}
+                  src={
+                    main_event.streamLinks.find((link) => link.isMain === true)
+                      .url
+                  }
                 />
 
                 <Button
                   style={{ margin: '2rem auto', display: 'block' }}
                   color={'primary'}
                   variant="outlined"
+                  onClick={() => {
+                    window.location.href = main_event.streamLinks.find(
+                      (link) => link.Service === 'VimeoLink'
+                    ).url;
+                  }}
                 >
-                  Watch on Smart TV
+                  Slow Connection?
                 </Button>
               </Grid>
               <Grid item={true} md={4} xs={12}>
-                <ServerSentEvents
-                  endpoint="http://localhost:4444/auction"
-                  render={(data) => (
-                    <div style={{ textAlign: 'center', fontSize: '2rem' }}>
-                      <center>
-                        <h3>{data.name}</h3>
-
-                        <CountUp
-                          formattingFn={(value) =>
-                            Intl.NumberFormat('en-US', {
-                              style: 'currency',
-                              currency: 'USD',
-                              minimumFractionDigits: 0,
-                            }).format(value)
+                {/* <FetchHtml endpoint="https://facebook.com" />
+                <VideoBox__iFrame
+                  stickTop={false}
+                  isStarted={true}
+                  src={
+                    'https://bputil11.bidpal.net/Scoreboard/preview/start/bpe369297'
+                  }
+                /> */}
+                <div
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 'inherit',
+                    minHeight: '300px',
+                  }}
+                >
+                  <ServerSentEvents
+                    endpoint={
+                      main_event.streamLinks.find(
+                        (link) => link.Service === 'LiveAssets'
+                      ).url
+                    }
+                    render={
+                      (data) => {
+                        if (data) {
+                          switch (data.name) {
+                            case null:
+                              return (
+                                <img
+                                  style={{ width: '120px' }}
+                                  src={main_event.KeyValue[0]?.value}
+                                />
+                              );
+                              break;
+                            case 'scroller':
+                              return (
+                                <NameScroller
+                                  title="Donations"
+                                  length={data.names.length}
+                                  children={<NameTable data={data} />}
+                                />
+                              );
+                              break;
+                            default:
+                              return <SingleAuctionItem data={data} />;
+                              break;
                           }
-                          prefix="$ "
-                          separator=","
-                          duration={5}
-                          start={data.currentBid - 100}
-                          end={data.currentBid || 0}
-                        />
-                      </center>
-                    </div>
-                  )}
-                ></ServerSentEvents>
-                <p style={{ fontSize: '1.25rem', textAlign: 'center' }}>
+                        } else {
+                          return (
+                            <img
+                              style={{ width: '120px' }}
+                              src={main_event.KeyValue[0]?.value}
+                            />
+                          );
+                        }
+                      }
+                      // data.name === null ? (
+
+                      // ) : (
+                      //   <div style={{ maxWidth: '80%' }}>
+                      //     <center>
+                      //       <img
+                      //         src={data.imgSrc}
+                      //         alt={data.name}
+                      //         style={{
+                      //           width: '250px',
+                      //           height: 'auto',
+                      //           marginTop: '4rem',
+                      //         }}
+                      //       />
+                      //       <h4>{data.name}</h4>
+                      //       <CountUp
+                      //         formattingFn={(value) =>
+                      //           Intl.NumberFormat('en-US', {
+                      //             style: 'currency',
+                      //             currency: 'USD',
+                      //             minimumFractionDigits: 0,
+                      //           }).format(value)
+                      //         }
+                      //         prefix="$ "
+                      //         separator=","
+                      //         duration={5}
+                      //         start={data.previousBid}
+                      //         end={data.currentBid || 0}
+                      //       />
+                      //     </center>
+                      //   </div>
+                      // )
+                    }
+                  ></ServerSentEvents>
+                </div>
+                <p
+                  style={{
+                    fontSize: '1.25rem',
+                    textAlign: 'center',
+                    maxWidth: '80%',
+                    margin: '1rem auto 0 auto',
+                  }}
+                >
                   To join the live auction, download the bidpal app and follow
                   along on your phone. Having trouble?
                 </p>
@@ -188,9 +294,9 @@ const Index = (props) => {
               ))}
             </Grid>
           </Section>
-          <Section showButton title="Platinum Sponsors">
+          {/* <Section showButton title="Platinum Sponsors">
             <Grid container spacing={3} justify={'center'}></Grid>
-          </Section>
+          </Section> */}
         </Body>
         <Footer></Footer>
       </Page>

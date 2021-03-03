@@ -87,7 +87,13 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={9} sm={12}>
-                <VideoBox isStarted={hasStarted} />
+                <VideoBox__StickyTop
+                  isStarted={hasStarted}
+                  src={
+                    main_event.streamLinks.find((link) => link.isMain === true)
+                      .url
+                  }
+                />
               </Grid>
               <Grid item md={3} sm={12}>
                 <Sidebar theme={event_theme} />

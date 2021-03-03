@@ -7,21 +7,35 @@ class ServerSentEvents extends React.Component {
   constructor(props) {
     super(props);
     // this.handleDataChange = handleDataChange.bind(this);
-    this.state = { data };
+    this.state = { data: null };
 
     this.handleDataChange = this.handleDataChange.bind(this);
   }
 
   componentDidMount() {
-    const eventSource = new EventSource(this.props.endpoint);
-    eventSource.onmessage = (e) => {
-      const { data } = e;
-      this.handleDataChange(data);
-      console.log('new value: ', data);
-    };
+    try {
+      const eventSource = new EventSource(this.props.endpoint);
+      eventSource.onmessage = (e) => {
+        console.log('new message');
+        const { data } = e;
+        this.handleDataChange(data);
+      };
+      eventSource.onerror = (err) => {
+        console.log('err: ', err);
+        this.handleDataChange({ name: null });
+      };
+    } catch (error) {
+      console.log('error in mounting: ', error);
+      this.handleDataChange({ name: null });
+    }
   }
+
   handleDataChange(data) {
-    this.setState(JSON.parse(data));
+    console.log('handle data change');
+    if (typeof data === 'string') {
+      return this.setState(JSON.parse(data));
+    }
+    this.setState(data);
   }
 
   render() {

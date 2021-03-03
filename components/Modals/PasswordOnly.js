@@ -107,6 +107,9 @@ export default function FormDialog({ open, setOpen, password, goToLink }) {
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
               autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
               <TextField
                 autoFocus

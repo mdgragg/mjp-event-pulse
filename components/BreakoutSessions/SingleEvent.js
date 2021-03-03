@@ -123,7 +123,9 @@ const SingleEvent = ({ session, buttonText }) => {
   const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);
 
   let link = session.Link?.url || '/';
-  const handleLink = () => {
+
+  const handleLink = (e) => {
+    e.preventDefault();
     setPasswordModalOpen(true);
   };
 
