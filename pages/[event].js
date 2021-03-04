@@ -70,88 +70,84 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
-  const Index = () => {
-    return (
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <Header theme={event_theme}>
-          <Navbar info={main_event} />
-        </Header>
+  return (
+    <Page theme={event_theme}>
+      <Meta title={event_meta.EventJobName}> </Meta>
+      <Header theme={event_theme}>
+        <Navbar info={main_event} />
+      </Header>
 
-        <Hero
-          hasStarted={hasStarted}
-          title={event_meta.EventJobName}
-          bgImage="http://lorempixel.com/1500/500/"
-          start={main_event.eventStartEnd.StartDateTime}
-        ></Hero>
+      <Hero
+        hasStarted={hasStarted}
+        title={event_meta.EventJobName}
+        bgImage="http://lorempixel.com/1500/500/"
+        start={main_event.eventStartEnd.StartDateTime}
+      ></Hero>
 
-        <Body>
-          <Section>
-            <Grid container={true} spacing={3}>
-              <Grid item={true} md={9} sm={12}>
-                <VideoBox isStarted={hasStarted} />
-              </Grid>
-              <Grid item={true} md={3} sm={12}>
-                <Sidebar theme={event_theme} />
-              </Grid>
+      <Body>
+        <Section>
+          <Grid container={true} spacing={3}>
+            <Grid item={true} md={9} sm={12}>
+              <VideoBox isStarted={hasStarted} />
             </Grid>
-          </Section>
-
-          <Banner color="#181818"></Banner>
-          <Section showButton={true} title="Speakers">
-            <Grid container={true} spacing={3} justify={'center'}>
-              <ListItem md={4} timeout={500} />
-              <ListItem md={4} timeout={1000} />
-              <ListItem md={4} timeout={2000} />
+            <Grid item={true} md={3} sm={12}>
+              <Sidebar theme={event_theme} />
             </Grid>
-          </Section>
-          <Section showButton={true} title="Platinum Sponsors">
-            <Grid container={true} spacing={3} justify={'center'}></Grid>
-          </Section>
-          <Section showButton={true} title="Gold Sponsors">
-            <Grid container={true} spacing={3} justify={'center'}>
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/250/"></img>
-              </Grid>
+          </Grid>
+        </Section>
 
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/240/"></img>
-              </Grid>
-
-              <Grid item={true} md={4}>
-                <img src="http://lorempixel.com/350/220/"></img>
-              </Grid>
+        <Banner color="#181818"></Banner>
+        <Section showButton={true} title="Speakers">
+          <Grid container={true} spacing={3} justify={'center'}>
+            <ListItem md={4} timeout={500} />
+            <ListItem md={4} timeout={1000} />
+            <ListItem md={4} timeout={2000} />
+          </Grid>
+        </Section>
+        <Section showButton={true} title="Platinum Sponsors">
+          <Grid container={true} spacing={3} justify={'center'}></Grid>
+        </Section>
+        <Section showButton={true} title="Gold Sponsors">
+          <Grid container={true} spacing={3} justify={'center'}>
+            <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/250/"></img>
             </Grid>
-          </Section>
-          <Section
-            showButton={false}
-            title={`${event_meta.EventJobName} in the News`}
-          >
-            <Grid container={true} spacing={3} justify={'center'}>
-              <ListItemSmall />
-              <ListItemSmall />
+
+            <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/240/"></img>
             </Grid>
-          </Section>
 
-          <EventSearch
-            currenthref={event_meta.eventUrl}
-            events={event_meta.events}
-          />
+            <Grid item={true} md={4}>
+              <img src="http://lorempixel.com/350/220/"></img>
+            </Grid>
+          </Grid>
+        </Section>
+        <Section
+          showButton={false}
+          title={`${event_meta.EventJobName} in the News`}
+        >
+          <Grid container={true} spacing={3} justify={'center'}>
+            <ListItemSmall />
+            <ListItemSmall />
+          </Grid>
+        </Section>
 
-          <Section></Section>
-        </Body>
-        <Footer>
-          <div></div>
-          <div className="signoff">
-            <center>Copyright 2020 Mill James</center>
-          </div>
-          <div></div>
-        </Footer>
-      </Page>
-    );
-  };
+        <EventSearch
+          currenthref={event_meta.eventUrl}
+          events={event_meta.events}
+        />
 
-  return <MainPage />;
+        <Section></Section>
+      </Body>
+      <Footer>
+        <div></div>
+        <div className="signoff">
+          <center>Copyright 2020 Mill James</center>
+        </div>
+        <div></div>
+      </Footer>
+    </Page>
+  );
 };
 
 export async function getServerSideProps(ctx) {
@@ -162,6 +158,15 @@ export async function getServerSideProps(ctx) {
 
   //get the event job data from our api
   let url = ctx.req.url.slice(1);
+
+  //make sure it is lowercase
+  if (url !== url.toLowerCase()) {
+    return {
+      redirect: {
+        destination: `${url.toLowerCase()}`,
+      },
+    };
+  }
   console.log(url);
 
   try {

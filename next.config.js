@@ -13,4 +13,13 @@ module.exports = {
     api_key:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjEzNzUzNzg4LCJleHAiOjE2NDUyODk3ODh9.hoky2HxECXDDvZ6Y3EUGKDwJtoz0zVtWxmQWjTT99Tg',
   },
+  async rewrites() {
+    return [
+      // {
+      //   source: '/SCCELLARAUCTION',
+      //   destination: '/sccellarauction',
+      //   permanent: true,
+      // },
+    ];
+  },
 };
