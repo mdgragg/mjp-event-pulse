@@ -1,21 +1,18 @@
-import clsx from 'clsx';
 import styled, { ThemeContext } from 'styled-components';
-import { Grid, Paper, Card } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useState, useEffect, useRef } from 'react';
-
-import MenuIcon from '@material-ui/icons/Menu';
+import { useEffect, useRef } from 'react';
 
 const VideoPlaceholder = styled.div`
   height: inherit;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   overflow: hidden;
+
   &&.fixed {
     height: auto;
     padding-top: 56.25%; /* 16:9 */
     display: block;
   }
+
   &&.fixed > div {
     position: fixed;
     top: 2%;
@@ -59,31 +56,31 @@ const StyledPaper = styled.div`
   }
 `;
 
-const VideoBox__StickyTop = (props) => {
-  const StyledVideoBox = styled.div`
-    position: relative;
-    overflow: hidden;
+const CustomFrame = styled.iframe`
+  border: none;
+`;
+
+const StyledVideoBox = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  && > iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-    && > iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-    }
-    @media (max-width: 768px) {
-      width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    border-radius: 0;
+  }
+`;
 
-      border-radius: 0;
-    }
-  `;
-
-  const [vidShow, setVidShow] = useState(true);
-  const [vidFixed, setVidFixed] = useState(false);
-
+const VideoBox__StickyTop = ({ src, isStarted }) => {
   const themeContext = React.useContext(ThemeContext);
 
   const offsetVideoHeight = themeContext.videoBreakPoint;
@@ -97,7 +94,7 @@ const VideoBox__StickyTop = (props) => {
     }
   }
   useEffect(() => {
-    if (props.isStarted) {
+    if (isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }
     return () => {
@@ -109,26 +106,11 @@ const VideoBox__StickyTop = (props) => {
     <VideoPlaceholder ref={wrapperRef}>
       <StyledPaper>
         <StyledVideoBox>
-          <FilterVideo vidShow={vidShow} src={props.src} />
+          <CustomFrame src={src} frameborder="0" allowfullscreen />
         </StyledVideoBox>
       </StyledPaper>
     </VideoPlaceholder>
   );
-};
-
-const CustomFrame = styled.iframe`
-  border: none;
-`;
-
-const FilterVideo = (props) => {
-  useEffect(() => {
-    console.log('remounted');
-  }, []);
-  if (props.vidShow) {
-    return <CustomFrame src={props.src} frameborder="0" allowfullscreen />;
-  } else {
-    return <div>No video...</div>;
-  }
 };
 
 export default VideoBox__StickyTop;

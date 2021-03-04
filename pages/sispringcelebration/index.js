@@ -10,7 +10,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
+import VideoBox__StickyTop__WithCountdown from 'components/VideoBoxes/Video__StickyTop__WithCountdown';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
 import FetchHtml from 'components/iFrames/FetchHtml';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
@@ -71,6 +71,14 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStarted(calculateIfStarted());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  });
+
   const MainPage = () => {
     return (
       <Page theme={event_theme}>
@@ -98,43 +106,34 @@ const Index = (props) => {
             />
           </div>
           <div>
-            {!hasStarted ? (
-              <center>
-                <h2
-                  style={{
-                    fontWeight: '800',
-                    fontSize: '2rem',
-                    color: event_theme.red,
-                    margin: 'auto auto 0 auto',
-                  }}
-                >
-                  STARTS IN
-                </h2>
-                <Counter
-                  fontSize={'1rem'}
-                  shadow={'0px'}
-                  bgColor={event_theme.blue}
-                  textColor={'white'}
-                  hasStarted={hasStarted}
-                  start={main_event.eventStartEnd.StartDateTime}
-                />
-              </center>
-            ) : (
-              <center>
-                <h2
-                  style={{
-                    fontWeight: '800',
-                    fontSize: '2rem',
-                    color: 'white',
-                    padding: '0.5rem',
-                    backgroundColor: event_theme.red,
-                    margin: 'auto auto 0 auto',
-                  }}
-                >
-                  Live Now
-                </h2>
-              </center>
-            )}
+            <center>
+              <Counter
+                fontSize={'1rem'}
+                shadow={'0px'}
+                bgColor={event_theme.blue}
+                textColor={'white'}
+                hasStarted={hasStarted}
+                afterStarted={
+                  <>
+                    <center>
+                      <h2
+                        style={{
+                          fontWeight: '800',
+                          fontSize: '2rem',
+                          color: 'white',
+                          padding: '0.5rem',
+                          backgroundColor: event_theme.red,
+                          margin: 'auto auto 0 auto',
+                        }}
+                      >
+                        Live Now
+                      </h2>
+                    </center>
+                  </>
+                }
+                start={main_event.eventStartEnd.StartDateTime}
+              />
+            </center>
           </div>
         </FlexHero>
 
@@ -142,11 +141,65 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <VideoBox__StickyTop
+                <VideoBox__StickyTop__WithCountdown
+                  showMinutesBefore={15}
+                  start={main_event.eventStartEnd.StartDateTime}
                   isStarted={hasStarted}
                   src={
                     main_event.streamLinks.find((link) => link.isMain === true)
                       .url
+                  }
+                  showBefore={
+                    <div
+                      style={{
+                        height: 'inherit',
+                        width: '100%',
+                        backgroundColor: '#181818',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        color: 'white',
+                      }}
+                    >
+                      <p
+                        style={{
+                          margin: '3rem auto',
+                          maxWidth: '50%',
+                          fontSize: '1.5rem',
+                          textAlign: 'center',
+                        }}
+                      >
+                        The Event Hasn't Started Yet, this video stream will
+                        update when it does.
+                      </p>
+                      <div
+                        style={{
+                          position: 'relative',
+                          zIndex: '99',
+                          backgroundColor: 'white',
+                          height: '300px',
+                          width: '300px',
+                          borderRadius: '200px',
+                          marginBottom: '2rem',
+                        }}
+                      >
+                        <img
+                          style={{
+                            position: 'absolute',
+                            top: '20%',
+                            transformOrigin: 'center center',
+                            left: '0',
+                            right: '0',
+                            width: '100%',
+                            maxWidth: '150px',
+                            zIndex: '100',
+                            margin: 'auto',
+                          }}
+                          src={main_event.KeyValue[0]?.value}
+                        />
+                      </div>
+                    </div>
                   }
                 />
 

@@ -7,13 +7,13 @@ const TheTable = styled.div`
     padding: 10px;
     font-size: 1.25rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 120px;
+    grid-template-columns: 1fr 1fr;
   }
   && .single-table-item:nth-child(odd) {
     background-color: lightgrey;
   }
 
-  width: 90%;
+  width: 75%;
   margin: auto;
 
   && .amount {
@@ -29,7 +29,7 @@ const NameTable = ({ data }) => {
         <div className="single-table-item">
           <div>{obj['First Name']} </div>
           <div>{obj['Last Name']} </div>
-          <div className="amount">{obj.Amount} </div>
+          {/* <div className="amount">{obj.Amount} </div> */}
         </div>
       ))}{' '}
     </TheTable>

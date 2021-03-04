@@ -27,10 +27,10 @@ const MyCounter = styled.div`
 `;
 
 export default function Counter(props) {
-  const { start, hasStarted } = props;
+  const { start, hasStarted, afterStarted = 'Live' } = props;
   function pad(value) {
     if (value === 0) {
-      return ' ';
+      return '0';
     }
     if (value < 10) {
       return '0' + value;
@@ -76,20 +76,25 @@ export default function Counter(props) {
 
   const [time, calcTime] = useState(getRemainingTime(start));
 
-  if (hasStarted) {
-    return '';
-  } else {
-    return (
-      <>
-        {!time.days ? (
-          start
-        ) : (
-          <MyCounter props={props}>
-            {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}
-            {pad(time.minutes)} Minutes {pad(time.seconds)}
-          </MyCounter>
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {time.total_remaining < 0 ? (
+        afterStarted
+      ) : (
+        <MyCounter props={props}>
+          <h2
+            style={{
+              fontWeight: '800',
+              fontSize: '2rem',
+              margin: 'auto auto 0 auto',
+            }}
+          >
+            STARTS IN
+          </h2>
+          {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}
+          {pad(time.minutes)} Minutes {pad(time.seconds)}
+        </MyCounter>
+      )}
+    </>
+  );
 }
