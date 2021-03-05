@@ -142,7 +142,7 @@ const Index = (props) => {
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
                 <VideoBox__StickyTop__WithCountdown
-                  showMinutesBefore={15}
+                  showMinutesBefore={31 * 60}
                   start={main_event.eventStartEnd.StartDateTime}
                   isStarted={hasStarted}
                   src={
@@ -170,7 +170,7 @@ const Index = (props) => {
                           textAlign: 'center',
                         }}
                       >
-                        The Event Hasn't Started Yet, this video stream will
+                        The event hasn't started yet. This video stream will
                         update when it does.
                       </p>
                       <div
@@ -243,73 +243,39 @@ const Index = (props) => {
                         (link) => link.Service === 'LiveAssets'
                       ).url
                     }
-                    render={
-                      (data) => {
-                        if (data) {
-                          switch (data.name) {
-                            case null:
-                              return (
-                                <img
-                                  style={{ width: '120px' }}
-                                  src={main_event.KeyValue[0]?.value}
-                                />
-                              );
-                              break;
-                            case 'scroller':
-                              return (
-                                <NameScroller
-                                  title="Donations"
-                                  length={data.names.length}
-                                  children={<NameTable data={data} />}
-                                />
-                              );
-                              break;
-                            default:
-                              return <SingleAuctionItem data={data} />;
-                              break;
-                          }
-                        } else {
-                          return (
-                            <img
-                              style={{ width: '120px' }}
-                              src={main_event.KeyValue[0]?.value}
-                            />
-                          );
+                    render={(data) => {
+                      if (data) {
+                        switch (data.name) {
+                          case null:
+                            return (
+                              <img
+                                style={{ width: '120px' }}
+                                src={main_event.KeyValue[0]?.value}
+                              />
+                            );
+                            break;
+                          case 'scroller':
+                            return (
+                              <NameScroller
+                                title="Donations"
+                                length={data.names.length}
+                                children={<NameTable data={data} />}
+                              />
+                            );
+                            break;
+                          default:
+                            return <SingleAuctionItem data={data} />;
+                            break;
                         }
+                      } else {
+                        return (
+                          <img
+                            style={{ width: '120px' }}
+                            src={main_event.KeyValue[0]?.value}
+                          />
+                        );
                       }
-                      // data.name === null ? (
-
-                      // ) : (
-                      //   <div style={{ maxWidth: '80%' }}>
-                      //     <center>
-                      //       <img
-                      //         src={data.imgSrc}
-                      //         alt={data.name}
-                      //         style={{
-                      //           width: '250px',
-                      //           height: 'auto',
-                      //           marginTop: '4rem',
-                      //         }}
-                      //       />
-                      //       <h4>{data.name}</h4>
-                      //       <CountUp
-                      //         formattingFn={(value) =>
-                      //           Intl.NumberFormat('en-US', {
-                      //             style: 'currency',
-                      //             currency: 'USD',
-                      //             minimumFractionDigits: 0,
-                      //           }).format(value)
-                      //         }
-                      //         prefix="$ "
-                      //         separator=","
-                      //         duration={5}
-                      //         start={data.previousBid}
-                      //         end={data.currentBid || 0}
-                      //       />
-                      //     </center>
-                      //   </div>
-                      // )
-                    }
+                    }}
                   ></ServerSentEvents>
                 </div>
                 <p
@@ -391,7 +357,6 @@ export async function getServerSideProps(ctx) {
 
     if (eventData.AuthRequired) {
       if (cookies(ctx).preview !== 'true') {
-        console.log('redirecting');
         return {
           redirect: {
             destination: '/sispringcelebration/landing',

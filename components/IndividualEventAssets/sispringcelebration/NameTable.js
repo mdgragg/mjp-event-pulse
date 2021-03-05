@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const TheTable = styled.div`
+  min-height: ${(props) => props.length * 10}vh;
   && .single-table-item {
     padding: 10px;
     font-size: 1.25rem;
@@ -24,11 +25,12 @@ const TheTable = styled.div`
 `;
 const NameTable = ({ data }) => {
   return (
-    <TheTable>
+    <TheTable length={data.names?.length || 3}>
       {data.names.map((obj) => (
         <div className="single-table-item">
           <div>{obj['First Name']} </div>
           <div>{obj['Last Name']} </div>
+
           {/* <div className="amount">{obj.Amount} </div> */}
         </div>
       ))}{' '}
