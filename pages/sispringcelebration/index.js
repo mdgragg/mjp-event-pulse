@@ -144,7 +144,7 @@ const Index = (props) => {
                 <VideoBox__StickyTop__WithCountdown
                   showMinutesBefore={31 * 60}
                   start={main_event.eventStartEnd.StartDateTime}
-                  isStarted={hasStarted}
+                  isStarted={true}
                   src={
                     main_event.streamLinks.find((link) => link.isMain === true)
                       .url
@@ -298,6 +298,35 @@ const Index = (props) => {
                     Bidpal Help
                   </Button>
                 </a>
+              </Grid>
+              <Grid item={true} md={8} xs={12}></Grid>
+              <Grid item={true} md={4} xs={12}>
+                <center>
+                  <h2>Chat</h2>
+                </center>
+                <div
+                  style={{
+                    height: '510px',
+                    color: '#181818',
+                    maxWidth: '360px',
+                    margin: '0 auto 2rem auto',
+                    border: '3px solid rgba(0,0,0,0.05)',
+                    padding: '10px',
+                    textAlign: 'center',
+                  }}
+                >
+                  <iframe
+                    src={
+                      main_event.streamLinks.find(
+                        (link) => link.Service === 'Chat'
+                      ).url
+                    }
+                    width="96%"
+                    height="96%"
+                    frameborder="0"
+                    style={{ margin: 'auto', height: '100%' }}
+                  ></iframe>
+                </div>
               </Grid>
             </Grid>
           </Section>
