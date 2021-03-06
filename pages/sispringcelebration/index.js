@@ -142,7 +142,7 @@ const Index = (props) => {
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
                 <VideoBox__StickyTop__WithCountdown
-                  showMinutesBefore={31 * 60}
+                  showMinutesBefore={15}
                   start={main_event.eventStartEnd.StartDateTime}
                   isStarted={true}
                   src={
