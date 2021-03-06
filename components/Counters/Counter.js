@@ -91,7 +91,7 @@ export default function Counter(props) {
           >
             STARTS IN
           </h2>
-          {time.days} Days {pad(time.hours)} {time.hours === 0 ? '' : 'Hours'}{' '}
+          {time.days} Days {time.hours === 0 ? '' : `${pad(time.hours)} Hours`}{' '}
           {pad(time.minutes)} Minutes {pad(time.seconds)}
         </MyCounter>
       )}
