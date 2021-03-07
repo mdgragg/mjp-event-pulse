@@ -388,11 +388,12 @@ export async function getServerSideProps(ctx) {
       if (cookies(ctx).preview !== 'true') {
         return {
           redirect: {
-            destination: '/sispringcelebration/landing',
+            destination: '/sispringcelebration/thank-you',
           },
         };
       }
     }
+
     const values = {
       props: {
         //meta will be the props for the event

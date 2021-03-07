@@ -12,7 +12,7 @@ const StyledSection = styled.div`
   @media (max-width: 768px) {
     padding: 1rem;
   }
-  :nth-child(even) {
+  &&:nth-child(even) {
     background-color: #f2f2f2;
   }
   z-index: 99;
