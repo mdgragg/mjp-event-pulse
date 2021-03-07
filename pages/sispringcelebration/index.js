@@ -83,14 +83,7 @@ const Index = (props) => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        {event_meta.AuthRequired ? (
-          <div style={{ textAlign: 'center' }}>
-            <h2>PREVIEW</h2>
-            <p>
-              Public page <Link href={`${router.pathname}/landing`}> here</Link>
-            </p>
-          </div>
-        ) : null}
+
         <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
           <div>
             <img
@@ -385,13 +378,11 @@ export async function getServerSideProps(ctx) {
     main_event.BreakoutSessions = breakoutObj;
 
     if (eventData.AuthRequired) {
-      if (cookies(ctx).preview !== 'true') {
-        return {
-          redirect: {
-            destination: '/sispringcelebration/thank-you',
-          },
-        };
-      }
+      return {
+        redirect: {
+          destination: '/sispringcelebration/thank-you',
+        },
+      };
     }
 
     const values = {

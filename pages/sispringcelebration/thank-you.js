@@ -208,16 +208,6 @@ export async function getServerSideProps(ctx) {
 
     main_event.BreakoutSessions = breakoutObj;
 
-    if (eventData.AuthRequired) {
-      if (cookies(ctx).preview !== 'true') {
-        return {
-          redirect: {
-            destination: '/sispringcelebration/thank-you',
-          },
-        };
-      }
-    }
-
     const values = {
       props: {
         //meta will be the props for the event
