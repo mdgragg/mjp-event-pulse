@@ -2,6 +2,17 @@
   src: url('../static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }
+
+@font-face {
+  src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf');
+  font-family: 'Source-Sans-Bold';
+}
+
+@font-face {
+  src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf');
+  font-family: 'Source-Sans-Regular';
+}
+
 html {
   scroll-behavior: smooth;
 }

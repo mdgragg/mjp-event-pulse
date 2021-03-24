@@ -92,6 +92,10 @@ export default function Hero(props) {
       ) : (
         ''
       )}
+      <div style={{ zIndex: '100', position: 'relative', margin: 'auto' }}>
+        {' '}
+        {props.children}
+      </div>
     </HeroHolder>
   );
 }
