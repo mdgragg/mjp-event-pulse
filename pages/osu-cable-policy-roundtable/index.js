@@ -77,13 +77,6 @@ const Index = (props) => {
             metadata={main_event}
           />
         </Body>
-        <Footer>
-          <div></div>
-          <div className="signoff">
-            <center>Copyright 2020 Mill James</center>
-          </div>
-          <div></div>
-        </Footer>
       </Page>
     );
   };

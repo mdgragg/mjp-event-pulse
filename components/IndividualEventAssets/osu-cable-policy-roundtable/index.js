@@ -42,10 +42,13 @@ const HeaderWrap = styled.div`
     text-transform: uppercase;
     color: ${(props) => props.theme.green};
     margin-top: 4rem;
+    transition: all 0.5s ease;
   }
   && button:hover {
     background-color: ${(props) => props.theme.green};
     color: white;
+    transform: scale(1.25);
+    box-shadow: 0px 0px 20px -10px black;
   }
 `;
 
@@ -54,6 +57,11 @@ const SpeakersSection = styled.div`
   && h2 {
     text-align: center;
     margin: 4rem auto;
+    font-size: 3rem;
+    color: ${(props) => props.theme.darkGreen};
+    text-transform: uppercase;
+    font-family: Source-Sans-Bold;
+    letter-spacing: 3px;
   }
 `;
 
@@ -83,6 +91,7 @@ const SpeakerMap = styled.div`
   }
   && .single-ambassador--description {
     /* text-align: center; */
+    font-size: 1rem;
   }
 `;
 
