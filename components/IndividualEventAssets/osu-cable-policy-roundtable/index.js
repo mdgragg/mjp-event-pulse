@@ -90,22 +90,31 @@ const SpeakersSection = styled.div`
 const SpeakerMap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 80%;
+  max-width: 90%;
   margin: 3rem auto;
 
   && .single-ambassador {
     margin: 1rem auto;
-    width: 300px;
+    width: 270px;
     padding: 20px;
+    transition: transform 0.4s ease, box-shadow 1s ease;
+
     @media all and (max-width: 500px) {
       /* margin: 1rem auto; */
       width: 90%;
       padding: 20px;
     }
   }
-
+  && div.single-ambassador:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 15px -10px black;
+    cursor: pointer;
+  }
   && div.single-ambassador:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+  && div.single-ambassador:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.65);
   }
   && .ambassador-picture {
     width: 100%;
