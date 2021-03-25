@@ -32,6 +32,7 @@ export var event_theme = {
   headerOpacity: null,
   white: null,
   green: '#a4bf00',
+  darkGreen: '#6b7c07',
   blue: null,
   red: null,
   buttonColor: null,
@@ -41,13 +42,8 @@ export var event_theme = {
 
 const Index = (props) => {
   const router = useRouter();
-
-  const {
-    event_meta,
-    main_event,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  // const { error, loading, data } = useQuery(getMainEventMeta(50));
+  const { speakers, event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -75,7 +71,11 @@ const Index = (props) => {
         <Meta title={event_meta.EventJobName}> </Meta>
 
         <Body>
-          <CABLE theme={event_theme} />
+          <CABLE
+            theme={event_theme}
+            speakers={speakers}
+            metadata={main_event}
+          />
         </Body>
         <Footer>
           <div></div>
@@ -105,9 +105,16 @@ export async function getServerSideProps(ctx) {
       (ev) => ev.isMainEvent === true
     )[0];
 
+    let speakers = await fetch(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/54'
+    ).then((res) => res.json());
+
+    speakers = speakers.EventSpeakers;
+
     const values = {
       props: {
         //meta will be the props for the event
+        speakers,
         event_meta: eventData,
         main_event,
       },

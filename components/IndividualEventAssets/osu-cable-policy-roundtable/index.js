@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import _ from 'lodash';
 const HeaderWrap = styled.div`
   background-image: url('${(props) => props.theme.bgImage}');
   min-height: ${(props) => props.theme.heroHeight};
@@ -60,38 +60,71 @@ const SpeakersSection = styled.div`
 const SpeakerMap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
 
   && .single-ambassador {
-    margin: 1rem 1rem;
-    width: 250px;
+    margin: 1rem auto;
+    width: 280px;
+    padding: 20px;
+  }
+
+  && div.single-ambassador:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.25);
   }
   && .ambassador-picture {
     width: 100%;
   }
   && h3 {
     text-align: center;
+    font-size: 1rem;
+    color: ${(props) => props.theme.green};
+    text-transform: uppercase;
   }
   && .single-ambassador--description {
-    text-align: center;
+    /* text-align: center; */
   }
 `;
 
 const TheFooter = styled.div`
   height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  background-color: ${(props) => props.theme.green};
+  color: white;
+  background-color: ${(props) => props.theme.darkGreen};
+  && .footer--copy {
+    color: white;
+    font-size: 1.75rem;
+  }
+  && h4 {
+    margin: 0 auto;
+    font-family: Source-Sans-Regular;
+  }
+  && span.plus {
+    font-size: 10rem;
+    font-weight: 800;
+    line-height: 150px;
+  }
 `;
-const CABLE = ({ theme }) => {
-  const speakers = [0, 1, 2, 3, 4];
+const CABLE = ({ theme, speakers, metadata }) => {
+  speakers = _.orderBy(speakers, ['LastName', 'FirstName'], ['asc']);
   return (
     <>
       <HeaderWrap>
         <h1>CABLE Bioeconomy Policy Roundtable</h1>
         <h2>Join The Conversation</h2>
         <h4>Click the button to join the Zoom meeting</h4>
-        <button> Join</button>
+        <button
+          onClick={() => {
+            window.location.href = metadata.streamLinks[0]?.url || null;
+          }}
+        >
+          {' '}
+          Join
+        </button>
       </HeaderWrap>
       <SpeakersSection>
         <h2>Cable Ambassadors</h2>
@@ -100,25 +133,27 @@ const CABLE = ({ theme }) => {
             <div className="single-ambassador">
               <img
                 className="ambassador-picture"
-                src="https://placehold.co/400x400"
+                src={spk.Thumbnail[0].url}
+                alt={`headshot of ${spk.FirstName}`}
               />
-              <h3>First Name Last</h3>
+              <h3>
+                {spk.FirstName} {spk.LastName}
+              </h3>
               <div className="single-ambassador--description">
-                {' '}
-                The component is suitable for most use cases, but you can also
-                build your own component to do routing. Next.js makes this easy
-                for you with the router API available in next/router. If you
-                want to do something (for example, submit a form) before
-                navigating to a new route, you can define that in your custom
-                routing code. When you use custom components for routing, you
-                can add prefetching to them too. To implement prefetching in
-                your routing code, use the prefetch method from useRouter.{' '}
+                {spk.Description}
               </div>
             </div>
           ))}
         </SpeakerMap>
       </SpeakersSection>
-      <TheFooter />
+      <TheFooter>
+        <div className="footer--copy">
+          <h4>National Institute of Food and Agriculture (NIFA)</h4>
+          <h4>Competitive Grant no. 2017-6700-926770</h4>
+          <h4>US Department of Agriculture (USDA)</h4>
+          <span className="plus">+</span>
+        </div>
+      </TheFooter>
     </>
   );
 };
