@@ -65,6 +65,14 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStarted(calculateIfStarted());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  });
+
   const MainPage = () => {
     return (
       <Page theme={event_theme}>
@@ -72,6 +80,7 @@ const Index = (props) => {
 
         <Body>
           <CABLE
+            hasStarted={hasStarted}
             theme={event_theme}
             speakers={speakers}
             metadata={main_event}

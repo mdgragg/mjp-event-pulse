@@ -81,7 +81,7 @@ export default function Counter(props) {
       {time.total_remaining < 0 ? (
         afterStarted
       ) : (
-        <MyCounter props={props}>
+        <MyCounter className={props.customClass || ''} props={props}>
           <h2
             style={{
               fontWeight: '800',

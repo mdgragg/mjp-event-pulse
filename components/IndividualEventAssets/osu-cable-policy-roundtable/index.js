@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import _ from 'lodash';
+import Counter from 'components/Counters/Counter';
 const HeaderWrap = styled.div`
   background-image: url('${(props) => props.theme.bgImage}');
   background-position: center center;
@@ -12,6 +13,10 @@ const HeaderWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  && .counter {
+    margin-top: 100px;
+    /* background-color: red; */
+  }
   && h1 {
     font-family: Source-Sans-Bold;
     font-size: 5rem;
@@ -147,7 +152,7 @@ const TheFooter = styled.div`
     line-height: 150px;
   }
 `;
-const CABLE = ({ theme, speakers, metadata }) => {
+const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
   speakers = _.orderBy(speakers, ['LastName', 'FirstName'], ['asc']);
   return (
     <>
@@ -155,14 +160,24 @@ const CABLE = ({ theme, speakers, metadata }) => {
         <h1>CABLE Bioeconomy Policy Roundtable</h1>
         <h2>Join The Conversation</h2>
         <h4>Click the button to join the Zoom meeting</h4>
-        <button
-          onClick={() => {
-            window.location.href = metadata.streamLinks[0]?.url || null;
-          }}
-        >
-          {' '}
-          Join
-        </button>
+        <Counter
+          customClass={'counter'}
+          fontSize={'1.25rem'}
+          shadow={'0px'}
+          bgColor={'rgba(255,255,255,0.45)'}
+          textColor={theme.darkGreen}
+          hasStarted={hasStarted}
+          afterStarted={
+            <button
+              onClick={() => {
+                window.location.href = metadata.streamLinks[0]?.url || null;
+              }}
+            >
+              Join
+            </button>
+          }
+          start={metadata.eventStartEnd.StartDateTime}
+        />
       </HeaderWrap>
       <SpeakersSection>
         <h2>Cable Ambassadors</h2>
