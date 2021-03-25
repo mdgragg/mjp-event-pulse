@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import _ from 'lodash';
 const HeaderWrap = styled.div`
   background-image: url('${(props) => props.theme.bgImage}');
+  background-position: center center;
+  background-repeat: no-repeat;
+
   min-height: ${(props) => props.theme.heroHeight};
   display: flex;
   flex-direction: column;
@@ -26,12 +29,14 @@ const HeaderWrap = styled.div`
     color: white;
     letter-spacing: 2px;
     margin: 1rem auto;
+    text-align: center;
   }
   && h4 {
     margin: 0;
     color: white;
     font-family: Source-Sans-Regular;
     font-size: 1.5rem;
+    text-align: center;
   }
   && button {
     min-width: 200px;
@@ -49,6 +54,18 @@ const HeaderWrap = styled.div`
     color: white;
     transform: scale(1.25);
     box-shadow: 0px 0px 20px -10px black;
+  }
+  @media all and (max-width: 500px) {
+    padding: 1rem;
+    justify-content: flex-start;
+    && h1 {
+      font-size: 3rem;
+      line-height: 2.85rem;
+    }
+    && h2 {
+      font-size: 2rem;
+      max-width: 70%;
+    }
   }
 `;
 
@@ -68,17 +85,22 @@ const SpeakersSection = styled.div`
 const SpeakerMap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 90%;
-  margin: auto;
+  max-width: 80%;
+  margin: 3rem auto;
 
   && .single-ambassador {
     margin: 1rem auto;
-    width: 280px;
+    width: 300px;
     padding: 20px;
+    @media all and (max-width: 500px) {
+      /* margin: 1rem auto; */
+      width: 90%;
+      padding: 20px;
+    }
   }
 
   && div.single-ambassador:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.5);
   }
   && .ambassador-picture {
     width: 100%;
@@ -93,9 +115,16 @@ const SpeakerMap = styled.div`
     /* text-align: center; */
     font-size: 1rem;
   }
+  @media all and (max-width: 768px) {
+    max-width: 100vw;
+  }
 `;
 
 const TheFooter = styled.div`
+  background: ${(props) => props.theme.darkGreen}
+    url('${(props) => props.theme.bgImage}');
+  background-blend-mode: soft-light;
+  background-position: center bottom;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -139,7 +168,10 @@ const CABLE = ({ theme, speakers, metadata }) => {
         <h2>Cable Ambassadors</h2>
         <SpeakerMap>
           {speakers.map((spk) => (
-            <div className="single-ambassador">
+            <div
+              className="single-ambassador"
+              key={`single-ambassador--${spk.FirstName}`}
+            >
               <img
                 className="ambassador-picture"
                 src={spk.Thumbnail[0].url}
