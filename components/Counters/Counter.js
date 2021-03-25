@@ -17,7 +17,7 @@ const MyCounter = styled.div`
   color: ${(props) => props.props.textColor || 'white'};
   background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.5em;
-  width: 360px;
+  min-width: 360px;
   font-size: ${(props) => props.props.fontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

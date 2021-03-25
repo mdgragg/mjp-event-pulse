@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import _ from 'lodash';
 import Counter from 'components/Counters/Counter';
+
+const WRAP = styled.div`
+  /* max-width: 1920px;
+  margin: auto; */
+`;
 const HeaderWrap = styled.div`
   background-image: url('${(props) => props.theme.bgImage}');
   background-position: center center;
   background-repeat: no-repeat;
-
+  background-size: cover;
   min-height: ${(props) => props.theme.heroHeight};
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,6 +82,8 @@ const HeaderWrap = styled.div`
 
 const SpeakersSection = styled.div`
   min-height: 80vh;
+  max-width: 1920px;
+  margin: auto;
   && h2 {
     text-align: center;
     margin: 4rem auto;
@@ -90,11 +98,12 @@ const SpeakersSection = styled.div`
 const SpeakerMap = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   max-width: 90%;
   margin: 3rem auto;
 
   && .single-ambassador {
-    margin: 1rem auto;
+    margin: 0.5rem;
     width: 270px;
     padding: 20px;
     transition: transform 0.4s ease, box-shadow 1s ease;
@@ -135,10 +144,12 @@ const SpeakerMap = styled.div`
 `;
 
 const TheFooter = styled.div`
+  margin-top: 3rem;
   background: ${(props) => props.theme.darkGreen}
     url('${(props) => props.theme.bgImage}');
   background-blend-mode: soft-light;
   background-position: center bottom;
+  background-size: cover;
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -164,26 +175,29 @@ const TheFooter = styled.div`
 const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
   speakers = _.orderBy(speakers, ['LastName', 'FirstName'], ['asc']);
   return (
-    <>
+    <WRAP>
       <HeaderWrap>
         <h1>CABLE Bioeconomy Policy Roundtable</h1>
-        <h2>Join The Conversation</h2>
-        <h4>Click the button to join the Zoom meeting</h4>
+
         <Counter
           customClass={'counter'}
-          fontSize={'1.25rem'}
+          fontSize={'2rem'}
           shadow={'0px'}
-          bgColor={'rgba(255,255,255,0.45)'}
+          bgColor={'rgba(255,255,255,0.65)'}
           textColor={theme.darkGreen}
           hasStarted={hasStarted}
           afterStarted={
-            <button
-              onClick={() => {
-                window.location.href = metadata.streamLinks[0]?.url || null;
-              }}
-            >
-              Join
-            </button>
+            <>
+              <h2>Join The Conversation</h2>
+              <h4>Click the button to join the Zoom meeting</h4>
+              <button
+                onClick={() => {
+                  window.location.href = metadata.streamLinks[0]?.url || null;
+                }}
+              >
+                Join
+              </button>
+            </>
           }
           start={metadata.eventStartEnd.StartDateTime}
         />
@@ -204,9 +218,10 @@ const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
               <h3>
                 {spk.FirstName} {spk.LastName}
               </h3>
-              <div className="single-ambassador--description">
-                {spk.Description}
-              </div>
+              <div
+                className="single-ambassador--description"
+                dangerouslySetInnerHTML={{ __html: spk.Description }}
+              ></div>
             </div>
           ))}
         </SpeakerMap>
@@ -219,7 +234,7 @@ const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
           <span className="plus">+</span>
         </div>
       </TheFooter>
-    </>
+    </WRAP>
   );
 };
 
