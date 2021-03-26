@@ -82,6 +82,9 @@ const Index = (props) => {
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
       setEnded(calculateIfEnded());
+      if (calculateIfEnded() && !hasEnded) {
+        window.location.reload();
+      }
     }, 1000);
 
     return () => clearInterval(interval);

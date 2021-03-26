@@ -267,7 +267,7 @@ const CABLE = ({ theme, speakers, metadata, hasStarted, hasEnded }) => {
             <div className="video-map">
               {/* {JSON.stringify(metadata.BreakoutSessions['Pillar Videos'])} */}
               {metadata.BreakoutSessions['Pillar Videos'].map((video) => (
-                <div className={`single-video--${video.Name}`}>
+                <div key={`single-video--${video.Name}`}>
                   <VideoBox src={video.Link.url}></VideoBox>
                   <h4> {video.Name} </h4>
                 </div>
