@@ -227,29 +227,6 @@ const CABLE = ({ theme, speakers, metadata, hasStarted, hasEnded }) => {
     <WRAP>
       <HeaderWrap>
         <h1>CABLE Bioeconomy Policy Roundtable</h1>
-
-        <Counter
-          customClass={'counter'}
-          fontSize={'2rem'}
-          shadow={'0px'}
-          bgColor={'rgba(255,255,255,0.65)'}
-          textColor={theme.darkGreen}
-          hasStarted={hasStarted}
-          afterStarted={
-            <>
-              <h2>Join The Conversation</h2>
-              <h4>Click the button to join the Zoom meeting</h4>
-              <button
-                onClick={() => {
-                  window.location.href = metadata.streamLinks[0]?.url || null;
-                }}
-              >
-                Join
-              </button>
-            </>
-          }
-          start={metadata.eventStartEnd.StartDateTime}
-        />
       </HeaderWrap>
       {hasEnded ? (
         <>
