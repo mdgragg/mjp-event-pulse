@@ -3,10 +3,24 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import _ from 'lodash';
 import Counter from 'components/Counters/Counter';
+import VideoBox from 'components/VideoBoxes/Video__iFrame';
 
 const WRAP = styled.div`
-  /* max-width: 1920px;
-  margin: auto; */
+  font-family: Source-Sans-Bold;
+  && h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: ${(props) => props.theme.darkGreen};
+  }
+  && h1 {
+    font-size: 5rem;
+    text-align: center;
+  }
+
+  && h4 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 `;
 const HeaderWrap = styled.div`
   background-image: url('${(props) => props.theme.bgImage}');
@@ -172,7 +186,42 @@ const TheFooter = styled.div`
     line-height: 150px;
   }
 `;
-const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
+const MainVideoSection = styled.div`
+  min-height: 40vh;
+  margin: 5rem auto;
+  && .main-video {
+    width: 50%;
+    margin: auto;
+  }
+`;
+const MultiVideoSection = styled.div`
+  /* min-height: 40vh; */
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  && .video-map {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    width: 95%;
+    margin: auto;
+  }
+  && .video-map h4 {
+    color: ${(props) => props.theme.green};
+  }
+`;
+const BGHR = styled.hr`
+  height: 80px;
+  margin: 0;
+  background: ${(props) => props.theme.darkGreen}
+    url('${(props) => props.theme.bgImage}');
+  background-position: center -500px;
+  background-size: cover;
+  background-attachment: fixed;
+`;
+const CABLE = ({ theme, speakers, metadata, hasStarted, hasEnded }) => {
   speakers = _.orderBy(speakers, ['LastName', 'FirstName'], ['asc']);
   return (
     <WRAP>
@@ -202,6 +251,34 @@ const CABLE = ({ theme, speakers, metadata, hasStarted }) => {
           start={metadata.eventStartEnd.StartDateTime}
         />
       </HeaderWrap>
+      {hasEnded ? (
+        <>
+          <MainVideoSection>
+            <h2>
+              Missed The Discussion? <br /> Re-Watch Below.
+            </h2>
+            <div className="main-video">
+              <VideoBox src={metadata.streamLinks[0].url || ''}></VideoBox>
+            </div>
+          </MainVideoSection>
+          <BGHR />
+          <MultiVideoSection>
+            <h2>Pillar Videos</h2>
+            <div className="video-map">
+              {/* {JSON.stringify(metadata.BreakoutSessions['Pillar Videos'])} */}
+              {metadata.BreakoutSessions['Pillar Videos'].map((video) => (
+                <div className={`single-video--${video.Name}`}>
+                  <VideoBox src={video.Link.url}></VideoBox>
+                  <h4> {video.Name} </h4>
+                </div>
+              ))}
+            </div>
+          </MultiVideoSection>
+          <BGHR />
+        </>
+      ) : (
+        ''
+      )}
       <SpeakersSection>
         <h2>Cable Ambassadors</h2>
         <SpeakerMap>

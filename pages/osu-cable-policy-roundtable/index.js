@@ -63,11 +63,25 @@ const Index = (props) => {
     return false;
   };
 
+  const calculateIfEnded = () => {
+    let now = new Date();
+    const parsed_event_end = Date.parse(main_event.eventStartEnd.EndDateTime);
+
+    let calc_time = parsed_event_end - now;
+
+    if (calc_time <= 0) {
+      return true;
+    }
+    return false;
+  };
+
   const [hasStarted, setStarted] = useState(calculateIfStarted());
+  const [hasEnded, setEnded] = useState(calculateIfEnded());
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
+      setEnded(calculateIfEnded());
     }, 1000);
 
     return () => clearInterval(interval);
@@ -81,6 +95,7 @@ const Index = (props) => {
         <Body>
           <CABLE
             hasStarted={hasStarted}
+            hasEnded={hasEnded}
             theme={event_theme}
             speakers={speakers}
             metadata={main_event}
@@ -112,6 +127,21 @@ export async function getServerSideProps(ctx) {
     ).then((res) => res.json());
 
     speakers = speakers.EventSpeakers;
+
+    let breakoutObj = {};
+
+    main_event.BreakoutSessions.forEach((sesh) => {
+      let key = Object.keys(breakoutObj).find(
+        (title) => title === sesh.Category
+      );
+      if (!key) {
+        breakoutObj[sesh.Category] = [sesh];
+      } else {
+        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
+      }
+    });
+
+    main_event.BreakoutSessions = breakoutObj;
 
     const values = {
       props: {
