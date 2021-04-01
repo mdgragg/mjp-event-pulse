@@ -377,7 +377,7 @@ export async function getServerSideProps(ctx) {
 
     main_event.BreakoutSessions = breakoutObj;
 
-    if (eventData.AuthRequired) {
+    if (true) {
       return {
         redirect: {
           destination: '/sispringcelebration/thank-you',

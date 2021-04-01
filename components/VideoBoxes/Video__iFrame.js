@@ -73,10 +73,20 @@ const CustomFrame = styled.iframe`
 
 const FilterVideo = (props) => {
   useEffect(() => {
-    console.log('remounted');
+    console.log('remounted video');
   }, []);
   if (props.vidShow) {
-    return <CustomFrame src={props.src} frameborder="0" allowfullscreen />;
+    return (
+      <CustomFrame
+        src={props.src}
+        // frameborder="0"
+        webkitallowfullscreen={true}
+        mozallowfullscreen={true}
+        allow="fullscreen"
+        allowfullscreen
+        controls="false"
+      />
+    );
   } else {
     return <div>No video...</div>;
   }

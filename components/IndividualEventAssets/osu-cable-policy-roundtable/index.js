@@ -193,6 +193,11 @@ const MainVideoSection = styled.div`
     width: 50%;
     margin: auto;
   }
+  @media all and (max-width: 768px) {
+    && .main-video {
+      width: 95%;
+    }
+  }
 `;
 const MultiVideoSection = styled.div`
   /* min-height: 40vh; */
@@ -210,6 +215,22 @@ const MultiVideoSection = styled.div`
   }
   && .video-map h4 {
     color: ${(props) => props.theme.green};
+    border-top: 4px solid ${(props) => props.theme.green};
+    width: min-content;
+    margin: 1rem auto;
+  }
+  @media all and (max-width: 1200px) {
+    && .video-map {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2%;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    && .video-map {
+      grid-template-columns: 1fr;
+      grid-gap: 0px;
+    }
   }
 `;
 const BGHR = styled.hr`
