@@ -26,7 +26,7 @@ import NameScroller from '../../components/RealTimeAssets/NameScroller';
 import NameTable from 'components/IndividualEventAssets/sispringcelebration/NameTable';
 import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
 export var event_theme = {
-  heroHeight: '22vh',
+  heroHeight: '350px',
   green: '93c84e',
   fontFamily: null,
   headerOpacity: null,
@@ -207,6 +207,8 @@ const Index = (props) => {
 
 export async function getServerSideProps(ctx) {
   //console.log(ctx.req.cookies);
+  const { preview } = cookies(ctx);
+  console.log(preview);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -215,6 +217,13 @@ export async function getServerSideProps(ctx) {
   try {
     let eventData = await getEventMeta('ads-sales-meetings-2021');
 
+    if (eventData.eventStatus.EventStatus === 'Preview' && preview !== 'true') {
+      return {
+        redirect: {
+          destination: 'ads-sales-meetings-2021/preview',
+        },
+      };
+    }
     let main_event = eventData.events.filter(
       (ev) => ev.isMainEvent === true
     )[0];

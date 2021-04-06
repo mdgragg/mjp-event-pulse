@@ -57,7 +57,7 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: { previewPassword: 'sispringcelebration' },
+    props: { previewPassword: 'adssales' },
   };
 }
 
