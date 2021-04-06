@@ -10,7 +10,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop__WithCountdown from 'components/VideoBoxes/Video__StickyTop__WithCountdown';
+import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
 import FetchHtml from 'components/iFrames/FetchHtml';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
@@ -27,6 +27,7 @@ import NameTable from 'components/IndividualEventAssets/sispringcelebration/Name
 import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
 export var event_theme = {
   heroHeight: '22vh',
+  green: '93c84e',
   fontFamily: null,
   headerOpacity: null,
   videoBreakPoint: 700,
@@ -86,25 +87,31 @@ const Index = (props) => {
 
         <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
           <div>
-            <img
-              style={{ width: '100%', maxWidth: '100px' }}
-              src={main_event.KeyValue[0]?.value}
-            />
+            <center>
+              <h2 style={{ color: '#181818', margin: 'auto' }}>
+                2021 Sales Meetings
+              </h2>
+            </center>
           </div>
           <div>
             {' '}
             <img
               style={{ width: '100%', maxWidth: '500px' }}
-              src={main_event.KeyValue[1]?.value}
+              src={main_event.KeyValue[0]?.value}
             />
+            <center>
+              <h2 style={{ color: '#181818', margin: 'auto' }}>
+                April 12th at 1pm
+              </h2>
+            </center>
           </div>
           <div>
             <center>
               <Counter
                 fontSize={'1rem'}
                 shadow={'0px'}
-                bgColor={event_theme.blue}
-                textColor={'white'}
+                bgColor={'#181818'}
+                textColor={'#93c84e'}
                 hasStarted={hasStarted}
                 afterStarted={
                   <>
@@ -134,82 +141,35 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <VideoBox__StickyTop__WithCountdown
-                  showMinutesBefore={15}
-                  start={main_event.eventStartEnd.StartDateTime}
+                <VideoBox__StickyTop
                   isStarted={true}
                   src={
                     main_event.streamLinks.find((link) => link.isMain === true)
                       .url
                   }
-                  showBefore={
-                    <div
-                      style={{
-                        height: 'inherit',
-                        width: '100%',
-                        backgroundColor: '#181818',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        color: 'white',
-                      }}
-                    >
-                      <p
-                        style={{
-                          margin: '3rem auto',
-                          maxWidth: '50%',
-                          fontSize: '1.5rem',
-                          textAlign: 'center',
-                        }}
-                      >
-                        The event hasn't started yet. This video stream will
-                        update when it does.
-                      </p>
-                      <div
-                        style={{
-                          position: 'relative',
-                          zIndex: '99',
-                          backgroundColor: 'white',
-                          height: '300px',
-                          width: '300px',
-                          borderRadius: '200px',
-                          marginBottom: '2rem',
-                        }}
-                      >
-                        <img
-                          style={{
-                            position: 'absolute',
-                            top: '20%',
-                            transformOrigin: 'center center',
-                            left: '0',
-                            right: '0',
-                            width: '100%',
-                            maxWidth: '150px',
-                            zIndex: '100',
-                            margin: 'auto',
-                          }}
-                          src={main_event.KeyValue[0]?.value}
-                        />
-                      </div>
-                    </div>
-                  }
                 />
-
-                <Button
-                  style={{ margin: '2rem auto', display: 'block' }}
-                  color={'primary'}
-                  variant="outlined"
-                  onClick={() => {
-                    window.location.href = main_event.streamLinks.find(
-                      (link) => link.Service === 'VimeoLink'
-                    ).url;
-                  }}
-                >
-                  Slow Connection?
-                </Button>
               </Grid>
               <Grid item={true} md={4} xs={12}>
+                {/* <FetchHtml endpoint="https://facebook.com" />
+                <VideoBox__iFrame
+                  stickTop={false}
+                  isStarted={true}
+                  src={
+                    'https://bputil11.bidpal.net/Scoreboard/preview/start/bpe369297'
+                  }
+                /> */}
+                <div
+                  style={{
+                    textAlign: 'center',
+                    fontSize: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 'inherit',
+                    minHeight: '300px',
+                  }}
+                ></div>
                 <p
                   style={{
                     fontSize: '1.25rem',
@@ -218,8 +178,7 @@ const Index = (props) => {
                     margin: '1rem auto 0 auto',
                   }}
                 >
-                  To join the live auction, download the bidpal app and follow
-                  along on your phone. Having trouble?
+                  For more information please contact our helpdesk.
                 </p>
                 <a href="#bidpal-help">
                   <Button
@@ -227,56 +186,16 @@ const Index = (props) => {
                     color={'primary'}
                     variant="outlined"
                   >
-                    Bidpal Help
+                    Help
                   </Button>
                 </a>
               </Grid>
               <Grid item={true} md={8} xs={12}></Grid>
-              <Grid item={true} md={4} xs={12}>
-                <center>
-                  <h2>Chat</h2>
-                </center>
-                <div
-                  style={{
-                    height: '510px',
-                    color: '#181818',
-                    maxWidth: '360px',
-                    margin: '0 auto 2rem auto',
-                    border: '3px solid rgba(0,0,0,0.05)',
-                    padding: '10px',
-                    textAlign: 'center',
-                  }}
-                >
-                  <iframe
-                    src={
-                      main_event.streamLinks.find(
-                        (link) => link.Service === 'Chat'
-                      ).url
-                    }
-                    width="96%"
-                    height="96%"
-                    frameborder="0"
-                    style={{ margin: 'auto', height: '100%' }}
-                  ></iframe>
-                </div>
-              </Grid>
+              <Grid item={true} md={4} xs={12}></Grid>
             </Grid>
           </Section>
 
-          <BannerWithPicture color={event_theme.blue}></BannerWithPicture>
-          <span id="bidpal-help" />
-          <Section title="Bidpal Resources">
-            <Grid container spacing={3} justify={'center'}>
-              {BreakoutSessions[1]?.map((session) => (
-                <Grid item key={session.id}>
-                  <SingleEvent buttonText="Click Here" session={session} />
-                </Grid>
-              ))}
-            </Grid>
-          </Section>
-          {/* <Section showButton title="Platinum Sponsors">
-            <Grid container spacing={3} justify={'center'}></Grid>
-          </Section> */}
+          <BannerWithPicture color={'#181818'}></BannerWithPicture>
         </Body>
         <Footer></Footer>
       </Page>
@@ -315,14 +234,6 @@ export async function getServerSideProps(ctx) {
     });
 
     main_event.BreakoutSessions = breakoutObj;
-
-    if (true) {
-      return {
-        redirect: {
-          destination: '/sispringcelebration/thank-you',
-        },
-      };
-    }
 
     const values = {
       props: {

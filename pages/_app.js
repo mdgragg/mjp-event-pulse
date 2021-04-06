@@ -67,6 +67,7 @@ MyApp.getInitialProps = async (appContext) => {
 
   const appProps = await App.getInitialProps(appContext);
   let { creds } = cookies(appContext.ctx);
+  // console.log(appContext.ctx.req);
 
   creds === undefined ? (creds = {}) : null;
 
