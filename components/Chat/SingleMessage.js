@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { chat_colors } from './PublicChat';
 
 const pad = (number) => {
   let the_num = parseInt(number, 10);
@@ -13,6 +14,7 @@ const pad = (number) => {
 };
 
 const Message = styled.div`
+  box-shadow: 5px 2px 10px -5px grey;
   && h4 {
     margin: 0;
   }
@@ -24,7 +26,7 @@ const Message = styled.div`
   margin: 2rem auto 1.5rem 0;
   border-radius: 10px;
   &&.me {
-    background-color: #007ab8;
+    background-color: ${() => chat_colors.blue};
     color: white;
     margin: 2rem 0 2rem auto;
     && .timestamp {
@@ -33,11 +35,12 @@ const Message = styled.div`
   }
   && .timestamp {
     color: grey;
+    font-size: 12px;
     position: absolute;
-    bottom: -20px;
+    bottom: -22px;
   }
 `;
-const SingleMessage = ({ isMe = false, name, content, date }) => {
+const SingleMessage = ({ isMe = false, name, content, date, type }) => {
   const theDate = new Date(date);
   const hours =
     theDate.getHours() > 12 ? theDate.getHours() - 12 : theDate.getHours();
@@ -47,11 +50,16 @@ const SingleMessage = ({ isMe = false, name, content, date }) => {
     <>
       <Message className={isMe ? 'me' : null}>
         <h4>{name}</h4>
-        {content}
+        <div
+          className={
+            type === 'reaction' ? 'message-content reaction' : 'message-content'
+          }
+        >
+          {content}
+        </div>
         <div className="timestamp">
           {theDate.getMonth() + 1}/{theDate.getUTCDate()}/
           {theDate.getUTCFullYear()}
-          {'   '}
           {hours}:{pad(theDate.getMinutes())}:{pad(theDate.getSeconds())} {AMPM}{' '}
         </div>
       </Message>
