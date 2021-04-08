@@ -228,7 +228,7 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
   try {
     let eventData = await getEventMeta('ads-sales-meetings-2021');
-    
+    if (
       eventData.eventStatus?.EventStatus === 'Preview' &&
       preview !== 'true'
     ) {
