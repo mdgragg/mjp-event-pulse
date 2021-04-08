@@ -12,7 +12,7 @@ import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import FetchHtml from 'components/iFrames/FetchHtml';
+import CircleSpeaker from 'components/ListItems/CircleSpeaker';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Counter from 'components/Counters/Counter';
@@ -23,25 +23,30 @@ import SingleEvent from 'components/BreakoutSessions/SingleEvent';
 import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
 import NameScroller from '../../components/RealTimeAssets/NameScroller';
 
-import NameTable from 'components/IndividualEventAssets/sispringcelebration/NameTable';
+import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
 import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
 export var event_theme = {
-  heroHeight: '350px',
-  green: '93c84e',
-  fontFamily: null,
-  headerOpacity: null,
-  videoBreakPoint: 700,
+  h1: {
+    fontSize: '5rem',
+  },
+  heroHeight: '450px',
+  green: '#93c84e',
   white: null,
   blue: '#1e2c60',
+  red: '#b71f39',
+  fontFamily: 'Akzidenz-Grotesque-Bold',
+  headerOpacity: '0.75',
+  videoBreakPoint: 700,
   buttonInfoColor: null,
   buttonSuccessColor: null,
   buttonDangerColor: 'tomato',
-  red: '#b71f39',
   buttonColor: null,
-  headerFont: null,
-  headerBgColor: 'white',
+  headerFont: 'Akzidenz-Grotesque-Bold',
+  headerFontColor: 'white',
+  headerBgColor: 'black',
   maxSectionWidth: '1800px',
 };
+
 const Index = (props) => {
   const router = useRouter();
 
@@ -52,8 +57,17 @@ const Index = (props) => {
     main_event: { BreakoutSessions },
   } = props;
 
+  const speakers = [
+    'Single Speaker',
+    'Single Speaker',
+    'Single Speaker',
+    'Single Speaker',
+    'Single Speaker',
+  ];
+
   event_theme = {
     ...event_theme,
+    header_image: main_event.HeaderImage.url,
   };
 
   const calculateIfStarted = () => {
@@ -86,22 +100,17 @@ const Index = (props) => {
         <Meta title={event_meta.EventJobName}> </Meta>
 
         <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
+          <div></div>
           <div>
             <center>
-              <h2 style={{ color: '#181818', margin: 'auto' }}>
-                2021 Sales Meetings
-              </h2>
-            </center>
-          </div>
-          <div>
-            {' '}
-            <img
-              style={{ width: '100%', maxWidth: '500px' }}
-              src={main_event.KeyValue[0]?.value}
-            />
-            <center>
-              <h2 style={{ color: '#181818', margin: 'auto' }}>
-                April 12th at 1pm
+              <img
+                style={{ width: '100%', maxWidth: '350px', margin: 'auto' }}
+                src={main_event.KeyValue[0]?.value}
+              />
+
+              <h1 style={{ margin: 'auto' }}>2021 Sales Meeting</h1>
+              <h2 style={{ margin: 'auto' }}>
+                <i> April 12th at 1:00pm EST</i>
               </h2>
             </center>
           </div>
@@ -110,8 +119,10 @@ const Index = (props) => {
               <Counter
                 fontSize={'1rem'}
                 shadow={'0px'}
-                bgColor={'#181818'}
-                textColor={'#93c84e'}
+                bgColor={event_theme.green}
+                counterText={'Starts In'}
+                counterTextColor={'white'}
+                textColor={'white'}
                 hasStarted={hasStarted}
                 afterStarted={
                   <>
@@ -141,23 +152,9 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <VideoBox__StickyTop
-                  isStarted={true}
-                  src={
-                    main_event.streamLinks.find((link) => link.isMain === true)
-                      .url
-                  }
-                />
+                <Agenda />
               </Grid>
               <Grid item={true} md={4} xs={12}>
-                {/* <FetchHtml endpoint="https://facebook.com" />
-                <VideoBox__iFrame
-                  stickTop={false}
-                  isStarted={true}
-                  src={
-                    'https://bputil11.bidpal.net/Scoreboard/preview/start/bpe369297'
-                  }
-                /> */}
                 <div
                   style={{
                     textAlign: 'center',
@@ -190,12 +187,27 @@ const Index = (props) => {
                   </Button>
                 </a>
               </Grid>
-              <Grid item={true} md={8} xs={12}></Grid>
-              <Grid item={true} md={4} xs={12}></Grid>
+              <Grid item md={8} xs={12}></Grid>
+              <Grid item md={4} xs={12}></Grid>
             </Grid>
           </Section>
 
-          <BannerWithPicture color={'#181818'}></BannerWithPicture>
+          <BannerWithPicture
+            innerWidth={`60%`}
+            color={'#ffffff'}
+            imgUrl={main_event.KeyValue[0]?.value}
+            headerText="About The Event"
+            children={`Aute minim sint irure consectetur reprehenderit deserunt voluptate. Nostrud pariatur voluptate ipsum nisi non. Est minim id minim deserunt labore quis dolor quis officia excepteur sunt sunt enim. Reprehenderit fugiat reprehenderit culpa tempor laboris ad. In ullamco eiusmod quis enim minim nostrud reprehenderit cupidatat qui consectetur et. `}
+          ></BannerWithPicture>
+          <Section>
+            <Grid container spacing={3} justify="center">
+              {speakers.map((spkr) => (
+                <Grid item md={4}>
+                  <CircleSpeaker>{spkr}</CircleSpeaker>
+                </Grid>
+              ))}
+            </Grid>
+          </Section>
         </Body>
         <Footer></Footer>
       </Page>
@@ -216,8 +228,10 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
   try {
     let eventData = await getEventMeta('ads-sales-meetings-2021');
-
-    if (eventData.eventStatus.EventStatus === 'Preview' && preview !== 'true') {
+    
+      eventData.eventStatus?.EventStatus === 'Preview' &&
+      preview !== 'true'
+    ) {
       return {
         redirect: {
           destination: 'ads-sales-meetings-2021/preview',

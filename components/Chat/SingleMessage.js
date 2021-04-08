@@ -45,7 +45,7 @@ const SingleMessage = ({ isMe = false, name, content, date, type }) => {
   const hours =
     theDate.getHours() > 12 ? theDate.getHours() - 12 : theDate.getHours();
 
-  const AMPM = theDate.getHours() > 12 ? 'pm' : 'am';
+  const AMPM = theDate.getHours() >= 12 ? 'pm' : 'am';
   return (
     <>
       <Message className={isMe ? 'me' : null}>
@@ -59,8 +59,8 @@ const SingleMessage = ({ isMe = false, name, content, date, type }) => {
         </div>
         <div className="timestamp">
           {theDate.getMonth() + 1}/{theDate.getUTCDate()}/
-          {theDate.getUTCFullYear()}
-          {hours}:{pad(theDate.getMinutes())}:{pad(theDate.getSeconds())} {AMPM}{' '}
+          {theDate.getUTCFullYear()} at {hours}:{pad(theDate.getMinutes())}:
+          {pad(theDate.getSeconds())} {AMPM}{' '}
         </div>
       </Message>
     </>

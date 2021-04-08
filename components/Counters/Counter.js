@@ -11,12 +11,13 @@ import { useState, Fragment, useEffect } from 'react';
 
 const MyCounter = styled.div`
   box-shadow: 0px 0px ${(props) => props.props.shadow || '30px'} 0px black;
+  border-radius: 5px;
   text-align: center;
   font-weight: bold;
   z-index: 99;
   color: ${(props) => props.props.textColor || 'white'};
   background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
-  padding: 0.5em;
+  padding: 0.65em;
   min-width: 360px;
   font-size: ${(props) => props.props.fontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,

@@ -14,7 +14,7 @@ const HeroHolder = styled.div`
   position: relative;
   width: 100%;
   height: ${(props) => props.theme.heroHeight || '35vh'};
-  background-color: white;
+  background-color: ${(props) => props.theme.headerBgColor};
   overflow: hidden;
   color: white;
   @media all and (max-width: 768px) {
@@ -26,7 +26,9 @@ const HeroHolder = styled.div`
     content: '';
     top: 0;
     position: absolute;
-    background-image: url('${(props) => props.theme.bgImage || props.bgImage}');
+    background-image: url('${(props) =>
+      props.theme.header_image || props.header_image}');
+    opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
@@ -35,11 +37,10 @@ const HeroHolder = styled.div`
 
 const HeaderInner = styled.div`
   position: relative;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
   align-items: center;
   width: 90%;
-  margin: auto;
   height: inherit;
   /* text-align: center; */
 `;

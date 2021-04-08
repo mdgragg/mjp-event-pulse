@@ -4,7 +4,7 @@ import { Typography, FormControl, Button, Input } from '@material-ui/core';
 
 const StyledBanner = styled.div`
   height: auto;
-  padding: 3em;
+  padding: 2em;
   display: flex;
   flex-direction: space-around;
   align-items: center;
@@ -19,7 +19,8 @@ const StyledBanner = styled.div`
   background-repeat: no-repeat;
 
   && .banner-image {
-    width: 60%;
+    width: 80%;
+    max-width: 450px;
     margin: 2rem;
   }
 `;
@@ -46,7 +47,9 @@ const MyInput = styled(Input)`
 const Banner = (props) => {
   return (
     <StyledBanner image={props.image} color={props.color}>
-      <div style={{ maxWidth: '500px', margin: 'auto' }}>
+      <div
+        style={{ maxWidth: `${props.innerWidth || '450px'}`, margin: 'auto' }}
+      >
         <Typography
           variant="h4"
           component="h4"

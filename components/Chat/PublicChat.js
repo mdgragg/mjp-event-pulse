@@ -151,10 +151,10 @@ const PublicChat = ({ slug = 'test' }) => {
     sessionStorage.setItem('public-chat--name', JSON.stringify(nameToSet));
     setName(nameToSet);
     setText(initialText);
-    grabMessages();
   };
 
   const grabMessages = () => {
+    console.log('grabbing messages...');
     base.fetch(`${slug}/public-chat`, {
       then: (data) => {
         setMessages(data);
@@ -163,7 +163,12 @@ const PublicChat = ({ slug = 'test' }) => {
   };
 
   useEffect(() => {
+    grabMessages();
+  }, [name]);
+
+  useEffect(() => {
     // base.post('messages', { data: messages });
+    console.log('mount');
     const retrievedName = JSON.parse(
       sessionStorage.getItem('public-chat--name')
     );
@@ -174,8 +179,10 @@ const PublicChat = ({ slug = 'test' }) => {
     ) {
       return setName(null);
     }
+
     setName(retrievedName);
     setText((prev) => ({ ...prev, name: retrievedName }));
+
     const ref = base.syncState(`${slug}/public-chat`, {
       context: {
         setState: ({ messages }) => setMessages({ ...messages }),
@@ -183,13 +190,14 @@ const PublicChat = ({ slug = 'test' }) => {
       },
       //   asArray: true,
       state: 'messages',
-      then: (e) => {
-        console.log('listening for messages');
+      then: () => {
+        console.log('listening');
       },
-      onFailure: () => {
-        toast.error('failure');
+      onFailure: (err) => {
+        toast.error('failure: ' + err);
       },
     });
+    grabMessages();
     return () => base.removeBinding(ref);
   }, []);
 
@@ -199,11 +207,13 @@ const PublicChat = ({ slug = 'test' }) => {
   }, [messages]);
 
   const handleSendMessage = async (messageObject) => {
+    if (!messageObject.name) {
+      messageObject.name = name;
+    }
     return new Promise((resolve, reject) => {
       base.post(`${slug}/public-chat/${Date.now()}--${name.uid}`, {
         data: messageObject,
         then: (err) => resolve(err),
-        onError: () => reject(),
       });
     });
   };
@@ -216,6 +226,7 @@ const PublicChat = ({ slug = 'test' }) => {
 
     handleSendMessage(textToSend).then((err) => {
       if (err) return toast.error(err);
+      grabMessages();
       return setText(initialText);
     });
   };
@@ -230,6 +241,7 @@ const PublicChat = ({ slug = 'test' }) => {
 
     handleSendMessage(textToSend).then((err) => {
       if (err) return toast.error(err);
+      grabMessages();
       return setText(initialText);
     });
   };
@@ -267,7 +279,12 @@ const PublicChat = ({ slug = 'test' }) => {
           <h3>{name && name.displayName}</h3>
           <Reactions>
             {reactions.map((reaction) => (
-              <span onClick={() => handleReaction(reaction)}>{reaction}</span>
+              <span
+                key={`single--reaction-${reaction.toString()}`}
+                onClick={() => handleReaction(reaction)}
+              >
+                {reaction}
+              </span>
             ))}
           </Reactions>
         </div>
@@ -289,14 +306,14 @@ const PublicChat = ({ slug = 'test' }) => {
           {' '}
           Send
         </SubmitChat>
-        {/* <button
+        <button
           onClick={() => {
             sessionStorage.clear();
             base.post(`${slug}/public-chat`, { data: {} });
           }}
         >
           reset
-        </button> */}
+        </button>
       </InputArea>
     </ChatWrap>
   );

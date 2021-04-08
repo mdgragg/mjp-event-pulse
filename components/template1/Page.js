@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
 import AppContextProvider, { AppContext } from 'lib/context/AppContext';
 import LoadingScreen from '../globals/Loading';
+
 const StyledPage = styled.div`
   background: ${(props) => props.theme.bg};
   color: ${(props) => props.theme.fontColor};
@@ -19,6 +20,22 @@ const StyledPage = styled.div`
   p {
     font-family: ${(props) => props.theme.pfont};
   }
+  h1 {
+    ${(props) => props.theme.h1}
+  }
+  h2 {
+    ${(props) => props.theme.h2}
+  }
+  h3 {
+    ${(props) => props.theme.h3}
+  }
+  h4 {
+    ${(props) => props.theme.h4}
+  }
+  h5 {
+    ${(props) => props.theme.h5}
+  }
+
   a {
     text-decoration: none;
     color: navy;

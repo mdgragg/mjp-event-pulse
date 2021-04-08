@@ -43,10 +43,11 @@ const useStyles = makeStyles((theme) => ({
 const CircleNameHolder = styled.div`
   margin-top: 50px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   && .name-holder {
     color: ${(props) => props.textColor};
-    margin: 0 auto;
+    margin: 1rem auto;
     font-size: 1.25rem;
     font-weight: 600;
     text-align: center;
@@ -59,7 +60,7 @@ const CircleImg = styled.img`
   width: auto;
   border-radius: 60px;
 `;
-export default function CircleName(props) {
+export default function CircleSpeaker(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [isScrolled, setScrolled] = React.useState(false);
