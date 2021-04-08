@@ -151,6 +151,13 @@ const PublicChat = ({ slug = 'test' }) => {
     sessionStorage.setItem('public-chat--name', JSON.stringify(nameToSet));
     setName(nameToSet);
     setText(initialText);
+
+    handleSendMessage({
+      name: nameToSet,
+      content: `${nameToSet.displayName} has joined the chat`,
+      type: 'JoinLeave',
+      date: Date.now(),
+    });
   };
 
   const grabMessages = () => {
@@ -167,9 +174,11 @@ const PublicChat = ({ slug = 'test' }) => {
   }, [name]);
 
   useEffect(() => {
+    console.log('mount');
+    console.log('grab1');
     grabMessages();
     // base.post('messages', { data: messages });
-    console.log('mount');
+
     const retrievedName = JSON.parse(
       sessionStorage.getItem('public-chat--name')
     );
@@ -178,28 +187,29 @@ const PublicChat = ({ slug = 'test' }) => {
       retrievedName.name === null ||
       retrievedName.uid === null
     ) {
-      return setName(null);
+      console.log('The name is null');
+      setName(null);
     }
 
     setName(retrievedName);
     setText((prev) => ({ ...prev, name: retrievedName }));
 
-    const ref = base.syncState(`${slug}/public-chat`, {
+    base.listenTo(`${slug}/public-chat`, {
       context: {
         setState: ({ messages }) => setMessages({ ...messages }),
         state: { messages },
       },
       //   asArray: true,
-      state: 'messages',
-      then: () => {
-        console.log('listening');
-      },
-      onFailure: (err) => {
-        toast.error('failure: ' + err);
+      // state: 'messages',
+      then(data) {
+        console.log('listen: ', data);
+        grabMessages();
       },
     });
 
-    return () => base.removeBinding(ref);
+    return () => {
+      console.log('unmount');
+    };
   }, []);
 
   //scroll to bottom on new message
@@ -212,12 +222,19 @@ const PublicChat = ({ slug = 'test' }) => {
       messageObject.name = name;
     }
     return new Promise((resolve, reject) => {
-      base.post(`${slug}/public-chat/${Date.now()}--${name.uid}`, {
-        data: messageObject,
-        then: (err) => resolve(err),
-      });
+      base.post(
+        `${slug}/public-chat/${Date.now()}--${messageObject.name.uid}`,
+        {
+          data: messageObject,
+          then: (err) => {
+            resolve(err);
+            grabMessages();
+          }, //err only if there is one
+        }
+      );
     });
   };
+
   const handleMessageUpdate = () => {
     if (text.content === '') {
       console.log(text.content);

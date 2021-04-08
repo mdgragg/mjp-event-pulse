@@ -46,6 +46,17 @@ const SingleMessage = ({ isMe = false, name, content, date, type }) => {
     theDate.getHours() > 12 ? theDate.getHours() - 12 : theDate.getHours();
 
   const AMPM = theDate.getHours() >= 12 ? 'pm' : 'am';
+  if (type === 'JoinLeave') {
+    return (
+      <div style={{ margin: '40px 0 0 0', color: 'grey' }}>
+        <strong style={{ color: 'black' }}>
+          {' '}
+          {content.slice(0, content.search('has'))}
+        </strong>{' '}
+        {content.slice(content.search('has', 0))}
+      </div>
+    );
+  }
   return (
     <>
       <Message className={isMe ? 'me' : null}>

@@ -47,6 +47,8 @@ export var event_theme = {
   maxSectionWidth: '1800px',
 };
 
+const PLACEHOLD = 'https://placehold.co/';
+
 const Index = (props) => {
   const router = useRouter();
 
@@ -67,7 +69,7 @@ const Index = (props) => {
 
   event_theme = {
     ...event_theme,
-    header_image: main_event.HeaderImage.url,
+    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
   const calculateIfStarted = () => {
