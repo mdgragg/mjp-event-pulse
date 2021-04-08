@@ -5,10 +5,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import SingleMessage from './SingleMessage';
+import { TonalitySharp } from '@material-ui/icons';
 
 export const chat_colors = {
   blue: `#007ab8`,
 };
+
+var badwordsArray = require('badwords/array');
 
 const SubmitChat = styled.button``;
 
@@ -97,6 +100,7 @@ const InputArea = styled.div`
   background-color: #dedede;
   width: 100%;
   padding: 0.5rem;
+  transition: all 0.2s ease;
   && .input-area--header {
     display: flex;
     justify-content: space-between;
@@ -108,9 +112,13 @@ const InputArea = styled.div`
     width: 100px;
     background-color: ${() => chat_colors.blue};
   }
+  &&.sending {
+    opacity: 0.9;
+    user-select: none;
+  }
 `;
 
-const PublicChat = ({ slug = 'test' }) => {
+const PublicChat = ({ slug = 'test-2' }) => {
   const [messages, setMessages] = useState(null);
 
   // name is : {name : some name, uid: name unique for chat}\
@@ -130,6 +138,8 @@ const PublicChat = ({ slug = 'test' }) => {
   //reactions
   const reactions = ['😍', '🙌🏼', '😀', '😂'];
 
+  const [sending, setSending] = useState(false);
+
   // used to track if name is me or not
   const nameRef = useRef();
 
@@ -140,12 +150,13 @@ const PublicChat = ({ slug = 'test' }) => {
     const current = nameRef.current.value;
 
     if (current === null || current.replace(/ /g, '') === '') {
-      return toast.error('you need to have a name');
+      return toast.error('You must have a name to join!');
     }
 
     const nameToSet = {
       displayName: current,
       uid: `${current}--${Math.ceil(Math.random(Date.now()) * 1000000000)}`,
+      userType: 'Attendee',
     };
 
     sessionStorage.setItem('public-chat--name', JSON.stringify(nameToSet));
@@ -174,8 +185,6 @@ const PublicChat = ({ slug = 'test' }) => {
   }, [name]);
 
   useEffect(() => {
-    console.log('mount');
-    console.log('grab1');
     grabMessages();
     // base.post('messages', { data: messages });
 
@@ -194,7 +203,7 @@ const PublicChat = ({ slug = 'test' }) => {
     setName(retrievedName);
     setText((prev) => ({ ...prev, name: retrievedName }));
 
-    base.listenTo(`${slug}/public-chat`, {
+    const ref = base.listenTo(`${slug}/public-chat`, {
       context: {
         setState: ({ messages }) => setMessages({ ...messages }),
         state: { messages },
@@ -202,13 +211,12 @@ const PublicChat = ({ slug = 'test' }) => {
       //   asArray: true,
       // state: 'messages',
       then(data) {
-        console.log('listen: ', data);
         grabMessages();
       },
     });
 
     return () => {
-      console.log('unmount');
+      base.removeBinding(ref);
     };
   }, []);
 
@@ -217,17 +225,35 @@ const PublicChat = ({ slug = 'test' }) => {
     chatMessageRef?.current?.scrollTo(0, 10000);
   }, [messages]);
 
+  const hasProfanity = (sentence) => {
+    let sentence_array = sentence.split(' ');
+    const sum = sentence_array.some((word) => badwordsArray.includes(word));
+    return sum;
+  };
+
   const handleSendMessage = async (messageObject) => {
-    if (!messageObject.name) {
-      messageObject.name = name;
-    }
     return new Promise((resolve, reject) => {
+      if (!name && messageObject.type !== 'JoinLeave') {
+        setText(initialText);
+        return reject('You need a name to join the chat!');
+      }
+      if (hasProfanity(messageObject.content)) {
+        return reject(
+          'Your message goes against our community guidelines, please adjust your content and try again.'
+        );
+      }
+      if (!messageObject.name) {
+        messageObject.name = name;
+      }
       base.post(
         `${slug}/public-chat/${Date.now()}--${messageObject.name.uid}`,
         {
           data: messageObject,
           then: (err) => {
             resolve(err);
+            if (sending) {
+              setSending(false);
+            }
             grabMessages();
           }, //err only if there is one
         }
@@ -236,17 +262,38 @@ const PublicChat = ({ slug = 'test' }) => {
   };
 
   const handleMessageUpdate = () => {
-    if (text.content === '') {
-      console.log(text.content);
+    setSending(true);
+    if (
+      !text ||
+      !text.content ||
+      text.content == '' ||
+      text.content === null ||
+      text.content === '\n'
+    ) {
+      toast.error('No content to send');
+      setText(initialText);
+      setSending(false);
       return;
     }
+
     let textToSend = { ...text, date: Date.now() };
 
-    handleSendMessage(textToSend).then((err) => {
-      if (err) return toast.error(err);
-      grabMessages();
-      return setText(initialText);
-    });
+    // remove last enter
+    if (textToSend.content.charAt(textToSend.content.length - 1) === '\n') {
+      textToSend.content = textToSend.content.slice(
+        0,
+        textToSend.content.length - 1
+      );
+    }
+
+    handleSendMessage(textToSend)
+      .then((err) => {
+        if (err) return console.error(err);
+        setSending(false);
+        grabMessages();
+        return setText(initialText);
+      })
+      .catch((err) => toast.error(err));
   };
 
   const handleReaction = (reaction) => {
@@ -257,11 +304,13 @@ const PublicChat = ({ slug = 'test' }) => {
       type: 'reaction',
     };
 
-    handleSendMessage(textToSend).then((err) => {
-      if (err) return toast.error(err);
-      grabMessages();
-      return setText(initialText);
-    });
+    handleSendMessage(textToSend)
+      .then((err) => {
+        if (err) return toast.error(err);
+        grabMessages();
+        return setText(initialText);
+      })
+      .catch((err) => toast.error(err));
   };
 
   return (
@@ -271,7 +320,7 @@ const PublicChat = ({ slug = 'test' }) => {
           <h3>Please Choose A Display Name</h3>
           <input ref={nameRef} type="text" />
           <br />
-          <button onClick={setTheName}> Set The Name</button>
+          <button onClick={setTheName}>Join the Chat</button>
         </NameInput>
       ) : null}
 
@@ -292,7 +341,7 @@ const PublicChat = ({ slug = 'test' }) => {
           ))}
       </ChatMessages>
 
-      <InputArea>
+      <InputArea className={sending ? 'sending' : null}>
         <div className="input-area--header">
           <h3>{name && name.displayName}</h3>
           <Reactions>
@@ -314,8 +363,9 @@ const PublicChat = ({ slug = 'test' }) => {
             const new_content = e.target.value;
             setText((prev) => ({ ...prev, content: new_content }));
           }}
-          onKeyUp={(e) => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter') {
+              e.preventDefault();
               handleMessageUpdate();
             }
           }}

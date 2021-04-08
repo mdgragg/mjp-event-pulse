@@ -47,18 +47,25 @@ const CircleNameHolder = styled.div`
   align-items: center;
   && .name-holder {
     color: ${(props) => props.textColor};
-    margin: 1rem auto;
+
     font-size: 1.25rem;
     font-weight: 600;
     text-align: center;
     max-width: 250px;
   }
+  && .name-holder h4 {
+    margin: 1rem auto 0 auto;
+  }
+  && .name-holder p {
+    font-size: 0.95rem;
+    margin: 0;
+  }
 `;
 const CircleImg = styled.img`
   display: inline;
-  max-height: 120px;
+  max-height: 180px;
   width: auto;
-  border-radius: 60px;
+  border-radius: 90px;
 `;
 export default function CircleSpeaker(props) {
   const classes = useStyles();
@@ -84,7 +91,14 @@ export default function CircleSpeaker(props) {
       {...(isScrolled ? { timeout: props.timeout || 0 } : {})}
     >
       <CircleNameHolder textColor={props.textColor}>
-        {props.noPic ? '' : <CircleImg src="https://placehold.co/500x500" />}
+        {props.noPic ? (
+          ''
+        ) : (
+          <CircleImg
+            className="speaker-image"
+            src={props.imgSrc || 'https://placehold.co/500x500'}
+          />
+        )}
         <div className="name-holder">{props.children}</div>
       </CircleNameHolder>
     </Grow>

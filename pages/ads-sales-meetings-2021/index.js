@@ -55,17 +55,10 @@ const Index = (props) => {
   const {
     event_meta,
     main_event,
+    speakers,
     event_meta: { AuthRequired },
     main_event: { BreakoutSessions },
   } = props;
-
-  const speakers = [
-    'Single Speaker',
-    'Single Speaker',
-    'Single Speaker',
-    'Single Speaker',
-    'Single Speaker',
-  ];
 
   event_theme = {
     ...event_theme,
@@ -203,11 +196,17 @@ const Index = (props) => {
           ></BannerWithPicture>
           <Section>
             <Grid container spacing={3} justify="center">
-              {speakers.map((spkr) => (
-                <Grid item md={4}>
-                  <CircleSpeaker>{spkr}</CircleSpeaker>
-                </Grid>
-              ))}
+              {speakers &&
+                speakers.map((spkr) => (
+                  <Grid item md={3} key={`speaker-map--${spkr.id}`}>
+                    <CircleSpeaker imgSrc={spkr.Thumbnail[0].url}>
+                      <h4>
+                        {spkr.FirstName} {spkr.LastName}
+                      </h4>
+                      <p>{spkr.Description}</p>
+                    </CircleSpeaker>
+                  </Grid>
+                ))}
             </Grid>
           </Section>
         </Body>
@@ -244,6 +243,11 @@ export async function getServerSideProps(ctx) {
       (ev) => ev.isMainEvent === true
     )[0];
 
+    let speakers = await fetch(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/57'
+    ).then((res) => res.json());
+
+    speakers = speakers.EventSpeakers;
     //make breakout sessions array by category
     let breakoutObj = {};
 
@@ -265,6 +269,7 @@ export async function getServerSideProps(ctx) {
         //meta will be the props for the event
         event_meta: eventData,
         main_event,
+        speakers,
       },
     };
     return values;

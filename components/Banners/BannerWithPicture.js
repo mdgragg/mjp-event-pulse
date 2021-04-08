@@ -21,7 +21,8 @@ const StyledBanner = styled.div`
   && .banner-image {
     width: 80%;
     max-width: 450px;
-    margin: 2rem;
+    margin: 2rem auto;
+    display: block;
   }
 `;
 const SignUp = styled.div`
