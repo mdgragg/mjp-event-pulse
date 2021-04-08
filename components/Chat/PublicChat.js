@@ -167,6 +167,7 @@ const PublicChat = ({ slug = 'test' }) => {
   }, [name]);
 
   useEffect(() => {
+    grabMessages();
     // base.post('messages', { data: messages });
     console.log('mount');
     const retrievedName = JSON.parse(
@@ -197,7 +198,7 @@ const PublicChat = ({ slug = 'test' }) => {
         toast.error('failure: ' + err);
       },
     });
-    grabMessages();
+
     return () => base.removeBinding(ref);
   }, []);
 
