@@ -2,7 +2,7 @@ import styled, { ThemeContext } from 'styled-components';
 import { useEffect, useRef } from 'react';
 
 const VideoPlaceholder = styled.div`
-  height: inherit;
+  /* height: inherit; */
   width: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   overflow: hidden;

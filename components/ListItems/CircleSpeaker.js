@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import clsx from 'clsx';
@@ -68,18 +68,25 @@ const CircleImg = styled.img`
   border-radius: 90px;
 `;
 export default function CircleSpeaker(props) {
+  const growRef = useRef();
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [isScrolled, setScrolled] = React.useState(false);
 
   const handleScroll = (e) => {
-    if (window.scrollY > 960) {
+    let offset_elem = growRef.current.getBoundingClientRect().top;
+    if (window.scrollY >= offset_elem) {
       setScrolled(true);
     }
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-  });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -87,6 +94,7 @@ export default function CircleSpeaker(props) {
 
   return (
     <Grow
+      ref={growRef}
       in={isScrolled}
       {...(isScrolled ? { timeout: props.timeout || 0 } : {})}
     >

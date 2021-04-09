@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 
 const StyledSection = styled.div`
   padding: 2em;
@@ -23,8 +23,9 @@ const StyledSection = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
   && h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 20px;
 
     color: ${(props) => props.headerColor};
@@ -54,17 +55,30 @@ const InnerContent = styled.div`
   margin-right: auto;
 `;
 
-const Section = (props) => {
+const Section = ({
+  minHeight,
+  headerColor,
+  headerText,
+  children,
+  showButton,
+  title,
+  secondary,
+}) => {
   return (
-    <StyledSection minHeight={props.minHeight} headerColor={props.headerColor}>
-      <div className="header-text"> {props.headerText}</div>
+    <StyledSection minHeight={minHeight} headerColor={headerColor}>
+      <div className="header-text">
+        {headerText && (
+          <center>
+            <h2>{headerText}</h2>
+          </center>
+        )}
+      </div>
       <InnerContent>
-        <center>{props.title && <h2>{props.title} </h2>}</center>
-        {props.children}
-        {props.showButton ? (
+        {children}
+        {showButton ? (
           <center>
             {' '}
-            <Button className="seeAll">See All {props.title}</Button>
+            <Button className="seeAll">See All {title}</Button>
           </center>
         ) : (
           ''

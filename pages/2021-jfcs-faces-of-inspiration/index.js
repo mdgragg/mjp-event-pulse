@@ -132,11 +132,6 @@ export async function getServerSideProps(ctx) {
   try {
     let eventData = await getEventMeta(event_job_slug);
     let main_event = eventData.events[0];
-    let speakers = await fetch(
-      process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/56'
-    ).then((res) => res.json());
-
-    speakers = speakers.EventSpeakers;
 
     let breakoutObj = {};
 

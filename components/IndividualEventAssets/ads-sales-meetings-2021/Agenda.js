@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 const AgendaWrap = styled.div`
   max-width: 500px;
-  font-size: 1.5rem;
+  width: 80%;
+  font-size: 1rem;
   margin: auto;
+  && h3 {
+    font-size: 1.5rem;
+  }
 `;
 const TimeBlock = styled.div`
   margin: 1rem auto;
@@ -25,7 +29,7 @@ const Agenda = (props) => {
   return (
     <AgendaWrap>
       <center>
-        <h2>AGENDA</h2>
+        <h3>AGENDA</h3>
       </center>
       <TimeBlock>
         <span className="agenda--time"> 1:00 - 1:45</span> Scott Barbour Company
@@ -48,8 +52,8 @@ const Agenda = (props) => {
       </TimeBlock>
       <Break>FIVE MINUTE BREAK</Break>
       <TimeBlock>
-        <span className="agenda--time"> 3:45 - ??? </span> Scott Barbour Closing
-        Comments
+        <span className="agenda--time"> 3:45 - Close </span> Scott Barbour
+        Closing Comments
       </TimeBlock>
     </AgendaWrap>
   );

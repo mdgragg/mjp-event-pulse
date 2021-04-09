@@ -29,8 +29,10 @@ export var event_theme = {
   h1: {
     fontSize: '5rem',
   },
-  heroHeight: '450px',
-  green: '#93c84e',
+  primaryColor: '#181818',
+  secondaryColor: '#97d700',
+  heroHeight: '600px',
+  green: '#97d700',
   white: null,
   blue: '#1e2c60',
   red: '#b71f39',
@@ -43,7 +45,7 @@ export var event_theme = {
   buttonColor: null,
   headerFont: 'Akzidenz-Grotesque-Bold',
   headerFontColor: 'white',
-  headerBgColor: 'black',
+  headerBgColor: 'white',
   maxSectionWidth: '1800px',
 };
 
@@ -147,39 +149,28 @@ const Index = (props) => {
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <Agenda />
-              </Grid>
-              <Grid item={true} md={4} xs={12}>
                 <div
                   style={{
-                    textAlign: 'center',
-                    fontSize: '2rem',
+                    height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
                     justifyContent: 'center',
-                    height: 'inherit',
-                    minHeight: '300px',
-                  }}
-                ></div>
-                <p
-                  style={{
-                    fontSize: '1.25rem',
-                    textAlign: 'center',
-                    maxWidth: '80%',
-                    margin: '1rem auto 0 auto',
+                    alignItems: 'center',
                   }}
                 >
-                  For more information please contact our helpdesk.
-                </p>
+                  <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                </div>
+              </Grid>
+              <Grid item={true} md={4} xs={12}>
+                <Agenda />
                 <a href="#bidpal-help">
-                  <Button
+                  {/* <Button
                     style={{ margin: '2rem auto', display: 'block' }}
                     color={'primary'}
                     variant="outlined"
                   >
                     Help
-                  </Button>
+                  </Button> */}
                 </a>
               </Grid>
               <Grid item md={8} xs={12}></Grid>
@@ -194,12 +185,16 @@ const Index = (props) => {
             headerText="About The Event"
             children={`Aute minim sint irure consectetur reprehenderit deserunt voluptate. Nostrud pariatur voluptate ipsum nisi non. Est minim id minim deserunt labore quis dolor quis officia excepteur sunt sunt enim. Reprehenderit fugiat reprehenderit culpa tempor laboris ad. In ullamco eiusmod quis enim minim nostrud reprehenderit cupidatat qui consectetur et. `}
           ></BannerWithPicture>
-          <Section>
+
+          <Section headerText="Speakers">
             <Grid container spacing={3} justify="center">
               {speakers &&
-                speakers.map((spkr) => (
+                speakers.map((spkr, index) => (
                   <Grid item md={3} key={`speaker-map--${spkr.id}`}>
-                    <CircleSpeaker imgSrc={spkr.Thumbnail[0].url}>
+                    <CircleSpeaker
+                      imgSrc={spkr.Thumbnail[0].url}
+                      timeout={1000 * index}
+                    >
                       <h4>
                         {spkr.FirstName} {spkr.LastName}
                       </h4>
@@ -207,6 +202,14 @@ const Index = (props) => {
                     </CircleSpeaker>
                   </Grid>
                 ))}
+            </Grid>
+          </Section>
+          <Section>
+            <Grid container spacing={3}>
+              <Grid item={true} md={8} sm={12} xs={12}></Grid>
+              <Grid item={true} md={4} xs={12}></Grid>
+              <Grid item md={8} xs={12}></Grid>
+              <Grid item md={4} xs={12}></Grid>
             </Grid>
           </Section>
         </Body>
@@ -221,7 +224,7 @@ const Index = (props) => {
 export async function getServerSideProps(ctx) {
   //console.log(ctx.req.cookies);
   const { preview } = cookies(ctx);
-  console.log(preview);
+
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
