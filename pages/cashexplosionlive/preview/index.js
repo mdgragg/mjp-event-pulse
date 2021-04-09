@@ -49,9 +49,8 @@ export async function getServerSideProps(ctx) {
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
-  const template = ctx.query?.preview_template || 'main-event';
 
-  const redirect = `./preview/${template}`;
+  const redirect = `./`;
   //   get the event job data from our api
   console.log(ctx.req.cookies[`preview${EVENT_URL}`]);
   if (ctx.req.cookies[`preview${EVENT_URL}`] === 'true') {

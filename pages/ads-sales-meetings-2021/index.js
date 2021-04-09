@@ -52,6 +52,7 @@ export var event_theme = {
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
+  const session_token = 'ads-sales-auth';
   const router = useRouter();
 
   const {
@@ -83,19 +84,27 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
+  const [hasAuthenticated, setHasAuthenticated] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
     }, 1000);
 
+    const storage_auth = sessionStorage.getItem(session_token);
+
+    if (storage_auth === 'true') {
+      setHasAuthenticated(true);
+    }
+
     return () => clearInterval(interval);
-  });
+  }, []);
 
   const MainPage = () => {
     return (
+      // <div style={{ filter: 'blur(20px)' }}>
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-
         <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
           <div></div>
           <div>
@@ -158,7 +167,11 @@ const Index = (props) => {
                     alignItems: 'center',
                   }}
                 >
-                  <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                  {hasAuthenticated ? (
+                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                  ) : (
+                    ''
+                  )}
                 </div>
               </Grid>
               <Grid item={true} md={4} xs={12}>
@@ -215,6 +228,7 @@ const Index = (props) => {
         </Body>
         <Footer></Footer>
       </Page>
+      // </div>
     );
   };
 
@@ -224,6 +238,7 @@ const Index = (props) => {
 export async function getServerSideProps(ctx) {
   //console.log(ctx.req.cookies);
   const { preview } = cookies(ctx);
+  const { hasLoggedIn } = cookies(ctx);
 
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
@@ -251,21 +266,6 @@ export async function getServerSideProps(ctx) {
     ).then((res) => res.json());
 
     speakers = speakers.EventSpeakers;
-    //make breakout sessions array by category
-    let breakoutObj = {};
-
-    main_event.BreakoutSessions.forEach((sesh) => {
-      let key = Object.keys(breakoutObj).find(
-        (title) => title === sesh.Category
-      );
-      if (!key) {
-        breakoutObj[sesh.Category] = [sesh];
-      } else {
-        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
-      }
-    });
-
-    main_event.BreakoutSessions = breakoutObj;
 
     const values = {
       props: {
