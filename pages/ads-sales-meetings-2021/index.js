@@ -178,13 +178,13 @@ const Index = (props) => {
             </Grid>
           </Section>
 
-          <BannerWithPicture
+          {/* <BannerWithPicture
             innerWidth={`60%`}
             color={'#ffffff'}
             imgUrl={main_event.KeyValue[0]?.value}
             headerText="About The Event"
             children={`Aute minim sint irure consectetur reprehenderit deserunt voluptate. Nostrud pariatur voluptate ipsum nisi non. Est minim id minim deserunt labore quis dolor quis officia excepteur sunt sunt enim. Reprehenderit fugiat reprehenderit culpa tempor laboris ad. In ullamco eiusmod quis enim minim nostrud reprehenderit cupidatat qui consectetur et. `}
-          ></BannerWithPicture>
+          ></BannerWithPicture> */}
 
           <Section headerText="Speakers">
             <Grid container spacing={3} justify="center">

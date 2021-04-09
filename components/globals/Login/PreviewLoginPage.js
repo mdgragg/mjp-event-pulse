@@ -26,7 +26,12 @@ const PageWrap = styled.div`
     margin-top: 3rem;
   }
 `;
-const LoginPage = ({ children, previewPassword = null }) => {
+const LoginPage = ({
+  children,
+  previewPassword = null,
+  redirect = './',
+  EVENT_URL = '',
+}) => {
   const router = useRouter();
   const [creds, setCreds] = useState(null);
 
@@ -36,10 +41,11 @@ const LoginPage = ({ children, previewPassword = null }) => {
 
   const handleSetPreview = () => {
     if (creds === previewPassword) {
-      document.cookie = `preview=true; path=/`;
-      router.push('./');
+      toast.success('Redirecting you to the preview');
+      document.cookie = `preview${EVENT_URL}=true; path=/`;
+      router.push(redirect);
     } else {
-      toast.error('wrong password');
+      toast.error('Wrong Password!');
     }
   };
   return (
