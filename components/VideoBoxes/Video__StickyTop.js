@@ -106,7 +106,14 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
     <VideoPlaceholder ref={wrapperRef}>
       <StyledPaper>
         <StyledVideoBox>
-          <CustomFrame src={src} frameborder="0" allowfullscreen />
+          <CustomFrame
+            src={src}
+            frameborder="0"
+            allowfullscreen
+            webkitallowfullscreen={true}
+            mozallowfullscreen={true}
+            allow="fullscreen"
+          />
         </StyledVideoBox>
       </StyledPaper>
     </VideoPlaceholder>
