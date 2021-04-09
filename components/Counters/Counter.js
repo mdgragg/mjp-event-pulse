@@ -28,7 +28,12 @@ const MyCounter = styled.div`
 `;
 
 export default function Counter(props) {
-  const { start, hasStarted, afterStarted = 'Live' } = props;
+  const {
+    start,
+    hasStarted,
+    afterStarted = 'Live',
+    title = 'STARTS IN',
+  } = props;
   function pad(value) {
     if (value === 0) {
       return '0';
@@ -79,7 +84,7 @@ export default function Counter(props) {
 
   return (
     <>
-      {time.total_remaining < 0 ? (
+      {time.total_remaining < 0 || hasStarted ? (
         afterStarted
       ) : (
         <MyCounter className={props.customClass || ''} props={props}>
@@ -90,7 +95,7 @@ export default function Counter(props) {
               margin: 'auto auto 0 auto',
             }}
           >
-            STARTS IN
+            {title}
           </h2>
           {time.days} Days {time.hours === 0 ? '' : `${pad(time.hours)} Hours`}{' '}
           {pad(time.minutes)} Minutes {pad(time.seconds)}

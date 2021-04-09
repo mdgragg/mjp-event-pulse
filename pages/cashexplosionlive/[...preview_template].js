@@ -9,21 +9,6 @@ import Footer from 'components/template1/Footer';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
 
 import { event_theme } from './index';
-const Decider = ({ template, data }) => {
-  switch (template) {
-    case 'success':
-      return <h1>test</h1>;
-      break;
-    case 'signup':
-      return <h1>Signup</h1>;
-      break;
-    case 'main-event':
-      return <MainEvent data={data} />;
-      break;
-    default:
-      return <MainEvent data={data} />;
-  }
-};
 
 const PreviewTemplate = ({ event_meta, main_event }) => {
   const router = useRouter();

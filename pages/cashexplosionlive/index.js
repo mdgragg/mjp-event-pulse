@@ -25,7 +25,11 @@ import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
 import NameScroller from '../../components/RealTimeAssets/NameScroller';
 
 import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
-import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
+import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
+import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
+import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
+import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
+
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -33,7 +37,9 @@ export var event_theme = {
   primaryColor: '#181818',
   secondaryColor: '#97d700',
   heroHeight: '600px',
-  green: '#97d700',
+  green: '#00d35a',
+  lightGreen: '#6dff80',
+  purple: '#667ff6',
   white: null,
   blue: '#1e2c60',
   red: '#b71f39',
@@ -53,6 +59,22 @@ export var event_theme = {
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'cashexplosionlive';
 
+const Decider = ({ template, main_event, theme }) => {
+  switch (template) {
+    case 'success':
+      return <Success main_event={main_event} theme={theme} />;
+      break;
+    case 'signup':
+      return <SignUp main_event={main_event} theme={theme} />;
+      break;
+    case 'main-event':
+      return <MainEvent main_event={main_event} theme={theme} />;
+      break;
+    default:
+      return <MainEvent main_event={main_event} theme={theme} />;
+  }
+};
+
 const Index = (props) => {
   const router = useRouter();
 
@@ -67,7 +89,7 @@ const Index = (props) => {
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-    body_bg: PLACEHOLD + '1920x1080',
+    body_bg: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
   const calculateIfStarted = () => {
@@ -85,6 +107,7 @@ const Index = (props) => {
   };
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
+  const [deciderTemplate, setDeciderTemplate] = useState('main-event');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -98,12 +121,42 @@ const Index = (props) => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-
         <Body>
-          <Section></Section>
-          <PreviewTemplate event_meta={event_meta} main_event={main_event} />
+          <Wrap theme={event_theme}>
+            <Decider
+              template={deciderTemplate}
+              theme={event_theme}
+              main_event={main_event}
+            />
+          </Wrap>
         </Body>
-        <Footer></Footer>
+        <Footer>
+          {event_meta.eventStatus.EventStatus === 'Preview' ? (
+            <div>
+              <h2>Preview Area</h2>
+              <button
+                style={{ display: 'inline', margin: '0 1rem' }}
+                onClick={() => setDeciderTemplate('main-event')}
+              >
+                Main Event
+              </button>
+
+              <button
+                style={{ display: 'inline', margin: '0 1rem' }}
+                onClick={() => setDeciderTemplate('signup')}
+              >
+                Sign Up
+              </button>
+
+              <button
+                style={{ display: 'inline', margin: '0 1rem' }}
+                onClick={() => setDeciderTemplate('success')}
+              >
+                Success
+              </button>
+            </div>
+          ) : null}
+        </Footer>
       </Page>
     );
   };

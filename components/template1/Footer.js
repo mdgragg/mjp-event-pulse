@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import React from "react";
+import styled from 'styled-components';
+import React from 'react';
 
 const StyledFooter = styled.div`
   /* padding: 2em; */
   width: 100%;
   background-color: ${(props) => props.theme.footerBg};
-  height: 100px;
+  min-height: 100px;
   color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

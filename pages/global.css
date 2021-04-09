@@ -13,6 +13,11 @@
   font-family: 'Source-Sans-Regular';
 }
 
+@font-face {
+  src: url('../static/fonts/HoueGothic.ttf');
+  font-family: 'House-Gothic';
+}
+
 html {
   scroll-behavior: smooth;
 }
