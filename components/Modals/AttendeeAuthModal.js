@@ -86,7 +86,6 @@ export default function AttendeeAuthModal({ open, callback, eventId }) {
     return await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/attendee/capture/${eventId}`,
       {
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
