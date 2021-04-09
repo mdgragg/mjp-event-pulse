@@ -76,7 +76,7 @@ export default function CircleSpeaker(props) {
 
   const handleScroll = (e) => {
     let offset_elem = growRef.current.getBoundingClientRect().top;
-    if (window.scrollY >= offset_elem) {
+    if (window.scrollY >= offset_elem - 500) {
       setScrolled(true);
     }
   };
