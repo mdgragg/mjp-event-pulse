@@ -200,7 +200,6 @@ export async function getStaticProps(ctx) {
     };
     return values;
   } catch (error) {
-    console.log('get static props error: ', error);
     return {
       redirect: {
         destination: '/',
