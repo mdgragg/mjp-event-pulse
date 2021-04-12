@@ -19,7 +19,7 @@ const MyCounter = styled.div`
   background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.65em;
   min-width: 360px;
-  font-size: ${(props) => props.props.fontSize || '1.5em'};
+  font-size: ${(props) => props.props.counterFontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   @media all and (max-width: 440px) {
@@ -33,6 +33,8 @@ export default function Counter(props) {
     hasStarted,
     afterStarted = 'Live',
     title = 'STARTS IN',
+    counterFontSize,
+    headerFontSize,
   } = props;
   function pad(value) {
     if (value === 0) {
@@ -91,7 +93,7 @@ export default function Counter(props) {
           <h2
             style={{
               fontWeight: '800',
-              fontSize: '2rem',
+              fontSize: `${headerFontSize || '2rem'}`,
               margin: 'auto auto 0 auto',
             }}
           >

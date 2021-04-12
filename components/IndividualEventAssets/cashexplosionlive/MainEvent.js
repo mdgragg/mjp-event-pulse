@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
+import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
 import PublicChat from 'components/Chat/PublicChat';
 import Counter from 'components/Counters/Counter';
 const Nav = styled.div`
@@ -16,11 +17,18 @@ const Nav = styled.div`
   && .logo {
     max-height: 150px;
   }
+  @media all and (max-width: 768px) {
+    padding: 2rem;
+    height: 130px;
+    && .logo {
+      max-height: 80px;
+    }
+  }
 `;
 
 const ShowWrap = styled.div`
   position: relative;
-  /* min-height: 80vh; */
+  min-height: 700px;
   width: 90%;
   display: grid;
   margin: 2rem auto;
@@ -28,6 +36,18 @@ const ShowWrap = styled.div`
   grid-template-columns: 75% 25%;
   grid-template-rows: 100%;
   justify-content: center;
+
+  @media all and (max-width: 1200px) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto 680px;
+    gap: 2rem;
+    && .crowd-purr {
+      width: 100%;
+      max-width: 450px;
+      margin: auto;
+      height: 100%;
+    }
+  }
 `;
 
 const MainEvent = ({ main_event }) => {
@@ -59,8 +79,9 @@ const MainEvent = ({ main_event }) => {
       </Nav>
       <ShowWrap>
         <Video__iFrame src={main_event.streamLinks[0].url} />
-
-        <PublicChat slug={main_event.slug} />
+        <div className="crowd-purr">
+          <Fluid__iFrame src={main_event.streamLinks[1].url} />
+        </div>
       </ShowWrap>
     </>
   );

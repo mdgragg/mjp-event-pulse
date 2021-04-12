@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainWrap = styled.div`
-  min-height: 120vh;
+  min-height: 100vh;
   font-family: Avenir;
   font-weight: 600;
   width: 100%;

@@ -9,34 +9,51 @@ const ThanksWrap = styled.div`
   min-height: 80vh;
   display: flex;
   margin-top: 3rem;
-  width: 80%;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1600px;
   flex-direction: column;
   position: relative;
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
-  && img.logo {
-    height: auto;
-    max-width: 300px;
+  && .logo {
+    /* max-width: 350px; */
+    width: auto;
+    height: 15vh;
+    min-height: 200px;
+  }
+
+  @media all and (max-width: 768px) {
+    && .logo {
+      height: 100px;
+      min-height: 100px;
+    }
+    && .counter {
+      display: none;
+    }
   }
 `;
 
 const ThanksArea = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 1600px;
   && p {
     text-transform: uppercase;
     font-family: House-Gothic;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin: 2rem auto;
     letter-spacing: 5px;
-    font-size: 3.5rem;
-    color: ${(props) => props.theme.lightGreen};
-  }
-
-  && span.white {
+    font-size: 2.5rem;
     color: white;
+  }
+  && span {
+    color: ${(props) => props.theme.green};
+  }
+  @media all and (max-width: 768px) {
+    && p {
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+    }
   }
 `;
 
@@ -44,17 +61,66 @@ const InfoBoxes = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
+  margin: 2rem auto;
   && div {
     background-color: ${(props) => props.theme.green};
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 1rem;
+    min-height: 250px;
+    text-transform: uppercase;
+    padding: 1rem;
+  }
+  && div.info {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 1rem;
-    height: 200px;
-    padding: 1rem;
+  }
+  && span {
+    font-size: 3rem;
+    font-family: House-Gothic;
+    background-color: ${(props) => props.theme.white || 'white'};
+    width: 70px;
+    color: ${(props) => props.theme.green};
+    height: 70px;
+    padding: 3px;
+    border-radius: 60px;
+    margin-bottom: 1rem;
+  }
+  @media all and (max-width: 1200px) {
+    && div.info {
+      font-size: 1.5rem;
+    }
+  }
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    && div {
+      padding: 2rem;
+    }
+    && div.info {
+      font-size: 2rem;
+    }
+  }
+
+  @media all and (max-width: 550px) {
+    && span {
+      font-size: 1.75rem;
+      height: 100%;
+      width: 45px;
+    }
+    && div {
+      padding: 0.85rem;
+      min-height: auto;
+    }
+    && div.info {
+      font-size: 1rem;
+    }
   }
 `;
 const SignUp = ({ main_event }) => {
@@ -67,26 +133,43 @@ const SignUp = ({ main_event }) => {
 
       <ThanksArea>
         <p>
-          {' '}
-          Thanks for your interest in CE's first ever livestream event happening{' '}
-          <span className="white"> May 1st!</span>
+          Thank you for your interest in attending Cash Explosion Fan Fair!
+          <br /> Come back<span className="green"> Saturday May 1st</span> for
+          fun and prizes! Here's what you will need to do:
         </p>
       </ThanksArea>
       <InfoBoxes>
         <div>
-          {' '}
-          YOU MUST REGISTER TO BE ELIGIBLE TO WIN ONE OF $16,000 IN PRIZE
-          GIVEAWAYS!
+          <span> 1</span>
+          <div className="info">
+            {' '}
+            You must register to be eligible to win $100, $1000, or $5000 in
+            cash prize giveaways!{' '}
+          </div>
         </div>
-        <div>PRE-REGISTRATION WINDOW OPENS AT 7:30PM</div>
-        <div> PRIZE GIVEAWAYS BEGIN AT 8:00PM</div>
+        <div>
+          <span> 2</span>
+          <div className="info">
+            Registration will be available on this page starting at 7:30pm
+            Saturday May 1st. You must register to be eligible to win!
+          </div>
+        </div>
+        <div>
+          {' '}
+          <span> 3</span>
+          <div className="info">The winning begins at 8:00pm</div>
+        </div>
       </InfoBoxes>
-      <Counter
-        bgColor="none"
-        shadow="none"
-        title="EVENT BEGINS IN"
-        start={main_event.eventStartEnd.StartDateTime}
-      />
+      <div className="counter">
+        <Counter
+          bgColor="none"
+          headerFontSize="4rem"
+          counterFontSize="1.5rem"
+          shadow="none"
+          title="REGISTRATION BEGINS IN"
+          start={main_event.eventStartEnd.StartDateTime}
+        />
+      </div>
     </ThanksWrap>
   );
 };

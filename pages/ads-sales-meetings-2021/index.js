@@ -247,11 +247,14 @@ const Index = (props) => {
 
   return <MainPage />;
 };
+// export async function getServerSideProps(ctx) {
+//   const { preview } = cookies(ctx);
+//   const { hasLoggedIn } = cookies(ctx);
+//   return { props: {} };
+// }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   //console.log(ctx.req.cookies);
-  const { preview } = cookies(ctx);
-  const { hasLoggedIn } = cookies(ctx);
 
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
@@ -282,6 +285,7 @@ export async function getServerSideProps(ctx) {
 
     const values = {
       props: {
+        preview: eventData.eventStatus?.EventStatus === 'Preview',
         //meta will be the props for the event
         event_meta: eventData,
         main_event,

@@ -48,7 +48,7 @@ export var event_theme = {
 const Index = (props) => {
   const router = useRouter();
   // const { error, loading, data } = useQuery(getMainEventMeta(50));
-  const { speakers, event_meta, main_event } = props;
+  const { speakers = [], event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -151,7 +151,6 @@ export async function getServerSideProps(ctx) {
     const values = {
       props: {
         //meta will be the props for the event
-        speakers,
         event_meta: eventData,
         main_event,
       },

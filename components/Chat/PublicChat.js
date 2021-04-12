@@ -18,8 +18,8 @@ const SubmitChat = styled.button``;
 const ChatWrap = styled.div`
   max-width: 500px;
   height: 100%;
+  max-height: 700px;
   position: relative;
-
   background-color: white;
   && button {
     display: inline;
@@ -27,7 +27,7 @@ const ChatWrap = styled.div`
 `;
 const NameInput = styled.div`
   height: calc(100% - 100px);
-  width: max-content;
+  width: 80%;
   margin: auto;
   left: 0;
   right: 0;
@@ -39,10 +39,13 @@ const NameInput = styled.div`
   font-size: 1.25rem;
   text-align: center;
   top: 0%;
+  && .choose-name {
+    color: #181818;
+  }
   && input {
     text-align: center;
     font-size: 2rem;
-    width: min-content;
+    width: 100%;
     padding: 0.75rem;
   }
 `;
@@ -51,6 +54,7 @@ const ChatMessages = styled.div`
   background-color: rgba(255, 255, 255, 0.25);
   scroll-behavior: smooth;
   padding: 0.75rem;
+  min-height: 500px;
   &&.blurred {
     filter: blur(10px);
   }
@@ -101,6 +105,9 @@ const InputArea = styled.div`
   width: 100%;
   padding: 0.5rem;
   transition: all 0.2s ease;
+  &&.hidden {
+    visibility: hidden;
+  }
   && .input-area--header {
     display: flex;
     justify-content: space-between;
@@ -317,7 +324,7 @@ const PublicChat = ({ slug = 'test-2' }) => {
     <ChatWrap>
       {name === null ? (
         <NameInput>
-          <h3>Please Choose A Display Name</h3>
+          <h3 className="choose-name">Please Choose A Display Name</h3>
           <input ref={nameRef} type="text" />
           <br />
           <button onClick={setTheName}>Join the Chat</button>
@@ -341,7 +348,9 @@ const PublicChat = ({ slug = 'test-2' }) => {
           ))}
       </ChatMessages>
 
-      <InputArea className={sending ? 'sending' : null}>
+      <InputArea
+        className={`${sending ? 'sending' : null} ${!name ? 'hidden' : null}`}
+      >
         <div className="input-area--header">
           <h3>{name && name.displayName}</h3>
           <Reactions>
@@ -356,6 +365,7 @@ const PublicChat = ({ slug = 'test-2' }) => {
           </Reactions>
         </div>
         <MessageInput
+          className={`${name === null ? 'hidden' : ''}`}
           placeholder={`Type your message here...`}
           type="text"
           value={text.content}
