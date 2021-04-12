@@ -8,7 +8,6 @@ handlers:
   - url: /.*
     secure: always
     script: auto
-    expiration: '0d 10m'
 
 inbound_services:
   - warmup
