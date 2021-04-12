@@ -1,218 +1,201 @@
 import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
+import cookies from 'next-cookies';
 import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
 
 import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
+import Link, { navigate } from 'next/link';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-import Header from 'components/template1/Header';
-import Navbar from 'components/template1/Navbar';
+
 import Body from 'components/template1/Body';
-import VideoBox from 'components/template1/VideoBox';
-import Sidebar from 'components/template1/Sidebar';
-import Banner from 'components/template1/Banner';
+import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
+import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
+import CircleSpeaker from 'components/ListItems/CircleSpeaker';
+import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Counter from 'components/Counters/Counter';
 import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
+
 import Section from 'components/template1/Section';
 import SingleEvent from 'components/BreakoutSessions/SingleEvent';
+import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
+import NameScroller from '../../components/RealTimeAssets/NameScroller';
 
+import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
+import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
+import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
+import { toast } from 'react-toastify';
 export var event_theme = {
-  heroHeight: '25vh',
-  bg: 'white',
-  fontFamily: null,
-  headerOpacity: null,
-  videoBreakPoint: 700,
+  h1: {
+    fontSize: '5rem',
+  },
+  primaryColor: '#181818',
+  secondaryColor: '#97d700',
+  heroHeight: '600px',
+  green: '#97d700',
   white: null,
   blue: '#1e2c60',
+  red: '#b71f39',
+  fontFamily: 'Akzidenz-Grotesque-Bold',
+  headerOpacity: '0.75',
+  videoBreakPoint: 700,
   buttonInfoColor: null,
   buttonSuccessColor: null,
   buttonDangerColor: 'tomato',
-  red: '#b71f39',
   buttonColor: null,
-  headerFont: null,
+  headerFont: 'Akzidenz-Grotesque-Bold',
+  headerFontColor: 'white',
   headerBgColor: 'white',
   maxSectionWidth: '1800px',
 };
-const Index = (props) => {
-  const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+const PLACEHOLD = 'https://placehold.co/';
+
+const ThankYou = (props) => {
+  const { event_meta, main_event, speakers } = props;
 
   event_theme = {
     ...event_theme,
+    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
-
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
 
   const MainPage = () => {
     return (
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
-          <div>
-            <img
-              style={{ width: '100%', maxWidth: '100px' }}
-              src={main_event.KeyValue[0]?.value}
-            />
-          </div>
-          <div>
-            {' '}
-            <img
-              style={{ width: '100%', maxWidth: '500px' }}
-              src={main_event.KeyValue[1]?.value}
-            />
-          </div>
-          <div>
-            <center>
-              <h2
-                style={{
-                  fontWeight: '800',
-                  fontSize: '2rem',
-                  color: 'white',
-                  padding: '0.5rem',
-                  backgroundColor: event_theme.red,
-                  margin: 'auto auto 0 auto',
-                }}
-              >
-                Thank You!
-              </h2>
-            </center>
-          </div>
-        </FlexHero>
-        <Body>
-          <div
-            style={{
-              backgroundColor: event_theme.blue,
-              padding: '1rem 0',
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            <h2 style={{ color: `white`, fontSize: '2rem' }}>
-              Thank You for Joining the
-              <br /> SI Fathers’ Club Spring Celebration & Auction{' '}
-            </h2>
-            <h3 style={{ color: 'white' }}>
-              {' '}
-              Please “raise your paddle” to support:
-            </h3>
-          </div>
-
-          <Section>
-            <center>
-              <div
-                style={{
-                  padding: '2rem',
-                  backgroundColor: 'white',
-                  display: 'inline-block',
-                  margin: '1rem',
-                }}
-              >
+      <>
+        <Page theme={event_theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
+          <FlexHero title={event_meta.EventJobName}>
+            <div></div>
+            <div>
+              <center>
                 <img
-                  style={{ margin: '2rem auto' }}
-                  src="https://storage.googleapis.com/mjp-stream-public/st.-ignatius-annual-fundraiser/image001.png"
-                  alt="CATS"
+                  style={{ width: '100%', maxWidth: '350px', margin: 'auto' }}
+                  src={main_event.KeyValue[0]?.value}
                 />
-              </div>
-            </center>
-            <div style={{ maxWidth: '800px', margin: 'auto' }}>
-              <p style={{ fontSize: '1.5rem' }}>
-                The <strong>Fund-A-Need</strong> proceeds will go to expanding
-                our current Learning Center to maximize the academic resources
-                for all SI students by increasing the physical space. <br />
-                <br />
-                <strong>
-                  The new expanded space will be called "CATS" - the Center for
-                  Academics and Targeted Support
-                </strong>{' '}
-                and will be open to the entire SI community. The Learning
-                Specialists at St. Ignatius will work collaboratively with
-                faculty members so that the students are best able to access
-                curriculum and instruction. The construction work on this
-                exciting new space will be done over the summer so that "CATS",
-                the new learning center will be ready at the start of the school
-                year. Your donation to the Fund-A-Need will have a direct impact
-                on the daily lives of all the SI students. To donate to the
-                Fund-a-Need,{' '}
-                <a href="https://one.bidpal.net/siauction21/search/donation">
+
+                <h2
+                  style={{
+                    margin: 'auto',
+                    backgroundColor: event_theme.green,
+                    padding: '10px',
+                    width: 'max-content',
+                  }}
+                >
                   {' '}
-                  click here.{' '}
-                </a>
-              </p>
+                  Thank You For Attending our
+                  <br /> 2021 Sales Meeting
+                </h2>
+                <h2 style={{ margin: '2rem auto' }}>
+                  <i> April 12th at 1:00pm EST</i>
+                </h2>
+              </center>
             </div>
-          </Section>
-        </Body>
-        <Footer></Footer>
-      </Page>
+            <div></div>
+          </FlexHero>
+
+          <Body>
+            <Section>
+              <Grid container spacing={3}>
+                <Grid item={true} md={8} sm={12} xs={12}>
+                  <div
+                    style={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                  </div>
+                </Grid>
+                <Grid item={true} md={4} xs={12}>
+                  <Agenda />
+                  <a href="#bidpal-help">
+                    {/* <Button
+                    style={{ margin: '2rem auto', display: 'block' }}
+                    color={'primary'}
+                    variant="outlined"
+                  >
+                    Help
+                  </Button> */}
+                  </a>
+                </Grid>
+                <Grid item md={8} xs={12}></Grid>
+                <Grid item md={4} xs={12}></Grid>
+              </Grid>
+            </Section>
+
+            <Section headerText="Speakers">
+              <Grid container spacing={3} justify="center">
+                {speakers &&
+                  speakers.map((spkr, index) => (
+                    <Grid item md={3} key={`speaker-map--${spkr.id}`}>
+                      <CircleSpeaker
+                        imgSrc={spkr.Thumbnail[0].url}
+                        timeout={1000 * index}
+                      >
+                        <h4>
+                          {spkr.FirstName} {spkr.LastName}
+                        </h4>
+                        <p>{spkr.Description}</p>
+                      </CircleSpeaker>
+                    </Grid>
+                  ))}
+              </Grid>
+            </Section>
+            <Section>
+              <Grid container spacing={3}>
+                <Grid item={true} md={8} sm={12} xs={12}></Grid>
+                <Grid item={true} md={4} xs={12}></Grid>
+                <Grid item md={8} xs={12}></Grid>
+                <Grid item md={4} xs={12}></Grid>
+              </Grid>
+            </Section>
+          </Body>
+          <Footer></Footer>
+        </Page>
+      </>
     );
   };
 
   return <MainPage />;
 };
+// export async function getServerSideProps(ctx) {
+//   const { preview } = cookies(ctx);
+//   const { hasLoggedIn } = cookies(ctx);
+//   return { props: {} };
+// }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   //console.log(ctx.req.cookies);
+
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
   try {
-    let eventData = await getEventMeta('sispringcelebration');
+    let eventData = await getEventMeta('ads-sales-meetings-2021');
 
     let main_event = eventData.events.filter(
       (ev) => ev.isMainEvent === true
     )[0];
 
-    //make breakout sessions array by category
-    let breakoutObj = {};
+    let speakers = await fetch(
+      process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/57'
+    ).then((res) => res.json());
 
-    main_event.BreakoutSessions.forEach((sesh) => {
-      let key = Object.keys(breakoutObj).find(
-        (title) => title === sesh.Category
-      );
-      if (!key) {
-        breakoutObj[sesh.Category] = [sesh];
-      } else {
-        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
-      }
-    });
-
-    main_event.BreakoutSessions = breakoutObj;
+    speakers = speakers.EventSpeakers;
 
     const values = {
       props: {
         //meta will be the props for the event
         event_meta: eventData,
         main_event,
+        speakers,
       },
     };
     return values;
@@ -226,4 +209,4 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-export default Index;
+export default ThankYou;
