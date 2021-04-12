@@ -272,7 +272,7 @@ export async function getStaticProps(ctx) {
 
   speakers = speakers.EventSpeakers;
 
-  if (eventData.EventStatus.eventStatus === 'Live') {
+  if (eventData.eventStatus.EventStatus === 'Live') {
     return {
       redirect: {
         destination: 'ads-sales-meetings-2021/thank-you',
