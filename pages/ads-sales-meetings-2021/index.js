@@ -253,7 +253,7 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   //console.log(ctx.req.cookies);
 
   // If you request this page with the preview mode cookies set:
