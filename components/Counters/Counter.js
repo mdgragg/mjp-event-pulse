@@ -15,7 +15,7 @@ const MyCounter = styled.div`
   text-align: center;
   font-weight: bold;
   z-index: 99;
-  color: ${(props) => props.textColor || 'white'}!important;
+  color: ${(props) => props.textColor || 'white'} !important;
   background-color: ${(props) => props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.65em;
   min-width: 360px;
@@ -26,7 +26,10 @@ const MyCounter = styled.div`
   && h2 {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: ${(props) => props.textColor};
+    color: ${(props) => props.textColor} !important;
+  }
+  @media all and (max-width: 768px) {
+    margin: 2rem auto;
   }
   @media all and (max-width: 440px) {
     width: 100%;

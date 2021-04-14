@@ -221,7 +221,7 @@ const Index = (props) => {
                 color={'black'}
                 secondary={`white`}
                 headerText={`About this Event`}
-                innerWidth={`45%`}
+                innerWidth={`650px`}
                 buttonText={`Learn More`}
               >
                 This would be a good area to describe the page since there are
@@ -255,7 +255,7 @@ export async function getServerSideProps(ctx) {
 
   let eventData = await getEventMeta(EVENT_URL);
 
-  const preview_cookie = ctx.req.cookies[`preview-token--${EVENT_URL}`];
+  const preview_cookie = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 

@@ -9,7 +9,8 @@ import { Grid, Button } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
-import EVENT_URL from './index';
+import { EVENT_URL } from './index';
+
 export var event_theme = {
   heroHeight: '25vh',
   fontFamily: null,
@@ -50,7 +51,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-  if (ctx.req.cookies.preview === 'true') {
+  if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
       redirect: {
         destination: './',
