@@ -43,6 +43,11 @@ const HeaderInner = styled.div`
   width: 90%;
   height: inherit;
   /* text-align: center; */
+  && h1,
+  && h2 {
+    color: ${(props) => props.theme.headerFontColor};
+    font-family: ${(props) => props.theme.headerFont};
+  }
 `;
 
 export default function Hero(props) {

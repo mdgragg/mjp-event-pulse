@@ -68,8 +68,13 @@ const Banner = (props) => {
           }}
         >
           {props.children}
-          <img className="banner-image" src={props.imgUrl} />
         </Typography>
+        {props.buttonText && (
+          <a href={props.buttonLink}>
+            <button> {props.buttonText}</button>
+          </a>
+        )}
+        <img className="banner-image" src={props.imgUrl} />
       </div>
     </StyledBanner>
   );

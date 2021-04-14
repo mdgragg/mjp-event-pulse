@@ -42,7 +42,7 @@ const LoginPage = ({
   const handleSetPreview = () => {
     if (creds === previewPassword) {
       toast.success('Redirecting you to the preview');
-      document.cookie = `preview${EVENT_URL}=true; path=/`;
+      document.cookie = `preview_cookie--${EVENT_URL}=true; path=/`;
       router.push(redirect);
     } else {
       toast.error('Wrong Password!');

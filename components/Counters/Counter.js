@@ -10,18 +10,24 @@ import {
 import { useState, Fragment, useEffect } from 'react';
 
 const MyCounter = styled.div`
-  box-shadow: 0px 0px ${(props) => props.props.shadow || '30px'} 0px black;
+  box-shadow: 0px 0px ${(props) => props.shadow || '30px'} 0px black;
   border-radius: 5px;
   text-align: center;
   font-weight: bold;
   z-index: 99;
-  color: ${(props) => props.props.textColor || 'white'};
-  background-color: ${(props) => props.props.bgColor || 'rgba(0, 0, 0, 0.8)'};
+  color: ${(props) => props.textColor || 'white'}!important;
+  background-color: ${(props) => props.bgColor || 'rgba(0, 0, 0, 0.8)'};
   padding: 0.65em;
   min-width: 360px;
-  font-size: ${(props) => props.props.counterFontSize || '1.5em'};
+  font-size: ${(props) => props.counterFontSize || '1.5em'};
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  && h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: ${(props) => props.textColor};
+  }
   @media all and (max-width: 440px) {
     width: 100%;
   }
@@ -89,7 +95,7 @@ export default function Counter(props) {
       {time.total_remaining < 0 || hasStarted ? (
         afterStarted
       ) : (
-        <MyCounter className={props.customClass || ''} props={props}>
+        <MyCounter className={props.customClass || ''} {...props}>
           <h2
             style={{
               fontWeight: '800',

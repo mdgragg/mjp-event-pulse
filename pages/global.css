@@ -18,6 +18,12 @@
   font-family: 'House-Gothic';
 }
 
+@font-face {
+  src: url('../static/fonts/Tiempos/TiemposFine-Light.otf');
+  font-family: 'Tiempos Fine';
+  font-weight: 400;
+}
+
 html {
   scroll-behavior: smooth;
 }
