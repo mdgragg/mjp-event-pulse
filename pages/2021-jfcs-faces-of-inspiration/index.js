@@ -17,7 +17,7 @@ import Page from 'components/template1/Page';
 import Hero from 'components/Heroes/Hero';
 import Navbar from 'components/template1/Navbar';
 import Body from 'components/template1/Body';
-import CABLE from 'components/IndividualEventAssets/osu-cable-policy-roundtable';
+import JCFS__PAGE from 'components/IndividualEventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
 import Footer from 'components/template1/Footer';
 import ListItem from 'components/template1/ListItem';
 import Section from 'components/template1/Section';
@@ -27,7 +27,7 @@ import cookies from 'next-cookies';
 import LoginPage from 'components/globals/Login/LoginPage';
 import PublicChat from '../../components/Chat/PublicChat';
 
-const event_job_slug = '2021-jfcs-faces-of-inspiration';
+export const EVENT_URL = '2021-jfcs-faces-of-inspiration';
 
 export var event_theme = {
   heroHeight: '550px',
@@ -52,7 +52,7 @@ const Index = (props) => {
 
   event_theme = {
     ...event_theme,
-    bgImage: main_event.KeyValue[0]?.value || 'https://placehold.co/1920x860',
+    bgImage: main_event.HeaderImage?.url || 'https://placehold.co/1920x860',
   };
 
   const calculateIfStarted = () => {
@@ -100,20 +100,7 @@ const Index = (props) => {
     return (
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-
-        <Hero
-          blur={0}
-          hasStarted={hasStarted}
-          title={main_event.EventName}
-          start={main_event.eventStartEnd.StartDateTime}
-        ></Hero>
-        <Body>
-          <Section>
-            <div style={{ height: '800px' }}>
-              <PublicChat />
-            </div>
-          </Section>
-        </Body>
+        <JCFS__PAGE theme={event_theme} main_event={main_event} />
       </Page>
     );
   };
@@ -130,23 +117,8 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
 
   try {
-    let eventData = await getEventMeta(event_job_slug);
+    let eventData = await getEventMeta(EVENT_URL);
     let main_event = eventData.events[0];
-
-    let breakoutObj = {};
-
-    main_event.BreakoutSessions.forEach((sesh) => {
-      let key = Object.keys(breakoutObj).find(
-        (title) => title === sesh.Category
-      );
-      if (!key) {
-        breakoutObj[sesh.Category] = [sesh];
-      } else {
-        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
-      }
-    });
-
-    main_event.BreakoutSessions = breakoutObj;
 
     const values = {
       props: {
