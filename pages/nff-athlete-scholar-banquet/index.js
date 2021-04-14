@@ -245,8 +245,6 @@ const Index = (props) => {
 // }
 
 export async function getServerSideProps(ctx) {
-  //console.log(ctx.req.cookies);
-
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -256,7 +254,7 @@ export async function getServerSideProps(ctx) {
   let eventData = await getEventMeta(EVENT_URL);
 
   const preview_cookie = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
-
+  console.log(preview_cookie);
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
   if (

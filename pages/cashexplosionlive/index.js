@@ -166,7 +166,7 @@ const Index = (props) => {
 
 export async function getServerSideProps(ctx) {
   //console.log(ctx.req.cookies);
-  const preview = ctx.req.cookies[`preview_cookies--${EVENT_URL}`];
+  const preview = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as

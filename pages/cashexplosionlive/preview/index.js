@@ -52,8 +52,8 @@ export async function getServerSideProps(ctx) {
 
   const redirect = `./`;
   //   get the event job data from our api
-  console.log(ctx.req.cookies[`preview${EVENT_URL}`]);
-  if (ctx.req.cookies[`preview${EVENT_URL}`] === 'true') {
+  console.log(ctx.req.cookies[`preview_cookie__${EVENT_URL}`]);
+  if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
       redirect: {
         destination: redirect,

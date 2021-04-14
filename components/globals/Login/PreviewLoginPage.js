@@ -38,16 +38,18 @@ const LoginPage = ({
   const handleChange = (e) => {
     setCreds(e.target.value);
   };
+  // redirect = redirect + EVENT_URL;
 
   const handleSetPreview = () => {
     if (creds === previewPassword) {
       toast.success('Redirecting you to the preview');
-      console.log(EVENT_URL);
+      console.log(redirect);
       document.cookie = `preview_cookie__${EVENT_URL}=true; max-age=${
         60 * 60 * 24 * 365
-      };`;
-
-      router.push(redirect);
+      }; path=/`;
+      setTimeout(() => {
+        router.push(redirect);
+      }, 1000);
     } else {
       toast.error('Wrong Password!');
     }
