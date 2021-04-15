@@ -21,14 +21,39 @@ const FaceGrid = styled.div`
     width: 15%;
     height: auto;
     z-index: 1;
+    box-shadow: 0px 0px 20px -5px grey;
+    transition: all 0.5s ease;
+  }
+  && img:hover {
+    transform: scale(1.02);
   }
 `;
 const faces = [
-  { url: 'https://placehold.co/300x500', alt: 'pic' },
-  { url: 'https://placehold.co/300x500', alt: 'pic' },
-  { url: 'https://placehold.co/300x500', alt: 'pic' },
-  { url: 'https://placehold.co/300x500', alt: 'pic' },
-  { url: 'https://placehold.co/300x500', alt: 'pic' },
+  {
+    url:
+      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-1.png',
+    alt: 'pic',
+  },
+  {
+    url:
+      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-2.png',
+    alt: 'pic',
+  },
+  {
+    url:
+      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-3.png',
+    alt: 'pic',
+  },
+  {
+    url:
+      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-4.png',
+    alt: 'pic',
+  },
+  {
+    url:
+      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-5.png',
+    alt: 'pic',
+  },
 ];
 const FaceMap = () => {
   return (

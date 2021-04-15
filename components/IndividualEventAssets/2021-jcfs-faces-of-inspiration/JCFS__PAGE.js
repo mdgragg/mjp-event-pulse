@@ -33,12 +33,13 @@ const Hero = styled.div`
   background-color: black;
   color: white;
   z-index: 1;
+  min-height: 900px;
   && .hero-content {
-    /* position: relative; */
+    position: relative;
     width: 100%;
     margin: auto;
     text-align: center;
-    height: 320px;
+    height: inherit;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,6 +58,45 @@ const Hero = styled.div`
     top: 0;
     opacity: 0.65;
     background-image: url('${(props) => props.theme.bgImage}');
+  }
+  @media all and (max-width: 1200px) {
+    min-height: 650px;
+  }
+`;
+
+const LogoArea = styled.div`
+  position: absolute;
+  z-index: 100;
+  height: 400px;
+  width: 100%;
+  && img {
+    position: absolute;
+    width: auto;
+  }
+  && img.faces {
+    top: 50px;
+    left: 20%;
+  }
+  && img.of-inspiration {
+    top: 100%;
+    left: 50%;
+  }
+  && h2 {
+    text-align: center;
+    margin-top: 550px;
+  }
+  @media all and (max-width: 1200px) {
+    && img.faces {
+      width: 50%;
+    }
+    && img.of-inspiration {
+      width: 30%;
+      top: 60%;
+    }
+    && h2 {
+      text-align: center;
+      margin-top: 320px;
+    }
   }
 `;
 
@@ -78,12 +118,14 @@ const JCFS__PAGE = ({ main_event, theme }) => {
   return (
     <PageGlobal>
       <Hero>
-        <div className="hero-content">
-          <h1>{main_event.EventName}</h1>
+        <LogoArea className="logo-area">
+          <img className="faces" src={main_event.KeyValue[0].value} />
+          <img className="of-inspiration" src={main_event.KeyValue[1].value} />
           <h2>
             <DateParse date={main_event.eventStartEnd.StartDateTime} />
           </h2>
-        </div>
+        </LogoArea>
+        {/* <div className="hero-content"></div> */}
       </Hero>
       <FaceMap />
       <Body style={{ zIndex: 150 }}>
@@ -177,7 +219,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
           />
           <SingleBox
             titleTextColor={'black'}
-            titleText="Post-Event Mett and Greet with Craig and Jan Sher"
+            titleText="Post-Event Meet and Greet with Craig and Jan Sher"
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"

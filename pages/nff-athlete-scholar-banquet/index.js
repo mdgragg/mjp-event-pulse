@@ -224,10 +224,7 @@ const Index = (props) => {
                 innerWidth={`650px`}
                 buttonText={`Learn More`}
               >
-                This would be a good area to describe the page since there are
-                not other descriptors within this page. You could link to the
-                main page via the button at the bottom or you could have an
-                email contact to reach out to with more questions.
+                {main_event.Description && main_event.Description}
               </BannerWithPicture>
             </Body>
           </Page>

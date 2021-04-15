@@ -46,8 +46,8 @@ const SingleNameScroll = styled.div`
 const ScrollSponsorMap = (names) => {
   const name_array = [];
 
-  names.forEach((name) => {
-    name_array.push(<SingleNameScroll>{name}</SingleNameScroll>);
+  names.forEach((name, index) => {
+    name_array.push(<SingleNameScroll>{name + index}</SingleNameScroll>);
   });
 
   return name_array;
@@ -55,11 +55,16 @@ const ScrollSponsorMap = (names) => {
 
 const SponsorSection = () => {
   const names = [
-    'Jan and Wayne',
-    'Bill and Bob',
-    'Jed and Wilma Styler',
-    'India and James Johantha',
-    'Redd Fendi and Blue Buttons',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
+    'Sponsor Number ',
   ];
 
   return (
