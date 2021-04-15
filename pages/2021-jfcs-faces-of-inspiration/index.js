@@ -34,7 +34,7 @@ export var event_theme = {
   videoBreakPoint: null,
   maxSectionWidth: null,
   fontFamily: 'Avenir',
-  headerOpacity: null,
+  headerOpacity: '0.5',
   white: null,
   green: '#4F854A',
   blue: '#005198',

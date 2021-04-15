@@ -6,15 +6,21 @@ const FaceGrid = styled.div`
   margin: auto;
   left: 0;
   right: 0;
-  position: absolute;
-  top: 300px;
+  position: relative;
+  /* top: 55%; */
+  background: none;
+  /* height: 250px; */
+
+  margin-top: -250px;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
+  z-index: 101;
   && img {
     margin: 1%;
     width: 15%;
     height: auto;
+    z-index: 1;
   }
 `;
 const faces = [

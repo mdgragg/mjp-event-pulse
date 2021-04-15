@@ -33,11 +33,13 @@ const BlockHolder = styled.div`
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.5);
 `;
 
-export const BlockName = ({ children, timeout, bg }) => {
+export const BlockName = ({ children, timeout, bg, growPosition }) => {
   const [isScrolled, setScrolled] = React.useState(false);
+  const growHandle = growPosition || 960;
 
   const handleScroll = (e) => {
-    if (window.scrollY > 960) {
+    console.log(growHandle);
+    if (window.scrollY > growHandle) {
       setScrolled(true);
     }
   };
@@ -52,11 +54,11 @@ export const BlockName = ({ children, timeout, bg }) => {
   );
 };
 
-export const BlockNameBig = ({ children, timeout, bg }) => {
+export const BlockNameBig = ({ children, timeout, bg, growPosition }) => {
   const [isScrolled, setScrolled] = React.useState(false);
-
+  const growHandle = growPosition || 960;
   const handleScroll = (e) => {
-    if (window.scrollY > 960) {
+    if (window.scrollY > growHandle) {
       setScrolled(true);
     }
   };
