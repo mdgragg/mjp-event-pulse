@@ -246,7 +246,7 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -255,21 +255,8 @@ export async function getServerSideProps(ctx) {
 
   let eventData = await getEventMeta(EVENT_URL);
 
-  const preview_cookie = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
-
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  if (
-    eventData.eventStatus.EventStatus === 'Preview' &&
-    preview_cookie !== 'true'
-  ) {
-    return {
-      redirect: {
-        destination: EVENT_URL + '/preview',
-        permanent: false,
-      },
-    };
-  }
   return {
     props: {
       //meta will be the props for the event

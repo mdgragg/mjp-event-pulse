@@ -178,7 +178,7 @@ const Index = (props) => {
   return <MainPage />;
 };
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   //console.log(ctx.req.cookies);
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
@@ -193,20 +193,6 @@ export async function getServerSideProps(ctx) {
     )[0];
 
     //make breakout sessions array by category
-    let breakoutObj = {};
-
-    main_event.BreakoutSessions.forEach((sesh) => {
-      let key = Object.keys(breakoutObj).find(
-        (title) => title === sesh.Category
-      );
-      if (!key) {
-        breakoutObj[sesh.Category] = [sesh];
-      } else {
-        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
-      }
-    });
-
-    main_event.BreakoutSessions = breakoutObj;
 
     const values = {
       props: {

@@ -188,7 +188,13 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               We will need the description for the thank you message, this is
               placeholder for the main program.
             </p>
-            <button>JOIN US</button>
+            <button
+              onClick={() =>
+                (window.location.href = main_event.streamLinks[0].url)
+              }
+            >
+              JOIN US
+            </button>
           </div>
         </Banner_ImgBg>
         {data.sponsors && <SponsorSection sponsors={data.sponsors} />}

@@ -1,12 +1,9 @@
 import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
+
 import _ from 'lodash';
 
-import { Grid, Button } from '@material-ui/core';
-
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
 import { EVENT_URL } from '../index';
 export var event_theme = {
@@ -26,8 +23,6 @@ export var event_theme = {
   maxSectionWidth: '1800px',
 };
 const Index = (props) => {
-  const router = useRouter();
-
   const MainPage = () => {
     return (
       <PreviewLoginPage

@@ -3,14 +3,10 @@ import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-
 import Body from 'components/template1/Body';
-
 import Footer from 'components/template1/Footer';
-
 import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
 import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
@@ -246,9 +242,9 @@ const Index = (props) => {
   return <MainPage />;
 };
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   //console.log(ctx.req.cookies);
-  const preview = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
+
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -256,16 +252,7 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
   try {
     let eventData = await getEventMeta(EVENT_URL);
-    if (
-      eventData.eventStatus?.EventStatus === 'Preview' &&
-      preview !== 'true'
-    ) {
-      return {
-        redirect: {
-          destination: `${EVENT_URL}/preview`,
-        },
-      };
-    }
+
     let main_event =
       eventData?.events?.filter((ev) => ev.isMainEvent === true)[0] || {};
 
