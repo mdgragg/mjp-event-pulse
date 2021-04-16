@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, createContext } from 'react';
 import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
@@ -88,6 +88,8 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
+  // const [hasStarted, setStarted] = createContext(false);
+
   const [hasAuthenticated, setHasAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -111,6 +113,7 @@ const Index = (props) => {
       <>
         <AttendeeAuthModal
           eventId={main_event.id}
+          event_name={main_event.EventName}
           open={!hasAuthenticated}
           callback={(creds) => {
             setHasAuthenticated(true);
@@ -253,7 +256,7 @@ export async function getServerSideProps(ctx) {
   let eventData = await getEventMeta(EVENT_URL);
 
   const preview_cookie = ctx.req.cookies[`preview_cookie__${EVENT_URL}`];
-  console.log(preview_cookie);
+
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
   if (

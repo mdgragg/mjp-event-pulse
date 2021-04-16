@@ -40,7 +40,12 @@ const Error = styled.div`
   font-size: 1.25rem;
   text-align: center;
 `;
-export default function AttendeeAuthModal({ open, callback, eventId }) {
+export default function AttendeeAuthModal({
+  open,
+  callback,
+  eventId,
+  event_name,
+}) {
   const init = {
     AttendeeFirst: '',
     AttendeeLast: '',
@@ -102,7 +107,9 @@ export default function AttendeeAuthModal({ open, callback, eventId }) {
           return toast.error(res.error);
         } else {
           return callback(
-            `Hello ${res.Attendee.AttendeeFirst}, welcome to ADS 2021 Sales Meeting!`
+            `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
+              event_name ? event_name : 'the event.'
+            }`
           );
         }
       });
