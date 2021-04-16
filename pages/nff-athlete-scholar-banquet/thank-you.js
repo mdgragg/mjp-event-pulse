@@ -177,35 +177,12 @@ export async function getStaticProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-  try {
-    let eventData = await getEventMeta('ads-sales-meetings-2021');
 
-    let main_event = eventData.events.filter(
-      (ev) => ev.isMainEvent === true
-    )[0];
-
-    let speakers = await fetch(
-      process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/57'
-    ).then((res) => res.json());
-
-    speakers = speakers.EventSpeakers;
-
-    const values = {
-      props: {
-        //meta will be the props for the event
-        event_meta: eventData,
-        main_event,
-        speakers,
-      },
-    };
-    return values;
-  } catch (error) {
-    return {
-      redirect: {
-        destination: '/',
-      },
-    };
-  }
+  return {
+    redirect: {
+      destination: '/',
+    },
+  };
 }
 
 export default ThankYou;

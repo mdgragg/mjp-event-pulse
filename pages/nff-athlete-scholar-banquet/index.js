@@ -100,7 +100,7 @@ const Index = (props) => {
     if (storage_auth === 'true') {
       setHasAuthenticated(true);
     } else {
-      setHasAuthenticated(true);
+      setHasAuthenticated(false);
     }
 
     return () => clearInterval(interval);
@@ -204,6 +204,7 @@ const Index = (props) => {
                     >
                       {hasAuthenticated ? (
                         <VideoBox__StickyTop
+                          isStarted={true}
                           src={main_event.streamLinks[0].url}
                         />
                       ) : (
@@ -223,6 +224,7 @@ const Index = (props) => {
                 headerText={`About this Event`}
                 innerWidth={`650px`}
                 buttonText={`Learn More`}
+                buttonLink={`https://www.nffcolumbus.com/ `}
               >
                 {main_event.Description && main_event.Description}
               </BannerWithPicture>

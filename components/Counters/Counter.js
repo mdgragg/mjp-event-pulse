@@ -93,25 +93,22 @@ export default function Counter(props) {
 
   const [time, calcTime] = useState(getRemainingTime(start));
 
+  if (time.total_remaining < 0 || hasStarted) {
+    return afterStarted;
+  }
   return (
-    <>
-      {time.total_remaining < 0 || hasStarted ? (
-        afterStarted
-      ) : (
-        <MyCounter className={props.customClass || ''} {...props}>
-          <h2
-            style={{
-              fontWeight: '800',
-              fontSize: `${headerFontSize || '2rem'}`,
-              margin: 'auto auto 0 auto',
-            }}
-          >
-            {title}
-          </h2>
-          {time.days} Days {time.hours === 0 ? '' : `${pad(time.hours)} Hours`}{' '}
-          {pad(time.minutes)} Minutes {pad(time.seconds)}
-        </MyCounter>
-      )}
-    </>
+    <MyCounter className={props.customClass || ''} {...props}>
+      <h2
+        style={{
+          fontWeight: '800',
+          fontSize: `${headerFontSize || '2rem'}`,
+          margin: 'auto auto 0 auto',
+        }}
+      >
+        {title}
+      </h2>
+      {time.days} Days {time.hours === 0 ? '' : `${pad(time.hours)} Hours`}{' '}
+      {pad(time.minutes)} Minutes {pad(time.seconds)}
+    </MyCounter>
   );
 }
