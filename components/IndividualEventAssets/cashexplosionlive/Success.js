@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
-import PublicChat from 'components/Chat/PublicChat';
 import Counter from 'components/Counters/Counter';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const ThanksWrap = styled.div`
   min-height: 80vh;

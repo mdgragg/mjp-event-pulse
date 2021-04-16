@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
-import PublicChat from 'components/Chat/PublicChat';
 import Counter from 'components/Counters/Counter';
+
 const Nav = styled.div`
   position: relative;
   top: 0;
