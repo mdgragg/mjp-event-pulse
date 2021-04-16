@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import MaskedInput from 'react-text-mask';
 import { Checkbox, FormControl } from '@material-ui/core';
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -88,31 +89,18 @@ export default function AttendeeAuthModal({
       setFormLoading(false);
       return toast.error('All fields are required!');
     }
-    return await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/attendee/capture/${eventId}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(values),
+    return await attendee_capture(values, eventId).then((res) => {
+      if (res.error) {
+        setFormLoading(false);
+        return toast.error(res.error);
+      } else {
+        return callback(
+          `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
+            event_name ? event_name : 'the event.'
+          }`
+        );
       }
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res.error) {
-          setFormLoading(false);
-          return toast.error(res.error);
-        } else {
-          return callback(
-            `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
-              event_name ? event_name : 'the event.'
-            }`
-          );
-        }
-      });
+    });
   };
 
   return (

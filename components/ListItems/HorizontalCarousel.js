@@ -43,6 +43,7 @@ const HorizontalCarousel = ({ data }) => {
       renderIndicator={false}
       showArrows={false}
       showStatus={false}
+      showThumbs={false}
     >
       {data.map((item, index) => (
         <div className="carousel--item" key={`carousel-item--map-${index}`}>

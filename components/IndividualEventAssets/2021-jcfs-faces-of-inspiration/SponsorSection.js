@@ -11,6 +11,8 @@ const TheSection = styled.div`
   z-index: 100;
   text-align: center;
   && h2 {
+    font-size: 2.5rem;
+    color: ${(props) => props.theme.blue};
   }
   && .sponsor--heading {
     display: flex;
@@ -23,16 +25,28 @@ const TheSection = styled.div`
   }
 `;
 
+const SingleSponsor = styled.div`
+  margin: 0 auto;
+  && img {
+    height: 250px;
+    width: auto;
+  }
+  && h3 {
+    color: ${(props) => props.theme.blue};
+    font-size: 1.25rem;
+  }
+`;
+
 const ScrollSection = styled.div`
   margin: 4rem auto;
 `;
 const SingleNameScroll = styled.div`
   background-color: ${(props) => props.theme.blue};
-  margin: 0 2rem;
+  margin: 0 1rem;
   min-height: 200px;
-
+  padding: 0 1rem;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
   display: flex;
   flex-direction: column;
@@ -47,42 +61,42 @@ const ScrollSponsorMap = (names) => {
   const name_array = [];
 
   names.forEach((name, index) => {
-    name_array.push(<SingleNameScroll>{name + index}</SingleNameScroll>);
+    name_array.push(<SingleNameScroll key={name}>{name}</SingleNameScroll>);
   });
 
   return name_array;
 };
 
-const SponsorSection = () => {
-  const names = [
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-    'Sponsor Number ',
-  ];
-
+const SponsorSection = ({ sponsors }) => {
   return (
     <>
       <TheSection>
         <h2>Presenting Sponsors</h2>
         <div className="sponsor--heading">
-          <div className="single--sponsor">Sembler</div>
-          <div className="single--sponsor">Jan & Craig Sher</div>
+          {sponsors.presentingSponsors &&
+            sponsors.presentingSponsors.map((sponsor) => (
+              <SingleSponsor>
+                <img src={sponsor.url} alt={sponsor.alt} />
+                <h3> {sponsor.alt}</h3>
+              </SingleSponsor>
+            ))}
         </div>
-        <h2>Platinum Sponsor</h2>
+        <h2>Platinum Sponsors</h2>
         <div className="sponsor--heading">
-          <div className="single--sponsor">Duke Energy</div>
+          {sponsors.platinumSponsors &&
+            sponsors.platinumSponsors.map((sponsor) => (
+              <SingleSponsor>
+                <img src={sponsor.url} alt={sponsor.alt} />
+                <h3> {sponsor.alt}</h3>
+              </SingleSponsor>
+            ))}
         </div>
         <h2>Other Sponsors</h2>
       </TheSection>
       <ScrollSection>
-        <HorizontalCarousel data={ScrollSponsorMap(names)} />
+        {sponsors?.otherNames && (
+          <HorizontalCarousel data={ScrollSponsorMap(sponsors.otherNames)} />
+        )}
       </ScrollSection>
     </>
   );

@@ -2,34 +2,21 @@ import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { getEventMeta } from 'lib/api';
 
-import { Grid, Button } from '@material-ui/core';
-import Link, { navigate } from 'next/link';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import CircleSpeaker from 'components/ListItems/CircleSpeaker';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
-import FlexHero from 'components/Heroes/FlexHero';
-import Counter from 'components/Counters/Counter';
+
 import Footer from 'components/template1/Footer';
 
-import PreviewTemplate from './[...preview_template]';
-import Section from 'components/template1/Section';
-import SingleEvent from 'components/BreakoutSessions/SingleEvent';
-import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
-import NameScroller from '../../components/RealTimeAssets/NameScroller';
-
-import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
 import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
 import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
 import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
-
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import { toast } from 'react-toastify';
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -59,19 +46,45 @@ export var event_theme = {
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'cashexplosionlive';
 
-const Decider = ({ template, main_event, theme }) => {
+const Decider = ({
+  template,
+  main_event,
+  theme,
+  handleSubmit,
+  form,
+  loading,
+  handleSetEmail,
+}) => {
   switch (template) {
     case 'success':
       return <Success main_event={main_event} theme={theme} />;
       break;
     case 'signup':
-      return <SignUp main_event={main_event} theme={theme} />;
+      return (
+        <SignUp
+          main_event={main_event}
+          theme={theme}
+          handleSubmit={handleSubmit}
+          handleSetEmail={handleSetEmail}
+          form={form}
+          loading={loading}
+        />
+      );
       break;
     case 'main-event':
       return <MainEvent main_event={main_event} theme={theme} />;
       break;
     default:
-      return <MainEvent main_event={main_event} theme={theme} />;
+      return (
+        <SignUp
+          main_event={main_event}
+          theme={theme}
+          handleSubmit={handleSubmit}
+          handleSetEmail={handleSetEmail}
+          form={form}
+          loading={loading}
+        />
+      );
   }
 };
 
@@ -92,30 +105,96 @@ const Index = (props) => {
     body_bg: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const calculateIfStarted = () => {
+  const storage_token = 'cash-explosion--email-auth';
+
+  const calculateInit = () => {
+    if (calculateIfStarted()) {
+      return 'main-event';
+    } else return 'signup';
+  };
+  const [deciderTemplate, setDeciderTemplate] = useState(calculateInit());
+  const [hasStarted, setStarted] = useState(calculateIfStarted());
+
+  function calculateIfStarted() {
     let now = new Date();
     const parsed_event_start = Date.parse(
       main_event.eventStartEnd.StartDateTime
     );
-
     let calc_time = parsed_event_start - now;
 
     if (calc_time <= 0) {
       return true;
     }
     return false;
-  };
+  }
 
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-  const [deciderTemplate, setDeciderTemplate] = useState('main-event');
+  const [form, setForm] = useState({
+    loading: false,
+    email_entered: false,
+    value: '',
+  });
 
   useEffect(() => {
+    setDeciderTemplate(handleDecider());
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
     }, 1000);
 
     return () => clearInterval(interval);
-  });
+  }, []);
+
+  function handleDecider() {
+    if (calculateIfStarted()) {
+      return 'main-event';
+    } else if (
+      localStorage.getItem(storage_token) === 'true' &&
+      !calculateIfStarted()
+    ) {
+      return 'success';
+    } else {
+      return 'signup';
+    }
+  }
+
+  //listen for has started
+  useEffect(() => {
+    console.log('handle decider: ', handleDecider());
+    setDeciderTemplate(handleDecider());
+  }, [hasStarted]);
+  //listen for submit
+
+  const handleSetEmail = (value) => {
+    console.log(value);
+    setForm((prev) => ({
+      ...prev,
+      value,
+    }));
+  };
+
+  const handleSubmit = async (email_value) => {
+    if (email_value === '') {
+      return toast.error('You must supply an email');
+    }
+    setForm((prev) => ({ ...prev, loading: true }));
+    const values = {
+      AttendeeFirst: 'CE Attendee',
+      AttendeeLast: 'Event 1',
+      AttendeeEmail: email_value,
+    };
+
+    return await attendee_capture(values, main_event.id).then((res) => {
+      if (res.error) {
+        setForm((prev) => ({ ...prev, loading: false }));
+        return toast.error(res.error);
+      } else {
+        toast.success(`Emailed recorded!`);
+        localStorage.setItem(storage_token, true);
+        setInterval(() => {
+          setDeciderTemplate('success');
+        }, 2000);
+      }
+    });
+  };
 
   const MainPage = () => {
     return (
@@ -127,6 +206,9 @@ const Index = (props) => {
               template={deciderTemplate}
               theme={event_theme}
               main_event={main_event}
+              handleSetEmail={handleSetEmail}
+              handleSubmit={handleSubmit}
+              form={form}
             />
           </Wrap>
         </Body>

@@ -134,8 +134,8 @@ const SignUp = ({ main_event }) => {
       <ThanksArea>
         <p>
           Thank you for your interest in attending Cash Explosion Fan Fair!
-          <br /> Come back<span className="green"> Saturday May 1st</span> for
-          fun and prizes! Here's what you will need to do:
+          <br /> Come back
+          <span className="green"> Saturday May 1st @ 7:30pm</span> to register.
         </p>
       </ThanksArea>
       <InfoBoxes>

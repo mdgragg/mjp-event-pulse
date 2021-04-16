@@ -1,13 +1,8 @@
-import styled, { keyframes } from 'styled-components';
-import {
-  Grid,
-  Card,
-  AppHeader,
-  AppBar,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
-import { useState, Fragment, useEffect } from 'react';
+import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import { calculate_remaining } from '../../lib/helpers';
+
+import CountdownClock from './CountdownClock';
 
 const MyCounter = styled.div`
   box-shadow: 0px 0px ${(props) => props.shadow || '30px'} 0px black;
@@ -39,63 +34,49 @@ const MyCounter = styled.div`
 export default function Counter(props) {
   const {
     start,
+    end,
     hasStarted,
+    hasEnded,
     afterStarted = 'Live',
     title = 'STARTS IN',
     counterFontSize,
     headerFontSize,
   } = props;
-  function pad(value) {
-    if (value === 0) {
-      return '0';
-    }
-    if (value < 10) {
-      return '0' + value;
-    } else {
-      return value;
-    }
-  }
 
-  function getRemainingTime(date) {
-    const total_remaining = Date.parse(date) - Date.parse(new Date());
-    const seconds = Math.floor((total_remaining / 1000) % 60);
-    const minutes = Math.floor((total_remaining / 1000 / 60) % 60);
-    const hours = Math.floor((total_remaining / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(total_remaining / (1000 * 60 * 60 * 24));
-    if (total_remaining === 'undefined') {
-      return {
-        days: '',
-        hours: '',
-        minutes: '',
-        seconds: '',
-        total_remaining: '',
-      };
-    }
-    return {
-      days,
-      hours,
-      minutes,
-      seconds,
-      total_remaining,
-    };
-  }
+  const [countdown_object, set_countdown_object] = useState(
+    calculate_remaining(start)
+  );
 
   useEffect(() => {
-    // calcTime(getRemainingTime(props.start));
-
-    let interval = setInterval(() => {
-      let remaining = getRemainingTime(start);
-      calcTime(remaining);
+    const counter = setInterval(() => {
+      set_countdown_object(calculate_remaining(start, end));
     }, 1000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(counter);
   }, []);
 
-  const [time, calcTime] = useState(getRemainingTime(start));
+  // show if the counter end has been reached
+  if (countdown_object.parsed_until_end > 0 || hasEnded) {
+    return (
+      <MyCounter className={props.customClass || ''} {...props}>
+        <h2
+          style={{
+            fontWeight: '800',
+            fontSize: `${headerFontSize || '2rem'}`,
+            margin: 'auto auto 0 auto',
+          }}
+        >
+          This Event Has Ended
+        </h2>
+      </MyCounter>
+    );
+  }
 
-  if (time.total_remaining < 0 || hasStarted) {
+  // show for live
+  if (countdown_object.total_remaining < 0 || hasStarted) {
     return afterStarted;
   }
+
+  // default show the counter
   return (
     <MyCounter className={props.customClass || ''} {...props}>
       <h2
@@ -107,8 +88,7 @@ export default function Counter(props) {
       >
         {title}
       </h2>
-      {time.days} Days {time.hours === 0 ? '' : `${pad(time.hours)} Hours`}{' '}
-      {pad(time.minutes)} Minutes {pad(time.seconds)}
+      <CountdownClock countdown_object={countdown_object} />
     </MyCounter>
   );
 }

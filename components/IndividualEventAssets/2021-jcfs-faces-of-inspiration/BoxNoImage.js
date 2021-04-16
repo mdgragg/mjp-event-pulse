@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TheBox = styled.div`
-  height: 450px;
+  height: auto;
+  border-radius: 25px;
   width: 90%;
   max-width: 450px;
   margin: 1rem auto;
@@ -13,16 +14,15 @@ const TheBox = styled.div`
   z-index: 2;
   justify-content: flex-end;
   transition: all 0.2s;
+  background-color: ${(props) => props.theme.blue};
   && .title-text {
     max-width: 380px;
-    transition: all 0.2s;
     margin: 0 auto;
     text-align: center;
-    color: ${(props) => props?.titleTextColor || 'red'};
+    color: white;
     font-size: 1.5rem;
     font-weight: 800;
     z-index: 2;
-    background-color: rgba(255, 255, 255, 0.5);
     padding: 10px 15px;
   }
   && button {
@@ -41,9 +41,10 @@ const TheBox = styled.div`
     img {
       opacity: 1;
     }
-    && .title-text {
-      background-color: rgba(255, 255, 255, 0.95);
-      color: black;
+    button {
+      background-color: white;
+      color: ${(props) => props.theme.blue};
+      transform: scale(1.05);
     }
   }
   @media all and (max-width: 868px) {
@@ -55,22 +56,7 @@ const TheBox = styled.div`
   }
 `;
 
-const MainImage = styled.img`
-  position: absolute;
-  z-index: 1;
-  width: auto;
-  height: 100%;
-  top: 0%;
-  opacity: 0.4;
-  transition: all 0.2s;
-  filter: saturate(0);
-  &&:hover {
-    opacity: 1;
-    filter: saturate(1);
-  }
-`;
-
-const SingleBox = ({
+const BoxNoImage = ({
   titleText = 'titleText',
   buttonText = 'buttonText',
   imgSrc,
@@ -93,10 +79,9 @@ const SingleBox = ({
       >
         <div className="title-text">{titleText}</div>
         <button>{buttonText}</button>
-        <MainImage src={imgSrc} alt={imgSrc} />
       </TheBox>
     </>
   );
 };
 
-export default SingleBox;
+export default BoxNoImage;

@@ -86,7 +86,7 @@ const Index = (props) => {
     return false;
   };
 
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
+  // const [hasStarted, setStarted] = useState(calculateIfStarted());
 
   // const [hasStarted, setStarted] = createContext(false);
 
@@ -94,7 +94,7 @@ const Index = (props) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
+      // setStarted(calculateIfStarted());
     }, 1000);
 
     const storage_auth = sessionStorage.getItem(session_token);
@@ -128,7 +128,7 @@ const Index = (props) => {
         >
           <Page theme={event_theme}>
             <Meta title={event_meta.EventJobName}> </Meta>
-            <FlexHero hasStarted={hasStarted} title={event_meta.EventJobName}>
+            <FlexHero title={event_meta.EventJobName}>
               <div></div>
               <div>
                 <center>
@@ -164,7 +164,6 @@ const Index = (props) => {
                     counterText={'Starts In'}
                     counterTextColor={'white'}
                     textColor={'white'}
-                    hasStarted={hasStarted}
                     afterStarted={
                       <>
                         <center>
@@ -178,12 +177,13 @@ const Index = (props) => {
                               margin: 'auto auto 0 auto',
                             }}
                           >
-                            Live Now
+                            Live Now!
                           </h2>
                         </center>
                       </>
                     }
                     start={main_event.eventStartEnd.StartDateTime}
+                    end={main_event.eventStartEnd.EndDateTime}
                   />
                 </center>
               </div>

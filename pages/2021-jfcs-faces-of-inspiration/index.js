@@ -1,31 +1,11 @@
-import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
-import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-import base from 'lib/firebase/base';
-import { fireBaseApp as fb } from 'lib/firebase/base';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
+import _ from 'lodash';
+import { getEventMeta } from 'lib/api';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-import Hero from 'components/Heroes/Hero';
-import Navbar from 'components/template1/Navbar';
-import Body from 'components/template1/Body';
 import JCFS__PAGE from 'components/IndividualEventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
-import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
-import Section from 'components/template1/Section';
-import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
-import cookies from 'next-cookies';
-import LoginPage from 'components/globals/Login/LoginPage';
-import PublicChat from '../../components/Chat/PublicChat';
 
 export const EVENT_URL = '2021-jfcs-faces-of-inspiration';
 

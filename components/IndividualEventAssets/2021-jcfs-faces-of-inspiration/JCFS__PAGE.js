@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Body from '../../Body.js';
 import FaceMap from './FaceMap';
 import SingleBox from './SingleBox';
@@ -7,12 +7,13 @@ import DateParse from 'components/assets/DateParse.js';
 import Banner from 'components/Banners/Banner.js';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg.js';
 import SponsorSection from './SponsorSection.js';
+import BoxNoImage from './BoxNoImage.js';
 
 const PageGlobal = styled.div`
   && button {
-    width: 200px;
+    width: 180px;
     border-radius: 80px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     padding: 10px 0px;
     font-weight: 800;
   }
@@ -103,7 +104,7 @@ const LogoArea = styled.div`
 const FirstSection = styled.div`
   padding-top: 4rem;
   width: 100%;
-  min-height: 500px;
+  min-height: 250px;
   max-width: 1200px;
   margin: auto;
   z-index: 100;
@@ -115,6 +116,21 @@ const FirstSection = styled.div`
 `;
 
 const JCFS__PAGE = ({ main_event, theme }) => {
+  const [data, setData] = useState({ faces: null, sponsors: null });
+  useEffect(() => {
+    const fetchFaces = async () => {
+      return await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/events/56/analytics`
+      ).then((res) => res.json());
+    };
+
+    fetchFaces().then((res) => {
+      if (res.Analytics?.faces) {
+        setData(res.Analytics);
+      }
+    });
+  }, []);
+
   return (
     <PageGlobal>
       <Hero>
@@ -127,33 +143,32 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         </LogoArea>
         {/* <div className="hero-content"></div> */}
       </Hero>
-      <FaceMap />
+
+      <FaceMap faces={data.faces} />
       <Body style={{ zIndex: 150 }}>
         <FirstSection>
-          <SingleBox
+          <BoxNoImage
             titleTextColor={theme.blue}
             titleText="Watch the Co-Chair's Welcome"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Watch Now"
-            imgSrc={`https://placehold.co/400x300`}
           />
-          <SingleBox
+          <BoxNoImage
             titleTextColor={theme.blue}
             titleText="Double Your Gift Here"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Donate"
-            imgSrc={`https://placehold.co/400x300`}
           />
         </FirstSection>
         <Banner_ImgBg
           color={theme.blue}
-          imgSrc={`https://placehold.co/1080x400`}
+          imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/main-event.png`}
         >
           <div
             style={{
-              height: '400px',
+              height: '600px',
               width: '100%',
               display: 'flex',
               flexWrap: 'wrap',
@@ -161,8 +176,14 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               justifyContent: 'center',
             }}
           >
-            <h2>Hello World</h2>
-            <p>
+            <h2>Main Program</h2>
+            <p
+              style={{
+                maxWidth: '500px',
+                margin: '2rem auto',
+                fontSize: '1rem',
+              }}
+            >
               {' '}
               We will need the description for the thank you message, this is
               placeholder for the main program.
@@ -170,8 +191,8 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             <button>JOIN US</button>
           </div>
         </Banner_ImgBg>
-        <SponsorSection></SponsorSection>
-        <br />
+        {data.sponsors && <SponsorSection sponsors={data.sponsors} />}
+
         <Banner color={theme.blue}>
           <div
             style={{
@@ -215,7 +236,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"
-            imgSrc={`https://placehold.co/400x300`}
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/sandra-qa.png`}
           />
           <SingleBox
             titleTextColor={'black'}
@@ -223,7 +244,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"
-            imgSrc={`https://placehold.co/400x300`}
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/jan-wayne.png`}
           />
         </div>
       </Body>

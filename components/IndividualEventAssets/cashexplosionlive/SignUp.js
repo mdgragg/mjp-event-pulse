@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
 import PublicChat from 'components/Chat/PublicChat';
@@ -49,6 +49,10 @@ const CTA = styled.div`
   }
 `;
 const EnterArea = styled.div`
+  &&.loading {
+    opacity: 0.85;
+  }
+
   width: 100%;
   margin: 3rem auto;
   && input {
@@ -98,7 +102,9 @@ const SignUpButton = styled.button`
     width: 100%;
   }
 `;
-const SignUp = ({ main_event }) => {
+const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
+  const [value, setValue] = useState('');
+
   return (
     <SignUpWrap>
       <img
@@ -108,14 +114,25 @@ const SignUp = ({ main_event }) => {
       <CTA>
         <span className="dollars"> Saturday, May 1st @ 8:00pm</span>
       </CTA>
-      <EnterArea>
+      <EnterArea className={form.loading ? 'loading' : ''}>
         <EnterText>
           <ArrowDownwardIcon className="downIcon" />
           <p> Enter your email for more information</p>
           <ArrowDownwardIcon className="downIcon" />
         </EnterText>
-        <input type="text" placeholder={`ENTER EMAIL`} />
-        <SignUpButton>Submit</SignUpButton>
+        <input
+          type="text"
+          placeholder={`ENTER EMAIL`}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <SignUpButton
+          onClick={() => {
+            handleSubmit(value);
+          }}
+        >
+          {form.loading ? 'Loading...' : 'Submit'}
+        </SignUpButton>
       </EnterArea>
     </SignUpWrap>
   );

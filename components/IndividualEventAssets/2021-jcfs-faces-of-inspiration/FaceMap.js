@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import LoadingImage from 'components/Loading/LoadingImage';
 const FaceGrid = styled.div`
   width: 80%;
   margin: auto;
@@ -28,41 +28,35 @@ const FaceGrid = styled.div`
     transform: scale(1.02);
   }
 `;
-const faces = [
-  {
-    url:
-      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-1.png',
-    alt: 'pic',
-  },
-  {
-    url:
-      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-2.png',
-    alt: 'pic',
-  },
-  {
-    url:
-      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-3.png',
-    alt: 'pic',
-  },
-  {
-    url:
-      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-4.png',
-    alt: 'pic',
-  },
-  {
-    url:
-      'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Renders/header-5.png',
-    alt: 'pic',
-  },
-];
-const FaceMap = () => {
+
+const FaceMap = ({ faces }) => {
   return (
     <FaceGrid>
-      {faces.map((face) => (
-        <img src={face.url} alt={face.alt} />
-      ))}
+      {faces ? (
+        faces.map((face, index) => (
+          <img key={face.alt + '--' + index} src={face.url} alt={face.alt} />
+        ))
+      ) : (
+        <LoadMap />
+      )}
     </FaceGrid>
   );
+};
+
+const LoadMap = () => {
+  let num = 5;
+  let themap = [];
+  for (let i = 0; i < num; i++) {
+    themap.push(
+      <div
+        key={`map-load--${i}`}
+        style={{ height: '300px', width: '15%', margin: '1%' }}
+      >
+        <LoadingImage />
+      </div>
+    );
+  }
+  return <>{themap}</>;
 };
 
 export default FaceMap;
