@@ -25,6 +25,7 @@ const MyCounter = styled.div`
   }
   @media all and (max-width: 768px) {
     margin: 2rem auto;
+    width: 100%;
   }
   @media all and (max-width: 440px) {
     width: 100%;

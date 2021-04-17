@@ -26,7 +26,7 @@ const ThanksWrap = styled.div`
       min-height: 100px;
     }
     && .counter {
-      display: none;
+      margin: 2rem auto;
     }
   }
 `;
@@ -105,7 +105,7 @@ const InfoBoxes = styled.div`
     }
   }
 
-  @media all and (max-width: 550px) {
+  @media all and (max-width: 768px) {
     && span {
       font-size: 1.75rem;
       height: 100%;
@@ -117,6 +117,14 @@ const InfoBoxes = styled.div`
     }
     && div.info {
       font-size: 1rem;
+    }
+    && .counter {
+      && h2 {
+        font-size: auto;
+        margin: 0 auto;
+      }
+      width: 75%;
+      font-size: 100%;
     }
   }
 `;
@@ -130,9 +138,9 @@ const SignUp = ({ main_event }) => {
 
       <ThanksArea>
         <p>
-          Thank you for your interest in attending Cash Explosion Fan Fair!
+          Thank you for your interest in attending Cash Explosion's Fan Fair!
           <br /> Come back
-          <span className="green"> Saturday May 1st @ 7:30pm</span> to register.
+          <span className="green"> May 1st @ 7:30pm</span> to register.
         </p>
       </ThanksArea>
       <InfoBoxes>
@@ -159,6 +167,7 @@ const SignUp = ({ main_event }) => {
       </InfoBoxes>
       <div className="counter">
         <Counter
+          customClass="counter-inner"
           bgColor="none"
           headerFontSize="4rem"
           counterFontSize="1.5rem"

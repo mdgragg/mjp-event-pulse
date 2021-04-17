@@ -208,33 +208,6 @@ const Index = (props) => {
             />
           </Wrap>
         </Body>
-        <Footer>
-          {event_meta.eventStatus.EventStatus === 'Preview' ? (
-            <div>
-              <h2>Preview Area</h2>
-              <button
-                style={{ display: 'inline', margin: '0 1rem' }}
-                onClick={() => setDeciderTemplate('main-event')}
-              >
-                Main Event
-              </button>
-
-              <button
-                style={{ display: 'inline', margin: '0 1rem' }}
-                onClick={() => setDeciderTemplate('signup')}
-              >
-                Sign Up
-              </button>
-
-              <button
-                style={{ display: 'inline', margin: '0 1rem' }}
-                onClick={() => setDeciderTemplate('success')}
-              >
-                Success
-              </button>
-            </div>
-          ) : null}
-        </Footer>
       </Page>
     );
   };
