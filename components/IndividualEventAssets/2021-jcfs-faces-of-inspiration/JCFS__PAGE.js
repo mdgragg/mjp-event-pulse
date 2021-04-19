@@ -99,6 +99,19 @@ const LogoArea = styled.div`
       margin-top: 320px;
     }
   }
+  @media all and (max-width: 500px) {
+    && img.faces {
+      width: 50%;
+    }
+    && img.of-inspiration {
+      width: 30%;
+      top: 30%;
+    }
+    && h2 {
+      font-size: 0.75rem;
+      margin-top: 160px;
+    }
+  }
 `;
 
 const FirstSection = styled.div`
@@ -153,6 +166,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Watch Now"
+            link="https://us02web.zoom.us/j/81055552981?pwd=azU1NjVFRCtCUjBCQUZMRXJZUmt2UT09"
           />
           <BoxNoImage
             titleTextColor={theme.blue}
@@ -160,6 +174,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Donate"
+            link="https://faces2021.givesmart.com"
           />
         </FirstSection>
         <Banner_ImgBg
@@ -179,12 +194,11 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             <h2>Main Program</h2>
             <p
               style={{
-                maxWidth: '500px',
+                maxWidth: '380px',
                 margin: '2rem auto',
                 fontSize: '1rem',
               }}
             >
-              {' '}
               {main_event.Description
                 ? main_event.Description
                 : 'We will need the description for the thank you message, this is placeholder for the main program.'}
@@ -217,6 +231,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
               buttonText="Learn More"
+              link="https://youtu.be/JxhanJjBB6M"
             />
             <SingleBox
               titleTextColor={'white'}
@@ -224,6 +239,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
               buttonText="Help"
+              link="https://us02web.zoom.us/j/82756728006?pwd=ZVBOSzNxQldVbkRTdTZGdlJnUXp2dz09"
             />
           </div>
         </Banner>
@@ -244,6 +260,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonTextColor="white"
             buttonText="Join Us"
             imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/sandra-qa.png`}
+            link="https://us02web.zoom.us/j/86773127001?pwd=U015SitMSERXZXZCYUY4UWFXUGdMZz09"
           />
           <SingleBox
             titleTextColor={'black'}
@@ -252,6 +269,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             buttonTextColor="white"
             buttonText="Join Us"
             imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/jan-wayne.png`}
+            link="https://us02web.zoom.us/j/82207856018?pwd=TElpcjBmcGpVaW5JR1JrTzdNN3lTUT09"
           />
         </div>
       </Body>

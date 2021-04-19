@@ -27,6 +27,12 @@ const FaceGrid = styled.div`
   && img:hover {
     transform: scale(1.02);
   }
+
+  @media all and (max-width: 500px) {
+    width: 100%;
+    margin-top: -450px;
+    margin-bottom: -30px;
+  }
 `;
 
 const FaceMap = ({ faces }) => {

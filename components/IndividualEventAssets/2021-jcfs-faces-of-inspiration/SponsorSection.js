@@ -16,12 +16,18 @@ const TheSection = styled.div`
   }
   && .sponsor--heading {
     display: flex;
+    flex-wrap: wrap;
     max-width: 800px;
     margin: auto;
   }
   && .single--sponsor {
     width: 100%;
     min-height: 300px;
+  }
+  @media all and (max-width: 500px) {
+    && h2 {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -58,6 +64,11 @@ const SingleNameScroll = styled.div`
   @media all and (max-width: 868px) {
     font-size: 1rem;
     min-height: 100px;
+  }
+  @media all and (max-width: 500px) {
+    font-size: 0.75rem;
+    width: 90%;
+    margin: 0 auto;
   }
 `;
 const ScrollSponsorMap = (names) => {

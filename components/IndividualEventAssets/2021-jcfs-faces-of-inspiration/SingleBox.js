@@ -47,10 +47,19 @@ const TheBox = styled.div`
     }
   }
   @media all and (max-width: 868px) {
-    height: 200px;
-
+    height: 85vw;
+    margin-top: 4rem;
     && .title-text {
+      position: absolute;
       font-size: 1rem;
+      bottom: 0rem;
+      cursor: pointer;
+    }
+    && button {
+      font-size: 1rem;
+      position: absolute;
+      bottom: -70px;
+      cursor: pointer;
     }
   }
 `;
@@ -73,7 +82,7 @@ const MainImage = styled.img`
 const SingleBox = ({
   titleText = 'titleText',
   buttonText = 'buttonText',
-  imgSrc,
+  imgSrc = 'https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/default-thumb-2.png',
   titleTextColor,
   buttonColor,
   buttonTextColor,
