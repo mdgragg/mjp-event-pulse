@@ -40,19 +40,27 @@ const LoginPage = ({
   };
   // redirect = redirect + EVENT_URL;
 
-  const handleSetPreview = () => {
-    if (creds === previewPassword) {
-      toast.success('Redirecting you to the preview');
-      console.log(redirect);
-      document.cookie = `preview_cookie__${EVENT_URL}=true; max-age=${
-        60 * 60 * 24 * 365
-      }; path=/`;
-      setTimeout(() => {
-        router.push(redirect);
-      }, 1000);
-    } else {
-      toast.error('Wrong Password!');
-    }
+  const handleSetPreview = async () => {
+    await fetch('/api/validate_preview_password', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        pw: creds,
+        event_url: EVENT_URL,
+      }),
+    })
+      .then((res) => {
+        if (res.status !== 200) {
+          return toast.error('Bad Password');
+        }
+        setTimeout(() => {
+          router.push(redirect);
+        }, 2000);
+        return toast.success(`Redirecting to: ${EVENT_URL}`);
+      })
+      .catch((err) => toast.error('errrrr', err));
   };
   return (
     <PageWrap>

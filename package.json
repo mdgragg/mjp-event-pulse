@@ -20,6 +20,7 @@
     "apollo-server-micro": "^2.18.1",
     "badwords": "^1.0.0",
     "clsx": "^1.1.1",
+    "cookie": "^0.4.1",
     "cors": "^2.8.5",
     "firebase": "^7.23.0",
     "fs-extra": "^9.0.1",

@@ -20,11 +20,9 @@ const Home = (props) => {
     <Page theme={theme}>
       <Header title="MJP Events" height={headerHeight} />
       <Section>
-        <Grid container>
-          {/* <Grid item={true} md={7} alignContent="center">
-              <EventSearch events={eventJobs} />
-            </Grid> */}
-          <Grid item={true} md={12} alignItems="flex-start">
+        <Grid container alignItems="flex-start">
+          <Grid item md={12}>
+            <Button onClick={() => {}}>Test</Button>
             <InfoGrid />
           </Grid>
         </Grid>
@@ -33,5 +31,10 @@ const Home = (props) => {
     </Page>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  console.log(ctx.req.cookies);
+  return { props: {} };
+}
 
 export default withApollo(Home);

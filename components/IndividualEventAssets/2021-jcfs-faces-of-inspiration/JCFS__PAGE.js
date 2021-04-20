@@ -3,9 +3,8 @@ import Body from '../../Body.js';
 import FaceMap from './FaceMap';
 import SingleBox from './SingleBox';
 import styled from 'styled-components';
-import DateParse from 'components/assets/DateParse.js';
+import MainProgram from './MainProgram';
 import Banner from 'components/Banners/Banner.js';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg.js';
 import SponsorSection from './SponsorSection.js';
 import BoxNoImage from './BoxNoImage.js';
 
@@ -34,7 +33,7 @@ const Hero = styled.div`
   background-color: black;
   color: white;
   z-index: 1;
-  min-height: 900px;
+  min-height: 700px;
   && .hero-content {
     position: relative;
     width: 100%;
@@ -63,6 +62,9 @@ const Hero = styled.div`
   @media all and (max-width: 1200px) {
     min-height: 650px;
   }
+  @media all and (max-width: 500px) {
+    min-height: 550px;
+  }
 `;
 
 const LogoArea = styled.div`
@@ -75,18 +77,35 @@ const LogoArea = styled.div`
     width: auto;
   }
   && img.faces {
-    top: 50px;
-    left: 20%;
+    height: 55%;
+    top: 80px;
+    left: 28%;
   }
   && img.of-inspiration {
-    top: 100%;
-    left: 50%;
+    height: 12%;
+    top: 65%;
+    left: 54%;
   }
   && h2 {
     text-align: center;
     margin-top: 550px;
   }
   @media all and (max-width: 1200px) {
+    && img.faces {
+      width: 37%;
+      height: auto;
+    }
+    && img.of-inspiration {
+      width: 25%;
+      height: auto;
+      top: 60%;
+    }
+    && h2 {
+      text-align: center;
+      margin-top: 320px;
+    }
+  }
+  @media all and (max-width: 768px) {
     && img.faces {
       width: 50%;
     }
@@ -95,21 +114,17 @@ const LogoArea = styled.div`
       top: 60%;
     }
     && h2 {
-      text-align: center;
-      margin-top: 320px;
+      font-size: 0.75rem;
+      margin-top: 160px;
     }
   }
-  @media all and (max-width: 500px) {
+  @media all and (max-width: 550px) {
     && img.faces {
       width: 50%;
     }
     && img.of-inspiration {
       width: 30%;
-      top: 30%;
-    }
-    && h2 {
-      font-size: 0.75rem;
-      margin-top: 160px;
+      top: 45%;
     }
   }
 `;
@@ -150,9 +165,6 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <LogoArea className="logo-area">
           <img className="faces" src={main_event.KeyValue[0].value} />
           <img className="of-inspiration" src={main_event.KeyValue[1].value} />
-          <h2>
-            <DateParse date={main_event.eventStartEnd.StartDateTime} />
-          </h2>
         </LogoArea>
         {/* <div className="hero-content"></div> */}
       </Hero>
@@ -177,41 +189,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             link="https://faces2021.givesmart.com"
           />
         </FirstSection>
-        <Banner_ImgBg
-          color={theme.blue}
-          imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/main-event.png`}
-        >
-          <div
-            style={{
-              height: '600px',
-              width: '100%',
-              display: 'flex',
-              flexWrap: 'wrap',
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}
-          >
-            <h2>Main Program</h2>
-            <p
-              style={{
-                maxWidth: '380px',
-                margin: '2rem auto',
-                fontSize: '1rem',
-              }}
-            >
-              {main_event.Description
-                ? main_event.Description
-                : 'We will need the description for the thank you message, this is placeholder for the main program.'}
-            </p>
-            <button
-              onClick={() =>
-                (window.location.href = main_event.streamLinks[0].url)
-              }
-            >
-              JOIN US
-            </button>
-          </div>
-        </Banner_ImgBg>
+        <MainProgram theme={theme} main_event={main_event} />
         {data.sponsors && <SponsorSection sponsors={data.sponsors} />}
 
         <Banner color={theme.blue}>
@@ -226,7 +204,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             }}
           >
             <SingleBox
-              titleTextColor={'white'}
+              titleTextColor={theme.blue}
               titleText="Learn about our newest program with the St. Petersburg Police Department - CALL"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
@@ -234,7 +212,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               link="https://youtu.be/JxhanJjBB6M"
             />
             <SingleBox
-              titleTextColor={'white'}
+              titleTextColor={theme.blue}
               titleText="Need Help? Contact the Help Desk"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"

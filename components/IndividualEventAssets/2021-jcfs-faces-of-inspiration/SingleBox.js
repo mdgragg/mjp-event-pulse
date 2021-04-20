@@ -18,10 +18,10 @@ const TheBox = styled.div`
     transition: all 0.2s;
     margin: 0 auto;
     text-align: center;
-    color: ${(props) => props?.titleTextColor || 'red'};
+    color: ${(props) => props?.titleTextColor || 'black'};
     font-size: 1.5rem;
     font-weight: 800;
-    z-index: 2;
+    z-index: 4;
     background-color: rgba(255, 255, 255, 0.5);
     padding: 10px 15px;
   }
@@ -40,6 +40,7 @@ const TheBox = styled.div`
     cursor: pointer;
     img {
       opacity: 1;
+      z-index: 0;
     }
     && .title-text {
       background-color: rgba(255, 255, 255, 0.95);
@@ -70,9 +71,9 @@ const MainImage = styled.img`
   width: auto;
   height: 100%;
   top: 0%;
-  opacity: 0.4;
+  opacity: 0.9;
   transition: all 0.2s;
-  filter: saturate(0);
+  filter: saturate(0.25);
   &&:hover {
     opacity: 1;
     filter: saturate(1);

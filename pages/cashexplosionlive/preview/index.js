@@ -28,7 +28,6 @@ const Index = (props) => {
       <PreviewLoginPage
         theme={event_theme}
         EVENT_URL={props.EVENT_URL}
-        previewPassword={props.previewPassword}
         redirect={props.redirect}
       >
         <Meta title={'Login'}></Meta>
@@ -45,7 +44,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
 
-  const redirect = `./`;
+  const redirect = `./main-event`;
   //   get the event job data from our api
   console.log(ctx.req.cookies[`preview_cookie__${EVENT_URL}`]);
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {

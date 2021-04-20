@@ -11,7 +11,7 @@ const FaceGrid = styled.div`
   background: none;
   /* height: 250px; */
 
-  margin-top: -250px;
+  margin-top: -280px;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
@@ -30,7 +30,7 @@ const FaceGrid = styled.div`
 
   @media all and (max-width: 500px) {
     width: 100%;
-    margin-top: -450px;
+    margin-top: -300px;
     margin-bottom: -30px;
   }
 `;

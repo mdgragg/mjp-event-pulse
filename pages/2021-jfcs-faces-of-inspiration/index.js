@@ -10,7 +10,7 @@ import JCFS__PAGE from 'components/IndividualEventAssets/2021-jcfs-faces-of-insp
 export const EVENT_URL = '2021-jfcs-faces-of-inspiration';
 
 export var event_theme = {
-  heroHeight: '550px',
+  heroHeight: 'auto',
   videoBreakPoint: null,
   maxSectionWidth: null,
   fontFamily: 'Avenir',

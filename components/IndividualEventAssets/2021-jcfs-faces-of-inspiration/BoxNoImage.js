@@ -49,7 +49,12 @@ const TheBox = styled.div`
   }
   @media all and (max-width: 868px) {
     height: 200px;
-
+    && .title-text {
+      font-size: 1rem;
+    }
+  }
+  @media all and (max-width: 550px) {
+    height: auto;
     && .title-text {
       font-size: 1rem;
     }

@@ -257,6 +257,15 @@ export async function getStaticProps(ctx) {
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
+  if (eventData.eventStatus.EventStatus === 'Live') {
+    return {
+      redirect: {
+        destination: `${EVENT_URL}/thank-you`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       //meta will be the props for the event
