@@ -32,11 +32,11 @@ import { Carousel } from 'react-responsive-carousel';
 //   }
 // `;
 
-const HorizontalCarousel = ({ data }) => {
+const HorizontalCarousel = ({ data, interval }) => {
   return (
     <Carousel
       infiniteLoop
-      interval={1000}
+      interval={interval || 2000}
       centerMode
       centerSlidePercentage={33}
       autoPlay

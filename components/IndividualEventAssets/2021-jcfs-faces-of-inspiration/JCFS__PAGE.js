@@ -162,7 +162,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <FirstSection>
           <BoxNoImage
             titleTextColor={theme.blue}
-            titleText="Watch the Co-Chair's Welcome"
+            titleText="Watch the Co-Chairs' Welcome"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Watch Now"

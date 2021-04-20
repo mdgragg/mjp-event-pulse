@@ -106,6 +106,7 @@ export async function getStaticProps() {
         event_meta: eventData,
         main_event,
       },
+      revalidate: 60,
     };
     return values;
   } catch (error) {

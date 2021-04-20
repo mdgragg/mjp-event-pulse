@@ -109,7 +109,10 @@ const SponsorSection = ({ sponsors }) => {
       </TheSection>
       <ScrollSection>
         {sponsors?.otherNames && (
-          <HorizontalCarousel data={ScrollSponsorMap(sponsors.otherNames)} />
+          <HorizontalCarousel
+            data={ScrollSponsorMap(sponsors.otherNames)}
+            interval={3000}
+          />
         )}
       </ScrollSection>
     </>
