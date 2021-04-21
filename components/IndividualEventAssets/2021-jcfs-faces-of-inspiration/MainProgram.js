@@ -8,12 +8,20 @@ const Wrap = styled.div`
   margin-bottom: 3srem;
 `;
 const Inner = styled.div`
-  height: 600px;
+  min-height: 600px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  h2 {
+    font-size: 2.5rem;
+  }
+  && p {
+    max-width: 480px;
+    margin: 2rem auto;
+    font-size: 1.75rem;
+  }
   && button {
     background-color: ${(props) => props.theme.blue};
     color: white;
@@ -21,9 +29,27 @@ const Inner = styled.div`
     font-size: 1rem;
     padding: 1rem 2rem;
   }
-
+  @media all and (max-width: 900px) {
+    h2 {
+      font-size: 2rem;
+    }
+    && p {
+      max-width: 60%;
+      margin: 1rem auto;
+      font-size: 1.5rem;
+    }
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
   @media all and (max-width: 768px) {
-    height: 300px;
+    min-height: 300px;
+  }
+  @media all and (max-width: 500px) {
+    && p {
+      max-width: 90%;
+      margin: 1rem auto;
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -36,13 +62,7 @@ const MainProgram = ({ theme, main_event }) => {
       >
         <Inner>
           <h2>Main Program</h2>
-          <p
-            style={{
-              maxWidth: '380px',
-              margin: '2rem auto',
-              fontSize: '1rem',
-            }}
-          >
+          <p style={{}}>
             {main_event.Description
               ? main_event.Description
               : 'We will need the description for the thank you message, this is placeholder for the main program.'}

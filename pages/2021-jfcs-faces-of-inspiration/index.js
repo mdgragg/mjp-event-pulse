@@ -11,6 +11,7 @@ export const EVENT_URL = '2021-jfcs-faces-of-inspiration';
 
 export var event_theme = {
   heroHeight: 'auto',
+  bg: '#f7f7f7',
   videoBreakPoint: null,
   maxSectionWidth: null,
   fontFamily: 'Avenir',

@@ -2,11 +2,24 @@ import React, { useEffect, useState } from 'react';
 import Body from '../../Body.js';
 import FaceMap from './FaceMap';
 import SingleBox from './SingleBox';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import MainProgram from './MainProgram';
 import Banner from 'components/Banners/Banner.js';
 import SponsorSection from './SponsorSection.js';
 import BoxNoImage from './BoxNoImage.js';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+
+const bob = keyframes`
+0%{
+  transform: scale(1)
+}
+50%{
+  transform: scale(1.2)
+}
+100%{
+  transform: scale(1)
+}
+`;
 
 const PageGlobal = styled.div`
   && button {
@@ -23,6 +36,21 @@ const PageGlobal = styled.div`
       padding: 10px 20px;
       font-size: 0.75rem;
     }
+  }
+  && .arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 3rem;
+    background-color: white;
+    color: ${(props) => props.theme.blue};
+    border-radius: 50px;
+    padding: 5px;
+    animation: ${bob} 2s ease infinite;
+    box-shadow: 0px 0px 11px -3px black;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 `;
 
@@ -165,6 +193,10 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <LogoArea className="logo-area">
           <img className="faces" src={main_event.KeyValue[0].value} />
           <img className="of-inspiration" src={main_event.KeyValue[1].value} />
+          <ExpandMoreRoundedIcon
+            className="arrow"
+            onClick={() => window.scrollTo(0, 950)}
+          />
         </LogoArea>
         {/* <div className="hero-content"></div> */}
       </Hero>
@@ -205,10 +237,10 @@ const JCFS__PAGE = ({ main_event, theme }) => {
           >
             <SingleBox
               titleTextColor={theme.blue}
-              titleText="Learn about our newest program with the St. Petersburg Police Department - CALL"
+              titleText="Community Assistance and Life Liaison program- an innovative pilot program with St. Petersburg Police"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
-              buttonText="Learn More"
+              buttonText="Watch Video Now"
               link="https://youtu.be/JxhanJjBB6M"
             />
             <SingleBox
@@ -233,7 +265,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         >
           <SingleBox
             titleTextColor={'black'}
-            titleText="Post-Event Q&A with Dr. Sandra Braham and Board Members"
+            titleText="Meet and Greet  Gulf Coast CEO, Dr. Sandra Braham"
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"
