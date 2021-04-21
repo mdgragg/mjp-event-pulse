@@ -1,9 +1,9 @@
 env: standard
-runtime: nodejs10
+runtime: nodejs12
 service: default
 
 env_variables:
-  NEXT_PUBLIC_TEST_VAR: 'test_this_string'
+  NEXT_PUBLIC_TEST_VAR: test_this_string
 
 instance_class: F4
 
