@@ -15,14 +15,15 @@ const Home = (props) => {
   const eventJobs = [];
   const [jobs, setJobs] = useState({ jobs: {} });
   const [headerHeight, setHeaderHeight] = useState('60vh');
-
+  useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_TEST_VAR);
+  }, []);
   return (
     <Page theme={theme}>
       <Header title="MJP Events" height={headerHeight} />
       <Section>
         <Grid container alignItems="flex-start">
           <Grid item md={12}>
-            <Button onClick={() => {}}>Test</Button>
             <InfoGrid />
           </Grid>
         </Grid>
