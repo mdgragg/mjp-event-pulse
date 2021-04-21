@@ -246,7 +246,7 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -257,7 +257,7 @@ export async function getStaticProps(ctx) {
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  if (eventData.eventStatus.EventStatus === 'Live') {
+  if (eventData.eventStatus.EventStatus === 'Ended') {
     return {
       redirect: {
         destination: `${EVENT_URL}/thank-you`,
