@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development && next dev -p 1338",
+    "dev": "NODE_ENV=development && next dev -p 3000",
     "stage": "NEXT_PUBLIC_ENV=staging && next dev",
     "build": "rm -rf ./build && NODE_ENV=production next build",
     "start": "NODE_ENV=production && next start -p 8080",

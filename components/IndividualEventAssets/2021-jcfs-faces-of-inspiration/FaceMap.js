@@ -28,9 +28,15 @@ const FaceGrid = styled.div`
     transform: scale(1.02);
   }
 
+  @media all and (max-width: 1200px) {
+    width: 100%;
+    margin-top: -220px;
+    margin-bottom: -30px;
+  }
+
   @media all and (max-width: 500px) {
     width: 100%;
-    margin-top: -300px;
+    margin-top: -220px;
     margin-bottom: -30px;
   }
 `;

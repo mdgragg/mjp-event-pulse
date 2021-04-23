@@ -17,7 +17,7 @@ const TheSection = styled.div`
   && .sponsor--heading {
     display: flex;
     flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
   }
   && .single--sponsor {
@@ -95,7 +95,7 @@ const SponsorSection = ({ sponsors }) => {
               </SingleSponsor>
             ))}
         </div>
-        <h2>Platinum Sponsors</h2>
+        <h2>Gold Sponsors</h2>
         <div className="sponsor--heading">
           {sponsors.platinumSponsors &&
             sponsors.platinumSponsors.map((sponsor) => (

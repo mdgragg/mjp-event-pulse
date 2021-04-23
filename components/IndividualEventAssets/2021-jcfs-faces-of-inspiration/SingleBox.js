@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TheBox = styled.div`
-  height: 450px;
+  height: 350px;
   width: 90%;
-  max-width: 450px;
+  max-width: 350px;
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@ const TheBox = styled.div`
     margin: 0 auto;
     text-align: center;
     color: ${(props) => props?.titleTextColor || 'black'};
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 800;
     z-index: 4;
     background-color: rgba(255, 255, 255, 0.5);
@@ -30,7 +30,7 @@ const TheBox = styled.div`
     color: ${(props) => props.buttonTextColor};
     width: 200px;
     border-radius: 80px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 10px 0px;
     font-weight: 800;
     z-index: 2;
@@ -40,6 +40,7 @@ const TheBox = styled.div`
     cursor: pointer;
     img {
       opacity: 1;
+      filter: saturate(1);
       z-index: 0;
     }
     && .title-text {
@@ -74,10 +75,6 @@ const MainImage = styled.img`
   opacity: 0.9;
   transition: all 0.2s;
   filter: saturate(0.25);
-  &&:hover {
-    opacity: 1;
-    filter: saturate(1);
-  }
 `;
 
 const SingleBox = ({
@@ -88,6 +85,7 @@ const SingleBox = ({
   buttonColor,
   buttonTextColor,
   link,
+  children,
 }) => {
   return (
     <>
@@ -103,6 +101,7 @@ const SingleBox = ({
       >
         <div className="title-text">{titleText}</div>
         <button>{buttonText}</button>
+        <div style={{ position: 'relative', zIndex: '100' }}> {children}</div>
         <MainImage src={imgSrc} alt={imgSrc} />
       </TheBox>
     </>

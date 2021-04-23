@@ -1,5 +1,5 @@
-import { gql, useQuery } from '@apollo/client';
-import withApollo from '../lib/withApollo';
+// import { gql, useQuery } from '@apollo/client';
+// import withApollo from '../lib/withApollo';
 import { useEffect, useState, useRef } from 'react';
 import EventSearch from 'components/globals/EventSearch';
 import Header from 'components/globals/Header';
@@ -33,9 +33,4 @@ const Home = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
-  console.log(ctx.req.cookies);
-  return { props: {} };
-}
-
-export default withApollo(Home);
+export default Home;

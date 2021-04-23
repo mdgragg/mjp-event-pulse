@@ -52,6 +52,11 @@ const PageGlobal = styled.div`
     right: 0;
     margin: 0 auto;
   }
+  @media all and (max-width: 1200px) {
+    && .arrow {
+      bottom: 120px;
+    }
+  }
 `;
 
 const Hero = styled.div`
@@ -88,7 +93,7 @@ const Hero = styled.div`
     background-image: url('${(props) => props.theme.bgImage}');
   }
   @media all and (max-width: 1200px) {
-    min-height: 650px;
+    min-height: 550px;
   }
   @media all and (max-width: 500px) {
     min-height: 550px;
@@ -107,40 +112,27 @@ const LogoArea = styled.div`
   && img.faces {
     height: 55%;
     top: 80px;
-    left: 28%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
-  && img.of-inspiration {
-    height: 12%;
-    top: 65%;
-    left: 54%;
-  }
+
   && h2 {
     text-align: center;
     margin-top: 550px;
   }
   @media all and (max-width: 1200px) {
     && img.faces {
-      width: 37%;
+      width: 28%;
+      top: 40px;
       height: auto;
-    }
-    && img.of-inspiration {
-      width: 25%;
-      height: auto;
-      top: 60%;
-    }
-    && h2 {
-      text-align: center;
-      margin-top: 320px;
     }
   }
   @media all and (max-width: 768px) {
     && img.faces {
       width: 50%;
     }
-    && img.of-inspiration {
-      width: 30%;
-      top: 60%;
-    }
+
     && h2 {
       font-size: 0.75rem;
       margin-top: 160px;
@@ -149,10 +141,6 @@ const LogoArea = styled.div`
   @media all and (max-width: 550px) {
     && img.faces {
       width: 50%;
-    }
-    && img.of-inspiration {
-      width: 30%;
-      top: 45%;
     }
   }
 `;
@@ -169,6 +157,9 @@ const FirstSection = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  && a.learn-more {
+    line-height: 2.5rem;
+  }
 `;
 
 const JCFS__PAGE = ({ main_event, theme }) => {
@@ -192,7 +183,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
       <Hero>
         <LogoArea className="logo-area">
           <img className="faces" src={main_event.KeyValue[0].value} />
-          <img className="of-inspiration" src={main_event.KeyValue[1].value} />
+
           <ExpandMoreRoundedIcon
             className="arrow"
             onClick={() => window.scrollTo(0, 950)}
@@ -204,22 +195,32 @@ const JCFS__PAGE = ({ main_event, theme }) => {
       <FaceMap faces={data.faces} />
       <Body style={{ zIndex: 150 }}>
         <FirstSection>
-          <BoxNoImage
+          <SingleBox
             titleTextColor={theme.blue}
-            titleText="Watch the Co-Chairs' Welcome"
+            titleText="Meet & Greet Welcome with Co-Chairs"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Watch Now"
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-STERENSS.png`}
             link="https://us02web.zoom.us/j/81055552981?pwd=azU1NjVFRCtCUjBCQUZMRXJZUmt2UT09"
           />
-          <BoxNoImage
+          <SingleBox
             titleTextColor={theme.blue}
             titleText="Double Your Gift Here"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Donate"
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/match.png`}
             link="https://faces2021.givesmart.com"
-          />
+          >
+            {' '}
+            <a
+              className="learn-more"
+              href="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Holocaust%20Survivor%20Urgent%20Care%20Fund%20-%20for%20MJ%20Lander.pdf"
+            >
+              Learn More
+            </a>
+          </SingleBox>
         </FirstSection>
         <MainProgram theme={theme} main_event={main_event} />
         {data.sponsors && <SponsorSection sponsors={data.sponsors} />}
@@ -242,6 +243,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonTextColor="white"
               buttonText="Watch Video Now"
               link="https://youtu.be/JxhanJjBB6M"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-CALL.png"
             />
             <SingleBox
               titleTextColor={theme.blue}
@@ -249,6 +251,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
               buttonText="Help"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-TECH.png"
               link="https://us02web.zoom.us/j/82756728006?pwd=ZVBOSzNxQldVbkRTdTZGdlJnUXp2dz09"
             />
           </div>
