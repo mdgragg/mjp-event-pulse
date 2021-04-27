@@ -206,7 +206,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <FirstSection>
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Meet & Greet Welcome 7 PM and Post-Event with Co-Chairs 8:30 PM"
+            titleText="Meet & Greet Welcome 7 PM"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Click To Join"
