@@ -45,9 +45,13 @@ const SingleSponsor = styled.div`
     font-size: 1.25rem;
   }
 `;
+const ScrollWrap = styled.div``;
 
 const ScrollSection = styled.div`
   margin: 4rem auto;
+  && h2 {
+    text-align: center;
+  }
 `;
 const SingleNameScroll = styled.div`
   background-color: ${(props) => props.theme.blue};
@@ -61,6 +65,7 @@ const SingleNameScroll = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 20px -7px black;
   @media all and (max-width: 868px) {
     font-size: 1rem;
     min-height: 100px;
@@ -70,12 +75,20 @@ const SingleNameScroll = styled.div`
     width: 90%;
     margin: 0 auto;
   }
+  &&.bronze {
+    min-height: 165px;
+    font-size: 1.25rem;
+  }
 `;
-const ScrollSponsorMap = (names) => {
+const ScrollSponsorMap = (names, the_class) => {
   const name_array = [];
 
   names.forEach((name, index) => {
-    name_array.push(<SingleNameScroll key={name}>{name}</SingleNameScroll>);
+    name_array.push(
+      <SingleNameScroll className={the_class} key={name}>
+        {name}
+      </SingleNameScroll>
+    );
   });
 
   return name_array;
@@ -105,16 +118,29 @@ const SponsorSection = ({ sponsors }) => {
               </SingleSponsor>
             ))}
         </div>
-        <h2>Other Sponsors</h2>
       </TheSection>
-      <ScrollSection>
-        {sponsors?.otherNames && (
-          <HorizontalCarousel
-            data={ScrollSponsorMap(sponsors.otherNames)}
-            interval={3000}
-          />
-        )}
-      </ScrollSection>
+      <ScrollWrap>
+        <ScrollSection>
+          <h2>Silver Sponsors</h2>
+          {sponsors?.silver && (
+            <HorizontalCarousel
+              data={ScrollSponsorMap(sponsors.silver, 'silver')}
+              interval={1600}
+            />
+          )}
+        </ScrollSection>
+        <ScrollSection>
+          <h2>Bronze Sponsors</h2>
+
+          {sponsors.bronze && (
+            <HorizontalCarousel
+              data={ScrollSponsorMap(sponsors.bronze, 'bronze')}
+              interval={1600}
+              centerSlidePercentage={20}
+            />
+          )}
+        </ScrollSection>
+      </ScrollWrap>
     </>
   );
 };
