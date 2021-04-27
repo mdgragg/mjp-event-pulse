@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Link from 'next/link';
 const TheBox = styled.div`
   height: 350px;
   width: 90%;
   max-width: 350px;
-  margin: 1rem auto;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +13,11 @@ const TheBox = styled.div`
   z-index: 2;
   justify-content: flex-end;
   transition: all 0.2s;
+  && .child {
+    position: absolute;
+    z-index: 100;
+    bottom: -3rem;
+  }
   && .title-text {
     max-width: 380px;
     transition: all 0.2s;
@@ -33,7 +38,11 @@ const TheBox = styled.div`
     font-size: 1rem;
     padding: 10px 0px;
     font-weight: 800;
-    z-index: 2;
+    z-index: 100;
+    position: relative;
+  }
+  && button:hover {
+    background-color: ${(props) => props.theme.blue};
   }
 
   &&:hover {
@@ -49,19 +58,29 @@ const TheBox = styled.div`
     }
   }
   @media all and (max-width: 868px) {
-    height: 85vw;
+    height: 400px;
     margin-top: 4rem;
+    text-align: center;
     && .title-text {
       position: absolute;
       font-size: 1rem;
       bottom: 0rem;
       cursor: pointer;
     }
+    && .button,
     && button {
       font-size: 1rem;
+      width: 80%;
+      left: 0;
+      right: 0;
+      margin: auto;
       position: absolute;
-      bottom: -70px;
+      bottom: -25px;
+      z-index: 100;
       cursor: pointer;
+    }
+    && .child {
+      bottom: -100px;
     }
   }
 `;
@@ -72,9 +91,13 @@ const MainImage = styled.img`
   width: auto;
   height: 100%;
   top: 0%;
-  opacity: 0.9;
+  opacity: 1;
   transition: all 0.2s;
-  filter: saturate(0.25);
+  filter: saturate(0.8);
+  @media all and (max-width: 868px) {
+    width: inherit;
+    height: auto;
+  }
 `;
 
 const SingleBox = ({
@@ -90,18 +113,15 @@ const SingleBox = ({
   return (
     <>
       <TheBox
-        onClick={() => {
-          if (link) {
-            window.location.href = link;
-          }
-        }}
         titleTextColor={titleTextColor}
         buttonColor={buttonColor}
         buttonTextColor={buttonTextColor}
       >
-        <div className="title-text">{titleText}</div>
-        <button>{buttonText}</button>
-        <div style={{ position: 'relative', zIndex: '100' }}> {children}</div>
+        <div className="title-text">{titleText}</div>{' '}
+        <a href={link} target="_blank" class="button">
+          <button>{buttonText}</button>
+        </a>
+        <div className="child"> {children}</div>
         <MainImage src={imgSrc} alt={imgSrc} />
       </TheBox>
     </>

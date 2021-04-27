@@ -5,7 +5,10 @@ import Banner_ImgBg from 'components/Banners/Banner_ImgBg.js';
 
 const Wrap = styled.div`
   margin-top: 3rem;
-  margin-bottom: 3srem;
+  margin-bottom: 3rem;
+  @media all and (max-width: 868px) {
+    margin-top: 180px;
+  }
 `;
 const Inner = styled.div`
   && .box {
@@ -45,7 +48,13 @@ const Inner = styled.div`
     background-color: ${(props) => props.theme.green};
     transform: scale(1.05);
   }
-  @media all and (max-width: 900px) {
+  @media all and (max-width: 868px) {
+    width: 90%;
+
+    margin: auto;
+    && .box {
+      width: auto;
+    }
     h2 {
       font-size: 2rem;
     }
@@ -85,13 +94,9 @@ const MainProgram = ({ theme, main_event }) => {
                 ? main_event.Description
                 : 'We will need the description for the thank you message, this is placeholder for the main program.'}
             </p>
-            <button
-              onClick={() =>
-                (window.location.href = main_event.streamLinks[0].url)
-              }
-            >
-              JOIN US
-            </button>
+            <a href={main_event.streamLinks[0].url} target="_blank">
+              <button>JOIN US</button>
+            </a>
           </div>
         </Inner>
       </Banner_ImgBg>

@@ -11,7 +11,7 @@ const FaceGrid = styled.div`
   background: none;
   /* height: 250px; */
 
-  margin-top: -280px;
+  margin-top: -300px;
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;

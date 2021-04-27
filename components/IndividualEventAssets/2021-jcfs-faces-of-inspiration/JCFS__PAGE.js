@@ -22,12 +22,21 @@ const bob = keyframes`
 `;
 
 const PageGlobal = styled.div`
+  && a {
+    margin: 0;
+    font-size: unset;
+    padding: 0;
+  }
   && button {
     width: 180px;
     border-radius: 80px;
     font-size: 1.25rem;
     padding: 10px 0px;
     font-weight: 800;
+  }
+  && h2 {
+    font-size: 2.5rem;
+    color: ${(props) => props.theme.blue};
   }
   @media all and (max-width: 868px) {
     && button {
@@ -54,7 +63,7 @@ const PageGlobal = styled.div`
   }
   @media all and (max-width: 1200px) {
     && .arrow {
-      bottom: 120px;
+      bottom: 10px;
     }
   }
 `;
@@ -66,7 +75,7 @@ const Hero = styled.div`
   background-color: black;
   color: white;
   z-index: 1;
-  min-height: 700px;
+  min-height: 610px;
   && .hero-content {
     position: relative;
     width: 100%;
@@ -103,7 +112,7 @@ const Hero = styled.div`
 const LogoArea = styled.div`
   position: absolute;
   z-index: 100;
-  height: 400px;
+  height: 300px;
   width: 100%;
   && img {
     position: absolute;
@@ -111,7 +120,7 @@ const LogoArea = styled.div`
   }
   && img.faces {
     height: 55%;
-    top: 80px;
+    top: 50px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -197,20 +206,20 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <FirstSection>
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Meet & Greet Welcome with Co-Chairs"
+            titleText="Meet & Greet Welcome 7 PM and Post-Event with Co-Chairs 8:30 PM"
             buttonColor={theme.green}
             buttonTextColor="white"
-            buttonText="Watch Now"
+            buttonText="Click To Join"
             imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-STERENSS.png`}
             link="https://us02web.zoom.us/j/81055552981?pwd=azU1NjVFRCtCUjBCQUZMRXJZUmt2UT09"
           />
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Double Your Gift Here"
+            titleText="Holocaust Survivor Urgent Care Fund - Double Your Gift"
             buttonColor={theme.green}
             buttonTextColor="white"
             buttonText="Donate"
-            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/match.png`}
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/match-2.png`}
             link="https://faces2021.givesmart.com"
           >
             {' '}
@@ -221,6 +230,16 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               Learn More
             </a>
           </SingleBox>
+
+          <SingleBox
+            titleTextColor={theme.blue}
+            titleText="Bid on Auction Items"
+            buttonColor={theme.green}
+            buttonTextColor="white"
+            buttonText="Bid Here"
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/auction.png`}
+            link="https://e.givesmart.com/events/kmi/i/"
+          />
         </FirstSection>
         <MainProgram theme={theme} main_event={main_event} />
         {data.sponsors && <SponsorSection sponsors={data.sponsors} />}
@@ -238,24 +257,26 @@ const JCFS__PAGE = ({ main_event, theme }) => {
           >
             <SingleBox
               titleTextColor={theme.blue}
-              titleText="Community Assistance and Life Liaison program- an innovative pilot program with St. Petersburg Police"
+              titleText="Innovative Pilot Program with the St. Petersburg Police"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
               buttonText="Watch Video Now"
               link="https://youtu.be/JxhanJjBB6M"
-              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-CALL.png"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/CALL-Logo-sq.png"
             />
             <SingleBox
               titleTextColor={theme.blue}
-              titleText="Need Help? Contact the Help Desk"
+              titleText="Need Help? Contact the Help Desk or call 877-665-4630"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
               buttonText="Help"
-              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-TECH.png"
               link="https://us02web.zoom.us/j/82756728006?pwd=ZVBOSzNxQldVbkRTdTZGdlJnUXp2dz09"
             />
           </div>
         </Banner>
+        <center>
+          <h2> Post Event Meet & Greets - 8:30 PM</h2>
+        </center>
         <div
           style={{
             width: '100%',
@@ -268,7 +289,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         >
           <SingleBox
             titleTextColor={'black'}
-            titleText="Meet and Greet  Gulf Coast CEO, Dr. Sandra Braham"
+            titleText="Gulf Coast JFCS, President & CEO, Dr. Sandra Braham"
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"
@@ -277,7 +298,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
           />
           <SingleBox
             titleTextColor={'black'}
-            titleText="Post-Event Meet and Greet with Craig and Jan Sher"
+            titleText="Lifetime Achievement Award Recipients, Jan & Craig Sher"
             buttonColor={theme.lightBlue}
             buttonTextColor="white"
             buttonText="Join Us"
