@@ -27,9 +27,10 @@ const HeroHolder = styled.div`
     background-image: url('${(props) =>
       props.theme.header_image || props.header_image}');
     opacity: ${(props) => props.theme.headerOpacity || 1};
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
+    background-attachment: inherit;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: center top;
   }
   @media all and (max-width: 768px) {
     height: min-content;
@@ -42,6 +43,7 @@ const HeaderInner = styled.div`
   display: grid;
   grid-template-columns: 20% 60% 20%;
   align-items: center;
+  margin: auto;
   width: 90%;
   height: inherit;
   /* text-align: center; */
