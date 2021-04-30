@@ -15,10 +15,19 @@ const PageWrap = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
-  && input {
-    height: 50px;
+  && p {
     font-size: 1.5rem;
   }
+  && input {
+    /* height: 50px; */
+    font-size: 2rem;
+    text-align: center;
+    padding: 0.5rem 0rem;
+  }
+  && input:focus {
+    outline: none;
+  }
+
   && button {
     height: 30px;
     width: 100px;
@@ -26,12 +35,7 @@ const PageWrap = styled.div`
     margin-top: 3rem;
   }
 `;
-const LoginPage = ({
-  children,
-  previewPassword = null,
-  redirect = './',
-  EVENT_URL = '',
-}) => {
+const LoginPage = ({ children, redirect = './', EVENT_URL = '' }) => {
   const router = useRouter();
   const [creds, setCreds] = useState(null);
 
@@ -64,9 +68,17 @@ const LoginPage = ({
   };
   return (
     <PageWrap>
-      <p>Password</p>
-      <input type="password" onChange={handleChange}></input>
-      <button onClick={handleSetPreview}>Log In</button>
+      <p>Preview Password</p>
+      <input
+        type="password"
+        onChange={handleChange}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            handleSetPreview();
+          }
+        }}
+      ></input>
+      <button onClick={handleSetPreview}>Submit</button>
       {children}
     </PageWrap>
   );

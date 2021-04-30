@@ -6,7 +6,7 @@ const handler = async (req, res) => {
   return await fetch(
     // 'http://localhost:1337' +
     process.env.NEXT_PUBLIC_STRAPI_API_URL +
-      '/event-jobs/56/auth/validate_preview',
+      `/event-jobs/${event_url}/auth/validate_preview`,
     {
       method: 'POST',
       headers: {
@@ -24,7 +24,7 @@ const handler = async (req, res) => {
     // console.log(res);
     res.cookie(`preview_cookie__${event_url}`, true, {
       httpOnly: false,
-      path: `/${event_url}`,
+      path: `/`,
     });
     return res.end(res.getHeader('Set-Cookie'));
   });

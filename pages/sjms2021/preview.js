@@ -1,13 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
-import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-
-import { Grid, Button } from '@material-ui/core';
-
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
 import { EVENT_URL, event_theme } from './index';
 
@@ -18,7 +10,7 @@ const Index = (props) => {
     return (
       <PreviewLoginPage
         theme={event_theme}
-        previewPassword={props.previewPassword}
+        redirect={`./`}
         EVENT_URL={EVENT_URL}
       >
         <Meta title={'Login'}></Meta>
@@ -43,7 +35,7 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: { previewPassword: 'nffbanquet' },
+    props: {},
   };
 }
 

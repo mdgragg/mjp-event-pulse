@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext, createContext } from 'react';
 import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { getEventMeta } from 'lib/api';
 
 import { Grid, Button } from '@material-ui/core';
 import Link, { navigate } from 'next/link';
@@ -11,22 +10,13 @@ import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import CircleSpeaker from 'components/ListItems/CircleSpeaker';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Counter from 'components/Counters/Counter';
 import Footer from 'components/template1/Footer';
-
 import Section from 'components/template1/Section';
-import SingleEvent from 'components/BreakoutSessions/SingleEvent';
-import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
 import DateParse from '../../components/assets/DateParse';
 
-import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
-import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
-import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
-import { toast } from 'react-toastify';
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -209,26 +199,43 @@ export async function getServerSideProps(ctx) {
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
 
-  let eventData = await getEventMeta(EVENT_URL);
+  let event_data = await getEventMeta(EVENT_URL);
+  console.log(Object.keys(ctx.res));
+  console.log(ctx.req.url);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+  let return_object;
 
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
+  switch (event_data.eventStatus.EventStatus) {
+    case 'Preview':
+      if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
+        return_object = {
+          redirect: {
+            destination: `${EVENT_URL}/preview`,
+            permanent: false,
+          },
+        };
+      }
+      break;
+    case 'Ended':
+      return_object = {
+        redirect: {
+          destination: `${EVENT_URL}/thank-you`,
+          permanent: false,
+        },
+      };
+      break;
+    default:
+      return_object = {
+        props: {
+          //meta will be the props for the event
+          event_meta: event_data,
+          main_event,
+        },
+        // revalidate: 600,
+      };
   }
 
-  return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
-    },
-  };
+  return return_object;
 }
 
 export default Index;

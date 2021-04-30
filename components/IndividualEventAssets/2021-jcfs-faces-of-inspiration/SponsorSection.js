@@ -104,7 +104,7 @@ const SponsorSection = ({ sponsors }) => {
             sponsors.presentingSponsors.map((sponsor) => (
               <SingleSponsor>
                 <img src={sponsor.url} alt={sponsor.alt} />
-                <h3> {sponsor.alt}</h3>
+                {/* <h3> {sponsor.alt}</h3> */}
               </SingleSponsor>
             ))}
         </div>
