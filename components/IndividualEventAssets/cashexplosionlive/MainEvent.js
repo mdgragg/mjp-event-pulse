@@ -39,7 +39,7 @@ const ShowWrap = styled.div`
 
   @media all and (max-width: 1200px) {
     grid-template-columns: 100%;
-    grid-template-rows: auto 680px;
+    grid-template-rows: min-content 680px;
     gap: 2rem;
     && .crowd-purr {
       width: 100%;

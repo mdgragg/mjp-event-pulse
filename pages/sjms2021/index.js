@@ -192,50 +192,17 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
+export async function getStaticProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
-  console.log(Object.keys(ctx.res));
-  console.log(ctx.req.url);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
-  let return_object;
 
-  switch (event_data.eventStatus.EventStatus) {
-    case 'Preview':
-      if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
-        return_object = {
-          redirect: {
-            destination: `${EVENT_URL}/preview`,
-            permanent: false,
-          },
-        };
-      }
-      break;
-    case 'Ended':
-      return_object = {
-        redirect: {
-          destination: `${EVENT_URL}/thank-you`,
-          permanent: false,
-        },
-      };
-      break;
-    default:
-      return_object = {
-        props: {
-          //meta will be the props for the event
-          event_meta: event_data,
-          main_event,
-        },
-        // revalidate: 600,
-      };
-  }
-
-  return return_object;
+  return {
+    props: {
+      //meta will be the props for the event
+      event_meta: event_data,
+      main_event,
+    },
+  };
 }
 
 export default Index;
