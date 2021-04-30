@@ -103,12 +103,7 @@ const Index = (props) => {
 
   const storage_token = 'cash-explosion--email-auth';
 
-  const calculateInit = () => {
-    if (calculateIfStarted()) {
-      return 'main-event';
-    } else return 'signup';
-  };
-  const [deciderTemplate, setDeciderTemplate] = useState(calculateInit());
+  const [deciderTemplate, setDeciderTemplate] = useState('signup');
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
   function calculateIfStarted() {
@@ -131,36 +126,30 @@ const Index = (props) => {
   });
 
   useEffect(() => {
-    setDeciderTemplate(handleDecider());
+    setStarted(calculateIfStarted());
     const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
+      if (calculateIfStarted()) {
+        setStarted(true);
+        clearInterval(interval);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  function handleDecider() {
-    if (calculateIfStarted()) {
-      return 'main-event';
-    } else if (
-      localStorage.getItem(storage_token) === 'true' &&
-      !calculateIfStarted()
-    ) {
-      return 'success';
-    } else {
-      return 'signup';
-    }
-  }
-
   //listen for has started
   useEffect(() => {
-    console.log('handle decider: ', handleDecider());
-    setDeciderTemplate(handleDecider());
+    if (hasStarted) {
+      setDeciderTemplate('main-event');
+    } else if (localStorage.getItem(storage_token) && !hasStarted) {
+      setDeciderTemplate('success');
+    } else {
+      setDeciderTemplate('signup');
+    }
   }, [hasStarted]);
   //listen for submit
 
   const handleSetEmail = (value) => {
-    console.log(value);
     setForm((prev) => ({
       ...prev,
       value,
@@ -185,9 +174,9 @@ const Index = (props) => {
       } else {
         toast.success(`Emailed recorded!`);
         localStorage.setItem(storage_token, true);
-        setInterval(() => {
+        setTimeout(() => {
           setDeciderTemplate('success');
-        }, 2000);
+        }, 1000);
       }
     });
   };
