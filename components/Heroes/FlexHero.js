@@ -29,8 +29,8 @@ const HeroHolder = styled.div`
     opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: inherit;
     background-repeat: no-repeat;
-    background-size: auto 100%;
-    background-position: center top;
+    background-size: fill;
+    background-position: center center;
   }
   @media all and (max-width: 768px) {
     height: min-content;

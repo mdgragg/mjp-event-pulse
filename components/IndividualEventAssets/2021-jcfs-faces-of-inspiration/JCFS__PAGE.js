@@ -206,12 +206,12 @@ const JCFS__PAGE = ({ main_event, theme }) => {
         <FirstSection>
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Meet & Greet Welcome 7 PM"
+            titleText="Craig & Jan Sher Award"
             buttonColor={theme.green}
             buttonTextColor="white"
-            buttonText="Click To Join"
-            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/logo-STERENSS.png`}
-            link="https://us02web.zoom.us/j/81055552981?pwd=azU1NjVFRCtCUjBCQUZMRXJZUmt2UT09"
+            buttonText="Watch Now"
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/post-event/jan-craig-post.png`}
+            link="https://www.youtube.com/watch?v=CziVPHRRTg8"
           />
           <SingleBox
             titleTextColor={theme.blue}
@@ -233,18 +233,20 @@ const JCFS__PAGE = ({ main_event, theme }) => {
 
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Bid on Auction Items"
+            titleText="Barbara Sterensis Award"
             buttonColor={theme.green}
             buttonTextColor="white"
-            buttonText="Bid Here"
-            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/auction.png`}
-            link="https://e.givesmart.com/events/kmi/i/"
+            buttonText="Watch Now"
+            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/post-event/sterensis.png`}
+            link="https://www.youtube.com/watch?v=AD5OJyj_OS8"
           />
         </FirstSection>
         <MainProgram theme={theme} main_event={main_event} />
         {data.sponsors && <SponsorSection sponsors={data.sponsors} />}
 
         <Banner color={theme.blue}>
+          <h2 style={{ color: 'white' }}> 2021 Featured Program Videos </h2>
+
           <div
             style={{
               width: '100%',
@@ -266,46 +268,30 @@ const JCFS__PAGE = ({ main_event, theme }) => {
             />
             <SingleBox
               titleTextColor={theme.blue}
-              titleText="Need Help? Contact the Help Desk or call 877-665-4630"
+              titleText="Betty Goldberg, Holocaust Survivor Program"
               buttonColor={theme.lightBlue}
               buttonTextColor="white"
-              buttonText="Help"
-              link="https://us02web.zoom.us/j/82756728006?pwd=ZVBOSzNxQldVbkRTdTZGdlJnUXp2dz09"
+              buttonText="Watch Now"
+              link="https://www.youtube.com/watch?v=nZg99zbxnoU"
+            />
+            <SingleBox
+              titleTextColor={theme.blue}
+              titleText="Safe At Home Program"
+              buttonColor={theme.lightBlue}
+              buttonTextColor="white"
+              buttonText="Watch Now"
+              link="https://www.youtube.com/watch?v=IOAUfEssFCg"
+            />
+            <SingleBox
+              titleTextColor={theme.blue}
+              titleText="Kinship Program"
+              buttonColor={theme.lightBlue}
+              buttonTextColor="white"
+              buttonText="Watch Now"
+              link="https://www.youtube.com/watch?v=xIZGlzAtpiU"
             />
           </div>
         </Banner>
-        <center>
-          <h2> Post Event Meet & Greets - 8:30 PM</h2>
-        </center>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-            margin: '4rem auto',
-            maxWidth: '1200px',
-          }}
-        >
-          <SingleBox
-            titleTextColor={'black'}
-            titleText="Gulf Coast JFCS, President & CEO, Dr. Sandra Braham"
-            buttonColor={theme.lightBlue}
-            buttonTextColor="white"
-            buttonText="Join Us"
-            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/sandra-qa.png`}
-            link="https://us02web.zoom.us/j/86773127001?pwd=U015SitMSERXZXZCYUY4UWFXUGdMZz09"
-          />
-          <SingleBox
-            titleTextColor={'black'}
-            titleText="Lifetime Achievement Award Recipients, Jan & Craig Sher"
-            buttonColor={theme.lightBlue}
-            buttonTextColor="white"
-            buttonText="Join Us"
-            imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/jan-wayne.png`}
-            link="https://us02web.zoom.us/j/82207856018?pwd=TElpcjBmcGpVaW5JR1JrTzdNN3lTUT09"
-          />
-        </div>
       </Body>
     </PageGlobal>
   );

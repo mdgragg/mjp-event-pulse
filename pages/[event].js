@@ -1,34 +1,21 @@
 import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
-import _ from 'lodash';
-import { getEventMeta, getMainEventMeta } from 'lib/api';
+import Route, { Router, useRouter } from 'next/router';
 
-import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
+import _ from 'lodash';
+import { getEventMeta } from 'lib/api';
+import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-import Header from 'components/template1/Header';
-import Navbar from 'components/template1/Navbar';
 import Body from 'components/template1/Body';
-import VideoBox from 'components/template1/VideoBox';
-import Sidebar from 'components/template1/Sidebar';
-import Banner from 'components/template1/Banner';
-import Hero from 'components/template1/Hero';
-import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
+import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
+import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/template1/Section';
-import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
-import cookies from 'next-cookies';
-import LoginPage from 'components/globals/Login/LoginPage';
+import DateParse from 'components/assets/DateParse';
+import Counter from 'components/Counters/Counter';
 
 export var event_theme = {
-  heroHeight: null,
+  heroHeight: '500px',
   fontFamily: null,
   headerOpacity: null,
   white: null,
@@ -38,30 +25,26 @@ export var event_theme = {
   headerFont: null,
   headerBgColor: null,
 };
+const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
   const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const EVENT_URL = router.query.event;
 
+  const session_token = EVENT_URL;
+  const { event_meta, main_event } = props;
   event_theme = {
     ...event_theme,
-    bgImage:
-      main_event.KeyValue[0]?.value || 'https://lorempixel.com/1920/1080/',
+    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
+
   const calculateIfStarted = () => {
     let now = new Date();
     const parsed_event_start = Date.parse(
       main_event.eventStartEnd.StartDateTime
     );
-
     let calc_time = parsed_event_start - now;
-
     if (calc_time <= 0) {
       return true;
     }
@@ -70,84 +53,121 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
-  return (
-    <Page theme={event_theme}>
-      <Meta title={event_meta.EventJobName}> </Meta>
-      <Header theme={event_theme}>
-        <Navbar info={main_event} />
-      </Header>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStarted(calculateIfStarted());
+    }, 1000);
 
-      <Hero
-        hasStarted={hasStarted}
-        title={event_meta.EventJobName}
-        bgImage="http://lorempixel.com/1500/500/"
-        start={main_event.eventStartEnd.StartDateTime}
-      ></Hero>
+    return () => clearInterval(interval);
+  }, []);
 
-      <Body>
-        <Section>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} md={9} sm={12}>
-              <VideoBox isStarted={hasStarted} />
-            </Grid>
-            <Grid item={true} md={3} sm={12}>
-              <Sidebar theme={event_theme} />
-            </Grid>
-          </Grid>
-        </Section>
+  const MainPage = () => {
+    return (
+      <>
+        <Page theme={event_theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
+          <FlexHero title={event_meta.EventJobName}>
+            <div></div>
+            <div>
+              <center>
+                <img
+                  style={{
+                    width: '100%',
+                    maxWidth: '350px',
+                    margin: '2rem auto',
+                  }}
+                  src={main_event.KeyValue[0]?.value}
+                />
 
-        <Banner color="#181818"></Banner>
-        <Section showButton={true} title="Speakers">
-          <Grid container={true} spacing={3} justify={'center'}>
-            <ListItem md={4} timeout={500} />
-            <ListItem md={4} timeout={1000} />
-            <ListItem md={4} timeout={2000} />
-          </Grid>
-        </Section>
-        <Section showButton={true} title="Platinum Sponsors">
-          <Grid container={true} spacing={3} justify={'center'}></Grid>
-        </Section>
-        <Section showButton={true} title="Gold Sponsors">
-          <Grid container={true} spacing={3} justify={'center'}>
-            <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/250/"></img>
-            </Grid>
+                <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
+                  {main_event.EventName}
+                </h1>
+                <h2 style={{ margin: 'auto' }}>
+                  <i>
+                    <DateParse date={main_event.eventStartEnd.StartDateTime} />
+                  </i>
+                </h2>
+              </center>
+            </div>
+            <div>
+              <center>
+                <Counter
+                  fontSize={'1rem'}
+                  shadow={'0px'}
+                  bgColor={event_theme.blue}
+                  counterText={'Starts In'}
+                  counterTextColor={event_theme.gold}
+                  textColor={event_theme.gold}
+                  afterStarted={
+                    <>
+                      <center>
+                        <h2
+                          style={{
+                            fontWeight: '800',
+                            fontSize: '2rem',
+                            color: 'white',
+                            padding: '0.5rem',
+                            backgroundColor: event_theme.red,
+                            margin: 'auto auto 0 auto',
+                          }}
+                        >
+                          Live Now!
+                        </h2>
+                      </center>
+                    </>
+                  }
+                  start={main_event.eventStartEnd.StartDateTime}
+                  end={main_event.eventStartEnd.EndDateTime}
+                />
+              </center>
+            </div>
+          </FlexHero>
 
-            <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/240/"></img>
-            </Grid>
+          <Body>
+            <Section>
+              <Grid container spacing={3}>
+                <Grid item md={1}>
+                  {' '}
+                </Grid>
+                <Grid item={true} md={10} sm={12} xs={12}>
+                  <div
+                    style={{
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <VideoBox__StickyTop
+                      isStarted={true}
+                      src={main_event.streamLinks[0].url}
+                    />
+                  </div>
+                </Grid>
+                <Grid item md={1}>
+                  {' '}
+                </Grid>
+              </Grid>
+            </Section>
+            <BannerWithPicture
+              imgUrl={main_event.KeyValue[1]?.value}
+              color={'black'}
+              secondary={`white`}
+              headerText={`About this Event`}
+              innerWidth={`650px`}
+              buttonText={`Learn More`}
+              buttonLink={`https://www.sjms.net/spring-gala `}
+            >
+              {main_event.Description && main_event.Description}
+            </BannerWithPicture>
+          </Body>
+        </Page>
+      </>
+    );
+  };
 
-            <Grid item={true} md={4}>
-              <img src="http://lorempixel.com/350/220/"></img>
-            </Grid>
-          </Grid>
-        </Section>
-        <Section
-          showButton={false}
-          title={`${event_meta.EventJobName} in the News`}
-        >
-          <Grid container={true} spacing={3} justify={'center'}>
-            <ListItemSmall />
-            <ListItemSmall />
-          </Grid>
-        </Section>
-
-        <EventSearch
-          currenthref={event_meta.eventUrl}
-          events={event_meta.events}
-        />
-
-        <Section></Section>
-      </Body>
-      <Footer>
-        <div></div>
-        <div className="signoff">
-          <center>Copyright 2020 Mill James</center>
-        </div>
-        <div></div>
-      </Footer>
-    </Page>
-  );
+  return <MainPage />;
 };
 
 export async function getServerSideProps(ctx) {
@@ -156,7 +176,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-
+  const EVENT_URL = ctx.params.event;
   let event_data = await getEventMeta(ctx.params.event);
   console.log(Object.keys(ctx.res));
   console.log(ctx.req.url);
@@ -190,6 +210,7 @@ export async function getServerSideProps(ctx) {
           main_event,
         },
       };
+      break;
     default:
       return_object = {
         redirect: {

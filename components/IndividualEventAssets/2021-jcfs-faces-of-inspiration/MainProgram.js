@@ -87,15 +87,14 @@ const MainProgram = ({ theme, main_event }) => {
       >
         <Inner>
           <div className="box">
-            <h2>Main Program</h2>
-            <h3>Starts Promptly at 7:30 PM EST </h3>
+            <h2>Main Program Recording</h2>
+
             <p style={{}}>
-              {main_event.Description
-                ? main_event.Description
-                : 'We will need the description for the thank you message, this is placeholder for the main program.'}
+              Enjoy the celebration honoring Jan and Craig Sher and other
+              inspiring heroes of Gulf Coast JFCS.
             </p>
             <a href={main_event.streamLinks[0].url} target="_blank">
-              <button>JOIN US</button>
+              <button>View Recording</button>
             </a>
           </div>
         </Inner>
