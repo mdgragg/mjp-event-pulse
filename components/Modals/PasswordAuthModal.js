@@ -48,7 +48,7 @@ export default function AttendeeAuthModal({
   event_name,
 }) {
   const init = {
-    password: '',
+    pw: '',
   };
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
@@ -78,21 +78,23 @@ export default function AttendeeAuthModal({
 
   const handleSumbit = async (e) => {
     setFormLoading(true);
-    e.preventDefault();
+    // e.preventDefault();
     if (values.password === '') {
       setFormLoading(false);
       return toast.error('You must provide a password!');
     }
-    return await attendee_password(values, eventId).then((res) => {
-      if (res.error) {
-        setFormLoading(false);
-        return toast.error(res.error);
-      } else {
+    return await attendee_password(values, eventId)
+      .then((res) => {
+        console.log('res: ', res);
         return callback(
           `Hello, welcome to ${event_name ? event_name : 'the event.'}`
         );
-      }
-    });
+      })
+      .catch((err) => {
+        setFormLoading(false);
+        toast.error(err);
+        return console.log('err: ', err);
+      });
   };
 
   return (
@@ -125,16 +127,21 @@ export default function AttendeeAuthModal({
               onSubmit={(e) => {
                 e.preventDefault();
               }}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter') {
+                  handleSumbit();
+                }
+              }}
             >
               <TextField
                 autoFocus
                 style={{ textAlign: 'center' }}
                 margin="normal"
                 id="password"
-                name="password"
+                name="pw"
                 label="Password"
                 type="password"
-                value={values.password}
+                value={values.pw}
                 onChange={handleChange}
                 required
               />

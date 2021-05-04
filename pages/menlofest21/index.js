@@ -13,6 +13,7 @@ import Footer from 'components/template1/Footer';
 import Section from 'components/template1/Section';
 import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
 import PasswordAuthModal from '../../components/Modals/PasswordAuthModal';
+import PublicChat from 'components/Chat/PublicChat';
 import { toast } from 'react-toastify';
 export var event_theme = {
   h1: {
@@ -81,11 +82,11 @@ const Index = (props) => {
 
     const storage_auth = sessionStorage.getItem(session_token);
 
-    // if (storage_auth === 'true') {
-    //   setHasAuthenticated(true);
-    // } else {
-    //   setHasAuthenticated(false);
-    // }
+    if (storage_auth === 'true') {
+      setHasAuthenticated(true);
+    } else {
+      setHasAuthenticated(false);
+    }
 
     return () => clearInterval(interval);
   }, []);
@@ -181,16 +182,7 @@ const Index = (props) => {
                     </div>
                   </Grid>
                   <Grid item={true} md={4} xs={12}>
-                    <Agenda />
-                    <a href="#bidpal-help">
-                      {/* <Button
-                    style={{ margin: '2rem auto', display: 'block' }}
-                    color={'primary'}
-                    variant="outlined"
-                  >
-                    Help
-                  </Button> */}
-                    </a>
+                    <PublicChat slug={main_event.slug} />
                   </Grid>
                   <Grid item md={8} xs={12}></Grid>
                   <Grid item md={4} xs={12}></Grid>

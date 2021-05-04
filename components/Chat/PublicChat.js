@@ -16,10 +16,13 @@ var badwordsArray = require('badwords/array');
 const SubmitChat = styled.button``;
 
 const ChatWrap = styled.div`
-  max-width: 500px;
+  max-width: 450px;
   height: 100%;
   max-height: 700px;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 200px;
   background-color: white;
   && button {
     display: inline;
@@ -51,10 +54,11 @@ const NameInput = styled.div`
 `;
 const ChatMessages = styled.div`
   overflow-y: scroll;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.25);
   scroll-behavior: smooth;
   padding: 0.75rem;
-  min-height: 500px;
+  min-height: 400px;
   &&.blurred {
     filter: blur(10px);
   }
@@ -63,7 +67,6 @@ const ChatMessages = styled.div`
   }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  max-height: 70%;
 `;
 const MessageInput = styled.textarea`
   background-color: rgba(255, 255, 255, 0.5);
@@ -74,7 +77,7 @@ const MessageInput = styled.textarea`
   }
 
   width: 100%;
-  height: 100px;
+  min-height: 60px;
   border: none;
   font-family: Roboto;
   color: black;
@@ -99,12 +102,15 @@ const Reactions = styled.div`
 `;
 
 const InputArea = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
   background-color: #dedede;
   width: 100%;
   padding: 0.5rem;
   transition: all 0.2s ease;
+  h3 {
+    margin: 0;
+  }
   &&.hidden {
     visibility: hidden;
   }
@@ -114,9 +120,13 @@ const InputArea = styled.div`
     align-items: center;
     width: 100%;
   }
+  && button {
+    margin: 6px 0;
+  }
   && button.chat--send {
     color: white;
     width: 100px;
+    margin: 0 1rem 0 0;
     background-color: ${() => chat_colors.blue};
   }
   &&.sending {

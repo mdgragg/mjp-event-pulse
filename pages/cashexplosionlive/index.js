@@ -3,11 +3,13 @@ import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
+import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 import Footer from 'components/template1/Footer';
 import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
+import ThankYou from 'components/IndividualEventAssets/cashexplosionlive/ThankYou';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
 import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
 import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
@@ -70,17 +72,11 @@ const Decider = ({
     case 'main-event':
       return <MainEvent main_event={main_event} theme={theme} />;
       break;
+    case 'thank-you':
+      return <ThankYou main_event={main_event} theme={theme} />;
+      break;
     default:
-      return (
-        <SignUp
-          main_event={main_event}
-          theme={theme}
-          handleSubmit={handleSubmit}
-          handleSetEmail={handleSetEmail}
-          form={form}
-          loading={loading}
-        />
-      );
+      return <MainEvent main_event={main_event} theme={theme} />;
   }
 };
 
@@ -101,23 +97,13 @@ const Index = (props) => {
     body_bg: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
+  const START = main_event.eventStartEnd.StartDateTime;
+  const END = main_event.eventStartEnd.EndDateTime;
   const storage_token = 'cash-explosion--email-auth';
 
   const [deciderTemplate, setDeciderTemplate] = useState('signup');
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-
-  function calculateIfStarted() {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  }
+  const [hasStarted, setStarted] = useState(calculateIfStarted(START));
+  const [hasEnded, setEnded] = useState(calculateIfEnded(END));
 
   const [form, setForm] = useState({
     loading: false,
@@ -126,11 +112,14 @@ const Index = (props) => {
   });
 
   useEffect(() => {
-    setStarted(calculateIfStarted());
+    setStarted(calculateIfStarted(START));
+    setEnded(calculateIfEnded(END));
     const interval = setInterval(() => {
-      if (calculateIfStarted()) {
+      if (calculateIfStarted(START)) {
         setStarted(true);
-        clearInterval(interval);
+      }
+      if (calculateIfEnded(END)) {
+        setEnded(true);
       }
     }, 1000);
 
@@ -139,6 +128,9 @@ const Index = (props) => {
 
   //listen for has started
   useEffect(() => {
+    if (hasEnded) {
+      return setDeciderTemplate('thank-you');
+    }
     if (hasStarted) {
       setDeciderTemplate('main-event');
     } else if (localStorage.getItem(storage_token) && !hasStarted) {
