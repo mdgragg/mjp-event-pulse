@@ -129,43 +129,54 @@ const Index = (props) => {
 
             <Body>
               <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
-                <img
-                  src={
-                    'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                  }
+                <div
                   style={{
-                    position: 'absolute',
-                    zIndex: '100',
-                    top: '65px',
-                    left: '25px',
-                    height: '130px',
-                    width: 'auto',
+                    width: '90%',
+                    margin: 'auto',
+                    minHeight: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
                   }}
-                />
-
-                <Grid container spacing={10}>
-                  <Grid item={true} md={12} sm={12} xs={12}>
-                    <div
+                >
+                  <div
+                    style={{
+                      justifySelf: 'flex-start',
+                      alignSelf: 'flex-start',
+                    }}
+                  >
+                    <img
+                      src={
+                        'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
+                      }
                       style={{
-                        maxWidth: '1000px',
-                        margin: 'auto',
-                        height: '100vh',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        position: 'relative',
+                        zIndex: '100',
+                        height: '130px',
+                        width: 'auto',
                       }}
-                    >
-                      {hasAuthenticated ? (
-                        <VideoBox__StickyTop
-                          src={main_event.streamLinks[0].url}
-                        />
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                  </Grid>
-                </Grid>
+                    />
+                  </div>
+                  <div
+                    style={{
+                      maxWidth: '1000px',
+                      height: 'calc(100vh - 150px)',
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {hasAuthenticated ? (
+                      <VideoBox__StickyTop
+                        src={main_event.streamLinks[0].url}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </div>
               </Section__WithBG>
             </Body>
           </Page>
