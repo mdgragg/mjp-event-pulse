@@ -1,16 +1,9 @@
-import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
 
-import { Grid, Button } from '@material-ui/core';
-
-import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
 import { EVENT_URL } from './index';
-
 export var event_theme = {
   heroHeight: '25vh',
   fontFamily: null,
@@ -34,10 +27,9 @@ const Index = (props) => {
     return (
       <PreviewLoginPage
         theme={event_theme}
+        EVENT_URL={EVENT_URL}
         previewPassword={props.previewPassword}
-      >
-        <Meta title={'Login'}></Meta>
-      </PreviewLoginPage>
+      ></PreviewLoginPage>
     );
   };
 
@@ -45,21 +37,15 @@ const Index = (props) => {
 };
 
 export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
       redirect: {
-        destination: './',
+        destination: `/${EVENT_URL}`,
+        permanent: false,
       },
     };
   }
-  return {
-    props: {},
-  };
+  return { props: {} };
 }
 
 export default Index;

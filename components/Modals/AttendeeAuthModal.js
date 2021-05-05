@@ -15,11 +15,12 @@ import NumberFormat from 'react-number-format';
 import MaskedInput from 'react-text-mask';
 import { Checkbox, FormControl } from '@material-ui/core';
 import attendee_capture from 'lib/fetchCalls/attendee_capture';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '500px',
+      width: '80%',
     },
 
     '& .MuiTextField-root': {
@@ -46,12 +47,28 @@ export default function AttendeeAuthModal({
   callback,
   eventId,
   event_name,
+  headerContent,
+  otherFields = {},
 }) {
-  const init = {
-    AttendeeFirst: '',
-    AttendeeLast: '',
-    AttendeeEmail: '',
+  let init = {
+    AttendeeFirst: {
+      displayName: 'First Name',
+      value: '',
+      required: true,
+    },
+    AttendeeLast: {
+      displayName: 'Last Name',
+      value: '',
+      required: true,
+    },
+    AttendeeEmail: {
+      displayName: 'Email',
+      value: '',
+      required: true,
+    },
+    ...otherFields,
   };
+
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
 
@@ -71,25 +88,38 @@ export default function AttendeeAuthModal({
   };
 
   const handleChange = (e) => {
+    e.persist();
     const name = e.target.name;
-    setValues({
-      ...values,
-      [name]: e.target.value,
-    });
+    console.log(e.target);
+    const prevValue = values[name];
+    console.log(prevValue);
+    setValues((prev) => ({
+      ...prev,
+      [name]: { ...prevValue, value: e.target.value },
+    }));
+  };
+
+  const check_required = () => {
+    let result = Object.keys(values).filter((v) => values[v] === '');
+
+    if (result.length > 0) {
+      return false;
+    }
+    return true;
   };
 
   const handleSumbit = async (e) => {
     setFormLoading(true);
     e.preventDefault();
-    if (
-      values.AttendeeEmail === '' ||
-      values.AttendeeFirst === '' ||
-      values.AttendeeLast === ''
-    ) {
+    if (!check_required()) {
       setFormLoading(false);
       return toast.error('All fields are required!');
     }
-    return await attendee_capture(values, eventId).then((res) => {
+    const send_values = {};
+
+    Object.keys(values).map((v) => (send_values[v] = values[v].value));
+
+    return await attendee_capture(send_values, eventId).then((res) => {
       if (res.error) {
         setFormLoading(false);
         return toast.error(res.error);
@@ -114,17 +144,26 @@ export default function AttendeeAuthModal({
           id="form-dialog-title"
           style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
         >
+          {headerContent && (
+            <div
+              style={{
+                width: '70%',
+                height: 'auto',
+                margin: 'auto',
+              }}
+            >
+              {headerContent}
+            </div>
+          )}
           Please Sign In To Enter
         </DialogTitle>
         {formErrors.showing
           ? formErrors.errors.map((err) => <Error>{err}</Error>)
           : ''}
-
         <DialogContent>
           <center>
             <DialogContentText>
-              Please enter your information
-              <br /> to proceed to the event.
+              Please enter your information to proceed to the event.
             </DialogContentText>
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
@@ -134,39 +173,20 @@ export default function AttendeeAuthModal({
                 e.preventDefault();
               }}
             >
-              <TextField
-                autoFocus
-                margin="normal"
-                id="FirstName"
-                name="AttendeeFirst"
-                label="First Name"
-                type="text"
-                value={values.AttendeeFirst}
-                onChange={handleChange}
-                required
-              />
-              <TextField
-                autoFocus
-                margin="normal"
-                id="LastName"
-                name="AttendeeLast"
-                label="Last Name"
-                type="text"
-                value={values.AttendeeLast}
-                onChange={handleChange}
-                required
-              />
-              <TextField
-                autoFocus
-                margin="normal"
-                id="email"
-                name="AttendeeEmail"
-                label="Email"
-                type="text"
-                value={values.AttendeeEmail}
-                onChange={handleChange}
-                required
-              />
+              {Object.keys(values).map((v) => (
+                <TextField
+                  key={`inputs--${v}`}
+                  autoFocus
+                  margin="normal"
+                  id={v}
+                  name={v}
+                  label={values[v].displayName}
+                  type="text"
+                  // value={values[v].value}
+                  onChange={handleChange}
+                  required
+                />
+              ))}
             </StyledForm>
           </center>
         </DialogContent>

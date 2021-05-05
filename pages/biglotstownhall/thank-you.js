@@ -118,17 +118,6 @@ const Index = (props) => {
             sessionStorage.setItem(session_token, true);
             toast.success(creds);
           }}
-          headerContent={
-            <img src="https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png" />
-          }
-          otherFields={{
-            Company: {
-              name: 'Company',
-              displayName: 'Company',
-              value: '',
-              required: 'true',
-            },
-          }}
         />
         <div
           style={{
@@ -140,54 +129,41 @@ const Index = (props) => {
 
             <Body>
               <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
-                <div
+                <img
+                  src={
+                    'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
+                  }
                   style={{
-                    width: '90%',
-                    margin: 'auto',
-                    minHeight: '100vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
+                    position: 'absolute',
+                    zIndex: '100',
+                    top: '65px',
+                    left: '25px',
+                    height: '130px',
+                    width: 'auto',
                   }}
-                >
-                  <div
-                    style={{
-                      justifySelf: 'flex-start',
-                      alignSelf: 'flex-start',
-                    }}
-                  >
-                    <img
-                      src={
-                        'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                      }
+                />
+
+                <Grid container spacing={10}>
+                  <Grid item={true} md={12} sm={12} xs={12}>
+                    <div
                       style={{
+                        maxWidth: '1000px',
+                        margin: 'auto',
+                        height: '100vh',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: '1000',
                         position: 'relative',
-                        zIndex: '100',
-                        height: '130px',
-                        width: 'auto',
                       }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      maxWidth: '1000px',
-                      height: 'calc(100vh - 150px)',
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {hasAuthenticated ? (
-                      <VideoBox__StickyTop
-                        src={main_event.streamLinks[0].url}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </div>
-                </div>
+                    >
+                      <h2 style={{ fontSize: '4rem', textAlign: 'center' }}>
+                        Thank you for attending {main_event.EventName}
+                      </h2>
+                    </div>
+                  </Grid>
+                </Grid>
               </Section__WithBG>
             </Body>
           </Page>
@@ -217,21 +193,12 @@ export async function getStaticProps(ctx) {
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
-  }
   return {
     props: {
       //meta will be the props for the event
       event_meta: eventData,
       main_event,
     },
-    revalidate: 6000,
   };
 }
 

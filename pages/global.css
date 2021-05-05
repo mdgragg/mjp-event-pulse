@@ -55,3 +55,8 @@ button:hover {
 button:focus {
   outline: none;
 }
+img {
+  width: inherit;
+  height: auto;
+  margin: auto;
+}

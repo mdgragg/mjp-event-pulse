@@ -52,20 +52,14 @@ export var event_theme = {
   maxSectionWidth: '1800px',
 };
 
-export const EVENT_URL = 'alliancedatainvestorday';
+export const EVENT_URL = 'biglotstownhall';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
   const session_token = EVENT_URL;
   const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    speakers,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const { event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -118,17 +112,6 @@ const Index = (props) => {
             sessionStorage.setItem(session_token, true);
             toast.success(creds);
           }}
-          headerContent={
-            <img src="https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png" />
-          }
-          otherFields={{
-            Company: {
-              name: 'Company',
-              displayName: 'Company',
-              value: '',
-              required: 'true',
-            },
-          }}
         />
         <div
           style={{
@@ -151,24 +134,6 @@ const Index = (props) => {
                     alignItems: 'center',
                   }}
                 >
-                  <div
-                    style={{
-                      justifySelf: 'flex-start',
-                      alignSelf: 'flex-start',
-                    }}
-                  >
-                    <img
-                      src={
-                        'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                      }
-                      style={{
-                        position: 'relative',
-                        zIndex: '100',
-                        height: '130px',
-                        width: 'auto',
-                      }}
-                    />
-                  </div>
                   <div
                     style={{
                       maxWidth: '1000px',
@@ -204,35 +169,56 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getStaticProps(ctx) {
-  //console.log(ctx.req.cookies);
+export async function getServerSideProps(ctx) {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+  let return_object;
 
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
-  let eventData = await getEventMeta(EVENT_URL);
-
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
+  switch (event_data.eventStatus.EventStatus) {
+    case 'Preview':
+      if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
+        return (return_object = {
+          redirect: {
+            destination: `${EVENT_URL}/preview`,
+            permanent: false,
+          },
+        });
+      }
+      return_object = {
+        props: {
+          //meta will be the props for the event
+          event_meta: event_data,
+          main_event,
+        },
+      };
+      break;
+    case 'Ended':
+      return_object = {
+        redirect: {
+          destination: `${EVENT_URL}/thank-you`,
+          permanent: false,
+        },
+      };
+      break;
+    case 'Live':
+      return_object = {
+        props: {
+          //meta will be the props for the event
+          event_meta: event_data,
+          main_event,
+        },
+      };
+      break;
+    default:
+      return_object = {
+        redirect: {
+          destination: `/`,
+          permanent: false,
+        },
+        // revalidate: 600,
+      };
   }
-  return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
-    },
-    revalidate: 6000,
-  };
+  return return_object;
 }
 
 export default Index;
