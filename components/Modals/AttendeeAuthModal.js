@@ -101,7 +101,7 @@ export default function AttendeeAuthModal({
 
   const check_required = () => {
     let result = Object.keys(values).filter(
-      (v) => values[v].value === '' && values[v].value.required
+      (v) => values[v].value === '' && values[v].required
     );
 
     if (result.length > 0) {
@@ -186,7 +186,7 @@ export default function AttendeeAuthModal({
                   type="text"
                   // value={values[v].value}
                   onChange={handleChange}
-                  required
+                  required={values[v].required}
                 />
               ))}
             </StyledForm>
