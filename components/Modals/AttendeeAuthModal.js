@@ -100,7 +100,9 @@ export default function AttendeeAuthModal({
   };
 
   const check_required = () => {
-    let result = Object.keys(values).filter((v) => values[v] === '');
+    let result = Object.keys(values).filter(
+      (v) => values[v].value === '' && values[v].value.required
+    );
 
     if (result.length > 0) {
       return false;
