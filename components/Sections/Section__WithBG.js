@@ -12,7 +12,7 @@ const BGSection = styled.div`
     content: '';
     position: absolute;
     background-image: url('${(props) => props.imgSrc}');
-    background-size: auto 100%;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
