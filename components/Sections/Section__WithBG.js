@@ -5,13 +5,17 @@ const BGSection = styled.div`
   /* background-color: red; */
   position: relative;
   background-color: rgba(0, 0, 0, 0);
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
   &&::before {
     content: '';
     position: absolute;
     background-image: url('${(props) => props.imgSrc}');
+    background-size: auto 100%;
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     top: 0;
     width: 100%;
     height: 100%;
