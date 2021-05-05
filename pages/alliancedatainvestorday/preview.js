@@ -34,6 +34,7 @@ const Index = (props) => {
     return (
       <PreviewLoginPage
         theme={event_theme}
+        EVENT_URL={EVENT_URL}
         previewPassword={props.previewPassword}
       >
         <Meta title={'Login'}></Meta>

@@ -205,14 +205,6 @@ const Index = (props) => {
 // }
 
 export async function getStaticProps(ctx) {
-  //console.log(ctx.req.cookies);
-
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
   let eventData = await getEventMeta(EVENT_URL);
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];

@@ -28,6 +28,11 @@
   font-family: 'Segoe';
 }
 
+@font-face {
+  src: url('../static/fonts/Futura/FuturaStd-Bold.otf');
+  font-family: 'Futura Bold';
+}
+
 html {
   scroll-behavior: smooth;
 }
