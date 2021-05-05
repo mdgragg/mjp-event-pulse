@@ -170,14 +170,6 @@ export async function getServerSideProps(ctx) {
 
   switch (event_data.eventStatus.EventStatus) {
     case 'Preview':
-      if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
-        return (return_object = {
-          redirect: {
-            destination: `${EVENT_URL}/preview`,
-            permanent: false,
-          },
-        });
-      }
       return_object = {
         props: {
           //meta will be the props for the event

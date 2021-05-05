@@ -1,33 +1,19 @@
-import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { getEventMeta } from 'lib/api';
 
-import { Grid, Button } from '@material-ui/core';
-import Link, { navigate } from 'next/link';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import CircleSpeaker from 'components/ListItems/CircleSpeaker';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
-import FlexHero from 'components/Heroes/FlexHero';
-import Counter from 'components/Counters/Counter';
-import Footer from 'components/template1/Footer';
 
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import SingleEvent from 'components/BreakoutSessions/SingleEvent';
-import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
-import NameScroller from '../../components/RealTimeAssets/NameScroller';
 
-import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
-import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
 import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
 import { toast } from 'react-toastify';
-import { Autocomplete } from '@material-ui/lab';
+
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -59,13 +45,7 @@ const Index = (props) => {
   const session_token = EVENT_URL;
   const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    speakers,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const { event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -77,9 +57,7 @@ const Index = (props) => {
     const parsed_event_start = Date.parse(
       main_event.eventStartEnd.StartDateTime
     );
-
     let calc_time = parsed_event_start - now;
-
     if (calc_time <= 0) {
       return true;
     }
@@ -87,22 +65,18 @@ const Index = (props) => {
   };
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
-
   const [hasAuthenticated, setHasAuthenticated] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
     }, 1000);
-
     const storage_auth = sessionStorage.getItem(session_token);
-
     if (storage_auth === 'true') {
       setHasAuthenticated(true);
     } else {
       setHasAuthenticated(false);
     }
-
     return () => clearInterval(interval);
   }, []);
 
@@ -198,11 +172,6 @@ const Index = (props) => {
 
   return <MainPage />;
 };
-// export async function getServerSideProps(ctx) {
-//   const { preview } = cookies(ctx);
-//   const { hasLoggedIn } = cookies(ctx);
-//   return { props: {} };
-// }
 
 export async function getStaticProps(ctx) {
   let eventData = await getEventMeta(EVENT_URL);

@@ -24,8 +24,8 @@ const LandingPage = ({ main_event }) => {
   return (
     <Page>
       <Inner>
-        <h2>{main_event.EventName}</h2>
-
+        <h2>Big Lots</h2>
+        <h2>Q1 Virtual Town Hall</h2>
         <div
           style={{
             fontSize: '1rem',
