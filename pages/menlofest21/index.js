@@ -144,8 +144,8 @@ const Index = (props) => {
 
                   <h2 style={{ margin: 'auto' }}>
                     Text{' '}
-                    <span style={{ color: event_theme.brown }}> 'Menlo'</span>{' '}
-                    to 24293
+                    <span style={{ color: event_theme.brown }}> MENLO</span> to
+                    71760
                   </h2>
                   <h2 style={{ margin: 'auto' }}>
                     <i> To sign up for live bidding</i>
