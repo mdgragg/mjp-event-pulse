@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { calculate_remaining } from '../../lib/helpers';
+import { calculate_remaining, calculateIfEnded } from '../../lib/helpers';
 
 import CountdownClock from './CountdownClock';
 
-const Counter__JustNumbers = ({ start, end }) => {
+const Counter__JustNumbers = ({ start, end, prefix }) => {
   const [countdown_object, set_countdown_object] = useState(
     calculate_remaining(start)
   );
@@ -15,7 +15,16 @@ const Counter__JustNumbers = ({ start, end }) => {
     return () => clearInterval(counter);
   }, []);
 
-  return <CountdownClock countdown_object={countdown_object} />;
+  if (countdown_object.total_remaining <= 0) {
+    return afterStarted ? afterStarted : '';
+  }
+
+  return (
+    <>
+      {prefix && prefix}
+      <CountdownClock countdown_object={countdown_object} />{' '}
+    </>
+  );
 };
 
 export default Counter__JustNumbers;

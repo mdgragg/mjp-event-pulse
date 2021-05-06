@@ -46,6 +46,7 @@ export default function AttendeeAuthModal({
   callback,
   eventId,
   event_name,
+  headerContent,
 }) {
   const init = {
     pw: '',
@@ -104,6 +105,18 @@ export default function AttendeeAuthModal({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
+        {headerContent && (
+          <div
+            style={{
+              width: '70%',
+              height: 'auto',
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+          >
+            {headerContent}
+          </div>
+        )}
         <DialogTitle
           id="form-dialog-title"
           style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}

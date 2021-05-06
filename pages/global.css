@@ -33,6 +33,16 @@
   font-family: 'Futura Bold';
 }
 
+@font-face {
+  src: url('../static/fonts/AceSans-Bold.otf');
+  font-family: 'Ace Sans';
+}
+
+@font-face {
+  src: url('../static/fonts/Hanoded.otf');
+  font-family: 'Hanoded';
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -64,4 +74,8 @@ img {
   width: inherit;
   height: auto;
   margin: auto;
+}
+
+a {
+  margin: 0;
 }
