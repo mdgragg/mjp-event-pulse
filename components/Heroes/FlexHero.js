@@ -29,7 +29,7 @@ const HeroHolder = styled.div`
     opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: inherit;
     background-repeat: no-repeat;
-    background-size: fill;
+    background-size: cover;
     background-position: center center;
   }
   @media all and (max-width: 768px) {

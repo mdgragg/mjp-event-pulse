@@ -215,21 +215,13 @@ const JCFS__PAGE = ({ main_event, theme }) => {
           />
           <SingleBox
             titleTextColor={theme.blue}
-            titleText="Holocaust Survivor Urgent Care Fund - Double Your Gift"
+            titleText="Holocaust Survivor Urgent Care Fund"
             buttonColor={theme.green}
             buttonTextColor="white"
-            buttonText="Donate"
+            buttonText="Help Now"
             imgSrc={`https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/match-2.png`}
-            link="https://faces2021.givesmart.com"
-          >
-            {' '}
-            <a
-              className="learn-more"
-              href="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/Holocaust%20Survivor%20Urgent%20Care%20Fund%20-%20for%20MJ%20Lander.pdf"
-            >
-              Learn More
-            </a>
-          </SingleBox>
+            link=" https://gulfcoastjewishfamilyandcommunityservices.org/faces/#survivorfund"
+          ></SingleBox>
 
           <SingleBox
             titleTextColor={theme.blue}
@@ -273,6 +265,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonTextColor="white"
               buttonText="Watch Now"
               link="https://www.youtube.com/watch?v=nZg99zbxnoU"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/post-event/post-event_0000s_0002_Holocaust.png"
             />
             <SingleBox
               titleTextColor={theme.blue}
@@ -281,6 +274,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonTextColor="white"
               buttonText="Watch Now"
               link="https://www.youtube.com/watch?v=IOAUfEssFCg"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/post-event/post-event_0000s_0001_Michelle.png"
             />
             <SingleBox
               titleTextColor={theme.blue}
@@ -289,6 +283,7 @@ const JCFS__PAGE = ({ main_event, theme }) => {
               buttonTextColor="white"
               buttonText="Watch Now"
               link="https://www.youtube.com/watch?v=xIZGlzAtpiU"
+              imgSrc="https://storage.googleapis.com/mjp-stream-public/2021-jfcs-faces-of-inspiration/post-event/post-event_0000s_0000_Tiffany-and-Anio.png"
             />
           </div>
         </Banner>
