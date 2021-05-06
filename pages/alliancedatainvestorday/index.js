@@ -2,15 +2,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-
 import Section__WithBG from 'components/Sections/Section__WithBG';
-
 import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
 import { toast } from 'react-toastify';
 
@@ -145,12 +141,13 @@ const Index = (props) => {
                   </div>
                   <div
                     style={{
-                      maxWidth: '68vw',
+                      maxWidth: '1200px',
                       height: 'calc(100vh - 150px)',
                       width: '100%',
                       display: 'flex',
+                      paddingTop: '3rem',
                       flexDirection: 'column',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                     }}
                   >
                     {hasAuthenticated ? (
