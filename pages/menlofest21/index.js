@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { Grid } from '@material-ui/core';
@@ -13,7 +12,6 @@ import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import Footer from 'components/template1/Footer';
 import Section from 'components/template1/Section';
-import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
 import PasswordAuthModal from '../../components/Modals/PasswordAuthModal';
 
 import { toast } from 'react-toastify';

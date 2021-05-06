@@ -145,7 +145,7 @@ const Index = (props) => {
                   </div>
                   <div
                     style={{
-                      maxWidth: '1000px',
+                      maxWidth: '68vw',
                       height: 'calc(100vh - 150px)',
                       width: '100%',
                       display: 'flex',
