@@ -29,6 +29,7 @@ export var event_theme = {
   purple: '#b1c6e6',
   brown: '#7c5437',
   fontFamily: 'Akzidenz-Grotesque-Bold',
+  footerBg: '#b1c6e6',
   headerOpacity: '0',
   videoBreakPoint: 700,
   buttonInfoColor: null,
@@ -309,18 +310,46 @@ const Index = (props) => {
                 <div
                   id={`how-to-bid`}
                   style={{
-                    maxWidth: '800px',
+                    width: '100%',
                     display: 'flex',
+                    flexWrap: 'wrap',
                     alignItems: 'center',
+                    justifyContent: 'space-evenly',
                     margin: 'auto',
                   }}
                 >
-                  <img
-                    style={{ width: '100%' }}
-                    src="https://storage.googleapis.com/mjp-stream-public/menlofest21/how-to-bid.jpg"
-                    alt="how to bid"
-                    srcset=""
-                  />
+                  <div
+                    style={{
+                      width: 'calc(50% - 2rem)',
+                      margin: '1rem',
+                      minWidth: '500px',
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: '100%',
+                      }}
+                      src="https://storage.googleapis.com/mjp-stream-public/menlofest21/Slide1.PNG"
+                      alt="how to bid"
+                      srcset=""
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: 'calc(50% - 2rem)',
+                      margin: '1rem',
+                      minWidth: '500px',
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: '100%',
+                      }}
+                      src="https://storage.googleapis.com/mjp-stream-public/menlofest21/Slide2.PNG"
+                      alt="how to bid"
+                      srcset=""
+                    />
+                  </div>
                 </div>
               </Section>
             </Body>
