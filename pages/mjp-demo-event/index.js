@@ -15,6 +15,7 @@ import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/template1/Section';
 import DateParse from 'components/assets/DateParse';
 import Counter from 'components/Counters/Counter';
+import useTestBool from '../../hooks/useTestBool';
 
 export var event_theme = {
   heroHeight: '500px',
@@ -157,7 +158,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-  const EVENT_URL = ctx.params.event;
+  const EVENT_URL = 'mjp-demo-event';
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let return_object;

@@ -76,98 +76,92 @@ const Index = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  const MainPage = () => {
-    return (
-      <>
-        <AttendeeAuthModal
-          eventId={main_event.id}
-          event_name={main_event.EventName}
-          open={!hasAuthenticated}
-          callback={(creds) => {
-            setHasAuthenticated(true);
-            sessionStorage.setItem(session_token, true);
-            toast.success(creds);
-          }}
-          headerContent={
-            <img src="https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png" />
-          }
-          otherFields={{
-            Company: {
-              name: 'Company',
-              displayName: 'Company',
-              value: '',
-              required: 'true',
-            },
-          }}
-        />
-        <div
-          style={{
-            filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-          }}
-        >
-          <Page theme={event_theme}>
-            <Meta title={event_meta.EventJobName}> </Meta>
+  return (
+    <>
+      <AttendeeAuthModal
+        eventId={main_event.id}
+        event_name={main_event.EventName}
+        open={!hasAuthenticated}
+        callback={(creds) => {
+          setHasAuthenticated(true);
+          sessionStorage.setItem(session_token, true);
+          toast.success(creds);
+        }}
+        headerContent={
+          <img src="https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png" />
+        }
+        otherFields={{
+          Company: {
+            name: 'Company',
+            displayName: 'Company',
+            value: '',
+            required: 'true',
+          },
+        }}
+      />
+      <div
+        style={{
+          filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
+        }}
+      >
+        <Page theme={event_theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
 
-            <Body>
-              <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+          <Body>
+            <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+              <div
+                style={{
+                  width: '90%',
+                  margin: 'auto',
+                  minHeight: '100vh',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                }}
+              >
                 <div
                   style={{
-                    width: '90%',
-                    margin: 'auto',
-                    minHeight: '100vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
+                    justifySelf: 'flex-start',
+                    alignSelf: 'flex-start',
                   }}
                 >
-                  <div
+                  <img
+                    src={
+                      'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
+                    }
                     style={{
-                      justifySelf: 'flex-start',
-                      alignSelf: 'flex-start',
+                      position: 'relative',
+                      zIndex: '100',
+                      height: '130px',
+                      width: 'auto',
                     }}
-                  >
-                    <img
-                      src={
-                        'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                      }
-                      style={{
-                        position: 'relative',
-                        zIndex: '100',
-                        height: '130px',
-                        width: 'auto',
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      maxWidth: '1200px',
-                      height: 'calc(100vh - 150px)',
-                      width: '100%',
-                      display: 'flex',
-                      paddingTop: '3rem',
-                      flexDirection: 'column',
-                      justifyContent: 'flex-start',
-                    }}
-                  >
-                    {hasAuthenticated ? (
-                      <VideoBox__StickyTop
-                        src={main_event.streamLinks[0].url}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </div>
+                  />
                 </div>
-              </Section__WithBG>
-            </Body>
-          </Page>
-        </div>
-      </>
-    );
-  };
-
-  return <MainPage />;
+                <div
+                  style={{
+                    maxWidth: '1200px',
+                    height: 'calc(100vh - 150px)',
+                    width: '100%',
+                    display: 'flex',
+                    paddingTop: '3rem',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                  }}
+                >
+                  {hasAuthenticated ? (
+                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+            </Section__WithBG>
+          </Body>
+        </Page>
+      </div>
+    </>
+  );
 };
 
 export async function getStaticProps(ctx) {

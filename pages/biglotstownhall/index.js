@@ -88,74 +88,62 @@ const Index = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  const MainPage = () => {
-    return (
-      <>
-        <AttendeeAuthModal
-          eventId={main_event.id}
-          event_name={main_event.EventName}
-          open={!hasAuthenticated}
-          callback={(creds) => {
-            setHasAuthenticated(true);
-            sessionStorage.setItem(session_token, true);
-            toast.success(creds);
-          }}
-        />
-        <div
-          style={{
-            filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-          }}
-        >
-          <Page theme={event_theme}>
-            <Meta title={event_meta.EventJobName}> </Meta>
+  return (
+    <>
+      <AttendeeAuthModal
+        eventId={main_event.id}
+        event_name={main_event.EventName}
+        open={!hasAuthenticated}
+        callback={(creds) => {
+          setHasAuthenticated(true);
+          sessionStorage.setItem(session_token, true);
+          toast.success(creds);
+        }}
+      />
+      <div
+        style={{
+          filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
+        }}
+      >
+        <Page theme={event_theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
 
-            <Body>
-              <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+          <Body>
+            <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+              <div
+                style={{
+                  width: '90%',
+                  margin: 'auto',
+                  minHeight: '100vh',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                }}
+              >
                 <div
                   style={{
-                    width: '90%',
-                    margin: 'auto',
-                    minHeight: '100vh',
+                    maxWidth: '1000px',
+                    height: 'calc(100vh - 150px)',
+                    width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  <div
-                    style={{
-                      maxWidth: '1000px',
-                      height: 'calc(100vh - 150px)',
-                      width: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {hasAuthenticated ? (
-                      <VideoBox__StickyTop
-                        src={main_event.streamLinks[0].url}
-                      />
-                    ) : (
-                      ''
-                    )}
-                  </div>
+                  {hasAuthenticated ? (
+                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
+                  ) : (
+                    ''
+                  )}
                 </div>
-              </Section__WithBG>
-            </Body>
-          </Page>
-        </div>
-      </>
-    );
-  };
-  if (event_meta.eventStatus.EventStatus === 'Preview') {
-    return (
-      <Page theme={event_theme}>
-        <LandingPage main_event={main_event} />
-      </Page>
-    );
-  }
-  return <MainPage />;
+              </div>
+            </Section__WithBG>
+          </Body>
+        </Page>
+      </div>
+    </>
+  );
 };
 // export async function getServerSideProps(ctx) {
 //   const { preview } = cookies(ctx);

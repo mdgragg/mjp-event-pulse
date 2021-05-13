@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from 'styled-components';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const VideoPlaceholder = styled.div`
   /* height: inherit; */
@@ -81,10 +81,14 @@ const StyledVideoBox = styled.div`
 `;
 
 const VideoBox__StickyTop = ({ src, isStarted }) => {
-  const themeContext = React.useContext(ThemeContext);
+  const [video_src, set_src] = useState();
 
+  const themeContext = React.useContext(ThemeContext);
   const offsetVideoHeight = themeContext.videoBreakPoint;
+
   const wrapperRef = useRef();
+
+  useMemo(() => set_src(src), [src]);
 
   function calculateFixed(e) {
     if (window.pageYOffset >= offsetVideoHeight) {
@@ -94,7 +98,7 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
     }
   }
   useEffect(() => {
-    console.log(isStarted);
+    console.log('remount');
     if (isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }
@@ -108,7 +112,7 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
       <StyledPaper>
         <StyledVideoBox>
           <CustomFrame
-            src={src}
+            src={video_src}
             frameborder="0"
             allowfullscreen
             webkitallowfullscreen={true}

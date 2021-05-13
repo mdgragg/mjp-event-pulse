@@ -50,6 +50,7 @@ export default function Counter(props) {
   );
 
   useEffect(() => {
+    console.log('counter mounter');
     const counter = setInterval(() => {
       set_countdown_object(calculate_remaining(start, end));
     }, 1000);
