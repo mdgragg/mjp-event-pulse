@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
+import FullWrap from 'components/FullWrap';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
@@ -99,11 +100,7 @@ const Index = (props) => {
           },
         }}
       />
-      <div
-        style={{
-          filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-        }}
-      >
+      <FullWrap className={hasAuthenticated ? '' : 'blurred'}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
 
@@ -159,7 +156,7 @@ const Index = (props) => {
             </Section__WithBG>
           </Body>
         </Page>
-      </div>
+      </FullWrap>
     </>
   );
 };

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { Grid } from '@material-ui/core';
+import FullWrap from 'components/FullWrap';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
@@ -117,11 +119,7 @@ const Index = (props) => {
           toast.success(creds);
         }}
       />
-      <div
-        style={{
-          filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-        }}
-      >
+      <FullWrap className={hasAuthenticated ? '' : 'blurred'}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <FlexHero
@@ -353,7 +351,7 @@ const Index = (props) => {
           </Body>
           <Footer></Footer>
         </Page>
-      </div>
+      </FullWrap>
     </>
   );
 };

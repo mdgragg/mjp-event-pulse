@@ -29,6 +29,7 @@ export var event_theme = {
   headerBgColor: 'black',
 };
 const PLACEHOLD = 'https://placehold.co/';
+export const EVENT_URL = 'mjp-demo-event';
 
 const Index = (props) => {
   const router = useRouter();
@@ -158,7 +159,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-  const EVENT_URL = 'mjp-demo-event';
+
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let return_object;
