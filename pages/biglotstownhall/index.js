@@ -70,27 +70,27 @@ const Index = (props) => {
 
   const [hasStarted, setStarted] = useState(calculateIfStarted());
 
-  const [hasAuthenticated, setHasAuthenticated] = useState(false);
+  const [hasAuthenticated, setHasAuthenticated] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStarted(calculateIfStarted());
     }, 1000);
 
-    const storage_auth = sessionStorage.getItem(session_token);
+    // const storage_auth = sessionStorage.getItem(session_token);
 
-    if (storage_auth === 'true') {
-      setHasAuthenticated(true);
-    } else {
-      setHasAuthenticated(false);
-    }
+    // if (storage_auth === 'true') {
+    //   setHasAuthenticated(true);
+    // } else {
+    //   setHasAuthenticated(false);
+    // }
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      <AttendeeAuthModal
+      {/* <AttendeeAuthModal
         eventId={main_event.id}
         event_name={main_event.EventName}
         open={!hasAuthenticated}
@@ -99,7 +99,7 @@ const Index = (props) => {
           sessionStorage.setItem(session_token, true);
           toast.success(creds);
         }}
-      />
+      /> */}
       <div
         style={{
           filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
@@ -109,36 +109,7 @@ const Index = (props) => {
           <Meta title={event_meta.EventJobName}> </Meta>
 
           <Body>
-            <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
-              <div
-                style={{
-                  width: '90%',
-                  margin: 'auto',
-                  minHeight: '100vh',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    maxWidth: '1000px',
-                    height: 'calc(100vh - 150px)',
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {hasAuthenticated ? (
-                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-            </Section__WithBG>
+            <LandingPage main_event={main_event} />
           </Body>
         </Page>
       </div>
@@ -151,48 +122,17 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps() {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
-  let return_object;
 
-  switch (event_data.eventStatus.EventStatus) {
-    case 'Preview':
-      return_object = {
-        props: {
-          //meta will be the props for the event
-          event_meta: event_data,
-          main_event,
-        },
-      };
-      break;
-    case 'Ended':
-      return_object = {
-        redirect: {
-          destination: `${EVENT_URL}/thank-you`,
-          permanent: false,
-        },
-      };
-      break;
-    case 'Live':
-      return_object = {
-        props: {
-          //meta will be the props for the event
-          event_meta: event_data,
-          main_event,
-        },
-      };
-      break;
-    default:
-      return_object = {
-        redirect: {
-          destination: `/`,
-          permanent: false,
-        },
-        // revalidate: 600,
-      };
-  }
-  return return_object;
+  return {
+    props: {
+      //meta will be the props for the event
+      event_meta: event_data,
+      main_event,
+    },
+  };
 }
 
 export default Index;
