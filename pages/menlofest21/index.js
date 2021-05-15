@@ -206,7 +206,7 @@ const Index = (props) => {
                   >
                     {hasAuthenticated ? (
                       <Video__StickyTop__WithCountdown
-                        showMinutesBefore={15}
+                        showMinutesBefore={195}
                         start={main_event.eventStartEnd.StartDateTime}
                         isStarted={true}
                         src={
@@ -375,7 +375,7 @@ export async function getStaticProps(ctx) {
       event_meta: eventData,
       main_event,
     },
-    revalidate: 3600,
+    revalidate: 1800,
   };
 }
 
