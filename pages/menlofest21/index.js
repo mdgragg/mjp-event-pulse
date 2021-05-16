@@ -186,63 +186,7 @@ const Index = (props) => {
                             (link) => link.isMain === true
                           ).url
                         }
-                        showBefore={
-                          <div
-                            style={{
-                              position: 'relative',
-                              paddingBottom: '56.25%',
-                              width: '100%',
-                            }}
-                          >
-                            <div
-                              style={{
-                                top: '0',
-                                left: '0',
-                                position: 'absolute',
-                                height: '100%',
-                                zIndex: '100',
-                                width: '100%',
-                                backgroundColor: '#181818',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'flex-start',
-                                alignItems: 'center',
-                                color: 'white',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  margin: 'auto',
-                                  maxWidth: '50%',
-                                  fontSize: '1.5rem',
-                                  textAlign: 'center',
-                                  fontFamily: 'Hanoded',
-                                }}
-                              >
-                                <p
-                                  style={{
-                                    fontFamily: 'Hanoded',
-                                    fontWeight: '800',
-                                  }}
-                                >
-                                  The event hasn't started yet.
-                                </p>
-                                <p
-                                  style={{
-                                    fontFamily: 'Ace Sans',
-                                  }}
-                                >
-                                  Check back in
-                                  <Counter__JustNumbers
-                                    start={
-                                      main_event.eventStartEnd.StartDateTime
-                                    }
-                                  />
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        }
+                        showBefore={<></>}
                       />
                     ) : (
                       ''
