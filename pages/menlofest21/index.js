@@ -158,35 +158,7 @@ const Index = (props) => {
                     padding: '1rem 0',
                     fontFamily: 'Ace Sans',
                   }}
-                >
-                  <Counter__JustNumbers
-                    afterStarted={
-                      <>
-                        <center>
-                          <h2
-                            style={{
-                              fontWeight: '800',
-                              fontSize: '2rem',
-                              color: 'white',
-                              padding: '0.5rem',
-                              backgroundColor: event_theme.purple,
-                              margin: 'auto auto 0 auto',
-                            }}
-                          >
-                            Live Now
-                          </h2>
-                        </center>
-                      </>
-                    }
-                    start={main_event.eventStartEnd.StartDateTime}
-                    end={main_event.eventStartEnd.EndDateTime}
-                    prefix={
-                      <h2 style={{ lineHeight: '0', fontFamily: 'Hanoded' }}>
-                        Starts In
-                      </h2>
-                    }
-                  />
-                </div>
+                ></div>
               </center>
             </div>
           </FlexHero>
