@@ -4,7 +4,6 @@ const useCalculateIfStarted = (start) => {
   const [hasStarted, setHasStarted] = useState(false);
 
   const calculate = () => {
-    console.log('running hook', start);
     let now = new Date();
     const parsed_event_start = Date.parse(start);
     let calc_time = parsed_event_start - now;

@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import MaskedInput from 'react-text-mask';
 import { Checkbox, FormControl } from '@material-ui/core';
-import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import attendee_capture from 'lib/fetchCalls/soft_auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,31 +42,35 @@ const Error = styled.div`
   font-size: 1.25rem;
   text-align: center;
 `;
-export default function AttendeeAuthModal({
+
+const default_fields = {
+  AttendeeFirst: {
+    displayName: 'First Name',
+    value: '',
+    required: true,
+  },
+  AttendeeLast: {
+    displayName: 'Last Name',
+    value: '',
+    required: true,
+  },
+  AttendeeEmail: {
+    displayName: 'Email',
+    value: '',
+    required: true,
+  },
+};
+
+export default function AttendeeList({
   open,
   callback,
-  eventId,
-  event_name,
+  event_meta,
   headerContent,
   signInText = null,
   otherFields = {},
 }) {
   let init = {
-    AttendeeFirst: {
-      displayName: 'First Name',
-      value: '',
-      required: true,
-    },
-    AttendeeLast: {
-      displayName: 'Last Name',
-      value: '',
-      required: true,
-    },
-    AttendeeEmail: {
-      displayName: 'Email',
-      value: '',
-      required: true,
-    },
+    ...default_fields,
     ...otherFields,
   };
 
@@ -84,16 +88,10 @@ export default function AttendeeAuthModal({
     toast.error('You must enter your information before joining.');
   };
 
-  const zeroForm = () => {
-    setValues(init);
-  };
-
   const handleChange = (e) => {
     e.persist();
     const name = e.target.name;
-    console.log(e.target);
     const prevValue = values[name];
-    console.log(prevValue);
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -122,18 +120,18 @@ export default function AttendeeAuthModal({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, eventId).then((res) => {
-      if (res.error) {
-        setFormLoading(false);
-        return toast.error(res.error);
-      } else {
+    return await attendee_capture(send_values, event_meta.id)
+      .then((res) => {
         return callback(
           `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
-            event_name ? event_name : 'the event.'
+            event_meta.EventName ? event_meta.EventName : 'the event.'
           }`
         );
-      }
-    });
+      })
+      .catch((err) => {
+        setFormLoading(false);
+        return toast.error(err);
+      });
   };
 
   return (
@@ -173,7 +171,6 @@ export default function AttendeeAuthModal({
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
-              autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -187,7 +184,6 @@ export default function AttendeeAuthModal({
                   name={v}
                   label={values[v].displayName}
                   type="text"
-                  // value={values[v].value}
                   onChange={handleChange}
                   required={values[v].required}
                 />

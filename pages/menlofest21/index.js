@@ -133,22 +133,21 @@ const Index = (props) => {
                 alt="logo"
               />
             </div>
-            <div>
+            <div style={{ margin: 'auto' }}>
               <center>
-                <img
-                  style={{ width: '100%', maxWidth: '350px', margin: 'auto' }}
-                  src={main_event.KeyValue[0]?.value}
-                />
-
                 <h2 style={{ margin: 'auto' }}>
-                  Text <span style={{ color: event_theme.brown }}> MENLO</span>{' '}
-                  to 71760
+                  Thank you for attending{' '}
+                  <span style={{ color: event_theme.brown }}>
+                    {' '}
+                    Menlo Fest Virtual Event 2021
+                  </span>{' '}
                 </h2>
                 <h2 style={{ margin: 'auto' }}>
-                  <i> To sign up for live bidding</i>
+                  <i> Please enjoy the full recording of the event below</i>
                 </h2>
               </center>
             </div>
+
             <div>
               <center>
                 <div
@@ -159,7 +158,7 @@ const Index = (props) => {
                     fontFamily: 'Ace Sans',
                   }}
                 >
-                  {' '}
+                  <h3>Thank You For Your Support!</h3>
                 </div>
               </center>
             </div>
@@ -168,7 +167,7 @@ const Index = (props) => {
           <Body>
             <Section>
               <Grid container spacing={3}>
-                <Grid item={true} md={8} sm={12} xs={12}>
+                <Grid item={true} md={12} sm={12} xs={12}>
                   <div
                     style={{
                       height: '100%',
@@ -195,76 +194,7 @@ const Index = (props) => {
                     )}
                   </div>
                 </Grid>
-                <Grid item={true} md={4} xs={12}>
-                  <Fluid__iFrame
-                    src={main_event.streamLinks[1].url}
-                    minHeight={`500px`}
-                  />
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div style={{ textAlign: 'center' }}>
-                    <h4> Slow Connection?</h4>
-                    <a href={main_event.streamLinks[2].url} target="_blank">
-                      <button> Click Here</button>
-                    </a>
-                  </div>
-                </Grid>
-
-                <Grid item md={4} xs={12}>
-                  <div style={{ textAlign: 'center' }}>
-                    <h4> Need Help Bidding?</h4>
-                    <a href={`#how-to-bid`}>
-                      <button>How To Bid</button>
-                    </a>
-                  </div>
-                </Grid>
               </Grid>
-            </Section>
-            <Section>
-              <div
-                id={`how-to-bid`}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                  margin: 'auto',
-                }}
-              >
-                <div
-                  style={{
-                    width: 'calc(50% - 2rem)',
-                    margin: '1rem',
-                    minWidth: '500px',
-                  }}
-                >
-                  <img
-                    style={{
-                      width: '100%',
-                    }}
-                    src="https://storage.googleapis.com/mjp-stream-public/menlofest21/Slide1.PNG"
-                    alt="how to bid"
-                    srcset=""
-                  />
-                </div>
-                <div
-                  style={{
-                    width: 'calc(50% - 2rem)',
-                    margin: '1rem',
-                    minWidth: '500px',
-                  }}
-                >
-                  <img
-                    style={{
-                      width: '100%',
-                    }}
-                    src="https://storage.googleapis.com/mjp-stream-public/menlofest21/Slide2.PNG"
-                    alt="how to bid"
-                    srcset=""
-                  />
-                </div>
-              </div>
             </Section>
           </Body>
           <Footer></Footer>

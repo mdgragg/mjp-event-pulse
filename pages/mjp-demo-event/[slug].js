@@ -1,7 +1,43 @@
-import React from 'react';
-import { EVENT_URL } from './index';
+import React, { useState } from 'react';
+import { EVENT_URL, event_theme } from './index';
+
 import { getEventMeta } from 'lib/api';
-const SubEvent = ({ main_event }) => {
+import AttendeeList from 'components/Modals/AttendeeList';
+import FullWrap from 'components/FullWrap';
+import Index from './index';
+
+const SubEvent = ({ main_event, event_meta }) => {
+  const [hasAuthorized, setHasAuthorized] = useState(false);
+
+  if (main_event.AuthOptions.AuthorizationType === 'AttendeeFromList') {
+    return (
+      <>
+        <AttendeeList
+          event_meta={main_event}
+          event_name={main_event.EventName}
+          open={!hasAuthorized}
+          callback={() => setHasAuthorized(true)}
+          signInText={
+            <>
+              <p>
+                This will only allow attendees to enter if they are on a list.{' '}
+                <br /> The only email that will work for this form is
+              </p>
+              <p style={{ textAlign: 'left', marginLeft: '20%' }}>
+                Name: <strong> Mills James </strong>
+                <br />
+                Email: <strong> mjuser@mjvirtualevents.com </strong>
+              </p>
+              <p>A user will only have to authenticate once per session.</p>
+            </>
+          }
+        />
+        <FullWrap className={hasAuthorized ? '' : 'blurred'}>
+          <Index event_meta={event_meta} main_event={main_event} />{' '}
+        </FullWrap>
+      </>
+    );
+  }
   return <div>{JSON.stringify(main_event)}</div>;
 };
 
@@ -19,5 +55,5 @@ export async function getServerSideProps(ctx) {
     (ev) => ev.slug === ctx.query.slug
   )[0];
 
-  return { props: { main_event } };
+  return { props: { event_meta: event_data, main_event } };
 }

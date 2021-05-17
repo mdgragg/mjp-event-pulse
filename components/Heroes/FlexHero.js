@@ -32,7 +32,7 @@ const HeroHolder = styled.div`
     background-size: cover;
     background-position: center center;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1200px) {
     height: min-content;
     padding-bottom: 1rem;
   }
@@ -52,9 +52,16 @@ const HeaderInner = styled.div`
     color: ${(props) => props.theme.headerFontColor};
     font-family: ${(props) => props.theme.headerFont};
   }
+  && img {
+    width: 100%;
+  }
   @media all and (max-width: 1200px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
+    row-gap: 1rem;
     margin: auto;
+    && img {
+      max-width: 50%;
+    }
   }
   @media all and (max-width: 768px) {
     && h1,
