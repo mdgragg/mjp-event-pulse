@@ -158,7 +158,9 @@ const Index = (props) => {
                     padding: '1rem 0',
                     fontFamily: 'Ace Sans',
                   }}
-                ></div>
+                >
+                  {' '}
+                </div>
               </center>
             </div>
           </FlexHero>

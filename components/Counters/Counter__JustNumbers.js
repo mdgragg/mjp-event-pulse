@@ -3,7 +3,7 @@ import { calculate_remaining, calculateIfEnded } from '../../lib/helpers';
 
 import CountdownClock from './CountdownClock';
 
-const Counter__JustNumbers = ({ start, end, prefix }) => {
+const Counter__JustNumbers = ({ start, end, prefix, afterStarted = null }) => {
   const [countdown_object, set_countdown_object] = useState(
     calculate_remaining(start)
   );

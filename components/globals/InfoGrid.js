@@ -1,5 +1,5 @@
-import { Grid } from "@material-ui/core";
-import styled from "styled-components";
+import { Grid } from '@material-ui/core';
+import styled from 'styled-components';
 const InfoGridDiv = styled.div`
   margin: auto;
   max-width: 500px;
@@ -32,9 +32,11 @@ export function InfoGrid() {
           <li> Mozilla Firefox 49+</li>
           <li> Safari 10+</li>
           <li> Microsoft Edge 15+</li>
-          <li>
-            {" "}
-            **Internet Explorer 11 - requires Flash plugin to be installed{" "}
+          <li style={{ color: 'red' }}>
+            {' '}
+            We cannot guarantee performance on
+            <strong> Internet Explorer</strong> we highly suggest you use a
+            different browser.
           </li>
         </ul>
         <h4> Supported mobile browsers: </h4>

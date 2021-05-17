@@ -10,32 +10,7 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import Section__WithBG from 'components/Sections/Section__WithBG';
 import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
 import { toast } from 'react-toastify';
-
-export var event_theme = {
-  h1: {
-    fontSize: '5rem',
-  },
-  primaryColor: '#181818',
-  secondaryColor: '#97d700',
-  heroHeight: '200px',
-  green: '#97d700',
-  white: null,
-  blue: '#1e2c60',
-  red: '#b71f39',
-  fontFamily: 'Akzidenz-Grotesque-Bold',
-  headerOpacity: '0.75',
-  videoBreakPoint: 700,
-  buttonInfoColor: null,
-  buttonSuccessColor: null,
-  buttonDangerColor: 'tomato',
-  buttonColor: null,
-  headerFont: 'Akzidenz-Grotesque-Bold',
-  headerFontColor: 'white',
-  headerBgColor: 'white',
-  maxSectionWidth: '1800px',
-};
-
-export const EVENT_URL = 'alliancedatainvestorday';
+import { EVENT_URL, event_theme } from './index';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
@@ -44,63 +19,9 @@ const Index = (props) => {
 
   const { event_meta, main_event } = props;
 
-  event_theme = {
-    ...event_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-  };
-
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-    let calc_time = parsed_event_start - now;
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-  const [hasAuthenticated, setHasAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-    const storage_auth = sessionStorage.getItem(session_token);
-    if (storage_auth === 'true') {
-      setHasAuthenticated(true);
-    } else {
-      setHasAuthenticated(false);
-    }
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
-      <AttendeeAuthModal
-        eventId={main_event.id}
-        event_name={main_event.EventName}
-        open={!hasAuthenticated}
-        callback={(creds) => {
-          setHasAuthenticated(true);
-          sessionStorage.setItem(session_token, true);
-          toast.success(creds);
-        }}
-        headerContent={
-          <img src="https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png" />
-        }
-        otherFields={{
-          Company: {
-            name: 'Company',
-            displayName: 'Company',
-            value: '',
-            required: 'true',
-          },
-        }}
-      />
-      <FullWrap className={hasAuthenticated ? '' : 'blurred'}>
+      <FullWrap>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
 
@@ -137,20 +58,29 @@ const Index = (props) => {
                 </div>
                 <div
                   style={{
-                    maxWidth: '1200px',
-                    height: 'calc(100vh - 150px)',
+                    maxWidth: '600px',
+                    height: 'calc(100vh - 450px)',
                     width: '100%',
+                    textAlign: 'center',
                     display: 'flex',
                     paddingTop: '3rem',
                     flexDirection: 'column',
-                    justifyContent: 'flex-start',
+                    justifyContent: 'center',
+                    position: 'relative',
                   }}
                 >
-                  {hasAuthenticated ? (
-                    <VideoBox__StickyTop src={main_event.streamLinks[0].url} />
-                  ) : (
-                    ''
-                  )}
+                  <p style={{ fontSize: '2rem' }}> Thank you for attending</p>
+                  <h2
+                    style={{
+                      fontSize: '3rem',
+                      color: event_theme.red,
+                      backgroundColor: 'white',
+                      lineHeight: '5rem',
+                    }}
+                  >
+                    {' '}
+                    <i> {main_event.EventName}</i>
+                  </h2>
                 </div>
               </div>
             </Section__WithBG>
@@ -180,7 +110,7 @@ export async function getStaticProps(ctx) {
       event_meta: eventData,
       main_event,
     },
-    revalidate: 6000,
+    revalidate: 60,
   };
 }
 

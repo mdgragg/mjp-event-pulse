@@ -2,6 +2,10 @@
   src: url('../static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }
+@font-face {
+  src: url('../static/fonts/Avenir.ttc');
+  font-family: 'Avenir';
+}
 
 @font-face {
   src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf');
@@ -58,13 +62,14 @@ button {
   display: block;
   transition: all 0.2s ease;
   outline: none;
-  font-family: 'Roboto';
+  font-family: 'Avenir';
 }
 
 button:hover {
   cursor: pointer;
-  border-radius: 30px;
-  background-color: azure;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
 }
 
 button:focus {
@@ -78,4 +83,8 @@ img {
 
 a {
   margin: 0;
+}
+
+p {
+  font-size: 16px;
 }
