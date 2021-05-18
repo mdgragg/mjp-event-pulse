@@ -20,6 +20,11 @@ module.exports = {
         destination: '/alliancedatainvestorevent',
         permanent: true,
       },
+      {
+        source: '/alliancedatainvestorday/thank-you',
+        destination: '/alliancedatainvestorevent/thank-you',
+        permanent: true,
+      },
     ];
   },
 };
