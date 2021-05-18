@@ -5,7 +5,8 @@ const BGSection = styled.div`
   /* background-color: red; */
   position: relative;
   background-color: rgba(0, 0, 0, 0);
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-y: scroll;
   height: 100%;
   width: 100%;
   &&::before {

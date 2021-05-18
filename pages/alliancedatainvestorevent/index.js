@@ -138,12 +138,14 @@ const Index = (props) => {
                 <div
                   style={{
                     maxWidth: '1200px',
-                    height: 'calc(100vh - 150px)',
+                    minHeight: 'calc(100vh - 150px)',
                     width: '100%',
                     display: 'flex',
                     paddingTop: '3rem',
+                    paddingBottom: '6rem',
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
+                    overflow: 'scroll',
                   }}
                 >
                   {hasAuthenticated ? (
