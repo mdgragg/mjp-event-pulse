@@ -43,10 +43,12 @@ const Error = styled.div`
 `;
 export default function AttendeeAuthModal({
   open,
+  event_meta,
   callback,
   eventId,
   event_name,
   headerContent,
+  textContent,
 }) {
   const init = {
     pw: '',
@@ -84,11 +86,13 @@ export default function AttendeeAuthModal({
       setFormLoading(false);
       return toast.error('You must provide a password!');
     }
-    return await attendee_password(values, eventId)
+    return await attendee_password(values, event_meta.id)
       .then((res) => {
         console.log('res: ', res);
         return callback(
-          `Hello, welcome to ${event_name ? event_name : 'the event.'}`
+          `Hello, welcome to ${
+            event_meta.EventName ? event_meta.EventName : 'the event.'
+          }`
         );
       })
       .catch((err) => {
@@ -129,10 +133,14 @@ export default function AttendeeAuthModal({
 
         <DialogContent>
           <center>
-            <DialogContentText>
-              This event requires a
-              <br /> password to enter.
-            </DialogContentText>
+            {textContent ? (
+              textContent
+            ) : (
+              <DialogContentText>
+                This event requires a
+                <br /> password to enter.
+              </DialogContentText>
+            )}
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate

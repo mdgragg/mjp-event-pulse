@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
       //   width: '25ch',
     },
   },
+  header: {
+    '.MuiDialogContent-root  p': {
+      maxWidth: '80%',
+    },
+  },
 }));
 
 const StyledForm = styled.form`
@@ -45,8 +50,7 @@ const Error = styled.div`
 export default function AttendeeAuthModal({
   open,
   callback,
-  eventId,
-  event_name,
+  event_meta,
   headerContent,
   signInText = null,
   otherFields = {},
@@ -73,19 +77,10 @@ export default function AttendeeAuthModal({
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
 
-  const [formErrors, setFormErrors] = React.useState({
-    showing: false,
-    errors: [],
-  });
-
   const [values, setValues] = React.useState(init);
 
   const handleClose = () => {
     toast.error('You must enter your information before joining.');
-  };
-
-  const zeroForm = () => {
-    setValues(init);
   };
 
   const handleChange = (e) => {
@@ -122,14 +117,14 @@ export default function AttendeeAuthModal({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, eventId).then((res) => {
+    return await attendee_capture(send_values, event_meta.id).then((res) => {
       if (res.error) {
         setFormLoading(false);
         return toast.error(res.error);
       } else {
         return callback(
           `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
-            event_name ? event_name : 'the event.'
+            event_meta.EventName ? event_meta.EventName : 'the event.'
           }`
         );
       }
@@ -160,16 +155,17 @@ export default function AttendeeAuthModal({
           )}
           Please Sign In To Enter
         </DialogTitle>
-        {formErrors.showing
-          ? formErrors.errors.map((err) => <Error>{err}</Error>)
-          : ''}
-        <DialogContent>
+
+        <DialogContent className={`${classes.header}`}>
           <center>
-            <DialogContentText>
-              {signInText
-                ? signInText
-                : ' Please enter your information to proceed to the event.'}
-            </DialogContentText>
+            {signInText ? (
+              signInText
+            ) : (
+              <DialogContentText>
+                Please enter your information to proceed to the event.
+              </DialogContentText>
+            )}
+
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate

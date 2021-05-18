@@ -3,8 +3,11 @@ import { EVENT_URL, event_theme } from './index';
 
 import { getEventMeta } from 'lib/api';
 import AttendeeList from 'components/Modals/AttendeeList';
+import PasswordAuthModal from 'components/Modals/PasswordAuthModal';
+import AttendeeAuthModal from 'components/Modals/AttendeeAuthModal';
 import FullWrap from 'components/FullWrap';
 import Index from './index';
+import { toast } from 'react-toastify';
 
 const SubEvent = ({ main_event, event_meta }) => {
   const [hasAuthorized, setHasAuthorized] = useState(false);
@@ -30,6 +33,51 @@ const SubEvent = ({ main_event, event_meta }) => {
               </p>
               <p>A user will only have to authenticate once per session.</p>
             </>
+          }
+        />
+        <FullWrap className={hasAuthorized ? '' : 'blurred'}>
+          <Index event_meta={event_meta} main_event={main_event} />{' '}
+        </FullWrap>
+      </>
+    );
+  }
+  if (main_event.AuthOptions.AuthorizationType === 'PasswordProtected') {
+    return (
+      <>
+        <PasswordAuthModal
+          event_meta={main_event}
+          event_name={main_event.EventName}
+          open={!hasAuthorized}
+          callback={() => setHasAuthorized(true)}
+          textContent={
+            <p>
+              This is a demo event, the password is <strong>mjp2021</strong>{' '}
+            </p>
+          }
+        />
+        <FullWrap className={hasAuthorized ? '' : 'blurred'}>
+          <Index event_meta={event_meta} main_event={main_event} />{' '}
+        </FullWrap>
+      </>
+    );
+  }
+  if (main_event.AuthOptions.AuthorizationType === 'CaptureNewAttendees') {
+    return (
+      <>
+        <AttendeeAuthModal
+          event_meta={main_event}
+          event_name={main_event.EventName}
+          open={!hasAuthorized}
+          callback={(res) => {
+            toast.success(res.toString());
+            setHasAuthorized(true);
+          }}
+          signInText={
+            <p>
+              This is a demo event, adding your credentials will add you as an
+              attendee to this event. We can generate a report of all attendees
+              captured after the event.
+            </p>
           }
         />
         <FullWrap className={hasAuthorized ? '' : 'blurred'}>

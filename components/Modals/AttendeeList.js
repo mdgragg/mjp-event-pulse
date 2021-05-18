@@ -77,11 +77,6 @@ export default function AttendeeList({
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
 
-  const [formErrors, setFormErrors] = React.useState({
-    showing: false,
-    errors: [],
-  });
-
   const [values, setValues] = React.useState(init);
 
   const handleClose = () => {
@@ -158,16 +153,17 @@ export default function AttendeeList({
           )}
           Please Sign In To Enter
         </DialogTitle>
-        {formErrors.showing
-          ? formErrors.errors.map((err) => <Error>{err}</Error>)
-          : ''}
+
         <DialogContent>
           <center>
-            <DialogContentText>
-              {signInText
-                ? signInText
-                : ' Please enter your information to proceed to the event.'}
-            </DialogContentText>
+            {signInText ? (
+              signInText
+            ) : (
+              <DialogContentText>
+                Please enter your information to proceed to the event.
+              </DialogContentText>
+            )}
+
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
@@ -183,6 +179,7 @@ export default function AttendeeList({
                   id={v}
                   name={v}
                   label={values[v].displayName}
+                  value={values[v].value}
                   type="text"
                   onChange={handleChange}
                   required={values[v].required}

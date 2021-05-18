@@ -99,9 +99,8 @@ const Index = (props) => {
   return (
     <>
       <PasswordAuthModal
-        eventId={main_event.id}
+        event_meta={main_event}
         open={!hasAuthenticated}
-        event_name={main_event.EventName}
         headerContent={
           <img
             style={{
