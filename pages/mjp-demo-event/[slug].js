@@ -99,9 +99,18 @@ export async function getServerSideProps(ctx) {
   //   get the event job data from our api
 
   let event_data = await getEventMeta(EVENT_URL);
+
   let main_event = event_data.events.filter(
     (ev) => ev.slug === ctx.query.slug
   )[0];
+
+  if (!main_event) {
+    return {
+      redirect: {
+        destination: './',
+      },
+    };
+  }
 
   return { props: { event_meta: event_data, main_event } };
 }

@@ -163,7 +163,7 @@ const Index = (props) => {
   );
 };
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   let eventData = await getEventMeta(EVENT_URL);
 
   let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
@@ -171,7 +171,7 @@ export async function getStaticProps(ctx) {
   if (eventData.eventStatus.EventStatus === 'Ended') {
     return {
       redirect: {
-        destination: `${EVENT_URL}/thank-you`,
+        destination: `alliancedatainvestorevent/thank-you`,
         permanent: false,
       },
     };
