@@ -11,9 +11,11 @@ import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
+import EmailOnlyModal from '../../components/Modals/AttendeeList__EmailOnlyModal';
 import LandingPage from 'components/IndividualEventAssets/biglotstownhall/LandingPage';
 import { toast } from 'react-toastify';
+import FullWrap from 'components/FullWrap';
+import useHasAuthorized from 'hooks/useHasAuthorized';
 
 export var event_theme = {
   h1: {
@@ -54,65 +56,35 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
+  // const [hasAuthenticated, setHasAuthenticated] =
+  //   useHasAuthorized(session_token);
 
   const [hasAuthenticated, setHasAuthenticated] = useState(true);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-
-    // const storage_auth = sessionStorage.getItem(session_token);
-
-    // if (storage_auth === 'true') {
-    //   setHasAuthenticated(true);
-    // } else {
-    //   setHasAuthenticated(false);
-    // }
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
-      {/* <AttendeeAuthModal
-        eventId={main_event.id}
-        event_name={main_event.EventName}
+      <EmailOnlyModal
+        signInText={
+          <p>
+            Please use your employee email <br />
+            (i.e. associateID@biglots.com)
+          </p>
+        }
+        event_meta={main_event}
         open={!hasAuthenticated}
         callback={(creds) => {
           setHasAuthenticated(true);
-          sessionStorage.setItem(session_token, true);
           toast.success(creds);
         }}
-      /> */}
-      <div
-        style={{
-          filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-        }}
-      >
+      />
+      <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
-
           <Body>
             <LandingPage main_event={main_event} />
           </Body>
         </Page>
-      </div>
+      </FullWrap>
     </>
   );
 };
@@ -132,6 +104,7 @@ export async function getStaticProps() {
       event_meta: event_data,
       main_event,
     },
+    revalidate: 300,
   };
 }
 
