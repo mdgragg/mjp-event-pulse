@@ -254,38 +254,10 @@ const Index = (props) => {
 // }
 
 export async function getServerSideProps(ctx) {
-  //console.log(ctx.req.cookies);
-
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
-  let eventData = await getEventMeta('ads-sales-meetings-2021');
-
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  let speakers = await fetch(
-    process.env.NEXT_PUBLIC_STRAPI_API_URL + '/events/57'
-  ).then((res) => res.json());
-
-  speakers = speakers.EventSpeakers;
-
-  if (eventData.eventStatus.EventStatus === 'Live') {
-    return {
-      redirect: {
-        destination: 'ads-sales-meetings-2021/thank-you',
-        permanent: false,
-      },
-    };
-  }
   return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
-      speakers,
+    redirect: {
+      destination: './',
+      permanent: true,
     },
   };
 }

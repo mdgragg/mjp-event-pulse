@@ -245,17 +245,6 @@ const SingleExhibitor = (props) => {
   return (
     <Page theme={event_theme}>
       <Body>
-        {errorBoxShow.isShowing ? (
-          <ChatErrorBox errorMessage={errorBoxShow.message} />
-        ) : (
-          ''
-        )}
-        <ChatNav
-          loggedIn={props?.loggedIn}
-          logOut={logOut}
-          exhibitor={exhibitor}
-          handleLogin={logIn}
-        />
         <Section minHeight={'100vh'}>
           <Grid container>
             <Grid item md={12} spacing={5}>
@@ -283,32 +272,6 @@ const SingleExhibitor = (props) => {
             </Grid>
           </Grid>
           <hr />
-          <ChatGrid container spacing={5}>
-            <Grid item={true} md={showLoggedIn ? 7 : 10} sm={12}>
-              <PublicChat
-                exhibitor={exhibitor}
-                messages={messages}
-                addQuestion={addQuestion}
-              />
-            </Grid>
-            <Grid item={true} md={4}>
-              {props?.loggedIn === 'true' ? (
-                <>
-                  <h2>Only You Can See this {exhibitor.FirstName} </h2>
-                  <LoggedIn
-                    key={'logged-in-div'}
-                    handleSelect={handleSelect}
-                    handleShowHide={handleShowHide}
-                    messages={messages}
-                    question={question}
-                    submitResponse={submitResponse}
-                  />
-                </>
-              ) : (
-                ''
-              )}
-            </Grid>
-          </ChatGrid>
         </Section>
         <Footer></Footer>
       </Body>
@@ -318,12 +281,7 @@ const SingleExhibitor = (props) => {
 
 export default SingleExhibitor;
 
-SingleExhibitor.getInitialProps = async (ctx) => {
-  let { loggedIn } = cookies(ctx);
-  const { id } = cookies(ctx);
-  if (!loggedIn) {
-    loggedIn = 'false';
-  }
+export async function getServerSideProps(ctx) {
   const data = await fetchAPI(
     `query getExhibitorDetail($id: String!){
         exhibitors(where: {
@@ -366,5 +324,5 @@ SingleExhibitor.getInitialProps = async (ctx) => {
   const exhibitor = await data.exhibitors[0];
   // By returning { props: posts }, the Blog component
   // will receive `posts` as a prop at build time
-  return { exhibitor, loggedIn, id };
-};
+  return { props: { exhibitor, loggedIn: false, id: ctx.query.exhibitor } };
+}

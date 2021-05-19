@@ -5,8 +5,8 @@ import EventSearch from '../../../components/template1/EventSearch';
 import Body from '../../../components/template1/Body';
 import Section from '../../../components/template1/Section';
 import Meta from 'components/globals/Meta';
-import { getEventExhibitors } from '../../../lib/api';
-
+import { GET_EXHIBITORS } from '../../osu-annual-scientific-meeting/exhibitors/index';
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 
 import Page from '../../../components/template1/Page';
@@ -22,7 +22,7 @@ const ExhibitorLink = styled.div`
     margin-bottom: 10px;
     border: 1px solid #c4c4c4;
     border-radius: 7px;
-    height: 100px;
+    height: 150px;
     padding: 20px;
     transition: all 0.15s;
   }
@@ -36,7 +36,10 @@ const ExhibitorLink = styled.div`
 `;
 const ExhibitorPage = (props) => {
   const router = useRouter();
-  const event = props.meta;
+
+  const { data, loading, error } = useQuery(GET_EXHIBITORS, {
+    variables: { slug: 'osu-ccts-annual-scientific-meeting' },
+  });
 
   return (
     <Page theme={event_theme}>
@@ -44,48 +47,28 @@ const ExhibitorPage = (props) => {
       <Body>
         <Section>
           <h1>Exhibitor Index</h1>
-
-          {Object.keys(event).length > 0
-            ? Object.keys(event).map((e) => (
-                <ExhibitorLink
-                  key={event[e].id ?? 'none'}
-                  onClick={() =>
-                    router.push(`${router.pathname}/${event[e].id}`)
-                  }
-                >
-                  <>
-                    {event[e].FirstName ?? ''} {event[e]?.LastName ?? ''} <br />{' '}
-                    <span>
-                      {' '}
-                      {event[e].ExhibitName?.replace(/_/g, ' ') ?? ''}
-                    </span>
-                  </>
-                </ExhibitorLink>
-              ))
-            : 'No Exhibitors'}
+          {loading ? (
+            <h2>Loading...</h2>
+          ) : (
+            data.events[0].exhibitors.map((e) => (
+              <ExhibitorLink
+                key={e.id}
+                onClick={() => router.push(`${router.pathname}/${e.id}`)}
+              >
+                <>
+                  <strong>
+                    {e.FirstName} {e.LastName}
+                  </strong>
+                  <br /> <span> {e.ExhibitName?.replace(/_/g, ' ')}</span>
+                  <br />
+                  {e.Email} <br />
+                </>
+              </ExhibitorLink>
+            ))
+          )}
         </Section>
       </Body>
     </Page>
   );
 };
-
-export async function getServerSideProps(context) {
-  //get the event job data from our api
-
-  let url;
-  console.log(context.req.url.slice(1, -11));
-  !context.previewData
-    ? (url = context.req.url.slice(1, -11))
-    : (url = context.previewData.url);
-
-  const data = await getEventExhibitors(url);
-  const values = {
-    props: {
-      //meta will be the props for the event
-      meta: data,
-    },
-  };
-  return values;
-}
-
 export default ExhibitorPage;

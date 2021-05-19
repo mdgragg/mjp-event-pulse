@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import { useRouter } from 'next/router';
 import Meta from 'components/globals/Meta';
 import { GlobalStyle } from 'components/globals/GlobalStyle';
 import 'react-dropzone-uploader/dist/styles.css';
 import './global.css';
 import cookies from 'next-cookies';
-import UserContextProvider from '../lib/context/UserContext';
 import AppContextProvider from '../lib/context/AppContext';
 import * as gtag from '../lib/analytics';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ApolloProvider } from '@apollo/client';
+import client from 'lib/withApollo';
 
 function MyApp({ Component, pageProps, loginData }) {
   const router = useRouter();
@@ -18,23 +19,24 @@ function MyApp({ Component, pageProps, loginData }) {
     const handleRouteChange = (url) => {
       gtag.pageView(url);
     };
-
     router.events.on('routeChangeComplete', handleRouteChange);
-
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
   return (
     <>
-      <Meta />
-      <GlobalStyle />
-      <AppContextProvider>
-        <UserContextProvider loginData={loginData}>
+      <ApolloProvider client={client}>
+        <Meta />
+        <GlobalStyle />
+        <AppContextProvider>
+          {/* <UserContextProvider loginData={loginData}> */}
           <ToastContainer />
           <Component {...pageProps} />
-        </UserContextProvider>
-      </AppContextProvider>
+          {/* </UserContextProvider> */}
+        </AppContextProvider>
+      </ApolloProvider>
     </>
   );
 }

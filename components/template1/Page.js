@@ -58,30 +58,16 @@ const Page = (props) => {
   const { loading } = useContext(AppContext);
   const whole_theme = { ...template1Theme, ...props.theme };
   //Material ui style provider for this theme
-  {
-    if (loading.loading) {
-      return (
-        <CssBaseline>
-          <StylesProvider injectFirst>
-            <ThemeProvider theme={whole_theme}>
-              <StyledPage>
-                <LoadingScreen message={loading.message} />
-              </StyledPage>
-            </ThemeProvider>
-          </StylesProvider>
-        </CssBaseline>
-      );
-    } else
-      return (
-        <CssBaseline>
-          <StylesProvider injectFirst>
-            <ThemeProvider theme={whole_theme}>
-              <StyledPage>{props.children}</StyledPage>
-            </ThemeProvider>
-          </StylesProvider>
-        </CssBaseline>
-      );
-  }
+
+  return (
+    <CssBaseline>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={whole_theme}>
+          <StyledPage>{props.children}</StyledPage>
+        </ThemeProvider>
+      </StylesProvider>
+    </CssBaseline>
+  );
 };
 
 export default Page;

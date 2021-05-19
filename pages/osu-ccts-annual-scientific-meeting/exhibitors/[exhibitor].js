@@ -35,6 +35,7 @@ const SingleExhibitor = (props) => {
       }
     };
   }, []);
+
   const InRoom = styled.div`
     width: 80px;
     text-align: center;
@@ -113,19 +114,22 @@ export async function getServerSideProps(ctx) {
   const exhibitor = await getExhibitorMeta(ctx.query.exhibitor);
 
   if (!exhibitor) {
-    const { res } = ctx;
-    res.setHeader('location', './');
-    res.statusCode = 302;
-    res.end();
-    return { props: {} };
+    return {
+      redirect: {
+        destination: '../exhibitors',
+      },
+    };
   } else {
     let eventData = await getEventMeta(exhibitor.event.slug);
     eventData = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
 
-    let id = '';
-    let loggedIn = false;
-
-    return { props: { exhibitor, loggedIn: loggedIn, id, eventData } };
+    return {
+      props: {
+        exhibitor,
+        id: ctx.query.exhibitor,
+        eventData,
+      },
+    };
   }
 }
 export default SingleExhibitor;

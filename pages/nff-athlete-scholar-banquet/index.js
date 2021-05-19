@@ -247,30 +247,10 @@ const Index = (props) => {
 // }
 
 export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
-  let eventData = await getEventMeta(EVENT_URL);
-
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
-  }
-
   return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
+    redirect: {
+      destination: './',
+      permanent: true,
     },
   };
 }
