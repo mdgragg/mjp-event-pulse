@@ -16,6 +16,7 @@ import LandingPage from 'components/IndividualEventAssets/biglotstownhall/Landin
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useHasAuthorized from 'hooks/useHasAuthorized';
+import AuthWrap from '../../components/AuthWrap';
 
 export var event_theme = {
   h1: {
@@ -46,41 +47,49 @@ export const EVENT_URL = 'biglotstownhall';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
-  const session_token = EVENT_URL;
-  const router = useRouter();
-
-  const { event_meta, main_event } = props;
+  const { event_meta, main_event, needs_auth } = props;
 
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  // const [hasAuthenticated, setHasAuthenticated] =
-  //   useHasAuthorized(session_token);
-
-  const [hasAuthenticated, setHasAuthenticated] = useState(true);
+  const [auth, setAuth] = useState(false);
 
   return (
-    <>
-      <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
-        <Page theme={event_theme}>
-          <Meta title={event_meta.EventJobName}> </Meta>
-          <Body>
-            <LandingPage main_event={main_event} />
-          </Body>
-        </Page>
-      </FullWrap>
-    </>
+    <AuthWrap
+      event_to_check={main_event}
+      callback={(creds) => {
+        setAuth(true);
+        toast.success(
+          `Hello ${
+            creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+          }, welcome to Big Lots Q1 Virtual Town Hall`
+        );
+      }}
+      options={['emailOnly']}
+      signInText={
+        <p>
+          Please use your employee email <br />
+          (i.e. associateID@biglots.com) <br />
+          <span style={{ fontSize: '0.75rem' }}>
+            This is a preview, so only associateid@biglots.com will work for
+            this example
+          </span>
+        </p>
+      }
+    >
+      <Page theme={event_theme}>
+        <Meta title={event_meta.EventJobName}> </Meta>
+        <Body>
+          <LandingPage main_event={main_event} />
+        </Body>
+      </Page>
+    </AuthWrap>
   );
 };
-// export async function getServerSideProps(ctx) {
-//   const { preview } = cookies(ctx);
-//   const { hasLoggedIn } = cookies(ctx);
-//   return { props: {} };
-// }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
@@ -90,7 +99,6 @@ export async function getStaticProps() {
       event_meta: event_data,
       main_event,
     },
-    revalidate: 300,
   };
 }
 

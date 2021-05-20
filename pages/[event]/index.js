@@ -158,8 +158,10 @@ export async function getServerSideProps(ctx) {
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
   const EVENT_URL = ctx.params.event;
+  console.log(EVENT_URL);
   try {
     let event_data = await getEventMeta(EVENT_URL);
+    console.log(event_data);
     let main_event = event_data.events.filter(
       (ev) => ev.isMainEvent === true
     )[0];
@@ -173,6 +175,10 @@ export async function getServerSideProps(ctx) {
               destination: `${EVENT_URL}/preview`,
               permanent: false,
             },
+          };
+        } else {
+          return_object = {
+            props: { event_meta: event_data, main_event },
           };
         }
         break;
@@ -202,7 +208,7 @@ export async function getServerSideProps(ctx) {
           // revalidate: 600,
         };
     }
-
+    console.log(return_object);
     return return_object;
   } catch (error) {
     console.log('[event].js error: ', error);

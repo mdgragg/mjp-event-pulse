@@ -117,11 +117,7 @@ export default function AttendeeList({
 
     return await attendee_capture(send_values, event_meta.id)
       .then((res) => {
-        return callback(
-          `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
-            event_meta.EventName ? event_meta.EventName : 'the event.'
-          }`
-        );
+        return callback(res);
       })
       .catch((err) => {
         setFormLoading(false);

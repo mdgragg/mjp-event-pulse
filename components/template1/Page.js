@@ -7,7 +7,7 @@ import { StylesProvider, createMuiTheme } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
-import AppContextProvider, { AppContext } from 'lib/context/AppContext';
+
 import LoadingScreen from '../globals/Loading';
 
 const StyledPage = styled.div`
@@ -55,7 +55,6 @@ Router.onRouteChangeComplete = () => {
 };
 
 const Page = (props) => {
-  const { loading } = useContext(AppContext);
   const whole_theme = { ...template1Theme, ...props.theme };
   //Material ui style provider for this theme
 

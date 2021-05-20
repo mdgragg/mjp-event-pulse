@@ -14,14 +14,13 @@ import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import MaskedInput from 'react-text-mask';
 import { Checkbox, FormControl } from '@material-ui/core';
-import attendee_capture from 'lib/fetchCalls/soft_auth';
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
       width: '80%',
-      minWidth: '350px',
     },
 
     '& .MuiTextField-root': {
@@ -42,21 +41,23 @@ const StyledForm = styled.form`
   }
 `;
 
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  font-size: 1.25rem;
+  text-align: center;
+`;
 export default function AttendeeAuthModal({
   open,
   callback,
   event_meta,
   headerContent,
   signInText = null,
-  otherFields = {},
+  fields = {},
+  overrideFields = {},
 }) {
   let init = {
-    AttendeeEmail: {
-      displayName: 'Email',
-      value: '',
-      required: true,
-    },
-    ...otherFields,
+    ...fields,
   };
 
   const classes = useStyles();
@@ -71,8 +72,9 @@ export default function AttendeeAuthModal({
   const handleChange = (e) => {
     e.persist();
     const name = e.target.name;
+    console.log(e.target);
     const prevValue = values[name];
-
+    console.log(prevValue);
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -95,18 +97,25 @@ export default function AttendeeAuthModal({
     e.preventDefault();
     if (!check_required()) {
       setFormLoading(false);
-      return toast.error('You must supply an email');
+      return toast.error('All fields are required!');
     }
     const send_values = {};
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
-
+    send_values.AttendeeEmail =
+      send_values.Company.replace(/\s/g, '__') + '@toolfair2021.com';
     return await attendee_capture(send_values, event_meta.id)
       .then((res) => {
-        return callback(res);
+        if (res.error) {
+          setFormLoading(false);
+          return toast.error(res.error);
+        } else {
+          console.log(res);
+          return callback(res);
+        }
       })
       .catch((err) => {
-        setFormLoading(false);
+        console.log('err: ', err);
         return toast.error(err);
       });
   };
@@ -126,7 +135,6 @@ export default function AttendeeAuthModal({
             <div
               style={{
                 width: '70%',
-
                 height: 'auto',
                 margin: 'auto',
               }}
@@ -137,7 +145,7 @@ export default function AttendeeAuthModal({
           Please Sign In To Enter
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent className={`${classes.header}`}>
           <center>
             {signInText ? (
               signInText
@@ -153,11 +161,6 @@ export default function AttendeeAuthModal({
               autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
-              }}
-              onKeyUp={(e) => {
-                if (e.key === 'Enter') {
-                  handleSumbit(e);
-                }
               }}
             >
               {Object.keys(values).map((v) => (

@@ -77,7 +77,7 @@ const Index = (props) => {
           setHasAuthenticated(true);
           toast.success(
             `Hello ${
-              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+              creds.AttendeeFirst ? creds.AttendeeFirst : ''
             }, Welcome to Big Lots Q1 Virtual Town Hall`
           );
         }}

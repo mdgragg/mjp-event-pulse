@@ -6,7 +6,7 @@ import { GlobalStyle } from 'components/globals/GlobalStyle';
 import 'react-dropzone-uploader/dist/styles.css';
 import './global.css';
 import cookies from 'next-cookies';
-import AppContextProvider from '../lib/context/AppContext';
+
 import * as gtag from '../lib/analytics';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,12 +30,9 @@ function MyApp({ Component, pageProps, loginData }) {
       <ApolloProvider client={client}>
         <Meta />
         <GlobalStyle />
-        <AppContextProvider>
-          {/* <UserContextProvider loginData={loginData}> */}
-          <ToastContainer />
-          <Component {...pageProps} />
-          {/* </UserContextProvider> */}
-        </AppContextProvider>
+
+        <ToastContainer />
+        <Component {...pageProps} />
       </ApolloProvider>
     </>
   );

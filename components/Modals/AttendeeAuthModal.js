@@ -122,11 +122,7 @@ export default function AttendeeAuthModal({
         setFormLoading(false);
         return toast.error(res.error);
       } else {
-        return callback(
-          `Hello ${res.Attendee.AttendeeFirst}, welcome to ${
-            event_meta.EventName ? event_meta.EventName : 'the event.'
-          }`
-        );
+        return callback(res);
       }
     });
   };

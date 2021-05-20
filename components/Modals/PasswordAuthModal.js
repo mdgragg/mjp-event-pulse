@@ -48,7 +48,7 @@ export default function AttendeeAuthModal({
   eventId,
   event_name,
   headerContent,
-  textContent,
+  signInText,
 }) {
   const init = {
     pw: '',
@@ -88,12 +88,7 @@ export default function AttendeeAuthModal({
     }
     return await attendee_password(values, event_meta.id)
       .then((res) => {
-        console.log('res: ', res);
-        return callback(
-          `Hello, welcome to ${
-            event_meta.EventName ? event_meta.EventName : 'the event.'
-          }`
-        );
+        return callback(res);
       })
       .catch((err) => {
         setFormLoading(false);
@@ -133,8 +128,8 @@ export default function AttendeeAuthModal({
 
         <DialogContent>
           <center>
-            {textContent ? (
-              textContent
+            {signInText ? (
+              signInText
             ) : (
               <DialogContentText>
                 This event requires a

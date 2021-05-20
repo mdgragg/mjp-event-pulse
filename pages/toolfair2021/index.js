@@ -12,11 +12,14 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Section__WithBG from 'components/Sections/Section__WithBG';
 import EmailOnlyModal from '../../components/Modals/AttendeeList__EmailOnlyModal';
-import LandingPage from 'components/IndividualEventAssets/biglotstownhall/LandingPage';
+import Landing from 'components/IndividualEventAssets/toolfair2021/Landing';
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useHasAuthorized from 'hooks/useHasAuthorized';
-import { EVENT_URL } from './index';
+
+import { token_generator } from '../../lib/helpers';
+import CustomModal from '../../components/IndividualEventAssets/toolfair2021/CustomModal';
+
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -42,6 +45,7 @@ export var event_theme = {
   maxSectionWidth: '1800px',
 };
 
+export const EVENT_URL = 'toolfair2021';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
@@ -55,38 +59,44 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const [hasAuthenticated, setHasAuthenticated] =
-    useHasAuthorized(session_token);
+  const [auth, setAuth] = useHasAuthorized(token_generator(main_event));
 
   return (
     <>
-      <EmailOnlyModal
-        signInText={
-          <p>
-            Please use your employee email <br />
-            (i.e. associateID@biglots.com) <br />
-            <span style={{ fontSize: '0.75rem' }}>
-              This is a preview, so only associateid@biglots.com will work for
-              this example
-            </span>
-          </p>
-        }
+      <CustomModal
+        fields={{
+          AttendeeFirst: {
+            displayName: 'First Name',
+            value: '',
+            required: true,
+          },
+          AttendeeLast: {
+            displayName: 'Last Name',
+            value: '',
+            required: true,
+          },
+          Company: {
+            displayName: 'Distributor #',
+            value: '',
+            required: true,
+          },
+        }}
+        open={!auth}
         event_meta={main_event}
-        open={!hasAuthenticated}
-        callback={(creds) => {
-          setHasAuthenticated(true);
+        callback={(res) => {
+          setAuth(true);
           toast.success(
             `Hello ${
-              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
-            }, Welcome to Big Lots Q1 Virtual Town Hall`
+              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
+            }, welcome to ${main_event.EventName}`
           );
         }}
       />
-      <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
+      <FullWrap className={auth ? '' : 'blurred'}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>
-            <LandingPage main_event={main_event} />
+            <Landing event_meta={main_event} />
           </Body>
         </Page>
       </FullWrap>
@@ -99,7 +109,7 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
@@ -109,7 +119,6 @@ export async function getStaticProps() {
       event_meta: event_data,
       main_event,
     },
-    revalidate: 310,
   };
 }
 

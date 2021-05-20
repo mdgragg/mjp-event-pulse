@@ -62,7 +62,7 @@ const LoginPage = ({ children, redirect = './', EVENT_URL = '' }) => {
         setTimeout(() => {
           router.push(redirect);
         }, 2000);
-        return toast.success(`Redirecting to: ${EVENT_URL}`);
+        return toast.success(`Redirecting to: ${redirect}`);
       })
       .catch((err) => toast.error('errrrr', err));
   };
