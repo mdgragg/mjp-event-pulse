@@ -63,20 +63,6 @@ const Index = (props) => {
 
   return (
     <>
-      <EmailOnlyModal
-        signInText={
-          <p>
-            Please use your employee email <br />
-            (i.e. associateID@biglots.com)
-          </p>
-        }
-        event_meta={main_event}
-        open={!hasAuthenticated}
-        callback={(creds) => {
-          setHasAuthenticated(true);
-          toast.success(creds);
-        }}
-      />
       <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>

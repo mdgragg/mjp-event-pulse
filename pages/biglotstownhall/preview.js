@@ -16,7 +16,7 @@ import LandingPage from 'components/IndividualEventAssets/biglotstownhall/Landin
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useHasAuthorized from 'hooks/useHasAuthorized';
-
+import { EVENT_URL } from './index';
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -42,7 +42,6 @@ export var event_theme = {
   maxSectionWidth: '1800px',
 };
 
-export const EVENT_URL = 'biglotstownhall';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
@@ -96,12 +95,17 @@ const Index = (props) => {
 //   return { props: {} };
 // }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps() {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+
   return {
-    redirect: {
-      destination: './',
-      permanent: true,
+    props: {
+      //meta will be the props for the event
+      event_meta: event_data,
+      main_event,
     },
+    revalidate: 300,
   };
 }
 
