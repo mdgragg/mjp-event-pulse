@@ -92,7 +92,7 @@ const Index = (props) => {
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>
-            <Landing event_meta={main_event} />
+            <Landing event_meta={main_event} hasAuth={auth} />
           </Body>
         </Page>
       </FullWrap>

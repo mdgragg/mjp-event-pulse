@@ -81,7 +81,7 @@ const Body = styled.div`
     }
   }
 `;
-const Landing = ({ event_meta }) => {
+const Landing = ({ event_meta, hasAuth }) => {
   return (
     <ThePage>
       <Header>
@@ -109,7 +109,7 @@ const Landing = ({ event_meta }) => {
       </Header>
       <Body>
         <div className="player">
-          <VideoBox__iFrame src={event_meta.streamLinks[0].url} />
+          {hasAuth && <VideoBox__iFrame src={event_meta.streamLinks[0].url} />}
         </div>
       </Body>
       <BannerWithPicture
