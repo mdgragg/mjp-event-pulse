@@ -1,9 +1,5 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { UserContext } from '../../../lib/context/UserContext';
-import { login, verify } from 'lib/fetchCalls/login';
-import { getAuthorizedEventJobs } from '../../../lib/fetchCalls/login';
-import { setLoading, AppContext } from 'lib/context/AppContext';
+
 import { Link } from '@material-ui/core';
 
 const LoggedIn = ({ user_creds, logOutUser }) => (

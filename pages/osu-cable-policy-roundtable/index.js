@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useQuery, gql } from '@apollo/client';
 import withApollo from 'lib/withApollo';
-import { UserContext } from 'lib/context/UserContext';
+
 import _ from 'lodash';
 import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
 

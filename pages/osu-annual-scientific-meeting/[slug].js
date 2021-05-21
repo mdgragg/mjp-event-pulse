@@ -1,5 +1,3 @@
-import { Router, useRouter } from 'next/router';
-import { useQuery, gql } from '@apollo/client';
 import React, { useContext, useEffect, useState } from 'react';
 import { event_theme } from './index';
 import { getEventMeta } from 'lib/api';
@@ -8,7 +6,6 @@ import { Grid, Button } from '@material-ui/core';
 import Page from '../../components/template1/Page';
 import Body from '../../components/template1/Body';
 import VideoBox from '../../components/template1/VideoBox';
-import { UserContext } from 'lib/context/UserContext';
 import Section from '../../components/template1/Section';
 
 //This page is rendered for every event belonging to Event Job
