@@ -1,11 +1,9 @@
 import base from 'lib/firebase/base';
-import { fireBaseApp as fb } from 'lib/firebase/base';
 import styled from 'styled-components';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import SingleMessage from './SingleMessage';
-import { TonalitySharp } from '@material-ui/icons';
 
 export const chat_colors = {
   blue: `#007ab8`,
@@ -16,8 +14,12 @@ var badwordsArray = require('badwords/array');
 const SubmitChat = styled.button``;
 
 const ChatWrap = styled.div`
-  max-width: 450px;
-  height: 100%;
+  margin: auto;
+  min-width: 350px;
+  max-width: 550px;
+  overflow-x: scroll;
+  width: 100%;
+
   max-height: 700px;
   position: relative;
   display: grid;
@@ -54,11 +56,11 @@ const NameInput = styled.div`
 `;
 const ChatMessages = styled.div`
   overflow-y: scroll;
-  height: 100%;
+  height: calc(700px - 155px);
   background-color: rgba(255, 255, 255, 0.25);
   scroll-behavior: smooth;
   padding: 0.75rem;
-  min-height: 400px;
+
   &&.blurred {
     filter: blur(10px);
   }
@@ -102,11 +104,12 @@ const Reactions = styled.div`
 `;
 
 const InputArea = styled.div`
-  position: relative;
+  position: absolute;
   bottom: 0;
   background-color: #dedede;
   width: 100%;
   padding: 0.5rem;
+  height: 155px;
   transition: all 0.2s ease;
   h3 {
     margin: 0;

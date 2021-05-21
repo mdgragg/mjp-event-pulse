@@ -12,11 +12,12 @@ import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
-import Section from 'components/template1/Section';
+import Section from 'components/Sections/Section';
 import DateParse from 'components/assets/DateParse';
 import Counter from 'components/Counters/Counter';
 import useTestBool from '../../hooks/useTestBool';
-
+import ClientOnly from 'components/assets/ClientOnly';
+import PublicChat from 'components/Chat/PublicChat';
 export var event_theme = {
   heroHeight: '500px',
   fontFamily: null,
@@ -112,10 +113,7 @@ const Index = (props) => {
         <Body>
           <Section>
             <Grid container spacing={3}>
-              <Grid item md={1}>
-                {' '}
-              </Grid>
-              <Grid item={true} md={10} sm={12} xs={12}>
+              <Grid item={true} md={8} sm={12} xs={12}>
                 <div
                   style={{
                     height: '100%',
@@ -131,8 +129,11 @@ const Index = (props) => {
                   />
                 </div>
               </Grid>
-              <Grid item md={1}>
-                {' '}
+              <Grid item md={4}>
+                <ClientOnly>
+                  <PublicChat slug={`chat`} />
+                </ClientOnly>
+                {/* <FullChat slug={`mjp-demo`} /> */}
               </Grid>
             </Grid>
           </Section>

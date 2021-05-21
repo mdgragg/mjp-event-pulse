@@ -118,6 +118,7 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
             webkitallowfullscreen={true}
             mozallowfullscreen={true}
             allow="fullscreen"
+            showControls
           />
         </StyledVideoBox>
       </StyledPaper>

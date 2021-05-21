@@ -78,6 +78,7 @@ const Index = (props) => {
           },
         }}
         open={!auth}
+        headerContent={<img src={main_event.LogoLink[0].Media.url} />}
         event_meta={main_event}
         callback={(res) => {
           setAuth(true);
