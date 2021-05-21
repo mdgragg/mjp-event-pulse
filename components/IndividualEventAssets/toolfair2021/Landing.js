@@ -5,6 +5,15 @@ import styled from 'styled-components';
 const ThePage = styled.div`
   height: 100vh;
   background-color: ${(props) => props.theme.blue};
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  && h1 {
+    font-family: Akzidenz-Grotesque-Bold;
+    font-size: 6rem;
+    text-transform: uppercase;
+  }
 `;
 const Landing = ({ event_meta }) => {
   return (
