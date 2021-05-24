@@ -126,7 +126,6 @@ export default function AttendeeAuthModal({
             <div
               style={{
                 width: '70%',
-
                 height: 'auto',
                 margin: 'auto',
               }}

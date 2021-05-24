@@ -10,6 +10,7 @@ const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
   background-color: ${(props) => props.theme.orange};
   height: 100vh;
+  min-height: 1080px;
   width: 100%;
   background-repeat: repeat-y;
   position: absolute;
@@ -21,6 +22,7 @@ const BG = styled.div`
 
 const Header = styled.div`
   height: 25vh;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,7 +37,14 @@ const Inner = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  && h2 {
+  && .date {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    font-family: Futura Bold;
+    line-height: 2rem;
+  }
+  && .title > h2 {
     background-color: white;
     font-size: 2rem;
     font-family: 'Futura Bold';
@@ -52,9 +61,24 @@ const Inner = styled.div`
     justify-self: end;
   }
   @media all and (max-width: 768px) {
-    && h2 {
-      font-size: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    row-gap: 1rem;
+    && .title > h2 {
+      font-size: 1.5rem;
       padding: 1rem;
+      width: auto;
+    }
+    && .date {
+      grid-row: -1;
+    }
+    && .title {
+      grid-row: 2;
+    }
+    && .logo-holder {
+      width: 40%;
+      grid-row: 1;
+      justify-self: center;
     }
   }
 `;
@@ -70,30 +94,25 @@ const LandingPage = ({ main_event }) => {
     <BG>
       <Header>
         <Inner>
-          <div
-            style={{
-              fontSize: '1rem',
-              color: 'white',
-              textAlign: 'center',
-              fontFamily: 'Futura Bold',
-              lineHeight: '2rem',
-            }}
-          >
+          <div className="date">
             <i>
               <DateParse
                 format={`dddd MMMM DD h:mma`}
                 date={main_event.eventStartEnd.StartDateTime}
               />{' '}
             </i>
+
             <Counter__JustNumbers
               start={main_event.eventStartEnd.StartDateTime}
               end={main_event.eventStartEnd.EndDateTime}
               afterStarted={`Live Now!`}
             />
           </div>
-          <h2>
-            Big Lots <br /> Q1 Virtual Town Hall
-          </h2>
+          <div className="title">
+            <h2>
+              Big Lots <br /> Q1 Virtual Town Hall
+            </h2>
+          </div>
           <div className="logo-holder">
             <img
               src={main_event?.LogoLink[0]?.Media.url}

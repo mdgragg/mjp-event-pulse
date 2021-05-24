@@ -67,6 +67,22 @@ const Index = (props) => {
             (i.e. associateID@biglots.com) <br />
           </p>
         }
+        headerContent={
+          <div
+            style={{
+              backgroundColor: event_theme.orange,
+              height: '80px',
+              width: '80px',
+              padding: '20px',
+              margin: '1rem auto',
+            }}
+          >
+            <img
+              style={{ height: 'auto', width: '90%' }}
+              src={main_event.LogoLink[0].Media.url}
+            />
+          </div>
+        }
         event_meta={main_event}
         open={!hasAuthenticated}
         callback={(creds) => {

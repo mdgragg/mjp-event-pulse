@@ -69,6 +69,22 @@ const Index = (props) => {
         );
       }}
       options={['emailOnly']}
+      headerContent={
+        <div
+          style={{
+            backgroundColor: event_theme.orange,
+            height: '80px',
+            width: '80px',
+            padding: '20px',
+            margin: '1rem auto',
+          }}
+        >
+          <img
+            style={{ height: 'auto', width: '90%' }}
+            src={main_event.LogoLink[0].Media.url}
+          />
+        </div>
+      }
       signInText={
         <p>
           Please use your employee email <br />
