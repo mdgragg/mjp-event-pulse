@@ -2,21 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop';
 import Fluid__iFrame from '../iFrames/Fluid__iFrame';
-const BodyWrap = styled.body`
+const BodyWrap = styled.div`
   min-height: 50vh;
-  display: grid;
-  grid-template-columns: 8fr 4fr;
-
-  gap: 2rem;
-  @media all and (max-width: 1000px) {
-    grid-template-columns: 1fr;
-  }
+  background-color: unset;
 `;
 const VideoBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 1300px;
+  margin: auto;
+  background-color: none;
 `;
 
 const ChatBox = styled.div`
@@ -24,7 +21,7 @@ const ChatBox = styled.div`
   min-height: 550px;
 `;
 
-const PlayerWithChat = ({ videoUrl, chatUrl }) => {
+const CenteredPlayer = ({ videoUrl, chatUrl }) => {
   return (
     <BodyWrap>
       <VideoBox>
@@ -32,11 +29,8 @@ const PlayerWithChat = ({ videoUrl, chatUrl }) => {
           <VideoBox__StickyTop src={videoUrl}></VideoBox__StickyTop>
         </div>
       </VideoBox>
-      <ChatBox>
-        <Fluid__iFrame src={videoUrl}></Fluid__iFrame>
-      </ChatBox>
     </BodyWrap>
   );
 };
 
-export default PlayerWithChat;
+export default CenteredPlayer;

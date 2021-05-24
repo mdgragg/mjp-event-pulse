@@ -98,7 +98,6 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
     }
   }
   useEffect(() => {
-    console.log('remount');
     if (isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }
