@@ -5,6 +5,7 @@ import { Grid, Button, Typography } from '@material-ui/core';
 const StyledSection = styled.div`
   padding: 2em;
   padding-bottom: 80px;
+  min-height: 80vh;
   width: 100%;
   min-height: ${(props) => props.minHeight || 'auto'};
   margin-left: auto;

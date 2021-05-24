@@ -47,6 +47,11 @@
   font-family: 'Hanoded';
 }
 
+@font-face {
+  src: url('../static/fonts/Gotham-Book.otf');
+  font-family: 'Gotham';
+}
+
 html {
   scroll-behavior: smooth;
 }
