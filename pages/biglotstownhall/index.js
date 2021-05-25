@@ -98,7 +98,7 @@ const Index = (props) => {
           {main_event.AuthOptions.AuthorizationType === 'Public' ? (
             <LandingPage main_event={main_event} />
           ) : (
-            <MainPage main_event={main_event} />
+            <MainPage main_event={main_event} auth={auth} />
           )}
         </Body>
       </Page>

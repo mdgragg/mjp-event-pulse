@@ -21,12 +21,14 @@ const ChatBox = styled.div`
   min-height: 550px;
 `;
 
-const CenteredPlayer = ({ videoUrl, chatUrl }) => {
+const CenteredPlayer = ({ videoUrl, showing = true }) => {
   return (
     <BodyWrap>
       <VideoBox>
         <div className="video-holder">
-          <VideoBox__StickyTop src={videoUrl}></VideoBox__StickyTop>
+          {showing && (
+            <VideoBox__StickyTop src={videoUrl}></VideoBox__StickyTop>
+          )}
         </div>
       </VideoBox>
     </BodyWrap>

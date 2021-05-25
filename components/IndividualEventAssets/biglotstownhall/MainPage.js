@@ -89,7 +89,7 @@ const PlayerBody = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-const LandingPage = ({ main_event }) => {
+const LandingPage = ({ main_event, hasAuth }) => {
   return (
     <BG>
       <Header>
@@ -122,7 +122,10 @@ const LandingPage = ({ main_event }) => {
         </Inner>
       </Header>
       <PlayerBody>
-        <CenteredPlayer videoUrl={main_event.streamLinks[0].url} />
+        <CenteredPlayer
+          videoUrl={main_event.streamLinks[0].url}
+          showing={hasAuth}
+        />
       </PlayerBody>
     </BG>
   );
