@@ -86,9 +86,7 @@ export default function AttendeeAuthModal({
   const handleChange = (e) => {
     e.persist();
     const name = e.target.name;
-    console.log(e.target);
     const prevValue = values[name];
-    console.log(prevValue);
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -117,14 +115,12 @@ export default function AttendeeAuthModal({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, event_meta.id).then((res) => {
-      if (res.error) {
+    return await attendee_capture(send_values, event_meta.id)
+      .then((res) => callback(res))
+      .catch((err) => {
+        toast.error(err);
         setFormLoading(false);
-        return toast.error(res.error);
-      } else {
-        return callback(res);
-      }
-    });
+      });
   };
 
   return (

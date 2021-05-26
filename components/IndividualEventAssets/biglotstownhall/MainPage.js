@@ -85,6 +85,8 @@ const Inner = styled.div`
 
 const PlayerBody = styled.div`
   min-height: 60vh;
+  max-width: 1200px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,17 +97,13 @@ const LandingPage = ({ main_event, hasAuth }) => {
       <Header>
         <Inner>
           <div className="date">
-            <i>
-              <DateParse
-                format={`dddd MMMM DD h:mma`}
-                date={main_event.eventStartEnd.StartDateTime}
-              />{' '}
-            </i>
+            <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
 
             <Counter__JustNumbers
               start={main_event.eventStartEnd.StartDateTime}
               end={main_event.eventStartEnd.EndDateTime}
-              afterStarted={`Live Now!`}
+              afterStarted={<div>Live Now!</div>}
+              afterEnded={<div>This Event Has Ended</div>}
             />
           </div>
           <div className="title">

@@ -36,12 +36,7 @@ const LandingPage = ({ main_event }) => {
             lineHeight: '2rem',
           }}
         >
-          <i>
-            <DateParse
-              format={`dddd MMMM DD h:mma`}
-              date={main_event.eventStartEnd.StartDateTime}
-            />{' '}
-          </i>
+          <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}
             end={main_event.eventStartEnd.EndDateTime}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop';
 import Fluid__iFrame from '../iFrames/Fluid__iFrame';
-const BodyWrap = styled.body`
+const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: 8fr 4fr;

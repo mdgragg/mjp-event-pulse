@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-
+import useCalculateIfStarted from '../../../hooks/useCalculateIfStarted';
 import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
 import DateParser from '../../assets/DateParse';
+import Video__StickyTop from '../../VideoBoxes/Video__StickyTop';
+import BannerWithPicture from '../../Banners/BannerWithPicture';
 const ThePage = styled.div`
   color: white;
   width: 100%;
   text-align: center;
   min-width: 800px;
 `;
-
-import VideoBox__iFrame from '../../VideoBoxes/Video__iFrame';
-import BannerWithPicture from '../../Banners/BannerWithPicture';
 
 const Header = styled.div`
   height: 300px;
@@ -81,7 +80,7 @@ const Body = styled.div`
     }
   }
 `;
-const Landing = ({ event_meta, hasAuth }) => {
+const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
   return (
     <ThePage>
       <Header>
@@ -91,25 +90,36 @@ const Landing = ({ event_meta, hasAuth }) => {
           alt={event_meta.LogoLink[0].Description}
         />
         <div className="right-wrap">
-          <h4>
-            The Business Meeting Will Begin <br />
-            <span className="date-span">
-              <DateParser
-                date={event_meta.eventStartEnd.StartDateTime}
-                format={`h:mma dddd MMMM D`}
-              />
-            </span>
-          </h4>
+          {hasStartEnd.hasEnded ? (
+            <h4>
+              Thank You For Attending! <br />{' '}
+              <span className="date-span"> {event_meta.EventName}</span>
+            </h4>
+          ) : (
+            <h4>
+              The Business Meeting Will Begin <br />
+              <span className="date-span">
+                <DateParser
+                  date={event_meta.eventStartEnd.StartDateTime}
+                  format={`h:mma dddd MMMM D`}
+                />
+              </span>
+            </h4>
+          )}
+
           <div className="counter">
             <Counter__JustNumbers
               start={event_meta.eventStartEnd.StartDateTime}
+              end={event_meta.eventStartEnd.EndDateTime}
+              afterEnded={` `}
+              afterStarted={<div>Live Now!</div>}
             />
           </div>
         </div>
       </Header>
       <Body>
         <div className="player">
-          {hasAuth && <VideoBox__iFrame src={event_meta.streamLinks[0].url} />}
+          {hasAuth && <Video__StickyTop src={event_meta.streamLinks[0].url} />}
         </div>
       </Body>
       <BannerWithPicture

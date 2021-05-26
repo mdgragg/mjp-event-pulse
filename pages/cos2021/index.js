@@ -4,7 +4,7 @@ import Route, { Router, useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
+import useCalculateStartEnd from 'hooks/useCalculateIfStarted';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
@@ -44,7 +44,7 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStarted = useCalculateIfStarted(start);
+  const hasStartEnd = useCalculateStartEnd(main_event);
 
   return (
     <>
@@ -52,7 +52,11 @@ const Index = (props) => {
         <Meta title={event_meta.EventJobName}> </Meta>
         <BattelleHero title={event_meta.EventJobName}>
           <h2 style={{ margin: 'auto', color: event_theme.blue }}>
-            {!hasStarted ? 'Join Us Live In...' : 'Live Now!'}
+            {!hasStartEnd.hasStarted
+              ? 'Join Us Live In...'
+              : hasStartEnd.hasEnded
+              ? ''
+              : 'Live Now!'}
             {/* <i>
               <DateParse date={main_event.eventStartEnd.StartDateTime} />
             </i> */}
@@ -60,6 +64,7 @@ const Index = (props) => {
           <h2 style={{ color: 'white', margin: '0 auto' }}>
             <Counter__JustNumbers
               start={main_event.eventStartEnd.StartDateTime}
+              end={main_event.eventStartEnd.EndDateTime}
             />
           </h2>
         </BattelleHero>
@@ -158,7 +163,7 @@ export async function getServerSideProps(ctx) {
       case 'Ended':
         return_object = {
           redirect: {
-            destination: `${EVENT_URL}/thank-you`,
+            destination: `./`,
             permanent: false,
           },
         };

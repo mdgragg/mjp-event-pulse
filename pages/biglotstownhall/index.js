@@ -48,7 +48,7 @@ export const EVENT_URL = 'biglotstownhall';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
-  const { event_meta, main_event, needs_auth } = props;
+  const { event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -60,8 +60,14 @@ const Index = (props) => {
   return (
     <AuthWrap
       event_to_check={main_event}
+      title={
+        <>
+          Please Sign In to Join
+          <br />
+          <strong> Big Lots' Q1 Town Hall</strong>
+        </>
+      }
       callback={(creds) => {
-        setAuth(true);
         toast.success(
           `Hello ${
             creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
@@ -69,6 +75,23 @@ const Index = (props) => {
         );
       }}
       options={['emailOnly']}
+      render={(v) => setAuth(v)}
+      signInText={
+        <div
+          style={{ textAlign: 'left', maxWidth: '450px', margin: '1rem 4rem' }}
+        >
+          <p>
+            Enter your Big Lots email address in the form of your unique
+            <strong> associateID@biglots.com </strong> <br />
+            (ex. 1234567@biglots.com) .
+          </p>
+          <p>
+            Contact Joey D'Amico at{' '}
+            <a href="mailto:jdamico@biglots.com">jdamico@biglots.com </a> if you
+            experience any technical issues.
+          </p>
+        </div>
+      }
       headerContent={
         <div
           style={{
@@ -85,12 +108,6 @@ const Index = (props) => {
           />
         </div>
       }
-      signInText={
-        <p>
-          Please use your employee email <br />
-          (i.e. associateID@biglots.com) <br />
-        </p>
-      }
     >
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
@@ -98,7 +115,7 @@ const Index = (props) => {
           {main_event.AuthOptions.AuthorizationType === 'Public' ? (
             <LandingPage main_event={main_event} />
           ) : (
-            <MainPage main_event={main_event} auth={auth} />
+            <MainPage main_event={main_event} hasAuth={auth} />
           )}
         </Body>
       </Page>

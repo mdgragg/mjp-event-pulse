@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
+import { calculate_remaining } from '../lib/helpers';
+const useCalculateIfStarted = (event) => {
+  const {
+    eventStartEnd: { StartDateTime, EndDateTime },
+  } = event;
 
-const useCalculateIfStarted = (start) => {
-  const [hasStarted, setHasStarted] = useState(false);
+  const [state, setState] = useState({ hasStarted: false, hasEnded: false });
 
   const calculate = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(start);
-    let calc_time = parsed_event_start - now;
-    if (calc_time <= 0) {
-      return setHasStarted(true);
-    }
-    return setHasStarted(false);
+    const res = calculate_remaining(StartDateTime, EndDateTime);
+    setState({
+      hasStarted: res.total_remaining <= 0,
+      hasEnded: res.parsed_until_end <= 0,
+    });
   };
 
   useEffect(() => {
@@ -19,9 +21,9 @@ const useCalculateIfStarted = (start) => {
     return () => {
       clearInterval(interval);
     };
-  }, [start]);
+  }, [event.eventStartEnd]);
 
-  return hasStarted;
+  return state;
 };
 
 export default useCalculateIfStarted;

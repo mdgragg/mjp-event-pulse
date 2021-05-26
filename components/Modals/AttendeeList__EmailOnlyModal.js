@@ -49,6 +49,7 @@ export default function AttendeeAuthModal({
   headerContent,
   signInText = null,
   otherFields = {},
+  title,
 }) {
   let init = {
     AttendeeEmail: {
@@ -133,7 +134,7 @@ export default function AttendeeAuthModal({
               {headerContent}
             </div>
           )}
-          Please Sign In To Enter
+          {title ? title : 'Please Sign In To Enter'}
         </DialogTitle>
 
         <DialogContent>

@@ -11,6 +11,7 @@ import Landing from 'components/IndividualEventAssets/toolfair2021/Landing';
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useHasAuthorized from 'hooks/useHasAuthorized';
+import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
 import { token_generator } from '../../lib/helpers';
 import CustomModal from '../../components/IndividualEventAssets/toolfair2021/CustomModal';
@@ -45,16 +46,13 @@ export const EVENT_URL = 'toolfair2021';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
-  const session_token = EVENT_URL;
-  const router = useRouter();
-
   const { event_meta, main_event } = props;
-
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
+  const hasStartEnd = useCalculateIfStarted(main_event);
   const [auth, setAuth] = useHasAuthorized(token_generator(main_event));
 
   return (
@@ -93,7 +91,11 @@ const Index = (props) => {
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>
-            <Landing event_meta={main_event} hasAuth={auth} />
+            <Landing
+              event_meta={main_event}
+              hasAuth={auth}
+              hasStartEnd={hasStartEnd}
+            />
           </Body>
         </Page>
       </FullWrap>

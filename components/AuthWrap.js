@@ -19,12 +19,14 @@ const Wrap = styled.div`
 
 const AuthWrap = ({
   children,
+  title,
   className,
   event_to_check,
   callback = () => {},
   render = () => {},
   options = [],
   signInText = null,
+  headerContent = null,
 }) => {
   const auth_type = event_to_check.AuthOptions.AuthorizationType;
 
@@ -33,6 +35,7 @@ const AuthWrap = ({
   );
 
   useEffect(() => {
+    console.log('use effect from auth wrap: ', hasAuthorized);
     render(hasAuthorized);
   }, [hasAuthorized]);
 
@@ -49,11 +52,13 @@ const AuthWrap = ({
       return (
         <>
           <AttendeeList__EmailOnlyModal
+            title={title}
             event_meta={event_to_check}
             event_name={event_to_check.EventName}
             open={!hasAuthorized}
             callback={handleCallback}
             signInText={signInText}
+            headerContent={headerContent}
           />
 
           <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
@@ -68,6 +73,7 @@ const AuthWrap = ({
           open={!hasAuthorized}
           callback={handleCallback}
           signInText={signInText}
+          headerContent={headerContent}
         />
         <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
       </>
@@ -82,6 +88,7 @@ const AuthWrap = ({
           open={!hasAuthorized}
           callback={handleCallback}
           signInText={signInText}
+          headerContent={headerContent}
         />
         <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
       </>
@@ -96,6 +103,7 @@ const AuthWrap = ({
           open={!hasAuthorized}
           callback={handleCallback}
           signInText={signInText}
+          headerContent={headerContent}
         />
         <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
       </>

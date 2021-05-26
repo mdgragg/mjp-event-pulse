@@ -61,11 +61,12 @@ const Index = (props) => {
   return (
     <>
       <EmailOnlyModal
-        signInText={
-          <p>
-            Please use your employee email <br />
-            (i.e. associateID@biglots.com) <br />
-          </p>
+        title={
+          <>
+            Please Sign In to Join
+            <br />
+            <strong> Big Lots' Q1 Town Hall</strong>
+          </>
         }
         headerContent={
           <div
@@ -81,6 +82,26 @@ const Index = (props) => {
               style={{ height: 'auto', width: '90%' }}
               src={main_event.LogoLink[0].Media.url}
             />
+          </div>
+        }
+        signInText={
+          <div
+            style={{
+              textAlign: 'left',
+              maxWidth: '450px',
+              margin: '1rem 4rem',
+            }}
+          >
+            <p>
+              Enter your Big Lots email address in the form of your unique
+              <strong> associateID@biglots.com </strong> <br />
+              (ex. 1234567@biglots.com) .
+            </p>
+            <p>
+              Contact Joey D'Amico at{' '}
+              <a href="mailto:jdamico@biglots.com">jdamico@biglots.com </a> if
+              you experience any technical issues.
+            </p>
           </div>
         }
         event_meta={main_event}
