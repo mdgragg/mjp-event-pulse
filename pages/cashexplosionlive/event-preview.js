@@ -3,42 +3,28 @@ import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
+import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
-import Footer from 'components/template1/Footer';
+
 import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
+import ThankYou from 'components/IndividualEventAssets/cashexplosionlive/ThankYou';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
 import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
 import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
-import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import { event_theme, Decider } from './index';
 import { toast } from 'react-toastify';
-import { EVENT_URL, event_theme } from './index';
 
 const PLACEHOLD = 'https://placehold.co/';
-
-const Decider = ({ template, main_event, theme }) => {
-  switch (template) {
-    case 'main-event':
-      return <MainEvent main_event={main_event} theme={theme} />;
-      break;
-    default:
-      return <MainEvent main_event={main_event} theme={theme} />;
-  }
-};
+export const EVENT_URL = 'cashexplosionlive';
 
 const Index = (props) => {
-  const router = useRouter();
+  const [template, setTemplate] = useState('main-event');
 
-  const {
-    event_meta,
-    main_event,
-    speakers,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const { event_meta, main_event } = props;
 
-  var event_theme = {
+  const theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
     body_bg: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
@@ -46,18 +32,28 @@ const Index = (props) => {
 
   const MainPage = () => {
     return (
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <Body>
-          <Wrap theme={event_theme}>
+      <>
+        <div style={{ display: 'flex' }}>
+          <button onClick={() => setTemplate('signup')}>Sign Up</button>
+          <button onClick={() => setTemplate('success')}>Success</button>
+          <button onClick={() => setTemplate('main-event')}>Main Event</button>
+          <button onClick={() => setTemplate('thank-you')}>Thank You</button>
+        </div>
+        <Page theme={theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
+
+          <Wrap theme={theme}>
             <Decider
-              template={'main-event'}
-              theme={event_theme}
+              template={template}
               main_event={main_event}
+              form={{ loading: false }}
+              handleSubmit={() =>
+                toast.error('Signup does not work in preview mode.')
+              }
             />
           </Wrap>
-        </Body>
-      </Page>
+        </Page>
+      </>
     );
   };
 

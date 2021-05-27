@@ -6,12 +6,9 @@ const MainWrap = styled.div`
   font-family: Avenir;
   font-weight: 600;
   width: 100%;
-  display: flex;
   position: relative;
-
+  display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
   background-color: black;
   &&::before {
     content: '';

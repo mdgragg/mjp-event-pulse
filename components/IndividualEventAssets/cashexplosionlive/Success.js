@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Counter from 'components/Counters/Counter';
+import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 
 const ThanksWrap = styled.div`
   min-height: 80vh;
   display: flex;
-  margin-top: 3rem;
+  margin: 3rem auto;
   width: 90%;
   max-width: 1600px;
   flex-direction: column;
@@ -19,38 +19,46 @@ const ThanksWrap = styled.div`
     height: 15vh;
     min-height: 200px;
   }
+  && .counter > h3 {
+    font-size: 1.75rem;
+  }
 
   @media all and (max-width: 768px) {
     && .logo {
       height: 100px;
-      min-height: 100px;
+      min-height: 150px;
     }
     && .counter {
-      margin: 2rem auto;
+      margin: 1rem auto;
     }
   }
 `;
 
 const ThanksArea = styled.div`
+  width: 60%;
+  text-transform: uppercase;
+  font-family: House-Gothic;
+  max-width: 700px;
+  margin: 2rem auto;
+  letter-spacing: 5px;
+
+  font-size: 2.5rem;
+  color: white;
   width: 100%;
-  max-width: 1600px;
-  && p {
-    text-transform: uppercase;
-    font-family: House-Gothic;
-    max-width: 700px;
-    margin: 2rem auto;
-    letter-spacing: 5px;
-    font-size: 2.5rem;
-    color: white;
-  }
-  && span {
+
+  && span.green {
     color: ${(props) => props.theme.green};
   }
+  && div.white-bg {
+    background-color: ${(props) => props.theme.purple};
+    padding: 6px 10px;
+    margin: 1rem auto;
+    width: 100%;
+  }
   @media all and (max-width: 768px) {
-    && p {
-      font-size: 1.5rem;
-      letter-spacing: 2px;
-    }
+    font-size: 2rem;
+    margin: 0rem auto;
+    letter-spacing: 2px;
   }
 `;
 
@@ -59,7 +67,7 @@ const InfoBoxes = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   margin: 2rem auto;
-  && div {
+  && div.box {
     background-color: ${(props) => props.theme.green};
     color: white;
     font-size: 1.75rem;
@@ -69,7 +77,6 @@ const InfoBoxes = styled.div`
     justify-content: flex-start;
     margin: 0 1rem;
     min-height: 250px;
-    text-transform: uppercase;
     padding: 1rem;
   }
   && div.info {
@@ -89,29 +96,13 @@ const InfoBoxes = styled.div`
     border-radius: 60px;
     margin-bottom: 1rem;
   }
-  @media all and (max-width: 1200px) {
-    && div.info {
-      font-size: 1.5rem;
-    }
-  }
-  @media all and (max-width: 1000px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    && div {
-      padding: 2rem;
-    }
-    && div.info {
-      font-size: 2rem;
-    }
-  }
-
   @media all and (max-width: 768px) {
     && span {
       font-size: 1.75rem;
       height: 100%;
       width: 45px;
     }
-    && div {
+    && div.box {
       padding: 0.85rem;
       min-height: auto;
     }
@@ -119,12 +110,25 @@ const InfoBoxes = styled.div`
       font-size: 1rem;
     }
     && .counter {
-      && h2 {
-        font-size: auto;
+      && h3 {
+        font-size: 1.75rem;
         margin: 0 auto;
       }
-      width: 75%;
-      font-size: 100%;
+    }
+  }
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    && div.box {
+      padding: 2rem;
+    }
+    && div.info {
+      font-size: 2rem;
+    }
+  }
+  @media all and (max-width: 1200px) {
+    && div.info {
+      font-size: 1.5rem;
     }
   }
 `;
@@ -132,19 +136,28 @@ const SignUp = ({ main_event }) => {
   return (
     <ThanksWrap>
       <img
-        src={main_event.KeyValue.find((kv) => kv.key === 'logo').value}
+        src={main_event.KeyValue.find((kv) => kv.key === 'Logo').value}
         className="logo"
       />
+      <div className="counter">
+        <h3>
+          Registration Opens In{' '}
+          <Counter__JustNumbers
+            start={main_event.eventStartEnd.StartDateTime}
+            start={main_event.eventStartEnd.EndDateTime}
+          />
+        </h3>
+      </div>
 
       <ThanksArea>
-        <p>
-          Thank you for your interest in attending Cash Explosion's Fan Fair!
-          <br /> Come back
-          <span className="green"> May 1st @ 7:30pm</span> to register.
-        </p>
+        <div className="white-bg">Thank you for your interest in attending</div>
+        <div className="white-bg">
+          Come back
+          <span className="green"> June 19th @ 7:30pm</span> to register.
+        </div>
       </ThanksArea>
       <InfoBoxes>
-        <div>
+        <div className="box">
           <span> 1</span>
           <div className="info">
             {' '}
@@ -152,30 +165,19 @@ const SignUp = ({ main_event }) => {
             cash prize giveaways!{' '}
           </div>
         </div>
-        <div>
+        <div className="box">
           <span> 2</span>
           <div className="info">
             Registration will be available on this page starting at 7:30pm
-            Saturday May 1st. You must register to be eligible to win!
+            Saturday June 18th. You must register to be eligible to win!
           </div>
         </div>
-        <div>
+        <div className="box">
           {' '}
           <span> 3</span>
           <div className="info">The winning begins at 8:00pm</div>
         </div>
       </InfoBoxes>
-      <div className="counter">
-        <Counter
-          customClass="counter-inner"
-          bgColor="none"
-          headerFontSize="4rem"
-          counterFontSize="1.5rem"
-          shadow="none"
-          title="REGISTRATION BEGINS IN"
-          start={main_event.eventStartEnd.StartDateTime}
-        />
-      </div>
     </ThanksWrap>
   );
 };

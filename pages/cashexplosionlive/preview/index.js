@@ -5,23 +5,8 @@ import _ from 'lodash';
 import Meta from 'components/globals/Meta';
 
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
-import { EVENT_URL } from '../index';
-export var event_theme = {
-  heroHeight: '25vh',
-  fontFamily: null,
-  headerOpacity: null,
-  videoBreakPoint: 700,
-  white: null,
-  blue: '#1e2c60',
-  buttonInfoColor: null,
-  buttonSuccessColor: null,
-  buttonDangerColor: 'tomato',
-  red: '#b71f39',
-  buttonColor: null,
-  headerFont: null,
-  headerBgColor: 'white',
-  maxSectionWidth: '1800px',
-};
+import { EVENT_URL, event_theme } from '../index';
+
 const Index = (props) => {
   const MainPage = () => {
     return (
@@ -39,12 +24,7 @@ const Index = (props) => {
 };
 
 export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-
-  const redirect = `./main-event`;
+  const redirect = `./event-preview`;
   //   get the event job data from our api
   console.log(ctx.req.cookies[`preview_cookie__${EVENT_URL}`]);
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
@@ -56,7 +36,6 @@ export async function getServerSideProps(ctx) {
   }
   return {
     props: {
-      previewPassword: 'celive',
       EVENT_URL,
       redirect,
     },

@@ -3,11 +3,11 @@ import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
+import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
-import Footer from 'components/template1/Footer';
+
 import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
 import ThankYou from 'components/IndividualEventAssets/cashexplosionlive/ThankYou';
 import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
@@ -15,6 +15,7 @@ import Success from 'components/IndividualEventAssets/cashexplosionlive/Success'
 import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
 import attendee_capture from 'lib/fetchCalls/attendee_capture';
 import { toast } from 'react-toastify';
+
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -44,7 +45,7 @@ export var event_theme = {
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'cashexplosionlive';
 
-const Decider = ({
+export const Decider = ({
   template,
   main_event,
   theme,
@@ -83,13 +84,7 @@ const Decider = ({
 const Index = (props) => {
   const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    speakers,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const { event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
@@ -97,48 +92,33 @@ const Index = (props) => {
     body_bg: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const START = main_event.eventStartEnd.StartDateTime;
-  const END = main_event.eventStartEnd.EndDateTime;
-  const storage_token = 'cash-explosion--email-auth';
+  const storage_token = 'cash-explosion-2--email-auth';
 
   const [deciderTemplate, setDeciderTemplate] = useState('signup');
-  const [hasStarted, setStarted] = useState(calculateIfStarted(START));
-  const [hasEnded, setEnded] = useState(calculateIfEnded(END));
 
+  const hasStartEnd = useCalculateIfStarted(main_event);
   const [form, setForm] = useState({
     loading: false,
     email_entered: false,
     value: '',
   });
 
-  useEffect(() => {
-    setStarted(calculateIfStarted(START));
-    setEnded(calculateIfEnded(END));
-    const interval = setInterval(() => {
-      if (calculateIfStarted(START)) {
-        setStarted(true);
-      }
-      if (calculateIfEnded(END)) {
-        setEnded(true);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   //listen for has started
   useEffect(() => {
-    if (hasEnded) {
+    if (true) {
       return setDeciderTemplate('thank-you');
     }
-    if (hasStarted) {
+    if (hasStartEnd.hasEnded) {
+      return setDeciderTemplate('thank-you');
+    }
+    if (hasStartEnd.hasStarted) {
       setDeciderTemplate('main-event');
     } else if (localStorage.getItem(storage_token) && !hasStarted) {
       setDeciderTemplate('success');
     } else {
       setDeciderTemplate('signup');
     }
-  }, [hasStarted]);
+  }, []);
   //listen for submit
 
   const handleSetEmail = (value) => {
@@ -173,27 +153,21 @@ const Index = (props) => {
     });
   };
 
-  const MainPage = () => {
-    return (
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <Body>
-          <Wrap theme={event_theme}>
-            <Decider
-              template={deciderTemplate}
-              theme={event_theme}
-              main_event={main_event}
-              handleSetEmail={handleSetEmail}
-              handleSubmit={handleSubmit}
-              form={form}
-            />
-          </Wrap>
-        </Body>
-      </Page>
-    );
-  };
-
-  return <MainPage />;
+  return (
+    <Page theme={event_theme}>
+      <Meta title={event_meta.EventJobName}> </Meta>
+      <Wrap theme={event_theme}>
+        <Decider
+          template={deciderTemplate}
+          theme={event_theme}
+          main_event={main_event}
+          handleSetEmail={handleSetEmail}
+          handleSubmit={handleSubmit}
+          form={form}
+        />
+      </Wrap>
+    </Page>
+  );
 };
 
 export async function getStaticProps(ctx) {

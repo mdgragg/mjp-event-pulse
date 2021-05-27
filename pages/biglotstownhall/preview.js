@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Router, useRouter } from 'next/router';
-
+import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-
 import Body from 'components/template1/Body';
-
 import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
 import MainPage from 'components/IndividualEventAssets/biglotstownhall/MainPage';
 import { toast } from 'react-toastify';
@@ -44,7 +39,6 @@ const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
   const session_token = EVENT_URL;
-  const router = useRouter();
 
   const { event_meta, main_event } = props;
 

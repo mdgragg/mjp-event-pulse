@@ -21,10 +21,15 @@ const handler = async (req, res) => {
       res.status(result.status);
       return res.send();
     }
+    let d = new Date();
+    d.setHours(23);
+    d.setMinutes(59);
+    d.setSeconds(59);
     // console.log(res);
     res.cookie(`preview_cookie__${event_url}`, true, {
       httpOnly: false,
       path: `/`,
+      expires: d,
     });
     return res.end(res.getHeader('Set-Cookie'));
   });

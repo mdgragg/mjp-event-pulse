@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-
+import DateParse from '../../assets/DateParse';
 const SignUpWrap = styled.div`
   /* min-height: 80vh; */
+  height: 100%;
+  align-self: center;
+  justify-self: center;
+  margin: auto;
   display: flex;
-  margin-top: 3rem;
-  width: 80%;
-  max-width: 800px;
   flex-direction: column;
+  justify-content: space-between;
+  height: auto;
   position: relative;
-  align-items: center;
-  justify-content: space-evenly;
   text-align: center;
-  && .logo {
-    /* max-width: 350px; */
+  && > div {
+    margin: 1.5rem auto;
     width: auto;
+  }
+  && .logo {
+    margin: 0;
+    margin-bottom: 4rem;
+  }
+  && .logo img {
+    width: auto;
+    margin: auto;
     max-height: 20vh;
-    min-height: 250px;
+    min-height: 200px;
   }
   @media all and (max-width: 768px) {
     width: 90%;
@@ -26,17 +35,16 @@ const SignUpWrap = styled.div`
 const CTA = styled.div`
   background-color: ${(props) => props.theme.green};
   color: white;
-  margin: 3rem auto;
+  margin: auto;
   text-transform: uppercase;
-  padding: 1rem;
+  padding: 0.5rem 1.5rem;
   font-size: 2rem;
   /* line-height: 2.45rem; */
   && span.dollars {
     display: block;
     font-size: 3rem;
     letter-spacing: 6px;
-    /* line-height: 4rem; */
-    font-weight: 800;
+    font-weight: 600;
     font-family: House-Gothic;
   }
   @media all and (max-width: 768px) {
@@ -51,12 +59,14 @@ const EnterArea = styled.div`
   }
 
   width: 100%;
-  margin: 3rem auto;
+  margin: auto;
   && input {
-    font-size: 1.5rem;
-    padding: 2rem;
+    font-size: 1.75rem;
+    padding: 1.5rem 0;
     width: 100%;
     text-align: center;
+    z-index: 101;
+    opacity: 1;
   }
   @media all and (max-width: 768px) {
     margin: 0 auto;
@@ -66,8 +76,9 @@ const EnterArea = styled.div`
 const EnterText = styled.div`
   color: white;
   text-transform: uppercase;
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: 1fr 10fr 1fr;
   margin: auto;
   && .downIcon {
     background-color: ${(props) => props.theme.purple};
@@ -78,19 +89,20 @@ const EnterText = styled.div`
     font-weight: 800;
   }
   && p {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 `;
 
 const SignUpButton = styled.button`
   background-color: ${(props) => props.theme.purple};
-  font-size: 4rem;
+  font-size: 3rem;
   color: white;
   font-family: House-Gothic;
   text-transform: uppercase;
   font-weight: 800;
   padding: 0.85rem 2rem;
   margin: 3rem auto;
+  letter-spacing: 6px;
   &&:hover {
     color: ${(props) => props.theme.green};
     border-radius: 80px;
@@ -100,28 +112,38 @@ const SignUpButton = styled.button`
   }
 `;
 const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
+  const inputRef = useRef();
   const [value, setValue] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
+  useEffect(() => {
+    inputRef.current.addEventListener('focus', () => setInputFocused(true));
+    inputRef.current.addEventListener('blur', () => setInputFocused(false));
+  }, []);
 
   return (
-    <SignUpWrap>
-      <img
-        src={main_event.KeyValue.find((kv) => kv.key === 'logo').value}
-        className="logo"
-      />
+    <SignUpWrap className="blackout">
+      <div className="logo">
+        <img src={main_event.KeyValue.find((kv) => kv.key === 'Logo').value} />
+      </div>
       <CTA>
-        <span className="dollars"> Saturday, May 1st @ 8:00pm</span>
+        <span className="dollars">
+          <DateParse date={main_event.eventStartEnd.StartDateTime} />
+        </span>
       </CTA>
       <EnterArea className={form.loading ? 'loading' : ''}>
         <EnterText>
           <ArrowDownwardIcon className="downIcon" />
-          <p> Enter your email for more information</p>
+          <p> Register for more information</p>
           <ArrowDownwardIcon className="downIcon" />
         </EnterText>
         <input
+          ref={inputRef}
           type="text"
           placeholder={`ENTER EMAIL`}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
         />
         <SignUpButton
           onClick={() => {
