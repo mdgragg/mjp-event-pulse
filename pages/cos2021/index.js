@@ -30,17 +30,25 @@ export var event_theme = {
   videoBreakPoint: 0,
 };
 const PLACEHOLD = 'https://placehold.co/';
+
 export const EVENT_URL = 'cos2021';
 
 const Index = (props) => {
   const { event_meta, main_event } = props;
+  const router = useRouter();
 
   event_theme = {
     ...event_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
+    header_image: main_event?.HeaderImage?.url,
   };
 
   const hasStartEnd = useCalculateStartEnd(main_event);
+
+  useEffect(() => {
+    if (event_meta.eventStatus.EventStatus === 'Ended') {
+      router.push('./');
+    }
+  }, []);
 
   return (
     <>
@@ -137,39 +145,18 @@ const Index = (props) => {
 };
 
 export async function getStaticProps() {
-  try {
-    let event_data = await getEventMeta(EVENT_URL);
+  let event_data = await getEventMeta(EVENT_URL);
 
-    let main_event = event_data.events.filter(
-      (ev) => ev.isMainEvent === true
-    )[0];
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
-    if (event_data.eventStatus.EventStatus === 'Ended') {
-      return {
-        redirect: {
-          destination: `./`,
-          permanent: false,
-        },
-      };
-    }
-    if (event_data.eventStatus.EventStatus === 'Live') {
-      return {
-        props: {
-          //meta will be the props for the event
-          event_meta: event_data,
-          main_event,
-        },
-        revalidate: 30,
-      };
-    }
-  } catch (error) {
-    console.log('[event].js error: ', error);
-    return {
-      redirect: {
-        destination: '/404',
-      },
-    };
-  }
+  return {
+    props: {
+      //meta will be the props for the event
+      event_meta: event_data,
+      main_event,
+    },
+    revalidate: 300,
+  };
 }
 
 export default Index;
