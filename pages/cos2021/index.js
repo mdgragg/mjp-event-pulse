@@ -13,7 +13,7 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import BattelleHero from 'components/IndividualEventAssets/cos2021/BattelleHero';
 import Section from 'components/template1/Section';
-import DateParse from 'components/assets/DateParse';
+import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 
 export var event_theme = {
@@ -27,17 +27,13 @@ export var event_theme = {
   buttonColor: null,
   headerFont: null,
   headerBgColor: 'black',
+  videoBreakPoint: 0,
 };
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'cos2021';
 
 const Index = (props) => {
-  const router = useRouter();
-
-  const session_token = EVENT_URL;
   const { event_meta, main_event } = props;
-  const start = main_event.eventStartEnd.StartDateTime;
-  const end = main_event.eventStartEnd.EndDateTime;
 
   event_theme = {
     ...event_theme,
@@ -50,22 +46,27 @@ const Index = (props) => {
     <>
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <BattelleHero title={event_meta.EventJobName}>
+        <BattelleHero
+          title={event_meta.EventJobName}
+          counter_area={
+            <h2 style={{ color: 'white', margin: '0 auto' }}>
+              {!hasStartEnd.hasStarted
+                ? 'Join Us Live In...'
+                : hasStartEnd.hasEnded
+                ? 'This Event Has Ended'
+                : 'Live Now!'}
+              <br />
+              <Counter__JustNumbers
+                start={main_event.eventStartEnd.StartDateTime}
+                end={main_event.eventStartEnd.EndDateTime}
+                afterStarted={' '}
+                afterEnded={' '}
+              />
+            </h2>
+          }
+        >
           <h2 style={{ margin: 'auto', color: event_theme.blue }}>
-            {!hasStartEnd.hasStarted
-              ? 'Join Us Live In...'
-              : hasStartEnd.hasEnded
-              ? ''
-              : 'Live Now!'}
-            {/* <i>
-              <DateParse date={main_event.eventStartEnd.StartDateTime} />
-            </i> */}
-          </h2>
-          <h2 style={{ color: 'white', margin: '0 auto' }}>
-            <Counter__JustNumbers
-              start={main_event.eventStartEnd.StartDateTime}
-              end={main_event.eventStartEnd.EndDateTime}
-            />
+            A Year Like No Other <br />
           </h2>
         </BattelleHero>
 
@@ -90,7 +91,7 @@ const Index = (props) => {
                   }}
                 >
                   <VideoBox__StickyTop
-                    isStarted={true}
+                    isStarted={hasStartEnd.hasStarted}
                     src={main_event.streamLinks[0].url}
                   />
                 </div>
@@ -108,7 +109,12 @@ const Index = (props) => {
                     alignItems: 'center',
                   }}
                 >
-                  <h2>CHAT HERE</h2>
+                  <Fluid__iFrame
+                    src={
+                      main_event.streamLinks.find((l) => l.Service === 'Chat')
+                        .url
+                    }
+                  />
                 </div>
               </Grid>
             </Grid>
@@ -119,8 +125,8 @@ const Index = (props) => {
             secondary={event_theme.blue}
             headerText={`About This Event`}
             innerWidth={`800px`}
-            buttonText={`Learn More`}
-            buttonLink={main_event.LogoLink[0].Link}
+            buttonText={null}
+            buttonLink={null}
           >
             {main_event.Description && main_event.Description}
           </BannerWithPicture>
@@ -130,64 +136,32 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
+export async function getStaticProps() {
   try {
     let event_data = await getEventMeta(EVENT_URL);
 
     let main_event = event_data.events.filter(
       (ev) => ev.isMainEvent === true
     )[0];
-    let return_object;
 
-    switch (event_data.eventStatus.EventStatus) {
-      case 'Preview':
-        if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
-          return_object = {
-            redirect: {
-              destination: `${EVENT_URL}/preview`,
-              permanent: false,
-            },
-          };
-        } else {
-          return_object = {
-            props: { event_meta: event_data, main_event },
-          };
-        }
-        break;
-      case 'Ended':
-        return_object = {
-          redirect: {
-            destination: `./`,
-            permanent: false,
-          },
-        };
-        break;
-      case 'Live':
-        return_object = {
-          props: {
-            //meta will be the props for the event
-            event_meta: event_data,
-            main_event,
-          },
-        };
-        break;
-      default:
-        return_object = {
-          redirect: {
-            destination: `/`,
-            permanent: false,
-          },
-          // revalidate: 600,
-        };
+    if (event_data.eventStatus.EventStatus === 'Ended') {
+      return {
+        redirect: {
+          destination: `./`,
+          permanent: false,
+        },
+      };
     }
-
-    return return_object;
+    if (event_data.eventStatus.EventStatus === 'Live') {
+      return {
+        props: {
+          //meta will be the props for the event
+          event_meta: event_data,
+          main_event,
+        },
+        revalidate: 30,
+      };
+    }
   } catch (error) {
     console.log('[event].js error: ', error);
     return {

@@ -50,7 +50,7 @@ const GoldBg = styled.div`
     rgba(233, 119, 0, 1) 100%
   );
 `;
-const BattelleHero = ({ children }) => {
+const BattelleHero = ({ children, counter_area }) => {
   return (
     <BG>
       <Inner className="inner-text">
@@ -58,6 +58,7 @@ const BattelleHero = ({ children }) => {
         <h2>Honoring Achievement Award Winners and Patentees</h2>
         <div className="twenty">2020</div>
         <GoldBg>{children}</GoldBg>
+        {counter_area}
       </Inner>
     </BG>
   );
