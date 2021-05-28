@@ -8,32 +8,45 @@ import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 const Nav = styled.div`
   position: relative;
   top: 0;
-
-  width: 100%;
-  width: 90%;
+  width: 95%;
   display: grid;
   margin: 2rem auto;
   gap: 2%;
   grid-template-columns: 75% 25%;
-  height: 220px;
-  padding: 2.5rem;
+  height: 300px;
+  padding: 0.5rem 2.5rem;
   && .logo {
-    max-height: 150px;
+    height: auto;
+    max-height: 280px;
     width: auto;
   }
-  @media all and (max-width: 768px) {
+
+  @media all and (max-width: 1265px) {
+    grid-template-columns: 50% 50%;
+  }
+
+  @media all and (max-width: 880px) {
+    margin: auto;
+    grid-template-columns: 80%;
     padding: 2rem;
-    height: 130px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
     && .logo {
-      max-height: 80px;
+      /* max-height: 180px; */
+      height: auto;
+      width: 95%;
     }
+  }
+  @media all and (max-width: 550px) {
+    grid-template-columns: 100%;
   }
 `;
 
 const ShowWrap = styled.div`
   position: relative;
-  min-height: 700px;
-  width: 90%;
+  min-height: 816px;
+  width: 95%;
   display: grid;
   margin: 2rem auto;
   gap: 2%;
@@ -41,11 +54,17 @@ const ShowWrap = styled.div`
   grid-template-rows: 100%;
   justify-content: center;
 
-  @media all and (max-width: 1200px) {
-    grid-template-columns: 100%;
-    grid-template-rows: min-content 680px;
+  @media all and (max-width: 1265px) {
+    grid-template-columns: 50% 50%;
+    margin: 5% auto;
+    justify-content: center;
+    grid-template-rows: min-content 880px;
     gap: 2rem;
+    && .video {
+      grid-column: 1/3;
+    }
     && .crowd-purr {
+      grid-row: 2/3;
       width: 100%;
       max-width: 450px;
       margin: auto;
@@ -65,16 +84,17 @@ const CountWrap = styled.div`
   font-size: 1.25rem;
   letter-spacing: 3px;
   padding: 8px 30px;
+  @media all and (max-width: 550px) {
+    font-size: 1rem;
+  }
 `;
 
 const MainEvent = ({ main_event }) => {
   return (
     <>
       <Nav>
-        <img
-          src={main_event.KeyValue.find((kv) => kv.key === 'Logo').value}
-          className="logo"
-        />
+        <img src={main_event.LogoLink[0].Media.url} className="logo" />
+
         <CountWrap>
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}
@@ -91,7 +111,9 @@ const MainEvent = ({ main_event }) => {
         </CountWrap>
       </Nav>
       <ShowWrap>
-        <Video__iFrame src={main_event.streamLinks[0].url} />
+        <div className="video">
+          <Video__iFrame src={main_event.streamLinks[0].url} />
+        </div>
         <div className="crowd-purr">
           <Fluid__iFrame src={main_event.streamLinks[1].url} />
         </div>

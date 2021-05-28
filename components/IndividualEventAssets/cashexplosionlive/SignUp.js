@@ -5,37 +5,40 @@ import DateParse from '../../assets/DateParse';
 const SignUpWrap = styled.div`
   /* min-height: 80vh; */
   height: 100%;
-  align-self: center;
+  align-self: flex-start;
   justify-self: center;
-  margin: auto;
+  margin: 5% auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: auto;
   position: relative;
   text-align: center;
   && > div {
-    margin: 1.5rem auto;
+    margin: 1rem auto;
     width: auto;
   }
   && .logo {
     margin: 0;
-    margin-bottom: 4rem;
   }
   && .logo img {
-    width: auto;
+    width: 40%;
     margin: auto;
-    max-height: 20vh;
-    min-height: 200px;
+    height: auto;
   }
-  @media all and (max-width: 768px) {
-    width: 90%;
+  @media all and (max-width: 1000px) {
+    width: 95%;
+    && .logo img {
+      width: 80%;
+      height: auto;
+      max-height: unset;
+      min-height: unset;
+    }
   }
 `;
 const CTA = styled.div`
   background-color: ${(props) => props.theme.green};
   color: white;
-  margin: auto;
+  margin: 0 auto;
   text-transform: uppercase;
   padding: 0.5rem 1.5rem;
   font-size: 2rem;
@@ -48,8 +51,11 @@ const CTA = styled.div`
     font-family: House-Gothic;
   }
   @media all and (max-width: 768px) {
+    font-size: 1.35rem;
     && span.dollars {
-      font-size: 2.5rem;
+      font-size: 1.85rem;
+      letter-spacing: 3px;
+      line-height: 2rem;
     }
   }
 `;
@@ -62,14 +68,20 @@ const EnterArea = styled.div`
   margin: auto;
   && input {
     font-size: 1.75rem;
-    padding: 1.5rem 0;
+    padding: 1.25rem 0;
     width: 100%;
     text-align: center;
     z-index: 101;
     opacity: 1;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     margin: 0 auto;
+    padding: 0;
+
+    && input {
+      margin: 0.5rem auto;
+      font-size: 1.35rem;
+    }
   }
 `;
 
@@ -85,11 +97,27 @@ const EnterText = styled.div`
     font-size: 4rem;
     padding: 10px;
     border-radius: 80px;
-    margin: 2rem auto;
+    margin: 1rem auto;
     font-weight: 800;
   }
   && p {
     font-size: 1.75rem;
+  }
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    && p {
+      margin: 0rem auto;
+      font-size: 1.35rem;
+    }
+    && .downIcon {
+      margin: 1rem auto;
+      font-size: 3.5rem;
+    }
+    && .downIcon:nth-of-type(1) {
+      display: none;
+    }
   }
 `;
 
@@ -100,15 +128,17 @@ const SignUpButton = styled.button`
   font-family: House-Gothic;
   text-transform: uppercase;
   font-weight: 800;
-  padding: 0.85rem 2rem;
+  padding: 1rem 1.25rem;
   margin: 3rem auto;
   letter-spacing: 6px;
   &&:hover {
     color: ${(props) => props.theme.green};
     border-radius: 80px;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     width: 100%;
+    margin: 1rem auto;
+    font-size: 2.25rem;
   }
 `;
 const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
@@ -123,11 +153,14 @@ const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
   return (
     <SignUpWrap className="blackout">
       <div className="logo">
-        <img src={main_event.KeyValue.find((kv) => kv.key === 'Logo').value} />
+        <img src={main_event.LogoLink[0].Media.url} className="logo" />
       </div>
       <CTA>
         <span className="dollars">
-          <DateParse date={main_event.eventStartEnd.StartDateTime} />
+          <DateParse
+            date={main_event.eventStartEnd.StartDateTime}
+            format={'dddd, MMMM DD \\a\\t h:mma'}
+          />
         </span>
       </CTA>
       <EnterArea className={form.loading ? 'loading' : ''}>

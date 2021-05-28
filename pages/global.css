@@ -55,6 +55,12 @@
 html {
   scroll-behavior: smooth;
 }
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 button {
   border: none;
   min-height: 35px;
