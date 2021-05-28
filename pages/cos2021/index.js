@@ -16,6 +16,8 @@ import Section from 'components/template1/Section';
 import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 
+export const EVENT_URL = 'cos2021';
+
 export var event_theme = {
   heroHeight: '500px',
   fontFamily: null,
@@ -29,9 +31,6 @@ export var event_theme = {
   headerBgColor: 'black',
   videoBreakPoint: 0,
 };
-const PLACEHOLD = 'https://placehold.co/';
-
-export const EVENT_URL = 'cos2021';
 
 const Index = (props) => {
   const { event_meta, main_event } = props;

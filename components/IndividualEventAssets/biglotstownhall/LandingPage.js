@@ -40,6 +40,11 @@ const LandingPage = ({ main_event }) => {
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}
             end={main_event.eventStartEnd.EndDateTime}
+            afterEnded={
+              <div>
+                This Event Has Ended <br /> Thank You For Attending!
+              </div>
+            }
           />
         </div>
       </Inner>
