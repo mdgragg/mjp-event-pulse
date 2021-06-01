@@ -14,3 +14,12 @@ const Login = (props) => {
 Login.propTypes = {};
 
 export default Login;
+
+export async function getServerSideProps(ctx) {
+  return {
+    redirect: {
+      destination: './',
+      permanent: false,
+    },
+  };
+}

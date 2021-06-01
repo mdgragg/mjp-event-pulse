@@ -17,6 +17,7 @@ const MainWrap = styled.div`
     position: absolute;
     background-image: url('${(props) => props.theme.body_bg}');
     background-position: center center;
+    background-size: 100% auto;
     background-attachment: fixed;
     top: 0;
     opacity: 0.85;
@@ -32,6 +33,12 @@ const MainWrap = styled.div`
   && h1,
   && h3 {
     color: white;
+  }
+  && button {
+    background-color: ${(props) => props.theme.purple};
+  }
+  && button.Mui-selected {
+    background-color: ${(props) => props.theme.green};
   }
 `;
 

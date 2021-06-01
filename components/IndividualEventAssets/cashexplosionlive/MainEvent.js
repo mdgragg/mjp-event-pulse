@@ -4,7 +4,7 @@ import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
 import Counter from 'components/Counters/Counter';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-
+import TwoPanel from 'components/TabPanels/TwoPanel';
 const Nav = styled.div`
   position: relative;
   top: 0;
@@ -14,7 +14,7 @@ const Nav = styled.div`
   gap: 2%;
   grid-template-columns: 75% 25%;
   height: 300px;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 1.5rem;
   && .logo {
     height: auto;
     max-height: 280px;
@@ -48,15 +48,19 @@ const ShowWrap = styled.div`
   min-height: 816px;
   width: 95%;
   display: grid;
-  margin: 2rem auto;
+  margin: 2rem auto 6rem auto;
   gap: 2%;
   grid-template-columns: 75% 25%;
   grid-template-rows: 100%;
   justify-content: center;
 
+  && button.MuiTab-root {
+    font-size: 1.5rem;
+    font-family: ${(props) => props.theme.fontFamily};
+  }
   @media all and (max-width: 1265px) {
     grid-template-columns: 50% 50%;
-    margin: 5% auto;
+    margin: 5% auto 20% auto;
     justify-content: center;
     grid-template-rows: min-content 880px;
     gap: 2rem;
@@ -64,9 +68,10 @@ const ShowWrap = styled.div`
       grid-column: 1/3;
     }
     && .crowd-purr {
+      grid-column: 1/3;
       grid-row: 2/3;
       width: 100%;
-      max-width: 450px;
+      max-width: 98vw;
       margin: auto;
       height: 100%;
     }
@@ -74,7 +79,7 @@ const ShowWrap = styled.div`
 `;
 
 const CountWrap = styled.div`
-  background-color: #ff5ef4;
+  background-color: ${(props) => props.theme.pink};
   color: white;
   height: min-content;
   align-self: center;
@@ -115,7 +120,19 @@ const MainEvent = ({ main_event }) => {
           <Video__iFrame src={main_event.streamLinks[0].url} />
         </div>
         <div className="crowd-purr">
-          <Fluid__iFrame src={main_event.streamLinks[1].url} />
+          <TwoPanel
+            data={[
+              {
+                title: 'Chat',
+                content: <Fluid__iFrame src={main_event.streamLinks[2].url} />,
+              },
+              {
+                title: 'Questions',
+                content: <Fluid__iFrame src={main_event.streamLinks[1].url} />,
+              },
+            ]}
+          />
+          {/* */}
         </div>
       </ShowWrap>
     </>
