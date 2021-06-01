@@ -103,7 +103,7 @@ const MainEvent = ({ main_event }) => {
         <CountWrap>
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}
-            start={main_event.eventStartEnd.EndDateTime}
+            end={main_event.eventStartEnd.EndDateTime}
             afterStarted={'LIVE!'}
             afterEnded={
               <>

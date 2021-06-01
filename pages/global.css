@@ -1,54 +1,54 @@
 @font-face {
-  src: url('../static/fonts/Basic-Commercial-LT-Com-Black.ttf');
+  src: url('../public/static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }
 @font-face {
-  src: url('../static/fonts/Avenir.ttc');
+  src: url('../public/static/fonts/Avenir.ttc');
   font-family: 'Avenir';
 }
 
 @font-face {
-  src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf');
+  src: url('../public/static/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf');
   font-family: 'Source-Sans-Bold';
 }
 
 @font-face {
-  src: url('../static/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf');
+  src: url('../public/static/fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf');
   font-family: 'Source-Sans-Regular';
 }
 
 @font-face {
-  src: url('../static/fonts/HoueGothic.ttf');
+  src: url('../public/static/fonts/HoueGothic.ttf');
   font-family: 'House-Gothic';
 }
 
 @font-face {
-  src: url('../static/fonts/Tiempos/TiemposFine-Light.otf');
+  src: url('../public/static/fonts/Tiempos/TiemposFine-Light.otf');
   font-family: 'Tiempos Fine';
   font-weight: 400;
 }
 @font-face {
-  src: url('../static/fonts/segoepr.ttf');
+  src: url('../public/static/fonts/segoepr.ttf');
   font-family: 'Segoe';
 }
 
 @font-face {
-  src: url('../static/fonts/Futura/FuturaStd-Bold.otf');
+  src: url('../public/static/fonts/Futura/FuturaStd-Bold.otf');
   font-family: 'Futura Bold';
 }
 
 @font-face {
-  src: url('../static/fonts/AceSans-Bold.otf');
+  src: url('../public/static/fonts/AceSans-Bold.otf');
   font-family: 'Ace Sans';
 }
 
 @font-face {
-  src: url('../static/fonts/Hanoded.otf');
+  src: url('../public/static/fonts/Hanoded.otf');
   font-family: 'Hanoded';
 }
 
 @font-face {
-  src: url('../static/fonts/Gotham-Book.otf');
+  src: url('../public/static/fonts/Gotham-Book.otf');
   font-family: 'Gotham';
 }
 

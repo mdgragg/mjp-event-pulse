@@ -158,7 +158,7 @@ const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
       <CTA>
         <span className="dollars">
           <DateParse
-            date={main_event.eventStartEnd.StartDateTime}
+            date={new Date('Saturday, June 19 20:00:00 GMT-0400')}
             format={'dddd, MMMM DD \\a\\t h:mma'}
           />
         </span>

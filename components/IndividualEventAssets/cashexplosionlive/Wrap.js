@@ -10,6 +10,7 @@ const MainWrap = styled.div`
   display: flex;
   flex-direction: column;
   background-color: black;
+  padding-bottom: 6rem;
   &&::before {
     content: '';
     height: 100%;
@@ -36,6 +37,9 @@ const MainWrap = styled.div`
   }
   && button {
     background-color: ${(props) => props.theme.purple};
+  }
+  && button.MuiTab-root {
+    width: 50%;
   }
   && button.Mui-selected {
     background-color: ${(props) => props.theme.green};

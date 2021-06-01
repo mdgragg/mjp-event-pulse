@@ -140,7 +140,7 @@ const SignUp = ({ main_event }) => {
           Registration Opens In{' '}
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}
-            start={main_event.eventStartEnd.EndDateTime}
+            end={main_event.eventStartEnd.EndDateTime}
           />
         </h3>
       </div>
@@ -159,7 +159,7 @@ const SignUp = ({ main_event }) => {
           <span> 1</span>
           <div className="info">
             {' '}
-            You must register to be eligible to win up to $25,000 in cash prize
+            You must register to be eligible to win up to $5,000 in cash prize
             giveaways!{' '}
           </div>
         </div>
@@ -173,7 +173,10 @@ const SignUp = ({ main_event }) => {
         <div className="box">
           {' '}
           <span> 3</span>
-          <div className="info">The winning begins at 8:00pm</div>
+          <div className="info">
+            $25,000 in cash prize giveaways! <br />
+            The winning begins at 8:00pm
+          </div>
         </div>
       </InfoBoxes>
     </ThanksWrap>
