@@ -16,7 +16,7 @@ import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
 import attendee_capture from 'lib/fetchCalls/attendee_capture';
 import { toast } from 'react-toastify';
 
-export const event_theme = {
+export var event_theme = {
   h1: {
     fontSize: '5rem',
   },

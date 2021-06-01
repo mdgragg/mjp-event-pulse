@@ -14,7 +14,7 @@ const FrameWrap = styled.div`
 const Fluid__iFrame = ({ src = '/', options, minHeight }) => {
   return (
     <FrameWrap minHeight={minHeight}>
-      <iframe src={src} frameborder="0"></iframe>
+      <iframe src={src} frameBorder="0"></iframe>
     </FrameWrap>
   );
 };
