@@ -184,6 +184,7 @@ export async function getStaticProps(ctx) {
         event_meta: eventData,
         main_event,
       },
+      revalidate: 1200,
     };
     return values;
   } catch (error) {

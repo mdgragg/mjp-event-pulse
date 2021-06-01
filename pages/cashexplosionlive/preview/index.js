@@ -26,7 +26,7 @@ const Index = (props) => {
 export async function getServerSideProps(ctx) {
   const redirect = `./event-preview`;
   //   get the event job data from our api
-  console.log(ctx.req.cookies[`preview_cookie__${EVENT_URL}`]);
+
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
       redirect: {
