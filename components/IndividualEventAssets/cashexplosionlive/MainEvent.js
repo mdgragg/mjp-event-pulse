@@ -123,12 +123,12 @@ const MainEvent = ({ main_event }) => {
           <TwoPanel
             data={[
               {
-                title: 'Chat',
-                content: <Fluid__iFrame src={main_event.streamLinks[2].url} />,
+                title: `${main_event.streamLinks[1].Service}`,
+                content: <Fluid__iFrame src={main_event.streamLinks[1].url} />,
               },
               {
-                title: 'Questions',
-                content: <Fluid__iFrame src={main_event.streamLinks[1].url} />,
+                title: `${main_event.streamLinks[2].Service}`,
+                content: <Fluid__iFrame src={main_event.streamLinks[2].url} />,
               },
             ]}
           />
