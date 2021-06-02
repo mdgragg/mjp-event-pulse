@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiBox-root': {
       height: '100%',
+      minHeight: '650px',
     },
   },
 }));

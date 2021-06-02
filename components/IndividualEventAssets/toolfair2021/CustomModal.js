@@ -72,9 +72,9 @@ export default function AttendeeAuthModal({
   const handleChange = (e) => {
     e.persist();
     const name = e.target.name;
-    console.log(e.target);
+
     const prevValue = values[name];
-    console.log(prevValue);
+
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -110,7 +110,6 @@ export default function AttendeeAuthModal({
           setFormLoading(false);
           return toast.error(res.error);
         } else {
-          console.log(res);
           return callback(res);
         }
       })

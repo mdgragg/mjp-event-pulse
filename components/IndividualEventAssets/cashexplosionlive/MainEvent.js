@@ -10,10 +10,10 @@ const Nav = styled.div`
   top: 0;
   width: 95%;
   display: grid;
-  margin: 2rem auto;
+  margin: 2rem auto 0 auto;
   gap: 2%;
   grid-template-columns: 75% 25%;
-  height: 300px;
+  height: 280px;
   padding: 0.5rem 1.5rem;
   && .logo {
     height: auto;
@@ -45,7 +45,7 @@ const Nav = styled.div`
 
 const ShowWrap = styled.div`
   position: relative;
-  min-height: 816px;
+  min-height: 750px;
   width: 95%;
   display: grid;
   margin: 2rem auto 6rem auto;
