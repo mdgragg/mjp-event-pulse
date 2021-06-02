@@ -99,7 +99,6 @@ const MainEvent = ({ main_event }) => {
     <>
       <Nav>
         <img src={main_event.LogoLink[0].Media.url} className="logo" />
-
         <CountWrap>
           <Counter__JustNumbers
             start={main_event.eventStartEnd.StartDateTime}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import App from 'next/app';
 import { useRouter } from 'next/router';
 import Meta from 'components/globals/Meta';
@@ -6,12 +6,18 @@ import { GlobalStyle } from 'components/globals/GlobalStyle';
 import 'react-dropzone-uploader/dist/styles.css';
 import './global.css';
 import cookies from 'next-cookies';
-
+import detectIE from '../lib/utils/detectIE';
 import * as gtag from '../lib/analytics';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ApolloProvider } from '@apollo/client';
+import { Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import client from 'lib/withApollo';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function MyApp({ Component, pageProps, loginData }) {
   const router = useRouter();
@@ -25,12 +31,37 @@ function MyApp({ Component, pageProps, loginData }) {
     };
   }, [router.events]);
 
+  const [state, setState] = useState({ open: false, version: null });
+
+  useEffect(() => {
+    const { isIE, version } = detectIE(window.navigator.userAgent);
+    if (isIE) {
+      setState({ ...state, open: true, version: version });
+    }
+  }, []);
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   return (
     <>
       <ApolloProvider client={client}>
         <Meta />
         <GlobalStyle />
-
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={state.open}
+          onClose={handleClose}
+          key={'topcenter'}
+        >
+          <Alert severity={'error'}>
+            It looks like you are a using Internet Explorer{' '}
+            {state.version && `Version ${state.version}`}. We cannot guarantee
+            optimal performance on this browser as it is deprecated. Please try
+            using Chrome, Safari, Edge or Firefox.
+          </Alert>
+        </Snackbar>
         <ToastContainer />
         <Component {...pageProps} />
       </ApolloProvider>
