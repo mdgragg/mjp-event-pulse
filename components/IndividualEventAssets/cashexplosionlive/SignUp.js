@@ -158,7 +158,7 @@ const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
       <CTA>
         <span className="dollars">
           <DateParse
-            date={new Date('Saturday, June 19 20:00:00 GMT-0400')}
+            date={new Date('Saturday, June 19 2021 20:00:00 GMT-0400')}
             format={'dddd, MMMM DD \\a\\t h:mma'}
           />
         </span>
@@ -166,7 +166,7 @@ const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
       <EnterArea className={form.loading ? 'loading' : ''}>
         <EnterText>
           <ArrowDownwardIcon className="downIcon" />
-          <p> Register for more information</p>
+          <p>RSVP for more information</p>
           <ArrowDownwardIcon className="downIcon" />
         </EnterText>
         <input

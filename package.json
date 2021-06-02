@@ -30,7 +30,7 @@
     "moment": "^2.29.1",
     "next": "10.0.6",
     "next-apollo": "^5.0.0",
-    "next-auth": "^3.3.0",
+    "next-auth": "^3.24.1",
     "next-cookies": "^2.0.3",
     "next-with-apollo": "^5.1.0",
     "nprogress": "^0.2.0",

@@ -8,6 +8,7 @@ const ErrWrap = styled.div`
   max-width: 1200px;
   margin: auto;
 `;
+
 const Everything = () => {
   const { err, loading, data } = useQuery(gql`
     query AllJobs {
