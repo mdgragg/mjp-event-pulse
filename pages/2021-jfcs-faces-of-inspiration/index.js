@@ -89,35 +89,13 @@ const Index = (props) => {
   return <MainPage />;
 };
 
-export async function getStaticProps() {
-  //console.log(ctx.req.cookies);
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
-  try {
-    let eventData = await getEventMeta(EVENT_URL);
-    let main_event = eventData.events[0];
-
-    const values = {
-      props: {
-        //meta will be the props for the event
-        event_meta: eventData,
-        main_event,
-      },
-      revalidate: 60,
-    };
-    return values;
-  } catch (error) {
-    console.log('get static props error: ', error);
-    return {
-      redirect: {
-        destination: '/',
-      },
-    };
-  }
+export async function getServerSideProps(ctx) {
+  return {
+    redirect: {
+      destination: './',
+      permanent: false,
+    },
+  };
 }
 
 export default Index;

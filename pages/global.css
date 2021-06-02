@@ -3,8 +3,26 @@
   font-family: 'Akzidenz-Grotesque-Bold';
 }
 @font-face {
-  src: url('../public/static/fonts/Avenir.ttc');
+  src: url('../public/static/fonts/Avenir-Light.ttf') format('truetype');
   font-family: 'Avenir';
+  font-weight: 200;
+}
+@font-face {
+  src: url('../public/static/fonts/Avenir-Roman.ttf') format('truetype');
+  font-family: 'Avenir';
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  src: url('../public/static/fonts/Avenir-Medium.ttf') format('truetype');
+  font-family: 'Avenir';
+  font-weight: 600;
+}
+@font-face {
+  src: url('../public/static/fonts/Avenir-Black.ttf') format('truetype');
+  font-family: 'Avenir';
+  font-style: bold;
+  font-weight: 800;
 }
 
 @font-face {

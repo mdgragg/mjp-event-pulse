@@ -20,30 +20,31 @@ export function InfoGrid() {
         the player in the browser to open the live player. The same applies to
         any event whose live player is embedded on a different website.
       </p>
+
+      <h4>System Requirements: </h4>
+      <ul>
+        <li>Windows 7 or higher</li>
+        <li> Mac OS X 10.6 or higher </li>
+      </ul>
+      <h4> Supported desktop browsers: </h4>
+      <ul>
+        <li> Google Chrome 45+</li>
+        <li> Mozilla Firefox 49+</li>
+        <li> Safari 10+</li>
+        <li> Microsoft Edge 15+</li>
+        <li style={{ color: 'red' }}>
+          {' '}
+          We cannot guarantee performance on
+          <strong> Internet Explorer</strong> we highly suggest you use a
+          different browser.
+        </li>
+      </ul>
+      <h4> Supported mobile browsers: </h4>
+      <ul>
+        <li>Chrome 45+ </li>
+        <li> Safari 10+ (iOS) </li>
+      </ul>
       <p>
-        <h4>System Requirements: </h4>
-        <ul>
-          <li>Windows 7 or higher</li>
-          <li> Mac OS X 10.6 or higher </li>
-        </ul>
-        <h4> Supported desktop browsers: </h4>
-        <ul>
-          <li> Google Chrome 45+</li>
-          <li> Mozilla Firefox 49+</li>
-          <li> Safari 10+</li>
-          <li> Microsoft Edge 15+</li>
-          <li style={{ color: 'red' }}>
-            {' '}
-            We cannot guarantee performance on
-            <strong> Internet Explorer</strong> we highly suggest you use a
-            different browser.
-          </li>
-        </ul>
-        <h4> Supported mobile browsers: </h4>
-        <ul>
-          <li>Chrome 45+ </li>
-          <li> Safari 10+ (iOS) </li>
-        </ul>
         Internet Connection: 5-10mbps download speed is recommended. Check your
         connection at <a href="https://www.speedtest.net">www.speedtest.net</a>.
       </p>

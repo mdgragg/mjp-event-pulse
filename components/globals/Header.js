@@ -17,7 +17,7 @@ const StyledHeader = styled.div`
     line-height: 0.6em;
     font-family: Avenir;
     letter-spacing: 6px;
-    font-weight: 800;
+    font-weight: 600;
     text-transform: uppercase;
   }
   && ::before {
