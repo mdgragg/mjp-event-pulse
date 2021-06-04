@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useReducer, useMemo } from 'react';
 import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
@@ -98,6 +98,7 @@ const Index = (props) => {
   const [deciderTemplate, setDeciderTemplate] = useState('signup');
 
   const hasStartEnd = useCalculateIfStarted(main_event);
+
   const [form, setForm] = useState({
     loading: false,
     email_entered: false,
@@ -105,22 +106,31 @@ const Index = (props) => {
   });
 
   //listen for has started
+
   useEffect(() => {
-    if (true) {
-      return setDeciderTemplate('thank-you');
-    }
     if (hasStartEnd.hasEnded) {
+      console.log('1');
       return setDeciderTemplate('thank-you');
     }
-    if (hasStartEnd.hasStarted) {
-      setDeciderTemplate('main-event');
-    } else if (localStorage.getItem(storage_token) && !hasStarted) {
-      setDeciderTemplate('success');
+    if (hasStartEnd.hasStarted && deciderTemplate !== 'main-event') {
+      console.log('2');
+      return setDeciderTemplate('main-event');
+    }
+    if (localStorage.getItem(storage_token) && !hasStartEnd.hasStarted) {
+      console.log('3');
+      return setDeciderTemplate('success');
     } else {
+      console.log('4');
       setDeciderTemplate('signup');
     }
   }, []);
   //listen for submit
+
+  // useEffect(() => {
+  //   if (hasStartEnd.hasStarted && deciderTemplate !== 'main-event') {
+  //     setDeciderTemplate('main-event');
+  //   }
+  // }, [hasStartEndMemo]);
 
   const handleSetEmail = (value) => {
     setForm((prev) => ({
@@ -140,18 +150,19 @@ const Index = (props) => {
       AttendeeEmail: email_value,
     };
 
-    return await attendee_capture(values, main_event.id).then((res) => {
-      if (res.error) {
-        setForm((prev) => ({ ...prev, loading: false }));
-        return toast.error(res.error);
-      } else {
+    return await attendee_capture(values, main_event.id)
+      .then((res) => {
         toast.success(`Emailed recorded!`);
         localStorage.setItem(storage_token, true);
         setTimeout(() => {
           setDeciderTemplate('success');
         }, 1000);
-      }
-    });
+      })
+      .catch((err) => {
+        setForm((prev) => ({ ...prev, loading: false }));
+        console.log(err);
+        return toast.error(err);
+      });
   };
 
   return (

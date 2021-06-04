@@ -149,52 +149,13 @@ const Index = (props) => {
   }
 };
 
-export async function getStaticProps() {
-  //console.log(ctx.req.cookies);
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-  try {
-    let eventData = await getEventMeta('sccellarauction');
-
-    let main_event = eventData.events.filter(
-      (ev) => ev.isMainEvent === true
-    )[0];
-
-    //make breakout sessions array by category
-    let breakoutObj = {};
-
-    main_event.BreakoutSessions.forEach((sesh) => {
-      let key = Object.keys(breakoutObj).find(
-        (title) => title === sesh.Category
-      );
-      if (!key) {
-        breakoutObj[sesh.Category] = [sesh];
-      } else {
-        breakoutObj[sesh.Category] = [...breakoutObj[sesh.Category], sesh];
-      }
-    });
-
-    main_event.BreakoutSessions = breakoutObj;
-
-    const values = {
-      props: {
-        //meta will be the props for the event
-        event_meta: eventData,
-        main_event,
-      },
-    };
-    return values;
-  } catch (error) {
-    console.log('get static props error: ', error);
-    return {
-      redirect: {
-        destination: '/',
-      },
-    };
-  }
+export async function getServerSideProps(ctx) {
+  return {
+    redirect: {
+      destination: './',
+      permanant: false,
+    },
+  };
 }
 
 export default Index;

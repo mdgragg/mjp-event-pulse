@@ -47,7 +47,7 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStarted = useCalculateIfStarted(start);
+  const hasStarted = useCalculateIfStarted(main_event);
 
   return (
     <>

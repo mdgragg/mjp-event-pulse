@@ -5,8 +5,6 @@ const useCalculateIfStarted = (event) => {
     eventStartEnd: { StartDateTime, EndDateTime },
   } = event;
 
-  const [state, setState] = useState({ hasStarted: false, hasEnded: false });
-
   const calculate = () => {
     const res = calculate_remaining(StartDateTime, EndDateTime);
     setState({
@@ -14,6 +12,8 @@ const useCalculateIfStarted = (event) => {
       hasEnded: res.parsed_until_end <= 0,
     });
   };
+
+  const [state, setState] = useState({ hasStarted: false, hasEnded: false });
 
   useEffect(() => {
     calculate();
