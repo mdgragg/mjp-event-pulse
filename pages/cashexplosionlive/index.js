@@ -113,7 +113,6 @@ const Index = (props) => {
       return setDeciderTemplate('thank-you');
     }
     if (hasStartEnd.hasStarted && deciderTemplate !== 'main-event') {
-      console.log('2');
       return setDeciderTemplate('main-event');
     }
     if (localStorage.getItem(storage_token) && !hasStartEnd.hasStarted) {
@@ -123,14 +122,7 @@ const Index = (props) => {
       console.log('4');
       setDeciderTemplate('signup');
     }
-  }, []);
-  //listen for submit
-
-  // useEffect(() => {
-  //   if (hasStartEnd.hasStarted && deciderTemplate !== 'main-event') {
-  //     setDeciderTemplate('main-event');
-  //   }
-  // }, [hasStartEndMemo]);
+  }, [hasStartEnd]);
 
   const handleSetEmail = (value) => {
     setForm((prev) => ({
@@ -169,14 +161,43 @@ const Index = (props) => {
     <Page theme={event_theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
       <Wrap theme={event_theme}>
-        <Decider
+        {
+          {
+            signup: (
+              <SignUp
+                main_event={main_event}
+                theme={event_theme}
+                handleSubmit={handleSubmit}
+                handleSetEmail={handleSetEmail}
+                form={form}
+                loading={form.loading}
+              />
+            ),
+            success: (
+              <Success
+                main_event={main_event}
+                theme={event_theme}
+                callback={() => {
+                  setDeciderTemplate('main-event');
+                }}
+              />
+            ),
+            'main-event': (
+              <MainEvent theme={event_theme} main_event={main_event} />
+            ),
+            'thank-you': (
+              <ThankYou main_event={main_event} theme={event_theme} />
+            ),
+          }[deciderTemplate]
+        }
+        {/* <Decider
           template={deciderTemplate}
           theme={event_theme}
           main_event={main_event}
           handleSetEmail={handleSetEmail}
           handleSubmit={handleSubmit}
           form={form}
-        />
+        /> */}
       </Wrap>
     </Page>
   );

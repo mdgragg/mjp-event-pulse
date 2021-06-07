@@ -9,6 +9,7 @@ const FrameWrap = styled.div`
   && iframe {
     height: 100%;
     width: 100%;
+    min-height: inherit;
   }
 `;
 const Fluid__iFrame = ({ src = '/', options, minHeight }) => {

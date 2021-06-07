@@ -131,7 +131,7 @@ const InfoBoxes = styled.div`
     }
   }
 `;
-const SignUp = ({ main_event }) => {
+const SignUp = ({ main_event, callback }) => {
   return (
     <ThanksWrap>
       <img src={main_event.LogoLink[0].Media.url} className="logo" />
@@ -139,6 +139,7 @@ const SignUp = ({ main_event }) => {
         <h3>
           Registration Opens In{' '}
           <Counter__JustNumbers
+            callback={callback}
             start={main_event.eventStartEnd.StartDateTime}
             end={main_event.eventStartEnd.EndDateTime}
           />

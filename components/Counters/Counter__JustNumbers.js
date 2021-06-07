@@ -9,6 +9,7 @@ const Counter__JustNumbers = ({
   prefix,
   afterStarted = null,
   afterEnded = null,
+  callback = () => {},
 }) => {
   const [countdown_object, set_countdown_object] = useState(
     calculate_remaining(start, end)
