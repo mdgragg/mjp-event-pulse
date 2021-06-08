@@ -55,7 +55,9 @@ const Header = (props) => {
         <MJP__SVG />
       </Logo>
       <h3> Virtual Events</h3>
-      <button> Work With Us</button>
+      <a href={`https://www.millsjames.com/contact-us/`}>
+        <button> Work With Us</button>
+      </a>
     </StyledHeader>
   );
 };

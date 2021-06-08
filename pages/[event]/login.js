@@ -8,11 +8,6 @@ const Login = (props) => {
 export default Login;
 
 export async function getServerSideProps(ctx) {
-  return {
-    redirect: {
-      destination: `./`,
-    },
-  };
   const session = await getSession(ctx);
   const destination = ctx.params.event;
   console.log(ctx.req.url);

@@ -138,7 +138,7 @@ const Index = (props) => {
     setForm((prev) => ({ ...prev, loading: true }));
     const values = {
       AttendeeFirst: 'CE Attendee',
-      AttendeeLast: 'Event 1',
+      AttendeeLast: 'Event 2',
       AttendeeEmail: email_value,
     };
 
