@@ -15,7 +15,7 @@ import DateParse from 'components/assets/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
-export const EVENT_URL = 'osu-odi-hall-of-fame';
+export const EVENT_URL = 'odihalloffame';
 export var event_theme = {
   heroHeight: '500px',
   fontFamily: null,
