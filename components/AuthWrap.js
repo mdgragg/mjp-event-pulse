@@ -45,6 +45,7 @@ const AuthWrap = ({
   };
 
   if (auth_type === 'Public') {
+    render(true);
     return <>{children}</>;
   }
   if (auth_type === 'AttendeeFromList') {

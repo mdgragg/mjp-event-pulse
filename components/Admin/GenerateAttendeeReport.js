@@ -3,7 +3,16 @@ import { useSession } from 'next-auth/client';
 import { toast } from 'react-toastify';
 import generate_attendee_report from 'lib/fetchCalls/generate_attendee_report';
 import { makeDate } from 'lib/helpers';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import styled from 'styled-components';
+import GetAttendees from './GetAttendees';
+const BigTitle = styled.div`
+  font-weight: 200;
+  font-family: Roboto;
+  font-style: thin;
+  font-size: 3rem;
+  margin: 1rem auto;
+  color: rgb(18, 223, 127); ;
+`;
 
 import {
   Button,
@@ -15,8 +24,15 @@ import {
   InputLabel,
   Checkbox,
 } from '@material-ui/core';
-const GenerateAttendeeReport = ({ events }) => {
-  const [selected_event, set_selected_event] = useState(events[0]);
+const GenerateAttendeeReport = ({ events, loading, selected_event }) => {
+  if (loading || !selected_event) {
+    return (
+      <div>
+        <BigTitle>Loading...</BigTitle>
+      </div>
+    );
+  }
+
   const [specific_date_time, set_specific_date_time] = useState({
     isSelected: false,
     from: makeDate(selected_event.eventStartEnd.StartDateTime),
@@ -25,10 +41,6 @@ const GenerateAttendeeReport = ({ events }) => {
   const [options, setOptions] = useState(null);
 
   const sesh = useSession();
-
-  const handle_select = (slug) => {
-    set_selected_event(events.find((ev) => ev.slug === slug));
-  };
 
   useEffect(() => {
     set_specific_date_time((prev) => ({
@@ -50,24 +62,13 @@ const GenerateAttendeeReport = ({ events }) => {
 
   return (
     <div>
+      <BigTitle>
+        <GetAttendees ev={selected_event} />
+      </BigTitle>
       <hr />
-      <h3>Generate Attendee Report</h3>
+      <h3>Generate Attendee Report for {selected_event.EventName}</h3>
 
       <FormControl>
-        <InputLabel id="event-slug">Sub-Event</InputLabel>
-        <Select
-          labelId="event-slug"
-          id="event-slug-select"
-          value={selected_event.slug}
-          onChange={(e) => handle_select(e.target.value)}
-        >
-          {events &&
-            events.map((ev) => (
-              <MenuItem value={ev.slug} key={ev.slug}>
-                {ev.slug}
-              </MenuItem>
-            ))}
-        </Select>
         <FormControlLabel
           control={
             <Checkbox
@@ -108,6 +109,7 @@ const GenerateAttendeeReport = ({ events }) => {
         )}
 
         <Button
+          variant="contained"
           style={{ display: 'block', margin: '2rem 0' }}
           onClick={async () => {
             toast('Generating Attendee Report...', {

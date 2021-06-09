@@ -16,7 +16,11 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="stylesheet" href="/static/fonts/fonts.css" />
+
+          <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
           {this.props.styleTags}
+
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}

@@ -93,7 +93,7 @@ const Index = (props) => {
           </div>
         </FlexHero>
         <Body>
-          {main_event.streamLinks.length == 1 ? (
+          {main_event.streamLinks.length === 1 ? (
             <div
               style={{
                 minHeight: '60vh',

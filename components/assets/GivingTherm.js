@@ -138,7 +138,7 @@ const GivingTherm = ({ endpoint, goal }) => {
           duration={5}
           end={percentFilled.total_raised}
           preserveValue={true}
-        />{' '}
+        />
       </h3>
       <TheTherm>
         <Filler
