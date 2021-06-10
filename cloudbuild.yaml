@@ -1,16 +1,16 @@
 steps:
+- name: node:12.20.1
+  entrypoint: npm
+  args: ["install"]
   - name: node:12.20.1
-    entrypoint: npm
-    args: ["install"]
-    - name: node:10.15.1
-    entrypoint: npm
-    args: ["run", "create-env"]
-    env:
-      - 'APP_SECRET=${_APP_SECRET}'
-      - 'STRAPI_AUTHENTICATED_API_KEY=${_STRAPI_AUTHENTICATED_API_KEY}'
-      - 'NEXTAUTH_URL=${_NEXTAUTH_URL}'
-      - 'NEXT_PUBLIC_STRAPI_API_URL=${_NEXT_PUBLIC_STRAPI_API_URL}'
-      - 'NEXT_PUBLIC_GOOGLE_ANALYTICS=${_NEXT_PUBLIC_GOOGLE_ANALYTICS}'
-      - 'NEXT_PUBLIC_TEST_VAR=${_NEXT_PUBLIC_TEST_VAR}'
-  - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy"]
+  entrypoint: npm
+  args: ["run", "create-env"]
+  env:
+    - 'APP_SECRET=${_APP_SECRET}'
+    - 'STRAPI_AUTHENTICATED_API_KEY=${_STRAPI_AUTHENTICATED_API_KEY}'
+    - 'NEXTAUTH_URL=${_NEXTAUTH_URL}'
+    - 'NEXT_PUBLIC_STRAPI_API_URL=${_NEXT_PUBLIC_STRAPI_API_URL}'
+    - 'NEXT_PUBLIC_GOOGLE_ANALYTICS=${_NEXT_PUBLIC_GOOGLE_ANALYTICS}'
+    - 'NEXT_PUBLIC_TEST_VAR=${_NEXT_PUBLIC_TEST_VAR}'
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy"]
