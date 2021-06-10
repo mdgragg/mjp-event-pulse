@@ -53,11 +53,14 @@ const ShowWrap = styled.div`
   grid-template-columns: 75% 25%;
   grid-template-rows: 100%;
   justify-content: center;
-
+  && > span.muitabs-indicator: {
+    background-color: blue;
+  }
   && button.MuiTab-root {
     font-size: 1.5rem;
     font-family: ${(props) => props.theme.fontFamily};
   }
+
   @media all and (max-width: 1265px) {
     grid-template-columns: 50% 50%;
     margin: 5% auto 20% auto;

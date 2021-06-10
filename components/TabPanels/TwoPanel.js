@@ -6,6 +6,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import styled from 'styled-components';
+
+const TabBarHolder = styled.div`
+  height: 100%;
+`;
+
+const MyTabPanel = styled(TabPanel)`
+  height: 100%;
+`;
 
 function TabPanel(props) {
   const { children, value, index, memoizedData, ...other } = props;
@@ -19,7 +28,7 @@ function TabPanel(props) {
       {...other}
       style={{
         height: '100%',
-        visibilty: value === index ? 'unset' : 'hidden',
+        visibilty: value === index ? 'visible' : 'hidden',
       }}
     >
       <Box style={{ height: '100%' }}>{memoizedData}</Box>
@@ -34,23 +43,7 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    height: '100%',
-    '& .MuiTabs-indicator': {
-      backgroundColor: '#ff5ef4',
-    },
-    '& .MuiBox-root': {
-      height: '100%',
-      minHeight: '650px',
-    },
-  },
-}));
-
 export default function SimpleTabs({ data }) {
-  const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const memoData = useMemo(() => {
@@ -63,7 +56,7 @@ export default function SimpleTabs({ data }) {
   };
 
   return (
-    <div className={classes.root}>
+    <TabBarHolder>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -78,13 +71,13 @@ export default function SimpleTabs({ data }) {
 
       {memoData &&
         data.map((d, index) => (
-          <TabPanel
+          <MyTabPanel
             value={value}
             index={index}
             key={`tab-panel--${index}`}
             memoizedData={data[index].content}
-          ></TabPanel>
+          ></MyTabPanel>
         ))}
-    </div>
+    </TabBarHolder>
   );
 }
