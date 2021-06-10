@@ -1,5 +1,5 @@
 steps:
-  - name: Create Env
+  - name: node:12.20.1
     entrypoint: npm
     args: ['run', 'create-env']
     env:
