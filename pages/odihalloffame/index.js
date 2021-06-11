@@ -12,6 +12,7 @@ import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
 import DateParse from 'components/assets/DateParse';
+import Agenda from 'components/IndividualEventAssets/odihalloffame/Agenda';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
@@ -81,11 +82,13 @@ const Index = (props) => {
             <h2
               style={{
                 color: '#666666',
-                fontSize: '2.5rem',
+                letterSpacing: '0px',
+                fontSize: '2rem',
                 fontFamily: 'Avenir',
               }}
             >
               <Counter__JustNumbers
+                prefix={'Join Us Live In'}
                 start={main_event.eventStartEnd.StartDateTime}
                 end={main_event.eventStartEnd.EndDateTime}
                 afterStarted={'Live Now!'}
@@ -118,15 +121,13 @@ const Index = (props) => {
           </div>
         </Section>
         <Section>
-          <div style={{ maxWidth: '1000px', margin: 'auto' }}>
-            <h2>Agenda</h2>
-          </div>
+          <Agenda />
         </Section>
         {main_event.Description && (
           <BannerWithPicture
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-            color={'black'}
-            secondary={`white`}
+            color={'white'}
+            secondary={`black`}
             headerText={`About This Event`}
             innerWidth={`650px`}
             buttonText={`Learn More`}

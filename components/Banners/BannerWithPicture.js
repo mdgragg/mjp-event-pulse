@@ -12,13 +12,14 @@ const StyledBanner = styled.div`
   text-align: center;
   width: 100%;
   left: 0;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.color || '#f7f7f7'};
   /* background-image: url('${(props) => props.image}'); */
   background-attachment: fixed;
   background-origin: center;
   background-repeat: no-repeat;
   && h4 {
     font-size: 2.5rem;
+    color: ${(props) => props.textColor || 'black'};
   }
   && p {
     font-size: 1.5rem;
@@ -33,11 +34,7 @@ const StyledBanner = styled.div`
 
 const Banner = (props) => {
   return (
-    <StyledBanner
-      image={props.image}
-      color={props.color}
-      style={{ ...props.style }}
-    >
+    <StyledBanner style={{ ...props.style }} {...props}>
       <div
         style={{ maxWidth: `${props.innerWidth || '450px'}`, margin: 'auto' }}
       >
@@ -49,7 +46,7 @@ const Banner = (props) => {
             <button> {props.buttonText}</button>
           </a>
         )}
-        <img className="banner-image" src={props.imgUrl} />
+        {props.imgUrl && <img className="banner-image" src={props.imgUrl} />}
       </div>
     </StyledBanner>
   );
