@@ -10,18 +10,17 @@ import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
-import Section from 'components/Sections/Section';
+import DHLBody from 'components/IndividualEventAssets/dhl-virtual-town-hall/Body';
 import DateParse from 'components/assets/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
-import { toast } from 'react-toastify';
+
 export const EVENT_URL = 'dhl-virtual-town-hall';
 export var event_theme = {
   primary: '#d30411',
   secondary: '#ffcc00',
-  heroHeight: '350px',
+  heroHeight: '250px',
   fontFamily: null,
-  headerOpacity: 0,
+  headerOpacity: 1,
   white: null,
   blue: null,
   red: '#d30411',
@@ -49,15 +48,8 @@ const Index = (props) => {
     <Page theme={event_theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
       <FlexHero title={event_meta.EventJobName}>
-        <div>
-          <img
-            style={{
-              width: '100%',
-              maxWidth: '350px',
-              margin: '2rem auto',
-            }}
-            src={main_event.LogoLink[0]?.Media?.url || null}
-          />
+        <div style={{ textAlign: 'center' }}>
+          <img src={main_event.LogoLink[0]?.Media?.url || null} />
         </div>
         <div>
           <center>
@@ -98,13 +90,8 @@ const Index = (props) => {
         </div>
       </FlexHero>
       <Body>
-        <Section>
-          <CenteredPlayer
-            videoUrl={main_event.streamLinks[0].url}
-            showing={true}
-            hasStarted={true}
-          />
-        </Section>
+        <DHLBody main_event={main_event} />
+
         <BannerWithPicture
           style={{ fontFamily: 'Delivery', color: event_theme.primary }}
           color={event_theme.secondary}

@@ -1,0 +1,40 @@
+import React from 'react';
+import CenteredPlayer from '../../BodyTemplates/CenteredPlayer';
+import styled from 'styled-components';
+
+const BigBG = styled.div`
+  position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  &&:after {
+    background-image: url(${(props) => props.bgImg});
+    position: absolute;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-origin: center center;
+    background-size: auto 100%;
+    content: '';
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  @media all and (min-width: 1920px) {
+    &&:after {
+      background-size: 100% auto;
+    }
+  }
+`;
+const Body = ({ main_event }) => {
+  return (
+    <BigBG bgImg={main_event?.HeaderImage?.url}>
+      <CenteredPlayer
+        videoUrl={main_event.streamLinks[0].url}
+        showing={true}
+        hasStarted={true}
+      />
+    </BigBG>
+  );
+};
+
+export default Body;

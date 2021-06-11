@@ -5,8 +5,23 @@ import Fluid__iFrame from '../iFrames/Fluid__iFrame';
 const BodyWrap = styled.div`
   min-height: 50vh;
   background-color: unset;
+  position: relative;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+`;
+
+const BG = styled.div`
+  background-image: url(${(props) => props.src});
+  background-size: 100% auto;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 `;
 const VideoBox = styled.div`
+  position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -14,22 +29,31 @@ const VideoBox = styled.div`
   max-width: 1300px;
   margin: auto;
   background-color: none;
+  z-index: 2;
 `;
 
-const CenteredPlayer = ({ videoUrl, showing = true, hasStarted }) => {
+const CenteredPlayer = ({
+  videoUrl,
+  showing = true,
+  hasStarted,
+  bgImg,
+  style = {},
+}) => {
   return (
-    <BodyWrap>
-      <VideoBox>
-        <div className="video-holder">
-          {showing && (
-            <VideoBox__StickyTop
-              src={videoUrl}
-              isStarted={hasStarted}
-            ></VideoBox__StickyTop>
-          )}
-        </div>
-      </VideoBox>
-    </BodyWrap>
+    <>
+      <BodyWrap style={{ ...style }}>
+        <VideoBox>
+          <div className="video-holder">
+            {showing && (
+              <VideoBox__StickyTop
+                src={videoUrl}
+                isStarted={hasStarted}
+              ></VideoBox__StickyTop>
+            )}
+          </div>
+        </VideoBox>
+      </BodyWrap>
+    </>
   );
 };
 

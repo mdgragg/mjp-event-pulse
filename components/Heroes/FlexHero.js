@@ -24,8 +24,8 @@ const HeroHolder = styled.div`
     content: '';
     top: 0;
     position: absolute;
-    background-image: url('${(props) =>
-      props.theme.header_image || props.header_image}');
+    background-image: url(${(props) =>
+      props.theme.header_image || props.header_image});
     opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: inherit;
     background-repeat: no-repeat;
@@ -61,6 +61,7 @@ const HeaderInner = styled.div`
     margin: auto;
     && img {
       max-width: 50%;
+      margin: auto;
     }
   }
   @media all and (max-width: 768px) {
