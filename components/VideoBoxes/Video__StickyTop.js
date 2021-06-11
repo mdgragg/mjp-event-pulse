@@ -6,7 +6,7 @@ const VideoPlaceholder = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.25);
   overflow: hidden;
-
+  box-shadow: 0px 0px 12px -8px black;
   &&.fixed {
     height: auto;
     padding-top: 56.25%; /* 16:9 */
@@ -65,6 +65,7 @@ const StyledVideoBox = styled.div`
   overflow: hidden;
   width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+
   && > iframe {
     position: absolute;
     top: 0;
@@ -91,14 +92,13 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
   useMemo(() => set_src(src), [src]);
 
   function calculateFixed(e) {
-    if (window.pageYOffset >= offsetVideoHeight) {
+    if (window.pageYOffset >= offsetVideoHeight && offsetVideoHeight > 0) {
       wrapperRef.current.classList.add('fixed');
     } else {
       wrapperRef.current.classList.remove('fixed');
     }
   }
   useEffect(() => {
-    console.log(isStarted);
     if (isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }

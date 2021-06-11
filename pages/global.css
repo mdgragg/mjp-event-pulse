@@ -1,4 +1,20 @@
 @font-face {
+  src: url('../public/static/fonts/Delivery/Delivery_W_Bd.woff') format('woff');
+  font-family: 'Delivery';
+  font-weight: 800;
+}
+
+@font-face {
+  src: url('../public/static/fonts/College-Block.otf');
+  font-family: 'College Block';
+}
+
+@font-face {
+  src: url('../public/static/fonts/College-Block.otf');
+  font-family: 'College Block';
+}
+
+@font-face {
   src: url('../public/static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }

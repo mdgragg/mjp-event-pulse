@@ -5,9 +5,7 @@
 		}
 	],
 	"settings": {
-		"workbench.editorAssociations": [
-		
-		],
+		"workbench.editorAssociations": {},
 			"workbench.colorCustomizations": {
 				"titleBar.activeBackground": "#0e161f",
 				"activityBar.background": "#1e2f42",

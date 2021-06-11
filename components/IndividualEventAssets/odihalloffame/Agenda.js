@@ -13,16 +13,11 @@ const StyledBanner = styled.div`
   width: 100%;
   left: 0;
   background-color: ${(props) => props.color};
-  /* background-image: url('${(props) => props.image}'); */
+  background-image: url('${(props) => props.theme.header_img}');
   background-attachment: fixed;
   background-origin: center;
   background-repeat: no-repeat;
-  && h4 {
-    font-size: 2.5rem;
-  }
-  && p {
-    font-size: 1.5rem;
-  }
+
   && .banner-image {
     width: 80%;
     max-width: 450px;
@@ -31,19 +26,30 @@ const StyledBanner = styled.div`
   }
 `;
 
-const Banner = (props) => {
+const Agenda = ({ main_event }) => {
   return (
-    <StyledBanner
-      image={props.image}
-      color={props.color}
-      style={{ ...props.style }}
-    >
+    <StyledBanner image={props.image} color={props.color}>
       <div
         style={{ maxWidth: `${props.innerWidth || '450px'}`, margin: 'auto' }}
       >
-        <h4>{props.headerText}</h4>
-
-        <p>{props.children}</p>
+        <Typography
+          variant="h4"
+          component="h4"
+          style={{ color: props.secondary, fontWeight: '800' }}
+        >
+          {props.headerText}
+        </Typography>
+        <Typography
+          variant="body1"
+          component="p"
+          style={{
+            color: props.secondary,
+            fontSize: '1.25rem',
+            marginTop: '1rem',
+          }}
+        >
+          {props.children}
+        </Typography>
         {props.buttonText && (
           <a href={props.buttonLink}>
             <button> {props.buttonText}</button>
@@ -55,4 +61,4 @@ const Banner = (props) => {
   );
 };
 
-export default Banner;
+export default Agenda;

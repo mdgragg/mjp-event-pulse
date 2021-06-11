@@ -29,7 +29,7 @@ export var event_theme = {
   buttonColor: null,
   headerFont: null,
   headerBgColor: 'black',
-  videoBreakPoint: 0,
+  videoBreakPoint: 1000,
 };
 
 const Index = (props) => {

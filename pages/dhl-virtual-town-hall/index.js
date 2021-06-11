@@ -15,18 +15,20 @@ import DateParse from 'components/assets/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
-export const EVENT_URL = 'odihalloffame';
+export const EVENT_URL = 'dhl-virtual-town-hall';
 export var event_theme = {
-  heroHeight: '500px',
+  primary: '#d30411',
+  secondary: '#ffcc00',
+  heroHeight: '350px',
   fontFamily: null,
   headerOpacity: 0,
   white: null,
   blue: null,
-  red: 'rgb(187, 0, 0)',
+  red: '#d30411',
   buttonColor: null,
-  headerFont: 'College Block',
-  headerBgColor: 'black',
-  headerFontColor: 'rgb(187, 0, 0)',
+  headerFont: 'Delivery',
+  headerBgColor: '#ffcc00',
+  headerFontColor: '#d30411',
   videoBreakPoint: 1500,
 };
 const PLACEHOLD = 'https://placehold.co/';
@@ -38,7 +40,7 @@ const Index = (props) => {
 
   event_theme = {
     ...event_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
+    header_image: null,
   };
 
   const hasStarted = useCalculateIfStarted(main_event);
@@ -64,7 +66,6 @@ const Index = (props) => {
                 margin: 'auto',
                 fontSize: '3rem',
                 width: '80%',
-                letterSpacing: '5px',
               }}
             >
               {main_event.EventName}
@@ -80,12 +81,13 @@ const Index = (props) => {
           <center>
             <h2
               style={{
-                color: '#666666',
-                fontSize: '2.5rem',
+                color: 'white',
+                fontSize: '1.5rem',
                 fontFamily: 'Avenir',
               }}
             >
               <Counter__JustNumbers
+                prefix={'Starts In'}
                 start={main_event.eventStartEnd.StartDateTime}
                 end={main_event.eventStartEnd.EndDateTime}
                 afterStarted={'Live Now!'}
@@ -97,40 +99,30 @@ const Index = (props) => {
       </FlexHero>
       <Body>
         <Section>
-          <div
-            style={{
-              minHeight: '60vh',
-              backgroundColor: 'none',
-              margin: '2rem',
-            }}
-          >
-            <PlayerWithChat
-              videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-              showing={true}
-              hasStarted={true}
-              children={
-                <a href={main_event.LogoLink[0]?.Link} target="_blank">
-                  <button> Learn More About This Event</button>
-                </a>
-              }
-            />
-          </div>
+          <CenteredPlayer
+            videoUrl={main_event.streamLinks[0].url}
+            showing={true}
+            hasStarted={true}
+          />
         </Section>
-        <Section>
-          <div style={{ maxWidth: '1000px', margin: 'auto' }}>
-            <h2>Agenda</h2>
-          </div>
-        </Section>
+        <BannerWithPicture
+          style={{ fontFamily: 'Delivery', color: event_theme.primary }}
+          color={event_theme.secondary}
+          secondary={event_theme.primary}
+          headerText={`Agenda`}
+          innerWidth={`650px`}
+        >
+          {' '}
+          Agenda items can go here or it can be deleted
+        </BannerWithPicture>
         {main_event.Description && (
           <BannerWithPicture
+            style={{ fontFamily: 'Delivery', color: event_theme.primary }}
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-            color={'black'}
-            secondary={`white`}
+            color={event_theme.secondary}
+            secondary={event_theme.primary}
             headerText={`About This Event`}
             innerWidth={`650px`}
-            buttonText={`Learn More`}
-            buttonLink={main_event.LogoLink[0]?.Link || '#'}
           >
             {main_event.Description}
           </BannerWithPicture>
