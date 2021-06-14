@@ -92,7 +92,7 @@ const Index = (props) => {
       <Body>
         <DHLBody main_event={main_event} />
 
-        <BannerWithPicture
+        {/* <BannerWithPicture
           style={{ fontFamily: 'Delivery', color: event_theme.primary }}
           color={event_theme.secondary}
           secondary={event_theme.primary}
@@ -101,7 +101,7 @@ const Index = (props) => {
         >
           {' '}
           Agenda items can go here or it can be deleted
-        </BannerWithPicture>
+        </BannerWithPicture> */}
         {main_event.Description && (
           <BannerWithPicture
             style={{ fontFamily: 'Delivery', color: event_theme.primary }}
@@ -110,10 +110,18 @@ const Index = (props) => {
             secondary={event_theme.primary}
             headerText={`About This Event`}
             innerWidth={`650px`}
+            textColor={event_theme.primary}
           >
             {main_event.Description}
           </BannerWithPicture>
         )}
+        <div
+          style={{
+            width: '100%',
+            height: '250px',
+            backgroundColor: event_theme.secondary,
+          }}
+        ></div>
       </Body>
     </Page>
   );
