@@ -4,7 +4,7 @@ import { Typography, FormControl, Button, Input } from '@material-ui/core';
 
 const StyledBanner = styled.div`
   height: auto;
-  padding: 2em;
+  padding: 4em 0;
   display: flex;
   flex-direction: space-around;
   align-items: center;
@@ -23,6 +23,7 @@ const StyledBanner = styled.div`
   }
   && p {
     font-size: 1.5rem;
+    color: ${(props) => props.textColor || 'black'};
   }
   && .banner-image {
     width: 80%;

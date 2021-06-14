@@ -14,7 +14,7 @@ import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
 import DateParse from 'components/assets/DateParse';
-import Counter from 'components/Counters/Counter';
+import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import useTestBool from '../../hooks/useTestBool';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
@@ -76,35 +76,19 @@ const Index = (props) => {
               </h2>
             </center>
           </div>
-          <div>
+          <div
+            style={{
+              color: 'white',
+              backgroundColor: 'rgba(0,0,0,0.65)',
+              fontSize: '1.5rem',
+              padding: '1rem 2rem',
+            }}
+          >
             <center>
-              <Counter
-                fontSize={'1rem'}
-                shadow={'0px'}
-                bgColor={event_theme.blue}
-                counterText={'Starts In'}
-                counterTextColor={event_theme.gold}
-                textColor={event_theme.gold}
-                afterStarted={
-                  <>
-                    <center>
-                      <h2
-                        style={{
-                          fontWeight: '800',
-                          fontSize: '2rem',
-                          color: 'white',
-                          padding: '0.5rem',
-                          backgroundColor: event_theme.red,
-                          margin: 'auto auto 0 auto',
-                        }}
-                      >
-                        Live Now!
-                      </h2>
-                    </center>
-                  </>
-                }
-                start={start}
-                end={end}
+              <Counter__JustNumbers
+                prefix="Starts In"
+                start={main_event.eventStartEnd.StartDateTime}
+                end={main_event.eventStartEnd.EndDateTime}
               />
             </center>
           </div>
@@ -141,6 +125,7 @@ const Index = (props) => {
             imgUrl={main_event.KeyValue[1]?.value}
             color={'black'}
             secondary={`white`}
+            textColor={`white`}
             headerText={`About this Event`}
             innerWidth={`650px`}
             buttonText={`Learn More`}
