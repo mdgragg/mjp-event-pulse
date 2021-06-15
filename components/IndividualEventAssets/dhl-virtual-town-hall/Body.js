@@ -4,12 +4,12 @@ import styled from 'styled-components';
 
 const BigBG = styled.div`
   position: relative;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
   &&:after {
     background-image: url(${(props) => props.bgImg});
     position: absolute;
-    background-position: fixed;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-origin: center center;
     background-size: auto 100%;
@@ -31,7 +31,8 @@ const Body = ({ main_event }) => {
       <CenteredPlayer
         videoUrl={main_event.streamLinks[0].url}
         showing={true}
-        hasStarted={true}
+        has
+        Started={true}
       />
     </BigBG>
   );
