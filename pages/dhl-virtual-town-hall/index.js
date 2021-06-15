@@ -119,7 +119,7 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   // If you request this page with the preview mode cookies set:
   // - context.preview will be true
   // - context.previewData will be the same as
@@ -133,12 +133,13 @@ export async function getServerSideProps(ctx) {
     )[0];
     return {
       props: { event_meta: event_data, main_event },
+      revalidate: 500,
     };
   } catch (error) {
     console.log('[event].js error: ', error);
     return {
       redirect: {
-        destination: '/404',
+        destination: './',
       },
     };
   }

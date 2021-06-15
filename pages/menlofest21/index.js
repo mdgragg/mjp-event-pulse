@@ -62,40 +62,6 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x350',
   };
 
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-
-  const [hasAuthenticated, setHasAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-
-    const storage_auth = sessionStorage.getItem(session_token);
-
-    if (storage_auth === 'true') {
-      setHasAuthenticated(true);
-    } else {
-      setHasAuthenticated(false);
-    }
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <PasswordAuthModal
@@ -203,26 +169,11 @@ const Index = (props) => {
   );
 };
 
-export async function getStaticProps(ctx) {
-  let eventData = await getEventMeta(EVENT_URL);
-
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
-  }
+export async function getServerSideProps(ctx) {
   return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
+    redirect: {
+      destination: './',
     },
-    revalidate: 1800,
   };
 }
 

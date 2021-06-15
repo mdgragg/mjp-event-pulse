@@ -1,8 +1,3 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-
-import _ from 'lodash';
-import { getEventMeta } from 'lib/api';
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import JCFS__PAGE from 'components/IndividualEventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
@@ -27,7 +22,6 @@ export var event_theme = {
 };
 
 const Index = (props) => {
-  const router = useRouter();
   // const { error, loading, data } = useQuery(getMainEventMeta(50));
   const { speakers = [], event_meta, main_event } = props;
 
@@ -36,57 +30,12 @@ const Index = (props) => {
     bgImage: main_event.HeaderImage?.url || 'https://placehold.co/1920x860',
   };
 
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const calculateIfEnded = () => {
-    let now = new Date();
-    const parsed_event_end = Date.parse(main_event.eventStartEnd.EndDateTime);
-
-    let calc_time = parsed_event_end - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-  const [hasEnded, setEnded] = useState(calculateIfEnded());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-      setEnded(calculateIfEnded());
-      if (calculateIfEnded() && !hasEnded) {
-        window.location.reload();
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
-
-  const MainPage = () => {
-    return (
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <JCFS__PAGE theme={event_theme} main_event={main_event} />
-      </Page>
-    );
-  };
-
-  return <MainPage />;
+  return (
+    <Page theme={event_theme}>
+      <Meta title={event_meta.EventJobName}> </Meta>
+      <JCFS__PAGE theme={event_theme} main_event={main_event} />
+    </Page>
+  );
 };
 
 export async function getServerSideProps(ctx) {
