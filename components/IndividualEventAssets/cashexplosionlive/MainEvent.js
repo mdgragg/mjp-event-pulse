@@ -45,7 +45,6 @@ const Nav = styled.div`
 
 const ShowWrap = styled.div`
   position: relative;
-  min-height: 750px;
   width: 95%;
   display: grid;
   margin: 2rem auto 6rem auto;
@@ -53,14 +52,16 @@ const ShowWrap = styled.div`
   grid-template-columns: 75% 25%;
   grid-template-rows: 100%;
   justify-content: center;
-  && > span.muitabs-indicator: {
-    background-color: blue;
-  }
+  align-items: stretch;
+
   && button.MuiTab-root {
     font-size: 1.5rem;
     font-family: ${(props) => props.theme.fontFamily};
   }
-
+  /* prettier-ignore */
+  && span.MuiTabs-indicator {
+    background-color: ${(props) => props.theme.pink};
+  }
   @media all and (max-width: 1265px) {
     grid-template-columns: 50% 50%;
     margin: 5% auto 20% auto;
@@ -84,38 +85,29 @@ const ShowWrap = styled.div`
 const CountWrap = styled.div`
   background-color: ${(props) => props.theme.pink};
   color: white;
-  height: min-content;
+  justify-self: center;
   align-self: center;
-  font-family: Avenir;
   text-align: center;
+  font-weight: 800;
   text-transform: uppercase;
-  font-size: 1.25rem;
-  letter-spacing: 3px;
+  font-size: 2rem;
+  letter-spacing: 2px;
   padding: 8px 30px;
+  width: max-content;
   @media all and (max-width: 550px) {
     font-size: 1rem;
   }
 `;
 
+const CrowdPurr = styled.div`
+  min-height: 980px;
+`;
 const MainEvent = ({ main_event }) => {
   return (
     <>
       <Nav>
         <img src={main_event.LogoLink[0].Media.url} className="logo" />
-        <CountWrap>
-          <Counter__JustNumbers
-            start={main_event.eventStartEnd.StartDateTime}
-            end={main_event.eventStartEnd.EndDateTime}
-            afterStarted={'LIVE!'}
-            afterEnded={
-              <>
-                Thanks for Attending!
-                <br /> This event has ended.
-              </>
-            }
-            prefix={'The Event Starts In'}
-          />
-        </CountWrap>
+        <CountWrap>Live Now!</CountWrap>
       </Nav>
       <ShowWrap>
         <div className="video">
@@ -126,7 +118,12 @@ const MainEvent = ({ main_event }) => {
             data={[
               {
                 title: `${main_event.streamLinks[1].Service}`,
-                content: <Fluid__iFrame src={main_event.streamLinks[1].url} />,
+                content: (
+                  <CrowdPurr>
+                    {' '}
+                    <Fluid__iFrame src={main_event.streamLinks[1].url} />
+                  </CrowdPurr>
+                ),
               },
               {
                 title: `${main_event.streamLinks[2].Service}`,
