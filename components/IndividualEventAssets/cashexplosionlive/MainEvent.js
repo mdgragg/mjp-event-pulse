@@ -106,7 +106,11 @@ const MainEvent = ({ main_event }) => {
   return (
     <>
       <Nav>
-        <img src={main_event.LogoLink[0].Media.url} className="logo" />
+        <img
+          src={main_event.LogoLink[0].Media.url}
+          className="logo"
+          alt="Cash Explosion Live Logo"
+        />
         <CountWrap>Live Now!</CountWrap>
       </Nav>
       <ShowWrap>

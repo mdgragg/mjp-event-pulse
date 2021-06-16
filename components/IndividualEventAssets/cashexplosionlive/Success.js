@@ -134,7 +134,11 @@ const InfoBoxes = styled.div`
 const SignUp = ({ main_event, callback }) => {
   return (
     <ThanksWrap>
-      <img src={main_event.LogoLink[0].Media.url} className="logo" />
+      <img
+        src={main_event.LogoLink[0].Media.url}
+        className="logo"
+        alt="Cash explosion live logo"
+      />
       <div className="counter">
         <h3>
           Registration Opens In{' '}

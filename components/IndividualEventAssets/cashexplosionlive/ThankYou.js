@@ -63,7 +63,10 @@ const SignUp = ({ main_event }) => {
   return (
     <ThanksWrap>
       <div className="logo">
-        <img src={main_event.KeyValue.find((kv) => kv.key === 'Logo').value} />
+        <img
+          src={main_event.LogoLink[0].Media.url}
+          alt={`Cash explostion live logo`}
+        />
       </div>
 
       <ThanksArea>

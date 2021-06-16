@@ -153,7 +153,11 @@ const SignUp = ({ main_event, handleSubmit, handleSetEmail, form }) => {
   return (
     <SignUpWrap className="blackout">
       <div className="logo">
-        <img src={main_event.LogoLink[0].Media.url} className="logo" />
+        <img
+          src={main_event.LogoLink[0].Media.url}
+          className="logo"
+          alt="Cash explosion live logo"
+        />
       </div>
       <CTA>
         <span className="dollars">
