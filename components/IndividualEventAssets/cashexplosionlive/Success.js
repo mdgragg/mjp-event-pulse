@@ -79,7 +79,7 @@ const InfoBoxes = styled.div`
   && div.box {
     background-color: ${(props) => props.theme.green};
     color: white;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,7 +126,7 @@ const InfoBoxes = styled.div`
     }
     && div.info {
       margin-top: 1rem;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       height: 100px;
     }
   }

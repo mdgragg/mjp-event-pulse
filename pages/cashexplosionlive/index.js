@@ -108,6 +108,7 @@ const Index = (props) => {
   //listen for has started
 
   useEffect(() => {
+    console.log(hasStartEnd);
     if (hasStartEnd.hasEnded) {
       console.log('1');
       return setDeciderTemplate('thank-you');
@@ -216,7 +217,7 @@ export async function getStaticProps(ctx) {
         event_meta: eventData,
         main_event,
       },
-      revalidate: 1200,
+      revalidate: 300,
     };
     return values;
   } catch (error) {

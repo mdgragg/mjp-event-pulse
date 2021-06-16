@@ -23,6 +23,12 @@ const Nav = styled.div`
 
   @media all and (max-width: 1265px) {
     grid-template-columns: 50% 50%;
+    height: 150px;
+    && .logo {
+      /* max-height: 180px; */
+      height: auto;
+      width: 65%;
+    }
   }
 
   @media all and (max-width: 880px) {
@@ -53,7 +59,9 @@ const ShowWrap = styled.div`
   grid-template-rows: 100%;
   justify-content: center;
   align-items: stretch;
-
+  && .chat {
+    display: none;
+  }
   && button.MuiTab-root {
     font-size: 1.5rem;
     font-family: ${(props) => props.theme.fontFamily};
@@ -70,13 +78,25 @@ const ShowWrap = styled.div`
     gap: 2rem;
     && .video {
       grid-column: 1/3;
+      width: 100%;
+      max-width: 900px;
+      justify-self: center;
     }
     && .crowd-purr {
       grid-column: 1/3;
       grid-row: 2/3;
       width: 100%;
-      max-width: 98vw;
+      max-width: 450px;
       margin: auto;
+      height: 100%;
+    }
+    && .chat {
+      /* grid-column: 2/3; */
+      /* grid-row: 2/3; */
+      width: 95%;
+      max-width: 500px;
+      margin: auto;
+      display: block;
       height: 100%;
     }
   }
@@ -85,14 +105,15 @@ const ShowWrap = styled.div`
 const CountWrap = styled.div`
   background-color: ${(props) => props.theme.pink};
   color: white;
+  font-family: House-Gothic;
   justify-self: center;
   align-self: center;
   text-align: center;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 2rem;
-  letter-spacing: 2px;
-  padding: 8px 30px;
+  font-size: 2.5rem;
+  letter-spacing: 4px;
+  padding: 4px 30px;
   width: max-content;
   @media all and (max-width: 550px) {
     font-size: 1rem;
@@ -137,6 +158,9 @@ const MainEvent = ({ main_event }) => {
           />
           {/* */}
         </div>
+        {/* <div className="chat">
+          <Fluid__iFrame src={main_event.streamLinks[2].url} />
+        </div> */}
       </ShowWrap>
     </>
   );
