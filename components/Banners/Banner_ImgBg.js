@@ -9,6 +9,7 @@ const TheBanner = styled(MyBanner)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding: 4rem 0;
   && .children {
     position: relative;
     z-index: 100;
@@ -19,14 +20,16 @@ const TheBanner = styled(MyBanner)`
     text-align: center;
     width: inherit;
   }
-  && img {
+  && img.bg {
     position: absolute;
-    width: 100%;
     height: auto;
+    width: 100%;
+    top: 0;
+    left: 0;
   }
 
-  @media all and (max-width: 768px) {
-    && img {
+  @media all and (max-width: 1000px) {
+    && img.bg {
       height: 100%;
       width: auto;
     }
@@ -38,7 +41,7 @@ const Banner_ImgBg = (props) => {
   return (
     <TheBanner>
       <div className="children"> {props.children} </div>
-      <img src={imgSrc} alt={'banner background ' + imgAlt} />
+      <img src={imgSrc} className="bg" alt={'banner background ' + imgAlt} />
     </TheBanner>
   );
 };

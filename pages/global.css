@@ -1,4 +1,11 @@
 @font-face {
+  src: url('../public/static/fonts/Georgia/Georgia.ttf') format('ttf');
+  font-family: 'Georgia';
+  font-weight: 200;
+}
+
+
+@font-face {
   src: url('../public/static/fonts/Delivery/Delivery_W_Bd.woff') format('woff');
   font-family: 'Delivery';
   font-weight: 800;

@@ -27,6 +27,11 @@ const ChatBox = styled.div`
   height: 100%;
   min-height: 550px;
   border: 2px solid rgba(203, 203, 203, 0.35);
+  @media all and (max-width: 1000px) {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
 `;
 
 const PlayerWithChat = ({ videoUrl, chatUrl, hasStarted, children }) => {

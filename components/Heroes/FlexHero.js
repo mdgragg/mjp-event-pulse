@@ -17,7 +17,9 @@ const HeroHolder = styled.div`
   background-color: ${(props) => props.theme.headerBgColor};
   overflow: hidden;
   color: white;
-
+  && > div {
+    text-align: center;
+  }
   && ::before {
     height: 100%;
     width: 100%;
