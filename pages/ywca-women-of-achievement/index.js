@@ -95,13 +95,13 @@ const Index = (props) => {
             >
               <div
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.6)',
+                  backgroundColor: 'rgba(255,255,255,0.75)',
                   maxWidth: '650px',
                   padding: '3rem',
                   margin: 'auto',
                 }}
               >
-                <h2>About This Event</h2>
+                <h3>About This Event</h3>
                 <p>{main_event.Description}</p>
                 <a href={main_event.LogoLink[0]?.Link}>
                   <button> Learn More</button>

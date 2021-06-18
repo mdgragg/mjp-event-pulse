@@ -10,6 +10,7 @@ const AfterEnded = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '400px',
+        textAlign: 'center',
       }}
     >
       <div>

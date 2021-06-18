@@ -34,8 +34,10 @@ const TheHero = styled.div`
   && .counter {
     font-size: 1rem;
     font-weight: 800;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.8);
+    color: ${(props) => props.theme.orange};
+    width: 70%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 1rem;
     text-align: center;
   }
@@ -59,13 +61,13 @@ const Title = styled.div`
   /* mix-blend-mode: hard-light; */
   font-family: Futura Bold;
   background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-origin: top center;
-  background-position: 0px 20px;
+  background-size: 100% 100%;
+  background-origin: center center;
+  background-position: 0px 10px;
   background-attachment: cover;
   background-image: url('https://storage.googleapis.com/mjp-stream-public/ywca-women-of-achievement/text-bg.png');
 
-  -webkit-text-fill-color: rgba(0, 0, 0, 0.1);
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.2);
   -webkit-background-clip: text;
 
   && span.date {
