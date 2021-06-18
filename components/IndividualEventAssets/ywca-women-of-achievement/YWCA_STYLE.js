@@ -14,7 +14,7 @@ const WRAP = styled.div`
     background-color: grey;
   }
   h3 {
-    font-family: Futura-Bold;
+    font-family: Futura Bold;
     text-transform: uppercase;
     font-size: 2.25rem;
     color: ${(props) => props.theme.orange};
