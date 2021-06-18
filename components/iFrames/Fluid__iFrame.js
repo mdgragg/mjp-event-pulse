@@ -12,10 +12,10 @@ const FrameWrap = styled.div`
     min-height: inherit;
   }
 `;
-const Fluid__iFrame = ({ src = '/', options, minHeight }) => {
+const Fluid__iFrame = ({ src = '/', options, minHeight, iFrameStyle }) => {
   return (
     <FrameWrap minHeight={minHeight}>
-      <iframe src={src} frameBorder="0"></iframe>
+      <iframe src={src} frameBorder="0" style={{ ...iFrameStyle }}></iframe>
     </FrameWrap>
   );
 };

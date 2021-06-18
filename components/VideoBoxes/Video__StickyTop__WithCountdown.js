@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import VideoBox__StickyTop from './Video__StickyTop';
-import Moment from 'react-moment';
-import moment from 'moment';
-
+import { calcHasStarted } from 'lib/helpers';
 const Video__StickyTop__WithCountdown = ({
   src,
   isStarted,
   showMinutesBefore,
   start,
-  showBefore,
+  showBefore = () => {
+    <></>;
+  },
 }) => {
   const [videoShowing, setVideoShowing] = useState(false);
 
