@@ -4,7 +4,6 @@
   font-weight: 200;
 }
 
-
 @font-face {
   src: url('../public/static/fonts/Delivery/Delivery_W_Bd.woff') format('woff');
   font-family: 'Delivery';
@@ -119,7 +118,6 @@ button {
 
 button:hover {
   cursor: pointer;
-  border-radius: 20px;
   background-color: black;
   color: white;
 }

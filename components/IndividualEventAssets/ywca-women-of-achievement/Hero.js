@@ -60,11 +60,12 @@ const Title = styled.div`
   font-family: Futura Bold;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-origin: center center;
-  background-attachment: fixed;
+  background-origin: top center;
+  background-position: 0px 20px;
+  background-attachment: cover;
   background-image: url('https://storage.googleapis.com/mjp-stream-public/ywca-women-of-achievement/text-bg.png');
 
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.1);
   -webkit-background-clip: text;
 
   && span.date {
