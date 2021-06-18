@@ -53,56 +53,9 @@ const Index = (props) => {
   const [auth, setAuth] = useState(false);
 
   return (
-    <AuthWrap
-      event_to_check={main_event}
-      callback={(res) => {
-        toast.success(
-          `Hello ${
-            res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-          }, welcome to ${main_event.EventName}`
-        );
-      }}
-      render={(value) => setAuth(value)}
-    >
-      <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <Body>
-          <Section>
-            <PlayerWithChat
-              videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-              showing={auth}
-              hasStarted={true}
-            />
-          </Section>
-          <Banner_ImgBg
-            imgSrc={
-              'https://storage.googleapis.com/mjp-stream-public/ywca-women-of-achievement/WOA2015-1861bw-1400x791.jpg'
-            }
-            imgAlt="Background pattern of radiating lines"
-          >
-            <div
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.6)',
-                maxWidth: '650px',
-                padding: '3rem',
-                margin: 'auto',
-              }}
-            >
-              <h2>About This Event</h2>
-              <p>{main_event.Description}</p>
-              <a href={main_event.LogoLink[0]?.Link}>
-                <button> Learn More</button>
-              </a>
-              <img
-                src={main_event.LogoLink[0].Media.url}
-                style={{ height: '80px', width: 'auto', margin: '2rem auto' }}
-              />
-            </div>
-          </Banner_ImgBg>
-        </Body>
-      </Page>
-    </AuthWrap>
+    <Page theme={event_theme}>
+      <Meta title={event_meta.EventJobName}> </Meta>
+    </Page>
   );
 };
 // export async function getServerSideProps(ctx) {
