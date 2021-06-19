@@ -23,29 +23,23 @@ const Nav = styled.div`
 
   @media all and (max-width: 1265px) {
     grid-template-columns: 50% 50%;
-    height: 150px;
+    padding: 1rem;
+    height: 180px;
     && .logo {
-      /* max-height: 180px; */
-      height: auto;
-      width: 65%;
+      max-height: 180px;
+      width: auto;
     }
   }
 
   @media all and (max-width: 880px) {
     margin: auto;
-    grid-template-columns: 80%;
-    padding: 2rem;
-    height: 100%;
+
     align-items: center;
     justify-content: center;
-    && .logo {
-      /* max-height: 180px; */
-      height: auto;
-      width: 95%;
-    }
   }
   @media all and (max-width: 550px) {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
+    height: 220px;
   }
 `;
 
@@ -74,8 +68,8 @@ const ShowWrap = styled.div`
     grid-template-columns: 50% 50%;
     margin: 5% auto 20% auto;
     justify-content: center;
-    grid-template-rows: min-content 880px;
-    gap: 2rem;
+    grid-template-rows: min-content auto;
+    gap: 10px;
     && .video {
       grid-column: 1/3;
       width: 100%;
@@ -115,13 +109,17 @@ const CountWrap = styled.div`
   letter-spacing: 4px;
   padding: 4px 30px;
   width: max-content;
-  @media all and (max-width: 550px) {
+  @media all and (max-width: 880px) {
     font-size: 1rem;
   }
 `;
 
 const CrowdPurr = styled.div`
-  min-height: 980px;
+  min-height: 1100px;
+`;
+
+const ChatWrap = styled.div`
+  min-height: 80vh;
 `;
 const MainEvent = ({ main_event }) => {
   return (
@@ -145,14 +143,17 @@ const MainEvent = ({ main_event }) => {
                 title: `${main_event.streamLinks[1].Service}`,
                 content: (
                   <CrowdPurr>
-                    {' '}
                     <Fluid__iFrame src={main_event.streamLinks[1].url} />
                   </CrowdPurr>
                 ),
               },
               {
                 title: `${main_event.streamLinks[2].Service}`,
-                content: <Fluid__iFrame src={main_event.streamLinks[2].url} />,
+                content: (
+                  <ChatWrap>
+                    <Fluid__iFrame src={main_event.streamLinks[2].url} />{' '}
+                  </ChatWrap>
+                ),
               },
             ]}
           />

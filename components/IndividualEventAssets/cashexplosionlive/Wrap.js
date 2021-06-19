@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const MainWrap = styled.div`
   min-height: 100vh;
+  min-width: 350px;
+  overflow-x: scroll;
   font-family: Avenir;
   font-weight: 600;
   width: 100%;
