@@ -53,7 +53,7 @@ const Title = styled.h1`
   }
 `;
 
-function GameShow__Main({ main_event }) {
+function GameShow__Main({ main_event, data }) {
   const start = main_event.eventStartEnd.StartDateTime;
   return (
     <>
@@ -70,6 +70,7 @@ function GameShow__Main({ main_event }) {
         </div>
       </Header>
       <GameShow__Body
+        data={data}
         src={main_event.streamLinks[0].url}
         start={start}
         chatSrc={main_event.streamLinks[1].url}

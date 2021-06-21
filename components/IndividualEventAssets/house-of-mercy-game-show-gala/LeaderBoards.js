@@ -80,7 +80,7 @@ const LeaderBoards = ({ leader_data }) => {
           <h3>Leader Boards</h3>
           <LeaderBoardGrid>
             {dummy.map((data) => (
-              <SingleTeam data={data} />
+              <SingleTeam data={data} key={data.name} />
             ))}
           </LeaderBoardGrid>
         </>

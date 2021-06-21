@@ -43,7 +43,7 @@ const StyledVideoBox = styled.div`
   }
 `;
 
-const GameShow__Body = ({ src, chatSrc, start }) => {
+const GameShow__Body = ({ src, chatSrc, start, data }) => {
   return (
     <TheBody>
       <div>
@@ -61,10 +61,10 @@ const GameShow__Body = ({ src, chatSrc, start }) => {
             }
           />
         </VideoBox>
-        <LeaderBoards />
+        <LeaderBoards data={data} />
       </div>
       <div>
-        <Total />
+        <Total data={data.total} />
         <div style={{ minHeight: '550px', margin: 'auto' }}>
           <Chat__iFrame src={chatSrc} iFrameStyle={{ padding: '1rem' }} />
         </div>

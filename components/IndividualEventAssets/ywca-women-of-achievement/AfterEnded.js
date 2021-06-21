@@ -16,7 +16,7 @@ const AfterEnded = () => {
       <div>
         <h3>Thanks for Attending!</h3>
         <p style={{ textAlign: 'center', margin: '2rem auto' }}>
-          This event has ended, but we appreciate your input. <br /> please fill
+          This event has ended, but we appreciate your input. <br /> Please fill
           out the survey below to help us improve.
         </p>
         <button>Fill Out The Survey</button>

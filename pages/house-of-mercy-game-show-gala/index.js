@@ -15,6 +15,7 @@ import GAMEWRAP from '../../components/IndividualEventAssets/house-of-mercy-game
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
 import AuthWrap from 'components/AuthWrap';
+import UseServerSentEvents from '../../hooks/useServerSentEvents';
 export var event_theme = {
   h1: {
     fontSize: '3rem',
@@ -47,12 +48,13 @@ const Index = (props) => {
 
   const hasStartEnd = useCalculateIfStarted(main_event);
   const [auth, setAuth] = useState(false);
+  const data = UseServerSentEvents();
 
   return (
     <Page theme={event_theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
       <GAMEWRAP>
-        <GameShow__Main main_event={main_event} />
+        <GameShow__Main main_event={main_event} data={data} />
       </GAMEWRAP>
     </Page>
   );
