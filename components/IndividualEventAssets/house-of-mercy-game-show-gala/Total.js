@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CountUp from 'react-countup';
 import Video__StickyTop__WithCoundown from '../../VideoBoxes/Video__StickyTop__WithCountdown';
@@ -29,7 +29,14 @@ const TheTotal = styled.div`
   }
 `;
 
-const Total = ({ total = 223243 }) => {
+const Total = ({ data }) => {
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    if (data) {
+      setTotal(data.total);
+    }
+  }, [data]);
+
   return (
     <TheTotal>
       Total Raised: <br />

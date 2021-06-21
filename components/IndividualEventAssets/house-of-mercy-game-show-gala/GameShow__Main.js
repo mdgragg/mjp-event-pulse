@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
 import DateParse from '../../assets/DateParse';
+
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
   height: 350px;
@@ -62,6 +63,7 @@ function GameShow__Main({ main_event, data }) {
           <img className="logo" src={main_event.LogoLink[0].Media.url}></img>
           <div>
             <Title>{main_event.EventName}</Title>
+            {JSON.stringify(data)}
             <DateParse date={start} />
           </div>
           <div className="counter">

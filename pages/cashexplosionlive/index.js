@@ -189,7 +189,7 @@ const Index = (props) => {
             'thank-you': (
               <ThankYou main_event={main_event} theme={event_theme} />
             ),
-          }[deciderTemplate]
+          }['thank-you']
         }
         {/* <Decider
           template={deciderTemplate}

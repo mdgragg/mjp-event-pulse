@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Total from './Total';
 import CountUp from 'react-countup';
 const Wrap = styled.div`
   text-align: center;
+  color: white;
+  && h2 {
+    color: white;
+  }
   && h3 {
     font-size: 1.5rem;
   }
@@ -72,14 +76,23 @@ const dummy = [
   { name: 'Stacey', previousBid: 0, currentBid: 20 },
 ];
 
-const LeaderBoards = ({ leader_data }) => {
+const LeaderBoards = ({ data }) => {
+  const [leader_data, set_leader_data] = useState(null);
+
+  useEffect(() => {
+    if (data?.teamTotal) {
+      set_leader_data(data.teamTotal);
+    } else {
+      set_leader_data(null);
+    }
+  }, [data]);
   return (
     <Wrap>
-      {!leader_data ? (
+      {leader_data ? (
         <>
           <h3>Leader Boards</h3>
           <LeaderBoardGrid>
-            {dummy.map((data) => (
+            {leader_data.map((data) => (
               <SingleTeam data={data} key={data.name} />
             ))}
           </LeaderBoardGrid>

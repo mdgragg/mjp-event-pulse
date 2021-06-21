@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const FrameWrap = styled.div`
   position: relative;
   height: 100%;
-  min-height: 550px;
+  min-height: 625px;
   background-color: white;
   width: 100%;
   max-width: 450px;

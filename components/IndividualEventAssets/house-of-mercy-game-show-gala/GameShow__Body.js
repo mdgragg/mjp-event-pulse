@@ -64,8 +64,12 @@ const GameShow__Body = ({ src, chatSrc, start, data }) => {
         <LeaderBoards data={data} />
       </div>
       <div>
-        <Total data={data.total} />
-        <div style={{ minHeight: '550px', margin: 'auto' }}>
+        {/* <Total data={data} /> */}
+        <div>
+          <button>Donate Now</button>
+        </div>
+
+        <div style={{ minHeight: '650px', margin: 'auto' }}>
           <Chat__iFrame src={chatSrc} iFrameStyle={{ padding: '1rem' }} />
         </div>
       </div>

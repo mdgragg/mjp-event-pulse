@@ -48,7 +48,7 @@ const Index = (props) => {
 
   const hasStartEnd = useCalculateIfStarted(main_event);
   const [auth, setAuth] = useState(false);
-  const data = UseServerSentEvents();
+  const data = UseServerSentEvents(main_event.streamLinks[2].url);
 
   return (
     <Page theme={event_theme}>
@@ -75,6 +75,7 @@ export async function getStaticProps(ctx) {
       event_meta: event_data,
       main_event,
     },
+    revalidate: 500,
   };
 }
 

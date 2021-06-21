@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const UseServerSentEvents = (
-  endpoint = 'https://afternoon-cove-71825.herokuapp.com/auction'
-) => {
+const UseServerSentEvents = (endpoint = 'http://localhost:4444/auction') => {
   const [listening, setListening] = useState(false);
   const [data, setData] = useState(null);
 
