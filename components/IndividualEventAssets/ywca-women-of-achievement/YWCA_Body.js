@@ -60,16 +60,13 @@ const YWCA_Body = () => {
           </ImageWrap>
         </div>
         <div>
-          <h3>Help Us Improve</h3>
+          <h3>Share Your Feedback</h3>
           <ImageWrap>
             <img
               src="https://www.ywcacolumbus.org/wp-content/uploads/sites/63/DSC_1375.jpg"
               alt="YWCA women hugging on stage"
             />
-            <a
-              href=" https://www.ywcacolumbus.org/get-involved/donate-now/donate-now-women-of-achievement/"
-              target="_blank"
-            >
+            <a href="#" target="_blank">
               <button>Fill Out The Survey</button>
             </a>
           </ImageWrap>
