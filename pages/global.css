@@ -92,6 +92,25 @@
   font-family: 'Gotham';
 }
 
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Light.otf');
+  font-style: thin;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Bold.otf');
+  font-weight: 800;
+  font-style: bold;
+}
 html {
   scroll-behavior: smooth;
 }
