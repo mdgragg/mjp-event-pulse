@@ -101,7 +101,7 @@ const SingleTeam = ({ data }) => {
     >
       <div className="name">Team {data.name}</div>
       <div className="sector">
-        Team {getNameData[data.name.toLowerCase()].sector}
+        {getNameData[data.name.toLowerCase()].sector}
       </div>
       <div className="amount">
         <CountUp
