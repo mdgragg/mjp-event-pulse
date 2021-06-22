@@ -7,16 +7,16 @@ import { event_theme, EVENT_URL } from './index';
 import LeaderBoards from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/LeaderBoards';
 import { getEventMeta } from 'lib/api';
 
-const pip062421 = ({ url }) => {
+const pip062422 = ({ url }) => {
   const data = UseServerSentEvents(url);
   return (
     <Page theme={event_theme}>
-      <LeaderBoards data={data} />
+      <Total data={data} />
     </Page>
   );
 };
 
-export default pip062421;
+export default pip062422;
 
 export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);

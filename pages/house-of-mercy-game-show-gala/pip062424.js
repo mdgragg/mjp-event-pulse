@@ -4,14 +4,14 @@ import UseServerSentEvents from '../../hooks/useServerSentEvents';
 import Total from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/Total';
 import { event_theme, EVENT_URL } from './index';
 
-import LeaderBoards from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/LeaderBoards';
+import { LeaderBoards__Leading } from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/LeaderBoards';
 import { getEventMeta } from 'lib/api';
 
 const pip062421 = ({ url }) => {
   const data = UseServerSentEvents(url);
   return (
     <Page theme={event_theme}>
-      <LeaderBoards data={data} />
+      <LeaderBoards__Leading data={data} />
     </Page>
   );
 };

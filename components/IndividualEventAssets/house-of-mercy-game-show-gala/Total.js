@@ -4,28 +4,24 @@ import CountUp from 'react-countup';
 import Video__StickyTop__WithCoundown from '../../VideoBoxes/Video__StickyTop__WithCountdown';
 const TheTotal = styled.div`
   position: relative;
-  background-color: ${(props) => props.theme.purple};
+  background-color: #f18a00;
   color: white;
-  max-width: 350px;
+  width: 99vw;
+  height: 99vh;
   margin: auto;
   text-align: center;
-  font-family: Akzidenz-Grotesque-Bold;
+  font-family: Sofia;
   border: 10px solid ${(props) => props.theme.lightOrange};
-  font-size: 1.25rem;
+  font-size: 9rem;
   margin-bottom: 1rem;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
   && .numbers {
-    font-size: 2rem;
-  }
-  && ::before {
-    /* box-sizing: content-box; */
-    position: absolute;
-    height: calc(100% + 15px);
-    width: calc(100% + 15px);
-    top: -8px;
-    left: -8px;
-    content: '';
-    border: 6px dotted white;
+    font-weight: 800;
   }
 `;
 
@@ -39,7 +35,8 @@ const Total = ({ data }) => {
 
   return (
     <TheTotal>
-      Total Raised: <br />
+      Total Raised
+      <br />
       <span className="numbers">
         <CountUp
           formattingFn={(value) =>

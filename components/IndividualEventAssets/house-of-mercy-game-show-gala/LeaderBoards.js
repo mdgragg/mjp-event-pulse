@@ -46,7 +46,7 @@ const LeaderBoardGrid = styled.div`
   text-align: center;
   width: 99vw;
   height: 99vh;
-  margin: 0;
+  margin: 0 auto;
   font-size: 1.5rem;
   padding: 0;
   && .centered-image {
@@ -75,6 +75,7 @@ const TeamItem = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
   && .name {
     font-size: 4rem;
     letter-spacing: 2px;
@@ -152,7 +153,6 @@ const LeaderBoards = ({ data }) => {
   return (
     <Wrap>
       <>
-        <h3>Leader Boards</h3>
         <LeaderBoardGrid>
           {leader_data
             ? leader_data.map((data) => (
@@ -170,3 +170,29 @@ const LeaderBoards = ({ data }) => {
 };
 
 export default LeaderBoards;
+
+export function LeaderBoards__Leading({ data }) {
+  const [leader_data, set_leader_data] = useState(null);
+
+  useEffect(() => {
+    if (data?.teamTotal) {
+      let leader_array = data.teamTotal;
+      leader_array.sort((a, b) => {
+        let value;
+        a.currentBid > b.currentBid ? (value = -1) : (value = 1);
+        return value;
+      });
+      set_leader_data(leader_array[0]);
+    } else {
+      set_leader_data(null);
+    }
+  }, [data]);
+
+  return (
+    <Wrap>
+      <div style={{ height: '100vh' }}>
+        {leader_data && <SingleTeam data={leader_data} />}
+      </div>
+    </Wrap>
+  );
+}
