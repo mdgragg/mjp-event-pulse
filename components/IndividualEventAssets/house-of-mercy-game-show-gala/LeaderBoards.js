@@ -35,6 +35,12 @@ const LeaderBoardGrid = styled.div`
     content: '';
     border: 6px dotted white;
   }
+  @media all and (max-width: 768px) {
+    grid-template-columns: 100%;
+    font-size: 1rem;
+    margin: 0.25rem auto;
+    width: 100%;
+  }
 `;
 
 const TeamItem = styled.div`
@@ -44,6 +50,10 @@ const TeamItem = styled.div`
 
   && .name {
     font-weight: 800;
+  }
+  @media all and (max-width: 768px) {
+    margin: 0.5rem;
+    padding: 0.5rem;
   }
 `;
 const SingleTeam = ({ data }) => {
@@ -78,7 +88,7 @@ const dummy = [
 
 const LeaderBoards = ({ data }) => {
   const [leader_data, set_leader_data] = useState(null);
-
+  const [static_data, set_static_data] = useState(dummy);
   useEffect(() => {
     if (data?.teamTotal) {
       set_leader_data(data.teamTotal);
@@ -99,8 +109,12 @@ const LeaderBoards = ({ data }) => {
         </>
       ) : (
         <>
-          <h3>Total</h3>
-          <Total />
+          <h3>Leader Boards</h3>
+          <LeaderBoardGrid>
+            {dummy.map((data) => (
+              <SingleTeam data={data} key={data.name} />
+            ))}
+          </LeaderBoardGrid>
         </>
       )}
     </Wrap>
