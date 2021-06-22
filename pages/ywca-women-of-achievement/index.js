@@ -103,7 +103,7 @@ const Index = (props) => {
               >
                 <h3>About This Event</h3>
                 <p>{main_event.Description}</p>
-                <a href={main_event.LogoLink[0]?.Link}>
+                <a href={main_event.LogoLink[0]?.Link} target="_blank">
                   <button> Learn More</button>
                 </a>
                 <img

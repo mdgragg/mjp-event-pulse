@@ -2,12 +2,13 @@ import React from 'react';
 import Page from 'components/template1/Page';
 import UseServerSentEvents from '../../hooks/useServerSentEvents';
 import Total from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/Total';
-import { event_theme } from './index';
+import { event_theme, EVENT_URL } from './index';
 
 import LeaderBoards from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/LeaderBoards';
 import { getEventMeta } from 'lib/api';
+
 const pip062421 = ({ url }) => {
-  const data = UseServerSentEvents();
+  const data = UseServerSentEvents(URLSearchParams);
   return (
     <Page theme={event_theme}>
       <Total data={data} />
