@@ -3,18 +3,9 @@ import { getEventMeta } from 'lib/api';
 
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
-import Section from 'components/Sections/Section';
-import PlayerWithChat from 'components/BodyTemplates/PlayerWithChat';
-import Body from 'components/template1/Body';
-import Hero from 'components/IndividualEventAssets/ywca-women-of-achievement/Hero';
-import { toast } from 'react-toastify';
-import FullWrap from 'components/FullWrap';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
+
 import GameShow__Main from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GameShow__Main';
 import GAMEWRAP from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-
-import AuthWrap from 'components/AuthWrap';
 import UseServerSentEvents from '../../hooks/useServerSentEvents';
 export var event_theme = {
   h1: {
@@ -46,8 +37,6 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStartEnd = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useState(false);
   const data = UseServerSentEvents(main_event.streamLinks[2].url);
 
   return (

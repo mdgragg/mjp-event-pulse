@@ -9,16 +9,19 @@ const TheBody = styled.div`
   display: grid;
   grid-template-columns: 65% 35%;
   padding: 3rem 1rem;
-  background-color: ${(props) => props.theme.green};
-  background-size: 100% 100%;
-  background-image: url('https://storage.googleapis.com/mjp-stream-public/house-of-mercy-game-show-gala/Green%20Dot%20Pattern.png');
+  background-color: #f8991b;
+  background-image: radial-gradient(#ef7e22 25%, transparent 26%),
+    radial-gradient(#ef7e22 10%, transparent 11%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0px 0px;
+  background-repeat: repeat;
   color: white;
   /* min-height: 100vh; */
   && > div {
     margin: 0 1rem;
   }
   && .donate-area {
-    margin: 3rem auto;
+    margin: 0 auto 3rem auto;
   }
   && .about-buttons {
     max-width: 550px;
@@ -75,37 +78,49 @@ const StyledVideoBox = styled.div`
   }
 `;
 
-const GameShow__Body = ({ src, chatSrc, start, data, imgSrc }) => {
+const GameShow__Body = ({ src, chatSrc, start, data, imgSrc, showVid }) => {
   return (
     <TheBody>
       <div>
         <VideoBox>
-          <Video__StickyTop__WithCoundown
-            src={src}
-            showMinutesBefore={60}
-            start={start}
-            hasStarted={true}
-            showBefore={
-              <StyledVideoBox>
-                <div className="placeholder">
-                  <div className="counter">
-                    <img src={imgSrc}></img>
-                    <p>
-                      Join us here LIVE in <br />{' '}
-                      <Counter__JustNumbers start={start} />
-                    </p>
+          {showVid ? (
+            <Video__StickyTop__WithCoundown
+              src={src}
+              showMinutesBefore={60}
+              start={start}
+              hasStarted={true}
+              showBefore={
+                <StyledVideoBox>
+                  <div className="placeholder">
+                    <div className="counter">
+                      <img src={imgSrc}></img>
+                      <p>
+                        Join us here LIVE in <br />{' '}
+                        <Counter__JustNumbers start={start} />
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </StyledVideoBox>
-            }
-          />
+                </StyledVideoBox>
+              }
+            />
+          ) : (
+            <div style={{ height: '500px', backgroundColor: 'black' }}>
+              <div className="placeholder">
+                Video Not Showing so as to not interfere with program
+                audio/bandwidth
+              </div>
+            </div>
+          )}
         </VideoBox>
         <div className="about-buttons">
           <a href="#about">
             <button>About</button>
           </a>
-          <a href="#about">
-            <button>Bidding Help</button>
+          <a
+            href="https://www.mercyone.org/desmoinesfoundation/news/2021-game-show-gala-giving-instructions"
+            target="_blank"
+          >
+            <button>Donation Help</button>
           </a>
         </div>
 
@@ -113,7 +128,12 @@ const GameShow__Body = ({ src, chatSrc, start, data, imgSrc }) => {
       </div>
       <div>
         <div className="donate-area">
-          <button className="donate">Donate Now</button>
+          <a
+            href="https://gameshowgala2021.ggo.bid/bidding/package-browse"
+            target="_blank"
+          >
+            <button className="donate">Donate Now</button>
+          </a>
         </div>
         <div style={{ minHeight: '650px', margin: 'auto' }}>
           <Chat__iFrame src={chatSrc} iFrameStyle={{ padding: '1rem' }} />

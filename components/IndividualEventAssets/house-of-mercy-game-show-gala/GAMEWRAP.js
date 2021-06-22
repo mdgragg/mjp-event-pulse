@@ -11,6 +11,7 @@ const Wrap = styled.div`
     letter-spacing: 2px;
     font-weight: 800;
     min-width: 200px;
+    box-shadow: 0 0 25px -10px black;
   }
   button:hover {
     background-color: ${(props) => props.theme.lightGreen};

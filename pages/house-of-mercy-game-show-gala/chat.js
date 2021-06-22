@@ -1,30 +1,36 @@
-import React from 'react';
-import Chat__iFrame from 'components/iFrames/Chat__iFrame';
+import { useState } from 'react';
 import { getEventMeta } from 'lib/api';
 
-import { EVENT_URL } from './index';
-const Chat = ({ src }) => {
+import Meta from 'components/globals/Meta';
+import Page from 'components/template1/Page';
+import Section from 'components/Sections/Section';
+import PlayerWithChat from 'components/BodyTemplates/PlayerWithChat';
+import Body from 'components/template1/Body';
+import Hero from 'components/IndividualEventAssets/ywca-women-of-achievement/Hero';
+import { toast } from 'react-toastify';
+import FullWrap from 'components/FullWrap';
+import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
+import GameShow__Main from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GameShow__Main';
+import GAMEWRAP from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
+import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
+
+import AuthWrap from 'components/AuthWrap';
+import UseServerSentEvents from '../../hooks/useServerSentEvents';
+
+import { event_theme, EVENT_URL } from './index';
+const Index = (props) => {
+  const { event_meta, main_event } = props;
+  const data = UseServerSentEvents(main_event.streamLinks[2].url);
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        margin: 'auto',
-        backgroundColor: 'rgba(40,40,40,1)',
-        paddingTop: '3rem',
-      }}
-    >
-      <h2 style={{ color: 'white', textAlign: 'center' }}>
-        House of Mercy Game Show Chat
-      </h2>
-      <Chat__iFrame
-        src={src}
-        iFrameStyle={{ padding: '1rem', height: '100%' }}
-      />
-    </div>
+    <Page theme={event_theme}>
+      <Meta title={event_meta.EventJobName}> </Meta>
+      <GAMEWRAP>
+        <GameShow__Main main_event={main_event} data={data} showVid={false} />
+      </GAMEWRAP>
+    </Page>
   );
 };
-
-export default Chat;
 
 export async function getStaticProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
@@ -32,8 +38,12 @@ export async function getStaticProps(ctx) {
 
   return {
     props: {
-      src: main_event.streamLinks[1].url,
+      //meta will be the props for the event
+      event_meta: event_data,
+      main_event,
     },
     revalidate: 500,
   };
 }
+
+export default Index;

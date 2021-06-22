@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MyBanner } from './Banner';
 import styled from 'styled-components';
 
@@ -24,11 +24,15 @@ const TheBanner = styled(MyBanner)`
     position: absolute;
     height: auto;
     width: 100%;
+    object-position: center center;
+    left: 0;
+    right: 0;
+    margin: auto;
     top: 0;
     left: 0;
   }
 
-  @media all and (max-width: 1000px) {
+  @media all and (max-width: ${(props) => props.breakWidth}px) {
     && img.bg {
       height: 100%;
       width: auto;
@@ -38,8 +42,16 @@ const TheBanner = styled(MyBanner)`
 
 const Banner_ImgBg = (props) => {
   const { imgSrc, imgAlt } = props;
+
+  const [breakWidth, setBreakWidth] = useState(1920);
+  useEffect(() => {
+    const bg_image = new Image();
+    bg_image.src = imgSrc;
+    bg_image.onload = () => setBreakWidth(bg_image.width);
+  }, []);
+
   return (
-    <TheBanner>
+    <TheBanner breakWidth={breakWidth}>
       <div className="children"> {props.children} </div>
       <img src={imgSrc} className="bg" alt={'banner background ' + imgAlt} />
     </TheBanner>

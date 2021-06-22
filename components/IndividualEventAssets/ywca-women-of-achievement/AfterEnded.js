@@ -19,7 +19,9 @@ const AfterEnded = () => {
           This event has ended, but we appreciate your input. <br /> Please fill
           out the survey below to help us improve.
         </p>
-        <button>Fill Out The Survey</button>
+        <a href="https://forms.gle/vugeV1CMZqJ5mZXN7" target="_blank">
+          <button>Fill Out The Survey</button>
+        </a>
       </div>
     </div>
   );

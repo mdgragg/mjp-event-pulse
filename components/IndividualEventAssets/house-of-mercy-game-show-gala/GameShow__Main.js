@@ -5,8 +5,14 @@ import DateParse from '../../assets/DateParse';
 import Banner_ImgBg from '../../Banners/Banner_ImgBg';
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
-  height: 350px;
+  min-height: 350px;
   background-color: white;
+  background-size: 100% auto;
+  background-position: center top;
+  background-image: url('https://storage.googleapis.com/mjp-stream-public/house-of-mercy-game-show-gala/Des-Moines_skyline-desktop.jpg');
+  @media all and (max-width: 1167px) {
+    background-size: auto 100%;
+  }
   && .inner {
     text-align: center;
     justify-content: center;
@@ -18,13 +24,14 @@ const Header = styled.div`
     display: grid;
     grid-template-columns: 20% 60% 20%;
     margin: auto;
-    padding: 0 2%;
+    padding: 2%;
   }
 
   && img.logo {
     width: 75%;
     max-width: 300px;
     display: block;
+    border-radius: 20px;
   }
   && .counter {
     font-size: 1rem;
@@ -32,6 +39,13 @@ const Header = styled.div`
     color: white;
     background-color: ${(props) => props.theme.lightGreen};
     padding: 1rem 2rem;
+    font-weight: 800;
+  }
+  && .date {
+    background-color: white;
+    width: max-content;
+    margin: 1rem auto;
+    padding: 10px;
     font-weight: 800;
   }
   @media all and (max-width: 1000px) {
@@ -87,7 +101,7 @@ const AboutBanner = styled.div`
     color: white;
   }
 `;
-function GameShow__Main({ main_event, data }) {
+function GameShow__Main({ main_event, data, showVid = true }) {
   const start = main_event.eventStartEnd.StartDateTime;
   return (
     <>
@@ -96,7 +110,9 @@ function GameShow__Main({ main_event, data }) {
           <div></div>
           <div>
             <img className="logo" src={main_event.LogoLink[0].Media.url}></img>
-            <DateParse date={start} />
+            <div className="date">
+              <DateParse date={start} />
+            </div>
           </div>
           <div className="counter">
             <Counter__JustNumbers prefix="Join Us Live In:" start={start} />
@@ -104,6 +120,7 @@ function GameShow__Main({ main_event, data }) {
         </div>
       </Header>
       <GameShow__Body
+        showVid={showVid}
         data={data}
         src={main_event.streamLinks[0].url}
         start={start}
