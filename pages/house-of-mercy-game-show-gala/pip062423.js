@@ -12,12 +12,16 @@ const pip062423 = ({ url }) => {
   const data = UseServerSentEvents(`${url}/auction`);
   const [sortedData, setSortedData] = useState(null);
   useEffect(() => {
-    if (data) {
-      const sorted = data.teamTotal.sort((a, b) => {
+    let sorted;
+    if (data && data.teamTotal) {
+      sorted = data.teamTotal.sort((a, b) => {
         let v;
         a.currentBid < b.currentBid ? (v = 1) : (v = -1);
         return v;
       });
+      if (!data.teamTotal) {
+        sorted = null;
+      }
       setSortedData(sorted);
     }
   }, [data]);

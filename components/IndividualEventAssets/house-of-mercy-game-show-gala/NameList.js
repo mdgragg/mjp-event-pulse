@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Transition } from 'react-transition-group';
 import { getRandomInt } from 'lib/helpers';
 import styled, { keyframes } from 'styled-components';
 
@@ -20,9 +21,10 @@ const appear = keyframes`
 const FeaturedNameWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
+  min-height: 125px;
   width: 80%;
   margin: 1rem auto;
-  padding: 1rem 0;
+  padding: 0.25rem;
   background-color: ${(props) => props.theme.lightOrange};
   justify-content: space-around;
 `;
@@ -41,7 +43,8 @@ const FeaturedName = styled.div`
   padding: 0.5rem;
   border-radius: 10px;
   transition: all 0.2s ease;
-  animation: ${appear} 1s ease ${(props) => props.index * 100 + 200}ms 1;
+  opacity: 1;
+  /* animation: ${appear} 1s ease ${(props) => props.index * 100 + 200}ms 1; */
 `;
 
 const pickFourRandom = (data) => {
@@ -107,13 +110,53 @@ const NameLooper = ({ names }) => {
       {featuredNames && (
         <FeaturedNameWrap>
           {featuredNames.map((name, index) => (
-            <FeaturedName key={name.Name + index} index={index}>
-              {name.Name}
-            </FeaturedName>
+            <SingleFeaturedName
+              key={name.Name + index}
+              index={index}
+              name={name.Name}
+            />
           ))}
         </FeaturedNameWrap>
       )}
     </center>
+  );
+};
+const transitionStyles = {
+  entering: { opacity: 0, transform: 'Scale(10%)' },
+  entered: { opacity: 1, transform: 'Scale(100%)' },
+  exiting: { opacity: 0.4, transform: 'Scale(10%)' },
+  exited: { opacity: 0, transform: 'Scale(10%)' },
+};
+const SingleFeaturedName = ({ name, index }) => {
+  const [inProp, setInProp] = useState(false);
+
+  useEffect(() => {
+    setInProp(true);
+    return () => {
+      setInProp(false);
+    };
+  }, []);
+
+  return (
+    <Transition
+      onExiting={() => console.log('exiting')}
+      in={inProp}
+      timeout={{
+        appear: index,
+        enter: 150 * index + 300,
+        exit: 100,
+      }}
+    >
+      {(state) => (
+        <FeaturedName
+          style={{
+            ...transitionStyles[state],
+          }}
+        >
+          {name}
+        </FeaturedName>
+      )}
+    </Transition>
   );
 };
 
