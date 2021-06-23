@@ -68,14 +68,14 @@ const HashTagBanner = styled.div`
   width: 100%;
   text-align: center;
   height: 200px;
-  background-color: ${(props) => props.theme.lightGreen};
+  background-color: ${(props) => props.theme.purple};
   color: white;
   font-size: clamp(1rem, 5vw, 6rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: Futura-Bold;
+  font-family: Futura Bold;
 `;
 const Title = styled.h1`
   max-width: 500px;
@@ -135,9 +135,9 @@ function GameShow__Main({ main_event, data, showVid = true }) {
       >
         <AboutBanner id="about">
           <p>
-            MercyOne House of Mercy is one of Iowa’s most comprehensive
-            providers of vital behavioral health services, especially for
-            parenting women with addiction.
+            MercyOne House of Mercy is one of Iowa’s largest and most
+            comprehensive providers of vital behavioral health services,
+            especially for parenting women with substance use disorders.
           </p>
           <a href="https://www.mercyone.org/desmoines/house-of-mercy/"></a>
           <button>Learn More</button>
