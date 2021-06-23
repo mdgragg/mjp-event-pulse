@@ -45,7 +45,7 @@ const day2 = [
   },
   {
     time: '6:51',
-    title: 'Spoken Word Art',
+    title: 'Spoken Word Artist',
     speakers: [
       {
         name: 'Atlas The Poet',

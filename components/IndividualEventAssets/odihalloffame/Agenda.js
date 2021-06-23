@@ -39,7 +39,7 @@ const Item__Title = styled.div`
 `;
 const SubItem = styled.li`
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 1rem;
   font-size: 0.85rem;
   font-weight: 800;
   color: ${(props) => props.theme.grey || 'rgb(50,50,50)'};
@@ -54,17 +54,18 @@ const ListAgenda = ({ data }) => {
   return (
     <SingleScheduleDay>
       {data.map((item) => (
-        <Item>
+        <Item key={item.time}>
           <div className="title--wrap">
             <Item__Time>{item.time}pm</Item__Time>
             <Item__Title> {item.title}</Item__Title>
           </div>
-          <hr />
+
           {item.speakers.map((spk) => (
-            <SubItem>
-              {spk.name} <span className="title"> {spk.title}</span>
+            <SubItem key={`${spk.name}--single-speaker`}>
+              {spk.name} <span className="title">{spk.title}</span>
             </SubItem>
           ))}
+          <hr />
         </Item>
       ))}
     </SingleScheduleDay>
