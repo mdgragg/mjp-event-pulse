@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 const Wrap = styled.div`
   font-family: Avenir;
+  h3 {
+    font-size: 1.5rem;
+  }
+  a {
+    margin: 0;
+  }
   button {
     background-color: ${(props) => props.theme.purple};
     min-height: 60px;
@@ -12,6 +18,7 @@ const Wrap = styled.div`
     font-weight: 800;
     min-width: 200px;
     box-shadow: 0 0 25px -10px black;
+    margin: 0.5rem auto;
   }
   button:hover {
     background-color: ${(props) => props.theme.lightGreen};
@@ -30,6 +37,7 @@ const Wrap = styled.div`
     border: 8px solid ${(props) => props.theme.lightOrange};
     box-sizing: content-box;
     animation: bounce 1s ease infinite;
+    margin: 0 auto;
   }
 
   button.donate::after {

@@ -9,7 +9,7 @@ import { getEventMeta } from 'lib/api';
 import { useEffect, useState } from 'react';
 
 const pip062423 = ({ url }) => {
-  const data = UseServerSentEvents(url);
+  const data = UseServerSentEvents(`${url}/auction`);
   const [sortedData, setSortedData] = useState(null);
   useEffect(() => {
     if (data) {

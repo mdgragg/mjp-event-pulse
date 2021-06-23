@@ -37,22 +37,15 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const data = UseServerSentEvents(main_event.streamLinks[2].url);
-
   return (
     <Page theme={event_theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
       <GAMEWRAP>
-        <GameShow__Main main_event={main_event} data={data} />
+        <GameShow__Main main_event={main_event} />
       </GAMEWRAP>
     </Page>
   );
 };
-// export async function getServerSideProps(ctx) {
-//   const { preview } = cookies(ctx);
-//   const { hasLoggedIn } = cookies(ctx);
-//   return { props: {} };
-// }
 
 export async function getStaticProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);

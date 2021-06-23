@@ -108,13 +108,7 @@ const Hero = ({ main_event }) => {
           </i>
         </h4>
       </div>
-      <div className="counter">
-        <Counter__JustNumbers
-          prefix="Join Us Live In"
-          start={main_event.eventStartEnd.StartDateTime}
-          afterStarted="Live Now!"
-        />
-      </div>
+      <div className="counter">Live at 12:00pm EST</div>
     </TheHero>
   );
 };

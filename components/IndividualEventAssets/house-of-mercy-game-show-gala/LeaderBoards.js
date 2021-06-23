@@ -75,7 +75,7 @@ const TeamItem = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 99%;
   && .name {
     font-size: 4rem;
     letter-spacing: 2px;
@@ -141,10 +141,14 @@ const LeaderBoards = ({ data }) => {
       let leader_array = data.teamTotal;
       leader_array.sort((a, b) => {
         let value;
-        a.currentBid > b.currentBid ? (value = -1) : (value = 1);
+
+        parseInt(a.currentBid, 10) > parseInt(b.currentBid, 10)
+          ? (value = -1)
+          : (value = 1);
         return value;
       });
-      set_leader_data(leader_array);
+      console.log('sorting: ', leader_array);
+      set_leader_data([...leader_array]);
     } else {
       set_leader_data(null);
     }

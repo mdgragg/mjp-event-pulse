@@ -5,6 +5,7 @@ import Chat__iFrame from '../../iFrames/Chat__iFrame';
 import Total from './Total';
 import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
 import LeaderBoards from './LeaderBoards';
+import NameList from './NameList';
 const TheBody = styled.div`
   display: grid;
   grid-template-columns: 65% 35%;
@@ -21,16 +22,21 @@ const TheBody = styled.div`
     margin: 0 1rem;
   }
   && .donate-area {
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 2rem auto;
   }
   && .about-buttons {
     max-width: 550px;
     margin: 2rem auto;
     justify-content: space-around;
     display: flex;
+    flex-wrap: wrap;
   }
   @media all and (max-width: 1000px) {
+    padding: 1rem 0.5rem;
     grid-template-columns: 100%;
+    && > div {
+      margin: 0 0.25rem;
+    }
   }
 `;
 
@@ -78,7 +84,14 @@ const StyledVideoBox = styled.div`
   }
 `;
 
-const GameShow__Body = ({ src, chatSrc, start, data, imgSrc, showVid }) => {
+const GameShow__Body = ({
+  src,
+  chatSrc,
+  start,
+  imgSrc,
+  realtimeSrc,
+  showVid,
+}) => {
   return (
     <TheBody>
       <div>
@@ -123,8 +136,7 @@ const GameShow__Body = ({ src, chatSrc, start, data, imgSrc, showVid }) => {
             <button>Donation Help</button>
           </a>
         </div>
-
-        {/* <LeaderBoards data={data} /> */}
+        <NameList url={realtimeSrc} />
       </div>
       <div>
         <div className="donate-area">

@@ -101,7 +101,7 @@ const AboutBanner = styled.div`
     color: white;
   }
 `;
-function GameShow__Main({ main_event, data, showVid = true }) {
+function GameShow__Main({ main_event, showVid = true }) {
   const start = main_event.eventStartEnd.StartDateTime;
   return (
     <>
@@ -121,10 +121,10 @@ function GameShow__Main({ main_event, data, showVid = true }) {
       </Header>
       <GameShow__Body
         showVid={showVid}
-        data={data}
         src={main_event.streamLinks[0].url}
         start={start}
         chatSrc={main_event.streamLinks[1].url}
+        realtimeSrc={main_event.streamLinks[2].url}
         imgSrc={main_event.LogoLink[0].Media.url}
       />
       <HashTagBanner>
@@ -139,11 +139,13 @@ function GameShow__Main({ main_event, data, showVid = true }) {
             comprehensive providers of vital behavioral health services,
             especially for parenting women with substance use disorders.
           </p>
-          <a href="https://www.mercyone.org/desmoines/house-of-mercy/"></a>
+          <a href="https://www.mercyone.org/desmoinesfoundation/impact/house-of-mercy "></a>
           <button>Learn More</button>
         </AboutBanner>
       </Banner_ImgBg>
-      <div style={{ height: '100px', backgroundColor: 'black' }}></div>
+      <div
+        style={{ height: '100px', backgroundColor: 'rgb(145,51,130)' }}
+      ></div>
     </>
   );
 }

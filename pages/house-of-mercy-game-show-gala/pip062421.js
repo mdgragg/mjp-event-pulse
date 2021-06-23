@@ -8,7 +8,7 @@ import LeaderBoards from '../../components/IndividualEventAssets/house-of-mercy-
 import { getEventMeta } from 'lib/api';
 
 const pip062421 = ({ url }) => {
-  const data = UseServerSentEvents(url);
+  const data = UseServerSentEvents(`${url}/auction`);
   return (
     <Page theme={event_theme}>
       <LeaderBoards data={data} />
