@@ -5,11 +5,12 @@ import DateParse from '../../assets/DateParse';
 import Banner_ImgBg from '../../Banners/Banner_ImgBg';
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
-  min-height: 450px;
+  min-height: 550px;
   background-color: white;
   background-size: 100% auto;
-  background-position: center 30%;
-  background-image: url('https://storage.googleapis.com/mjp-stream-public/house-of-mercy-game-show-gala/bg-img.jpg');
+  background-position: center -250px;
+  background-attachment: fixed;
+  background-image: url(${(props) => props.theme.header_image});
   @media all and (max-width: 1167px) {
     background-size: auto 100%;
   }
@@ -18,6 +19,7 @@ const Header = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
+    height: 550px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.1);
     color: ${(props) => props.theme.green};

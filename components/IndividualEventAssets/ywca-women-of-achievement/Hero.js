@@ -108,7 +108,7 @@ const Hero = ({ main_event }) => {
           </i>
         </h4>
       </div>
-      <div className="counter">Live at 12:00pm EST</div>
+      <div className="counter">Thank You for Joining Us!</div>
     </TheHero>
   );
 };

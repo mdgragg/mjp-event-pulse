@@ -103,7 +103,7 @@ const NameLooper = ({ names }) => {
 
   return (
     <center>
-      <h3>Thank You To Our Sponsors!</h3>
+      <h3>Thank You To Our Donors!</h3>
       {featuredNames && (
         <FeaturedNameWrap>
           {featuredNames.map((name, index) => (
