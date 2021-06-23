@@ -141,8 +141,9 @@ function GameShow__Main({ main_event, showVid = true }) {
             comprehensive providers of vital behavioral health services,
             especially for parenting women with substance use disorders.
           </p>
-          <a href="https://www.mercyone.org/desmoinesfoundation/impact/house-of-mercy "></a>
-          <button>Learn More</button>
+          <a href="https://www.mercyone.org/desmoinesfoundation/impact/house-of-mercy ">
+            <button>Learn More</button>
+          </a>
         </AboutBanner>
       </Banner_ImgBg>
       <div
