@@ -5,11 +5,11 @@ import DateParse from '../../assets/DateParse';
 import Banner_ImgBg from '../../Banners/Banner_ImgBg';
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
-  min-height: 350px;
+  min-height: 450px;
   background-color: white;
   background-size: 100% auto;
-  background-position: center top;
-  background-image: url('https://storage.googleapis.com/mjp-stream-public/house-of-mercy-game-show-gala/Des-Moines_skyline-desktop.jpg');
+  background-position: center 30%;
+  background-image: url('https://storage.googleapis.com/mjp-stream-public/house-of-mercy-game-show-gala/bg-img.jpg');
   @media all and (max-width: 1167px) {
     background-size: auto 100%;
   }
@@ -22,7 +22,7 @@ const Header = styled.div`
     background-color: rgba(255, 255, 255, 0.1);
     color: ${(props) => props.theme.green};
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 25% 50% 25%;
     margin: auto;
     padding: 2%;
   }
@@ -34,7 +34,7 @@ const Header = styled.div`
     border-radius: 20px;
   }
   && .counter {
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin: auto;
     color: white;
     background-color: ${(props) => props.theme.lightGreen};
