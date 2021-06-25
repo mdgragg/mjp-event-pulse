@@ -5,7 +5,7 @@ import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates/index';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';

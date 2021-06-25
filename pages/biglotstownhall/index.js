@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from '../../components/PageTemplates/index';
 
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';

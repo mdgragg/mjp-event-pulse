@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getEventMeta } from 'lib/api';
 
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates/index';
 
 import GameShow__Main from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GameShow__Main';
 import GAMEWRAP from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GAMEWRAP';

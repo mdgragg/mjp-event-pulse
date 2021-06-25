@@ -1,17 +1,17 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import NProgress from 'nprogress';
-import Router from 'next/router';
+
+import Footer from '../Footers';
 import { template1Theme } from '../Themes/template1.theme';
-import { StylesProvider, createMuiTheme } from '@material-ui/core';
+import { StylesProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 const StyledPage = styled.div`
-  background: ${(props) => props.theme.bg};
+  background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.fontColor};
   min-height: 100vh;
   z-index: 0;
-  width: 100vw;
+  min-width: 100vw;
   /* overflow: hidden; */
   p {
     font-family: ${(props) => props.theme.pfont};
@@ -34,31 +34,23 @@ const StyledPage = styled.div`
 
   a {
     text-decoration: none;
-    color: navy;
+    color: unset;
     font-weight: 600;
-    margin-left: 2px;
-  }
-  a:hover {
-    color: grey;
   }
 `;
 
-Router.onRouteChangeStart = () => {
-  NProgress.start();
-};
-Router.onRouteChangeComplete = () => {
-  NProgress.done();
-};
-
-const Page = (props) => {
-  const whole_theme = { ...template1Theme, ...props.theme };
+const Page = ({ theme, children, showFooter = true }) => {
+  const whole_theme = { ...template1Theme, ...theme };
   //Material ui style provider for this theme
 
   return (
     <CssBaseline>
       <StylesProvider injectFirst>
         <ThemeProvider theme={whole_theme}>
-          <StyledPage>{props.children}</StyledPage>
+          <StyledPage>
+            {children}
+            {showFooter && <Footer />}
+          </StyledPage>
         </ThemeProvider>
       </StylesProvider>
     </CssBaseline>
