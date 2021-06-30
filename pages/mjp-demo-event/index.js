@@ -14,7 +14,7 @@ import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
 import DateParse from 'components/assets/DateParse';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
+import BoxedCounter from 'components/Counters/BoxedCounter';
 import useTestBool from '../../hooks/useTestBool';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
@@ -76,28 +76,15 @@ const Index = (props) => {
               </h2>
             </center>
           </div>
-          <div
-            style={{
-              color: 'white',
-              backgroundColor: 'rgba(0,0,0,0.65)',
-              fontSize: '1.5rem',
-              padding: '1rem 2rem',
-            }}
-          >
-            <center>
-              <Counter__JustNumbers
-                prefix="Starts In"
-                start={main_event.eventStartEnd.StartDateTime}
-                end={main_event.eventStartEnd.EndDateTime}
-              />
-            </center>
-          </div>
+
+          <BoxedCounter event={main_event} />
         </FlexHero>
 
         <Body>
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
+                <BoxedCounter event={main_event} />
                 <div
                   style={{
                     height: '100%',

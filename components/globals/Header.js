@@ -24,8 +24,8 @@ const StyledHeader = styled.div`
     height: 100%;
     width: 100%;
     position: absolute;
-
     opacity: 0.6;
+    filter: blur(8px);
     /* background-attachment: fixed; */
     z-index: -1;
     background-size: cover;
@@ -56,7 +56,7 @@ const Header = (props) => {
       </Logo>
       <h3> Virtual Events</h3>
       <a href={`https://www.millsjames.com/contact-us/`}>
-        <button> Work With Us</button>
+        <button className="btn"> Work With Us</button>
       </a>
     </StyledHeader>
   );

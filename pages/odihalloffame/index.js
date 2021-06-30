@@ -43,7 +43,8 @@ const ODIWRAP = styled.div`
     text-transform: uppercase;
   }
   button:hover {
-    color: grey;
+    color: white;
+    background-color: #ea3e52;
   }
   p {
     font-size: 1.5rem;

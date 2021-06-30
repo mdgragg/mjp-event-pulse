@@ -111,6 +111,10 @@
   font-weight: 800;
   font-style: bold;
 }
+
+:root {
+  --mjp-orange: #f67b00;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -120,22 +124,29 @@ html {
   box-sizing: border-box;
 }
 
-button {
+button.btn,
+.MuiButton-root {
   border: none;
-  min-height: 35px;
+  min-height: 40px;
+  min-width: 180px;
   padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 1rem;
+  border-radius: 1px;
+  font-size: 12px;
   font-weight: 400;
-  text-transform: capitalize;
   margin: 1rem auto;
   display: block;
   transition: all 0.2s ease;
   outline: none;
-  font-family: 'Avenir';
+  font-family: Avenir;
+  letter-spacing: 2px;
+  background-color: var(--mjp-orange);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-button:hover {
+button:hover,
+.MuiButton-root:hover {
   cursor: pointer;
   background-color: black;
   color: white;
