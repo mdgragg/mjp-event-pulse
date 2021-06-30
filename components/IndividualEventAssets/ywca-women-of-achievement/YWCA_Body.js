@@ -67,7 +67,7 @@ const YWCA_Body = () => {
               alt="YWCA women hugging on stage"
             />
             <a href="https://forms.gle/vugeV1CMZqJ5mZXN7" target="_blank">
-              <button>Fill Out The Survey</button>
+              <button className="btn"> Fill Out The Survey</button>
             </a>
           </ImageWrap>
         </div>

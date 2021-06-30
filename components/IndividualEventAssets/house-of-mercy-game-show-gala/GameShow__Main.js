@@ -142,7 +142,7 @@ function GameShow__Main({ main_event, showVid = true }) {
             especially for parenting women with substance use disorders.
           </p>
           <a href="https://www.mercyone.org/desmoinesfoundation/impact/house-of-mercy ">
-            <button>Learn More</button>
+            <button className="btn"> Learn More</button>
           </a>
         </AboutBanner>
       </Banner_ImgBg>

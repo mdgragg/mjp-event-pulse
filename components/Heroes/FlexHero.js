@@ -45,6 +45,7 @@ const HeaderInner = styled.div`
   display: grid;
   grid-template-columns: 20% 60% 20%;
   align-items: center;
+  justify-content: center;
   margin: auto;
   width: 90%;
   height: inherit;

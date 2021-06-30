@@ -44,7 +44,7 @@ const Banner = (props) => {
         <p>{props.children}</p>
         {props.buttonText && (
           <a href={props.buttonLink}>
-            <button> {props.buttonText}</button>
+            <button className="btn"> {props.buttonText}</button>
           </a>
         )}
         {props.imgUrl && <img className="banner-image" src={props.imgUrl} />}

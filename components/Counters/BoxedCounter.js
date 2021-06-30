@@ -107,13 +107,15 @@ const BoxedCounter = ({ event }) => {
 
           <div className="numhours box">
             <div className="digit"> {obj.hours} </div>
-            <div className="delimiter ">{obj.hours > 1 ? 'Hours' : 'Hour'}</div>
+            <div className="delimiter ">
+              {obj.hours === 1 ? 'Hour' : 'Hours'}
+            </div>
           </div>
 
           <div className="numminutes box">
             <div className="digit">{obj.minutes}</div>
             <div className="delimiter ">
-              {obj.minutes > 1 ? 'Min' : 'Minute'}
+              {obj.minutes === 1 ? 'Min' : 'Mins'}
             </div>
           </div>
 

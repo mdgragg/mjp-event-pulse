@@ -34,25 +34,31 @@ const TheBanner = styled(MyBanner)`
 
   @media all and (max-width: ${(props) => props.breakWidth}px) {
     && img.bg {
-      height: 100%;
-      width: auto;
+      height: auto;
+      width: ${(props) => props.breakWidth}px;
     }
   }
 `;
 
 const Banner_ImgBg = (props) => {
-  const { imgSrc, imgAlt } = props;
+  const { imgSrc, imgAlt, children } = props;
 
   const [breakWidth, setBreakWidth] = useState(1920);
   useEffect(() => {
     const bg_image = new Image();
     bg_image.src = imgSrc;
-    bg_image.onload = () => setBreakWidth(bg_image.width);
+
+    bg_image.onload = function () {
+      console.log('width: ', this.width);
+      setBreakWidth(this.width);
+    };
   }, []);
+
+  console.log('breakwidth:', breakWidth);
 
   return (
     <TheBanner breakWidth={breakWidth}>
-      <div className="children"> {props.children} </div>
+      <div className="children"> {children} </div>
       <img src={imgSrc} className="bg" alt={'banner background ' + imgAlt} />
     </TheBanner>
   );

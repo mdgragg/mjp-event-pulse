@@ -124,17 +124,20 @@ html {
   box-sizing: border-box;
 }
 
+button{
+  border: none;
+  display: block;
+  margin: 1rem auto;
+}
+
 button.btn,
 .MuiButton-root {
-  border: none;
   min-height: 40px;
   min-width: 180px;
   padding: 5px 10px;
   border-radius: 1px;
   font-size: 12px;
   font-weight: 400;
-  margin: 1rem auto;
-  display: block;
   transition: all 0.2s ease;
   outline: none;
   font-family: Avenir;

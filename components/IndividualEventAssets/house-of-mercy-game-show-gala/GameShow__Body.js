@@ -127,13 +127,13 @@ const GameShow__Body = ({
         </VideoBox>
         <div className="about-buttons">
           <a href="#about">
-            <button>About</button>
+            <button className="btn">About</button>
           </a>
           <a
             href="https://www.mercyone.org/desmoinesfoundation/news/2021-game-show-gala-giving-instructions"
             target="_blank"
           >
-            <button>Donation Help</button>
+            <button className="btn">Donation Help</button>
           </a>
         </div>
         <NameList url={realtimeSrc} />
@@ -144,7 +144,7 @@ const GameShow__Body = ({
             href="https://gameshowgala2021.ggo.bid/bidding/package-browse"
             target="_blank"
           >
-            <button className="donate">Donate Now</button>
+            <button className="btn donate">Donate Now</button>
           </a>
         </div>
         <div style={{ minHeight: '650px', margin: 'auto' }}>

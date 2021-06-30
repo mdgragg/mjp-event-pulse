@@ -1,5 +1,6 @@
 import base from 'lib/firebase/base';
 import styled from 'styled-components';
+import { Button } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -7,19 +8,20 @@ import SingleMessage from './SingleMessage';
 
 export const chat_colors = {
   blue: `#007ab8`,
+  grey: `#dedede`,
 };
 
 var badwordsArray = require('badwords/array');
 
-const SubmitChat = styled.button``;
+const SubmitChat = styled(Button)``;
 
 const ChatWrap = styled.div`
   margin: auto;
   min-width: 350px;
-  max-width: 550px;
+  max-width: 450px;
   overflow-x: scroll;
   width: 100%;
-
+  border: 2px solid ${chat_colors.grey};
   max-height: 700px;
   position: relative;
   display: grid;
@@ -88,7 +90,7 @@ const MessageInput = styled.textarea`
 `;
 
 const Reactions = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   && span {
     display: inline-block;
@@ -106,7 +108,7 @@ const Reactions = styled.div`
 const InputArea = styled.div`
   position: absolute;
   bottom: 0;
-  background-color: #dedede;
+  background-color: ${chat_colors.grey};
   width: 100%;
   padding: 0.5rem;
   height: 155px;
@@ -340,7 +342,7 @@ const PublicChat = ({ slug = 'test-2' }) => {
           <h3 className="choose-name">Please Choose A Display Name</h3>
           <input ref={nameRef} type="text" />
           <br />
-          <button onClick={setTheName}>Join the Chat</button>
+          <Button onClick={setTheName}>Join the Chat</Button>
         </NameInput>
       ) : null}
 

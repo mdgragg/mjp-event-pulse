@@ -7,14 +7,15 @@ import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
+import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
 import DateParse from 'components/assets/DateParse';
-import BoxedCounter from 'components/Counters/BoxedCounter';
+import CircleCounter from 'components/Counters/CircleCounter';
 import useTestBool from '../../hooks/useTestBool';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
@@ -53,38 +54,12 @@ const Index = (props) => {
     <>
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <FlexHero title={event_meta.EventJobName}>
-          <div></div>
-          <div>
-            <center>
-              <img
-                style={{
-                  width: '100%',
-                  maxWidth: '350px',
-                  margin: '2rem auto',
-                }}
-                src={main_event.KeyValue[0]?.value}
-              />
-
-              <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-                {main_event.EventName}
-              </h1>
-              <h2 style={{ margin: 'auto' }}>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
-            </center>
-          </div>
-
-          <BoxedCounter event={main_event} />
-        </FlexHero>
+        <MJHero main_event={main_event} />
 
         <Body>
           <Section>
             <Grid container spacing={3}>
               <Grid item={true} md={8} sm={12} xs={12}>
-                <BoxedCounter event={main_event} />
                 <div
                   style={{
                     height: '100%',
@@ -113,7 +88,7 @@ const Index = (props) => {
             color={'black'}
             secondary={`white`}
             textColor={`white`}
-            headerText={`About this Event`}
+            headerText={`About This Event`}
             innerWidth={`650px`}
             buttonText={`Learn More`}
             buttonLink={`#`}

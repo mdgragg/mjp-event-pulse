@@ -66,13 +66,16 @@ const Footer = () => {
       </div>
       <div>
         <div className="icons">
-          <a>
+          <a href="https://www.millsjames.com/contact-us/" target="_blank">
             <EmailIcon />
           </a>
-          <a>
+          <a
+            href="https://www.linkedin.com/company/mills-james-productions"
+            target="_blank"
+          >
             <LinkedInIcon />
           </a>
-          <a>
+          <a href="https://www.youtube.com/user/millsjames1" target="_blank">
             <YouTubeIcon />
           </a>
         </div>
