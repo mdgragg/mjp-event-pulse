@@ -115,6 +115,7 @@ const MainPage = ({ main_event, hasStarted }) => {
               <i>
                 <DateParse
                   date={main_event.eventStartEnd.StartDateTime}
+                  format={`dddd, MMMM D, YYYY`}
                 ></DateParse>
               </i>
             </div>

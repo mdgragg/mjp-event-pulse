@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import Footer from '../Footers';
-import { template1Theme } from '../Themes/template1.theme';
+import { default_theme } from '../Themes/default.theme';
 import { StylesProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -40,7 +40,7 @@ const StyledPage = styled.div`
 `;
 
 const Page = ({ theme, children, showFooter = true }) => {
-  const whole_theme = { ...template1Theme, ...theme };
+  const whole_theme = { ...default_theme, ...theme };
   //Material ui style provider for this theme
 
   return (
