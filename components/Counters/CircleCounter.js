@@ -3,34 +3,40 @@ import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
 const Wrap = styled.div`
   /* padding: 15px; */
-  width: max-content;
-  color: white;
+  width: 100%;
+  max-width: 800px;
+  color: ${(props) => props.theme.colors.primary};
   margin: auto;
   text-align: center;
 `;
 
 const Title = styled.div`
   text-transform: uppercase;
-  font-family: Gotham;
+  background-color: ${(props) => props.theme.colors.secondary};
+  font-family: ${(props) => props.theme.fonts.secondary};
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 2px;
   margin: 1rem auto;
+  padding: 0.75rem 0;
 `;
 
 const Box = styled.div`
   font-family: Avenir;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   height: auto;
+  flex-wrap: wrap;
 
   && > div.box {
-    height: 72px;
-    padding-top: 2px;
-    width: 72px;
-    margin: 0 0.25rem;
-    background-color: rgba(0, 237, 158, 1);
+    height: 0;
+    padding-top: 20%;
+    min-width: 75px;
+    min-height: 75px;
+    width: 20%;
+    margin: 0.5rem;
+    background-color: ${(props) => props.theme.colors.secondary};
     border-radius: 100%;
     display: flex;
     flex-direction: column;
@@ -39,16 +45,18 @@ const Box = styled.div`
     justify-content: center;
   }
 
-  && div.box:last-of-type::after {
-    content: '';
-  }
   && .digit {
+    position: absolute;
+    top: 20%;
     font-weight: 600;
-    font-size: 1.75rem;
-    line-height: 1.75rem;
+    font-size: clamp(24px, 6.5vw, 4.5rem);
+    line-height: clamp(24px, 6.5vw, 4.5rem);
   }
   && .delimiter {
-    font-size: 0.65rem;
+    position: absolute;
+    top: 70%;
+    font-size: clamp(10px, 1.5vw, 1.25rem);
+    line-height: clamp(10px, 1.5vw, 1.25rem);
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -71,7 +79,7 @@ const SingleDigit = ({ number, delimiter }) => {
   );
 };
 
-const BoxedCounter = ({ event }) => {
+const BoxedCounter = ({ event, prefix }) => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {
@@ -95,7 +103,8 @@ const BoxedCounter = ({ event }) => {
   if (obj) {
     return (
       <Wrap>
-        <Title>Join Us Live In:</Title>
+        {prefix && <Title>{prefix}</Title>}
+
         <Box>
           {Object.keys(obj).map((o) => {
             if (o !== 'total_remaining' && o !== 'parsed_until_end') {

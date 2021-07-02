@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
 const Wrap = styled.div`
-  background-color: black;
+  background-color: ${(props) => props.theme.colors.primary};
   padding: 15px;
   width: max-content;
-  color: white;
+  color: ${(props) => props.theme.white};
   margin: auto;
   text-align: center;
 `;
@@ -74,7 +74,7 @@ const Box = styled.div`
   }
 `;
 
-const BoxedCounter = ({ event }) => {
+const BoxedCounter = ({ event, style }) => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {
@@ -97,7 +97,7 @@ const BoxedCounter = ({ event }) => {
 
   if (obj) {
     return (
-      <Wrap>
+      <Wrap style={{ ...style }}>
         <Title>Join Us Live In:</Title>
         <Box>
           <div className="numday box">
