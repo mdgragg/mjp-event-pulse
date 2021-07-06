@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Video__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
-import Counter from 'components/Counters/Counter';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import TwoPanel from 'components/TabPanels/TwoPanel';
 const Nav = styled.div`
   position: relative;

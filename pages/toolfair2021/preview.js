@@ -1,20 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-
-import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import Section__WithBG from 'components/Sections/Section__WithBG';
-import EmailOnlyModal from '../../components/Modals/AuthModal__EmailOnly';
-import LandingPage from 'components/IndividualEventAssets/biglotstownhall/LandingPage';
-import { toast } from 'react-toastify';
+import Page from 'components/PageTemplates';
 import FullWrap from 'components/FullWrap';
+import Body from 'components/template1/Body';
+import EmailOnlyModal from '../../components/Modals/AuthModal__EmailOnly';
+import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
+import { toast } from 'react-toastify';
+
 import useHasAuthorized from 'hooks/useHasAuthorized';
 import { EVENT_URL } from './index';
 export var event_theme = {
@@ -109,7 +104,6 @@ export async function getStaticProps() {
       event_meta: event_data,
       main_event,
     },
-    revalidate: 310,
   };
 }
 

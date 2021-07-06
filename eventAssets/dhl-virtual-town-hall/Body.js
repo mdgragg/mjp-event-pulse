@@ -1,5 +1,5 @@
 import React from 'react';
-import CenteredPlayer from '../../BodyTemplates/CenteredPlayer';
+import CenteredPlayer from 'components/BodyTemplates/CenteredPlayer';
 import styled from 'styled-components';
 
 const BigBG = styled.div`

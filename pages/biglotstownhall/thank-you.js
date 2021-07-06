@@ -1,33 +1,18 @@
 import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
-import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
+import { useRouter } from 'next/router';
 
-import { Grid, Button } from '@material-ui/core';
-import Link, { navigate } from 'next/link';
+import _ from 'lodash';
+import { getEventMeta } from 'lib/api';
+
+import { Grid } from '@material-ui/core';
+
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import CircleSpeaker from 'components/ListItems/CircleSpeaker';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
-import FlexHero from 'components/Heroes/FlexHero';
-import Counter from 'components/Counters/Counter';
-import Footer from 'components/template1/Footer';
-
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import SingleEvent from 'components/BreakoutSessions/SingleEvent';
-import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
-import NameScroller from '../../components/RealTimeAssets/NameScroller';
-
-import Agenda from 'eventAssets/ads-sales-meetings-2021/Agenda';
-import SingleAuctionItem from 'eventAssets/SingleAuctionItem';
 import AttendeeAuthModal from '../../components/Modals/AuthModal__Attendee';
 import { toast } from 'react-toastify';
-import { Autocomplete } from '@material-ui/lab';
 export var event_theme = {
   h1: {
     fontSize: '5rem',

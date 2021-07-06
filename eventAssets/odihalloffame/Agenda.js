@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import Moment from 'react-moment';
-import { Typography, FormControl, Button, Input } from '@material-ui/core';
 import TwoPanel from 'components/TabPanels/TwoPanel';
 
 import Day1 from './Day1';

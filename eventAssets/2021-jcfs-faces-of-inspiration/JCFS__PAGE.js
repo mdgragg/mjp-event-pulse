@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Body from '../../Body.js';
+import Body from 'components/Body.js';
 import FaceMap from './FaceMap';
 import SingleBox from './SingleBox';
 import styled, { keyframes } from 'styled-components';

@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
-import useCalculateIfStarted from '../../../hooks/useCalculateIfStarted';
-import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
-import DateParser from '../../assets/DateParse';
-import Video__StickyTop from '../../VideoBoxes/Video__StickyTop';
-import BannerWithPicture from '../../Banners/BannerWithPicture';
+import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
+import DateParser from 'components/assets/DateParse';
+import Video__StickyTop from 'components/VideoBoxes/Video__StickyTop';
+import BannerWithPicture from 'components/Banners/BannerWithPicture';
+
 const ThePage = styled.div`
   color: white;
   width: 100%;

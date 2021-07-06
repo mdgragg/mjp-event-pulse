@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
-import Agenda from 'components/IndividualEventAssets/odihalloffame/Agenda';
+import Agenda from 'eventAssets/odihalloffame/Agenda';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { PlayerWithChat } from 'components/BodyTemplates';
 import styled from 'styled-components';
