@@ -6,23 +6,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
-import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
-import MaskedInput from 'react-text-mask';
-import { Checkbox, FormControl } from '@material-ui/core';
+import attendee_password from 'lib/fetchCalls/attendee_password';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
+      width: '350px',
     },
 
     '& .MuiTextField-root': {
       margin: '0.5rem',
+
       //   width: '25ch',
+    },
+    '& .MuiInput-root input': {
+      textAlign: 'center',
+      fontSize: '2rem',
     },
   },
 }));
@@ -39,9 +41,17 @@ const Error = styled.div`
   font-size: 1.25rem;
   text-align: center;
 `;
-export default function PasswordOnly({ open, setOpen, password, goToLink }) {
+export default function AuthModal__Password({
+  open,
+  event_meta,
+  callback,
+  eventId,
+  event_name,
+  headerContent,
+  signInText,
+}) {
   const init = {
-    password: '',
+    pw: '',
   };
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
@@ -50,11 +60,11 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
     showing: false,
     errors: [],
   });
+
   const [values, setValues] = React.useState(init);
 
   const handleClose = () => {
-    zeroForm();
-    setOpen(false);
+    toast.error('You must provide a password before joining.');
   };
 
   const zeroForm = () => {
@@ -63,7 +73,6 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
 
   const handleChange = (e) => {
     const name = e.target.name;
-
     setValues({
       ...values,
       [name]: e.target.value,
@@ -71,11 +80,21 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
   };
 
   const handleSumbit = async (e) => {
-    e.preventDefault();
-    if (values.password === password) {
-      return goToLink();
+    setFormLoading(true);
+    // e.preventDefault();
+    if (values.password === '') {
+      setFormLoading(false);
+      return toast.error('You must provide a password!');
     }
-    return toast.error('wrong password!');
+    return await attendee_password(values, event_meta.id)
+      .then((res) => {
+        return callback(res);
+      })
+      .catch((err) => {
+        setFormLoading(false);
+        toast.error(err);
+        return console.log('err: ', err);
+      });
   };
 
   return (
@@ -85,24 +104,38 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
+        {headerContent && (
+          <div
+            style={{
+              width: '70%',
+              height: 'auto',
+              margin: 'auto',
+              textAlign: 'center',
+            }}
+          >
+            {headerContent}
+          </div>
+        )}
         <DialogTitle
           id="form-dialog-title"
           style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
         >
-          Password Protected Event
+          Please Provide a Password
         </DialogTitle>
-        {formErrors.showing ? (
-          <Error>Incorrect password, please try again.</Error>
-        ) : (
-          ''
-        )}
+        {formErrors.showing
+          ? formErrors.errors.map((err) => <Error>{err}</Error>)
+          : ''}
 
         <DialogContent>
           <center>
-            <DialogContentText>
-              This event requires a password.
-              <br /> Please enter the password to continue.
-            </DialogContentText>
+            {signInText ? (
+              signInText
+            ) : (
+              <DialogContentText>
+                This event requires a
+                <br /> password to enter.
+              </DialogContentText>
+            )}
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
@@ -110,15 +143,21 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
               onSubmit={(e) => {
                 e.preventDefault();
               }}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter') {
+                  handleSumbit();
+                }
+              }}
             >
               <TextField
                 autoFocus
+                style={{ textAlign: 'center' }}
                 margin="normal"
                 id="password"
-                name="password"
+                name="pw"
                 label="Password"
                 type="password"
-                value={values.password}
+                value={values.pw}
                 onChange={handleChange}
                 required
               />
@@ -127,9 +166,6 @@ export default function PasswordOnly({ open, setOpen, password, goToLink }) {
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
           <Button onClick={handleSumbit} color="primary">
             Submit
           </Button>

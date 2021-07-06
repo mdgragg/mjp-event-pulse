@@ -36,13 +36,6 @@ const StyledForm = styled.form`
   }
 `;
 
-const Error = styled.div`
-  background-color: red;
-  color: white;
-  font-size: 1.25rem;
-  text-align: center;
-`;
-
 const default_fields = {
   AttendeeFirst: {
     displayName: 'First Name',
@@ -61,7 +54,7 @@ const default_fields = {
   },
 };
 
-export default function AttendeeList({
+export default function AuthModal__AttendeeList({
   open,
   callback,
   event_meta,

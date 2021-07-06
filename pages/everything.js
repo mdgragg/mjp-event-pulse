@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import ClientOnly from '../components/assets/ClientOnly';
 import { gql, useQuery } from '@apollo/client';
 import DateParse from 'components/assets/DateParse';
+import { useSession, getSession } from 'next-auth/client';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
+import { Button__Secondary } from 'components/Buttons';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Page from 'components/PageTemplates';
+import router from 'next/router';
+import Link from 'next/link';
 const ErrWrap = styled.div`
   background-color: #f7f7f7;
   padding: 1rem;
@@ -16,6 +22,7 @@ const Everything = () => {
     query AllJobs {
       eventJobs {
         EventJobName
+        eventUrl
         jobId
         eventStatus {
           EventStatus
@@ -33,15 +40,17 @@ const Everything = () => {
   `);
 
   return (
-    <ErrWrap>
-      <h2>Everything</h2>
-      <ClientOnly>{data && <EventMap events={data.eventJobs} />}</ClientOnly>
-    </ErrWrap>
+    <Page>
+      <ErrWrap>
+        <h2>Everything</h2>
+        <ClientOnly>{data && <EventMap events={data.eventJobs} />}</ClientOnly>
+      </ErrWrap>
+    </Page>
   );
 };
 
 const Lister = styled.ul`
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
   background-color: white;
   margin: 0.5rem;
@@ -86,6 +95,18 @@ const Status = styled.div`
   font-size: 0.75rem;
   text-align: center;
   /* width: max-content; */
+`;
+
+const GoIcon = styled.div`
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  margin: -9px auto;
+  padding-top: 10px;
+  &&:hover {
+    color: white;
+    cursor: pointer;
+  }
 `;
 const ListWrap = styled.div`
   display: grid;
@@ -138,8 +159,28 @@ const SingleEventBlock = ({ ev }) => {
         ))}
       </div>
       <Status>{ev.eventStatus.EventStatus}</Status>
+
+      <GoIcon>
+        <Link href={`/${ev.eventUrl}`}>
+          <VisibilityIcon />
+        </Link>
+      </GoIcon>
     </Lister>
   );
 };
 
 export default Everything;
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx);
+  if (!session) {
+    return {
+      redirect: {
+        destination: `/api/auth/signin?callbackUrl=${process.env.NEXTAUTH_URL}/everything`,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}

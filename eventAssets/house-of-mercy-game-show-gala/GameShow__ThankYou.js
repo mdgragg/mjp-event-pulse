@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
-import DateParse from '../../assets/DateParse';
-import Banner_ImgBg from '../../Banners/Banner_ImgBg';
+import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
+import DateParse from 'components/assets/DateParse';
+import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
   min-height: 550px;
@@ -81,6 +81,7 @@ const HashTagBanner = styled.div`
 `;
 const Title = styled.h1`
   max-width: 500px;
+  color: white;
   text-align: center;
   margin: 1rem auto;
   @media all and (max-width: 1000px) {
@@ -103,32 +104,29 @@ const AboutBanner = styled.div`
     color: white;
   }
 `;
-function GameShow__Main({ main_event, showVid = true }) {
+function GameShow__ThankYou({ main_event, showVid = true }) {
   const start = main_event.eventStartEnd.StartDateTime;
+  const end = main_event.eventStartEnd.EndDateTime;
   return (
     <>
       <Header>
         <div className="inner">
           <div></div>
           <div>
-            <img className="logo" src={main_event.LogoLink[0].Media.url}></img>
-            <div className="date">
-              <DateParse date={start} />
-            </div>
+            <Title>Thank You for Attending!</Title>
           </div>
           <div className="counter">
-            <Counter__JustNumbers prefix="Join Us Live In:" start={start} />
+            <Counter__JustNumbers
+              prefix="Join Us Live In:"
+              start={start}
+              end={end}
+              afterStarted={`Live Now!`}
+              afterEnded={`This Event Has Ended`}
+            />
           </div>
         </div>
       </Header>
-      <GameShow__Body
-        showVid={showVid}
-        src={main_event.streamLinks[0].url}
-        start={start}
-        chatSrc={main_event.streamLinks[1].url}
-        realtimeSrc={main_event.streamLinks[2].url}
-        imgSrc={main_event.LogoLink[0].Media.url}
-      />
+
       <HashTagBanner>
         <div>#2021GameShowGala </div>
       </HashTagBanner>
@@ -153,4 +151,4 @@ function GameShow__Main({ main_event, showVid = true }) {
   );
 }
 
-export default GameShow__Main;
+export default GameShow__ThankYou;

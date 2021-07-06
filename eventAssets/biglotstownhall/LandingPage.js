@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from '../../assets/DateParse';
+import DateParse from 'components/assets/DateParse';
 
 const Page = styled.div`
   height: 100vh;

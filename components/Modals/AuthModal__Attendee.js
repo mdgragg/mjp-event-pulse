@@ -14,14 +14,13 @@ import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import MaskedInput from 'react-text-mask';
 import { Checkbox, FormControl } from '@material-ui/core';
-import attendee_capture from 'lib/fetchCalls/soft_auth';
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
       width: '80%',
-      minWidth: '350px',
     },
 
     '& .MuiTextField-root': {
@@ -42,16 +41,25 @@ const StyledForm = styled.form`
   }
 `;
 
-export default function AttendeeAuthModal({
+export default function AuthModal__Attendee({
   open,
   callback,
   event_meta,
   headerContent,
   signInText = null,
   otherFields = {},
-  title,
 }) {
   let init = {
+    AttendeeFirst: {
+      displayName: 'First Name',
+      value: '',
+      required: true,
+    },
+    AttendeeLast: {
+      displayName: 'Last Name',
+      value: '',
+      required: true,
+    },
     AttendeeEmail: {
       displayName: 'Email',
       value: '',
@@ -73,7 +81,6 @@ export default function AttendeeAuthModal({
     e.persist();
     const name = e.target.name;
     const prevValue = values[name];
-
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -96,19 +103,17 @@ export default function AttendeeAuthModal({
     e.preventDefault();
     if (!check_required()) {
       setFormLoading(false);
-      return toast.error('You must supply an email');
+      return toast.error('All fields are required!');
     }
     const send_values = {};
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
     return await attendee_capture(send_values, event_meta.id)
-      .then((res) => {
-        return callback(res);
-      })
+      .then((res) => callback(res))
       .catch((err) => {
+        toast.error(err);
         setFormLoading(false);
-        return toast.error(err);
       });
   };
 
@@ -134,10 +139,10 @@ export default function AttendeeAuthModal({
               {headerContent}
             </div>
           )}
-          {title ? title : 'Please Sign In To Enter'}
+          Please Sign In To Enter
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent className={`${classes.header}`}>
           <center>
             {signInText ? (
               signInText
@@ -153,11 +158,6 @@ export default function AttendeeAuthModal({
               autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
-              }}
-              onKeyUp={(e) => {
-                if (e.key === 'Enter') {
-                  handleSumbit(e);
-                }
               }}
             >
               {Object.keys(values).map((v) => (

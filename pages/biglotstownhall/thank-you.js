@@ -23,9 +23,9 @@ import SingleEvent from 'components/BreakoutSessions/SingleEvent';
 import ServerSentEvents from '../../components/RealTimeAssets/ServerSentEvents';
 import NameScroller from '../../components/RealTimeAssets/NameScroller';
 
-import Agenda from 'components/IndividualEventAssets/ads-sales-meetings-2021/Agenda';
-import SingleAuctionItem from 'components/IndividualEventAssets/SingleAuctionItem';
-import AttendeeAuthModal from '../../components/Modals/AttendeeAuthModal';
+import Agenda from 'eventAssets/ads-sales-meetings-2021/Agenda';
+import SingleAuctionItem from 'eventAssets/SingleAuctionItem';
+import AttendeeAuthModal from '../../components/Modals/AuthModal__Attendee';
 import { toast } from 'react-toastify';
 import { Autocomplete } from '@material-ui/lab';
 export var event_theme = {

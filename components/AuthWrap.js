@@ -1,15 +1,12 @@
 import styled from 'styled-components';
-
 import React, { useEffect } from 'react';
 import useHasAuthorized from '../hooks/useHasAuthorized';
-
-import AttendeeList from 'components/Modals/AttendeeList';
-import AttendeeList__EmailOnlyModal from 'components/Modals/AttendeeList__EmailOnlyModal';
-import PasswordAuthModal from 'components/Modals/PasswordAuthModal';
-import AttendeeAuthModal from 'components/Modals/AttendeeAuthModal';
-import { toast } from 'react-toastify';
+import AttendeeList from 'components/Modals/AuthModal__AttendeeList';
+import AttendeeList__EmailOnlyModal from 'components/Modals/AuthModal__EmailOnly';
+import PasswordAuthModal from 'components/Modals/AuthModal__Password';
+import AttendeeAuthModal from 'components/Modals/AuthModal__Attendee';
 import { token_generator } from '../lib/helpers';
-import { render } from 'nprogress';
+
 const Wrap = styled.div`
   filter: blur(0px);
   &&.blurred {

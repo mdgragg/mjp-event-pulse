@@ -1,6 +1,6 @@
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-import JCFS__PAGE from 'components/IndividualEventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
+import Page from 'components/PageTemplates';
+import JCFS__PAGE from 'eventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
 
 export const EVENT_URL = '2021-jfcs-faces-of-inspiration';
 

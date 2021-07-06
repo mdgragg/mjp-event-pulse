@@ -6,12 +6,11 @@ import Page from 'components/PageTemplates';
 import Section from 'components/Sections/Section';
 import PlayerWithChat from 'components/BodyTemplates/PlayerWithChat';
 import Body from 'components/template1/Body';
-import Hero from 'components/IndividualEventAssets/ywca-women-of-achievement/Hero';
-import YWCA_Body from 'components/IndividualEventAssets/ywca-women-of-achievement/YWCA_Body';
-import AfterEnded from 'components/IndividualEventAssets/ywca-women-of-achievement/AfterEnded';
-import YWCA_STYLE from 'components/IndividualEventAssets/ywca-women-of-achievement/YWCA_STYLE';
+import Hero from 'eventAssets/ywca-women-of-achievement/Hero';
+import YWCA_Body from 'eventAssets/ywca-women-of-achievement/YWCA_Body';
+import AfterEnded from 'eventAssets/ywca-women-of-achievement/AfterEnded';
+import YWCA_STYLE from 'eventAssets/ywca-women-of-achievement/YWCA_STYLE';
 import { toast } from 'react-toastify';
-import FullWrap from 'components/FullWrap';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 

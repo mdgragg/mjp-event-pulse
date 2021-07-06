@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
-import { getEventMeta } from 'lib/api';
 import { Grid } from '@material-ui/core';
 import FullWrap from 'components/FullWrap';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import Video__StickyTop__WithCountdown from 'components/VideoBoxes/Video__StickyTop__WithCountdown';
 import FlexHero from 'components/Heroes/FlexHero';
-import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import Footer from 'components/template1/Footer';
 import Section from 'components/template1/Section';
-import PasswordAuthModal from '../../components/Modals/PasswordAuthModal';
+import PasswordAuthModal from 'components/Modals/AuthModal__Password';
 
 import { toast } from 'react-toastify';
 export var event_theme = {

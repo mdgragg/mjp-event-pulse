@@ -6,25 +6,32 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
+import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import attendee_password from 'lib/fetchCalls/attendee_password';
+import NumberFormat from 'react-number-format';
+import MaskedInput from 'react-text-mask';
+import { Checkbox, FormControl } from '@material-ui/core';
+import attendee_capture from 'lib/fetchCalls/soft_auth';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '350px',
+      width: '80%',
+      minWidth: '350px',
     },
 
     '& .MuiTextField-root': {
       margin: '0.5rem',
-
       //   width: '25ch',
     },
-    '& .MuiInput-root input': {
-      textAlign: 'center',
-      fontSize: '2rem',
+  },
+  header: {
+    '.MuiDialogContent-root  p': {
+      maxWidth: '80%',
     },
   },
 }));
@@ -35,65 +42,73 @@ const StyledForm = styled.form`
   }
 `;
 
-const Error = styled.div`
-  background-color: red;
-  color: white;
-  font-size: 1.25rem;
-  text-align: center;
-`;
-export default function AttendeeAuthModal({
+export default function AuthModal__EmailOnly({
   open,
-  event_meta,
   callback,
-  eventId,
-  event_name,
+  event_meta,
   headerContent,
-  signInText,
+  signInText = null,
+  otherFields = {},
+  title,
 }) {
-  const init = {
-    pw: '',
+  let init = {
+    AttendeeEmail: {
+      displayName: 'Email',
+      value: '',
+      required: true,
+    },
+    ...otherFields,
   };
+
   const classes = useStyles();
   const [formLoading, setFormLoading] = React.useState(false);
-
-  const [formErrors, setFormErrors] = React.useState({
-    showing: false,
-    errors: [],
-  });
 
   const [values, setValues] = React.useState(init);
 
   const handleClose = () => {
-    toast.error('You must provide a password before joining.');
-  };
-
-  const zeroForm = () => {
-    setValues(init);
+    toast.error('You must enter your information before joining.');
   };
 
   const handleChange = (e) => {
+    e.persist();
     const name = e.target.name;
-    setValues({
-      ...values,
-      [name]: e.target.value,
-    });
+    const prevValue = values[name];
+
+    setValues((prev) => ({
+      ...prev,
+      [name]: { ...prevValue, value: e.target.value },
+    }));
+  };
+
+  const check_required = () => {
+    let result = Object.keys(values).filter(
+      (v) => values[v].value === '' && values[v].required
+    );
+
+    if (result.length > 0) {
+      return false;
+    }
+    return true;
   };
 
   const handleSumbit = async (e) => {
     setFormLoading(true);
-    // e.preventDefault();
-    if (values.password === '') {
+    e.preventDefault();
+    if (!check_required()) {
       setFormLoading(false);
-      return toast.error('You must provide a password!');
+      return toast.error('You must supply an email');
     }
-    return await attendee_password(values, event_meta.id)
+    const send_values = {};
+
+    Object.keys(values).map((v) => (send_values[v] = values[v].value));
+
+    return await attendee_capture(send_values, event_meta.id)
       .then((res) => {
         return callback(res);
       })
       .catch((err) => {
         setFormLoading(false);
-        toast.error(err);
-        return console.log('err: ', err);
+        return toast.error(err);
       });
   };
 
@@ -104,27 +119,23 @@ export default function AttendeeAuthModal({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        {headerContent && (
-          <div
-            style={{
-              width: '70%',
-              height: 'auto',
-              margin: 'auto',
-              textAlign: 'center',
-            }}
-          >
-            {headerContent}
-          </div>
-        )}
         <DialogTitle
           id="form-dialog-title"
           style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
         >
-          Please Provide a Password
+          {headerContent && (
+            <div
+              style={{
+                width: '70%',
+                height: 'auto',
+                margin: 'auto',
+              }}
+            >
+              {headerContent}
+            </div>
+          )}
+          {title ? title : 'Please Sign In To Enter'}
         </DialogTitle>
-        {formErrors.showing
-          ? formErrors.errors.map((err) => <Error>{err}</Error>)
-          : ''}
 
         <DialogContent>
           <center>
@@ -132,10 +143,10 @@ export default function AttendeeAuthModal({
               signInText
             ) : (
               <DialogContentText>
-                This event requires a
-                <br /> password to enter.
+                Please enter your information to proceed to the event.
               </DialogContentText>
             )}
+
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
@@ -145,22 +156,24 @@ export default function AttendeeAuthModal({
               }}
               onKeyUp={(e) => {
                 if (e.key === 'Enter') {
-                  handleSumbit();
+                  handleSumbit(e);
                 }
               }}
             >
-              <TextField
-                autoFocus
-                style={{ textAlign: 'center' }}
-                margin="normal"
-                id="password"
-                name="pw"
-                label="Password"
-                type="password"
-                value={values.pw}
-                onChange={handleChange}
-                required
-              />
+              {Object.keys(values).map((v) => (
+                <TextField
+                  key={`inputs--${v}`}
+                  autoFocus
+                  margin="normal"
+                  id={v}
+                  name={v}
+                  label={values[v].displayName}
+                  type="text"
+                  // value={values[v].value}
+                  onChange={handleChange}
+                  required={values[v].required}
+                />
+              ))}
             </StyledForm>
           </center>
         </DialogContent>

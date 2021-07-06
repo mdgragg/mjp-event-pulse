@@ -11,7 +11,7 @@ import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import EmailOnlyModal from '../../components/Modals/AttendeeList__EmailOnlyModal';
+import EmailOnlyModal from '../../components/Modals/AuthModal__EmailOnly';
 import LandingPage from 'components/IndividualEventAssets/biglotstownhall/LandingPage';
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';

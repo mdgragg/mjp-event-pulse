@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import CenteredPlayer from 'components/BodyTemplates/CenteredPlayer';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
-import VideoBox__StickyTop from '../../VideoBoxes/Video__StickyTop';
+import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from '../../assets/DateParse';
+import DateParse from 'components/assets/DateParse';
 
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');

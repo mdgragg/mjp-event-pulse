@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useCalculateIfStarted } from '../../../hooks';
-import CenteredPlayer from 'components/BodyTemplates/CenteredPlayer';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
-import VideoBox__StickyTop from '../../VideoBoxes/Video__StickyTop';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from '../../assets/DateParse';
-import { Button__Big } from '../../Buttons';
-import { BoxedCounter, CircleCounter } from '../../Counters';
-import ExternalLink from '../../Modals/ExternalLink';
+import { useCalculateIfStarted } from 'hooks';
+
+import { DateParse } from 'components/assets';
+import { Button__Big } from 'components/Buttons';
+import { CircleCounter } from 'components/Counters';
+import ExternalLink from 'components/Modals/ExternalLink';
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
   background-color: ${(props) => props.theme.colors.primary};
   height: 100vh;
+  padding: 2rem 0;
   min-height: 1080px;
   width: 100%;
   background-repeat: repeat-y;
-  position: absolute;
+  position: relative;
   background-size: 100% auto;
   @media all and (max-width: 768px) {
     background-size: cover;
@@ -36,7 +34,7 @@ const Header = styled.div`
   }
 `;
 const Inner = styled.div`
-  width: 100%;
+  width: 95%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;

@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Video__StickyTop__WithCoundown from '../../VideoBoxes/Video__StickyTop__WithCountdown';
-import Chat__iFrame from '../../iFrames/Chat__iFrame';
-import Total from './Total';
-import Counter__JustNumbers from '../../Counters/Counter__JustNumbers';
-import LeaderBoards from './LeaderBoards';
+import Video__StickyTop__WithCoundown from 'components/VideoBoxes/Video__StickyTop__WithCountdown';
+import Chat__iFrame from 'components/iFrames/Chat__iFrame';
+import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import NameList from './NameList';
+
 const TheBody = styled.div`
   display: grid;
   grid-template-columns: 65% 35%;

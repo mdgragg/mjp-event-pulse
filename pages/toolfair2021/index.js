@@ -1,20 +1,15 @@
-import { Router, useRouter } from 'next/router';
-
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
-import Landing from 'components/IndividualEventAssets/toolfair2021/Landing';
+import Landing from 'eventAssets/toolfair2021/Landing';
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useHasAuthorized from 'hooks/useHasAuthorized';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-
 import { token_generator } from '../../lib/helpers';
-import CustomModal from '../../components/IndividualEventAssets/toolfair2021/CustomModal';
+import CustomModal from 'eventAssets/toolfair2021/CustomModal';
 
 export var event_theme = {
   h1: {
