@@ -29,7 +29,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   @media all and (max-width: 768px) {
-    height: auto;
+    /* height: auto; */
     margin: 2rem auto;
   }
 `;
@@ -58,6 +58,7 @@ const Inner = styled.div`
   && .logo-holder {
     width: 50%;
     height: 100%;
+
     text-align: center;
     justify-self: end;
   }
@@ -85,7 +86,7 @@ const Inner = styled.div`
 `;
 
 const PlayerBody = styled.div`
-  min-height: 60vh;
+  min-height: 50vh;
   max-width: 768px;
   margin: auto;
   display: flex;
