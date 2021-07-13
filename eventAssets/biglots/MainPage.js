@@ -78,7 +78,7 @@ const Inner = styled.div`
       grid-row: 2;
     }
     && .logo-holder {
-      width: 40%;
+      width: 60%;
       grid-row: 1;
       justify-self: center;
     }
