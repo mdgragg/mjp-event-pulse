@@ -121,7 +121,7 @@ const MainPage = ({ main_event, hasStarted }) => {
           <div className="logo-holder">
             <img
               src={`https://storage.googleapis.com/mjp-stream-public/biglots/BL_Stacked_Logo-01.png`}
-              alt="Big Lots logo B!"
+              alt="Big Lots logo stacked"
             />
           </div>
         </Inner>
