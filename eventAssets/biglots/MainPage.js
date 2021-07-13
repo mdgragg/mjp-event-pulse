@@ -120,7 +120,7 @@ const MainPage = ({ main_event, hasStarted }) => {
           </div>
           <div className="logo-holder">
             <img
-              src={main_event?.LogoLink[0]?.Media.url}
+              src={`https://storage.googleapis.com/mjp-stream-public/biglots/BL_Stacked_Logo-01.png`}
               alt="Big Lots logo B!"
             />
           </div>
