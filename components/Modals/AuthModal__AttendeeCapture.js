@@ -41,7 +41,7 @@ const StyledForm = styled.form`
   }
 `;
 
-export default function AuthModal__Attendee({
+export default function AuthModal__AttendeeCapture({
   open,
   callback,
   event_meta,
