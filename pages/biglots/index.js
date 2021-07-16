@@ -101,7 +101,7 @@ export var event_theme = {
   breakpoints: { ...BREAKPOINTS },
   headerHeight: '200px',
   headerOpacity: '0.75',
-  videoBreakPoint: 700,
+  videoBreakPoint: 0,
   maxSectionWidth: '1800px',
 };
 

@@ -6,6 +6,7 @@ import { DateParse } from 'components/assets';
 import { Button__Big } from 'components/Buttons';
 import { CircleCounter } from 'components/Counters';
 import ExternalLink from 'components/Modals/ExternalLink';
+import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
   background-color: ${(props) => props.theme.colors.primary};
@@ -57,15 +58,15 @@ const Inner = styled.div`
   }
   && .logo-holder {
     width: 50%;
+    min-width: 200px;
     height: 100%;
-
     text-align: center;
     justify-self: end;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1200px) {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
-    row-gap: 1rem;
+    /* row-gap: 1rem; */
     && .title > h2 {
       font-size: 1.5rem;
       padding: 1rem;
@@ -79,6 +80,7 @@ const Inner = styled.div`
     }
     && .logo-holder {
       width: 60%;
+      max-width: 350px;
       grid-row: 1;
       justify-self: center;
     }
@@ -86,21 +88,28 @@ const Inner = styled.div`
 `;
 
 const PlayerBody = styled.div`
-  min-height: 50vh;
-  max-width: 768px;
+  min-height: 500px;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: center;
+  && h2 {
+    font-size: clamp(3rem, 3vw, 10vw);
+    color: white;
+    font-family: Futura Bold;
+  }
+  @media all and (max-width: 1200px) {
+    max-width: 768px;
+  }
+  @media all and (max-width: 768px) {
+    max-width: 95%;
+    margin-top: 3rem;
+    min-height: auto;
+  }
 `;
 const MainPage = ({ main_event, hasStarted }) => {
-  const [externalLink, setExternalLink] = useState({
-    open: false,
-    eventOpen: false,
-    errorText: 'This event has not started yet.',
-  });
-
   const hasStartEnd = useCalculateIfStarted(main_event);
 
   return (
@@ -128,28 +137,22 @@ const MainPage = ({ main_event, hasStarted }) => {
         </Inner>
       </Header>
       <PlayerBody>
-        <div>
-          <CircleCounter event={main_event} style={{ margin: '1rem auto' }} />
-          <Button__Big
-            style={{ margin: '4rem auto', padding: '1rem 3rem' }}
-            onClick={() => {
-              setExternalLink((prev) => ({ ...prev, open: true }));
-            }}
-          >
-            Join Us Live
-          </Button__Big>
-        </div>
+        <Video__StickyTop__WithCountdown
+          isStarted={true}
+          start={main_event.eventStartEnd.StartDateTime}
+          showMinutesBefore={30}
+          showBefore={
+            <div>
+              <h2>Join Us Live In</h2>
+              <CircleCounter
+                event={main_event}
+                style={{ margin: '1rem auto' }}
+              />
+            </div>
+          }
+          src={main_event.streamLinks[0].url}
+        />
       </PlayerBody>
-      <ExternalLink
-        open={externalLink.open}
-        setOpen={(value) =>
-          setExternalLink((prev) => ({ ...prev, open: value }))
-        }
-        link={{
-          allowed: hasStartEnd.hasStarted,
-          errorText: 'This event has not started yet!',
-        }}
-      />
     </BG>
   );
 };

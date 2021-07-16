@@ -79,7 +79,7 @@ const SingleDigit = ({ number, delimiter }) => {
   );
 };
 
-const BoxedCounter = ({ event, prefix }) => {
+const CircleCounter = ({ event, prefix }) => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {
@@ -106,9 +106,15 @@ const BoxedCounter = ({ event, prefix }) => {
         {prefix && <Title>{prefix}</Title>}
 
         <Box>
-          {Object.keys(obj).map((o) => {
+          {Object.keys(obj).map((o, index) => {
             if (o !== 'total_remaining' && o !== 'parsed_until_end') {
-              return <SingleDigit number={obj[o]} delimiter={o} />;
+              return (
+                <SingleDigit
+                  number={obj[o]}
+                  delimiter={o}
+                  key={`counter--${index}`}
+                />
+              );
             }
           })}
         </Box>
@@ -117,4 +123,4 @@ const BoxedCounter = ({ event, prefix }) => {
   }
 };
 
-export default BoxedCounter;
+export default CircleCounter;
