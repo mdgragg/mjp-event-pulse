@@ -11,8 +11,7 @@ import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import AttendeeAuthModal from '../../components/Modals/AuthModal__Attendee';
-import { toast } from 'react-toastify';
+
 export var event_theme = {
   h1: {
     fontSize: '5rem',
@@ -44,115 +43,59 @@ const Index = (props) => {
   const session_token = EVENT_URL;
   const router = useRouter();
 
-  const {
-    event_meta,
-    main_event,
-    speakers,
-    event_meta: { AuthRequired },
-    main_event: { BreakoutSessions },
-  } = props;
+  const { event_meta, main_event } = props;
 
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-
-  const [hasAuthenticated, setHasAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-
-    const storage_auth = sessionStorage.getItem(session_token);
-
-    if (storage_auth === 'true') {
-      setHasAuthenticated(true);
-    } else {
-      setHasAuthenticated(false);
-    }
-
-    return () => clearInterval(interval);
-  }, []);
-
   const MainPage = () => {
     return (
       <>
-        <AttendeeAuthModal
-          eventId={main_event.id}
-          event_name={main_event.EventName}
-          open={!hasAuthenticated}
-          callback={(creds) => {
-            setHasAuthenticated(true);
-            sessionStorage.setItem(session_token, true);
-            toast.success(creds);
-          }}
-        />
-        <div
-          style={{
-            filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-          }}
-        >
-          <Page theme={event_theme}>
-            <Meta title={event_meta.EventJobName}> </Meta>
+        <Page theme={event_theme}>
+          <Meta title={event_meta.EventJobName}> </Meta>
 
-            <Body>
-              <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
-                <img
-                  src={
-                    'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                  }
-                  style={{
-                    position: 'absolute',
-                    zIndex: '100',
-                    top: '65px',
-                    left: '25px',
-                    height: '130px',
-                    width: 'auto',
-                  }}
-                />
+          <Body>
+            <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+              <img
+                src={
+                  'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
+                }
+                style={{
+                  position: 'absolute',
+                  zIndex: '100',
+                  top: '65px',
+                  left: '25px',
+                  height: '130px',
+                  width: 'auto',
+                }}
+              />
 
-                <Grid container spacing={10}>
-                  <Grid item={true} md={12} sm={12} xs={12}>
-                    <div
-                      style={{
-                        maxWidth: '1000px',
-                        margin: 'auto',
-                        height: '100vh',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: '1000',
-                        position: 'relative',
-                      }}
-                    >
-                      <h2 style={{ fontSize: '4rem', textAlign: 'center' }}>
-                        Thank you for attending {main_event.EventName}
-                      </h2>
-                    </div>
-                  </Grid>
+              <Grid container spacing={10}>
+                <Grid item={true} md={12} sm={12} xs={12}>
+                  <div
+                    style={{
+                      maxWidth: '1000px',
+                      margin: 'auto',
+                      height: '100vh',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      zIndex: '1000',
+                      position: 'relative',
+                    }}
+                  >
+                    <h2 style={{ fontSize: '4rem', textAlign: 'center' }}>
+                      Thank you for attending {main_event.EventName}
+                    </h2>
+                  </div>
                 </Grid>
-              </Section__WithBG>
-            </Body>
-          </Page>
-        </div>
+              </Grid>
+            </Section__WithBG>
+          </Body>
+        </Page>
       </>
     );
   };
