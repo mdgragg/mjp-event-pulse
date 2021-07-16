@@ -6,7 +6,6 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import FullWrap from 'components/FullWrap';
 import Body from 'components/template1/Body';
-import EmailOnlyModal from '../../components/Modals/AuthModal__EmailOnly';
 import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
 import { toast } from 'react-toastify';
 
@@ -55,28 +54,6 @@ const Index = (props) => {
 
   return (
     <>
-      <EmailOnlyModal
-        signInText={
-          <p>
-            Please use your employee email <br />
-            (i.e. associateID@biglots.com) <br />
-            <span style={{ fontSize: '0.75rem' }}>
-              This is a preview, so only associateid@biglots.com will work for
-              this example
-            </span>
-          </p>
-        }
-        event_meta={main_event}
-        open={!hasAuthenticated}
-        callback={(creds) => {
-          setHasAuthenticated(true);
-          toast.success(
-            `Hello ${
-              creds.AttendeeFirst ? creds.AttendeeFirst : ''
-            }, Welcome to Big Lots Q1 Virtual Town Hall`
-          );
-        }}
-      />
       <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>

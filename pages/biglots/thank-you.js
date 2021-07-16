@@ -7,7 +7,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 import Section__WithBG from 'components/Sections/Section__WithBG';
-import { AuthModal__Attendee } from '../../components/Modals';
+
 import { toast } from 'react-toastify';
 
 export var event_theme = {
@@ -90,67 +90,49 @@ const Index = (props) => {
 
   const MainPage = () => {
     return (
-      <>
-        <AuthModal__Attendee
-          eventId={main_event.id}
-          event_name={main_event.EventName}
-          open={!hasAuthenticated}
-          callback={(creds) => {
-            setHasAuthenticated(true);
-            sessionStorage.setItem(session_token, true);
-            toast.success(creds);
-          }}
-        />
-        <div
-          style={{
-            filter: `${!hasAuthenticated ? 'blur(20px)' : 'blur(0px)}'}`,
-          }}
-        >
-          <Page theme={event_theme}>
-            <Meta title={event_meta.EventJobName}> </Meta>
+      <Page theme={event_theme}>
+        <Meta title={event_meta.EventJobName}> </Meta>
 
-            <Body>
-              <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
-                <img
-                  src={
-                    'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
-                  }
+        <Body>
+          <Section__WithBG imgSrc={main_event?.HeaderImage?.url}>
+            <img
+              src={
+                'https://storage.googleapis.com/mjp-stream-public/alliancedatainvestorday/logo.png'
+              }
+              style={{
+                position: 'absolute',
+                zIndex: '100',
+                top: '65px',
+                left: '25px',
+                height: '130px',
+                width: 'auto',
+              }}
+            />
+
+            <Grid container spacing={10}>
+              <Grid item={true} md={12} sm={12} xs={12}>
+                <div
                   style={{
-                    position: 'absolute',
-                    zIndex: '100',
-                    top: '65px',
-                    left: '25px',
-                    height: '130px',
-                    width: 'auto',
+                    maxWidth: '1000px',
+                    margin: 'auto',
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    zIndex: '1000',
+                    position: 'relative',
                   }}
-                />
-
-                <Grid container spacing={10}>
-                  <Grid item={true} md={12} sm={12} xs={12}>
-                    <div
-                      style={{
-                        maxWidth: '1000px',
-                        margin: 'auto',
-                        height: '100vh',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: '1000',
-                        position: 'relative',
-                      }}
-                    >
-                      <h2 style={{ fontSize: '4rem', textAlign: 'center' }}>
-                        Thank you for attending {main_event.EventName}
-                      </h2>
-                    </div>
-                  </Grid>
-                </Grid>
-              </Section__WithBG>
-            </Body>
-          </Page>
-        </div>
-      </>
+                >
+                  <h2 style={{ fontSize: '4rem', textAlign: 'center' }}>
+                    Thank you for attending {main_event.EventName}
+                  </h2>
+                </div>
+              </Grid>
+            </Grid>
+          </Section__WithBG>
+        </Body>
+      </Page>
     );
   };
 
