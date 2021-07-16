@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
+import { toast } from 'react-toastify';
 import AuthWrap from '../../components/AuthWrap';
 import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
@@ -140,7 +141,7 @@ const Index = (props) => {
         toast.success(
           `Hello ${
             creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
-          }, welcome to Big Lots Q1 Virtual Town Hall`
+          }, welcome to ${main_event.EventName}`
         );
       }}
       render={(v) => setAuth(v)}
@@ -174,7 +175,7 @@ const Index = (props) => {
       }
     >
       <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
+        <Meta title={main_event.EventName}> </Meta>
         <Body>
           {false ? (
             <LandingPage main_event={main_event} />
