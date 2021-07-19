@@ -44,6 +44,7 @@ const StyledForm = styled.form`
 export default function AuthModal__AttendeeCapture({
   open,
   callback,
+  title,
   event_meta,
   headerContent,
   signInText = null,
@@ -128,7 +129,7 @@ export default function AuthModal__AttendeeCapture({
           id="form-dialog-title"
           style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
         >
-          {headerContent && (
+          {title ? (
             <div
               style={{
                 width: '70%',
@@ -136,10 +137,11 @@ export default function AuthModal__AttendeeCapture({
                 margin: 'auto',
               }}
             >
-              {headerContent}
+              {title}
             </div>
+          ) : (
+            <h3>Please Sign In To Enter</h3>
           )}
-          Please Sign In To Enter
         </DialogTitle>
 
         <DialogContent className={`${classes.header}`}>

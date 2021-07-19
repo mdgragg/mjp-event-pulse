@@ -132,9 +132,23 @@ const Index = (props) => {
       event_to_check={main_event}
       title={
         <>
+          <div
+            style={{
+              backgroundColor: event_theme.colors.orange,
+              height: '90px',
+              width: '90px',
+              padding: '5px',
+              margin: '1rem auto',
+            }}
+          >
+            <img
+              style={{ height: 'auto', width: '90%' }}
+              src={main_event.LogoLink[0].Media.url}
+            />
+          </div>
           Please Sign In to Join
           <br />
-          <strong> Big Lots' Q1 Town Hall</strong>
+          <strong> {main_event.EventName}</strong>
         </>
       }
       callback={(creds) => {
@@ -157,31 +171,11 @@ const Index = (props) => {
           </p>
         </div>
       }
-      headerContent={
-        <div
-          style={{
-            backgroundColor: event_theme.colors.orange,
-            height: '90px',
-            width: '90px',
-            padding: '5px',
-            margin: '1rem auto',
-          }}
-        >
-          <img
-            style={{ height: 'auto', width: '90%' }}
-            src={main_event.LogoLink[0].Media.url}
-          />
-        </div>
-      }
     >
       <Page theme={event_theme}>
         <Meta title={main_event.EventName}> </Meta>
         <Body>
-          {false ? (
-            <LandingPage main_event={main_event} />
-          ) : (
-            <MainPage main_event={main_event} hasAuth={auth} />
-          )}
+          <MainPage main_event={main_event} hasAuth={auth} />
         </Body>
       </Page>
     </AuthWrap>
