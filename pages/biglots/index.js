@@ -131,16 +131,14 @@ const Index = (props) => {
   const [auth, setAuth] = useState(false);
 
   return (
-    <Page theme={event_theme}>
-      <Meta title={event_meta.EventJobName}> </Meta>
-      <Body>
-        {false ? (
-          <LandingPage main_event={main_event} />
-        ) : (
+    <AuthWrap event_to_check={main_event}>
+      <Page theme={event_theme}>
+        <Meta title={event_meta.EventJobName}> </Meta>
+        <Body>
           <MainPage main_event={main_event} hasAuth={auth} />
-        )}
-      </Body>
-    </Page>
+        </Body>
+      </Page>
+    </AuthWrap>
   );
 };
 
@@ -155,7 +153,7 @@ export async function getStaticProps(ctx) {
       main_event,
       theme,
     },
-    revalidate: 3000,
+    revalidate: 300,
   };
 }
 
