@@ -1,18 +1,9 @@
-import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
+import { useState } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-import Body from 'components/template1/Body';
-
-import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
-import ThankYou from 'components/IndividualEventAssets/cashexplosionlive/ThankYou';
-import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
-import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
-import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
+import Page from 'components/PageTemplates';
+import Wrap from 'eventAssets/cashexplosionlive/Wrap';
 import { event_theme, Decider } from './index';
 import { toast } from 'react-toastify';
 

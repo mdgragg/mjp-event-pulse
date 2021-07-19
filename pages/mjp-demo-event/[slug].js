@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { EVENT_URL, event_theme } from './index';
+import React, { useState } from 'react';
+import { EVENT_URL } from './index';
 
 import { getEventMeta } from 'lib/api';
 
 import AuthWrap from 'components/AuthWrap';
 import Index from './index';
-import { toast } from 'react-toastify';
-import useHasAuthorized from '../../hooks/useHasAuthorized';
-import { token_generator } from '../../lib/helpers';
 
 const SubEvent = ({ main_event, event_meta }) => {
   const [auth, setAuth] = useState(false);

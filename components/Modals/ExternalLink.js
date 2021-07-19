@@ -8,9 +8,19 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components';
+
+const useStyles = makeStyles({
+  root: {
+    '& .MuiPaper-root': {
+      padding: ' 2rem',
+      minHeight: '350px',
+    },
+  },
+});
 
 export default function ExternalLink({ open, setOpen, goToLink, link }) {
+  const classes = useStyles();
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -29,6 +39,7 @@ export default function ExternalLink({ open, setOpen, goToLink, link }) {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
+      className={classes.root}
     >
       <DialogTitle
         id="form-dialog-title"

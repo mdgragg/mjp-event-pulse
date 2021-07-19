@@ -93,12 +93,14 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
 
   function calculateFixed(e) {
     if (window.pageYOffset >= offsetVideoHeight && offsetVideoHeight > 0) {
+      console.log('adding fixed');
       wrapperRef.current.classList.add('fixed');
     } else {
       wrapperRef.current.classList.remove('fixed');
     }
   }
   useEffect(() => {
+    console.log('video break point', offsetVideoHeight);
     if (isStarted) {
       window.addEventListener('scroll', calculateFixed, { passive: true });
     }

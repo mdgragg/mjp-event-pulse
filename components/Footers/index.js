@@ -15,7 +15,7 @@ const MyFooter = styled.div`
   width: 100%;
   background-color: black;
   color: white;
-  padding: 1rem 0;
+  padding: 2rem 0;
   display: grid;
   grid-template-columns: repeat(3, 33%);
   align-items: center;
@@ -36,6 +36,12 @@ const MyFooter = styled.div`
     margin: 0 0.5rem;
     font-size: 1.75rem;
   }
+  @media all and (max-width: 768px) {
+    grid-template-columns: 100%;
+    && .tech-issues {
+      display: none;
+    }
+  }
 `;
 
 const LogoWrap = styled.div`
@@ -53,7 +59,7 @@ const LogoWrap = styled.div`
 const Footer = () => {
   return (
     <MyFooter>
-      <div>
+      <div className="tech-issues">
         <a href="/">{`Having Tech Issues?`} </a>
       </div>
       <div>

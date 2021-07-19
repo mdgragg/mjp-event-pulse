@@ -11,6 +11,9 @@ const MakeButtonStyle = (type) => {
     background-color: ${(props) => props.theme.buttons[type].backgroundColor};
     color: ${(props) => props.theme.buttons[type].fontColor};
     border: ${(props) => props.theme.buttons[type].border};
+    @media all and (max-width: 500px) {
+      font-size: 1rem;
+    }
   `;
 };
 

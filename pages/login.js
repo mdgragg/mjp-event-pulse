@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import LoginPage from 'components/globals/Login/LoginPage';
 const Login = (props) => {
   return (
     <Page>
-      <p>Please log in to view this event</p>
       <LoginPage />
     </Page>
   );
@@ -17,9 +16,6 @@ export default Login;
 
 export async function getServerSideProps(ctx) {
   return {
-    redirect: {
-      destination: './',
-      permanent: false,
-    },
+    props: {},
   };
 }

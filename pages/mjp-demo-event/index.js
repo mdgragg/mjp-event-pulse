@@ -1,9 +1,7 @@
-import { useEffect, useState, useContext } from 'react';
-import Route, { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
@@ -11,12 +9,8 @@ import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
-import FlexHero from 'components/Heroes/FlexHero';
 import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
-import DateParse from 'components/assets/DateParse';
-import CircleCounter from 'components/Counters/CircleCounter';
-import useTestBool from '../../hooks/useTestBool';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
 export var event_theme = {

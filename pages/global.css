@@ -124,7 +124,7 @@ html {
   box-sizing: border-box;
 }
 
-button{
+button {
   border: none;
   display: block;
   margin: 1rem auto;
@@ -133,7 +133,7 @@ button{
 button.btn,
 .MuiButton-root {
   min-height: 40px;
-  min-width: 180px;
+  min-width: clamp(130px, 10vw, 40vw);
   padding: 5px 10px;
   border-radius: 1px;
   font-size: 12px;

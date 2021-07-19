@@ -1,15 +1,12 @@
 import styled from 'styled-components';
-
 import React, { useEffect } from 'react';
 import useHasAuthorized from '../hooks/useHasAuthorized';
-
-import AttendeeList from 'components/Modals/AttendeeList';
-import AttendeeList__EmailOnlyModal from 'components/Modals/AttendeeList__EmailOnlyModal';
-import PasswordAuthModal from 'components/Modals/PasswordAuthModal';
-import AttendeeAuthModal from 'components/Modals/AttendeeAuthModal';
-import { toast } from 'react-toastify';
+import AttendeeList from 'components/Modals/AuthModal__AttendeeList';
+import AttendeeList__EmailOnlyModal from 'components/Modals/AuthModal__EmailOnly';
+import PasswordAuthModal from 'components/Modals/AuthModal__Password';
+import { AuthModal__AttendeeCapture } from 'components/Modals/';
 import { token_generator } from '../lib/helpers';
-import { render } from 'nprogress';
+
 const Wrap = styled.div`
   filter: blur(0px);
   &&.blurred {
@@ -27,6 +24,7 @@ const AuthWrap = ({
   options = [],
   signInText = null,
   headerContent = null,
+  otherFields = {},
 }) => {
   const auth_type = event_to_check.AuthOptions.AuthorizationType;
 
@@ -43,6 +41,7 @@ const AuthWrap = ({
     setHasAuthorized(true);
     callback(res);
   };
+  // ================= RETURN AREA ===================== //
 
   if (auth_type === 'Public') {
     render(true);
@@ -53,6 +52,7 @@ const AuthWrap = ({
       return (
         <>
           <AttendeeList__EmailOnlyModal
+            otherFields={otherFields}
             title={title}
             event_meta={event_to_check}
             event_name={event_to_check.EventName}
@@ -61,7 +61,6 @@ const AuthWrap = ({
             signInText={signInText}
             headerContent={headerContent}
           />
-
           <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
         </>
       );
@@ -69,6 +68,7 @@ const AuthWrap = ({
     return (
       <>
         <AttendeeList
+          otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
           open={!hasAuthorized}
@@ -84,6 +84,7 @@ const AuthWrap = ({
     return (
       <>
         <PasswordAuthModal
+          otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
           open={!hasAuthorized}
@@ -98,7 +99,8 @@ const AuthWrap = ({
   if (auth_type === 'CaptureNewAttendees') {
     return (
       <>
-        <AttendeeAuthModal
+        <AuthModal__AttendeeCapture
+          otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
           open={!hasAuthorized}

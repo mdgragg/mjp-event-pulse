@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import { getEventMeta } from 'lib/api';
 
 import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates/index';
 
-import GameShow__Main from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GameShow__Main';
-import GAMEWRAP from '../../components/IndividualEventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
-import UseServerSentEvents from '../../hooks/useServerSentEvents';
+import GameShow__Main from 'eventAssets/house-of-mercy-game-show-gala/GameShow__Main';
+import GAMEWRAP from 'eventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
+
 export var event_theme = {
   h1: {
     fontSize: '3rem',
@@ -47,17 +46,14 @@ const Index = (props) => {
   );
 };
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
   return {
-    props: {
-      //meta will be the props for the event
-      event_meta: event_data,
-      main_event,
+    redirect: {
+      destination: EVENT_URL + '/thank-you',
     },
-    revalidate: 500,
   };
 }
 
