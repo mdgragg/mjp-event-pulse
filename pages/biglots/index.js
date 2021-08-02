@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import LandingPage from 'eventAssets/biglots/LandingPage';
 import MainPage from 'eventAssets/biglots/MainPage';
+import { useRouter } from 'next/router';
 
 export const COLORS = {
   red: '#b71f39',
@@ -111,6 +112,7 @@ export const EVENT_URL = 'biglots';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
+  const router = useRouter();
   const { event_meta, main_event } = props;
 
   event_theme = {
@@ -119,6 +121,12 @@ const Index = (props) => {
   };
 
   const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if (event_meta.eventStatus.EventStatus === 'Ended') {
+      router.push(`${EVENT_URL}/thank-you`);
+    }
+  }, []);
 
   return (
     <AuthWrap
