@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
@@ -76,7 +77,8 @@ const Admin = (props) => {
               }}
             >
               Admin
-            </span>
+            </span>{' '}
+            /{router.query.event}
           </h1>
           <div>
             {selected_event &&
@@ -99,17 +101,8 @@ const Admin = (props) => {
           />
 
           <hr />
-          <button
-            onClick={() =>
-              signIn().then((res) => {
-                console.log(res);
-                toast('Hello!');
-              })
-            }
-          >
-            Login
-          </button>
-          <button
+
+          <Button
             onClick={() =>
               signOut().then((res) => {
                 console.log(res);
@@ -118,7 +111,7 @@ const Admin = (props) => {
             }
           >
             Logout
-          </button>
+          </Button>
         </div>
       </Section>
     </Page>

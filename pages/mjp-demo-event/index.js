@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-
+import { database } from 'lib/firebase/base';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
@@ -102,6 +102,10 @@ export async function getServerSideProps(ctx) {
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
 
+  let initial_data = await fetch(
+    'https://millsjameseventcms-testing.firebaseio.com/test-2.json'
+  ).then((res) => res.json());
+
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let return_object;
@@ -131,6 +135,7 @@ export async function getServerSideProps(ctx) {
           //meta will be the props for the event
           event_meta: event_data,
           main_event,
+          test: initial_data,
         },
       };
       break;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import LandingPage from 'eventAssets/biglots/LandingPage';
 import MainPage from 'eventAssets/biglots/MainPage';
+import { useRouter } from 'next/router';
 
 export const COLORS = {
   red: '#b71f39',
@@ -111,6 +112,7 @@ export const EVENT_URL = 'biglots';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
+  const router = useRouter();
   const { event_meta, main_event } = props;
 
   event_theme = {
@@ -119,6 +121,12 @@ const Index = (props) => {
   };
 
   const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if (event_meta.eventStatus.EventStatus === 'Ended') {
+      router.push(`${EVENT_URL}/thank-you`);
+    }
+  }, []);
 
   return (
     <AuthWrap
@@ -132,9 +140,23 @@ const Index = (props) => {
       event_to_check={main_event}
       title={
         <>
+          <div
+            style={{
+              backgroundColor: event_theme.colors.orange,
+              height: '90px',
+              width: '90px',
+              padding: '5px',
+              margin: '1rem auto',
+            }}
+          >
+            <img
+              style={{ height: 'auto', width: '90%' }}
+              src={main_event.LogoLink[0].Media.url}
+            />
+          </div>
           Please Sign In to Join
           <br />
-          <strong> Big Lots' Q1 Town Hall</strong>
+          <strong> {main_event.EventName}</strong>
         </>
       }
       callback={(creds) => {
@@ -157,31 +179,11 @@ const Index = (props) => {
           </p>
         </div>
       }
-      headerContent={
-        <div
-          style={{
-            backgroundColor: event_theme.colors.orange,
-            height: '90px',
-            width: '90px',
-            padding: '5px',
-            margin: '1rem auto',
-          }}
-        >
-          <img
-            style={{ height: 'auto', width: '90%' }}
-            src={main_event.LogoLink[0].Media.url}
-          />
-        </div>
-      }
     >
       <Page theme={event_theme}>
         <Meta title={main_event.EventName}> </Meta>
         <Body>
-          {false ? (
-            <LandingPage main_event={main_event} />
-          ) : (
-            <MainPage main_event={main_event} hasAuth={auth} />
-          )}
+          <MainPage main_event={main_event} hasAuth={auth} />
         </Body>
       </Page>
     </AuthWrap>
@@ -199,7 +201,7 @@ export async function getStaticProps(ctx) {
       main_event,
       theme,
     },
-    revalidate: 3000,
+    revalidate: 300,
   };
 }
 

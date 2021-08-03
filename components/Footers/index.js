@@ -24,17 +24,19 @@ const MyFooter = styled.div`
     text-align: center;
     margin: 0 auto;
   }
+  && .icons-wrap {
+    margin: 0;
+  }
   && .icons {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 80%;
-
     margin: auto;
   }
 
   && .icons svg {
-    margin: 0 0.5rem;
-    font-size: 1.75rem;
+    margin: 0 0.25rem;
+    font-size: 1.25rem;
   }
   @media all and (max-width: 768px) {
     grid-template-columns: 100%;
@@ -70,7 +72,7 @@ const Footer = () => {
           </LogoWrap>
         </a>
       </div>
-      <div>
+      <div className="icons-wrap">
         <div className="icons">
           <a href="https://www.millsjames.com/contact-us/" target="_blank">
             <EmailIcon />

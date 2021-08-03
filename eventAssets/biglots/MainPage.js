@@ -23,7 +23,6 @@ const BG = styled.div`
 `;
 
 const Header = styled.div`
-  height: 25vh;
   min-height: 250px;
   display: flex;
   flex-direction: column;
@@ -60,6 +59,7 @@ const Inner = styled.div`
     width: 50%;
     min-width: 200px;
     height: 100%;
+    margin: 1rem auto;
     text-align: center;
     justify-self: end;
   }
@@ -81,6 +81,7 @@ const Inner = styled.div`
     && .logo-holder {
       width: 60%;
       max-width: 350px;
+
       grid-row: 1;
       justify-self: center;
     }

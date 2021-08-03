@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import React, { useEffect } from 'react';
 import useHasAuthorized from '../hooks/useHasAuthorized';
-import AttendeeList from 'components/Modals/AuthModal__AttendeeList';
-import AttendeeList__EmailOnlyModal from 'components/Modals/AuthModal__EmailOnly';
-import PasswordAuthModal from 'components/Modals/AuthModal__Password';
-import { AuthModal__AttendeeCapture } from 'components/Modals/';
+import {
+  AuthModal__AttendeeCapture,
+  AuthModal__Password,
+  AuthModal__Email,
+  AuthModal__AttendeeList,
+} from 'components/Modals/';
 import { token_generator } from '../lib/helpers';
 
 const Wrap = styled.div`
@@ -51,7 +53,7 @@ const AuthWrap = ({
     if (options.includes('emailOnly')) {
       return (
         <>
-          <AttendeeList__EmailOnlyModal
+          <AuthModal__Email
             otherFields={otherFields}
             title={title}
             event_meta={event_to_check}
@@ -67,7 +69,7 @@ const AuthWrap = ({
     }
     return (
       <>
-        <AttendeeList
+        <AuthModal__AttendeeList
           otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
@@ -83,7 +85,7 @@ const AuthWrap = ({
   if (auth_type === 'PasswordProtected') {
     return (
       <>
-        <PasswordAuthModal
+        <AuthModal__Password
           otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
@@ -100,6 +102,7 @@ const AuthWrap = ({
     return (
       <>
         <AuthModal__AttendeeCapture
+          title={title}
           otherFields={otherFields}
           event_meta={event_to_check}
           event_name={event_to_check.EventName}
