@@ -140,7 +140,7 @@ const MainPage = ({ main_event, hasStarted }) => {
         <Video__StickyTop__WithCountdown
           isStarted={true}
           start={main_event.eventStartEnd.StartDateTime}
-          showMinutesBefore={30}
+          showMinutesBefore={5}
           showBefore={
             <div>
               <h2>Join Us Live In</h2>
