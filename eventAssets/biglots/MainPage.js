@@ -141,7 +141,7 @@ const MainPage = ({ main_event, hasStarted }) => {
         <Video__StickyTop__WithCountdown
           isStarted={true}
           start={main_event.eventStartEnd.StartDateTime}
-          showMinutesBefore={5}
+          showMinutesBefore={1}
           showBefore={
             <div>
               <h2>Join Us Live In</h2>
