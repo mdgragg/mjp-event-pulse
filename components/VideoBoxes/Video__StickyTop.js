@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from 'styled-components';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useContext } from 'react';
 
 const VideoPlaceholder = styled.div`
   /* height: inherit; */
@@ -84,7 +84,7 @@ const StyledVideoBox = styled.div`
 const VideoBox__StickyTop = ({ src, isStarted }) => {
   const [video_src, set_src] = useState();
 
-  const themeContext = React.useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
   const offsetVideoHeight = themeContext.videoBreakPoint;
 
   const wrapperRef = useRef();

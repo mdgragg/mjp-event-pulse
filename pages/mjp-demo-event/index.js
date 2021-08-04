@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { database } from 'lib/firebase/base';
+
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
@@ -28,21 +28,14 @@ const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
 const Index = (props) => {
-  const router = useRouter();
-
-  const EVENT_URL = router.query.event;
-
-  const session_token = EVENT_URL;
   const { event_meta, main_event } = props;
-  const start = main_event.eventStartEnd.StartDateTime;
-  const end = main_event.eventStartEnd.EndDateTime;
+  const router = useRouter();
+  const hasStartEnd = useCalculateIfStarted(main_event);
 
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
-
-  const hasStarted = useCalculateIfStarted(main_event);
 
   return (
     <>
@@ -71,7 +64,7 @@ const Index = (props) => {
               </Grid>
               <Grid item md={4}>
                 <ClientOnly>
-                  <PublicChat slug={`chat`} />
+                  <PublicChat slug={main_event.slug} />
                 </ClientOnly>
                 {/* <FullChat slug={`mjp-demo`} /> */}
               </Grid>

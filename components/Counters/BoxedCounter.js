@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
+import { default_theme } from '../Themes/default.theme';
 const Wrap = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   padding: 15px;
@@ -104,7 +105,6 @@ const BoxedCounter = ({ event, style }) => {
             <div className="digit"> {obj.days} </div>
             <div className="delimiter"> {obj.days > 1 ? 'Days' : 'Day'}</div>
           </div>
-
           <div className="numhours box">
             <div className="digit"> {obj.hours} </div>
             <div className="delimiter ">
@@ -118,7 +118,6 @@ const BoxedCounter = ({ event, style }) => {
               {obj.minutes === 1 ? 'Min' : 'Mins'}
             </div>
           </div>
-
           <div className="numseconds box ">
             <div className="digit"> {obj.seconds}</div>
             <div className=" delimiter ">Sec</div>
@@ -127,6 +126,16 @@ const BoxedCounter = ({ event, style }) => {
       </Wrap>
     );
   }
+};
+
+BoxedCounter.defaultProps = {
+  theme: default_theme,
+  event: {
+    eventStartEnd: {
+      StartDateTime: null,
+      EndDateTime: null,
+    },
+  },
 };
 
 export default BoxedCounter;
