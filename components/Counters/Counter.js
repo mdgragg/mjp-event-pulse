@@ -60,7 +60,7 @@ export default function Counter(props) {
   // show if the counter end has been reached
   if (countdown_object.parsed_until_end > 0 || hasEnded) {
     return (
-      <MyCounter className={props.customClass || ''} {...props}>
+      <MyCounter id="counter" className={props.customClass || ''} {...props}>
         <h2
           style={{
             fontWeight: '800',

@@ -1,4 +1,26 @@
 @font-face {
+  src: url('../public/static/fonts/Georgia/Georgia.ttf') format('ttf');
+  font-family: 'Georgia';
+  font-weight: 200;
+}
+
+@font-face {
+  src: url('../public/static/fonts/Delivery/Delivery_W_Bd.woff') format('woff');
+  font-family: 'Delivery';
+  font-weight: 800;
+}
+
+@font-face {
+  src: url('../public/static/fonts/College-Block.otf');
+  font-family: 'College Block';
+}
+
+@font-face {
+  src: url('../public/static/fonts/College-Block.otf');
+  font-family: 'College Block';
+}
+
+@font-face {
   src: url('../public/static/fonts/Basic-Commercial-LT-Com-Black.ttf');
   font-family: 'Akzidenz-Grotesque-Bold';
 }
@@ -70,6 +92,29 @@
   font-family: 'Gotham';
 }
 
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Light.otf');
+  font-style: thin;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Sofia';
+  src: url('../public/static/fonts/Sofia/Sofia-Bold.otf');
+  font-weight: 800;
+  font-style: bold;
+}
+
+:root {
+  --mjp-orange: #f67b00;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -81,22 +126,31 @@ html {
 
 button {
   border: none;
-  min-height: 35px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 1rem;
-  font-weight: 400;
-  text-transform: capitalize;
-  margin: 1rem auto;
   display: block;
-  transition: all 0.2s ease;
-  outline: none;
-  font-family: 'Avenir';
+  margin: 1rem auto;
 }
 
-button:hover {
+button.btn,
+.MuiButton-root {
+  min-height: 40px;
+  min-width: clamp(130px, 10vw, 40vw);
+  padding: 5px 10px;
+  border-radius: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: Avenir;
+  letter-spacing: 2px;
+  background-color: var(--mjp-orange);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+button:hover,
+.MuiButton-root:hover {
   cursor: pointer;
-  border-radius: 20px;
   background-color: black;
   color: white;
 }
@@ -117,4 +171,16 @@ a {
 
 p {
   font-size: 16px;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(105%);
+  }
+  100% {
+    transform: scale(100%);
+  }
 }

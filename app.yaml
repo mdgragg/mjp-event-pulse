@@ -2,9 +2,6 @@ env: standard
 runtime: nodejs12
 service: default
 
-env_variables:
-  NEXT_PUBLIC_TEST_VAR: test_this_string
-
 instance_class: F2
 
 handlers:
@@ -17,10 +14,9 @@ inbound_services:
 
 automatic_scaling:
   target_cpu_utilization: 0.65
-  min_instances: 2
+  min_instances: 1
   max_instances: 100
-  min_idle_instances: 2
+  min_idle_instances: 1
   max_idle_instances: automatic
   min_pending_latency: 2000ms
   max_pending_latency: automatic
-  max_concurrent_requests: 20

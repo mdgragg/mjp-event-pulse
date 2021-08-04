@@ -24,6 +24,9 @@ import {
   InputLabel,
   Checkbox,
 } from '@material-ui/core';
+
+const init_options = { Date: null, FilterMJP: false };
+
 const GenerateAttendeeReport = ({ events, loading, selected_event }) => {
   if (loading || !selected_event) {
     return (
@@ -38,7 +41,7 @@ const GenerateAttendeeReport = ({ events, loading, selected_event }) => {
     from: makeDate(selected_event.eventStartEnd.StartDateTime),
     to: makeDate(selected_event.eventStartEnd.EndDateTime),
   });
-  const [options, setOptions] = useState(null);
+  const [options, setOptions] = useState(init_options);
 
   const sesh = useSession();
 
@@ -52,11 +55,15 @@ const GenerateAttendeeReport = ({ events, loading, selected_event }) => {
 
   useEffect(() => {
     if (specific_date_time.isSelected) {
-      setOptions({
+      setOptions((prev) => ({
+        ...prev,
         Date: { from: specific_date_time.from, to: specific_date_time.to },
-      });
+      }));
     } else {
-      setOptions(null);
+      setOptions((prev) => ({
+        ...prev,
+        Date: null,
+      }));
     }
   }, [specific_date_time.isSelected]);
 
@@ -69,6 +76,18 @@ const GenerateAttendeeReport = ({ events, loading, selected_event }) => {
       <h3>Generate Attendee Report for {selected_event.EventName}</h3>
 
       <FormControl>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={options.FilterMJP}
+              onChange={() =>
+                setOptions((prev) => ({ ...prev, FilterMJP: !prev.FilterMJP }))
+              }
+              name="Filter MJP Emails"
+            />
+          }
+          label="Filter Out @mjp emails"
+        />
         <FormControlLabel
           control={
             <Checkbox

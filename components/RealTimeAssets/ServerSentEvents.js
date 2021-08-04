@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-let data = { hellp: 'wold' };
-
 class ServerSentEvents extends React.Component {
   constructor(props) {
     super(props);

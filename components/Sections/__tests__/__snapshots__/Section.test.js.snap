@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counters Should render 1`] = `
+<div
+  className="Section__StyledSection-jAnJfD jGjdV"
+/>
+`;
+
+exports[`Section Should render 1`] = `
+<div
+  className="Section__StyledSection-jAnJfD jGjdV"
+/>
+`;
