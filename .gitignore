@@ -34,6 +34,7 @@ gae_variables.json
 .env.production.local
 .env.production
 .env.*
+firebase-creds.js
 # vercel
 .vercel
 
