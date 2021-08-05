@@ -17,15 +17,17 @@ const HeroHolder = styled.div`
   background-color: ${(props) => props.theme.headerBgColor};
   overflow: hidden;
   color: white;
-
+  && > div {
+    text-align: center;
+  }
   && ::before {
     height: 100%;
     width: 100%;
     content: '';
     top: 0;
     position: absolute;
-    background-image: url('${(props) =>
-      props.theme.header_image || props.header_image}');
+    background-image: url(${(props) =>
+      props.theme.header_image || props.header_image});
     opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: inherit;
     background-repeat: no-repeat;
@@ -43,6 +45,7 @@ const HeaderInner = styled.div`
   display: grid;
   grid-template-columns: 20% 60% 20%;
   align-items: center;
+  justify-content: center;
   margin: auto;
   width: 90%;
   height: inherit;
@@ -61,6 +64,7 @@ const HeaderInner = styled.div`
     margin: auto;
     && img {
       max-width: 50%;
+      margin: auto;
     }
   }
   @media all and (max-width: 768px) {

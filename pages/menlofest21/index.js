@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
-import { getEventMeta } from 'lib/api';
 import { Grid } from '@material-ui/core';
 import FullWrap from 'components/FullWrap';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import Video__StickyTop__WithCountdown from 'components/VideoBoxes/Video__StickyTop__WithCountdown';
 import FlexHero from 'components/Heroes/FlexHero';
-import Fluid__iFrame from 'components/iFrames/Fluid__iFrame';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import Footer from 'components/template1/Footer';
 import Section from 'components/template1/Section';
-import PasswordAuthModal from '../../components/Modals/PasswordAuthModal';
+import PasswordAuthModal from 'components/Modals/AuthModal__Password';
 
 import { toast } from 'react-toastify';
 export var event_theme = {
@@ -61,40 +55,6 @@ const Index = (props) => {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x350',
   };
-
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-
-  const [hasAuthenticated, setHasAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-    }, 1000);
-
-    const storage_auth = sessionStorage.getItem(session_token);
-
-    if (storage_auth === 'true') {
-      setHasAuthenticated(true);
-    } else {
-      setHasAuthenticated(false);
-    }
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <>
@@ -203,26 +163,11 @@ const Index = (props) => {
   );
 };
 
-export async function getStaticProps(ctx) {
-  let eventData = await getEventMeta(EVENT_URL);
-
-  let main_event = eventData.events.filter((ev) => ev.isMainEvent === true)[0];
-
-  if (eventData.eventStatus.EventStatus === 'Ended') {
-    return {
-      redirect: {
-        destination: `${EVENT_URL}/thank-you`,
-        permanent: false,
-      },
-    };
-  }
+export async function getServerSideProps(ctx) {
   return {
-    props: {
-      //meta will be the props for the event
-      event_meta: eventData,
-      main_event,
+    redirect: {
+      destination: './',
     },
-    revalidate: 1800,
   };
 }
 

@@ -1,14 +1,10 @@
-import React, { useContext, useRef } from 'react';
-import styled, { ThemeProvider, withTheme } from 'styled-components';
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import { template1Theme } from './template1.theme';
+import { template1Theme } from '../Themes/template1.theme';
 import { StylesProvider, createMuiTheme } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { withStyles } from '@material-ui/core/styles';
-import Header from './Header';
-
-import LoadingScreen from '../globals/Loading';
 
 const StyledPage = styled.div`
   background: ${(props) => props.theme.bg};

@@ -1,20 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-
-import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import VideoBox__iFrame from 'components/VideoBoxes/Video__iFrame';
-import Section__WithBG from 'components/Sections/Section__WithBG';
-import EmailOnlyModal from '../../components/Modals/AttendeeList__EmailOnlyModal';
-import LandingPage from 'components/IndividualEventAssets/biglotstownhall/LandingPage';
-import { toast } from 'react-toastify';
+import Page from 'components/PageTemplates';
 import FullWrap from 'components/FullWrap';
+import Body from 'components/template1/Body';
+import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
+import { toast } from 'react-toastify';
+
 import useHasAuthorized from 'hooks/useHasAuthorized';
 import { EVENT_URL } from './index';
 export var event_theme = {
@@ -60,28 +54,6 @@ const Index = (props) => {
 
   return (
     <>
-      <EmailOnlyModal
-        signInText={
-          <p>
-            Please use your employee email <br />
-            (i.e. associateID@biglots.com) <br />
-            <span style={{ fontSize: '0.75rem' }}>
-              This is a preview, so only associateid@biglots.com will work for
-              this example
-            </span>
-          </p>
-        }
-        event_meta={main_event}
-        open={!hasAuthenticated}
-        callback={(creds) => {
-          setHasAuthenticated(true);
-          toast.success(
-            `Hello ${
-              creds.AttendeeFirst ? creds.AttendeeFirst : ''
-            }, Welcome to Big Lots Q1 Virtual Town Hall`
-          );
-        }}
-      />
       <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
@@ -109,7 +81,6 @@ export async function getStaticProps() {
       event_meta: event_data,
       main_event,
     },
-    revalidate: 310,
   };
 }
 

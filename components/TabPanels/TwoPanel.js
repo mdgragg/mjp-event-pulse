@@ -46,15 +46,11 @@ function a11yProps(index) {
 export default function SimpleTabs({ data }) {
   const [value, setValue] = React.useState(0);
 
-  const memoData = useMemo(() => {
-    return [data[0], data[1]];
-  }, [data[0].content, data[1].content]);
-
   const handleChange = (event, newValue) => {
     // console.log(event, newValue);
     setValue(newValue);
   };
-
+  if (!data) return <></>;
   return (
     <TabBarHolder>
       <AppBar position="static">
@@ -69,7 +65,7 @@ export default function SimpleTabs({ data }) {
         </Tabs>
       </AppBar>
 
-      {memoData &&
+      {data &&
         data.map((d, index) => (
           <MyTabPanel
             value={value}

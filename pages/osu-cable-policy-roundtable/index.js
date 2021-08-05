@@ -1,28 +1,13 @@
-import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import { useQuery, gql } from '@apollo/client';
-import withApollo from 'lib/withApollo';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-
-import { Grid, Button } from '@material-ui/core';
-import LoginBox from 'components/globals/Login';
+import { getEventMeta } from 'lib/api';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-import Header from 'components/template1/Header';
-import Navbar from 'components/template1/Navbar';
+import Page from 'components/PageTemplates';
+
 import Body from 'components/template1/Body';
-import CABLE from 'components/IndividualEventAssets/osu-cable-policy-roundtable';
-import Footer from 'components/template1/Footer';
-import ListItem from 'components/template1/ListItem';
-import Section from 'components/template1/Section';
-import ListItemSmall from 'components/template1/ListItemSmall';
-import EventSearch from 'components/template1/EventSearch';
-import cookies from 'next-cookies';
-import LoginPage from 'components/globals/Login/LoginPage';
+import CABLE from 'eventAssets/osu-cable-policy-roundtable';
 
 export var event_theme = {
   heroHeight: '860px',

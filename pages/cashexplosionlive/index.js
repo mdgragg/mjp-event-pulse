@@ -1,18 +1,16 @@
-import { useEffect, useState, useContext, useReducer, useMemo } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
-import Body from 'components/template1/Body';
-
-import SignUp from 'components/IndividualEventAssets/cashexplosionlive/SignUp';
-import ThankYou from 'components/IndividualEventAssets/cashexplosionlive/ThankYou';
-import MainEvent from 'components/IndividualEventAssets/cashexplosionlive/MainEvent';
-import Success from 'components/IndividualEventAssets/cashexplosionlive/Success';
-import Wrap from 'components/IndividualEventAssets/cashexplosionlive/Wrap';
+import Page from 'components/PageTemplates/index';
+import SignUp from 'eventAssets/cashexplosionlive/SignUp';
+import ThankYou from 'eventAssets/cashexplosionlive/ThankYou';
+import MainEvent from 'eventAssets/cashexplosionlive/MainEvent';
+import Success from 'eventAssets/cashexplosionlive/Success';
+import Wrap from 'eventAssets/cashexplosionlive/Wrap';
 import attendee_capture from 'lib/fetchCalls/attendee_capture';
 import { toast } from 'react-toastify';
 
@@ -108,6 +106,7 @@ const Index = (props) => {
   //listen for has started
 
   useEffect(() => {
+    console.log(hasStartEnd);
     if (hasStartEnd.hasEnded) {
       console.log('1');
       return setDeciderTemplate('thank-you');
@@ -188,7 +187,7 @@ const Index = (props) => {
             'thank-you': (
               <ThankYou main_event={main_event} theme={event_theme} />
             ),
-          }[deciderTemplate]
+          }['thank-you']
         }
         {/* <Decider
           template={deciderTemplate}
@@ -216,7 +215,7 @@ export async function getStaticProps(ctx) {
         event_meta: eventData,
         main_event,
       },
-      revalidate: 1200,
+      revalidate: 300,
     };
     return values;
   } catch (error) {

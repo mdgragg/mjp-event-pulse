@@ -39,7 +39,7 @@ const Error = styled.div`
   font-size: 1.25rem;
   text-align: center;
 `;
-export default function FormDialog({ open, setOpen, password, goToLink }) {
+export default function PasswordOnly({ open, setOpen, password, goToLink }) {
   const init = {
     password: '',
   };

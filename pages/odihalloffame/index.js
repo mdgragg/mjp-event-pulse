@@ -1,33 +1,56 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import AuthWrap from 'components/AuthWrap';
-import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import { Button } from '@material-ui/core';
+import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
-import DateParse from 'components/assets/DateParse';
+import Agenda from 'eventAssets/odihalloffame/Agenda';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
-import { toast } from 'react-toastify';
+import { PlayerWithChat } from 'components/BodyTemplates';
+import styled from 'styled-components';
+
 export const EVENT_URL = 'odihalloffame';
 export var event_theme = {
   heroHeight: '500px',
   fontFamily: null,
-  headerOpacity: 0.6,
+  headerOpacity: 0,
   white: null,
   blue: null,
-  red: null,
+  red: 'rgb(187, 0, 0)',
   buttonColor: null,
-  headerFont: null,
+  headerFont: 'Georgia',
   headerBgColor: 'black',
+  headerFontColor: 'rgb(187, 0, 0)',
+  videoBreakPoint: 1500,
 };
 const PLACEHOLD = 'https://placehold.co/';
+
+const ODIWRAP = styled.div`
+  button {
+    background-color: ${event_theme.red};
+    color: white;
+    min-height: 60px;
+    padding: 0 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    min-width: 200px;
+    text-transform: uppercase;
+  }
+  button:hover {
+    color: white;
+    background-color: #ea3e52;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+  && .MuiAppBar-colorPrimary {
+    background-color: grey;
+  }
+`;
 
 const Index = (props) => {
   const router = useRouter();
@@ -43,78 +66,110 @@ const Index = (props) => {
 
   return (
     <Page theme={event_theme}>
-      <Meta title={event_meta.EventJobName}> </Meta>
-      <FlexHero title={event_meta.EventJobName}>
-        <div>
-          <img
-            style={{
-              width: '100%',
-              maxWidth: '350px',
-              margin: '2rem auto',
-            }}
-            src={main_event.LogoLink[0]?.Media?.url || null}
-          />
-        </div>
-        <div>
-          <center>
-            <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-              {main_event.EventName}
-            </h1>
-            <h2 style={{ margin: 'auto' }}>
-              <i>
-                <DateParse date={main_event.eventStartEnd.StartDateTime} />
-              </i>
-            </h2>
-          </center>
-        </div>
-        <div>
-          <center>
-            <h2>
-              <Counter__JustNumbers
-                start={main_event.eventStartEnd.StartDateTime}
-                end={main_event.eventStartEnd.EndDateTime}
-                afterStarted={'Live Now!'}
-                afterEnded={'Thank You for Attending'}
+      <ODIWRAP>
+        <Meta title={event_meta.EventJobName}> </Meta>
+        <FlexHero title={event_meta.EventJobName}>
+          <div></div>
+          <div>
+            <center>
+              <h1
+                style={{
+                  margin: 'auto',
+                  fontSize: '2rem',
+                  lineHeight: '2.85rem',
+                }}
+              >
+                2021 Ohio State University <br />
+                <span style={{ fontSize: '2.5rem' }}>
+                  {' '}
+                  Office of Diversity and Inclusion
+                </span>{' '}
+                <br /> Hall of Fame Awards
+                <br /> Virtual Event
+              </h1>
+              <h2 style={{ margin: '1rem auto', fontFamily: 'Avenir' }}>
+                <i>Wednesday June 23, 2021 | 6:30pm EST</i> <br />
+                <i>Thursday June 24, 2021 | 6:30pm EST</i>
+              </h2>
+            </center>
+          </div>
+          <div>
+            <center>
+              <h2
+                style={{
+                  color: '#666666',
+                  letterSpacing: '0px',
+                  fontSize: '1.5rem',
+                  fontFamily: 'Avenir',
+                }}
+              >
+                <Counter__JustNumbers
+                  prefix={'Join Us Live In'}
+                  start={main_event.eventStartEnd.StartDateTime}
+                  end={main_event.eventStartEnd.EndDateTime}
+                  afterStarted={'Live Now!'}
+                  afterEnded={'Thank You for Attending'}
+                />
+              </h2>
+            </center>
+          </div>
+        </FlexHero>
+        <Body>
+          <Section>
+            <div
+              style={{
+                minHeight: '60vh',
+                backgroundColor: 'none',
+                margin: '2rem',
+              }}
+            >
+              <PlayerWithChat
+                videoUrl={main_event.streamLinks[0].url}
+                chatUrl={main_event.streamLinks[1].url}
+                showing={true}
+                hasStarted={true}
+                children={
+                  <center>
+                    <a href={main_event.LogoLink[0]?.Link} target="_blank">
+                      <Button> Learn More About This Event</Button>
+                    </a>
+                  </center>
+                }
               />
-            </h2>
-          </center>
-        </div>
-      </FlexHero>
-      <Body>
-        <Section>
-          <div
-            style={{
-              minHeight: '60vh',
-              backgroundColor: 'none',
-              margin: '2rem',
-            }}
+            </div>
+          </Section>
+          <Section>
+            <Agenda />
+          </Section>
+
+          <Banner_ImgBg
+            imgSrc={main_event?.HeaderImage?.url}
+            imgAlt="Background pattern of radiating lines"
           >
-            <PlayerWithChat
-              videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-              showing={true}
-            />
-          </div>
-        </Section>
-        <Section>
-          <div style={{ maxWidth: '1000px', margin: 'auto' }}>
-            <h2>Agenda</h2>
-          </div>
-        </Section>
-        {main_event.Description && (
-          <BannerWithPicture
-            imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-            color={'black'}
-            secondary={`white`}
-            headerText={`About This Event`}
-            innerWidth={`650px`}
-            buttonText={`Learn More`}
-            buttonLink={main_event.LogoLink[0]?.Link || '#'}
-          >
-            {main_event.Description}
-          </BannerWithPicture>
-        )}
-      </Body>
+            <div
+              style={{
+                maxWidth: '650px',
+                margin: '2rem auto',
+              }}
+            >
+              <h2>About This Event</h2>
+              <p>{main_event.Description}</p>
+              <a href={main_event.LogoLink[0]?.Link}>
+                <Button>Learn More</Button>
+              </a>
+              <img
+                src={main_event.LogoLink[0].Media.url}
+                style={{
+                  height: '250px',
+                  width: 'auto',
+                  margin: '3rem auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </Banner_ImgBg>
+        </Body>
+      </ODIWRAP>
     </Page>
   );
 };

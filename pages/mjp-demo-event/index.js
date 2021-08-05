@@ -1,21 +1,16 @@
-import { useEffect, useState, useContext } from 'react';
-import Route, { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import { calculateIfStarted, calculateIfEnded } from 'lib/helpers';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
-import FlexHero from 'components/Heroes/FlexHero';
+import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
-import DateParse from 'components/assets/DateParse';
-import Counter from 'components/Counters/Counter';
-import useTestBool from '../../hooks/useTestBool';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
 export var event_theme = {
@@ -33,82 +28,20 @@ const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
 const Index = (props) => {
-  const router = useRouter();
-
-  const EVENT_URL = router.query.event;
-
-  const session_token = EVENT_URL;
   const { event_meta, main_event } = props;
-  const start = main_event.eventStartEnd.StartDateTime;
-  const end = main_event.eventStartEnd.EndDateTime;
+  const router = useRouter();
+  const hasStartEnd = useCalculateIfStarted(main_event);
 
   event_theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStarted = useCalculateIfStarted(main_event);
-
   return (
     <>
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <FlexHero title={event_meta.EventJobName}>
-          <div></div>
-          <div>
-            <center>
-              <img
-                style={{
-                  width: '100%',
-                  maxWidth: '350px',
-                  margin: '2rem auto',
-                }}
-                src={main_event.KeyValue[0]?.value}
-              />
-
-              <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-                {main_event.EventName}
-              </h1>
-              <h2 style={{ margin: 'auto' }}>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
-            </center>
-          </div>
-          <div>
-            <center>
-              <Counter
-                fontSize={'1rem'}
-                shadow={'0px'}
-                bgColor={event_theme.blue}
-                counterText={'Starts In'}
-                counterTextColor={event_theme.gold}
-                textColor={event_theme.gold}
-                afterStarted={
-                  <>
-                    <center>
-                      <h2
-                        style={{
-                          fontWeight: '800',
-                          fontSize: '2rem',
-                          color: 'white',
-                          padding: '0.5rem',
-                          backgroundColor: event_theme.red,
-                          margin: 'auto auto 0 auto',
-                        }}
-                      >
-                        Live Now!
-                      </h2>
-                    </center>
-                  </>
-                }
-                start={start}
-                end={end}
-              />
-            </center>
-          </div>
-        </FlexHero>
+        <MJHero main_event={main_event} />
 
         <Body>
           <Section>
@@ -131,7 +64,7 @@ const Index = (props) => {
               </Grid>
               <Grid item md={4}>
                 <ClientOnly>
-                  <PublicChat slug={`chat`} />
+                  <PublicChat slug={main_event.slug} />
                 </ClientOnly>
                 {/* <FullChat slug={`mjp-demo`} /> */}
               </Grid>
@@ -141,7 +74,8 @@ const Index = (props) => {
             imgUrl={main_event.KeyValue[1]?.value}
             color={'black'}
             secondary={`white`}
-            headerText={`About this Event`}
+            textColor={`white`}
+            headerText={`About This Event`}
             innerWidth={`650px`}
             buttonText={`Learn More`}
             buttonLink={`#`}
@@ -160,6 +94,10 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
+
+  let initial_data = await fetch(
+    'https://millsjameseventcms-testing.firebaseio.com/test-2.json'
+  ).then((res) => res.json());
 
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
@@ -190,6 +128,7 @@ export async function getServerSideProps(ctx) {
           //meta will be the props for the event
           event_meta: event_data,
           main_event,
+          test: initial_data,
         },
       };
       break;

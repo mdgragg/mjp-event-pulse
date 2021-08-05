@@ -4,7 +4,7 @@ import { Typography, FormControl, Button, Input } from '@material-ui/core';
 
 const StyledBanner = styled.div`
   height: auto;
-  padding: 2em;
+  padding: 4em 0;
   display: flex;
   flex-direction: space-around;
   align-items: center;
@@ -12,12 +12,19 @@ const StyledBanner = styled.div`
   text-align: center;
   width: 100%;
   left: 0;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.color || '#f7f7f7'};
   /* background-image: url('${(props) => props.image}'); */
   background-attachment: fixed;
   background-origin: center;
   background-repeat: no-repeat;
-
+  && h4 {
+    font-size: 2.5rem;
+    color: ${(props) => props.textColor || 'black'};
+  }
+  && p {
+    font-size: 1.5rem;
+    color: ${(props) => props.textColor || 'black'};
+  }
   && .banner-image {
     width: 80%;
     max-width: 450px;
@@ -25,56 +32,22 @@ const StyledBanner = styled.div`
     display: block;
   }
 `;
-const SignUp = styled.div`
-  margin-left: 50px;
-  margin-top: -20px;
-`;
-
-const MyInput = styled(Input)`
-  margin: 10px;
-  .MuiInput-root {
-    border-bottom: 1px solid white;
-  }
-  .MuiInput-input {
-    color: white;
-    border-bottom: 1px solid white;
-    text-align: center;
-  }
-  .MuiInput-underline {
-    color: orange;
-  }
-`;
 
 const Banner = (props) => {
   return (
-    <StyledBanner image={props.image} color={props.color}>
+    <StyledBanner style={{ ...props.style }} {...props}>
       <div
         style={{ maxWidth: `${props.innerWidth || '450px'}`, margin: 'auto' }}
       >
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{ color: props.secondary, fontWeight: '800' }}
-        >
-          {props.headerText}
-        </Typography>
-        <Typography
-          variant="body1"
-          component="p"
-          style={{
-            color: props.secondary,
-            fontSize: '1.25rem',
-            marginTop: '1rem',
-          }}
-        >
-          {props.children}
-        </Typography>
+        <h4>{props.headerText}</h4>
+
+        <p>{props.children}</p>
         {props.buttonText && (
           <a href={props.buttonLink}>
-            <button> {props.buttonText}</button>
+            <button className="btn"> {props.buttonText}</button>
           </a>
         )}
-        <img className="banner-image" src={props.imgUrl} />
+        {props.imgUrl && <img className="banner-image" src={props.imgUrl} />}
       </div>
     </StyledBanner>
   );

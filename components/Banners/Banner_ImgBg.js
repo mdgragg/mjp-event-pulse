@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MyBanner } from './Banner';
 import styled from 'styled-components';
 
@@ -9,6 +9,7 @@ const TheBanner = styled(MyBanner)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  padding: 4rem 0;
   && .children {
     position: relative;
     z-index: 100;
@@ -19,26 +20,46 @@ const TheBanner = styled(MyBanner)`
     text-align: center;
     width: inherit;
   }
-  && img {
+  && img.bg {
     position: absolute;
-    width: 100%;
     height: auto;
+    width: 100%;
+    object-position: center center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    left: 0;
   }
 
-  @media all and (max-width: 768px) {
-    && img {
-      height: 100%;
-      width: auto;
+  @media all and (max-width: ${(props) => props.breakWidth}px) {
+    && img.bg {
+      height: auto;
+      width: ${(props) => props.breakWidth}px;
     }
   }
 `;
 
 const Banner_ImgBg = (props) => {
-  const { imgSrc, imgAlt } = props;
+  const { imgSrc, imgAlt, children } = props;
+
+  const [breakWidth, setBreakWidth] = useState(1920);
+  useEffect(() => {
+    const bg_image = new Image();
+    bg_image.src = imgSrc;
+
+    bg_image.onload = function () {
+      console.log('width: ', this.width);
+      setBreakWidth(this.width);
+    };
+  }, []);
+
+  console.log('breakwidth:', breakWidth);
+
   return (
-    <TheBanner>
-      <div className="children"> {props.children} </div>
-      <img src={imgSrc} alt={'banner background ' + imgAlt} />
+    <TheBanner breakWidth={breakWidth}>
+      <div className="children"> {children} </div>
+      <img src={imgSrc} className="bg" alt={'banner background ' + imgAlt} />
     </TheBanner>
   );
 };
