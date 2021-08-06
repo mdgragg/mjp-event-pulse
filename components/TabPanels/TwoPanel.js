@@ -8,12 +8,23 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import styled from 'styled-components';
 
+const StyledAppBar = styled(AppBar)`
+  background-color: ${(props) => props.theme.colors.secondary};
+  && .Mui-selected {
+    background-color: ${(props) => props.theme.colors.tertiary};
+  }
+  && .MuiTabs-indicator {
+    background-color: ${(props) => props.theme.colors.primary};
+  }
+`;
 const TabBarHolder = styled.div`
   height: 100%;
+  width: 100%;
 `;
 
 const MyTabPanel = styled(TabPanel)`
   height: 100%;
+  background-color: ${(props) => props.theme.secondary};
 `;
 
 function TabPanel(props) {
@@ -53,17 +64,19 @@ export default function SimpleTabs({ data }) {
   if (!data) return <></>;
   return (
     <TabBarHolder>
-      <AppBar position="static">
+      <StyledAppBar position="sticky">
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
         >
           {data.map((d, index) => (
             <Tab label={d.title} {...a11yProps(index)} key={`tab--${index}`} />
           ))}
         </Tabs>
-      </AppBar>
+      </StyledAppBar>
 
       {data &&
         data.map((d, index) => (

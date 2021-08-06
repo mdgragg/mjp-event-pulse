@@ -13,12 +13,12 @@ const breatheAnimation = keyframes`
 const HeroHolder = styled.div`
   position: relative;
   width: 100%;
-  height: ${(props) => props.theme.heroHeight || '35vh'};
-  background-color: ${(props) => props.theme.headerBgColor};
+  min-height: ${(props) => props.theme.heroHeight || '400px'};
+  background-color: ${(props) => props.theme.heroBgColor};
   overflow: hidden;
-  color: white;
+  padding: 3rem 0;
 `;
 
-export default function SolidColorHero() {
-  return <HeroHolder>{props.children}</HeroHolder>;
+export default function SolidColorHero({ children }) {
+  return <HeroHolder>{children}</HeroHolder>;
 }

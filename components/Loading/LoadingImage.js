@@ -50,8 +50,13 @@ const Loader = styled.div`
     left: 0;
   }
 `;
-const LoadingImage = () => {
-  return <Loader />;
+const LoadingImage = ({ children }) => {
+  return (
+    <>
+      <Loader />
+      {children}
+    </>
+  );
 };
 
 export default LoadingImage;

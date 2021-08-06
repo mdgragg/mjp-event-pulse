@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 
 const MakeButtonStyle = (type) => {
   return css`
+    transition: all 0.2s ease;
     font-family: ${(props) => props.theme.buttons[type].fontFamily};
     font-size: ${(props) => props.theme.buttons[type].fontSize};
     letter-spacing: ${(props) => props.theme.buttons[type].letterSpacing};

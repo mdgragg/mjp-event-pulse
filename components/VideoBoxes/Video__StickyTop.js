@@ -33,7 +33,7 @@ const StyledPaper = styled.div`
   padding: 0;
   border: none;
   border-radius: 0;
-
+  box-shadow: var(--mjp-shadow);
   &&.fixed {
     position: fixed;
     top: 2%;

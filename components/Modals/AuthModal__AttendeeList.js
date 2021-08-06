@@ -6,14 +6,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
-import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
-import MaskedInput from 'react-text-mask';
-import { Checkbox, FormControl } from '@material-ui/core';
 import attendee_capture from 'lib/fetchCalls/soft_auth';
 
 const useStyles = makeStyles((theme) => ({

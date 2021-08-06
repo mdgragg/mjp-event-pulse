@@ -3,79 +3,64 @@ import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
 import { default_theme } from '../Themes/default.theme';
 const Wrap = styled.div`
-  background-color: ${(props) => props.theme.colors.primary};
-  padding: 15px;
-  width: max-content;
-  color: ${(props) => props.theme.white};
+  width: 100%;
+  max-width: 700px;
+  color: ${(props) => props.theme.colors.primary};
   margin: auto;
   text-align: center;
 `;
 
 const Title = styled.div`
   text-transform: uppercase;
+  color: ${(props) => props.theme.colors.secondary};
   font-family: Gotham;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 2px;
+  /* margin: 1rem auto; */
+  padding: 0.75rem 0;
 `;
 const Box = styled.div`
   font-family: Avenir;
-  display: grid;
-  padding: 0px 10px;
-  justify-content: center;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  grid-template-columns: repeat(4, 70px);
-  column-gap: 0px;
-  grid-template-rows: 65px;
   height: auto;
-  grid-template-areas: 'numday numhours nummins numsecs ';
+  flex-wrap: wrap;
+
   && > div.box {
-    /* border: 1px solid rgba(255, 255, 255, 0.1); */
-    /* padding: 4px 0; */
-    /* background-color: rgba(255, 255, 255, 0.1); */
+    height: 0;
+    padding-top: 20%;
+    min-width: 50px;
+    min-height: 50px;
+    width: 20%;
+    background-color: ${(props) => props.theme.colors.secondary};
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     justify-content: center;
   }
-  && div.box::after {
-    content: ':';
-    font-weight: 600;
-    position: absolute;
-    right: -3px;
-    top: -2px;
-    font-size: 1.5rem;
-  }
-  && div.box:last-of-type::after {
-    content: '';
-  }
+
   && .digit {
+    position: absolute;
+    top: 20%;
     font-weight: 600;
-    font-size: 2rem;
-    line-height: 2.25rem;
+    font-size: clamp(22px, 5vw, 2.5rem);
+    line-height: clamp(24px, 5vw, 2.5rem);
   }
   && .delimiter {
-    font-size: 0.65rem;
+    position: absolute;
+    top: 70%;
+    font-size: clamp(10px, 1.5vw, 1.25rem);
+    line-height: clamp(10px, 1.5vw, 1.25rem);
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
-  && .numday {
-    grid-area: numday;
-  }
-  && .numhours {
-    grid-area: numhours;
-  }
-  && .numminutes {
-    grid-area: nummins;
-  }
-  && .numseconds {
-    grid-area: numsecs;
-  }
 `;
 
-const BoxedCounter = ({ event, style }) => {
+const BoxedCounter = ({ event, style, prefix }) => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {
@@ -99,7 +84,8 @@ const BoxedCounter = ({ event, style }) => {
   if (obj) {
     return (
       <Wrap style={{ ...style }}>
-        <Title>Join Us Live In:</Title>
+        {prefix && <Title>{prefix}</Title>}
+
         <Box>
           <div className="numday box">
             <div className="digit"> {obj.days} </div>
