@@ -110,7 +110,7 @@ const PlayerBody = styled.div`
     min-height: auto;
   }
 `;
-const MainPage = ({ main_event, hasStarted }) => {
+const MainPage = ({ main_event, hasAuth }) => {
   const hasStartEnd = useCalculateIfStarted(main_event);
 
   return (
@@ -137,22 +137,25 @@ const MainPage = ({ main_event, hasStarted }) => {
           </div>
         </Inner>
       </Header>
+
       <PlayerBody>
-        <Video__StickyTop__WithCountdown
-          isStarted={true}
-          start={main_event.eventStartEnd.StartDateTime}
-          showMinutesBefore={1}
-          showBefore={
-            <div>
-              <h2>Join Us Live In</h2>
-              <CircleCounter
-                event={main_event}
-                style={{ margin: '1rem auto' }}
-              />
-            </div>
-          }
-          src={main_event.streamLinks[0].url}
-        />
+        {true && (
+          <Video__StickyTop__WithCountdown
+            isStarted={true}
+            start={main_event.eventStartEnd.StartDateTime}
+            showMinutesBefore={30}
+            showBefore={
+              <div>
+                <h2>Join Us Live In</h2>
+                <CircleCounter
+                  event={main_event}
+                  style={{ margin: '1rem auto' }}
+                />
+              </div>
+            }
+            src={main_event.streamLinks[0].url}
+          />
+        )}
       </PlayerBody>
     </BG>
   );

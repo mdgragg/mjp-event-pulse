@@ -5,17 +5,7 @@ import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { signIn, signOut, useSession, getSession } from 'next-auth/client';
 import { toast } from 'react-toastify';
-import {
-  Button,
-  TextField,
-  Select,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  InputLabel,
-  Checkbox,
-  LinearProgress,
-} from '@material-ui/core';
+import { Button, LinearProgress } from '@material-ui/core';
 import GenerateAttendeeReport from '../../components/Admin/GenerateAttendeeReport';
 import Page from 'components/template1/Page';
 import Section from 'components/Sections/Section';

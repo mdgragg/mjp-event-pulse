@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import Body from 'components/template1/Body';
 import LandingPage from 'eventAssets/biglots/LandingPage';
 import MainPage from 'eventAssets/biglots/MainPage';
 import { useRouter } from 'next/router';
+import { AppContext } from 'context/AppContext';
 
 export const COLORS = {
   red: '#b71f39',
@@ -120,7 +121,9 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const [auth, setAuth] = useState(false);
+  const {
+    state: { hasAuth },
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (event_meta.eventStatus.EventStatus === 'Ended') {
@@ -137,7 +140,7 @@ const Index = (props) => {
           required: true,
         },
       }}
-      event_to_check={main_event}
+      eventToCheck={main_event}
       title={
         <>
           <div
@@ -159,14 +162,13 @@ const Index = (props) => {
           <strong> {main_event.EventName}</strong>
         </>
       }
-      callback={(creds) => {
+      successCallback={(creds) => {
         toast.success(
           `Hello ${
             creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
           }, welcome to ${main_event.EventName}`
         );
       }}
-      render={(v) => setAuth(v)}
       signInText={
         <div
           style={{ textAlign: 'left', maxWidth: '450px', margin: '1rem 4rem' }}
@@ -183,14 +185,14 @@ const Index = (props) => {
       <Page theme={event_theme}>
         <Meta title={main_event.EventName}> </Meta>
         <Body>
-          <MainPage main_event={main_event} hasAuth={auth} />
+          <MainPage main_event={main_event} hasAuth={hasAuth} />
         </Body>
       </Page>
     </AuthWrap>
   );
 };
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let theme = {};
@@ -201,7 +203,6 @@ export async function getStaticProps(ctx) {
       main_event,
       theme,
     },
-    revalidate: 300,
   };
 }
 

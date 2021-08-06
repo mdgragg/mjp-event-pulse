@@ -1,5 +1,5 @@
 import styled, { ThemeContext } from 'styled-components';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useContext } from 'react';
 
 const VideoPlaceholder = styled.div`
   /* height: inherit; */
@@ -33,7 +33,7 @@ const StyledPaper = styled.div`
   padding: 0;
   border: none;
   border-radius: 0;
-
+  box-shadow: var(--mjp-shadow);
   &&.fixed {
     position: fixed;
     top: 2%;
@@ -84,7 +84,7 @@ const StyledVideoBox = styled.div`
 const VideoBox__StickyTop = ({ src, isStarted }) => {
   const [video_src, set_src] = useState();
 
-  const themeContext = React.useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
   const offsetVideoHeight = themeContext.videoBreakPoint;
 
   const wrapperRef = useRef();

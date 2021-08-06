@@ -1,3 +1,4 @@
+import { Button__Primary, Button__Secondary } from 'components/Buttons';
 import styled from 'styled-components';
 import MJP__SVG from './MJP__SVG';
 
@@ -56,7 +57,7 @@ const Header = (props) => {
       </Logo>
       <h3> Virtual Events</h3>
       <a href={`https://www.millsjames.com/contact-us/`}>
-        <button className="btn"> Work With Us</button>
+        <Button__Primary>Work With Us</Button__Primary>
       </a>
     </StyledHeader>
   );

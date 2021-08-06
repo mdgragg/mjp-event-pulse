@@ -6,7 +6,7 @@ import Header from 'components/globals/Header';
 import Footer from 'components/Footers';
 import Page from 'components/template1/Page';
 import Section from 'components/template1/Section';
-import { theme } from 'components/globals/style';
+import { default_theme } from 'components/Themes/default.theme';
 
 import { Grid, Button } from '@material-ui/core';
 import { InfoGrid } from 'components/globals/InfoGrid';
@@ -19,7 +19,7 @@ const Home = (props) => {
     console.log(process.env.NEXT_PUBLIC_TEST_VAR);
   }, []);
   return (
-    <Page theme={theme}>
+    <Page theme={default_theme}>
       <Header
         title="MJP Events"
         height={headerHeight}

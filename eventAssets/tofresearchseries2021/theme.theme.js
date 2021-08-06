@@ -1,74 +1,61 @@
-const COLORS = {
+export const COLORS = {
   red: '#b71f39',
   orange: '#FF5600',
-  yellow: '#eace28',
+  yellow: '',
   green: '#97d700',
   blue: '#1e2c60',
-  indigo: '#0d2f49',
-  violet: '#5602b7',
+  indigo: '',
+  violet: '',
   white: '#ffffff',
   black: '#000000',
   primary: 'white',
-  secondary: 'var(--mjp-orange)',
-  tertiary: '',
+  secondary: '#9f7953',
+  tertiary: '#055574',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
   offBlack: '#161616',
 };
 
-const FONTS = {
-  title: {
-    fontFamily: 'Avenir',
-    fontSize: '2rem',
-    letterSpacing: '',
-    fontWeight: '800',
-    lineHeight: '',
-  },
+export const FONTS = {
+  title: { fontFamily: '', fontSize: '', letterSpacing: '', lineHeight: '' },
   body: {
-    fontFamily: 'Avenir',
-    fontWeight: '200',
+    fontFamily: 'Futura Bold',
     fontSize: '',
     letterSpacing: '',
     lineHeight: '',
   },
-  get primary() {
-    return this.body;
-  }, //default to title
-  get secondary() {
-    return this.body;
-  }, // default to body
-  get tertiary() {
-    return this.body;
-  }, // default to body
+  primary: '', //default to title
+  secondary: '', // default to body
+  tertiary: '', // default to body
 };
 
 export const BUTTONS = {
   primary: {
     fontFamily: FONTS.body.fontFamily,
-    fontSize: '1.5rem',
+    fontSize: '',
     letterSpacing: '',
-    lineHeight: 'inherit',
+    lineHeight: '',
     backgroundColor: COLORS.secondary,
-    fontColor: 'white',
+    fontColor: COLORS.primary,
     border: '',
   },
   secondary: {
-    fontFamily: FONTS.body.fontFamily,
-    fontSize: '1rem',
+    fontFamily: '',
+    fontSize: '',
     letterSpacing: '',
     lineHeight: '',
-    backgroundColor: '',
-    fontColor: '',
+    backgroundColor: COLORS.secondary,
+    fontColor: COLORS.primary,
     border: '',
   },
   big: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Futura Bold',
     fontSize: '2rem',
     letterSpacing: '2px',
     lineHeight: 'auto',
-    backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    backgroundColor: COLORS.secondary,
+    fontColor: COLORS.primary,
     border: '5px solid white',
   },
   small: {
@@ -76,8 +63,8 @@ export const BUTTONS = {
     fontSize: '',
     letterSpacing: '',
     lineHeight: '',
-    backgroundColor: '',
-    fontColor: '',
+    backgroundColor: COLORS.secondary,
+    fontColor: COLORS.primary,
     border: '',
     hover: {
       fontColor: '',
@@ -85,12 +72,12 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: COLORS.orange,
-    backgroundColor: 'white',
+    fontColor: COLORS.tertiary,
+    backgroundColor: COLORS.primary,
   },
 };
 
-const BREAKPOINTS = {
+export const BREAKPOINTS = {
   xl: 1920,
   lg: 1600,
   md: 1200,
@@ -98,13 +85,14 @@ const BREAKPOINTS = {
   xs: 500,
 };
 
-export const default_theme = {
+export var event_theme = {
   colors: { ...COLORS },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  headerHeight: '200px',
+  heroBgColor: COLORS.primary,
+  heroHeight: '500px',
   headerOpacity: '0.75',
-  videoBreakPoint: 700,
+  videoBreakPoint: 0,
   maxSectionWidth: '1800px',
 };

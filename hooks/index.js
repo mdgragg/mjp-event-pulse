@@ -1,11 +1,11 @@
 import useCalculateRemaining from './useCalculateRemaining';
-import useHasAuthorized from './useHasAuthorized';
+import useSessionToken from './useSessionToken';
 import useCalculateIfStarted from './useCalculateIfStarted';
 import useInterval from './useInterval';
 import useServerSentEvents from './useServerSentEvents';
 
 export {
-  useHasAuthorized,
+  useSessionToken,
   useCalculateIfStarted,
   useInterval,
   useServerSentEvents,

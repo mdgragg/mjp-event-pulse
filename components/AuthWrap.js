@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import React, { useEffect } from 'react';
-import useHasAuthorized from '../hooks/useHasAuthorized';
+import React, { useContext, useEffect } from 'react';
+import useSessionToken from '../hooks/useSessionToken';
 import {
   AuthModal__AttendeeCapture,
   AuthModal__Password,
@@ -8,6 +8,7 @@ import {
   AuthModal__AttendeeList,
 } from 'components/Modals/';
 import { token_generator } from '../lib/helpers';
+import { AppContext } from 'context/AppContext';
 
 const Wrap = styled.div`
   filter: blur(0px);
@@ -20,50 +21,57 @@ const AuthWrap = ({
   children,
   title,
   className,
-  event_to_check,
-  callback = () => {},
-  render = () => {},
+  eventToCheck,
+  successCallback = () => {},
+  // this is to tell the child it has authorized
+
   options = [],
   signInText = null,
   headerContent = null,
   otherFields = {},
 }) => {
-  const auth_type = event_to_check.AuthOptions.AuthorizationType;
+  const authType = eventToCheck.AuthOptions.AuthorizationType;
 
-  const [hasAuthorized, setHasAuthorized] = useHasAuthorized(
-    token_generator(event_to_check)
+  const [hasToken, handleSetToken] = useSessionToken(
+    token_generator(eventToCheck)
   );
 
+  const {
+    setAuth,
+    state: { hasAuth },
+  } = useContext(AppContext);
+
   useEffect(() => {
-    console.log('use effect from auth wrap: ', hasAuthorized);
-    render(hasAuthorized);
-  }, [hasAuthorized]);
+    if (hasToken) {
+      setAuth(true);
+    }
+  }, [hasToken]);
 
   const handleCallback = (res) => {
-    setHasAuthorized(true);
-    callback(res);
+    handleSetToken(true);
+    successCallback(res);
   };
   // ================= RETURN AREA ===================== //
 
-  if (auth_type === 'Public') {
-    render(true);
+  if (authType === 'Public') {
+    // setAuth(true);
     return <>{children}</>;
   }
-  if (auth_type === 'AttendeeFromList') {
+  if (authType === 'AttendeeFromList') {
     if (options.includes('emailOnly')) {
       return (
         <>
           <AuthModal__Email
             otherFields={otherFields}
             title={title}
-            event_meta={event_to_check}
-            event_name={event_to_check.EventName}
-            open={!hasAuthorized}
+            event_meta={eventToCheck}
+            event_name={eventToCheck.EventName}
+            open={!hasAuth}
             callback={handleCallback}
             signInText={signInText}
             headerContent={headerContent}
           />
-          <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
+          <Wrap className={hasAuth ? '' : 'blurred'}>{children}</Wrap>
         </>
       );
     }
@@ -71,47 +79,47 @@ const AuthWrap = ({
       <>
         <AuthModal__AttendeeList
           otherFields={otherFields}
-          event_meta={event_to_check}
-          event_name={event_to_check.EventName}
-          open={!hasAuthorized}
+          event_meta={eventToCheck}
+          event_name={eventToCheck.EventName}
+          open={!hasAuth}
           callback={handleCallback}
           signInText={signInText}
           headerContent={headerContent}
         />
-        <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
+        <Wrap className={hasAuth ? '' : 'blurred'}>{children}</Wrap>
       </>
     );
   }
-  if (auth_type === 'PasswordProtected') {
+  if (authType === 'PasswordProtected') {
     return (
       <>
         <AuthModal__Password
           otherFields={otherFields}
-          event_meta={event_to_check}
-          event_name={event_to_check.EventName}
-          open={!hasAuthorized}
+          event_meta={eventToCheck}
+          event_name={eventToCheck.EventName}
+          open={!hasAuth}
           callback={handleCallback}
           signInText={signInText}
           headerContent={headerContent}
         />
-        <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
+        <Wrap className={hasAuth ? '' : 'blurred'}>{children}</Wrap>
       </>
     );
   }
-  if (auth_type === 'CaptureNewAttendees') {
+  if (authType === 'CaptureNewAttendees') {
     return (
       <>
         <AuthModal__AttendeeCapture
           title={title}
           otherFields={otherFields}
-          event_meta={event_to_check}
-          event_name={event_to_check.EventName}
-          open={!hasAuthorized}
+          event_meta={eventToCheck}
+          event_name={eventToCheck.EventName}
+          open={!hasAuth}
           callback={handleCallback}
           signInText={signInText}
           headerContent={headerContent}
         />
-        <Wrap className={hasAuthorized ? '' : 'blurred'}>{children}</Wrap>
+        <Wrap className={hasAuth ? '' : 'blurred'}>{children}</Wrap>
       </>
     );
   }

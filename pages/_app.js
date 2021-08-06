@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import App from 'next/app';
 import { useRouter } from 'next/router';
-import Meta from 'components/globals/Meta';
-import { GlobalStyle } from 'components/globals/GlobalStyle';
-import 'react-dropzone-uploader/dist/styles.css';
-import './global.css';
+import { ApolloProvider } from '@apollo/client';
+import client from 'lib/withApollo';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import 'react-dropzone-uploader/dist/styles.css';
+
+import AppContextProvider from '../context/AppContext';
+import { GlobalStyle } from 'components/globals/GlobalStyle';
+import './global.css';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+
 import Router from 'next/router';
 import cookies from 'next-cookies';
 import detectIE from '../lib/utils/detectIE';
 import * as gtag from '../lib/analytics';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ApolloProvider } from '@apollo/client';
+
+import Meta from 'components/globals/Meta';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import client from 'lib/withApollo';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -56,8 +61,8 @@ function MyApp({ Component, pageProps, loginData }) {
   };
 
   return (
-    <>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <AppContextProvider>
         <Meta />
         <GlobalStyle />
         <Snackbar
@@ -75,8 +80,8 @@ function MyApp({ Component, pageProps, loginData }) {
         </Snackbar>
         <ToastContainer />
         <Component {...pageProps} />
-      </ApolloProvider>
-    </>
+      </AppContextProvider>
+    </ApolloProvider>
   );
 }
 
