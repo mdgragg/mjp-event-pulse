@@ -78,8 +78,7 @@ const Index = (props) => {
             >
               <Counter__JustNumbers
                 prefix={'Starts In'}
-                start={main_event.eventStartEnd.StartDateTime}
-                end={main_event.eventStartEnd.EndDateTime}
+                event={main_event}
                 afterStarted={'Live Now!'}
                 afterEnded={'Thank You for Attending'}
               />

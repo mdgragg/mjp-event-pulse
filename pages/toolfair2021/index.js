@@ -54,7 +54,7 @@ const Index = (props) => {
 
   return (
     <>
-      <CustomModal
+      {/* <CustomModal
         fields={{
           AttendeeFirst: {
             displayName: 'First Name',
@@ -83,14 +83,14 @@ const Index = (props) => {
             }, welcome to ${main_event.EventName}`
           );
         }}
-      />
-      <FullWrap className={auth ? '' : 'blurred'}>
+      /> */}
+      <FullWrap>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>
             <Landing
               event_meta={main_event}
-              hasAuth={hasAuth}
+              hasAuth={true}
               hasStartEnd={hasStartEnd}
             />
           </Body>

@@ -6,26 +6,7 @@ import Page from 'components/PageTemplates/index';
 import GameShow__ThankYou from 'eventAssets/house-of-mercy-game-show-gala/GameShow__ThankYou';
 import GAMEWRAP from 'eventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
 
-export var event_theme = {
-  h1: {
-    fontSize: '3rem',
-  },
-  primaryColor: '#181818',
-  secondaryColor: '#97d700',
-  heroHeight: '200px',
-  green: 'rgb(3,76,66)',
-  lightGreen: 'rgb(148,199,78)',
-  grey: '#181818',
-  white: null,
-  blue: '#1e2c60',
-  red: '#e41936',
-  purple: 'rgb(145,51,130)',
-  orange: 'rgb(243,120,47)',
-  lightOrange: 'rgb(252,172,52)',
-  fontFamily: 'Akzidenz-Grotesque-Bold',
-  videoBreakPoint: 700,
-};
-
+import { event_theme } from 'components/Themes/default.theme';
 export const EVENT_URL = 'house-of-mercy-game-show-gala';
 const PLACEHOLD = 'https://placehold.co/';
 

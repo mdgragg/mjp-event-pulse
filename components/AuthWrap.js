@@ -20,7 +20,6 @@ const Wrap = styled.div`
 const AuthWrap = ({
   children,
   title,
-  className,
   eventToCheck,
   successCallback = () => {},
   // this is to tell the child it has authorized
@@ -42,10 +41,10 @@ const AuthWrap = ({
   } = useContext(AppContext);
 
   useEffect(() => {
-    if (hasToken) {
+    if (hasToken || authType === 'Public') {
       setAuth(true);
     }
-  }, [hasToken]);
+  }, [hasToken, authType]);
 
   const handleCallback = (res) => {
     handleSetToken(true);
@@ -54,7 +53,6 @@ const AuthWrap = ({
   // ================= RETURN AREA ===================== //
 
   if (authType === 'Public') {
-    setAuth(true);
     return <>{children}</>;
   }
   if (authType === 'AttendeeFromList') {

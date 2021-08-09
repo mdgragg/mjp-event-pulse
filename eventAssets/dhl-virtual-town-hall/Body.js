@@ -31,8 +31,7 @@ const Body = ({ main_event }) => {
       <CenteredPlayer
         videoUrl={main_event.streamLinks[0].url}
         showing={true}
-        has
-        Started={true}
+        hasStarted={true}
       />
     </BigBG>
   );

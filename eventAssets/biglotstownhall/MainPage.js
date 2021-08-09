@@ -91,7 +91,7 @@ const PlayerBody = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-const LandingPage = ({ main_event, hasAuth }) => {
+const LandingPage = ({ main_event }) => {
   return (
     <BG>
       <Header>
@@ -100,8 +100,7 @@ const LandingPage = ({ main_event, hasAuth }) => {
             <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
 
             <Counter__JustNumbers
-              start={main_event.eventStartEnd.StartDateTime}
-              end={main_event.eventStartEnd.EndDateTime}
+              event={main_event}
               afterStarted={<div>Live Now!</div>}
               afterEnded={<div>This Event Has Ended</div>}
             />
@@ -122,7 +121,7 @@ const LandingPage = ({ main_event, hasAuth }) => {
       <PlayerBody>
         <CenteredPlayer
           videoUrl={main_event.streamLinks[0].url}
-          showing={hasAuth}
+          showing={true}
         />
       </PlayerBody>
     </BG>

@@ -118,8 +118,7 @@ function GameShow__ThankYou({ main_event, showVid = true }) {
           <div className="counter">
             <Counter__JustNumbers
               prefix="Join Us Live In:"
-              start={start}
-              end={end}
+              event={main_event}
               afterStarted={`Live Now!`}
               afterEnded={`This Event Has Ended`}
             />

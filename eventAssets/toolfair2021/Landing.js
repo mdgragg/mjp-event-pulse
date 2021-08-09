@@ -107,8 +107,7 @@ const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
 
           <div className="counter">
             <Counter__JustNumbers
-              start={event_meta.eventStartEnd.StartDateTime}
-              end={event_meta.eventStartEnd.EndDateTime}
+              event={event_meta}
               afterEnded={` `}
               afterStarted={<div>Live Now!</div>}
             />
@@ -117,7 +116,7 @@ const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
       </Header>
       <Body>
         <div className="player">
-          {hasAuth && <Video__StickyTop src={event_meta.streamLinks[0].url} />}
+          {true && <Video__StickyTop src={event_meta.streamLinks[0].url} />}
         </div>
       </Body>
       <BannerWithPicture

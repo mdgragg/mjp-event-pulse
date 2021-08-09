@@ -5,7 +5,7 @@ import DateParse from 'components/assets/DateParse';
 
 const Page = styled.div`
   height: 100vh;
-  background-color: ${(props) => props.theme.orange};
+  background-color: ${(props) => props.theme.colors.orange};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ const Inner = styled.div`
     background-color: white;
     font-size: 2rem;
     font-family: 'Futura Bold';
-    color: ${(props) => props.theme.orange};
+    color: ${(props) => props.theme.colors.orange};
     padding: 1.5rem;
     text-align: center;
   }
@@ -38,8 +38,7 @@ const LandingPage = ({ main_event }) => {
         >
           <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
           <Counter__JustNumbers
-            start={main_event.eventStartEnd.StartDateTime}
-            end={main_event.eventStartEnd.EndDateTime}
+            event={main_event}
             afterEnded={
               <div>
                 This Event Has Ended <br /> Thank You For Attending!
