@@ -56,13 +56,12 @@ const Index = (props) => {
 export async function getServerSideProps(ctx) {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
-  let theme = {};
+
   return {
     props: {
       //meta will be the props for the event
       event_meta: event_data,
       main_event,
-      theme,
     },
   };
 }

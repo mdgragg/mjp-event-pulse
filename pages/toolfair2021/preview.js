@@ -9,7 +9,7 @@ import Body from 'components/template1/Body';
 import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
 import { toast } from 'react-toastify';
 
-import useHasAuthorized from 'hooks/useHasAuthorized';
+import useSessionToken from 'hooks/useSessionToken';
 import { EVENT_URL } from './index';
 export var event_theme = {
   h1: {
@@ -49,12 +49,11 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const [hasAuthenticated, setHasAuthenticated] =
-    useHasAuthorized(session_token);
+  const [hasToken, handleSetToken] = useSessionToken(session_token);
 
   return (
     <>
-      <FullWrap className={!hasAuthenticated ? 'blurred' : ''}>
+      <FullWrap className={!hasToken ? 'blurred' : ''}>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>

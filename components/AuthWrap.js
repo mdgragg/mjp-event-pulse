@@ -54,7 +54,7 @@ const AuthWrap = ({
   // ================= RETURN AREA ===================== //
 
   if (authType === 'Public') {
-    // setAuth(true);
+    setAuth(true);
     return <>{children}</>;
   }
   if (authType === 'AttendeeFromList') {

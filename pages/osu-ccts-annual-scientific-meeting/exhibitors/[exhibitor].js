@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getExhibitorMeta, getEventMetaMain, getEventMeta } from 'lib/api/';
+import { getExhibitorMeta, getEventMeta } from 'lib/api';
 import styled from 'styled-components';
 
 import Page from 'components/template1/Page';

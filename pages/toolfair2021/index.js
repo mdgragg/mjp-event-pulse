@@ -6,7 +6,7 @@ import Body from 'components/template1/Body';
 import Landing from 'eventAssets/toolfair2021/Landing';
 import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
-import useHasAuthorized from 'hooks/useHasAuthorized';
+import useSessionToken from 'hooks/useSessionToken';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { token_generator } from '../../lib/helpers';
 import CustomModal from 'eventAssets/toolfair2021/CustomModal';
@@ -48,7 +48,9 @@ const Index = (props) => {
   };
 
   const hasStartEnd = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useHasAuthorized(token_generator(main_event));
+  const [hasToken, handlSetToken] = useSessionToken(
+    token_generator(main_event)
+  );
 
   return (
     <>
@@ -70,11 +72,11 @@ const Index = (props) => {
             required: true,
           },
         }}
-        open={!auth}
+        open={!hasToken}
         headerContent={<img src={main_event.LogoLink[0].Media.url} />}
         event_meta={main_event}
         callback={(res) => {
-          setAuth(true);
+          handlSetToken(true);
           toast.success(
             `Hello ${
               res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
@@ -88,7 +90,7 @@ const Index = (props) => {
           <Body>
             <Landing
               event_meta={main_event}
-              hasAuth={auth}
+              hasAuth={hasAuth}
               hasStartEnd={hasStartEnd}
             />
           </Body>

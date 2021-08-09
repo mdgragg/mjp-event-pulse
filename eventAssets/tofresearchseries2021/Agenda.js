@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import React from 'react';
 import TwoPanel from 'components/TabPanels/TwoPanel';
 import SpineSession from './Agenda/SpineSession';
+
+// http://events.r20.constantcontact.com/register/event?llr=dmu7d7cab&oeidk=a07ehvrwj2ga36ae5cf&showPage=true
 const TheAgenda = styled.div`
   min-height: 880px;
   font-size: 1rem;

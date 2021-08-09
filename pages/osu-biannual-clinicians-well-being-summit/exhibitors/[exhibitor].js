@@ -3,7 +3,7 @@ import { fireBaseApp as fb } from 'lib/firebase/base';
 import cookies from 'next-cookies';
 import ReactCSSTransitionGroup from 'react-transition-group';
 import React, { useEffect, setState, useRef } from 'react';
-import { fetchAPI } from 'lib/api/';
+import { fetchAPI } from 'lib/api';
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 import {
