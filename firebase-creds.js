@@ -8,3 +8,5 @@ export const firebaseConfig = {
   appId: process.env.FB_APP_ID,
   measurementId: process.env.FB_MEASUREMENT_ID,
 };
+
+// create creds here...
