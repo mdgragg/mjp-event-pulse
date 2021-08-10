@@ -69,11 +69,13 @@ const SingleSponsor = ({ sponsor }) => {
       <Image src={sponsor.Logo.url} />
       <Title className="title">
         {sponsor.SponsorName}
-        <div class="button">
-          <Link href={sponsor?.SponsorLink || '#'} passHref>
-            <MyButton className="btn">Visit</MyButton>
-          </Link>
-        </div>
+        {sponsor.SponsorLink && (
+          <div class="button">
+            <Link href={sponsor?.SponsorLink} passHref>
+              <MyButton className="btn">Visit</MyButton>
+            </Link>
+          </div>
+        )}
       </Title>
       {sponsor.Description && <p>{sponsor.Description}</p>}
     </SingleSponsorStyle>

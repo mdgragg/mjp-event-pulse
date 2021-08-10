@@ -13,27 +13,15 @@ import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
 import ClientOnly from 'components/assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
-export var event_theme = {
-  heroHeight: '500px',
-  fontFamily: null,
-  headerOpacity: 0.6,
-  white: null,
-  blue: null,
-  red: null,
-  buttonColor: null,
-  headerFont: null,
-  headerBgColor: 'black',
-};
+import { default_theme } from '../../components/Themes/default.theme';
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
 const Index = (props) => {
   const { event_meta, main_event } = props;
-  const router = useRouter();
-  const hasStartEnd = useCalculateIfStarted(main_event);
 
-  event_theme = {
-    ...event_theme,
+  let event_theme = {
+    ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 

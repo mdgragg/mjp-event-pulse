@@ -6,59 +6,47 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
+import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import attendee_capture from 'lib/fetchCalls/soft_auth';
+import NumberFormat from 'react-number-format';
+import MaskedInput from 'react-text-mask';
+import { Checkbox, FormControl } from '@material-ui/core';
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import { AuthModalProps } from '../AuthWrap__Types';
+import {
+  HeaderWrap,
+  StyledDialogTitle,
+  StyledForm,
+  useStyles,
+} from './AuthModal__Styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '80%',
-    },
-
-    '& .MuiTextField-root': {
-      margin: '0.5rem',
-      //   width: '25ch',
-    },
-  },
-}));
-
-const StyledForm = styled.form`
-  &&.loading {
-    opacity: 0.2;
-  }
-`;
-
-const default_fields = {
-  AttendeeFirst: {
-    displayName: 'First Name',
-    value: '',
-    required: true,
-  },
-  AttendeeLast: {
-    displayName: 'Last Name',
-    value: '',
-    required: true,
-  },
-  AttendeeEmail: {
-    displayName: 'Email',
-    value: '',
-    required: true,
-  },
-};
-
-export default function AuthModal__AttendeeList({
+export default function AuthModal__AttendeeCapture({
   open,
-  callback,
-  event_meta,
-  headerContent,
+  successCallback,
+  title,
+  eventToCheck,
   signInText = null,
   otherFields = {},
-}) {
+}: AuthModalProps) {
   let init = {
-    ...default_fields,
+    AttendeeFirst: {
+      displayName: 'First Name',
+      value: '',
+      required: true,
+    },
+    AttendeeLast: {
+      displayName: 'Last Name',
+      value: '',
+      required: true,
+    },
+    AttendeeEmail: {
+      displayName: 'Email',
+      value: '',
+      required: true,
+    },
     ...otherFields,
   };
 
@@ -103,13 +91,11 @@ export default function AuthModal__AttendeeList({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, event_meta.id)
-      .then((res) => {
-        return callback(res);
-      })
+    return await attendee_capture(send_values, eventToCheck.id)
+      .then((res) => successCallback(res))
       .catch((err) => {
+        toast.error(err);
         setFormLoading(false);
-        return toast.error(err);
       });
   };
 
@@ -120,37 +106,25 @@ export default function AuthModal__AttendeeList({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle
-          id="form-dialog-title"
-          style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
-        >
-          {headerContent && (
-            <div
-              style={{
-                width: '70%',
-                height: 'auto',
-                margin: 'auto',
-              }}
-            >
-              {headerContent}
-            </div>
+        <StyledDialogTitle id="form-dialog-title">
+          {title ? (
+            <HeaderWrap>{title}</HeaderWrap>
+          ) : (
+            <h3>Please Sign In To Enter</h3>
           )}
-          Please Sign In To Enter
-        </DialogTitle>
+        </StyledDialogTitle>
 
-        <DialogContent>
+        <DialogContent className={`${classes.header}`}>
           <center>
-            {signInText ? (
-              signInText
-            ) : (
-              <DialogContentText>
-                Please enter your information to proceed to the event.
-              </DialogContentText>
-            )}
-
+            <DialogContentText>
+              {signInText
+                ? signInText
+                : 'Please enter your information to proceed to the event.'}
+            </DialogContentText>
             <StyledForm
               className={`${classes.root} ${formLoading ? 'loading' : false}`}
               noValidate
+              autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -163,7 +137,6 @@ export default function AuthModal__AttendeeList({
                   id={v}
                   name={v}
                   label={values[v].displayName}
-                  value={values[v].value}
                   type="text"
                   onChange={handleChange}
                   required={values[v].required}

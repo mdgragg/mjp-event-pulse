@@ -31,9 +31,6 @@ const Item__Time = styled.div`
 `;
 const Item__Title = styled.div`
   display: inline;
-  /* color: white;
-  background-color: ${(props) => props.theme.red};
-  padding: 3px; */
 `;
 const SubItem = styled.li`
   list-style: none;
@@ -91,10 +88,10 @@ const tab_data = [
   { title: 'Knee Session', content: <h2>Knee Session Agenda</h2> },
   { title: 'Hip Session', content: <h2>Hip Session Agenda</h2> },
 ];
-const Agenda = ({ main_event }) => {
+const Agenda = ({ initialTab }) => {
   return (
     <TheAgenda>
-      <TwoPanel data={tab_data}></TwoPanel>
+      <TwoPanel data={tab_data} initialTab={initialTab}></TwoPanel>
     </TheAgenda>
   );
 };

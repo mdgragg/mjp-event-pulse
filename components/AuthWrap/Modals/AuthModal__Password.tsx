@@ -5,51 +5,29 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import attendee_password from 'lib/fetchCalls/attendee_password';
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '350px',
-    },
+import { AuthModalProps } from '../AuthWrap__Types';
 
-    '& .MuiTextField-root': {
-      margin: '0.5rem',
+import {
+  Error,
+  useStyles,
+  StyledForm,
+  HeaderWrap,
+  StyledDialogTitle,
+} from './AuthModal__Styles';
 
-      //   width: '25ch',
-    },
-    '& .MuiInput-root input': {
-      textAlign: 'center',
-      fontSize: '2rem',
-    },
-  },
-}));
-
-const StyledForm = styled.form`
-  &&.loading {
-    opacity: 0.2;
-  }
-`;
-
-const Error = styled.div`
-  background-color: red;
-  color: white;
-  font-size: 1.25rem;
-  text-align: center;
-`;
 export default function AuthModal__Password({
   open,
-  event_meta,
-  callback,
-  eventId,
-  event_name,
+  eventToCheck,
+  successCallback,
   headerContent,
   signInText,
-}) {
+  otherFields,
+}: AuthModalProps) {
   const init = {
     pw: '',
   };
@@ -61,7 +39,7 @@ export default function AuthModal__Password({
     errors: [],
   });
 
-  const [values, setValues] = React.useState(init);
+  const [values, setValues] = React.useState({ ...init });
 
   const handleClose = () => {
     toast.error('You must provide a password before joining.');
@@ -82,16 +60,17 @@ export default function AuthModal__Password({
   const handleSumbit = async (e) => {
     setFormLoading(true);
     // e.preventDefault();
-    if (values.password === '') {
+    if (values.pw === '') {
       setFormLoading(false);
       return toast.error('You must provide a password!');
     }
-    return await attendee_password(values, event_meta.id)
+    return await attendee_password(values, eventToCheck.id)
       .then((res) => {
-        return callback(res);
+        return successCallback(res);
       })
       .catch((err) => {
         setFormLoading(false);
+        zeroForm();
         toast.error(err);
         return console.log('err: ', err);
       });
@@ -104,24 +83,10 @@ export default function AuthModal__Password({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        {headerContent && (
-          <div
-            style={{
-              width: '70%',
-              height: 'auto',
-              margin: 'auto',
-              textAlign: 'center',
-            }}
-          >
-            {headerContent}
-          </div>
-        )}
-        <DialogTitle
-          id="form-dialog-title"
-          style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
-        >
+        {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
+        <StyledDialogTitle id="form-dialog-title">
           Please Provide a Password
-        </DialogTitle>
+        </StyledDialogTitle>
         {formErrors.showing
           ? formErrors.errors.map((err) => <Error>{err}</Error>)
           : ''}

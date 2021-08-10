@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Button__Primary } from '../Buttons';
 import { Typography, FormControl, Button, Input } from '@material-ui/core';
 
 const StyledBanner = styled.div`
@@ -12,7 +13,7 @@ const StyledBanner = styled.div`
   text-align: center;
   width: 100%;
   left: 0;
-  background-color: ${(props) => props.color || '#f7f7f7'};
+  background-color: ${(props) => props.theme.colors.primary || '#f7f7f7'};
   /* background-image: url('${(props) => props.image}'); */
   background-attachment: fixed;
   background-origin: center;
@@ -44,7 +45,10 @@ const Banner = (props) => {
         <p>{props.children}</p>
         {props.buttonText && (
           <a href={props.buttonLink}>
-            <button className="btn"> {props.buttonText}</button>
+            <Button__Primary className="btn">
+              {' '}
+              {props.buttonText}
+            </Button__Primary>
           </a>
         )}
         {props.imgUrl && <img className="banner-image" src={props.imgUrl} />}

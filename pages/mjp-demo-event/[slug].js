@@ -21,7 +21,7 @@ const SubEvent = ({ main_event, event_meta }) => {
         toast.success('Hello, welcome to the demo event!');
       }}
     >
-      <Index event_meta={event_meta} main_event={main_event} />{' '}
+      <Index event_meta={event_meta} main_event={main_event} />
     </AuthWrap>
   );
 };
@@ -29,12 +29,6 @@ const SubEvent = ({ main_event, event_meta }) => {
 export default SubEvent;
 
 export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
-
   let event_data = await getEventMeta(EVENT_URL);
 
   let main_event = event_data.events.filter(

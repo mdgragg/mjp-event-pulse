@@ -13,11 +13,11 @@ export function getKeyValue(keyValue) {
   return obj;
 }
 
-export function calcHasStarted(eventStartEnd) {
-  const now = new Date();
+export function calcHasStarted(eventStartEnd: any): boolean {
+  const now: Date = new Date();
   const hasStarted =
-    Date.parse(eventStartEnd.StartDateTime) < Date.parse(now) &&
-    Date.parse(eventStartEnd.EndDateTime) > Date.parse(now);
+    Date.parse(eventStartEnd.StartDateTime) < Date.parse(now.toString()) &&
+    Date.parse(eventStartEnd.EndDateTime) > Date.parse(now.toString());
 
   return hasStarted;
 }
@@ -54,8 +54,8 @@ export const calculate_remaining = (start, end) => {
   return obj;
 };
 
-export function calculateIfStarted(start) {
-  let now = new Date();
+export function calculateIfStarted(start: string): boolean {
+  let now: number = Date.parse(new Date());
   const parsed_event_start = Date.parse(start);
   let calc_time = parsed_event_start - now;
 
@@ -76,7 +76,7 @@ export function calculateIfEnded(end) {
   return false;
 }
 
-export const token_generator = (event) => {
+export const tokenGenerator = (event): string => {
   return `${event.event_job.jobId}--${event.id}-${event.AuthOptions.AuthorizationType}`;
 };
 
@@ -104,7 +104,7 @@ export function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
-export function transformByCommonAttr(array, field) {
+export function transformByCommonAttr(array, field): {} {
   return array.reduce(function (obj, key) {
     obj[key[field]] = array.filter((v) => v[field] === key[field]);
     return obj;

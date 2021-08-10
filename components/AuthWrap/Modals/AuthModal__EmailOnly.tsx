@@ -11,56 +11,25 @@ import { toast } from 'react-toastify';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
-import MaskedInput from 'react-text-mask';
-import { Checkbox, FormControl } from '@material-ui/core';
-import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import attendee_capture from 'lib/fetchCalls/soft_auth';
+import { AuthModalProps } from '../AuthWrap__Types';
+import {
+  HeaderWrap,
+  StyledDialogTitle,
+  StyledForm,
+  useStyles,
+} from './AuthModal__Styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '80%',
-    },
-
-    '& .MuiTextField-root': {
-      margin: '0.5rem',
-      //   width: '25ch',
-    },
-  },
-  header: {
-    '.MuiDialogContent-root  p': {
-      maxWidth: '80%',
-    },
-  },
-}));
-
-const StyledForm = styled.form`
-  &&.loading {
-    opacity: 0.2;
-  }
-`;
-
-export default function AuthModal__AttendeeCapture({
+export default function AuthModal__EmailOnly({
   open,
-  callback,
-  title,
-  event_meta,
+  successCallback,
+  eventToCheck,
   headerContent,
   signInText = null,
   otherFields = {},
-}) {
+  title,
+}: AuthModalProps) {
   let init = {
-    AttendeeFirst: {
-      displayName: 'First Name',
-      value: '',
-      required: true,
-    },
-    AttendeeLast: {
-      displayName: 'Last Name',
-      value: '',
-      required: true,
-    },
     AttendeeEmail: {
       displayName: 'Email',
       value: '',
@@ -82,6 +51,7 @@ export default function AuthModal__AttendeeCapture({
     e.persist();
     const name = e.target.name;
     const prevValue = values[name];
+
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
@@ -104,17 +74,19 @@ export default function AuthModal__AttendeeCapture({
     e.preventDefault();
     if (!check_required()) {
       setFormLoading(false);
-      return toast.error('All fields are required!');
+      return toast.error('You must supply an email');
     }
     const send_values = {};
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, event_meta.id)
-      .then((res) => callback(res))
+    return await attendee_capture(send_values, eventToCheck.id)
+      .then((res) => {
+        return successCallback(res);
+      })
       .catch((err) => {
-        toast.error(err);
         setFormLoading(false);
+        return toast.error(err);
       });
   };
 
@@ -125,26 +97,12 @@ export default function AuthModal__AttendeeCapture({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle
-          id="form-dialog-title"
-          style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
-        >
-          {title ? (
-            <div
-              style={{
-                width: '70%',
-                height: 'auto',
-                margin: 'auto',
-              }}
-            >
-              {title}
-            </div>
-          ) : (
-            <h3>Please Sign In To Enter</h3>
-          )}
-        </DialogTitle>
+        <StyledDialogTitle id="form-dialog-title">
+          {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
+          {title ? title : 'Please Sign In To Enter'}
+        </StyledDialogTitle>
 
-        <DialogContent className={`${classes.header}`}>
+        <DialogContent>
           <center>
             {signInText ? (
               signInText
@@ -161,6 +119,11 @@ export default function AuthModal__AttendeeCapture({
               onSubmit={(e) => {
                 e.preventDefault();
               }}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter') {
+                  handleSumbit(e);
+                }
+              }}
             >
               {Object.keys(values).map((v) => (
                 <TextField
@@ -171,7 +134,6 @@ export default function AuthModal__AttendeeCapture({
                   name={v}
                   label={values[v].displayName}
                   type="text"
-                  // value={values[v].value}
                   onChange={handleChange}
                   required={values[v].required}
                 />

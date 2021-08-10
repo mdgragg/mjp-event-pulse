@@ -1,6 +1,6 @@
 import base from 'lib/firebase/base';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { Button__Primary } from '../Buttons';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ export const chat_colors = {
 
 var badwordsArray = require('badwords/array');
 
-const SubmitChat = styled(Button)``;
+const SubmitChat = styled(Button__Primary)``;
 
 const ChatWrap = styled.div`
   margin: auto;
@@ -43,17 +43,26 @@ const NameInput = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 100;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-align: center;
   top: 0%;
   && .choose-name {
     color: #181818;
   }
+  && input::placeholder {
+    color: ${chat_colors.grey};
+  }
   && input {
+    border: none;
+    background-color: white;
+    border-bottom: 1px solid black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.25rem;
     width: 100%;
-    padding: 0.75rem;
+    padding: 1rem;
+  }
+  && input::selection {
+    outline: none;
   }
 `;
 const ChatMessages = styled.div`
@@ -132,7 +141,7 @@ const InputArea = styled.div`
     color: white;
     width: 100px;
     margin: 0 1rem 0 0;
-    background-color: ${() => chat_colors.blue};
+    background-color: ${chat_colors.blue};
   }
   &&.sending {
     opacity: 0.9;
@@ -339,10 +348,13 @@ const PublicChat = ({ slug = 'test-2' }) => {
     <ChatWrap>
       {name === null ? (
         <NameInput>
-          <h3 className="choose-name">Please Choose A Display Name</h3>
-          <input ref={nameRef} type="text" />
+          <input
+            ref={nameRef}
+            type="text"
+            placeholder="Please choose a display name..."
+          />
           <br />
-          <Button onClick={setTheName}>Join the Chat</Button>
+          <Button__Primary onClick={setTheName}>Join the Chat</Button__Primary>
         </NameInput>
       ) : null}
 

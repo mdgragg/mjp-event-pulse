@@ -1,3 +1,5 @@
+import { createTheme } from '@material-ui/core';
+
 const COLORS = {
   red: '#b71f39',
   orange: '#FF5600',
@@ -8,9 +10,9 @@ const COLORS = {
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
-  primary: 'white',
-  secondary: 'var(--mjp-orange)',
-  tertiary: '',
+  primary: 'black',
+  secondary: 'white',
+  tertiary: 'var(--mjp-orange)',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
@@ -49,7 +51,7 @@ export const BUTTONS = {
     fontSize: '1.5rem',
     letterSpacing: '',
     lineHeight: 'inherit',
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.tertiary,
     fontColor: 'white',
     border: '',
   },
@@ -85,8 +87,8 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: COLORS.orange,
-    backgroundColor: 'white',
+    fontColor: 'white',
+    backgroundColor: 'black',
   },
 };
 
@@ -99,6 +101,7 @@ const BREAKPOINTS = {
 };
 
 export const default_theme = {
+  ...createTheme(),
   colors: { ...COLORS },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },

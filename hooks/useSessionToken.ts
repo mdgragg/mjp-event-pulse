@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 
-const useSessionToken = (token_name) => {
+const useSessionToken = (token_name: string) => {
   const [hasToken, setToken] = useState(false);
 
   useEffect(() => {
-    console.log('hook is checking auth...');
     if (sessionStorage.getItem(token_name)) {
       setToken(true);
     }
   }, []);
 
-  const handleSetToken = (value) => {
-    setToken(value);
+  const handleSetToken = (value: string): void => {
+    setToken(true);
     sessionStorage.setItem(token_name, value);
   };
 

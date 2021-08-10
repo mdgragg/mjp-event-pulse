@@ -18,15 +18,17 @@ const Wrap = styled.div`
   gap: 1rem;
   && .agenda__wrap {
     max-width: 550px;
+    min-height: 600px;
     width: 100%;
     box-shadow: var(--mjp-shadow);
     background-color: white;
     justify-self: start;
   }
   @media all and (max-width: 1200px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     && .agenda__wrap {
-      max-width: 100%;
+      max-width: 768px;
+      margin: auto;
       margin-top: 1rem;
     }
   }
@@ -106,7 +108,7 @@ const MainPage = ({ main_event }) => {
           />
         </PlayerBody>
         <div className="agenda__wrap">
-          <Agenda />
+          <Agenda initialTab={1} />
         </div>
       </Wrap>
 

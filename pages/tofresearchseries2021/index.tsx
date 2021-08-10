@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
@@ -26,11 +27,11 @@ const Index = (props) => {
     state: { hasAuth },
   } = useContext(AppContext);
 
-  useEffect(() => {
-    if (event_meta.eventStatus.EventStatus === 'Ended') {
-      router.push(`${EVENT_URL}/thank-you`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (event_meta.eventStatus.EventStatus === 'Ended') {
+  //     router.push(`${EVENT_URL}/thank-you`);
+  //   }
+  // }, []);
 
   return (
     <AuthWrap
@@ -53,17 +54,16 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
   return {
     props: {
-      //meta will be the props for the event
       event_meta: event_data,
       main_event,
     },
   };
-}
+};
 
 export default Index;

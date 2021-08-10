@@ -1,10 +1,5 @@
-import clsx from 'clsx';
 import styled, { ThemeContext } from 'styled-components';
-import { Grid, Paper, Card } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useState, useEffect, useRef } from 'react';
-
-import MenuIcon from '@material-ui/icons/Menu';
+import { useState, useEffect, useRef, useContext } from 'react';
 
 const VideoPlaceholder = styled.div`
   height: inherit;
@@ -50,9 +45,6 @@ const VideoBox = (props) => {
   `;
 
   const [vidShow, setVidShow] = useState(true);
-  const [vidFixed, setVidFixed] = useState(false);
-
-  const themeContext = React.useContext(ThemeContext);
 
   const wrapperRef = useRef();
 
