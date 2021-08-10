@@ -5,11 +5,11 @@ import SpineSession from './Agenda/SpineSession';
 
 // http://events.r20.constantcontact.com/register/event?llr=dmu7d7cab&oeidk=a07ehvrwj2ga36ae5cf&showPage=true
 const TheAgenda = styled.div`
-  min-height: 880px;
+  min-height: 100%;
   font-size: 1rem;
-  max-width: 550px;
+  /* max-width: 550px; */
   margin: auto;
-  background-color: #f7f7f7;
+  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const SingleScheduleDay = styled.div`
@@ -73,11 +73,15 @@ const ListAgenda = ({ data }) => {
 const tab_data = [
   {
     title: 'Spine Session',
-    content: <h2>Spine Session Agenda</h2>,
+    content: (
+      <>
+        <h2>Spine Session Agenda</h2> <SpineSession />
+      </>
+    ),
   },
   { title: 'Foot & Ankle Session', content: <h2>Foot & Ankle Agenda</h2> },
   {
-    title: 'Neurology/ Pain Management Session',
+    title: 'Neurology/ Pain Mgmt Session',
     content: <h2>Pain Mgmt Session Agenda</h2>,
   },
   {

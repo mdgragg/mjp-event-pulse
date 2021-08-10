@@ -12,26 +12,14 @@ import Agenda from 'eventAssets/odihalloffame/Agenda';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { PlayerWithChat } from 'components/BodyTemplates';
 import styled from 'styled-components';
-
+import { event_theme } from 'eventAssets/odihalloffame/theme.theme';
 export const EVENT_URL = 'odihalloffame';
-export var event_theme = {
-  heroHeight: '500px',
-  fontFamily: null,
-  headerOpacity: 0,
-  white: null,
-  blue: null,
-  red: 'rgb(187, 0, 0)',
-  buttonColor: null,
-  headerFont: 'Georgia',
-  headerBgColor: 'black',
-  headerFontColor: 'rgb(187, 0, 0)',
-  videoBreakPoint: 1500,
-};
+
 const PLACEHOLD = 'https://placehold.co/';
 
 const ODIWRAP = styled.div`
   button {
-    background-color: ${event_theme.red};
+    background-color: ${event_theme.colors.red};
     color: white;
     min-height: 60px;
     padding: 0 10px;
@@ -54,18 +42,16 @@ const ODIWRAP = styled.div`
 
 const Index = (props) => {
   const router = useRouter();
-  const EVENT_URL = router.query.event;
+
   const { event_meta, main_event } = props;
 
-  event_theme = {
+  let theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStarted = useCalculateIfStarted(main_event);
-
   return (
-    <Page theme={event_theme}>
+    <Page theme={theme}>
       <ODIWRAP>
         <Meta title={event_meta.EventJobName}> </Meta>
         <FlexHero title={event_meta.EventJobName}>
@@ -77,6 +63,7 @@ const Index = (props) => {
                   margin: 'auto',
                   fontSize: '2rem',
                   lineHeight: '2.85rem',
+                  color: theme.colors.red,
                 }}
               >
                 2021 Ohio State University <br />
@@ -87,7 +74,13 @@ const Index = (props) => {
                 <br /> Hall of Fame Awards
                 <br /> Virtual Event
               </h1>
-              <h2 style={{ margin: '1rem auto', fontFamily: 'Avenir' }}>
+              <h2
+                style={{
+                  margin: '1rem auto',
+                  fontFamily: 'Avenir',
+                  color: 'grey',
+                }}
+              >
                 <i>Wednesday June 23, 2021 | 6:30pm EST</i> <br />
                 <i>Thursday June 24, 2021 | 6:30pm EST</i>
               </h2>
@@ -105,8 +98,7 @@ const Index = (props) => {
               >
                 <Counter__JustNumbers
                   prefix={'Join Us Live In'}
-                  start={main_event.eventStartEnd.StartDateTime}
-                  end={main_event.eventStartEnd.EndDateTime}
+                  event={main_event}
                   afterStarted={'Live Now!'}
                   afterEnded={'Thank You for Attending'}
                 />

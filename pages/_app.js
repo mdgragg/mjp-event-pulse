@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import App from 'next/app';
 import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
-import client from 'lib/withApollo';
+import { client } from '../lib/withApollo';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

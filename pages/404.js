@@ -6,9 +6,9 @@ import Header from 'components/globals/Header';
 import Footer from 'components/globals/Footer';
 import Page from 'components/template1/Page';
 import Section from 'components/template1/Section';
-import { theme } from 'components/globals/style';
-
-import { Grid, Button } from '@material-ui/core';
+import { default_theme } from 'components/Themes/default.theme';
+import { Button__Primary } from 'components/Buttons';
+import { Grid } from '@material-ui/core';
 import { InfoGrid } from 'components/globals/InfoGrid';
 import MJP__SVG from '../components/globals/MJP__SVG';
 
@@ -16,7 +16,7 @@ const Error_404 = (props) => {
   const [headerHeight, setHeaderHeight] = useState('60vh');
 
   return (
-    <Page theme={theme}>
+    <Page theme={default_theme}>
       <Header
         height={'600px'}
         image="https://storage.googleapis.com/mjp-stream-public/Screen%20Shot%202021-05-17%20at%209.45.20%20AM.png"
@@ -40,7 +40,7 @@ const Error_404 = (props) => {
                 started building your own brand experience contact us.
               </p>
               <Link href="https://www.millsjames.com/contact-us/">
-                <button style={{ margin: '0' }}>Contact Us</button>
+                <Button__Primary>Contact Us</Button__Primary>
               </Link>
             </div>
           </Grid>

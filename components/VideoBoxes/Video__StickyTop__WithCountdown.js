@@ -58,7 +58,7 @@ const Video__StickyTop__WithCountdown = ({
   }, []);
 
   if (videoShowing) {
-    return <VideoBox__StickyTop src={src} isStarted={isStarted} />;
+    return <VideoBox__StickyTop src={src} isStarted={true} />;
   }
   return (
     <StyledVideoBox>

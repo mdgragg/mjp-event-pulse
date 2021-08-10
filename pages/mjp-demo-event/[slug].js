@@ -5,21 +5,23 @@ import { getEventMeta } from 'lib/api';
 
 import AuthWrap from 'components/AuthWrap';
 import Index from './index';
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
+import { toast } from 'react-toastify';
 
 const SubEvent = ({ main_event, event_meta }) => {
-  const [auth, setAuth] = useState(false);
+  const {
+    setAuth,
+    state: { hasAuth },
+  } = useContext(AppContext);
   return (
     <AuthWrap
-      event_to_check={main_event}
-      callback={(res) => {
-        console.log(res);
-      }}
-      render={(val) => {
-        setV(val);
+      eventToCheck={main_event}
+      successCallback={(res) => {
+        toast.success('Hello, welcome to the demo event!');
       }}
     >
       <Index event_meta={event_meta} main_event={main_event} />{' '}
-      {v ? <h1>True</h1> : <h1>False</h1>}
     </AuthWrap>
   );
 };

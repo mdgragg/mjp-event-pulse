@@ -11,30 +11,37 @@ import Agenda from './Agenda';
 const Wrap = styled.div`
   width: 95%;
   margin: 3rem auto;
+  max-width: 1920px;
   display: grid;
   grid-template-columns: 66% 34%;
   text-align: center;
-  gap: 2rem;
+  gap: 1rem;
   && .agenda__wrap {
-    width: auto;
+    max-width: 550px;
+    width: 100%;
     box-shadow: var(--mjp-shadow);
     background-color: white;
+    justify-self: start;
   }
   @media all and (max-width: 1200px) {
     grid-template-columns: 1fr;
+    && .agenda__wrap {
+      max-width: 100%;
+      margin-top: 1rem;
+    }
   }
 `;
 
 const PlayerBody = styled.div`
   align-self: start;
   width: 100%;
-  min-height: 500px;
+  /* min-height: 500px; */
   max-width: 1200px;
-  margin: 5rem auto;
+  margin: 0 auto;
   display: flex;
   text-align: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 
   @media all and (max-width: 1200px) {
     max-width: 768px;
@@ -99,7 +106,6 @@ const MainPage = ({ main_event }) => {
           />
         </PlayerBody>
         <div className="agenda__wrap">
-          <h2>Agenda</h2>
           <Agenda />
         </div>
       </Wrap>

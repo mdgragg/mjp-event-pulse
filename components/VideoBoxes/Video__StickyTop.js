@@ -107,7 +107,7 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
     return () => {
       window.removeEventListener('scroll', calculateFixed);
     };
-  }, []);
+  }, [isStarted]);
 
   return (
     <VideoPlaceholder ref={wrapperRef}>
