@@ -50,7 +50,7 @@ const AuthWrap = (props: AuthWrapProps) => {
   }, [hasToken, authType]);
 
   const handleCallback = (res: Object): void => {
-    handleSetToken(true);
+    handleSetToken('true');
     successCallback(res);
   };
 

@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
+import Center from 'components/Center';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ export default function AuthModal__Password({
     });
   };
 
-  const handleSumbit = async (e) => {
+  const handleSumbit = async () => {
     setFormLoading(true);
     // e.preventDefault();
     if (values.pw === '') {
@@ -92,7 +92,7 @@ export default function AuthModal__Password({
           : ''}
 
         <DialogContent>
-          <center>
+          <Center>
             {signInText ? (
               signInText
             ) : (
@@ -127,7 +127,7 @@ export default function AuthModal__Password({
                 required
               />
             </StyledForm>
-          </center>
+          </Center>
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>

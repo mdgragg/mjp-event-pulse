@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import Center from 'components/Center';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Input from '@material-ui/core/Input';
 import { toast } from 'react-toastify';
@@ -115,7 +116,7 @@ export default function AuthModal__AttendeeCapture({
         </StyledDialogTitle>
 
         <DialogContent>
-          <center>
+          <Center>
             <DialogContentText>
               {signInText
                 ? signInText
@@ -143,7 +144,7 @@ export default function AuthModal__AttendeeCapture({
                 />
               ))}
             </StyledForm>
-          </center>
+          </Center>
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>

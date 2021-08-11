@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import InputLabel from '@material-ui/core/InputLabel';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
+import Center from 'components/Center';
 import attendee_capture from 'lib/fetchCalls/soft_auth';
 import { AuthModalProps } from '../AuthWrap__Types';
 import {
@@ -103,7 +104,7 @@ export default function AuthModal__EmailOnly({
         </StyledDialogTitle>
 
         <DialogContent>
-          <center>
+          <Center>
             {signInText ? (
               signInText
             ) : (
@@ -139,7 +140,7 @@ export default function AuthModal__EmailOnly({
                 />
               ))}
             </StyledForm>
-          </center>
+          </Center>
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>

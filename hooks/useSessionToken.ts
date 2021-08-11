@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-const useSessionToken = (token_name: string) => {
+export declare interface SessionToken__Type {}
+
+const useSessionToken = (
+  token_name: string
+): [boolean, (value: boolean | string) => void] => {
   const [hasToken, setToken] = useState(false);
 
   useEffect(() => {
@@ -9,7 +13,7 @@ const useSessionToken = (token_name: string) => {
     }
   }, []);
 
-  const handleSetToken = (value: string): void => {
+  const handleSetToken = (value) => {
     setToken(true);
     sessionStorage.setItem(token_name, value);
   };

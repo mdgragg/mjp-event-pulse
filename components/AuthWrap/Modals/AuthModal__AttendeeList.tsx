@@ -13,6 +13,7 @@ import attendee_capture from 'lib/fetchCalls/soft_auth';
 import { AuthModalProps } from '../AuthWrap__Types';
 import { HeaderWrap, StyledDialogTitle } from './AuthModal__Styles';
 import { useStyles, StyledForm } from './AuthModal__Styles';
+import Center from 'components/Center';
 
 const default_fields = {
   AttendeeFirst: {
@@ -107,7 +108,7 @@ export default function AuthModal__AttendeeList({
         Please Sign In To Enter
       </StyledDialogTitle>
       <DialogContent>
-        <center>
+        <Center>
           <DialogContentText>
             {signInText
               ? signInText
@@ -135,7 +136,7 @@ export default function AuthModal__AttendeeList({
               />
             ))}
           </StyledForm>
-        </center>
+        </Center>
       </DialogContent>
       <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
         <Button onClick={handleSumbit} color="primary">

@@ -1,3 +1,12 @@
+interface CounterObject {
+  parsed_until_end: number;
+  total_remaining: number;
+  days: string | number;
+  hours: string | number;
+  minutes: string | number;
+  seconds: string | number;
+}
+
 export function get_ext(file) {
   file = file.split(/[#?]/)[0].split('.').pop().trim();
   return file;
@@ -22,13 +31,13 @@ export function calcHasStarted(eventStartEnd: any): boolean {
   return hasStarted;
 }
 
-export const calculate_remaining = (start, end) => {
+export const calculate_remaining = (start, end): CounterObject => {
   const now = Date.now();
   const parsed_remaining = Date.parse(start) - now;
   const parsed_until_end = Date.parse(end) - now;
   // if (parsed_until_end > 0) return null;
 
-  const obj = {
+  const obj: CounterObject = {
     parsed_until_end,
     total_remaining: parsed_remaining,
     days: Math.floor(parsed_remaining / (1000 * 60 * 60 * 24)),
@@ -37,7 +46,7 @@ export const calculate_remaining = (start, end) => {
     seconds: Math.floor((parsed_remaining / 1000) % 60),
   };
 
-  if (obj.seconds < 10) obj.seconds = '0' + obj.seconds;
+  if (obj.seconds < 10) obj.seconds = ('0' + obj.seconds).toString();
 
   //make it null if its zero
   Object.keys(obj).map((key) => {
@@ -55,7 +64,7 @@ export const calculate_remaining = (start, end) => {
 };
 
 export function calculateIfStarted(start: string): boolean {
-  let now: number = Date.parse(new Date());
+  let now: number = Date.parse(new Date().toString());
   const parsed_event_start = Date.parse(start);
   let calc_time = parsed_event_start - now;
 
@@ -66,7 +75,7 @@ export function calculateIfStarted(start: string): boolean {
 }
 
 export function calculateIfEnded(end) {
-  let now = new Date();
+  let now = Date.parse(new Date().toString());
   const parsed_event_end = Date.parse(end);
   let calc_time = now - parsed_event_end;
 
