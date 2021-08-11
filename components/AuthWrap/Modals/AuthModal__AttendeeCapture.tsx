@@ -114,7 +114,7 @@ export default function AuthModal__AttendeeCapture({
           )}
         </StyledDialogTitle>
 
-        <DialogContent className={`${classes.header}`}>
+        <DialogContent>
           <center>
             <DialogContentText>
               {signInText
