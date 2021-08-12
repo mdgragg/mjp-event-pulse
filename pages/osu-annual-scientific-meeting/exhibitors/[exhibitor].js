@@ -5,7 +5,7 @@ import { fetchAPI } from 'lib/api';
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
-import Page from 'components/template1/Page';
+import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import Section from 'components/template1/Section';
 import Footer from 'components/template1/Footer';

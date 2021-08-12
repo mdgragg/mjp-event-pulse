@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button__Primary } from 'components/Buttons';
+import { Button__Primary, Button__Secondary } from 'components/Buttons';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,6 +8,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
+import { ExternalLink__Type } from 'types/Link__Types';
+import Center from 'components/Center';
+
+export declare type ExternalLink__Props = {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  link: ExternalLink__Type;
+};
 
 const useStyles = makeStyles({
   root: {
@@ -18,7 +26,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ExternalLink({ open, setOpen, goToLink, link }) {
+export default function ExternalLink({
+  open,
+  setOpen,
+  link,
+}: ExternalLink__Props) {
   const classes = useStyles();
 
   const handleClose = () => {
@@ -28,7 +40,7 @@ export default function ExternalLink({ open, setOpen, goToLink, link }) {
   const handleSumbit = async (e) => {
     e.preventDefault();
     if (link.allowed) {
-      return goToLink();
+      return (window.location.href = link.href);
     }
     toast.error(link.errorText || 'This link is not allowed');
     return handleClose();
@@ -49,22 +61,22 @@ export default function ExternalLink({ open, setOpen, goToLink, link }) {
       </DialogTitle>
 
       <DialogContent>
-        <center>
+        <Center>
           <DialogContentText>
             This will take you an external event.
             <br /> Please press enter to continue.
           </DialogContentText>
-        </center>
+        </Center>
       </DialogContent>
 
       <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button__Primary onClick={handleClose} color="primary">
+        <Button__Secondary onClick={handleClose} color="primary">
           Cancel
-        </Button__Primary>
+        </Button__Secondary>
 
-        <Button__Primary onClick={handleSumbit} color="primary">
+        <Button__Secondary onClick={handleSumbit} color="primary">
           Enter
-        </Button__Primary>
+        </Button__Secondary>
       </DialogActions>
     </Dialog>
   );

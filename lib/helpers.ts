@@ -1,4 +1,6 @@
-interface CounterObject {
+import { EventStartEnd__Type, Event__Type } from 'types/Events__Types';
+
+export interface CounterObject {
   parsed_until_end: number;
   total_remaining: number;
   days: string | number;
@@ -14,15 +16,13 @@ export function get_ext(file) {
 
 export function getKeyValue(keyValue) {
   let obj = {};
-
   keyValue.map((kv) => {
     obj[kv['key']] = kv['value'];
   });
-
   return obj;
 }
 
-export function calcHasStarted(eventStartEnd: any): boolean {
+export function calcHasStarted(eventStartEnd: EventStartEnd__Type): boolean {
   const now: Date = new Date();
   const hasStarted =
     Date.parse(eventStartEnd.StartDateTime) < Date.parse(now.toString()) &&
@@ -59,7 +59,6 @@ export const calculate_remaining = (start, end): CounterObject => {
       obj[key] = '00';
     }
   });
-
   return obj;
 };
 
@@ -85,7 +84,7 @@ export function calculateIfEnded(end) {
   return false;
 }
 
-export const tokenGenerator = (event): string => {
+export const tokenGenerator = (event: Event__Type): string => {
   return `${event.event_job.jobId}--${event.id}-${event.AuthOptions.AuthorizationType}`;
 };
 

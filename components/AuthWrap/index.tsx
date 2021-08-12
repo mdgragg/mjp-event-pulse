@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import React, { useContext, useEffect } from 'react';
 import useSessionToken from 'hooks/useSessionToken';
 import { AuthModalProps, AuthWrapProps } from './AuthWrap__Types';
+
 import {
   AuthModal__AttendeeCapture,
   AuthModal__Password,
@@ -13,9 +14,18 @@ import { AppContext } from 'context/AppContext';
 import { Modal } from '@material-ui/core';
 
 const StyledAuthWrap = styled.div`
-  filter: blur(0px);
   &&.blurred {
-    filter: blur(18px);
+    position: relative;
+  }
+  &&.blurred::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 100;
   }
 `;
 
@@ -30,6 +40,7 @@ const AuthWrap = (props: AuthWrapProps) => {
     signInText = null,
     headerContent = null,
     otherFields,
+    theme,
   } = props;
 
   const authType = eventToCheck.AuthOptions.AuthorizationType;
@@ -61,7 +72,8 @@ const AuthWrap = (props: AuthWrapProps) => {
     signInText,
     headerContent,
     otherFields,
-    open: hasAuth,
+    open: !hasAuth,
+    theme,
   };
 
   // ================= RETURN AREA ===================== //

@@ -132,7 +132,7 @@ button {
 }
 
 button.btn,
-.MuiButton-root {
+.MuiButton-root.btn {
   min-height: 40px;
   min-width: clamp(130px, 10vw, 40vw);
   padding: 5px 10px;
@@ -146,13 +146,6 @@ button.btn,
   color: white;
   font-weight: 600;
   text-transform: uppercase;
-}
-
-button:hover,
-.MuiButton-root:hover {
-  cursor: pointer;
-  background-color: black;
-  color: white;
 }
 
 button:focus {

@@ -9,6 +9,7 @@ export declare interface AuthWrapProps {
   headerContent?: React.ReactNode;
   otherFields?: Object;
   options?: {}[];
+  theme?: any;
 }
 
 export declare interface AuthModalProps {
@@ -19,4 +20,5 @@ export declare interface AuthModalProps {
   successCallback: (res: any) => void;
   signInText?: React.ReactNode | string;
   headerContent?: React.ReactNode;
+  theme: any;
 }

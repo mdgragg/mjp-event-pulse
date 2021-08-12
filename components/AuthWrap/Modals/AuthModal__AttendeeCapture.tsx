@@ -1,28 +1,24 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Center from 'components/Center';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
+
 import { toast } from 'react-toastify';
-import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
-import MaskedInput from 'react-text-mask';
-import { Checkbox, FormControl } from '@material-ui/core';
+
 import attendee_capture from 'lib/fetchCalls/attendee_capture';
 import { AuthModalProps } from '../AuthWrap__Types';
 import {
   HeaderWrap,
   StyledDialogTitle,
   StyledForm,
+  ModalWrap,
   useStyles,
 } from './AuthModal__Styles';
+import { Button__Primary } from 'components/Buttons';
 
 export default function AuthModal__AttendeeCapture({
   open,
@@ -101,8 +97,9 @@ export default function AuthModal__AttendeeCapture({
   };
 
   return (
-    <div>
+    <ModalWrap>
       <Dialog
+        className={classes.modal}
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -111,7 +108,10 @@ export default function AuthModal__AttendeeCapture({
           {title ? (
             <HeaderWrap>{title}</HeaderWrap>
           ) : (
-            <h3>Please Sign In To Enter</h3>
+            <>
+              <h3 style={{ marginBottom: 0 }}>Please Sign In To Enter</h3>{' '}
+              <span>{eventToCheck.EventName}</span>
+            </>
           )}
         </StyledDialogTitle>
 
@@ -148,11 +148,9 @@ export default function AuthModal__AttendeeCapture({
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={handleSumbit} color="primary">
-            Submit
-          </Button>
+          <Button__Primary onClick={handleSumbit}>Submit</Button__Primary>
         </DialogActions>
       </Dialog>
-    </div>
+    </ModalWrap>
   );
 }

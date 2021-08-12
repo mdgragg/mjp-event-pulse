@@ -20,7 +20,7 @@ export const COLORS = {
 export const FONTS = {
   title: { fontFamily: '', fontSize: '', letterSpacing: '', lineHeight: '' },
   body: {
-    fontFamily: 'Futura Bold',
+    fontFamily: 'Avenir',
     fontSize: '',
     letterSpacing: '',
     lineHeight: '',
@@ -33,10 +33,10 @@ export const FONTS = {
 export const BUTTONS = {
   primary: {
     fontFamily: FONTS.body.fontFamily,
-    fontSize: '',
+    fontSize: '1.5rem',
     letterSpacing: '',
     lineHeight: '',
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.tertiary,
     fontColor: COLORS.primary,
     border: '',
   },
@@ -50,13 +50,13 @@ export const BUTTONS = {
     border: '',
   },
   big: {
-    fontFamily: 'Futura Bold',
-    fontSize: '2rem',
-    letterSpacing: '2px',
+    fontFamily: 'Avenir',
+    fontSize: '2.5rem',
+    letterSpacing: '0px',
     lineHeight: 'auto',
     backgroundColor: COLORS.secondary,
     fontColor: COLORS.primary,
-    border: '5px solid white',
+    border: '0px solid white',
   },
   small: {
     fontFamily: '',

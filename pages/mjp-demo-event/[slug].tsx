@@ -4,10 +4,11 @@ import { EVENT_URL } from './index';
 import { getEventMeta } from 'lib/api';
 
 import AuthWrap from 'components/AuthWrap';
-import Index from './index';
+import Index, { PageBody } from './index';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { toast } from 'react-toastify';
+import { GetServerSideProps } from 'next';
 
 const SubEvent = ({ main_event, event_meta }) => {
   const {
@@ -15,14 +16,16 @@ const SubEvent = ({ main_event, event_meta }) => {
     state: { hasAuth },
   } = useContext(AppContext);
   return (
-    <AuthWrap
-      eventToCheck={main_event}
-      successCallback={(res) => {
-        toast.success('Hello, welcome to the demo event!');
-      }}
-    >
-      <Index event_meta={event_meta} main_event={main_event} />
-    </AuthWrap>
+    <Index event_meta={event_meta} main_event={main_event}>
+      <AuthWrap
+        eventToCheck={main_event}
+        successCallback={(res) => {
+          toast.success('Hello, welcome to the demo event!');
+        }}
+      >
+        <PageBody main_event={main_event} />
+      </AuthWrap>
+    </Index>
   );
 };
 

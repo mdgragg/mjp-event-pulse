@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import CircleCounter from '../Counters/CircleCounter';
-import DateParse from '../assets/DateParse';
+import DateParse from '../Assets/DateParse';
 import styled from 'styled-components';
 import { ThemeContext } from 'styled-components';
 const Hero = styled.div`

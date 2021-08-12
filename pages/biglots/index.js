@@ -46,7 +46,7 @@ export const FONTS = {
 export const BUTTONS = {
   primary: {
     fontFamily: FONTS.body.fontFamily,
-    fontSize: '',
+    fontSize: '1.5rem',
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: COLORS.primary,

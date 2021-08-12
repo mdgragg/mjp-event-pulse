@@ -1,5 +1,5 @@
 import React from 'react';
-import { event_theme } from '../index';
+import { default_theme } from 'components/Themes/default.theme';
 import { Router, useRouter } from 'next/router';
 import Body from '../../../components/template1/Body';
 import Section from '../../../components/template1/Section';
@@ -41,7 +41,7 @@ const ExhibitorPage = (props) => {
   const event = data;
 
   return (
-    <Page theme={event_theme}>
+    <Page theme={default_theme}>
       <Meta title="Exhibitors"> </Meta>
       <Body>
         <Section>

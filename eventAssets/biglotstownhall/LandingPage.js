@@ -26,7 +26,7 @@ const LandingPage = ({ main_event }) => {
     <Page>
       <Inner>
         <h2>Big Lots</h2>
-        <h2>Q1 Virtual Town Hall</h2>
+        <h2>Q2 Virtual Town Hall</h2>
         <div
           style={{
             fontSize: '1rem',
@@ -36,8 +36,14 @@ const LandingPage = ({ main_event }) => {
             lineHeight: '2rem',
           }}
         >
-          <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
+          <i>
+            <DateParse
+              date={main_event.eventStartEnd.StartDateTime}
+            ></DateParse>{' '}
+          </i>
+          <br />
           <Counter__JustNumbers
+            prefix={`Join Us In:`}
             event={main_event}
             afterEnded={
               <div>

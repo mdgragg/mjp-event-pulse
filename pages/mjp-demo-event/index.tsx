@@ -11,14 +11,14 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
-import ClientOnly from 'components/assets/ClientOnly';
+import ClientOnly from 'components/Assets/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
 import { default_theme } from '../../components/Themes/default.theme';
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
 const Index = (props) => {
-  const { event_meta, main_event } = props;
+  const { event_meta, main_event, children } = props;
 
   let event_theme = {
     ...default_theme,
@@ -29,52 +29,57 @@ const Index = (props) => {
     <>
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
-        <MJHero main_event={main_event} />
-
-        <Body>
-          <Section>
-            <Grid container spacing={3}>
-              <Grid item={true} md={8} sm={12} xs={12}>
-                <div
-                  style={{
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <VideoBox__StickyTop
-                    isStarted={true}
-                    src={main_event.streamLinks[0].url}
-                  />
-                </div>
-              </Grid>
-              <Grid item md={4}>
-                <ClientOnly>
-                  <PublicChat slug={main_event.slug} />
-                </ClientOnly>
-                {/* <FullChat slug={`mjp-demo`} /> */}
-              </Grid>
-            </Grid>
-          </Section>
-          <BannerWithPicture
-            imgUrl={main_event.KeyValue[1]?.value}
-            color={'black'}
-            secondary={`white`}
-            textColor={`white`}
-            headerText={`About This Event`}
-            innerWidth={`650px`}
-            buttonText={`Learn More`}
-            buttonLink={`#`}
-          >
-            {main_event.Description && main_event.Description}
-          </BannerWithPicture>
-        </Body>
+        {children ? children : <PageBody main_event={main_event} />}
       </Page>
     </>
   );
 };
+
+export const PageBody = ({ main_event }) => (
+  <>
+    <MJHero main_event={main_event} />
+    <Body>
+      <Section>
+        <Grid container spacing={3}>
+          <Grid item={true} md={8} sm={12} xs={12}>
+            <div
+              style={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <VideoBox__StickyTop
+                isStarted={true}
+                src={main_event.streamLinks[0].url}
+              />
+            </div>
+          </Grid>
+          <Grid item md={4}>
+            <ClientOnly>
+              <PublicChat slug={main_event.slug} />
+            </ClientOnly>
+            {/* <FullChat slug={`mjp-demo`} /> */}
+          </Grid>
+        </Grid>
+      </Section>
+      <BannerWithPicture
+        imgUrl={main_event.KeyValue[1]?.value}
+        color={'black'}
+        secondary={`white`}
+        textColor={`white`}
+        headerText={`About This Event`}
+        innerWidth={`650px`}
+        buttonText={`Learn More`}
+        buttonLink={`#`}
+      >
+        {main_event.Description && main_event.Description}
+      </BannerWithPicture>
+    </Body>
+  </>
+);
 
 export async function getServerSideProps(ctx) {
   // If you request this page with the preview mode cookies set:

@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { SolidColorHero } from 'components/Heroes';
 import { Section } from 'components/Sections';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/Assets/DateParse';
 import SponsorMap from './SponsorMap';
 import Before from './Before';
 import LoadingImage from 'components/Loading/LoadingImage';
+import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Agenda from './Agenda';
 const Wrap = styled.div`
@@ -94,7 +95,23 @@ const MainPage = ({ main_event }) => {
       </SolidColorHero>
       <Wrap>
         <PlayerBody>
-          <Video__StickyTop__WithCountdown
+          <LinkBox__StickyTop__WithCountdown
+            start={main_event.eventStartEnd.StartDateTime}
+            offset={7208}
+            link={{
+              href: 'https://www.facebook.com',
+              allowed: true,
+              errorText: 'Hello World!',
+            }}
+            prefix={<h2 style={{ fontSize: '2rem' }}>Join the Zoom Webinar</h2>}
+            showBefore={
+              <Before
+                src={main_event?.HeaderImage?.url}
+                main_event={main_event}
+              />
+            }
+          />
+          {/* <Video__StickyTop__WithCountdown
             isStarted={true}
             start={main_event.eventStartEnd.StartDateTime}
             showMinutesBefore={30}
@@ -105,7 +122,7 @@ const MainPage = ({ main_event }) => {
               />
             }
             src={main_event.streamLinks[0].url}
-          />
+          /> */}
         </PlayerBody>
         <div className="agenda__wrap">
           <Agenda initialTab={1} />

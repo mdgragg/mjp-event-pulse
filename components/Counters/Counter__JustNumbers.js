@@ -5,8 +5,6 @@ import CountdownClock from './CountdownClock';
 
 const Counter__JustNumbers = ({
   event,
-  start,
-  end,
   prefix,
   afterStarted = null,
   afterEnded = null,
@@ -28,7 +26,7 @@ const Counter__JustNumbers = ({
   return (
     <>
       {prefix && prefix}
-      <CountdownClock countdown_object={Object} />
+      <CountdownClock countdown_object={obj} />
     </>
   );
 };

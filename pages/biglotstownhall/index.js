@@ -24,63 +24,67 @@ const Index = (props) => {
   };
 
   return (
-    // <AuthWrap
-    //   eventToCheck={main_event}
-    //   title={
-    //     <>
-    //       Please Sign In to Join
-    //       <br />
-    //       <strong> Big Lots' Q1 Town Hall</strong>
-    //     </>
-    //   }
-    //   callback={(creds) => {
-    //     toast.success(
-    //       `Hello ${
-    //         creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
-    //       }, welcome to Big Lots Q1 Virtual Town Hall`
-    //     );
-    //   }}
-    //   options={['emailOnly']}
-    //   signInText={
-    //     <div
-    //       style={{ textAlign: 'left', maxWidth: '450px', margin: '1rem 4rem' }}
-    //     >
-    //       <p>
-    //         Enter your Big Lots email address in the form of your unique
-    //         <strong> associateID@biglots.com </strong> <br />
-    //         (ex. 1234567@biglots.com) .
-    //       </p>
-    //       <p>
-    //         Contact Joey D'Amico at{' '}
-    //         <a href="mailto:jdamico@biglots.com">jdamico@biglots.com </a> if you
-    //         experience any technical issues.
-    //       </p>
-    //     </div>
-    //   }
-    //   headerContent={
-    //     <div
-    //       style={{
-    //         backgroundColor: event_theme.orange,
-    //         height: '80px',
-    //         width: '80px',
-    //         padding: '20px',
-    //         margin: '1rem auto',
-    //       }}
-    //     >
-    //       <img
-    //         style={{ height: 'auto', width: '90%' }}
-    //         src={main_event.LogoLink[0].Media.url}
-    //       />
-    //     </div>
-    //   }
-    // >
     <Page theme={theme}>
-      <Meta title={event_meta.EventJobName}> </Meta>
-      <Body>
-        <LandingPage main_event={main_event} />
-      </Body>
+      <AuthWrap
+        eventToCheck={main_event}
+        title={
+          <>
+            Please Sign In to Join
+            <br />
+            <strong> Big Lots' Q1 Town Hall</strong>
+          </>
+        }
+        callback={(creds) => {
+          toast.success(
+            `Hello ${
+              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+            }, welcome to Big Lots Q1 Virtual Town Hall`
+          );
+        }}
+        options={['emailOnly']}
+        signInText={
+          <div
+            style={{
+              textAlign: 'left',
+              maxWidth: '450px',
+              margin: '1rem 4rem',
+            }}
+          >
+            <p>
+              Enter your Big Lots email address in the form of your unique
+              <strong> associateID@biglots.com </strong> <br />
+              (ex. 1234567@biglots.com) .
+            </p>
+            <p>
+              Contact Joey D'Amico at{' '}
+              <a href="mailto:jdamico@biglots.com">jdamico@biglots.com </a> if
+              you experience any technical issues.
+            </p>
+          </div>
+        }
+        headerContent={
+          <div
+            style={{
+              backgroundColor: event_theme.orange,
+              height: '80px',
+              width: '80px',
+              padding: '20px',
+              margin: '1rem auto',
+            }}
+          >
+            <img
+              style={{ height: 'auto', width: '90%' }}
+              src={main_event.LogoLink[0].Media.url}
+            />
+          </div>
+        }
+      >
+        <Meta title={event_meta.EventJobName}> </Meta>
+        <Body>
+          <LandingPage main_event={main_event} />
+        </Body>{' '}
+      </AuthWrap>
     </Page>
-    // </AuthWrap>
   );
 };
 

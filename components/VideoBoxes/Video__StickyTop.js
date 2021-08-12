@@ -19,12 +19,9 @@ const VideoPlaceholder = styled.div`
     left: 2%;
     width: 350px;
     height: auto;
-    z-index: 100;
+    z-index: 1000;
     padding: 0;
     border-radius: 0;
-    /* &&.fixed > div {
-      height: 200px;
-    } */
   }
 `;
 
