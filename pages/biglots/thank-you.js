@@ -8,7 +8,9 @@ import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 
 import LandingPage from '../../eventAssets/biglots/LandingPage';
-import { event_theme, EVENT_URL } from './index';
+import { EVENT_URL } from './index';
+
+import default_theme from 'eventAssets/biglots/theme.theme';
 
 const Index = ({ event_meta, main_event }) => {
   const router = useRouter();
@@ -19,7 +21,7 @@ const Index = ({ event_meta, main_event }) => {
   }, []);
 
   return (
-    <Page theme={event_theme}>
+    <Page theme={default_theme}>
       <Meta title={main_event.EventName}> </Meta>
       <Body>
         <LandingPage main_event={main_event} />

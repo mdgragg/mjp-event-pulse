@@ -5,7 +5,7 @@ import Page from 'components/PageTemplates/index';
 
 import GameShow__Main from 'eventAssets/house-of-mercy-game-show-gala/GameShow__Main';
 import GAMEWRAP from 'eventAssets/house-of-mercy-game-show-gala/GAMEWRAP';
-import { event_theme } from 'components/Themes/default.theme';
+import event_theme from 'components/Themes/default.theme';
 
 export const EVENT_URL = 'house-of-mercy-game-show-gala';
 const PLACEHOLD = 'https://placehold.co/';
@@ -18,7 +18,7 @@ const Index = (props) => {
   };
 
   return (
-    <Page theme={event_theme}>
+    <Page theme={theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
       <GAMEWRAP>
         <GameShow__Main main_event={main_event} />

@@ -108,3 +108,5 @@ export const default_theme = {
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
 };
+
+export default default_theme;

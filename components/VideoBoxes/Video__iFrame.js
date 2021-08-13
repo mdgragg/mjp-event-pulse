@@ -1,6 +1,6 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useState, useEffect, useRef, useContext } from 'react';
-import { StyledVideoBox, StyledIFrame, StyledPaper } from './VideoBox__Styles';
+import { StyledIFrame, StyledPaper } from './VideoBox__Styles';
 
 const VideoBox = (props) => {
   const [vidShow, setVidShow] = useState(true);
@@ -8,9 +8,7 @@ const VideoBox = (props) => {
   return (
     <VideoPlaceholder ref={wrapperRef}>
       <StyledPaper>
-        <StyledVideoBox>
-          <FilterVideo vidShow={vidShow} src={props.src} />
-        </StyledVideoBox>
+        <FilterVideo vidShow={vidShow} src={props.src} />
       </StyledPaper>
     </VideoPlaceholder>
   );

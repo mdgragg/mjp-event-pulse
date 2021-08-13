@@ -10,7 +10,7 @@ import LandingPage from 'eventAssets/biglots/LandingPage';
 import MainPage from 'eventAssets/biglots/MainPage';
 import { useRouter } from 'next/router';
 import { AppContext } from 'context/AppContext';
-import { default_theme } from 'eventAssets/biglots/theme.theme';
+import default_theme from 'eventAssets/biglots/theme.theme';
 
 export const EVENT_URL = 'biglots';
 const PLACEHOLD = 'https://placehold.co/';

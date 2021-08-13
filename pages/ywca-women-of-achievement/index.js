@@ -15,7 +15,7 @@ import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
 import AuthWrap from 'components/AuthWrap';
-import { event_theme } from 'eventAssets/ywca-women-of-achievement/theme.theme';
+import event_theme from 'eventAssets/ywca-women-of-achievement/theme.theme';
 
 export const EVENT_URL = 'ywca-women-of-achievement';
 const PLACEHOLD = 'https://placehold.co/';
