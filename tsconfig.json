@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "https://mjvirtualevents.com",
     "skipLibCheck": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
