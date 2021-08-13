@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useGetSponsors from '../../queryHooks/useGetSponsors';
+import useGetSponsors from 'hooks/queryHooks/useGetSponsors';
 import SingleSponsor from './SingleSponsor';
 
 const StyledMap = styled.div`
