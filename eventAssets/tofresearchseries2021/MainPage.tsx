@@ -92,7 +92,7 @@ const MainPage = ({ main_event }) => {
         <PlayerBody>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
-            offset={7208}
+            offset={10}
             link={{
               href: 'https://www.facebook.com',
               allowed: true,

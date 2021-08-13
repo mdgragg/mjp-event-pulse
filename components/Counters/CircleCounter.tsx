@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
+import { Event__Type } from 'types/Events__Types';
 const Wrap = styled.div`
   /* padding: 15px; */
   width: 100%;
   max-width: 800px;
-  color: ${(props) => props.theme.colors.primary};
   margin: auto;
   text-align: center;
 `;
 
 const Title = styled.div`
   text-transform: uppercase;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   font-family: ${(props) => props.theme.fonts.secondary};
+  color: ${(props) => props.theme.colors.primary};
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 2px;
@@ -28,7 +29,7 @@ const Box = styled.div`
   align-items: center;
   height: auto;
   flex-wrap: wrap;
-
+  color: ${(props) => props.theme.colors.primary};
   && > div.box {
     height: 0;
     padding-top: 20%;
@@ -37,6 +38,7 @@ const Box = styled.div`
     width: 20%;
     margin: 0.5rem;
     background-color: ${(props) => props.theme.colors.secondary};
+
     border-radius: 100%;
     display: flex;
     flex-direction: column;
@@ -79,7 +81,12 @@ const SingleDigit = ({ number, delimiter }) => {
   );
 };
 
-const CircleCounter = ({ event, prefix }) => {
+type CircleCounter__Props = {
+  event: Event__Type;
+  prefix?: React.ReactNode | string;
+};
+
+const CircleCounter = ({ event, prefix }: CircleCounter__Props): any => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {

@@ -111,7 +111,7 @@ const LandingPage = ({ main_event }) => {
           </div>
           <div className="title">
             <h2>
-              Big Lots <br /> Q1 Virtual Town Hall
+              Big Lots <br /> Q2 Virtual Town Hall
             </h2>
           </div>
           <div className="logo-holder">

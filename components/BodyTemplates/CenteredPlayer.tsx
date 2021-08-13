@@ -32,13 +32,18 @@ const VideoBox = styled.div`
   z-index: 2;
 `;
 
+type CenteredPlayer__Props = {
+  videoUrl: string;
+  showing?: boolean;
+  hasStarted: boolean;
+  style?: {};
+};
 const CenteredPlayer = ({
   videoUrl,
   showing = true,
   hasStarted,
-  bgImg,
   style = {},
-}) => {
+}: CenteredPlayer__Props) => {
   return (
     <>
       <BodyWrap style={{ ...style }}>

@@ -7,26 +7,23 @@ import { StylesProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 const StyledPage = styled.div`
-  background: ${(props) => props.theme.background};
   color: ${(props) => props.theme.fontColor};
   min-height: 100vh;
   z-index: 0;
   min-width: 100vw;
   /* overflow: hidden; */
-  p {
-    font-family: ${(props) => props.theme.pfont};
-  }
+
   h1 {
-    ${(props) => props.theme.h1}
+    ${(props) => props.theme.typography.h1};
   }
   h2 {
-    ${(props) => props.theme.h2}
+    ${(props) => props.theme.typography.h2};
   }
   h3 {
-    ${(props) => props.theme.h3}
+    ${(props) => props.theme.typography.h3};
   }
   h4 {
-    ${(props) => props.theme.h4}
+    color: ${(props) => props.theme.colors.secondary};
   }
   h5 {
     ${(props) => props.theme.h5}

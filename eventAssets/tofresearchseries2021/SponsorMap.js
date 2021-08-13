@@ -16,6 +16,9 @@ const Tier = styled.h3`
 
 const SingleTier = styled.div`
   margin: 6rem auto;
+  && hr {
+    color: ${(props) => props.theme.colors.primary};
+  }
 `;
 
 const SponsorWrap = styled.div`
@@ -53,7 +56,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Series Presenting'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>

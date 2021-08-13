@@ -74,8 +74,8 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: COLORS.tertiary,
-    backgroundColor: COLORS.primary,
+    fontColor: COLORS.primary,
+    backgroundColor: COLORS.secondary,
   },
 };
 
@@ -86,13 +86,25 @@ export const BREAKPOINTS = {
   sm: 768,
   xs: 500,
 };
+const TYPOGRAPHY = {
+  h1: {
+    color: COLORS.tertiary,
+  },
+  h2: {
+    color: COLORS.tertiary,
+  },
+  h3: {
+    color: COLORS.tertiary,
+  },
+};
 
 export var event_theme = {
   colors: { ...COLORS },
+  typography: { ...TYPOGRAPHY },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  heroBgColor: COLORS.primary,
+  heroBgColor: 'white',
   heroHeight: '500px',
   headerOpacity: '0.75',
   videoBreakPoint: 550,

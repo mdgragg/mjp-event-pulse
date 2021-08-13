@@ -4,13 +4,13 @@ const COLORS = {
   red: '#b71f39',
   orange: '#FF5600',
   yellow: '#eace28',
-  green: '#97d700',
+  green: '#008065',
   blue: '#1e2c60',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
-  primary: 'black',
+  primary: '#008065',
   secondary: 'white',
   tertiary: 'var(--mjp-orange)',
   info: '',
@@ -102,10 +102,11 @@ const BREAKPOINTS = {
 
 const TYPOGRAPHY = {
   h1: {
-    color: COLORS.tertiary,
+    color: 'white',
+    fontSize: '3rem',
   },
   h2: {
-    color: COLORS.tertiary,
+    color: 'white',
   },
   h3: {
     color: COLORS.tertiary,
@@ -120,8 +121,8 @@ export const default_theme = {
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
   headerHeight: '200px',
-  heroBgColor: 'white',
   headerOpacity: '0.75',
+  heroBgColor: COLORS.green,
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
 };

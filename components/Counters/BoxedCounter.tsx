@@ -33,7 +33,7 @@ const Wrap = styled.div`
 
 const Title = styled.div`
   text-transform: uppercase;
-  color: ${(props) => props.styles.textColor || props.theme.colors.primary};
+  color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
   font-family: Gotham;
   font-size: 1.5rem;
   font-weight: 800;
@@ -48,7 +48,7 @@ const Box = styled.div`
   align-items: center;
   height: auto;
   flex-wrap: wrap;
-  color: ${(props) => props.styles.textColor || props.theme.colors.primary};
+  color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
   && > div.box {
     height: 0;
     padding-top: 20%;
@@ -56,7 +56,7 @@ const Box = styled.div`
     min-height: 50px;
     width: 20%;
     background-color: ${(props) =>
-      props.styles.boxColor || props.theme.colors.secondary};
+      props.styles?.boxColor || props.theme.colors.secondary};
     display: flex;
     flex-direction: column;
     align-items: center;
