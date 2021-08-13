@@ -94,7 +94,7 @@ const MainPage = ({ main_event }) => {
             start={main_event.eventStartEnd.StartDateTime}
             offset={10}
             link={{
-              href: 'https://www.facebook.com',
+              href: main_event.streamLinks[0].url,
               allowed: true,
               errorText: 'Hello World!',
             }}
