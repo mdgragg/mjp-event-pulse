@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { SPONSOR_QUERY } from '../lib/queries';
-import { transformByCommonAttr } from '../lib/helpers';
+import { SPONSOR_QUERY } from 'lib/queries';
+import { transformByCommonAttr } from 'lib/helpers';
 const useGetSponsors = (id) => {
   const [sortData, setSortData] = useState(null);
   let { error, loading, data } = useQuery(SPONSOR_QUERY, {
