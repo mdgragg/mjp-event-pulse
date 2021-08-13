@@ -26,18 +26,15 @@ const LinkBox__StickyTop__WithCountdown = ({
 }: LinkBox_StickyTop__WithCountdown__Types) => {
   const started = useCalculateStartWithOffset(start, offset);
 
+  if (started) {
+    return <LinkBox link={link} prefix={prefix} />;
+  }
   return (
-    <Replacer
-      showIfTrue={<LinkBox link={link} prefix={prefix} />}
-      showIfFalse={
-        <StyledVideoPlaceholder__Wrap>
-          <StyledPlaceholder__Inner style={{ backgroundColor: 'white' }}>
-            {showBefore}
-          </StyledPlaceholder__Inner>
-        </StyledVideoPlaceholder__Wrap>
-      }
-      decider={started}
-    />
+    <StyledVideoPlaceholder__Wrap>
+      <StyledPlaceholder__Inner style={{ backgroundColor: 'white' }}>
+        {showBefore}
+      </StyledPlaceholder__Inner>
+    </StyledVideoPlaceholder__Wrap>
   );
 };
 
