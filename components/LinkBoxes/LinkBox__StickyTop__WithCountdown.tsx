@@ -31,7 +31,9 @@ const LinkBox__StickyTop__WithCountdown = ({
       showIfTrue={<LinkBox link={link} prefix={prefix} />}
       showIfFalse={
         <StyledVideoPlaceholder__Wrap>
-          <StyledPlaceholder__Inner>{showBefore}</StyledPlaceholder__Inner>
+          <StyledPlaceholder__Inner style={{ backgroundColor: 'white' }}>
+            {showBefore}
+          </StyledPlaceholder__Inner>
         </StyledVideoPlaceholder__Wrap>
       }
       decider={started}

@@ -10,7 +10,7 @@ import Body from 'components/template1/Body';
 
 import { toast } from 'react-toastify';
 import AuthWrap from 'components/AuthWrap';
-import { event_theme } from '../biglots';
+import event_theme from 'eventAssets/biglots/theme.theme';
 
 export const EVENT_URL = 'biglotstownhall';
 const PLACEHOLD = 'https://placehold.co/';
@@ -81,8 +81,9 @@ const Index = (props) => {
       >
         <Meta title={event_meta.EventJobName}> </Meta>
         <Body>
-          <LandingPage main_event={main_event} />
-        </Body>{' '}
+          <MainPage main_event={main_event} />
+          {/* <LandingPage main_event={main_event} /> */}
+        </Body>
       </AuthWrap>
     </Page>
   );
@@ -98,7 +99,7 @@ export async function getStaticProps(ctx) {
       event_meta: event_data,
       main_event,
     },
-    revalidate: 3000,
+    revalidate: 300,
   };
 }
 

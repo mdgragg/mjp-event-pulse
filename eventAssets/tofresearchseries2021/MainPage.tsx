@@ -46,9 +46,6 @@ const PlayerBody = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
-  @media all and (max-width: 1200px) {
-    max-width: 768px;
-  }
   @media all and (max-width: 768px) {
     max-width: 95%;
     margin-top: 3rem;
@@ -111,18 +108,6 @@ const MainPage = ({ main_event }) => {
               />
             }
           />
-          {/* <Video__StickyTop__WithCountdown
-            isStarted={true}
-            start={main_event.eventStartEnd.StartDateTime}
-            showMinutesBefore={30}
-            showBefore={
-              <Before
-                src={main_event?.HeaderImage?.url}
-                main_event={main_event}
-              />
-            }
-            src={main_event.streamLinks[0].url}
-          /> */}
         </PlayerBody>
         <div className="agenda__wrap">
           <Agenda initialTab={1} />

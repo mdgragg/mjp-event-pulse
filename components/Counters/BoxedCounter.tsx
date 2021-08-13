@@ -1,18 +1,39 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { Variants } from 'types/Styled__Types';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
 import { default_theme } from '../Themes/default.theme';
+
+const makeStyles = (variant, selector, theme) => {
+  console.log(theme);
+  const variantObj = {
+    // primary: {
+    //   backgroundColor: theme.colors.primary,
+    //   foregroundColor: theme.colors.secondary,
+    // },
+    // secondary: {
+    //   backgroundColor: theme.colors.secondary,
+    //   foregroundColor: theme.colors.tertiary,
+    // },
+    // inverted: {
+    //   backgroundColor: theme.colors.primary,
+    //   foregroundColor: theme.colors.tertiary,
+    // },
+  };
+
+  return 'black';
+};
+
 const Wrap = styled.div`
   width: 100%;
   max-width: 700px;
-  color: ${(props) => props.theme.colors.primary};
   margin: auto;
   text-align: center;
 `;
 
 const Title = styled.div`
   text-transform: uppercase;
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.styles.textColor || props.theme.colors.primary};
   font-family: Gotham;
   font-size: 1.5rem;
   font-weight: 800;
@@ -27,14 +48,15 @@ const Box = styled.div`
   align-items: center;
   height: auto;
   flex-wrap: wrap;
-
+  color: ${(props) => props.styles.textColor || props.theme.colors.primary};
   && > div.box {
     height: 0;
     padding-top: 20%;
     min-width: 50px;
     min-height: 50px;
     width: 20%;
-    background-color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) =>
+      props.styles.boxColor || props.theme.colors.secondary};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,11 +82,26 @@ const Box = styled.div`
   }
 `;
 
-const BoxedCounter = ({ event, style, prefix }) => {
+type BoxedCounter__Props = {
+  event: {};
+  styles?: {
+    boxColor?: string;
+    textColor?: string;
+  };
+  prefix?: React.ReactNode | string;
+  variant?: Variants;
+};
+
+const BoxedCounter = ({
+  event,
+  styles,
+  prefix,
+  variant = Variants.primary,
+}: BoxedCounter__Props): JSX.Element | null => {
   const obj = useCalculateRemaining(event);
 
   if (!obj) {
-    return '';
+    return null;
   }
   if (obj.parsed_until_end <= 0) {
     return (
@@ -83,10 +120,9 @@ const BoxedCounter = ({ event, style, prefix }) => {
 
   if (obj) {
     return (
-      <Wrap style={{ ...style }}>
-        {prefix && <Title>{prefix}</Title>}
-
-        <Box>
+      <Wrap>
+        {prefix && <Title styles={styles}>{prefix}</Title>}
+        <Box styles={styles}>
           <div className="numday box">
             <div className="digit"> {obj.days} </div>
             <div className="delimiter"> {obj.days > 1 ? 'Days' : 'Day'}</div>

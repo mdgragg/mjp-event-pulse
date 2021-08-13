@@ -55,7 +55,7 @@ export default function ExternalLink({
     >
       <DialogTitle
         id="form-dialog-title"
-        style={{ fontSize: '3rem', textAlign: 'center', fontWeight: '600' }}
+        style={{ fontSize: '3rem', textAlign: 'center', fontWeight: 600 }}
       >
         External Event Link
       </DialogTitle>

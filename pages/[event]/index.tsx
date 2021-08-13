@@ -11,26 +11,13 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/template1/Section';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/Assets/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
+import Center from 'components/Center';
+import { default_theme } from 'components/Themes/default.theme';
 
-export var event_theme = {
-  primary: null,
-  primaryVariant: null,
-  secondary: null,
-  secondaryVariant: null,
-  heroHeight: '500px',
-  fontFamily: null,
-  headerOpacity: 0.6,
-  white: null,
-  blue: null,
-  red: null,
-  buttonColor: null,
-  headerFont: null,
-  headerBgColor: 'black',
-};
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
@@ -38,8 +25,8 @@ const Index = (props) => {
   const EVENT_URL = router.query.event;
   const { event_meta, main_event } = props;
 
-  event_theme = {
-    ...event_theme,
+  var event_theme = {
+    ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
@@ -48,15 +35,14 @@ const Index = (props) => {
 
   return (
     <AuthWrap
-      event_to_check={main_event}
-      callback={(res) => {
+      eventToCheck={main_event}
+      successCallback={(res) => {
         toast.success(
           `Hello ${
             res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
           }, welcome to ${main_event.EventName}`
         );
       }}
-      render={(value) => setAuth(value)}
     >
       <Page theme={event_theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
@@ -72,7 +58,7 @@ const Index = (props) => {
             />
           </div>
           <div>
-            <center>
+            <Center>
               <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
                 {main_event.EventName}
               </h1>
@@ -81,19 +67,18 @@ const Index = (props) => {
                   <DateParse date={main_event.eventStartEnd.StartDateTime} />
                 </i>
               </h2>
-            </center>
+            </Center>
           </div>
           <div>
-            <center>
+            <Center>
               <h2>
                 <Counter__JustNumbers
-                  start={main_event.eventStartEnd.StartDateTime}
-                  end={main_event.eventStartEnd.EndDateTime}
+                  event={main_event}
                   afterStarted={'Live Now!'}
                   afterEnded={'Thank You for Attending'}
                 />
               </h2>
-            </center>
+            </Center>
           </div>
         </FlexHero>
         <Body>
@@ -107,7 +92,9 @@ const Index = (props) => {
               }}
             >
               <CenteredPlayer
-                showing={auth}
+                bgImg={null}
+                showing={true}
+                hasStarted={true}
                 videoUrl={main_event.streamLinks[0].url}
               />
             </div>
@@ -120,9 +107,10 @@ const Index = (props) => {
               }}
             >
               <PlayerWithChat
+                children={null}
+                hasStarted={true}
                 videoUrl={main_event.streamLinks[0].url}
                 chatUrl={main_event.streamLinks[1].url}
-                showing={auth}
               />
             </div>
           )}
@@ -153,7 +141,7 @@ export async function getServerSideProps(ctx) {
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
   const EVENT_URL = ctx.params.event;
-  console.log(EVENT_URL);
+
   try {
     let event_data = await getEventMeta(EVENT_URL);
     let main_event = event_data.events.filter(

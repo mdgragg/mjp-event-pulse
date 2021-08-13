@@ -4,11 +4,13 @@ import CenteredPlayer from 'components/BodyTemplates/CenteredPlayer';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from 'components/assets/DateParse';
-
+import DateParse from 'components/Assets/DateParse';
+import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
+import { BoxedCounter } from 'components/Counters';
+import event_theme from 'eventAssets/biglots/theme.theme';
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
-  background-color: ${(props) => props.theme.orange};
+  background-color: ${(props) => props.theme.colors.orange};
   height: 100vh;
   min-height: 1080px;
   width: 100%;
@@ -43,12 +45,14 @@ const Inner = styled.div`
     text-align: center;
     font-family: Futura Bold;
     line-height: 2rem;
+    width: 80%;
+    margin: auto;
   }
   && .title > h2 {
     background-color: white;
     font-size: 2rem;
     font-family: 'Futura Bold';
-    color: ${(props) => props.theme.orange};
+    color: ${(props) => props.theme.colors.orange};
     padding: 1.5rem;
     text-align: center;
     width: max-content;
@@ -85,7 +89,8 @@ const Inner = styled.div`
 
 const PlayerBody = styled.div`
   min-height: 60vh;
-  max-width: 1200px;
+  max-width: 768px;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -97,7 +102,9 @@ const LandingPage = ({ main_event }) => {
       <Header>
         <Inner>
           <div className="date">
-            <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
+            <i>
+              <DateParse date={main_event.eventStartEnd.StartDateTime} />
+            </i>
 
             <Counter__JustNumbers
               event={main_event}
@@ -118,10 +125,43 @@ const LandingPage = ({ main_event }) => {
           </div>
         </Inner>
       </Header>
+
       <PlayerBody>
-        <CenteredPlayer
-          videoUrl={main_event.streamLinks[0].url}
-          showing={true}
+        <LinkBox__StickyTop__WithCountdown
+          start={main_event.eventStartEnd.StartDateTime}
+          offset={5}
+          prefix={
+            <h2
+              style={{
+                color: event_theme.colors.primary,
+                fontFamily: event_theme.fonts.primary.fontFamily,
+              }}
+            >
+              Join the Zoom Webinar
+            </h2>
+          }
+          showBefore={
+            <>
+              <BoxedCounter
+                prefix={
+                  <h2
+                    style={{
+                      color: event_theme.colors.primary,
+                      fontFamily: event_theme.fonts.primary.fontFamily,
+                    }}
+                  >
+                    Join Us Live In:
+                  </h2>
+                }
+                event={main_event}
+                styles={{
+                  boxColor: event_theme.colors.primary,
+                  textColor: event_theme.colors.secondary,
+                }}
+              />
+            </>
+          }
+          link={{ href: main_event.streamLinks[0].url, allowed: true }}
         />
       </PlayerBody>
     </BG>
