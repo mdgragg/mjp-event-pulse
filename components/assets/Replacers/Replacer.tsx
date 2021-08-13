@@ -6,7 +6,7 @@ type Replacer__Types = {
   decider: boolean;
 };
 
-const Replacer = ({
+export const Replacer = ({
   showIfTrue,
   showIfFalse,
   decider,

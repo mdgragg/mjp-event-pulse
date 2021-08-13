@@ -1,5 +1,5 @@
 import React from 'react';
-import Replacer from 'components/Assets/Replacers/Replacer';
+import { Replacer } from 'components/Assets/Replacers';
 import useCalculateStartWithOffset from 'hooks/useCalculateStartWithOffset';
 import LinkBox from './LinkBox';
 import {
