@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import FullWrap from 'components/FullWrap';
 import useSessionToken from 'hooks/useSessionToken';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import { token_generator } from '../../lib/helpers';
+import { tokenGenerator } from '../../lib/helpers';
 import CustomModal from 'eventAssets/toolfair2021/CustomModal';
 
 export var event_theme = {
@@ -48,9 +48,7 @@ const Index = (props) => {
   };
 
   const hasStartEnd = useCalculateIfStarted(main_event);
-  const [hasToken, handlSetToken] = useSessionToken(
-    token_generator(main_event)
-  );
+  const [hasToken, handlSetToken] = useSessionToken(tokenGenerator(main_event));
 
   return (
     <>

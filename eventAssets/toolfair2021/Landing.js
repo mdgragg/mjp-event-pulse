@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParser from 'components/assets/DateParse';
+import DateParser from 'components/__Assets__/DateParse';
 import Video__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 

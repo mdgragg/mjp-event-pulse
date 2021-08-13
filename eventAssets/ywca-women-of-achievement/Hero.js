@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Counter__JustNumbers } from 'components/Counters';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 
 const TheHero = styled.div`
   height: 500px;

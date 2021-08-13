@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 const SignUpWrap = styled.div`
   /* min-height: 80vh; */
   height: 100%;

@@ -11,7 +11,7 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/template1/Section';
-import DateParse from 'components/Assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';

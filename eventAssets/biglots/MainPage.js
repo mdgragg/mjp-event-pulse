@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useCalculateIfStarted } from 'hooks';
 
-import { DateParse } from 'components/assets';
+import { DateParse } from 'components/__Assets__';
 import { Button__Big } from 'components/Buttons';
 import { CircleCounter } from 'components/Counters';
 import ExternalLink from 'components/Modals/ExternalLink';

@@ -11,7 +11,7 @@ import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
-import ClientOnly from 'components/Assets/ClientOnly';
+import ClientOnly from 'components/__Assets__/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
 import { default_theme } from '../../components/Themes/default.theme';
 const PLACEHOLD = 'https://placehold.co/';

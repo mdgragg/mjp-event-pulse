@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 import { GET_EXHIBITORS } from 'lib/queries';
 import Page from '../../../components/template1/Page';
 import styled from 'styled-components';
-import ClientOnly from 'components/assets/ClientOnly';
+import ClientOnly from 'components/__Assets__/ClientOnly';
 
 const ExhibitorLink = styled.div`
   && {

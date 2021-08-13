@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import ClientOnly from '../components/assets/ClientOnly';
+import ClientOnly from 'components/__Assets__/ClientOnly';
 import { gql, useQuery } from '@apollo/client';
-import DateParse from 'components/assets/DateParse';
-import { useSession, getSession } from 'next-auth/client';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import { Button__Secondary } from 'components/Buttons';
+import DateParse from 'components/__Assets__/DateParse';
+import { getSession } from 'next-auth/client';
+
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Page from 'components/PageTemplates';
 import router from 'next/router';

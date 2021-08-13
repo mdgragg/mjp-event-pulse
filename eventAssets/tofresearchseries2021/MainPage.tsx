@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { SolidColorHero } from 'components/Heroes';
 import { Section } from 'components/Sections';
-import DateParse from 'components/Assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import SponsorMap from './SponsorMap';
 import Before from './Before';
-import LoadingImage from 'components/Loading/LoadingImage';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
-import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Agenda from './Agenda';
 const Wrap = styled.div`
   width: 95%;

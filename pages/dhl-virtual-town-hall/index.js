@@ -9,7 +9,7 @@ import Body from 'components/template1/Body';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import DHLBody from 'eventAssets/dhl-virtual-town-hall/Body';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 
 export const EVENT_URL = 'dhl-virtual-town-hall';

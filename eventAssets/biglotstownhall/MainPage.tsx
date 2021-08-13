@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import CenteredPlayer from 'components/BodyTemplates/CenteredPlayer';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from 'components/Assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 import { BoxedCounter } from 'components/Counters';
 import event_theme from 'eventAssets/biglots/theme.theme';
