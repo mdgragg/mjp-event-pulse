@@ -1,16 +1,20 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useState, useEffect, useRef, useContext } from 'react';
-import { StyledIFrame, StyledPaper } from './VideoBox__Styles';
+import {
+  StyledIFrame,
+  StyledPaper,
+  StyledVideoPlaceholder__Wrap,
+} from './VideoBox__Styles';
 
 const VideoBox = (props) => {
   const [vidShow, setVidShow] = useState(true);
   const wrapperRef = useRef();
   return (
-    <VideoPlaceholder ref={wrapperRef}>
+    <StyledVideoPlaceholder__Wrap ref={wrapperRef}>
       <StyledPaper>
         <FilterVideo vidShow={vidShow} src={props.src} />
       </StyledPaper>
-    </VideoPlaceholder>
+    </StyledVideoPlaceholder__Wrap>
   );
 };
 

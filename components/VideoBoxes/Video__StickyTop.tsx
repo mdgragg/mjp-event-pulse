@@ -81,19 +81,19 @@ const StyledVideoBox = styled.div`
 const VideoBox__StickyTop = ({ src, isStarted }) => {
   const [video_src, set_src] = useState();
 
-  const themeContext = useContext(ThemeContext);
+  const themeContext: any = useContext(ThemeContext);
   const offsetVideoHeight = themeContext.videoBreakPoint;
 
-  const wrapperRef = useRef();
+  const wrapperRef: any = useRef();
 
   useMemo(() => set_src(src), [src]);
 
   function calculateFixed(e) {
     if (window.pageYOffset >= offsetVideoHeight && offsetVideoHeight > 0) {
       console.log('adding fixed');
-      wrapperRef.current.classList.add('fixed');
+      wrapperRef?.current.classList.add('fixed');
     } else {
-      wrapperRef.current.classList.remove('fixed');
+      wrapperRef?.current.classList.remove('fixed');
     }
   }
   useEffect(() => {
