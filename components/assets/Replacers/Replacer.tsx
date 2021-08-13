@@ -6,7 +6,11 @@ type Replacer__Types = {
   decider: boolean;
 };
 
-const Replacer = ({ showIfTrue, showIfFalse, decider }: Replacer__Types) => {
+const Replacer = ({
+  showIfTrue,
+  showIfFalse,
+  decider,
+}: Replacer__Types): any => {
   return decider ? <> {showIfTrue}</> : <>{showIfFalse} </>;
 };
 
