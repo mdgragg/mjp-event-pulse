@@ -2,41 +2,21 @@ import { useEffect, useState, useContext } from 'react';
 import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
-import { getEventMeta, getEventMetaMain, getMainEventMeta } from 'lib/api';
-
 import { Grid, Button } from '@material-ui/core';
 
 import Meta from 'components/globals/Meta';
 import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
 
-export var event_theme = {
-  heroHeight: '25vh',
-  fontFamily: null,
-  headerOpacity: null,
-  videoBreakPoint: 700,
-  white: null,
-  blue: '#1e2c60',
-  buttonInfoColor: null,
-  buttonSuccessColor: null,
-  buttonDangerColor: 'tomato',
-  red: '#b71f39',
-  buttonColor: null,
-  headerFont: null,
-  headerBgColor: 'white',
-  maxSectionWidth: '1800px',
-};
 const Preview = ({ EVENT_URL }) => {
   const router = useRouter();
 
   const MainPage = () => {
     return (
-      <PreviewLoginPage
-        theme={event_theme}
-        EVENT_URL={EVENT_URL}
-        redirect={`/${EVENT_URL}`}
-      >
-        <Meta title={'Login'}></Meta>
+      <PreviewLoginPage EVENT_URL={EVENT_URL} redirect={`/${EVENT_URL}`}>
+        <Meta title={'Login'}>
+          <title>Login</title>
+        </Meta>
       </PreviewLoginPage>
     );
   };

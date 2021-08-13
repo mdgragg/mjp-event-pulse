@@ -3,14 +3,11 @@ import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
-import { Grid } from '@material-ui/core';
 import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
-import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
-import Section from 'components/template1/Section';
 import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
@@ -92,7 +89,6 @@ const Index = (props) => {
               }}
             >
               <CenteredPlayer
-                bgImg={null}
                 showing={true}
                 hasStarted={true}
                 videoUrl={main_event.streamLinks[0].url}

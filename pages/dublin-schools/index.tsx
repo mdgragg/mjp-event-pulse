@@ -48,8 +48,11 @@ const Index = (props) => {
       }}
     >
       <Page theme={event_theme}>
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <MainPage main_event={main_event} />
+        <Meta title={event_meta.EventJobName}>
+          {' '}
+          <title>{event_meta.EventJobName}</title>
+        </Meta>
+        <MainPage main_event={main_event} hasAuth={hasAuth} />
       </Page>
     </AuthWrap>
   );
