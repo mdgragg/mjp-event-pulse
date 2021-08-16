@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import DateParse from 'components/__Assets__/DateParse';
 import { SolidColorHero } from 'components/Heroes';
 import { CenteredPlayer } from 'components/BodyTemplates';
 import { CircleCounter } from 'components/Counters';
@@ -15,6 +15,11 @@ const Hero__Inner = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  && img {
+    width: 90%;
+    max-width: 250px;
+    margin: 1rem auto;
+  }
 `;
 
 const PageInner = styled.div`
@@ -30,8 +35,13 @@ const MainPage = ({ main_event, hasAuth }) => {
     <div>
       <SolidColorHero>
         <Hero__Inner>
-          <h1>{main_event.EventName}</h1>
-          <CircleCounter event={main_event} prefix={<h2> Join Us In:</h2>} />
+          <img src={main_event?.LogoLink[0]?.Media.url} />
+          <i>
+            <DateParse
+              date={main_event.eventStartEnd.StartDateTime}
+              format={`dddd MMMM DD, YYYY`}
+            />{' '}
+          </i>
         </Hero__Inner>
       </SolidColorHero>
       <PageInner>
