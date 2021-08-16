@@ -108,7 +108,7 @@ const MainPage = ({ main_event }) => {
           />
         </PlayerBody>
         <div className="agenda__wrap">
-          <Agenda initialTab={1} />
+          <Agenda initialTab={0} />
         </div>
       </Wrap>
 

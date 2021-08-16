@@ -47,9 +47,9 @@ const FONTS = {
 
 export const BUTTONS = {
   primary: {
-    fontFamily: FONTS.body.fontFamily,
-    fontSize: '1.5rem',
-    letterSpacing: '',
+    fontFamily: 'Avenir',
+    fontSize: '0.85rem',
+    letterSpacing: '2px',
     lineHeight: 'inherit',
     backgroundColor: COLORS.tertiary,
     fontColor: 'white',
