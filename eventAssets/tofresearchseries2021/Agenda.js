@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React, { useEffect } from 'react';
 import TwoPanel from 'components/TabPanels/TwoPanel';
-import agenda from "./Agenda/agenda.json"
-import DateParse from 'components/__Assets__/DateParse'
+import agenda from './Agenda/agenda.json';
+import DateParse from 'components/__Assets__/DateParse';
 // http://events.r20.constantcontact.com/register/event?llr=dmu7d7cab&oeidk=a07ehvrwj2ga36ae5cf&showPage=true
 const TheAgenda = styled.div`
   min-height: 100%;
@@ -47,28 +47,26 @@ const SubItem = styled.li`
 `;
 
 const ListAgenda = ({ data }) => {
-
-
   return (
     <SingleScheduleDay>
       {data.items.map((item, index) => {
         if (!item.title) {
-          return null
+          return null;
         } else {
           return (
             <Item key={`${item.title}--${index}`}>
               <div className="title--wrap">
-                <Item__Time><DateParse date={item.start} format={`h:mma`} /></Item__Time>
+                <Item__Time>
+                  <DateParse date={item.start} format={`h:mma`} />
+                </Item__Time>
                 <Item__Title> {item.title}</Item__Title>
               </div>
               <SubItem key={`${item.presenter}--single-speaker`}>
                 {item.presenter}
               </SubItem>
-
             </Item>
-          )
+          );
         }
-
       })}
     </SingleScheduleDay>
   );
@@ -79,13 +77,14 @@ const tab_data = [
     title: 'Spine Session',
     content: (
       <>
-        <h2>Foot & Ankle Agenda</h2>
+        <h2>Spine Agenda</h2>
         <ListAgenda data={agenda[0]} />
       </>
     ),
   },
   {
-    title: 'Foot & Ankle Session', content: (
+    title: 'Foot & Ankle Session',
+    content: (
       <>
         <h2>Foot & Ankle Agenda</h2>
         <ListAgenda data={agenda[1]} />
@@ -111,7 +110,8 @@ const tab_data = [
     ),
   },
   {
-    title: 'Knee Session', content: (
+    title: 'Knee Session',
+    content: (
       <>
         <h2>Knee Session Agenda</h2>
         <ListAgenda data={agenda[4]} />
@@ -119,7 +119,8 @@ const tab_data = [
     ),
   },
   {
-    title: 'Hip Session', content: (
+    title: 'Hip Session',
+    content: (
       <>
         <h2>Hip Session Agenda</h2>
         <ListAgenda data={agenda[5]} />
@@ -128,10 +129,7 @@ const tab_data = [
   },
 ];
 const Agenda = ({ initialTab }) => {
-  const tabData =
-    useEffect(() => {
-
-    })
+  const tabData = useEffect(() => {});
   return (
     <TheAgenda>
       <TwoPanel data={tab_data} initialTab={initialTab}></TwoPanel>
