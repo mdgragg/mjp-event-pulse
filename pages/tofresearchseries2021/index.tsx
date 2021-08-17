@@ -63,6 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       event_meta: event_data,
       main_event,
     },
+    revalidate: 300,
   };
 };
 
