@@ -14,11 +14,19 @@ const HeroHolder = styled.div`
   position: relative;
   width: 100%;
   min-height: ${(props) => props.theme.heroHeight || '400px'};
-  background-color: ${(props) => props.theme.heroBgColor};
+  background-color: ${(props) =>
+    props.color || props.theme.heroBgColor || 'white'};
   overflow: hidden;
   padding: 3rem 0;
 `;
 
-export default function SolidColorHero({ children }) {
-  return <HeroHolder>{children}</HeroHolder>;
+type SolidColorHeroProps__Types = {
+  children: React.ReactNode;
+  color?: string;
+};
+export default function SolidColorHero({
+  children,
+  color,
+}: SolidColorHeroProps__Types) {
+  return <HeroHolder color={color}>{children}</HeroHolder>;
 }

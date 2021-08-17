@@ -1,4 +1,4 @@
 import CenteredPlayer from './CenteredPlayer';
 import PlayerWithChat from './PlayerWithChat';
-
-export { CenteredPlayer, PlayerWithChat };
+import FullPage__WithBackground from './FullPage__WithBackground';
+export { CenteredPlayer, PlayerWithChat, FullPage__WithBackground };
