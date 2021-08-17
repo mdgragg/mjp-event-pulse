@@ -14,7 +14,7 @@ const HeroHolder = styled.div`
   position: relative;
   width: 100%;
   height: ${(props) => props.theme.heroHeight || '35vh'};
-  background-color: ${(props) => props.theme.headerBgColor};
+  background-color: ${(props) => props.theme.heroBgColor};
   overflow: hidden;
   color: white;
   && > div {

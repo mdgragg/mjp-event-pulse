@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 const StyledPage = styled.div`
   color: ${(props) => props.theme.fontColor};
+  font-family: ${(props) => props.theme.fonts.body};
   min-height: 100vh;
   z-index: 0;
   min-width: 100vw;

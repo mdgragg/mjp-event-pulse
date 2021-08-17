@@ -19,6 +19,7 @@ import {
   HeaderWrap,
   StyledDialogTitle,
 } from './AuthModal__Styles';
+import { Button__Primary } from 'components/Buttons';
 
 export default function AuthModal__Password({
   open,
@@ -131,9 +132,7 @@ export default function AuthModal__Password({
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={handleSumbit} color="primary">
-            Submit
-          </Button>
+          <Button__Primary onClick={handleSumbit}>Submit</Button__Primary>
         </DialogActions>
       </Dialog>
     </div>
