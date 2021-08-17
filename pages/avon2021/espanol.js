@@ -31,7 +31,7 @@ const Index = (props) => {
                 ).url
               }
             />
-            <Link href={`/avon2021/espanol`}>
+            <Link href={`/avon2021/eng`}>
               <Button__Primary>WATCH IN ENGLISH</Button__Primary>
             </Link>
             <br />
