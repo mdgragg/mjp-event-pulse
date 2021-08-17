@@ -1,463 +1,527 @@
-[{
-  "date": "2021-08-16T04:00:00.000Z",
-  "name": "Spine Session",
-  "items": [{
-    "title": "Welcome & Introduction",
-    "start": "2021-08-17T18:00:00",
-    "end": "2021-08-17T18:05:00",
-    "presenter": "Daryl SYBERT, DO",
-    "link": null
-  }, {
-    "title": "Balanced Back Update",
-    "start": "2021-08-17T18:05:00",
-    "end": "2021-08-17T18:20:00",
-    "presenter": "Scott Hodges, DO",
-    "link": null
-  }, {
-    "title": "SI Joint Fusion Update",
-    "start": "2021-08-17T18:20:00",
-    "end": "2021-08-17T18:30:00",
-    "presenter": "Ying Chen, DO",
-    "link": null
-  }, {
-    "title": "Hip Spine Syndrom",
-    "start": "2021-08-17T18:30:00",
-    "end": "2021-08-17T18:45:00",
-    "presenter": "Hal Martin, DO",
-    "link": null
-  }, {
-    "title": "Spine Pelvis Fem Research Grant",
-    "start": "2021-08-17T18:45:00",
-    "end": "2021-08-17T19:00:00",
-    "presenter": "Grant Chudik / Daryl Sybert, DO",
-    "link": null
-  }, {
-    "title": "Advances in Lateral Surgey",
-    "start": "2021-08-17T19:00:00",
-    "end": "2021-08-17T19:15:00",
-    "presenter": "Donald Rohl, DO",
-    "link": null
-  }, {
-    "title": "Outpatient Lumbar Surgery",
-    "start": "2021-08-17T19:15:00",
-    "end": "2021-08-17T19:30:00",
-    "presenter": "Hunter Pharis / Daryl Sybert, DO",
-    "link": null
-  }, {
-    "title": " TOF Future Direction for Spine",
-    "start": "2021-08-17T19:30:00",
-    "end": "2021-08-17T19:40:00",
-    "presenter": "Daryl Sybert, DO",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-17T19:40:00",
-    "end": "2021-08-17T20:05:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
+[
+  {
+    "date": "2021-08-16T04:00:00.000Z",
+    "name": "Spine Session",
+    "items": [
+      {
+        "title": "Research at The Orthopedic Foundation",
+        "start": "2021-08-17T18:00:00",
+        "end": "2021-08-17T18:10:00",
+        "presenter": "Daryl Sybert, DO",
+        "link": null
+      },
+      {
+        "title": "History and Evolution of the Balanced Back",
+        "start": "2021-08-17T18:10:00",
+        "end": "2021-08-17T18:30:00",
+        "presenter": "Scott Hodges, DO",
+        "link": null
+      },
+      {
+        "title": "Balanced Back Clinical Trial",
+        "start": "2021-08-17T18:30:00",
+        "end": "2021-08-17T18:45:00",
+        "presenter": "Grant Chudik / Daryl Sybert, DO",
+        "link": null
+      },
+      {
+        "title": "Advances in Lateral Fusion Technology",
+        "start": "2021-08-17T18:45:00",
+        "end": "2021-08-17T19:00:00",
+        "presenter": "Donald Rohl, DO",
+        "link": null
+      },
+      {
+        "title": "Update in SI Joint Fusion Technology",
+        "start": "2021-08-17T19:00:00",
+        "end": "2021-08-17T19:15:00",
+        "presenter": "Ying Chen, DO",
+        "link": null
+      },
+      {
+        "title": "Hip Spine Syndrome",
+        "start": "2021-08-17T19:15:00",
+        "end": "2021-08-17T19:45:00",
+        "presenter": "Hal Martin, DO",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-17T19:45:00",
+        "end": "2021-08-17T20:00:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-17Tundefined:00",
+        "end": "2021-08-17Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-17Tundefined:00",
+        "end": "2021-08-17Tundefined:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
+  },
+  {
+    "date": "2021-08-23T04:00:00.000Z",
+    "name": "Foot & Ankle Session",
+    "items": [
+      {
+        "title": "Welcome",
+        "start": "2021-08-24T18:00:00",
+        "end": "2021-08-24T18:05:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": "Achilles Review ",
+        "start": "2021-08-24T18:05:00",
+        "end": "2021-08-24T18:15:00",
+        "presenter": "Jeffrey Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "Utilizing Portable NPWT to Aid in Better Healing Outcomes at Home: Cost Savings Analysis ",
+        "start": "2021-08-24T18:15:00",
+        "end": "2021-08-24T18:25:00",
+        "presenter": "Jacob Grimmer/ Ralph J. Napolitano, DPM",
+        "link": null
+      },
+      {
+        "title": "Analysis of Lower Extremity Wounds Treated with Natie,v Cross-Linked Extracellular Matrix and Broa Spectrum Polyhexamethylene Biguanide ",
+        "start": "2021-08-24T18:25:00",
+        "end": "2021-08-24T18:35:00",
+        "presenter": "Ralph J. Napolitano, DPM / Abbey Karlock",
+        "link": null
+      },
+      {
+        "title": "Wound Bed Preparation of Lower Extremity Wounds Using Negative Pressure Wound Therapy With Instillation: Taking Cost Into Consideration         ",
+        "start": "2021-08-24T18:35:00",
+        "end": "2021-08-24T19:45:00",
+        "presenter": "Ralph J. Napolitano, DPM",
+        "link": null
+      },
+      {
+        "title": "Ankle Instability Treatment Based Off of Degree Varus Tilt Greggory Brandle/ Nicholas Cheney, DO",
+        "start": "2021-08-24T19:45:00",
+        "end": "2021-08-24T20:55:00",
+        "presenter": "Ralph J. Napolitano, DPM",
+        "link": null
+      },
+      {
+        "title": "A Retrospective Chart Review Examining Gabapentin's Potential Neuroprotective Effects in Periphera Nerve Blocks",
+        "start": "2021-08-24T20:55:00",
+        "end": "2021-08-24T19:05:00",
+        "presenter": "David Shuster/ Nicholas Cheney, DO",
+        "link": null
+      },
+      {
+        "title": "Recurrent Lateral Ankle Instability ",
+        "start": "2021-08-24T19:05:00",
+        "end": "2021-08-24T19:15:00",
+        "presenter": "Kaitlyn Rizzo/ Nicholas Cheney, DO",
+        "link": null
+      },
+      {
+        "title": "Nerve Complications after Regional Anesthesia in Foot and Ankle Surgery Avoiding the Popliteal Fossa ",
+        "start": "2021-08-24T19:15:00",
+        "end": "2021-08-24T19:25:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": "Effect of Fluoroscopic Intraarticular Injection Tyler Sloan/ Nicholas Cheney, DO",
+        "start": "2021-08-24T19:25:00",
+        "end": "2021-08-24T20:35:00",
+        "presenter": "Ania Bartholomew/ Nicholas Cheney, DO",
+        "link": null
+      },
+      {
+        "title": "Compartment Pressure and Surgical Outcomes of External Compartment Syndrome",
+        "start": "2021-08-24T20:35:00",
+        "end": "2021-08-24T21:45:00",
+        "presenter": "Jacob Brower/ Nicholas Cheney, DO",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-24T21:45:00",
+        "end": "2021-08-24T8:00 PM:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
+  },
+  {
+    "date": "2021-08-30T04:00:00.000Z",
+    "name": "Neurology Session",
+    "items": [
+      {
+        "title": "Welcome",
+        "start": "2021-08-31T18:00:00",
+        "end": "2021-08-31T18:05:00",
+        "presenter": "Martin Taylor, DO, PhD",
+        "link": null
+      },
+      {
+        "title": "New Therapies for Parkinson’s Disease",
+        "start": "2021-08-31T18:05:00",
+        "end": "2021-08-31T18:40:00",
+        "presenter": "Ashley Taylor, NP",
+        "link": null
+      },
+      {
+        "title": "Understanding GCRP in headache",
+        "start": "2021-08-31T18:40:00",
+        "end": "2021-08-31T19:25:00",
+        "presenter": "Martin Taylor, DO, PhD",
+        "link": null
+      },
+      {
+        "title": "New Treatment Options for Cervical Dystonia",
+        "start": "2021-08-31T19:25:00",
+        "end": "2021-08-31T19:45:00",
+        "presenter": "Martin Taylor, DO, PhD",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-31T19:45:00",
+        "end": "2021-08-31T20:05:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
+  },
+  {
+    "date": "2021-08-30T04:00:00.000Z",
+    "name": "Upper Extremity Session",
+    "items": [
+      {
+        "title": "Welcome",
+        "start": "2021-08-31T18:00:00",
+        "end": "2021-08-31T18:05:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": "Partial Rotator Cuff Tears",
+        "start": "2021-08-31T18:05:00",
+        "end": "2021-08-31T18:30:00",
+        "presenter": "Benjamin Szerlip, DO",
+        "link": null
+      },
+      {
+        "title": "Reverse Total Shoulder Replacement",
+        "start": "2021-08-31T18:30:00",
+        "end": "2021-08-31T18:55:00",
+        "presenter": "Scott Stephens, MD",
+        "link": null
+      },
+      {
+        "title": "Cubital Tunnel Syndrome",
+        "start": "2021-08-31T18:55:00",
+        "end": "2021-08-31T19:20:00",
+        "presenter": "Ryan Klinefelter, MD",
+        "link": null
+      },
+      {
+        "title": "Shoulder Instability",
+        "start": "2021-08-31T19:20:00",
+        "end": "2021-08-31T19:45:00",
+        "presenter": "B. Rodney Comisar, MD",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-31T19:45:00",
+        "end": "2021-08-31T20:05:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
+  },
+  {
+    "date": "2021-08-30T04:00:00.000Z",
+    "name": "Knee Session",
+    "items": [
+      {
+        "title": "Introduction",
+        "start": "2021-08-31T18:00:00",
+        "end": "2021-08-31T18:10:00",
+        "presenter": "Jim Mason,DO, FAOAO, Mark Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "Why calipered kinematically aligned TKA's fail today - Surgeon error",
+        "start": "2021-08-31T18:10:00",
+        "end": "2021-08-31T18:25:00",
+        "presenter": "Steve Howell, MD",
+        "link": null
+      },
+      {
+        "title": "Arthroplasty update",
+        "start": "2021-08-31T18:25:00",
+        "end": "2021-08-31T19:40:00",
+        "presenter": "Mark Kolich, DO",
+        "link": null
+      },
+      {
+        "title": "Highly accurate calipered kinematically aligned TKA with manual instruments",
+        "start": "2021-08-31T19:40:00",
+        "end": "2021-08-31T19:00:00",
+        "presenter": "Steve Howell, MD",
+        "link": null
+      },
+      {
+        "title": "ACL update",
+        "start": "2021-08-31T19:00:00",
+        "end": "2021-08-31T19:15:00",
+        "presenter": "B. Rodney Comisar, MD",
+        "link": null
+      },
+      {
+        "title": "Alignment is more important the Robotics",
+        "start": "2021-08-31T19:15:00",
+        "end": "2021-08-31T19:30:00",
+        "presenter": "Steve Howell, MD",
+        "link": null
+      },
+      {
+        "title": "Robotic knee arthroplasty",
+        "start": "2021-08-31T19:30:00",
+        "end": "2021-08-31T19:45:00",
+        "presenter": "Mark Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-31T19:45:00",
+        "end": "2021-08-31T20:10:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
+  },
+  {
+    "date": "2021-08-30T04:00:00.000Z",
+    "name": "Hip Session",
+    "items": [
+      {
+        "title": "Introduction",
+        "start": "2021-08-31T20:00:00",
+        "end": "2021-08-31T20:10:00",
+        "presenter": "Mark Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "Update on hip examination",
+        "start": "2021-08-31T20:10:00",
+        "end": "2021-08-31T20:25:00",
+        "presenter": "Hal Martin, DO",
+        "link": null
+      },
+      {
+        "title": "Outpatient Arthroplasty at a freestanding ASC",
+        "start": "2021-08-31T20:25:00",
+        "end": "2021-08-31T20:40:00",
+        "presenter": "Mark Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "New Treatment Options for Cervical Dystonia",
+        "start": "2021-08-31T20:40:00",
+        "end": "2021-08-31T20:55:00",
+        "presenter": "Martin Taylor, DO, PhD",
+        "link": null
+      },
+      {
+        "title": "Update on the use of ceramics in total hip arthroplasty",
+        "start": "2021-08-31T20:55:00",
+        "end": "2021-08-31T21:10:00",
+        "presenter": "Adolph Lombardi, MD",
+        "link": null
+      },
+      {
+        "title": "TBA",
+        "start": "2021-08-31T9:10 PM:00",
+        "end": "2021-08-31T21:25:00",
+        "presenter": "TBA  Alicia Bertone, DVM",
+        "link": null
+      },
+      {
+        "title": "History is the best teacher: Pearls I learned from my mentor Thomas H Mallory, MD",
+        "start": "2021-08-31T9:25 PM:00",
+        "end": "2021-08-31T21:40:00",
+        "presenter": "Adolph Lombardi MD",
+        "link": null
+      },
+      {
+        "title": "Joint infection prevention",
+        "start": "2021-08-31T21:40:00",
+        "end": "2021-08-31T21:50:00",
+        "presenter": "Mark Gittins, DO",
+        "link": null
+      },
+      {
+        "title": "Q&A",
+        "start": "2021-08-31T21:50:00",
+        "end": "2021-08-31T22:20:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      },
+      {
+        "title": null,
+        "start": "2021-08-31Tundefined:00",
+        "end": "2021-08-31Tundefined:00",
+        "presenter": "",
+        "link": null
+      }
+    ],
+    "options": { "displayOnPage": true, "defaultTab": true }
   }
-}, {
-  "date": "2021-08-23T04:00:00.000Z",
-  "name": "Foot & Ankle Session",
-  "items": [{
-    "title": "Welcome",
-    "start": "2021-08-24T18:00:00",
-    "end": "2021-08-24T18:05:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": "Achilles Review ",
-    "start": "2021-08-24T18:05:00",
-    "end": "2021-08-24T18:15:00",
-    "presenter": "Jeffrey Gittins, DO",
-    "link": null
-  }, {
-    "title": "Utilizing Portable NPWT to Aid in Better Healing Outcomes at Home: Cost Savings Analysis ",
-    "start": "2021-08-24T18:15:00",
-    "end": "2021-08-24T18:25:00",
-    "presenter": "Jacob Grimmer/ Ralph J. Napolitano, DPM",
-    "link": null
-  }, {
-    "title": "Analysis of Lower Extremity Wounds Treated with Natie,v Cross-Linked Extracellular Matrix and Broa Spectrum Polyhexamethylene Biguanide ",
-    "start": "2021-08-24T18:25:00",
-    "end": "2021-08-24T18:35:00",
-    "presenter": "Ralph J. Napolitano, DPM / Abbey Karlock",
-    "link": null
-  }, {
-    "title": "Wound Bed Preparation of Lower Extremity Wounds Using Negative Pressure Wound Therapy With Instillation: Taking Cost Into Consideration         ",
-    "start": "2021-08-24T18:35:00",
-    "end": "2021-08-24T18:45:00 PM:00",
-    "presenter": "Ralph J. Napolitano, DPM",
-    "link": null
-  }, {
-    "title": "Ankle Instability Treatment Based Off of Degree Varus Tilt Greggory Brandle/ Nicholas Cheney, DO",
-    "start": "2021-08-24T18:45:00 PM:00",
-    "end": "2021-08-24T18:55:00 PM:00",
-    "presenter": "Ralph J. Napolitano, DPM",
-    "link": null
-  }, {
-    "title": "A Retrospective Chart Review Examining Gabapentin's Potential Neuroprotective Effects in Periphera Nerve Blocks",
-    "start": "2021-08-24T18:55:00 PM:00",
-    "end": "2021-08-24T19:05:00",
-    "presenter": "David Shuster/ Nicholas Cheney, DO",
-    "link": null
-  }, {
-    "title": "Recurrent Lateral Ankle Instability ",
-    "start": "2021-08-24T19:05:00",
-    "end": "2021-08-24T19:15:00",
-    "presenter": "Kaitlyn Rizzo/ Nicholas Cheney, DO",
-    "link": null
-  }, {
-    "title": "Nerve Complications after Regional Anesthesia in Foot and Ankle Surgery Avoiding the Popliteal Fossa ",
-    "start": "2021-08-24T19:15:00",
-    "end": "2021-08-24T19:25:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": "Effect of Fluoroscopic Intraarticular Injection Tyler Sloan/ Nicholas Cheney, DO",
-    "start": "2021-08-24T19:25:00",
-    "end": "2021-08-24T19:35:00",
-    "presenter": "Ania Bartholomew/ Nicholas Cheney, DO",
-    "link": null
-  }, {
-    "title": "Compartment Pressure and Surgical Outcomes of External Compartment Syndrome",
-    "start": "2021-08-24T7:35 PM:00",
-    "end": "2021-08-24T19:45:00",
-    "presenter": "Jacob Brower/ Nicholas Cheney, DO",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-24T7:45 PM:00",
-    "end": "2021-08-24T8:00 PM:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
-  }
-}, {
-  "date": "2021-08-30T04:00:00.000Z",
-  "name": "Neurology Session",
-  "items": [{
-    "title": "Welcome",
-    "start": "2021-08-31T18:00:00",
-    "end": "2021-08-31T18:05:00",
-    "presenter": "Martin Taylor, DO, PhD",
-    "link": null
-  }, {
-    "title": "New Therapies for Parkinson’s Disease",
-    "start": "2021-08-31T18:05:00",
-    "end": "2021-08-31T18:40:00",
-    "presenter": "Ashley Taylor, NP",
-    "link": null
-  }, {
-    "title": "Understanding GCRP in headache",
-    "start": "2021-08-31T18:40:00",
-    "end": "2021-08-31T19:25:00",
-    "presenter": "Martin Taylor, DO, PhD",
-    "link": null
-  }, {
-    "title": "New Treatment Options for Cervical Dystonia",
-    "start": "2021-08-31T19:25:00",
-    "end": "2021-08-31T19:45:00",
-    "presenter": "Martin Taylor, DO, PhD",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-31T19:45:00",
-    "end": "2021-08-31T20:05:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
-  }
-}, {
-  "date": "2021-08-30T04:00:00.000Z",
-  "name": "Upper Extremity Session",
-  "items": [{
-    "title": "Welcome",
-    "start": "2021-08-31T18:00:00",
-    "end": "2021-08-31T18:05:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": "Partial Rotator Cuff Tears",
-    "start": "2021-08-31T18:05:00",
-    "end": "2021-08-31T18:30:00",
-    "presenter": "Benjamin Szerlip, DO",
-    "link": null
-  }, {
-    "title": "Reverse Total Shoulder Replacement",
-    "start": "2021-08-31T18:30:00",
-    "end": "2021-08-31T18:55:00",
-    "presenter": "Scott Stephens, MD",
-    "link": null
-  }, {
-    "title": "Cubital Tunnel Syndrome",
-    "start": "2021-08-31T18:55:00",
-    "end": "2021-08-31T19:20:00",
-    "presenter": "Ryan Klinefelter, MD",
-    "link": null
-  }, {
-    "title": "Shoulder Instability",
-    "start": "2021-08-31T19:20:00",
-    "end": "2021-08-31T19:45:00",
-    "presenter": "B. Rodney Comisar, MD",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-31T19:45:00",
-    "end": "2021-08-31T20:05:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
-  }
-}, {
-  "date": "2021-08-30T04:00:00.000Z",
-  "name": "Knee Session",
-  "items": [{
-    "title": "Introduction",
-    "start": "2021-08-31T18:00:00",
-    "end": "2021-08-31T18:10:00",
-    "presenter": "Jim Mason,DO, FAOAO, Mark Gittins, DO",
-    "link": null
-  }, {
-    "title": "Why calipered kinematically aligned TKA's fail today - Surgeon error",
-    "start": "2021-08-31T18:10:00",
-    "end": "2021-08-31T18:25:00",
-    "presenter": "Steve Howell, MD",
-    "link": null
-  }, {
-    "title": "Arthroplasty update",
-    "start": "2021-08-31T18:25:00",
-    "end": "2021-08-31T18:40:00 PM:00",
-    "presenter": "Mark Kolich, DO",
-    "link": null
-  }, {
-    "title": "Highly accurate calipered kinematically aligned TKA with manual instruments",
-    "start": "2021-08-31T18:40:00 PM:00",
-    "end": "2021-08-31T19:00:00",
-    "presenter": "Steve Howell, MD",
-    "link": null
-  }, {
-    "title": "ACL update",
-    "start": "2021-08-31T19:00:00",
-    "end": "2021-08-31T19:15:00",
-    "presenter": "B. Rodney Comisar, MD",
-    "link": null
-  }, {
-    "title": "Alignment is more important the Robotics",
-    "start": "2021-08-31T7:15 PM:00",
-    "end": "2021-08-31T19:30:00",
-    "presenter": "Steve Howell, MD",
-    "link": null
-  }, {
-    "title": "Robotic knee arthroplasty",
-    "start": "2021-08-31T7:30 PM:00",
-    "end": "2021-08-31T19:45:00",
-    "presenter": "Mark Gittins, DO",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-31T19:45:00",
-    "end": "2021-08-31T20:05:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
-  }
-}, {
-  "date": "2021-08-30T04:00:00.000Z",
-  "name": "Hip Session",
-  "items": [{
-    "title": "Introduction",
-    "start": "2021-08-31T20:00:00",
-    "end": "2021-08-31T20:10:00",
-    "presenter": "Mark Gittins, DO",
-    "link": null
-  }, {
-    "title": "Update on hip examination",
-    "start": "2021-08-31T20:10:00",
-    "end": "2021-08-31T20:25:00",
-    "presenter": "Hal Martin, DO",
-    "link": null
-  }, {
-    "title": "Outpatient Arthroplasty at a freestanding ASC",
-    "start": "2021-08-31T20:25:00",
-    "end": "2021-08-31T20:40:00",
-    "presenter": "Mark Gittins, DO",
-    "link": null
-  }, {
-    "title": "New Treatment Options for Cervical Dystonia",
-    "start": "2021-08-31T20:40:00",
-    "end": "2021-08-31T20:55:00",
-    "presenter": "Martin Taylor, DO, PhD",
-    "link": null
-  }, {
-    "title": "Update on the use of ceramics in total hip arthroplasty",
-    "start": "2021-08-31T20:55:00",
-    "end": "2021-08-31T21:10:00",
-    "presenter": "Adolph Lombardi, MD",
-    "link": null
-  }, {
-    "title": "TBA",
-    "start": "2021-08-31T9:10 PM:00",
-    "end": "2021-08-31T21:25:00",
-    "presenter": "TBA  Alicia Bertone, DVM",
-    "link": null
-  }, {
-    "title": "History is the best teacher: Pearls I learned from my mentor Thomas H Mallory, MD",
-    "start": "2021-08-31T9:25 PM:00",
-    "end": "2021-08-31T21:40:00",
-    "presenter": "Adolph Lombardi MD",
-    "link": null
-  }, {
-    "title": "Joint infection prevention",
-    "start": "2021-08-31T21:40:00",
-    "end": "2021-08-31T21:50:00",
-    "presenter": "Mark Gittins, DO",
-    "link": null
-  }, {
-    "title": "Q&A",
-    "start": "2021-08-31T21:50:00",
-    "end": "2021-08-31T22:20:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }, {
-    "title": null,
-    "start": "2021-08-31Tundefined:00",
-    "end": "2021-08-31Tundefined:00",
-    "presenter": "",
-    "link": null
-  }],
-  "options": {
-    "displayOnPage": true,
-    "defaultTab": true
-  }
-}]
+]
