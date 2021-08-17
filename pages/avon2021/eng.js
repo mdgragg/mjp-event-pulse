@@ -31,12 +31,12 @@ const Index = (props) => {
                 ).url
               }
             />
-            <Link href={`/avon2021`}>
-              <Button__Primary>BACK</Button__Primary>
-            </Link>
-            <br />
             <Link href={`/avon2021/espanol`}>
               <Button__Primary>VER EN ESPAÑOL</Button__Primary>
+            </Link>
+            <br />
+            <Link href={`/avon2021`}>
+              <Button__Primary>BACK</Button__Primary>
             </Link>
           </Center>
         </div>
