@@ -27,42 +27,23 @@ const Index = (props) => {
       <FullPage__WithBackground
         imgSrc={`https://storage.googleapis.com/mjp-stream-public/avon2021/bg1920x1080.png`}
       >
-        <div>
-          <img
-            style={{
-              width: '100%',
-              maxWidth: '350px',
-              margin: '2rem auto',
-            }}
-            src={main_event.LogoLink[0]?.Media?.url || null}
-          />
-        </div>
-        <div style={{ maxWidth: '900px', margin: 'auto' }}>
-          <Center>
-            <h1>{main_event.EventName} Backup Streams</h1>
-            <h3>({main_event.EventName} Secuencia de Video de Respaldo)</h3>
-          </Center>
-        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '1080px',
+          }}
+        >
+          <Link href={'/avon2021/eng'}>
+            <Button__Big>WATCH IN ENGLISH</Button__Big>
+          </Link>
 
-        <Body>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '30vh',
-            }}
-          >
-            <Link href={'/avon2021/eng'}>
-              <Button__Big>WATCH IN ENGLISH</Button__Big>
-            </Link>
-            <br />
-            <Link href={'/avon2021/espanol'}>
-              <Button__Big>VER EN ESPAÑOL</Button__Big>
-            </Link>
-          </div>
-        </Body>
+          <Link href={'/avon2021/espanol'}>
+            <Button__Big>VER EN ESPAÑOL</Button__Big>
+          </Link>
+        </div>
       </FullPage__WithBackground>
     </Page>
   );

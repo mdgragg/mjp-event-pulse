@@ -22,7 +22,6 @@ const Index = (props) => {
       >
         <div style={{ width: '96%', margin: 'auto', padding: '2rem 0' }}>
           <Center>
-            <h3>{main_event.EventName} Espanol</h3>
             <CenteredPlayer
               showing={true}
               hasStarted={true}
@@ -32,8 +31,12 @@ const Index = (props) => {
                 ).url
               }
             />
+            <Link href={`/avon2021/espanol`}>
+              <Button__Primary>WATCH IN ENGLISH</Button__Primary>
+            </Link>
+            <br />
             <Link href={`/avon2021`}>
-              <Button__Primary>Back</Button__Primary>
+              <Button__Primary>BACK</Button__Primary>
             </Link>
           </Center>
         </div>

@@ -25,6 +25,7 @@ const MakeButtonStyle = (type) => {
     border: ${(props) => props.theme.buttons[type].border};
     font-weight: ${defaults[type].fontWeight || 600};
     padding: 8px 18px;
+    margin: 1rem auto;
     @media all and (max-width: 500px) {
       font-size: 1rem;
     }
