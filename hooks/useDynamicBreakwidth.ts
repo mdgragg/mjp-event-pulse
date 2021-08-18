@@ -7,9 +7,9 @@ const useDynamicBreakwidth = (initial: number, imgSrc: string): number => {
     const bgImage = new Image();
     bgImage.src = imgSrc;
 
-    bgImage.onload = function (this: Element) {
+    bgImage.onload = function () {
       console.log(this);
-      setBreakwidth(this.width);
+      setBreakwidth(bgImage.width);
     };
   }, []);
 
