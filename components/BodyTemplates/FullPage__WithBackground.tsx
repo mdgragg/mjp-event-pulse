@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDynamicBreakwidth } from '../../hooks';
 
 const StyledPage = styled.div`
   min-height: 100vh;
+  height: 100%;
   background-image: url('${(props) => props.imgSrc}');
   background-attachment: fixed;
+  background-size: 100% auto;
   width: 100%;
+  @media all and (max-width: ${(props) => props.breakWidth}px) {
+    background-size: auto 100%;
+  }
 `;
 
 type FullPage__WithBackground__Props = {
@@ -18,7 +24,13 @@ const FullPage__WithBackground = (
 ): any => {
   const { children, imgSrc } = props;
 
-  return <StyledPage {...props}>{children}</StyledPage>;
+  const breakWidth = useDynamicBreakwidth(1080, imgSrc);
+
+  return (
+    <StyledPage {...props} breakWidth={breakWidth}>
+      {children}
+    </StyledPage>
+  );
 };
 
 export default FullPage__WithBackground;

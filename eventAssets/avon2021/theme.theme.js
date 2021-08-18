@@ -70,7 +70,7 @@ export const BUTTONS = {
     letterSpacing: '2px',
     lineHeight: 'auto',
     backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    fontColor: 'white',
     border: 'none',
   },
   small: {

@@ -31,11 +31,16 @@ const Index = (props) => {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
-            height: '1080px',
+            minHeight: '900px',
+            // marginBottom: 'calc(100vh - 900px)',
           }}
         >
+          <img
+            style={{ maxWidth: '300px', width: '50%', margin: '15% auto' }}
+            src={main_event.LogoLink[0].Media.url}
+          />
           <Link href={'/avon2021/eng'}>
             <Button__Big>WATCH IN ENGLISH</Button__Big>
           </Link>

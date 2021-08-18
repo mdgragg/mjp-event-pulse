@@ -4,12 +4,6 @@ import Counter from 'components/Counters/Counter';
 import { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-const breatheAnimation = keyframes`
-0% { transform: scale(1.2) }
-50% {transform: scale(1.3) }
-100% {transform: scale(1.2) }
-`;
-
 const HeroHolder = styled.div`
   position: relative;
   width: 100%;
@@ -61,7 +55,7 @@ const HeaderInner = styled.div`
   @media all and (max-width: 1200px) {
     grid-template-columns: 100%;
     row-gap: 1rem;
-    margin: auto;
+    margin: 1rem auto;
     && img {
       max-width: 50%;
       margin: auto;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MyBanner } from './Banner';
 import styled from 'styled-components';
+import { useDynamicBreakwidth } from '../../hooks';
 
 const TheBanner = styled(MyBanner)`
   position: relative;
@@ -43,18 +44,7 @@ const TheBanner = styled(MyBanner)`
 const Banner_ImgBg = (props) => {
   const { imgSrc, imgAlt, children } = props;
 
-  const [breakWidth, setBreakWidth] = useState(1920);
-  useEffect(() => {
-    const bg_image = new Image();
-    bg_image.src = imgSrc;
-
-    bg_image.onload = function () {
-      console.log('width: ', this.width);
-      setBreakWidth(this.width);
-    };
-  }, []);
-
-  console.log('breakwidth:', breakWidth);
+  const breakWidth = useDynamicBreakwidth(1080);
 
   return (
     <TheBanner breakWidth={breakWidth}>
