@@ -43,28 +43,16 @@ const HeaderInner = styled.div`
   margin: auto;
   width: 90%;
   height: inherit;
-  /* text-align: center; */
-  && h1,
-  && h2 {
-    color: ${(props) => props.theme.headerFontColor};
-    font-family: ${(props) => props.theme.headerFont};
-  }
   && img {
     width: 100%;
   }
   @media all and (max-width: 1200px) {
     grid-template-columns: 100%;
     row-gap: 1rem;
-    margin: 1rem auto;
+    margin: 2rem auto;
     && img {
-      max-width: 50%;
+      width: 50%;
       margin: auto;
-    }
-  }
-  @media all and (max-width: 768px) {
-    && h1,
-    && h2 {
-      font-size: 1.5rem !important;
     }
   }
 `;

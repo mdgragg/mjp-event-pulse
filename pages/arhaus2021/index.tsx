@@ -41,7 +41,7 @@ const Index = (props) => {
           <div>
             <img
               style={{
-                width: '100%',
+                width: '10%',
                 maxWidth: '370px',
                 margin: '0rem auto',
               }}
@@ -86,6 +86,7 @@ const Index = (props) => {
             <Center>
               <h2>
                 <Counter__JustNumbers
+                  prefix={`Join Us Live In`}
                   event={main_event}
                   afterStarted={'Live Now!'}
                   afterEnded={'Thank You for Attending'}
@@ -98,7 +99,8 @@ const Index = (props) => {
           {main_event.streamLinks.length > 0 && (
             <div
               style={{
-                minHeight: '60vh',
+                width: '90%',
+                margin: '1rem auto',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',

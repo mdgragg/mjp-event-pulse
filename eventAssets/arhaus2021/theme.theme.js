@@ -22,17 +22,17 @@ const COLORS = {
 const FONTS = {
   title: {
     fontFamily: 'Roboto ',
-    fontSize: '2rem',
+    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
     letterSpacing: '',
     fontWeight: '800',
-    lineHeight: '',
+    lineHeight: '3rem',
   },
   body: {
     fontFamily: 'Roboto',
     fontWeight: '200',
-    fontSize: '',
+    fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
-    lineHeight: '',
+    lineHeight: 'auto',
   },
   get primary() {
     return this.body;

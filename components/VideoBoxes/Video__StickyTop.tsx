@@ -17,7 +17,7 @@ const VideoPlaceholder = styled.div`
     position: fixed;
     top: 2%;
     left: 2%;
-    width: 350px;
+    width: 96%;
     height: auto;
     z-index: 1000;
     padding: 0;
@@ -35,7 +35,7 @@ const StyledPaper = styled.div`
     position: fixed;
     top: 2%;
     left: 2%;
-    width: 350px;
+    width: 96%;
     height: auto;
     z-index: 100;
     padding: 0;

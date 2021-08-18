@@ -4,7 +4,7 @@ import React from 'react';
 const StyledBody = styled.div`
   /* padding: 2em; */
   width: 100%;
-  min-height: calc(1080px - ${(props) => props.theme.headerHeight});
+  min-height: calc(100vh - ${(props) => props.theme.headerHeight});
   background-color: ${(props) => props.theme.bg};
   z-index: 20;
 `;
