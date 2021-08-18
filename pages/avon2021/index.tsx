@@ -38,7 +38,7 @@ const Index = (props) => {
           }}
         >
           <img
-            style={{ maxWidth: '300px', width: '50%', margin: '15% auto' }}
+            style={{ maxWidth: '300px', width: '50%', margin: '9vh auto' }}
             src={main_event.LogoLink[0].Media.url}
           />
           <Link href={'/avon2021/eng'}>
