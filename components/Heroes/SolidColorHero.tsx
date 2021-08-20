@@ -18,6 +18,9 @@ const HeroHolder = styled.div`
     props.color || props.theme.heroBgColor || 'white'};
   overflow: hidden;
   padding: 3rem 0;
+  @media all and(max-width: 1200px) {
+    padding: 2% auto;
+  }
 `;
 
 type SolidColorHeroProps__Types = {

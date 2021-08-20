@@ -27,6 +27,7 @@ export default function AuthModal__AttendeeCapture({
   eventToCheck,
   signInText = null,
   otherFields = {},
+  headerContent,
 }: AuthModalProps) {
   let init = {
     AttendeeFirst: {
@@ -113,6 +114,7 @@ export default function AuthModal__AttendeeCapture({
               <span>{eventToCheck.EventName}</span>
             </>
           )}
+          {headerContent && headerContent}
         </StyledDialogTitle>
 
         <DialogContent>

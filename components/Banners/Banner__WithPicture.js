@@ -13,7 +13,7 @@ const StyledBanner = styled.div`
   text-align: center;
   width: 100%;
   left: 0;
-  background-color: ${(props) => props.theme.colors.primary || '#f7f7f7'};
+  background-color: ${(props) => props.color || props.theme.colors.primary};
   /* background-image: url('${(props) => props.image}'); */
   background-attachment: fixed;
   background-origin: center;
@@ -28,7 +28,7 @@ const StyledBanner = styled.div`
   }
   && .banner-image {
     width: 80%;
-    max-width: 450px;
+    max-width: 180px;
     margin: 2rem auto;
     display: block;
   }

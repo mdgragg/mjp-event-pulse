@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop';
 import Fluid__iFrame from '../iFrames/Fluid__iFrame';
 const BodyWrap = styled.div`
-  min-height: 50vh;
+  min-height: calc(100vh - ${(props) => props.theme.heroHeight}px);
   background-color: unset;
   position: relative;
   padding-top: 3rem;
@@ -27,9 +27,15 @@ const VideoBox = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 1300px;
+  width: 100%;
   margin: auto;
   background-color: none;
   z-index: 2;
+  @media all and (max-width: 1300px) {
+    justify-content: flex-start;
+    width: 96%;
+    height: auto;
+  }
 `;
 
 type CenteredPlayer__Props = {

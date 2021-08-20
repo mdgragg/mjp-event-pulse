@@ -68,14 +68,14 @@ const Box = styled.div`
     position: absolute;
     top: 20%;
     font-weight: 600;
-    font-size: clamp(22px, 5vw, 2.5rem);
-    line-height: clamp(24px, 5vw, 2.5rem);
+    font-size: clamp(18px, 190%, 3rem);
+    line-height: clamp(12px, 9vw, 1.5rem);
   }
   && .delimiter {
     position: absolute;
     top: 70%;
-    font-size: clamp(10px, 1.5vw, 1.25rem);
-    line-height: clamp(10px, 1.5vw, 1.25rem);
+    font-size: clamp(12px, 110%, 1.5rem);
+    line-height: clamp(10px, 8vw, 1rem);
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;

@@ -8,7 +8,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import { Banner__WithPicture } from 'components/Banners';
 import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
 import ClientOnly from 'components/__Assets__/ClientOnly';
@@ -65,7 +65,7 @@ export const PageBody = ({ main_event }) => (
           </Grid>
         </Grid>
       </Section>
-      <BannerWithPicture
+      <Banner__WithPicture
         imgUrl={main_event.KeyValue[1]?.value}
         color={'black'}
         secondary={`white`}
@@ -76,7 +76,7 @@ export const PageBody = ({ main_event }) => (
         buttonLink={`#`}
       >
         {main_event.Description && main_event.Description}
-      </BannerWithPicture>
+      </Banner__WithPicture>
     </Body>
   </>
 );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDynamicBreakwidth } from '../../hooks';
 
 const StyledPage = styled.div`
-  min-height: 100vh;
+  min-height: calc(100vh - ${(props) => props.theme.heroHeight});
   height: 100%;
   background-image: url('${(props) => props.imgSrc}');
   background-attachment: fixed;

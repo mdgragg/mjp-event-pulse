@@ -21,7 +21,7 @@ const HeroHolder = styled.div`
     top: 0;
     position: absolute;
     background-image: url(${(props) =>
-      props.theme.header_image || props.header_image});
+      props.header_image || props.theme.header_image || 'none'});
     opacity: ${(props) => props.theme.headerOpacity || 1};
     background-attachment: inherit;
     background-repeat: no-repeat;
@@ -30,7 +30,7 @@ const HeroHolder = styled.div`
   }
   @media all and (max-width: 1200px) {
     height: min-content;
-    padding-bottom: 1rem;
+    padding-bottom: 2%;
   }
 `;
 
@@ -49,7 +49,7 @@ const HeaderInner = styled.div`
   @media all and (max-width: 1200px) {
     grid-template-columns: 100%;
     row-gap: 1rem;
-    margin: 2rem auto;
+    margin: 2% auto;
     && img {
       width: 50%;
       margin: auto;

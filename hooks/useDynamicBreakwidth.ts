@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 
-const useDynamicBreakwidth = (initial: number, imgSrc: string): number => {
-  const [breakwidth, setBreakwidth] = useState(initial);
+const useDynamicBreakwidth = (
+  initial: number,
+  imgSrc: string
+): { breakWidth: number; imageHeight: number } => {
+  const [breakWidth, setBreakWidth] = useState(initial);
+  const [imageHeight, setImageHeight] = useState(0);
 
   useEffect(() => {
     const bgImage = new Image();
@@ -9,11 +13,16 @@ const useDynamicBreakwidth = (initial: number, imgSrc: string): number => {
 
     bgImage.onload = function () {
       console.log(this);
-      setBreakwidth(bgImage.width);
+      setBreakWidth(bgImage.width);
+      setImageHeight(bgImage.height);
     };
   }, []);
 
-  return breakwidth;
+  useEffect(() => {
+    console.log({ breakWidth, imageHeight });
+  }, [breakWidth, imageHeight]);
+
+  return { breakWidth, imageHeight };
 };
 
 export default useDynamicBreakwidth;

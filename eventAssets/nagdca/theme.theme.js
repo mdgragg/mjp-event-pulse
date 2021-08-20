@@ -10,9 +10,9 @@ const COLORS = {
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
-  primary: 'white',
-  secondary: '#1e372f',
-  tertiary: '#4f4f4d',
+  primary: '#204D9B',
+  secondary: 'white',
+  tertiary: '#204D9B',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
@@ -22,17 +22,17 @@ const COLORS = {
 const FONTS = {
   title: {
     fontFamily: 'Roboto ',
-    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
+    fontSize: 'clamp(1.5rem, 6vw, 3.5rem)',
     letterSpacing: '',
     fontWeight: '800',
-    lineHeight: '3rem',
+    lineHeight: '4.5rem',
   },
   body: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Avenir',
     fontWeight: '200',
-    fontSize: 'clamp(1.25rem, 20vw, 1rem)',
+    fontSize: '',
     letterSpacing: '',
-    lineHeight: 'auto',
+    lineHeight: '',
   },
   get primary() {
     return this.body;
@@ -47,7 +47,7 @@ const FONTS = {
 
 export const BUTTONS = {
   primary: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Avenir',
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
@@ -65,7 +65,7 @@ export const BUTTONS = {
     border: '',
   },
   big: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Avenir',
     fontSize: '2rem',
     letterSpacing: '2px',
     lineHeight: 'auto',
@@ -88,7 +88,7 @@ export const BUTTONS = {
   },
   hover: {
     fontColor: 'white',
-    backgroundColor: COLORS.secondary,
+    backgroundColor: 'black',
   },
 };
 
@@ -102,15 +102,15 @@ const BREAKPOINTS = {
 
 const TYPOGRAPHY = {
   h1: {
-    color: COLORS.primary,
+    color: COLORS.secondary,
     ...FONTS.title,
   },
   h2: {
-    color: COLORS.primary,
-    ...FONTS.body,
+    color: COLORS.secondary,
+    fontSize: 'clamp(1.25rem, 10vw, 1rem)',
   },
   h3: {
-    color: COLORS.primary,
+    color: COLORS.tertiary,
   },
 };
 
@@ -121,9 +121,9 @@ export const default_theme = {
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  headerHeight: '200px',
-  heroBgColor: COLORS.secondary,
-  headerOpacity: '0.1',
+  heroHeight: '380px',
+  heroBgColor: COLORS.tertiary,
+  headerOpacity: '1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
 };

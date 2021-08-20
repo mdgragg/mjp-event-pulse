@@ -6,7 +6,6 @@ import AuthWrap from 'components/AuthWrap';
 import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
 import FlexHero from 'components/Heroes/FlexHero';
 import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';

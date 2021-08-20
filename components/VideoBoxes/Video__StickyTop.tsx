@@ -11,6 +11,7 @@ const VideoPlaceholder = styled.div`
     height: auto;
     padding-top: 56.25%; /* 16:9 */
     display: block;
+    z-index: 1000;
   }
 
   &&.fixed > div {
@@ -18,10 +19,18 @@ const VideoPlaceholder = styled.div`
     top: 2%;
     left: 2%;
     width: 96%;
+    max-width: 350px;
     height: auto;
     z-index: 1000;
     padding: 0;
     border-radius: 0;
+  }
+
+  @media all and (max-width: 768px) {
+    &&.fixed > div {
+      width: 96%;
+      max-width: 96%;
+    }
   }
 `;
 
