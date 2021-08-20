@@ -8,7 +8,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import { FullPage__SolidColor } from 'components/BodyTemplates';
 import {
-  Banner_ImgBg,
+  Banner__ImgBg,
   Banner__JustImage,
   Banner__WithPicture,
 } from 'components/Banners';
