@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg.js';
+import { Banner__ImgBg } from 'components/Banners';
 
 const Wrap = styled.div`
   margin-top: 3rem;

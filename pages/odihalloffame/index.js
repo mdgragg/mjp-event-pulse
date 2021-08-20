@@ -5,7 +5,7 @@ import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import { Button } from '@material-ui/core';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
+import { Banner__ImgBg } from 'components/Banners/';
 import FlexHero from 'components/Heroes/FlexHero';
 import Section from 'components/Sections/Section';
 import Agenda from 'eventAssets/odihalloffame/Agenda';
@@ -134,7 +134,7 @@ const Index = (props) => {
             <Agenda />
           </Section>
 
-          <Banner_ImgBg
+          <Banner__ImgBg
             imgSrc={main_event?.HeaderImage?.url}
             imgAlt="Background pattern of radiating lines"
           >
@@ -159,7 +159,7 @@ const Index = (props) => {
                 }}
               />
             </div>
-          </Banner_ImgBg>
+          </Banner__ImgBg>
         </Body>
       </ODIWRAP>
     </Page>

@@ -11,7 +11,7 @@ import YWCA_Body from 'eventAssets/ywca-women-of-achievement/YWCA_Body';
 import AfterEnded from 'eventAssets/ywca-women-of-achievement/AfterEnded';
 import YWCA_STYLE from 'eventAssets/ywca-women-of-achievement/YWCA_STYLE';
 import { toast } from 'react-toastify';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
+import { Banner__ImgBg } from 'components/Banners';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
 import AuthWrap from 'components/AuthWrap';
@@ -60,7 +60,7 @@ const Index = (props) => {
             <Section>
               <YWCA_Body main_event={main_event} hasStartEnd={hasStartEnd} />
             </Section>
-            <Banner_ImgBg
+            <Banner__ImgBg
               imgSrc={
                 'https://storage.googleapis.com/mjp-stream-public/ywca-women-of-achievement/WOA2015-1861bw-1400x791.jpg'
               }
@@ -84,7 +84,7 @@ const Index = (props) => {
                   style={{ height: '80px', width: 'auto', margin: '2rem auto' }}
                 />
               </div>
-            </Banner_ImgBg>
+            </Banner__ImgBg>
           </Body>
         </YWCA_STYLE>
       </Page>
