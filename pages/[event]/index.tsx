@@ -135,7 +135,7 @@ export async function getServerSideProps(ctx) {
   const EVENT_URL = ctx.params.event;
 
   try {
-    GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
+    return GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
   } catch (error) {
     console.log('[event].js error: ', error);
     return {

@@ -1,5 +1,3 @@
-// import { gql, useQuery } from '@apollo/client';
-// import withApollo from '../lib/withApollo';
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Header from 'components/globals/Header';
