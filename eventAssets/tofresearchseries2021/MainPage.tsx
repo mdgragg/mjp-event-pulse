@@ -7,6 +7,7 @@ import SponsorMap from './SponsorMap';
 import Before from './Before';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 import Agenda from './Agenda';
+import Agenda__MultiTab from 'components/Agenda/Agenda__MultiTab';
 const Wrap = styled.div`
   width: 95%;
   margin: 3rem auto;
@@ -108,7 +109,7 @@ const MainPage = ({ main_event }) => {
           />
         </PlayerBody>
         <div className="agenda__wrap">
-          <Agenda initialTab={1} />
+          <Agenda__MultiTab eventId={main_event.id} />
         </div>
       </Wrap>
 
