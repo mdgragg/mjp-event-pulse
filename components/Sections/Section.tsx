@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Grid, Button, Typography } from '@material-ui/core';
-
 const StyledSection = styled.div`
   padding: 2em;
   min-height: 80vh;

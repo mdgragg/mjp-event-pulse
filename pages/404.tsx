@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Header from 'components/globals/Header';
 import Footer from 'components/globals/Footer';
 import Page from 'components/template1/Page';
-import Section from 'components/template1/Section';
+import Section from 'components/Sections/Section';
 import { default_theme } from 'components/Themes/default.theme';
 import { Button__Primary } from 'components/Buttons';
 import { Grid } from '@material-ui/core';
@@ -13,8 +13,6 @@ import { InfoGrid } from 'components/globals/InfoGrid';
 import MJP__SVG from '../components/globals/MJP__SVG';
 
 const Error_404 = (props) => {
-  const [headerHeight, setHeaderHeight] = useState('60vh');
-
   return (
     <Page theme={default_theme}>
       <Header

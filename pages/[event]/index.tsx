@@ -14,6 +14,7 @@ import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
 import Center from 'components/Center';
 import { default_theme } from 'components/Themes/default.theme';
+import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -31,17 +32,17 @@ const Index = (props) => {
   const [auth, setAuth] = useState(false);
 
   return (
-    <AuthWrap
-      eventToCheck={main_event}
-      successCallback={(res) => {
-        toast.success(
-          `Hello ${
-            res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-          }, welcome to ${main_event.EventName}`
-        );
-      }}
-    >
-      <Page theme={event_theme}>
+    <Page theme={event_theme}>
+      <AuthWrap
+        eventToCheck={main_event}
+        successCallback={(res) => {
+          toast.success(
+            `Hello ${
+              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
+            }, welcome to ${main_event.EventName}`
+          );
+        }}
+      >
         <Meta title={event_meta.EventJobName}> </Meta>
         <FlexHero title={event_meta.EventJobName}>
           <div>
@@ -125,69 +126,16 @@ const Index = (props) => {
             </BannerWithPicture>
           )}
         </Body>
-      </Page>
-    </AuthWrap>
+      </AuthWrap>
+    </Page>
   );
 };
 
 export async function getServerSideProps(ctx) {
-  // If you request this page with the preview mode cookies set:
-  // - context.preview will be true
-  // - context.previewData will be the same as
-  //   the argument used for `setPreviewData`.
-  //   get the event job data from our api
   const EVENT_URL = ctx.params.event;
 
   try {
-    let event_data = await getEventMeta(EVENT_URL);
-    let main_event = event_data.events.filter(
-      (ev) => ev.isMainEvent === true
-    )[0];
-    let return_object;
-
-    switch (event_data.eventStatus.EventStatus) {
-      case 'Preview':
-        if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
-          return_object = {
-            redirect: {
-              destination: `${EVENT_URL}/preview`,
-              permanent: false,
-            },
-          };
-        } else {
-          return_object = {
-            props: { event_meta: event_data, main_event },
-          };
-        }
-        break;
-      case 'Ended':
-        return_object = {
-          redirect: {
-            destination: `${EVENT_URL}/thank-you`,
-            permanent: false,
-          },
-        };
-        break;
-      case 'Live':
-        return_object = {
-          props: {
-            //meta will be the props for the event
-            event_meta: event_data,
-            main_event,
-          },
-        };
-        break;
-      default:
-        return_object = {
-          redirect: {
-            destination: `/`,
-            permanent: false,
-          },
-          // revalidate: 600,
-        };
-    }
-
-    return return_object;
+    GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
   } catch (error) {
     console.log('[event].js error: ', error);
     return {
