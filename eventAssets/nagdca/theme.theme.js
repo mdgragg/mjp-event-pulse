@@ -10,9 +10,9 @@ const COLORS = {
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
-  primary: '#204D9B',
+  primary: '#0047bb',
   secondary: 'white',
-  tertiary: '#204D9B',
+  tertiary: '#141b4d',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
@@ -21,14 +21,14 @@ const COLORS = {
 
 const FONTS = {
   title: {
-    fontFamily: 'Roboto ',
-    fontSize: 'clamp(1.5rem, 6vw, 3.5rem)',
+    fontFamily: 'Akzidenz-Grotesque-Bold',
+    fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
     letterSpacing: '',
     fontWeight: '800',
     lineHeight: '4.5rem',
   },
   body: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Akzidenz-Grotesque-Bold',
     fontWeight: '200',
     fontSize: '',
     letterSpacing: '',
@@ -87,8 +87,8 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: 'white',
-    backgroundColor: 'black',
+    fontColor: COLORS.primary,
+    backgroundColor: '#f7f7f7',
   },
 };
 
@@ -121,8 +121,8 @@ export const default_theme = {
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  heroHeight: '380px',
-  heroBgColor: COLORS.tertiary,
+  heroHeight: '240px',
+  heroBgColor: COLORS.primary,
   headerOpacity: '1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',

@@ -7,6 +7,8 @@ import useGetAgenda from 'hooks/queryHooks/useGetAgenda';
 const TheAgenda = styled.div`
   min-height: 100%;
   font-size: 1rem;
+  max-height: 100%;
+  overflow: scroll;
   /* max-width: 550px; */
   margin: auto;
   background-color: ${(props) => props.theme.colors.primary};
@@ -32,15 +34,14 @@ const Agenda__MultiTab = ({ eventId }) => {
   const { error, loading, data } = useGetAgenda(eventId);
 
   const [tabData, setTabData] = useState([]);
+  let initialTab = 0;
 
   useEffect(() => {
     if (data && !error) {
       const newTabData = makeTabData(data);
       console.log({ newTabData });
       setTabData(newTabData);
-      const initialTab = newTabData.findIndex(
-        (d) => d.options.defaultTab === true
-      );
+      initialTab = data.findIndex((d) => d.options.defaultTab === true);
     }
   }, [data, error, loading]);
 
@@ -53,10 +54,7 @@ const Agenda__MultiTab = ({ eventId }) => {
           ]}
         ></TwoPanel>
       ) : (
-        <TwoPanel
-          data={tabData}
-          initialTab={tabData.findIndex((d) => d.options.defaultTab === true)}
-        ></TwoPanel>
+        <TwoPanel data={tabData} initialTab={initialTab}></TwoPanel>
       )}
     </TheAgenda>
   );

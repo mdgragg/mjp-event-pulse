@@ -34,7 +34,7 @@ const Wrap = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
-  font-family: Gotham;
+  font-family: ${(props) => props.theme.fonts.body.fontFamily};
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 2px;
@@ -42,19 +42,25 @@ const Title = styled.div`
   padding: 0.75rem 0;
 `;
 const Box = styled.div`
-  font-family: Avenir;
+  font-family: ${(props) => props.theme.fonts.body.fontFamily};
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   height: auto;
   flex-wrap: wrap;
+  margin: auto;
   color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
-  && > div.box {
+  && .section {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+  && div.box {
     height: 0;
     padding-top: 20%;
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 70px;
+    min-height: 70px;
     width: 20%;
+    margin: 0.25rem;
     background-color: ${(props) =>
       props.styles?.boxColor || props.theme.colors.secondary};
     display: flex;
@@ -72,9 +78,10 @@ const Box = styled.div`
     line-height: clamp(12px, 9vw, 1.5rem);
   }
   && .delimiter {
+    font-family: Avenir;
     position: absolute;
     top: 70%;
-    font-size: clamp(12px, 110%, 1.5rem);
+    font-size: clamp(1px, 1vi, 2.5rem);
     line-height: clamp(10px, 8vw, 1rem);
     font-weight: 800;
     letter-spacing: 2px;
@@ -123,26 +130,29 @@ const BoxedCounter = ({
       <Wrap>
         {prefix && <Title styles={styles}>{prefix}</Title>}
         <Box styles={styles}>
-          <div className="numday box">
-            <div className="digit"> {obj.days} </div>
-            <div className="delimiter"> {obj.days > 1 ? 'Days' : 'Day'}</div>
-          </div>
-          <div className="numhours box">
-            <div className="digit"> {obj.hours} </div>
-            <div className="delimiter ">
-              {obj.hours === 1 ? 'Hour' : 'Hours'}
+          <div className="section">
+            <div className="numday box">
+              <div className="digit"> {obj.days} </div>
+              <div className="delimiter"> {obj.days > 1 ? 'Days' : 'Day'}</div>
+            </div>
+            <div className="numhours box">
+              <div className="digit"> {obj.hours} </div>
+              <div className="delimiter ">
+                {obj.hours === 1 ? 'Hour' : 'Hours'}
+              </div>
             </div>
           </div>
-
-          <div className="numminutes box">
-            <div className="digit">{obj.minutes}</div>
-            <div className="delimiter ">
-              {obj.minutes === 1 ? 'Min' : 'Mins'}
+          <div className="section">
+            <div className="numminutes box">
+              <div className="digit">{obj.minutes}</div>
+              <div className="delimiter ">
+                {obj.minutes === 1 ? 'Min' : 'Mins'}
+              </div>
             </div>
-          </div>
-          <div className="numseconds box ">
-            <div className="digit"> {obj.seconds}</div>
-            <div className=" delimiter ">Sec</div>
+            <div className="numseconds box ">
+              <div className="digit"> {obj.seconds}</div>
+              <div className=" delimiter ">Sec</div>
+            </div>
           </div>
         </Box>
       </Wrap>

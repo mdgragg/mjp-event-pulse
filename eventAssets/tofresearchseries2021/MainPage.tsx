@@ -8,6 +8,7 @@ import Before from './Before';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 import Agenda from './Agenda';
 import Agenda__MultiTab from 'components/Agenda/Agenda__MultiTab';
+
 const Wrap = styled.div`
   width: 95%;
   margin: 3rem auto;
@@ -18,6 +19,7 @@ const Wrap = styled.div`
   gap: 1rem;
   && .agenda__wrap {
     max-width: 550px;
+    height: 100%;
     min-height: 600px;
     width: 100%;
     box-shadow: var(--mjp-shadow);
@@ -35,8 +37,11 @@ const Wrap = styled.div`
 `;
 
 const PlayerBody = styled.div`
+  position: sticky;
+  top: 1rem;
   align-self: start;
   width: 100%;
+  z-index: 1000;
   /* min-height: 500px; */
   max-width: 1200px;
   margin: 0 auto;

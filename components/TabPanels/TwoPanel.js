@@ -6,8 +6,14 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import styled from 'styled-components';
 
+const TabBarHolder = styled.div`
+  max-height: 800px;
+  width: 100%;
+`;
+
 const StyledAppBar = styled(AppBar)`
   background-color: ${(props) => props.theme.colors.secondary};
+  z-index: 999;
   && .Mui-selected {
     background-color: ${(props) => props.theme.colors.tertiary};
   }
@@ -15,13 +21,8 @@ const StyledAppBar = styled(AppBar)`
     background-color: ${(props) => props.theme.colors.primary};
   }
 `;
-const TabBarHolder = styled.div`
-  height: 100%;
-  width: 100%;
-`;
 
 const MyTabPanel = styled(TabPanel)`
-  height: 100%;
   background-color: ${(props) => props.theme.secondary};
 `;
 
@@ -52,7 +53,7 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs({ data, initialTab = 0 }) {
+export default function SimpleTabs({ data, initialTab = 1 }) {
   const [value, setValue] = React.useState(initialTab);
 
   const handleChange = (event, newValue) => {

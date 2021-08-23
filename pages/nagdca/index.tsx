@@ -61,30 +61,27 @@ const Index = (props) => {
         }}
       >
         <Meta title={event_meta.EventJobName}> </Meta>
-        <SolidColorHero color={event_theme.colors.tertiary}>
-          <FlexHero>
+        <SolidColorHero color={event_theme.colors.primary}>
+          <FlexHero columns={`25% 50% 25%`}>
             <div>
               <img
                 style={{
-                  maxWidth: '180px',
-                  backgroundColor: 'white',
-                  padding: '25px',
-                  borderRadius: '30px',
+                  maxWidth: '100px',
                 }}
                 src={main_event.LogoLink[0]?.Media?.url || null}
               />
             </div>
             <div>
               <h1>{main_event.EventName}</h1>
+              <h4>
+                <DateParse date={main_event.eventStartEnd.StartDateTime} />
+              </h4>
             </div>
-            <div>
-              <Center>
-                <BoxedCounter
-                  event={main_event}
-                  prefix={<h2>Join Us Live In:</h2>}
-                />
-              </Center>
-            </div>
+
+            <BoxedCounter
+              event={main_event}
+              prefix={<h2>Join Us Live In:</h2>}
+            />
           </FlexHero>
         </SolidColorHero>
         <FullPage__SolidColor color={'#f7f7f7'}>
@@ -111,17 +108,17 @@ const Index = (props) => {
             </div>
           )}
           <Banner__JustImage imgSrc={main_event?.HeaderImage?.url} />
-
           <Banner__WithPicture
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-            color={'white'}
+            color={event_theme.colors.primary}
             secondary={`white`}
-            headerText={`About This Event`}
+            headerText={null}
             innerWidth={`650px`}
             buttonText={`Learn More`}
             buttonLink={main_event.LogoLink[0]?.Link || '#'}
           >
-            Hello world.
+            Additional info can be displayed here, it can also be deleted and
+            show no text.
           </Banner__WithPicture>
         </FullPage__SolidColor>
       </AuthWrap>

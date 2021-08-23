@@ -19,7 +19,7 @@ const Item = styled.ul`
   &&.loading {
     height: 2.5rem;
     width: 80%;
-    margin: 1rem auto;
+    margin: 1rem auto 0rem auto;
     line-height: auto;
   }
 `;
@@ -33,9 +33,11 @@ const Item__Title = styled.div`
 `;
 const SubItem = styled.li`
   list-style: none;
-  margin: 0 0 1rem 1rem;
+  margin: 0 0 1rem 0rem;
   font-size: 1rem;
+  line-height: 1rem;
   font-weight: 800;
+  padding: 0;
   color: ${(props) => props.theme.colors.grey || 'rgb(50,50,50)'};
   && span.title {
     color: ${(props) => props.theme.colors.secondary};
@@ -54,6 +56,7 @@ const ListAgenda = ({ data }) => {
         } else {
           return (
             <Item key={`${item.title}--${index}`}>
+              <hr />
               <div className="title--wrap">
                 <Item__Time>
                   <DateParse date={item.start} format={`h:mma`} />
@@ -77,11 +80,11 @@ const ListAgenda__Loading = ({ number = 10 }) => {
   return (
     <SingleScheduleDay>
       {number_array.map((n) => (
-        <>
-          <Item className="loading">
-            <LoadingImage key={n} delay={n * 40} />
+        <React.Fragment key={n}>
+          <Item className="loading" key={n}>
+            <LoadingImage delay={n * 40} />
           </Item>
-        </>
+        </React.Fragment>
       ))}
     </SingleScheduleDay>
   );

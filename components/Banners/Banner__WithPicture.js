@@ -18,35 +18,37 @@ const StyledBanner = styled.div`
   background-attachment: fixed;
   background-origin: center;
   background-repeat: no-repeat;
+  margin: 0 auto;
+  margin-top: -5px;
   && h4 {
     font-size: 2.5rem;
-    color: ${(props) => props.textColor || 'black'};
+    color: ${(props) => props.textColor || props.theme.colors.secondary};
   }
   && p {
     font-size: 1.5rem;
-    color: ${(props) => props.textColor || 'black'};
+    color: ${(props) => props.textColor || props.theme.colors.secondary};
   }
   && .banner-image {
     width: 80%;
-    max-width: 180px;
+    max-width: 120px;
     margin: 2rem auto;
     display: block;
   }
 `;
 
 const Banner = (props) => {
+  const { headerText, innerWidth, style, children, buttonText, imgUrl } = props;
   return (
     <StyledBanner style={{ ...props.style }} {...props}>
       <div
         style={{ maxWidth: `${props.innerWidth || '450px'}`, margin: 'auto' }}
       >
-        <h4>{props.headerText}</h4>
+        {headerText && <h4>{headerText}</h4>}
 
         <p>{props.children}</p>
         {props.buttonText && (
           <a href={props.buttonLink}>
             <Button__Primary className="btn">
-              {' '}
               {props.buttonText}
             </Button__Primary>
           </a>

@@ -4,8 +4,8 @@ import useCalculateStartWithOffset from 'hooks/useCalculateStartWithOffset';
 import LinkBox from './LinkBox';
 import {
   StyledPlaceholder__Inner,
-  StyledVideoPlaceholder__Wrap,
-} from 'components/VideoBoxes/VideoBox__Styles';
+  StyledPlaceholder__Wrap,
+} from './LinkBox__Styles';
 import { ExternalLink__Type } from 'types/Link__Types';
 import { Replacer } from 'components/__Assets__';
 
@@ -30,11 +30,11 @@ const LinkBox__StickyTop__WithCountdown = ({
   return (
     <Replacer
       showIfFalse={
-        <StyledVideoPlaceholder__Wrap>
+        <StyledPlaceholder__Wrap>
           <StyledPlaceholder__Inner style={{ backgroundColor: 'white' }}>
             {showBefore}
           </StyledPlaceholder__Inner>
-        </StyledVideoPlaceholder__Wrap>
+        </StyledPlaceholder__Wrap>
       }
       showIfTrue={<LinkBox link={link} prefix={prefix} />}
       decider={started}

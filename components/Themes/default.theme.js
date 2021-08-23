@@ -121,7 +121,7 @@ export const default_theme = {
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  headerHeight: '200px',
+  heroHeight: '250px',
   heroBgColor: COLORS.secondary,
   headerOpacity: '0.1',
   videoBreakPoint: 700,

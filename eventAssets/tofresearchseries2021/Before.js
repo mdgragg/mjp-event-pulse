@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BoxedCounter } from 'components/Counters';
+import { BoxedCounter, Counter__JustNumbers } from 'components/Counters';
 
 const Wrap = styled.div`
   background-color: white;
@@ -19,22 +19,32 @@ const Inner = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   && img {
     width: auto;
     height: 50%;
-    max-height: 320px;
+    max-height: 300px;
   }
   && .counter {
     max-width: 500px;
     margin: auto;
   }
+  && .counter2 {
+    display: none;
+    font-weight: 800;
+    color: ${(props) => props.theme.colors.tertiary};
+  }
   @media all and (max-width: 768px) {
-    && img {
+    && .counter1 {
       display: none;
     }
+    && .counter2 {
+      display: block;
+    }
     width: 60%;
-    height: min-content;
+    height: 100%;
   }
 `;
 const Before = ({ src, main_event }) => {
@@ -42,8 +52,11 @@ const Before = ({ src, main_event }) => {
     <Wrap>
       <Inner>
         <img src={src} alt="logo" />
-        <div className="counter">
+        <div className="counter counter1">
           <BoxedCounter event={main_event} prefix={`Join Us Live In:`} />
+        </div>
+        <div className="counter counter2">
+          <Counter__JustNumbers event={main_event} />
         </div>
       </Inner>
     </Wrap>

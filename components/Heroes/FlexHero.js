@@ -7,10 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 const HeroHolder = styled.div`
   position: relative;
   width: 100%;
-  height: ${(props) => props.theme.heroHeight || '35vh'};
+  min-height: ${(props) => props.theme.heroHeight || '30vh'};
   background-color: ${(props) => props.theme.heroBgColor};
-  overflow: hidden;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   && > div {
     text-align: center;
   }
@@ -30,14 +32,15 @@ const HeroHolder = styled.div`
   }
   @media all and (max-width: 1200px) {
     height: min-content;
-    padding-bottom: 2%;
+    padding: 2% 0;
   }
 `;
 
 const HeaderInner = styled.div`
   position: relative;
+  vertical-align: center;
   display: grid;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: ${(props) => props.columns || '20% 60% 20%'};
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -49,20 +52,20 @@ const HeaderInner = styled.div`
   @media all and (max-width: 1200px) {
     grid-template-columns: 100%;
     row-gap: 1rem;
-    margin: 2% auto;
+    margin: 0 auto;
     && img {
       width: 50%;
-      margin: auto;
+      margin: 0 auto;
     }
   }
 `;
 
 export default function Hero(props) {
-  const { theme } = props;
-
   return (
-    <HeroHolder bgImage={props.bgImage}>
-      <HeaderInner className="header--inner ">{props.children}</HeaderInner>
+    <HeroHolder bgImage={props.bgImage} style={{ ...props.style }}>
+      <HeaderInner className="header--inner" columns={props.columns}>
+        {props.children}
+      </HeaderInner>
     </HeroHolder>
   );
 }
