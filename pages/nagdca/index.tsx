@@ -40,8 +40,18 @@ const Index = (props) => {
     <Page theme={event_theme}>
       <AuthWrap
         headerContent={
-          <div style={{ width: '120px', margin: '1rem auto' }}>
-            <img src={main_event.LogoLink[0].Media.url} />
+          <div
+            style={{
+              width: '40%',
+              margin: '1rem auto',
+              padding: '4% 0',
+              backgroundColor: event_theme.colors.primary,
+            }}
+          >
+            <img
+              style={{ position: 'relative' }}
+              src={main_event.LogoLink[0].Media.url}
+            />
           </div>
         }
         otherFields={{
