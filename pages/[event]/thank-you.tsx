@@ -14,7 +14,7 @@ const ThankYou = ({ event_meta, main_event }) => {
   return (
     <Page theme={theme}>
       <FullPage__SolidColor noHero color={theme.colors.secondary}>
-        <Box__XYCentered height={`100vh`}>
+        <Box__XYCentered minHeight={`100vh`}>
           <Card__Ended />
         </Box__XYCentered>
       </FullPage__SolidColor>
