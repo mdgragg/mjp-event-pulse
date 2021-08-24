@@ -13,9 +13,7 @@ const Video__StickyTop__WithCountdown = ({
   src,
   showMinutesBefore = 0,
   start,
-  showBefore = () => {
-    <></>;
-  },
+  showBefore,
 }) => {
   const videoShowing = useCalculateStartWithOffset(start, showMinutesBefore);
 
@@ -24,7 +22,9 @@ const Video__StickyTop__WithCountdown = ({
   }
   return (
     <StyledVideoPlaceholder__Wrap>
-      <StyledPlaceholder__Inner>{showBefore}</StyledPlaceholder__Inner>
+      <StyledPlaceholder__Inner>
+        {showBefore && showBefore}
+      </StyledPlaceholder__Inner>
     </StyledVideoPlaceholder__Wrap>
   );
 };

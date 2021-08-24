@@ -27,7 +27,7 @@ const StyledPage = styled.div`
     margin: 0;
   }
   h4 {
-    color: ${(props) => props.theme.colors.secondary};
+    ${(props) => props.theme.typography.h4};
     margin: 0;
   }
   h5 {

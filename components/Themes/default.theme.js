@@ -18,7 +18,18 @@ const COLORS = {
   offWhite: '#f7f7f7',
   offBlack: '#161616',
 };
-
+const PALETTE = {
+  text: {
+    primary: COLORS.primary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+  background: {
+    primary: COLORS.primary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+};
 const FONTS = {
   title: {
     fontFamily: 'Roboto ',
@@ -112,12 +123,16 @@ const TYPOGRAPHY = {
   h3: {
     color: COLORS.primary,
   },
+  p: {
+    ...FONTS.body,
+  },
 };
 
 export const default_theme = {
   ...createTheme(),
   typography: { ...TYPOGRAPHY },
   colors: { ...COLORS },
+  palette: { ...PALETTE },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },

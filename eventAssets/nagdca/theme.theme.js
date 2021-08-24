@@ -112,6 +112,11 @@ const TYPOGRAPHY = {
   h3: {
     color: COLORS.tertiary,
   },
+  h4: {
+    fontSize: '1rem',
+    color: COLORS.white,
+    lineHeight: '2rem',
+  },
 };
 
 export const default_theme = {

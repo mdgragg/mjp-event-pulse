@@ -20,6 +20,8 @@ import { toast } from 'react-toastify';
 import { default_theme } from 'eventAssets/nagdca/theme.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import { BoxedCounter } from 'components/Counters';
+import { Box__XYCentered } from 'components/Boxes';
+import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 
 const PLACEHOLD = 'https://placehold.co/';
 const EVENT_URL = `nagdca`;
@@ -95,41 +97,47 @@ const Index = (props) => {
           </FlexHero>
         </SolidColorHero>
         <FullPage__SolidColor color={'#f7f7f7'}>
-          {main_event.streamLinks.length === 1 ? (
-            <CenteredPlayer
-              showing={true}
-              hasStarted={true}
-              videoUrl={main_event.streamLinks[0].url}
-            />
-          ) : (
+          <Box__XYCentered minHeight={'100%'}>
             <div
-              style={{
-                minHeight: '60vh',
-                backgroundColor: 'none',
-                margin: '2rem',
-              }}
+              style={{ maxWidth: '900px', width: '95%', margin: '3rem auto' }}
             >
-              <PlayerWithChat
-                children={null}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-                chatUrl={main_event.streamLinks[1].url}
+              <Video__StickyTop__WithCountdown
+                showMinutesBefore={30}
+                start={main_event.eventStartEnd.StartDateTime}
+                src={main_event.streamLinks[0].url}
+                showBefore={
+                  <BoxedCounter
+                    event={main_event}
+                    prefix={
+                      <>
+                        <h2>This Event Hasn't Started Yet</h2>
+                        <h4>Join Us Live In:</h4>
+                      </>
+                    }
+                  />
+                }
               />
             </div>
-          )}
-          <Banner__JustImage imgSrc={main_event?.HeaderImage?.url} />
+          </Box__XYCentered>
+
+          <div style={{ width: '100%', textAlign: 'center' }}>
+            <img
+              style={{ margin: '0 auto 3rem', maxWidth: '800px' }}
+              src={main_event?.HeaderImage?.url}
+              alt="nationwide does the right things at the right time"
+            />
+          </div>
+
           <Banner__WithPicture
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
             color={event_theme.colors.primary}
             secondary={`white`}
             headerText={null}
             innerWidth={`650px`}
-            buttonText={`Learn More`}
+            buttonText={null}
             buttonLink={main_event.LogoLink[0]?.Link || '#'}
-          >
-            Additional info can be displayed here, it can also be deleted and
-            show no text.
-          </Banner__WithPicture>
+            style={{ height: '400px' }}
+          ></Banner__WithPicture>
         </FullPage__SolidColor>
       </AuthWrap>
     </Page>

@@ -26,6 +26,7 @@ export const StyledPlaceholder__Inner = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: var(--mjp-shadow);
 `;
 
 export const VideoPlaceholder = styled.div`
