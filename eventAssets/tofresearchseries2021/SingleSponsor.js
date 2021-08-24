@@ -79,9 +79,9 @@ const SingleSponsor = ({ sponsor }) => {
         {sponsor.SponsorName}
         {sponsor.SponsorLink && (
           <div className="button">
-            <Link href={sponsor?.SponsorLink} passHref>
+            <a href={sponsor?.SponsorLink}>
               <MyButton className="btn">Visit</MyButton>
-            </Link>
+            </a>
           </div>
         )}
       </Title>

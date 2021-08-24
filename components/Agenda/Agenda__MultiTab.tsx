@@ -52,6 +52,7 @@ const Agenda__MultiTab = ({ eventId }) => {
           data={[
             { title: 'Loading', content: <ListAgenda__Loading number={10} /> },
           ]}
+          initialTab={0}
         ></TwoPanel>
       ) : (
         <TwoPanel data={tabData} initialTab={initialTab}></TwoPanel>

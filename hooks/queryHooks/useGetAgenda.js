@@ -1,8 +1,8 @@
 const { useEffect, useState } = require('react');
 
-const fetchAgenda = async (id = '147') => {
+const fetchAgenda = async (eventUrl = 'nagdca') => {
   return await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/events/${id}/get_agenda`
+    `https://storage.googleapis.com/mjp-stream-public/${eventUrl}/agenda.json`
   )
     .then((res) => res.json())
     .catch((err) => {

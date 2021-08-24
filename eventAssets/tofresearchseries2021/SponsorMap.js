@@ -37,16 +37,13 @@ const SponsorMap = ({ eventId }) => {
     return <div>{err}</div>;
   } else if (data) {
     return (
-      // title
-      //series presenting
-
       <StyledMap>
         <SingleTier>
           <Tier>Title Sponsor</Tier>
           <hr />
           <SponsorWrap>
             {data['Title'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -66,7 +63,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Presenting'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -76,7 +73,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Gold'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -86,7 +83,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Silver'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -96,7 +93,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Bronze'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>

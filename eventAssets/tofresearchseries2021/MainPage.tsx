@@ -49,7 +49,9 @@ const PlayerBody = styled.div`
   text-align: center;
   flex-direction: column;
   justify-content: space-around;
-
+  @media all and (max-width: 1200px) {
+    position: initial;
+  }
   @media all and (max-width: 768px) {
     max-width: 95%;
     margin-top: 3rem;

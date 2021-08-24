@@ -19,6 +19,19 @@ const COLORS = {
   offBlack: '#161616',
 };
 
+const PALETTE = {
+  text: {
+    primary: COLORS.primary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+  background: {
+    primary: COLORS.primary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+};
+
 const FONTS = {
   title: {
     fontFamily: 'Akzidenz-Grotesque-Bold',
@@ -34,15 +47,9 @@ const FONTS = {
     letterSpacing: '',
     lineHeight: '',
   },
-  get primary() {
-    return this.body;
+  get special() {
+    return this.title;
   }, //default to title
-  get secondary() {
-    return this.body;
-  }, // default to body
-  get tertiary() {
-    return this.body;
-  }, // default to body
 };
 
 export const BUTTONS = {
@@ -119,18 +126,23 @@ const TYPOGRAPHY = {
   },
 };
 
-export const default_theme = {
-  ...createTheme(),
-  typography: { ...TYPOGRAPHY },
-  colors: { ...COLORS },
-  fonts: { ...FONTS },
-  buttons: { ...BUTTONS },
-  breakpoints: { ...BREAKPOINTS },
+const GLOBALS = {
   heroHeight: '240px',
   heroBgColor: COLORS.primary,
   headerOpacity: '1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
+};
+
+export const default_theme = {
+  ...createTheme(),
+  colors: { ...COLORS },
+  palette: { ...PALETTE },
+  fonts: { ...FONTS },
+  buttons: { ...BUTTONS },
+  typography: { ...TYPOGRAPHY },
+  breakpoints: { ...BREAKPOINTS },
+  ...GLOBALS,
 };
 
 export default default_theme;

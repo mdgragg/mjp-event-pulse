@@ -53,7 +53,7 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs({ data, initialTab = 1 }) {
+export default function SimpleTabs({ data, initialTab = 0 }) {
   const [value, setValue] = React.useState(initialTab);
 
   const handleChange = (event, newValue) => {
