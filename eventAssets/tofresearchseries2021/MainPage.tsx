@@ -116,7 +116,7 @@ const MainPage = ({ main_event }) => {
           />
         </PlayerBody>
         <div className="agenda__wrap">
-          <Agenda__MultiTab eventId={main_event.id} />
+          <Agenda__MultiTab eventUrl={'tofresearchseries2021'} />
         </div>
       </Wrap>
 

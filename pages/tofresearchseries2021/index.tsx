@@ -1,5 +1,5 @@
-import { GetServerSideProps } from 'next';
-import { ServerSideResponse } from 'types/PageResponses';
+import { GetStaticProps } from 'next';
+import { StaticResponse } from 'types/PageResponses';
 import { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
@@ -55,15 +55,16 @@ const Index = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async () => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  const returnObj: ServerSideResponse = {
+  const returnObj: StaticResponse = {
     props: {
       event_meta: event_data,
       main_event,
     },
+    revalidate: 300,
   };
 
   return returnObj;

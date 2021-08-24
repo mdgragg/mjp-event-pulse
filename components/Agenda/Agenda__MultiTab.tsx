@@ -30,18 +30,19 @@ const makeTabData = (data) => {
       };
     });
 };
-const Agenda__MultiTab = ({ eventId }) => {
-  const { error, loading, data } = useGetAgenda(eventId);
+const Agenda__MultiTab = ({ eventUrl }) => {
+  const { error, loading, data } = useGetAgenda(eventUrl);
 
   const [tabData, setTabData] = useState([]);
-  let initialTab = 0;
+  let [initialTab, setInitialTab] = useState(0);
 
   useEffect(() => {
     if (data && !error) {
       const newTabData = makeTabData(data);
       console.log({ newTabData });
       setTabData(newTabData);
-      initialTab = data.findIndex((d) => d.options.defaultTab === true);
+      let calcInitialTab = data.findIndex((d) => d.options.defaultTab === true);
+      setInitialTab(calcInitialTab);
     }
   }, [data, error, loading]);
 

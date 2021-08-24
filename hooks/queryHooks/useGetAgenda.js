@@ -1,6 +1,6 @@
 const { useEffect, useState } = require('react');
 
-const fetchAgenda = async (eventUrl = 'nagdca') => {
+const fetchAgenda = async (eventUrl) => {
   return await fetch(
     `https://storage.googleapis.com/mjp-stream-public/${eventUrl}/agenda.json`
   )
@@ -10,22 +10,24 @@ const fetchAgenda = async (eventUrl = 'nagdca') => {
     });
 };
 
-const useGetAgenda = ({ eventId }) => {
+const useGetAgenda = (eventUrl) => {
   const [data, setAgenda] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchAgenda(eventId)
-      .then((res) => {
-        console.log(res);
-        setAgenda(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err);
-      });
-  }, [eventId]);
+    if (eventUrl) {
+      fetchAgenda(eventUrl)
+        .then((res) => {
+          console.log(res);
+          setAgenda(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(err);
+        });
+    }
+  }, [eventUrl]);
 
   useEffect(() => {
     if (data) {

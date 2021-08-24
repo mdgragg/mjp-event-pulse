@@ -22,6 +22,8 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import { BoxedCounter } from 'components/Counters';
 import { Box__XYCentered } from 'components/Boxes';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
+import { StaticResponse } from 'types/PageResponses';
+import { GetStaticProps } from 'next';
 
 const PLACEHOLD = 'https://placehold.co/';
 const EVENT_URL = `nagdca`;
@@ -144,17 +146,19 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
-  try {
-    return await GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
-  } catch (error) {
-    console.log('[event].js error: ', error);
-    return {
-      redirect: {
-        destination: '/404',
-      },
-    };
-  }
-}
+export const getStaticProps: GetStaticProps = async () => {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+
+  const returnObj: StaticResponse = {
+    props: {
+      event_meta: event_data,
+      main_event,
+    },
+    revalidate: 300,
+  };
+
+  return returnObj;
+};
 
 export default Index;

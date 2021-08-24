@@ -7,3 +7,8 @@ export type ServerSideResponse = {
     permanent: boolean;
   };
 };
+
+export type StaticResponse = {
+  props: any;
+  revalidate?: number;
+};
