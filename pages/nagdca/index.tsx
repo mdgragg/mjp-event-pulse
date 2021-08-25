@@ -122,13 +122,13 @@ const Index = (props) => {
             </div>
           </Box__XYCentered>
 
-          <div style={{ width: '100%', textAlign: 'center' }}>
+          {/* <div style={{ width: '100%', textAlign: 'center' }}>
             <img
               style={{ margin: '0 auto 3rem', maxWidth: '800px' }}
               src={main_event?.HeaderImage?.url}
               alt="nationwide does the right things at the right time"
             />
-          </div>
+          </div> */}
 
           <Banner__WithPicture
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
