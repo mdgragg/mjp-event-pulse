@@ -17,6 +17,20 @@ export const COLORS = {
   offBlack: '#161616',
 };
 
+const PALETTE = {
+  text: {
+    primary: COLORS.white,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+  background: {
+    primary: COLORS.tertiary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+};
+
+
 export const FONTS = {
   title: { fontFamily: '', fontSize: '', letterSpacing: '', lineHeight: '' },
   body: {
@@ -98,15 +112,21 @@ const TYPOGRAPHY = {
   },
 };
 
+const GLOBALS = {
+  heroHeight: '240px',
+  heroBgColor: COLORS.primary,
+  headerOpacity: '1',
+  videoBreakPoint: 700,
+  maxSectionWidth: '1800px',
+};
+
 export var event_theme = {
   colors: { ...COLORS },
   typography: { ...TYPOGRAPHY },
+  palette: { ...PALETTE },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  heroBgColor: 'white',
-  heroHeight: '500px',
-  headerOpacity: '0.75',
-  videoBreakPoint: 550,
-  maxSectionWidth: '1800px',
+  ...GLOBALS
+
 };
