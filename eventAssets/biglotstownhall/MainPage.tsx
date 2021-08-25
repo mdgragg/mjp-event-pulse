@@ -126,7 +126,7 @@ const LandingPage = ({ main_event }) => {
       <PlayerBody>
         <LinkBox__StickyTop__WithCountdown
           start={main_event.eventStartEnd.StartDateTime}
-          offset={5}
+          offset={20}
           prefix={
             <h2
               style={{
