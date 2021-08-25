@@ -109,6 +109,10 @@ const Index = (props) => {
                 src={main_event.streamLinks[0].url}
                 showBefore={
                   <BoxedCounter
+                    styles={{
+                      textColor: event_theme.colors.primary,
+                      boxColor: event_theme.colors.white,
+                    }}
                     event={main_event}
                     prefix={
                       <>

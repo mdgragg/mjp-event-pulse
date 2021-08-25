@@ -21,12 +21,12 @@ const COLORS = {
 
 const PALETTE = {
   text: {
-    primary: COLORS.primary,
+    primary: COLORS.white,
     secondary: COLORS.secondary,
     tertiary: COLORS.tertiary,
   },
   background: {
-    primary: COLORS.primary,
+    primary: COLORS.tertiary,
     secondary: COLORS.secondary,
     tertiary: COLORS.tertiary,
   },
