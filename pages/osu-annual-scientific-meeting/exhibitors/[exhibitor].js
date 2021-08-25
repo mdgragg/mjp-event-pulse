@@ -15,7 +15,7 @@ import PublicChat from 'components/template1/ChatBox/PublicChat';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { BackButton } from 'components/template1/Elements/';
-import { withApollo } from 'next-with-apollo';
+
 
 const SingleExhibitor = (props) => {
   // const router = useRouter();

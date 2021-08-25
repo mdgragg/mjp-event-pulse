@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
+import { useCalculateIfStarted } from "hooks";
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
@@ -23,6 +24,8 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
+  const hasStartEnd = useCalculateIfStarted(main_event)
+
   return (
     <Page theme={theme}>
       <AuthWrap
@@ -36,8 +39,7 @@ const Index = (props) => {
         }
         callback={(creds) => {
           toast.success(
-            `Hello ${
-              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+            `Hello ${creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
             }, welcome to Big Lots Q1 Virtual Town Hall`
           );
         }}
@@ -81,7 +83,7 @@ const Index = (props) => {
       >
         <Meta title={event_meta.EventJobName}> </Meta>
         <Body>
-          <MainPage main_event={main_event} />
+          <MainPage main_event={main_event} hasStartEnd={hasStartEnd} />
           {/* <LandingPage main_event={main_event} /> */}
         </Body>
       </AuthWrap>

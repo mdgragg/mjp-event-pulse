@@ -17,6 +17,20 @@ export const COLORS = {
   offBlack: '#161616',
 };
 
+const PALETTE = {
+  text: {
+    primary: COLORS.white,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+  background: {
+    primary: COLORS.primary,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+};
+
+
 export const FONTS = {
   title: {
     fontFamily: 'Futura Bold',
@@ -83,6 +97,27 @@ export const BUTTONS = {
     backgroundColor: 'white',
   },
 };
+const TYPOGRAPHY = {
+  h1: {
+    color: COLORS.secondary,
+    ...FONTS.title,
+  },
+  h2: {
+    ...FONTS.title,
+    color: COLORS.secondary,
+    fontSize: 'clamp(1.25rem, 10vw, 1rem)',
+
+  },
+  h3: {
+    color: COLORS.tertiary,
+  },
+  h4: {
+    fontSize: '1rem',
+    color: COLORS.white,
+    lineHeight: '2rem',
+  },
+};
+
 
 export const BREAKPOINTS = {
   xl: 1920,
@@ -92,15 +127,22 @@ export const BREAKPOINTS = {
   xs: 500,
 };
 
+const GLOBALS = {
+  heroHeight: '240px',
+  heroBgColor: COLORS.primary,
+  headerOpacity: '1',
+  videoBreakPoint: 700,
+  maxSectionWidth: '1800px',
+};
+
 var event_theme = {
   colors: { ...COLORS },
+  palette: { ...PALETTE },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
+  typography: { ...TYPOGRAPHY },
   breakpoints: { ...BREAKPOINTS },
-  headerHeight: '200px',
-  headerOpacity: '0.75',
-  videoBreakPoint: 0,
-  maxSectionWidth: '1800px',
+  ...GLOBALS,
 };
 
 export default event_theme;

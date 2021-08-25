@@ -49,12 +49,15 @@ const Box = styled.div`
   height: auto;
   flex-wrap: wrap;
   margin: auto;
-  color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
+  color: ${(props) =>
+    props.styles?.textColor || props.theme.palette.text.primary};
+
   && .section {
     display: inline-flex;
     flex-wrap: wrap;
   }
   && div.box {
+    box-shadow: var(--mjp-shadow);
     height: 0;
     padding-top: 20%;
     min-width: 70px;
@@ -62,7 +65,7 @@ const Box = styled.div`
     width: 20%;
     margin: 0.25rem;
     background-color: ${(props) =>
-      props.styles?.boxColor || props.theme.colors.secondary};
+      props.styles?.boxColor || props.theme.palette.background.primary};
     display: flex;
     flex-direction: column;
     align-items: center;

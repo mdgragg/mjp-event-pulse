@@ -2,9 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import DateParse from 'components/__Assets__/DateParse';
+import Center from 'components/Center';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
+import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
+import { Replacer } from 'components/__Assets__';
 import { BoxedCounter } from 'components/Counters';
 import event_theme from 'eventAssets/biglots/theme.theme';
+import Before from 'components/LinkBoxes/Before';
+
+const Wrap = styled.div`
+  position: relative;
+`;
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
   background-color: ${(props) => props.theme.colors.orange};
@@ -93,75 +101,69 @@ const PlayerBody = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-const LandingPage = ({ main_event }) => {
+const LandingPage = ({ main_event, hasStartEnd }) => {
   return (
-    <BG>
-      <Header>
-        <Inner>
-          <div className="date">
-            <i>
-              <DateParse date={main_event.eventStartEnd.StartDateTime} />
-            </i>
+    <Wrap>
+      <BG>
+        <Header>
+          <Inner>
+            <div className="date">
+              <i>
+                <DateParse date={main_event.eventStartEnd.StartDateTime} />
+              </i>
 
-            <Counter__JustNumbers
-              event={main_event}
-              afterStarted={<div>Live Now!</div>}
-              afterEnded={<div>This Event Has Ended</div>}
-            />
-          </div>
-          <div className="title">
-            <h2>
-              Big Lots <br /> Q2 Virtual Town Hall
-            </h2>
-          </div>
-          <div className="logo-holder">
-            <img
-              src={main_event?.LogoLink[0]?.Media.url}
-              alt="Big Lots logo B!"
-            />
-          </div>
-        </Inner>
-      </Header>
-
-      <PlayerBody>
-        <LinkBox__StickyTop__WithCountdown
-          start={main_event.eventStartEnd.StartDateTime}
-          offset={20}
-          prefix={
-            <h2
-              style={{
-                color: event_theme.colors.primary,
-                fontFamily: event_theme.fonts.primary.fontFamily,
-              }}
-            >
-              Join the Zoom Webinar
-            </h2>
-          }
-          showBefore={
-            <>
-              <BoxedCounter
-                prefix={
-                  <h2
-                    style={{
-                      color: event_theme.colors.primary,
-                      fontFamily: event_theme.fonts.primary.fontFamily,
-                    }}
-                  >
-                    Join Us Live In:
-                  </h2>
-                }
+              <Counter__JustNumbers
                 event={main_event}
-                styles={{
-                  boxColor: event_theme.colors.primary,
-                  textColor: event_theme.colors.secondary,
-                }}
+                afterStarted={<div>Live Now!</div>}
+                afterEnded={<div>This Event Has Ended</div>}
               />
-            </>
-          }
-          link={{ href: main_event.streamLinks[0].url, allowed: true }}
-        />
-      </PlayerBody>
-    </BG>
+            </div>
+            <div className="title">
+              <h2>
+                Big Lots <br /> Q2 Virtual Town Hall
+              </h2>
+            </div>
+            <div className="logo-holder">
+              <img
+                src={main_event?.LogoLink[0]?.Media.url}
+                alt="Big Lots logo B!"
+              />
+            </div>
+          </Inner>
+        </Header>
+
+        <PlayerBody>
+          <Replacer
+            showIfFalse={null}
+            showIfTrue={
+              <div style={{ margin: '1rem' }}>
+                <Center>
+                  <h2>
+                    Enjoy the Pre-Show! <br />
+                    The Q2 Town Hall will begin at 10AM EST
+                  </h2>
+                </Center>
+              </div>
+            }
+            decider={true}
+          ></Replacer>
+
+          <Video__StickyTop__WithCountdown
+            start={main_event.eventStartEnd.StartDateTime}
+            showMinutesBefore={20}
+            showBefore={
+              <>
+                <Before
+                  main_event={main_event}
+                  imgSrc={main_event.LogoLink[1].Media.url}
+                />
+              </>
+            }
+            src={main_event.streamLinks[0].url}
+          />
+        </PlayerBody>
+      </BG>
+    </Wrap>
   );
 };
 
