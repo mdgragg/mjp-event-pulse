@@ -11,7 +11,6 @@ import {
 } from './Modals';
 import { tokenGenerator } from 'lib/helpers';
 import { AppContext } from 'context/AppContext';
-import { Modal } from '@material-ui/core';
 
 const StyledAuthWrap = styled.div`
   &&.blurred {
@@ -25,7 +24,7 @@ const StyledAuthWrap = styled.div`
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    z-index: 100;
+    z-index: 1000;
   }
 `;
 

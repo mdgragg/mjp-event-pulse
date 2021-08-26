@@ -101,17 +101,14 @@ const PlayerBody = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-const LandingPage = ({ main_event, hasStartEnd }) => {
+const LandingPage = ({ main_event, hasStartEnd, hasAuth }) => {
   return (
     <Wrap>
       <BG>
         <Header>
           <Inner>
             <div className="date">
-              <i>
-                <DateParse date={main_event.eventStartEnd.StartDateTime} />
-              </i>
-
+              Friday, August 27, 2021 | 10 a.m. EDT
               <Counter__JustNumbers
                 event={main_event}
                 afterStarted={<div>Live Now!</div>}
@@ -139,28 +136,29 @@ const LandingPage = ({ main_event, hasStartEnd }) => {
               <div style={{ margin: '1rem' }}>
                 <Center>
                   <h2>
-                    Enjoy the Pre-Show! <br />
-                    The Q2 Town Hall will begin at 10AM EST
+                    Enjoy the pre-show! <br />
+                    The event will begin at 10 a.m. EDT.
                   </h2>
                 </Center>
               </div>
             }
-            decider={true}
+            decider={!hasStartEnd.hasStarted}
           ></Replacer>
-
-          <Video__StickyTop__WithCountdown
-            start={main_event.eventStartEnd.StartDateTime}
-            showMinutesBefore={20}
-            showBefore={
-              <>
-                <Before
-                  main_event={main_event}
-                  imgSrc={main_event.LogoLink[1].Media.url}
-                />
-              </>
-            }
-            src={main_event.streamLinks[0].url}
-          />
+          {hasAuth && (
+            <Video__StickyTop__WithCountdown
+              start={main_event.eventStartEnd.StartDateTime}
+              showMinutesBefore={20}
+              showBefore={
+                <>
+                  <Before
+                    main_event={main_event}
+                    imgSrc={main_event.LogoLink[1].Media.url}
+                  />
+                </>
+              }
+              src={main_event.streamLinks[0].url}
+            />
+          )}
         </PlayerBody>
       </BG>
     </Wrap>

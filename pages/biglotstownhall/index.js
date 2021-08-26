@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Router, useRouter } from 'next/router';
-import { useCalculateIfStarted } from "hooks";
+import { useContext } from 'react';
+import { useCalculateIfStarted } from 'hooks';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
@@ -8,7 +7,7 @@ import MainPage from 'eventAssets/biglotstownhall/MainPage';
 import Meta from 'components/globals/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
-
+import { AppContext } from 'context/AppContext';
 import { toast } from 'react-toastify';
 import AuthWrap from 'components/AuthWrap';
 import event_theme from 'eventAssets/biglots/theme.theme';
@@ -24,7 +23,11 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStartEnd = useCalculateIfStarted(main_event)
+  const hasStartEnd = useCalculateIfStarted(main_event);
+
+  const {
+    state: { hasAuth },
+  } = useContext(AppContext);
 
   return (
     <Page theme={theme}>
@@ -32,14 +35,15 @@ const Index = (props) => {
         eventToCheck={main_event}
         title={
           <>
-            Please Sign In to Join
+            Please sign in to join
             <br />
-            <strong> Big Lots' Q1 Town Hall</strong>
+            <strong> Big Lots' Q2 Virtual Town Hall</strong>
           </>
         }
         callback={(creds) => {
           toast.success(
-            `Hello ${creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+            `Hello ${
+              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
             }, welcome to Big Lots Q1 Virtual Town Hall`
           );
         }}
@@ -65,25 +69,24 @@ const Index = (props) => {
           </div>
         }
         headerContent={
-          <div
+          <img
             style={{
-              backgroundColor: event_theme.orange,
-              height: '80px',
-              width: '80px',
-              padding: '20px',
-              margin: '1rem auto',
+              height: 'auto',
+              width: '90%',
+              maxWidth: '100px',
+              padding: '1rem',
             }}
-          >
-            <img
-              style={{ height: 'auto', width: '90%' }}
-              src={main_event.LogoLink[0].Media.url}
-            />
-          </div>
+            src={main_event.LogoLink[1].Media.url}
+          />
         }
       >
         <Meta title={event_meta.EventJobName}> </Meta>
         <Body>
-          <MainPage main_event={main_event} hasStartEnd={hasStartEnd} />
+          <MainPage
+            main_event={main_event}
+            hasStartEnd={hasStartEnd}
+            hasAuth={hasAuth}
+          />
           {/* <LandingPage main_event={main_event} /> */}
         </Body>
       </AuthWrap>
