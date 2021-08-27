@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useCalculateIfStarted } from 'hooks';
 
 import { DateParse } from 'components/__Assets__';
+import Before from 'components/LinkBoxes/Before';
 import { Button__Big } from 'components/Buttons';
 import { CircleCounter } from 'components/Counters';
 import ExternalLink from 'components/Modals/ExternalLink';
@@ -121,12 +122,11 @@ const MainPage = ({ main_event, hasAuth }) => {
           <div className="title">
             <h2>{main_event.EventName}</h2>
             <div className="date" style={{ margin: '2rem' }}>
-              <i>
-                <DateParse
-                  date={main_event.eventStartEnd.StartDateTime}
-                  format={`dddd, MMMM D, YYYY`}
-                ></DateParse>
-              </i>
+              <DateParse
+                date={main_event.eventStartEnd.StartDateTime}
+                format={`dddd, MMMM DD`}
+              ></DateParse>{' '}
+              at 1:00 PM EST
             </div>
           </div>
           <div className="logo-holder">
@@ -145,13 +145,10 @@ const MainPage = ({ main_event, hasAuth }) => {
             start={main_event.eventStartEnd.StartDateTime}
             showMinutesBefore={30}
             showBefore={
-              <div>
-                <h2>Join Us Live In</h2>
-                <CircleCounter
-                  event={main_event}
-                  style={{ margin: '1rem auto' }}
-                />
-              </div>
+              <Before
+                imgSrc={main_event.LogoLink[1].Media.url}
+                main_event={main_event}
+              />
             }
             src={main_event.streamLinks[0].url}
           />
