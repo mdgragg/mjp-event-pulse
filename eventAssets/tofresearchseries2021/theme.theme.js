@@ -1,5 +1,5 @@
 export const COLORS = {
-  red: '#b71f39',
+  red: 'rbga(173,33,28)',
   orange: '#FF5600',
   yellow: '',
   green: '#97d700',
@@ -24,7 +24,7 @@ const PALETTE = {
     tertiary: COLORS.tertiary,
   },
   background: {
-    primary: COLORS.tertiary,
+    primary: COLORS.white,
     secondary: COLORS.secondary,
     tertiary: COLORS.tertiary,
   },

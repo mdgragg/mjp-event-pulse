@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { AppContext } from 'context/AppContext';
 import default_theme from 'eventAssets/biglots/theme.theme';
 
-export const EVENT_URL = 'biglots';
+export const EVENT_URL = 'biglotsvendorsummit';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
@@ -61,8 +61,7 @@ const Index = (props) => {
         }
         successCallback={(creds) => {
           toast.success(
-            `Hello ${
-              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+            `Hello ${creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
             }, welcome to ${main_event.EventName}`
           );
         }}

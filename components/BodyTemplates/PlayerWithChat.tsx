@@ -6,7 +6,7 @@ const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: 8fr 4fr;
-
+  background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   @media all and (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -34,21 +34,41 @@ const ChatBox = styled.div`
     margin: 0 auto;
   }
 `;
+type PlayerWithChat__Props = {
+  videoUrl: string;
+  chatUrl: string;
+  hasStarted: boolean;
+  children: React.ReactNode;
+  videoComponent?: React.ReactNode;
+  chatComponent?: React.ReactNode;
+};
 
-const PlayerWithChat = ({ videoUrl, chatUrl, hasStarted, children }) => {
+const PlayerWithChat = ({
+  videoUrl,
+  chatUrl,
+  hasStarted,
+  children,
+  videoComponent,
+  chatComponent,
+}: PlayerWithChat__Props) => {
   return (
     <BodyWrap>
       <VideoBox>
         <div className="video-holder">
-          <VideoBox__StickyTop
-            isStarted={hasStarted}
-            src={videoUrl}
-          ></VideoBox__StickyTop>
+          {videoComponent ? (
+            videoComponent
+          ) : (
+            <VideoBox__StickyTop isStarted={hasStarted} src={videoUrl} />
+          )}
         </div>
         <div className="children">{children}</div>
       </VideoBox>
       <ChatBox>
-        <Fluid__iFrame src={chatUrl}></Fluid__iFrame>
+        {chatComponent ? (
+          chatComponent
+        ) : (
+          <Fluid__iFrame src={chatUrl}></Fluid__iFrame>
+        )}
       </ChatBox>
     </BodyWrap>
   );

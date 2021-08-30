@@ -33,7 +33,8 @@ const Wrap = styled.div`
 
 const Title = styled.div`
   text-transform: uppercase;
-  color: ${(props) => props.styles?.textColor || props.theme.colors.primary};
+  color: ${(props) =>
+    props.styles?.textColor || props.theme.palette.text.primary};
   font-family: ${(props) => props.theme.fonts.body.fontFamily};
   font-size: 1.5rem;
   font-weight: 800;
@@ -77,14 +78,14 @@ const Box = styled.div`
     position: absolute;
     top: 20%;
     font-weight: 600;
-    font-size: clamp(18px, 190%, 3rem);
+    font-size: clamp(18px, 160%, 3rem);
     line-height: clamp(12px, 9vw, 1.5rem);
   }
   && .delimiter {
     font-family: Avenir;
     position: absolute;
     top: 70%;
-    font-size: clamp(1px, 1vi, 2.5rem);
+    font-size: clamp(1px, 70%, 2.5rem);
     line-height: clamp(10px, 8vw, 1rem);
     font-weight: 800;
     letter-spacing: 2px;

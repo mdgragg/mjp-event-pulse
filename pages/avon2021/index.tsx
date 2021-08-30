@@ -42,11 +42,7 @@ const Index = (props) => {
             src={main_event.LogoLink[0].Media.url}
           />
           <Link href={'/avon2021/eng'}>
-            <Button__Big>WATCH IN ENGLISH</Button__Big>
-          </Link>
-
-          <Link href={'/avon2021/espanol'}>
-            <Button__Big>VER EN ESPAÑOL</Button__Big>
+            <Button__Big>This Event Has Ended</Button__Big>
           </Link>
         </div>
       </FullPage__WithBackground>

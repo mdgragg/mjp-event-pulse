@@ -1,7 +1,7 @@
 import { createTheme } from '@material-ui/core';
 
 const COLORS = {
-  red: '#b71f39',
+  red: 'rgba(173,33,28)',
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
@@ -20,7 +20,7 @@ const COLORS = {
 };
 const PALETTE = {
   text: {
-    primary: COLORS.primary,
+    primary: COLORS.red,
     secondary: COLORS.secondary,
     tertiary: COLORS.tertiary,
   },
@@ -62,7 +62,7 @@ export const BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: COLORS.tertiary,
+    backgroundColor: COLORS.red,
     fontColor: 'white',
     border: '',
   },
@@ -77,12 +77,13 @@ export const BUTTONS = {
   },
   big: {
     fontFamily: 'Roboto',
-    fontSize: '2rem',
+    fontSize: '1rem',
     letterSpacing: '2px',
     lineHeight: 'auto',
-    backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    backgroundColor: COLORS.red,
+    fontColor: COLORS.white,
     border: '5px solid white',
+
   },
   small: {
     fontFamily: '',
@@ -98,8 +99,8 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: 'white',
-    backgroundColor: COLORS.secondary,
+    fontColor: COLORS.red,
+    backgroundColor: COLORS.white,
   },
 };
 
@@ -113,20 +114,28 @@ const BREAKPOINTS = {
 
 const TYPOGRAPHY = {
   h1: {
-    color: COLORS.primary,
+    color: COLORS.red,
     ...FONTS.title,
   },
   h2: {
-    color: COLORS.primary,
+    color: COLORS.red,
     ...FONTS.body,
   },
   h3: {
-    color: COLORS.primary,
+    color: COLORS.red,
   },
   p: {
     ...FONTS.body,
   },
 };
+
+const GLOBALS = {
+  heroHeight: '500px',
+  heroBgColor: COLORS.secondary,
+  headerOpacity: '1',
+  videoBreakPoint: 700,
+  maxSectionWidth: '1800px',
+}
 
 export const default_theme = {
   ...createTheme(),
@@ -136,11 +145,7 @@ export const default_theme = {
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  heroHeight: '250px',
-  heroBgColor: COLORS.secondary,
-  headerOpacity: '0.1',
-  videoBreakPoint: 700,
-  maxSectionWidth: '1800px',
+  ...GLOBALS
 };
 
 export default default_theme;
