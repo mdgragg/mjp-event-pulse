@@ -34,7 +34,7 @@ const Wrap = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   color: ${(props) =>
-    props.styles?.textColor || props.theme.palette.text.primary};
+    props.styles?.textColor || props.theme.palette.text.secondary};
   font-family: ${(props) => props.theme.fonts.body.fontFamily};
   font-size: 1.5rem;
   font-weight: 800;
@@ -51,7 +51,7 @@ const Box = styled.div`
   flex-wrap: wrap;
   margin: auto;
   color: ${(props) =>
-    props.styles?.textColor || props.theme.palette.text.primary};
+    props.styles?.textColor || props.theme.palette.text.secondary};
 
   && .section {
     display: inline-flex;
@@ -66,7 +66,7 @@ const Box = styled.div`
     width: 20%;
     margin: 0.25rem;
     background-color: ${(props) =>
-      props.styles?.boxColor || props.theme.palette.background.primary};
+      props.styles?.boxColor || props.theme.palette.background.secondary};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,6 +101,7 @@ type BoxedCounter__Props = {
   };
   prefix?: React.ReactNode | string;
   variant?: Variants;
+  [x: string]: any;
 };
 
 const BoxedCounter = ({
@@ -108,6 +109,7 @@ const BoxedCounter = ({
   styles,
   prefix,
   variant = Variants.primary,
+  ...other
 }: BoxedCounter__Props): JSX.Element | null => {
   const obj = useCalculateRemaining(event);
 
@@ -131,7 +133,7 @@ const BoxedCounter = ({
 
   if (obj) {
     return (
-      <Wrap>
+      <Wrap {...other}>
         {prefix && <Title styles={styles}>{prefix}</Title>}
         <Box styles={styles}>
           <div className="section">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 import styled from 'styled-components';
 
 const FrameWrap = styled.div`
@@ -12,7 +12,17 @@ const FrameWrap = styled.div`
     min-height: inherit;
   }
 `;
-const Fluid__iFrame = ({ src = '/', options, minHeight, iFrameStyle }) => {
+
+type Fluid__IFrame__Props = {
+  src: string;
+  minHeight?: string;
+  iFrameStyle?: {};
+};
+const Fluid__iFrame = ({
+  src = '/',
+  minHeight,
+  iFrameStyle,
+}: Fluid__IFrame__Props) => {
   return (
     <FrameWrap minHeight={minHeight}>
       <iframe src={src} frameBorder="0" style={{ ...iFrameStyle }}></iframe>

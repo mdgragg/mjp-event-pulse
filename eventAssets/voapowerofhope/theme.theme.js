@@ -4,7 +4,7 @@ const COLORS = {
   red: 'rgba(173,33,28)',
   orange: '#FF5600',
   yellow: '#eace28',
-  green: '#97d700',
+  green: 'rgba(123,161,61)',
   blue: '#1e2c60',
   indigo: '#0d2f49',
   violet: '#5602b7',
@@ -21,12 +21,12 @@ const COLORS = {
 const PALETTE = {
   text: {
     primary: COLORS.red,
-    secondary: COLORS.secondary,
+    secondary: COLORS.white,
     tertiary: COLORS.tertiary,
   },
   background: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
+    primary: COLORS.white,
+    secondary: COLORS.green,
     tertiary: COLORS.tertiary,
   },
 };
@@ -62,7 +62,7 @@ export const BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: COLORS.red,
+    backgroundColor: COLORS.green,
     fontColor: 'white',
     border: '',
   },

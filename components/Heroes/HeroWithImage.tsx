@@ -66,7 +66,7 @@ type HeroWithImage__Props = {
 };
 
 const HeroWithImage = ({ bgImage, imgSrc, children }: HeroWithImage__Props) => {
-  const theme = useContext(ThemeContext);
+  const theme: any = useContext(ThemeContext);
   return (
     <HeroWrap>
       <HeroBgImage src={bgImage || theme.header_image} />

@@ -19,6 +19,7 @@ import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Button__Big, Button__Primary } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Before from 'components/LinkBoxes/Before';
+import VOAHeader from './VoaHeader';
 
 const VideoWrap = styled.div`
   display: flex;
@@ -31,11 +32,13 @@ const VideoComponent = ({ main_event }) => (
   <VideoWrap>
     <Video__StickyTop__WithCountdown
       src={main_event.streamLinks[0].url}
+      start={main_event.eventStartEnd.StartDateTime}
       showMinutesBefore={30}
       showBefore={
         <Before
           main_event={main_event}
           imgSrc={main_event.LogoLink[0].Media.url}
+          counterProps={{ styles: { boxColor: default_theme.colors.red } }}
         />
       }
     ></Video__StickyTop__WithCountdown>
@@ -69,9 +72,10 @@ const Index = (props) => {
   return (
     <Page theme={event_theme}>
       <Meta title={event_meta.EventJobName}> </Meta>
-      <HeroWithImage />
+      <VOAHeader main_event={main_event} />
       <BodyWrap>
         <div
+          id="event"
           style={{
             width: '90%',
             minHeight: '80vh',

@@ -47,13 +47,23 @@ const Inner = styled.div`
     height: 100%;
   }
 `;
-const Before = ({ imgSrc, main_event }) => {
+
+type Before__Props = {
+  imgSrc: string;
+  main_event: {};
+  [x: string]: any;
+};
+const Before = ({ imgSrc, main_event, counterProps }: Before__Props) => {
   return (
     <Wrap>
       <Inner>
         {imgSrc && <img src={imgSrc} alt="logo" />}
         <div className="counter counter1">
-          <BoxedCounter event={main_event} prefix={`Join Us Live In:`} />
+          <BoxedCounter
+            event={main_event}
+            prefix={`Join Us Live In:`}
+            {...counterProps}
+          />
         </div>
         <div className="counter counter2">
           <Counter__JustNumbers event={main_event} />
