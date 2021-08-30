@@ -65,4 +65,7 @@ const Before = ({ imgSrc, main_event }) => {
 
 Before.propTypes = {};
 
+Before.defaultProps = {
+  imgSrc: 'https://placehold.co/250x250',
+};
 export default Before;

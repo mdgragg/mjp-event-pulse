@@ -146,7 +146,7 @@ const MainPage = ({ main_event, hasAuth }) => {
             showMinutesBefore={30}
             showBefore={
               <Before
-                imgSrc={main_event.LogoLink[1].Media.url}
+                imgSrc={main_event?.LogoLink[1]?.Media.url}
                 main_event={main_event}
               />
             }
