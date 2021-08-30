@@ -19,7 +19,7 @@ import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Button__Big, Button__Primary } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Before from 'components/LinkBoxes/Before';
-import VOAHeader from './VoaHeader';
+import VOAHeader from 'eventAssets/voapowerofhope/VoaHeader';
 
 const VideoWrap = styled.div`
   display: flex;
