@@ -54,6 +54,7 @@ type Before__Props = {
   [x: string]: any;
 };
 const Before = ({ imgSrc, main_event, counterProps }: Before__Props) => {
+  // test s
   return (
     <Wrap>
       <Inner>
