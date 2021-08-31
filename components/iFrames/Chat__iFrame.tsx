@@ -16,7 +16,12 @@ const FrameWrap = styled.div`
     min-height: inherit;
   }
 `;
-const Chat__iFrame = ({ src = '/', options }) => {
+
+type Chat__iFrame__Props = {
+  src: string;
+  options?: {};
+};
+const Chat__iFrame = ({ src = '/', options }: Chat__iFrame__Props) => {
   return (
     <FrameWrap>
       <iframe src={src} frameBorder="0"></iframe>

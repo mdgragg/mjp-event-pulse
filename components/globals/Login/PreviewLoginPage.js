@@ -45,6 +45,7 @@ const LoginPage = ({ children, redirect = './', EVENT_URL = '' }) => {
   // redirect = redirect + EVENT_URL;
 
   const handleSetPreview = async () => {
+    console.log(creds)
     await fetch('/api/validate_preview_password', {
       method: 'POST',
       headers: {

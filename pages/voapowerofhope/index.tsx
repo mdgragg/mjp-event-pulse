@@ -29,7 +29,7 @@ const VideoWrap = styled.div`
   align-self: center;
 `;
 
-const VideoComponent = ({ main_event }) => (
+const VideoComponent = ({ main_event }: any) => (
   <VideoWrap>
     <Video__StickyTop__WithCountdown
       src={main_event.streamLinks[0].url}

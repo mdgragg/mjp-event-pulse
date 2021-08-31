@@ -53,7 +53,17 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs({ data, initialTab = 0 }) {
+type SingleTab = {
+  content: React.ReactNode;
+  title: string;
+};
+
+type SimpleTabs__Props = {
+  data: SingleTab[];
+  initialTab?: number;
+};
+
+const SimpleTabs = ({ data, initialTab = 0 }: SimpleTabs__Props) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -64,6 +74,7 @@ export default function SimpleTabs({ data, initialTab = 0 }) {
     // console.log(event, newValue);
     setValue(newValue);
   };
+
   if (!data) return <></>;
   return (
     <TabBarHolder>
@@ -92,4 +103,6 @@ export default function SimpleTabs({ data, initialTab = 0 }) {
         ))}
     </TabBarHolder>
   );
-}
+};
+
+export default SimpleTabs;

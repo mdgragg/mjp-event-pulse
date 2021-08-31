@@ -12,6 +12,7 @@ const StyledPage = styled.div`
   min-height: 100vh;
   z-index: 0;
   min-width: 100vw;
+background-color: ${props => props.theme.palette.background.primary};
   /* overflow: hidden; */
 
   h1 {

@@ -11,7 +11,6 @@ const handler = async (req, res) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        authorization: `Bearer ${'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTYxODc3NTU5NSwiZXhwIjoxNjUwMzExNTk1fQ.zUE-AqcjjuXvGupK9fqypnVeoRD1XzpKOJ4yCUbg2mI'}`,
       },
       body: JSON.stringify({ pw }),
     }

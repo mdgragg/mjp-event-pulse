@@ -57,7 +57,11 @@ const PlaceholderContent = styled.div`
     }
   }
 `;
-const VideoPlaceholder = ({ main_event }: any) => {
+
+type Props = {
+  main_event: any;
+};
+const VideoPlaceholder = ({ main_event }: Props) => {
   const theme: any = useContext(ThemeContext);
 
   return (
