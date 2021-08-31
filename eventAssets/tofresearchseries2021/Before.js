@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {ThemeContext} from 'styled-components';
 import { BoxedCounter, Counter__JustNumbers } from 'components/Counters';
+import { useContext } from 'react';
 
 const Wrap = styled.div`
   background-color: white;
@@ -48,12 +49,13 @@ const Inner = styled.div`
   }
 `;
 const Before = ({ src, main_event }) => {
+  const theme = useContext(ThemeContext)
   return (
     <Wrap>
       <Inner>
         <img src={src} alt="logo" />
         <div className="counter counter1">
-          <BoxedCounter event={main_event} prefix={`Join Us Live In:`} />
+          <BoxedCounter event={main_event} prefix={`Join Us Live In:`}  styles={{textColor: theme.palette.text.secondary, titleColor: theme.palette.text.primary}}/>
         </div>
         <div className="counter counter2">
           <Counter__JustNumbers event={main_event} />

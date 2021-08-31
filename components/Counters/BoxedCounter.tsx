@@ -34,7 +34,7 @@ const Wrap = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   color: ${(props) =>
-    props.styles?.textColor || props.theme.palette.text.secondary};
+    props.styles?.titleColor || props.theme.palette.text.secondary};
   font-family: ${(props) => props.theme.fonts.body.fontFamily};
   font-size: 1.5rem;
   font-weight: 800;

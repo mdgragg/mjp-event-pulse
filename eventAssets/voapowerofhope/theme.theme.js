@@ -5,7 +5,7 @@ const COLORS = {
   orange: '#FF5600',
   yellow: '#eace28',
   green: 'rgba(123,161,61)',
-  blue: '#1e2c60',
+  blue: '#0166ab',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
@@ -32,14 +32,14 @@ const PALETTE = {
 };
 const FONTS = {
   title: {
-    fontFamily: 'Roboto ',
+    fontFamily: 'Meta Pro',
     fontSize: 'clamp(1.5rem, 20vw, 2rem)',
     letterSpacing: '',
     fontWeight: '800',
     lineHeight: '3rem',
   },
   body: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Meta Pro',
     fontWeight: '200',
     fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
@@ -58,7 +58,7 @@ const FONTS = {
 
 export const BUTTONS = {
   primary: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Meta Pro',
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
@@ -76,7 +76,7 @@ export const BUTTONS = {
     border: '',
   },
   big: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Meta Pro',
     fontSize: '1rem',
     letterSpacing: '2px',
     lineHeight: 'auto',

@@ -8,68 +8,39 @@ import { useContext } from 'react';
 import { BoxedCounter, Counter__JustNumbers } from 'components/Counters';
 import { Button__Primary } from 'components/Buttons';
 
-const breatheAnimation = keyframes`
-0% { transform: scale(1.2) }
-50% {transform: scale(1.3) }
-100% {transform: scale(1.2) }
-`;
-
 const HeroWrap = styled.div`
-  position: relative;
-  min-height: min-content;
-  max-height: max-content;
-  width: clamp(100vw, 100vw, 1200px);
-  overflow: hidden;
-  text-align: center;
-`;
-
-const HeroBgImage = styled.img`
-  width: 100%;
-  margin: auto;
-  height: auto;
-  /* max-height: 500px; */
-  /* position: fixed; */
-  z-index: -1;
-`;
-
-const HeroContent = styled.div`
-  position: absolute;
-  display: grid;
-  width: 90%;
-  height: 100%;
-  margin: auto;
-  grid-template-columns: 50% 50%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  z-index: 1000;
-  pointer-events: all;
-  && div.logo-counter__div {
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
+  padding: 2rem 0;
+  width: 100%;
   && img.logo {
-    width: 50%;
+    max-width: 250px;
   }
-  && .counter--numbers {
-    display: none;
-  }
-  @media all and (max-width: 1200px) {
-    && .counter {
-      display: none;
-    }
+  @media all and (max-width: 550px) {
+    padding: 1rem;
+    min-height: unset;
     && img.logo {
-      width: 80%;
+      max-width: 150px;
     }
-    && .counter--numbers {
-      display: block;
-      width: 50%;
-      font-size: 0.75rem;
-      color: ${(props) => props.theme.colors.green};
-      font-weight: 800;
-      text-align: left;
+  }
+`;
+
+const Sayings = styled.div`
+  display: grid;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  grid-template-columns: repeat(3, 33%);
+  color: ${(props) => props.theme.colors.blue};
+  font-weight: 600;
+  @media all and (max-width: 550px) {
+    grid-template-columns: 1fr;
+    && div {
+      margin: 0.15rem;
+      font-size: 1rem;
     }
   }
 `;
@@ -84,20 +55,12 @@ const VOAHeader = ({ main_event, children }: VOAHeroWithImage__Props) => {
   const theme: any = useContext(ThemeContext);
   return (
     <HeroWrap>
-      <HeroContent>
-        <div className="logo-counter__div">
-          <img className="logo" src={main_event.LogoLink[1].Media.url} />
-          <BoxedCounter event={main_event} className="counter" />
-          <div className="counter--numbers">
-            <Counter__JustNumbers event={main_event} />
-          </div>
-          <a href="#event">
-            <Button__Primary>Take Me There</Button__Primary>
-          </a>
-        </div>
-        <div></div>
-      </HeroContent>
-      <HeroBgImage src={theme.header_image} />
+      <img className="logo" src={main_event.LogoLink[0].Media.url} alt="" />
+      <Sayings>
+        <div>Offer Hope</div>
+        <div>Restore Dignity</div>
+        <div>Transform Lives</div>
+      </Sayings>
     </HeroWrap>
   );
 };

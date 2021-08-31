@@ -20,6 +20,7 @@ import { Button__Big, Button__Primary } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Before from 'components/LinkBoxes/Before';
 import VOAHeader from 'eventAssets/voapowerofhope/VoaHeader';
+import VideoPlaceholder from 'eventAssets/voapowerofhope/VideoPlaceholder';
 
 const VideoWrap = styled.div`
   display: flex;
@@ -34,13 +35,7 @@ const VideoComponent = ({ main_event }) => (
       src={main_event.streamLinks[0].url}
       start={main_event.eventStartEnd.StartDateTime}
       showMinutesBefore={30}
-      showBefore={
-        <Before
-          main_event={main_event}
-          imgSrc={main_event.LogoLink[0].Media.url}
-          counterProps={{ styles: { boxColor: default_theme.colors.red } }}
-        />
-      }
+      showBefore={<VideoPlaceholder main_event={main_event} />}
     ></Video__StickyTop__WithCountdown>
     <a
       style={{ margin: 'auto' }}
@@ -63,11 +58,7 @@ const Index = (props) => {
     ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
-
-  const {
-    setAuth,
-    state: { hasAuth },
-  } = useContext(AppContext);
+  const hasStartEnd = useCalculateIfStarted(main_event);
 
   return (
     <Page theme={event_theme}>

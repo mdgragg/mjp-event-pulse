@@ -8,6 +8,7 @@ const BodyWrap = styled.div`
   grid-template-columns: 8fr 4fr;
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
+  width: auto;
   @media all and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
