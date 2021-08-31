@@ -20,11 +20,11 @@ export const COLORS = {
 const PALETTE = {
   text: {
     primary: COLORS.white,
-    secondary: COLORS.secondary,
+    secondary: COLORS.white,
     tertiary: COLORS.tertiary,
   },
   background: {
-    primary: COLORS.white,
+    primary: COLORS.blue,
     secondary: COLORS.secondary,
     tertiary: COLORS.tertiary,
   },
