@@ -34,7 +34,7 @@ const PreviousVideos = (props: props) => {
       );
     }
   }, [links]);
-  if (!videoLinks) {
+  if (!videoLinks || videoLinks.length === 0) {
     return null;
   }
   return (
