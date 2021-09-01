@@ -30,7 +30,7 @@ const Agenda = (props) => {
       </div>
       <div>
         <div className="date">Wednesday, September 15</div>
-        <div className="detail">7:00 PM - Kol Nidr</div>
+        <div className="detail">7:00 PM - Kol Nidre</div>
       </div>
       <div>
         <div className="date">Thursday, September 16</div>
