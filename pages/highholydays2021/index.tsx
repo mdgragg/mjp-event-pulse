@@ -96,12 +96,12 @@ const Index = (props) => {
               chatComponent={
                 <TwoPanel
                   data={[
-                    {
-                      title: 'Chat',
-                      content: (
-                        <Chat__iFrame src={main_event.streamLinks[1].url} />
-                      ),
-                    },
+                    // {
+                    //   title: 'Chat',
+                    //   content: (
+                    //     <Chat__iFrame src={main_event.streamLinks[1].url} />
+                    //   ),
+                    // },
                     { title: 'Agenda', content: <Agenda /> },
                   ]}
                 />
