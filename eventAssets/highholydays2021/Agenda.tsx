@@ -25,14 +25,14 @@ const Agenda = (props) => {
       </div>
       <div>
         <div className="date">Tuesday, September 7 </div>
-        <div className="detail">10:00 AM - Rosh Hashana </div>
+        <div className="detail">10:00 AM - Rosh Hashanah </div>
       </div>
       <div>
-        <div className="date">Thursday, September 16</div>
+        <div className="date">Wednesday, September 15</div>
         <div className="detail">7:00 PM - Kol Nidr</div>
       </div>
       <div>
-        <div className="date">Friday, September 17 </div>
+        <div className="date">Thursday, September 16</div>
         <div className="detail">
           10:00 AM - Yom Kippur <br /> 4:30PM - Yizkor & Neilah
         </div>
