@@ -43,7 +43,7 @@ type CenteredPlayer__Props = {
   showing?: boolean;
   hasStarted: boolean;
   style?: {};
-  videoComponent: React.ReactNodes;
+  videoComponent?: React.ReactNode;
 };
 const CenteredPlayer = ({
   videoUrl,
