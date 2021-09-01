@@ -6,11 +6,12 @@ import { BoxedCounter, Counter__JustNumbers } from 'components/Counters';
 import { Button__Primary } from 'components/Buttons';
 
 const PlaceholderImage = styled.img`
-  width: 100%;
+  width: 102%;
   height: auto;
   position: relative;
   z-index: 1;
   margin-top: 7px;
+  margin-left: -1px;
 `;
 
 const PlaceholderContent = styled.div`
@@ -33,7 +34,7 @@ const PlaceholderContent = styled.div`
   }
 
   && img.logo {
-    width: 50%;
+    width: 70%;
   }
   && .counter--numbers {
     display: none;

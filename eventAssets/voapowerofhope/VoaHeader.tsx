@@ -31,9 +31,9 @@ const HeroWrap = styled.div`
 const Sayings = styled.div`
   display: grid;
   width: 100%;
-  max-width: 500px;
+  max-width: 448px;
   text-align: center;
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: repeat(3, auto);
   color: ${(props) => props.theme.colors.blue};
   font-weight: 600;
   @media all and (max-width: 550px) {

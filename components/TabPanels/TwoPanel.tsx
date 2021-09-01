@@ -12,13 +12,15 @@ const TabBarHolder = styled.div`
 `;
 
 const StyledAppBar = styled(AppBar)`
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.palette.background.secondary};
   z-index: 999;
+  color: ${(props) => props.theme.palette.text.secondary};
   && .Mui-selected {
-    background-color: ${(props) => props.theme.colors.tertiary};
+    background-color: ${(props) => props.theme.palette.background.tertiary};
+    color: ${(props) => props.theme.palette.text.secondary};
   }
   && .MuiTabs-indicator {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.palette.text.secondary};
   }
 `;
 

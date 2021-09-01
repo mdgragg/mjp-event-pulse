@@ -1,91 +1,11 @@
 import styled, { ThemeContext } from 'styled-components';
 import { useEffect, useMemo, useRef, useState, useContext } from 'react';
-
-const VideoPlaceholder = styled.div`
-  /* height: inherit; */
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  box-shadow: 0px 0px 12px -8px black;
-  &&.fixed {
-    height: auto;
-    padding-top: 56.25%; /* 16:9 */
-    display: block;
-    z-index: 1000;
-  }
-
-  &&.fixed > div {
-    position: fixed;
-    top: 2%;
-    left: 2%;
-    width: 96%;
-    max-width: 350px;
-    height: auto;
-    z-index: 1000;
-    padding: 0;
-    border-radius: 0;
-  }
-
-  @media all and (max-width: 768px) {
-    &&.fixed > div {
-      width: 96%;
-      max-width: 96%;
-    }
-  }
-`;
-
-const StyledPaper = styled.div`
-  min-width: inherit;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  box-shadow: var(--mjp-shadow);
-  &&.fixed {
-    position: fixed;
-    top: 2%;
-    left: 2%;
-    width: 96%;
-    height: auto;
-    z-index: 100;
-    padding: 0;
-    border-radius: 0;
-    /* &&.fixed > div {
-      height: 200px;
-    } */
-  }
-
-  @media (max-width: 768px) {
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: none;
-    border: none;
-    margin: -1px -1px -1px -1px;
-  }
-`;
-
-const CustomFrame = styled.iframe`
-  border: none;
-`;
-
-const StyledVideoBox = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-
-  && > iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-    border-radius: 0;
-  }
-`;
+import {
+  StyledIFrame,
+  StyledVideoBox,
+  StyledPaper,
+  StyledStickyTopVideoPlaceholder,
+} from './VideoBox__Styles';
 
 const VideoBox__StickyTop = ({ src, isStarted }) => {
   const [video_src, set_src] = useState();
@@ -99,7 +19,6 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
 
   function calculateFixed(e) {
     if (window.pageYOffset >= offsetVideoHeight && offsetVideoHeight > 0) {
-      console.log('adding fixed');
       wrapperRef?.current.classList.add('fixed');
     } else {
       wrapperRef?.current.classList.remove('fixed');
@@ -116,10 +35,10 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
   }, [isStarted]);
 
   return (
-    <VideoPlaceholder ref={wrapperRef}>
+    <StyledStickyTopVideoPlaceholder ref={wrapperRef}>
       <StyledPaper>
         <StyledVideoBox>
-          <CustomFrame
+          <StyledIFrame
             src={video_src}
             frameborder="0"
             allowfullscreen
@@ -130,7 +49,7 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
           />
         </StyledVideoBox>
       </StyledPaper>
-    </VideoPlaceholder>
+    </StyledStickyTopVideoPlaceholder>
   );
 };
 

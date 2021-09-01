@@ -3,32 +3,27 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import {
   StyledIFrame,
   StyledPaper,
+  StyledVideoBox,
   StyledVideoPlaceholder__Wrap,
 } from './VideoBox__Styles';
 
-const VideoBox = (props) => {
-  const [vidShow, setVidShow] = useState(true);
+type VideoBox__Props = {
+  src: string;
+};
+const VideoBox = ({ src }: VideoBox__Props) => {
   const wrapperRef = useRef();
   return (
-    <StyledVideoPlaceholder__Wrap ref={wrapperRef}>
-      <StyledPaper>
-        <FilterVideo vidShow={vidShow} src={props.src} />
-      </StyledPaper>
-    </StyledVideoPlaceholder__Wrap>
-  );
-};
-
-const FilterVideo = (props) => {
-  return (
-    <StyledIFrame
-      src={props.src}
-      // frameborder="0"
-      webkitallowfullscreen={true}
-      mozallowfullscreen={true}
-      allow="fullscreen"
-      allowfullscreen
-      controls="false"
-    />
+    <StyledVideoBox>
+      <StyledIFrame
+        src={src}
+        // frameborder="0"
+        webkitallowfullscreen={true}
+        mozallowfullscreen={true}
+        allow="fullscreen"
+        allowfullscreen
+        controls="false"
+      />
+    </StyledVideoBox>
   );
 };
 

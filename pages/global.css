@@ -1,17 +1,13 @@
 @font-face {
   font-family: 'Meta Pro';
-  src: url('../public/static/fonts/meta-pro/FFMetaProBookIt.ttf') format('ttf');
+  src: url('../public/static/fonts/meta-pro/MetaPro\ -\ Roman.woff')
+    format('woff');
 }
 
 @font-face {
   font-family: 'Meta Pro';
-  src: url('../public/static/fonts/meta-pro/FFMetaProLight.TTF') format('ttf');
-  font-weight: 100;
-}
-
-@font-face {
-  font-family: 'Meta Pro';
-  src: url('../public/static/fonts/meta-pro/FFMetaProBlk.TTF') format('ttf');
+  src: url('../public/static/fonts/meta-pro/MetaPro\ -\ Bold.woff')
+    format('woff');
   font-weight: 800;
 }
 

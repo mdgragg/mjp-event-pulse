@@ -12,10 +12,6 @@ const Hero = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  && h1 {
-    font-size: 3rem;
-    color: white;
-  }
   && .inner {
     text-align: center;
   }

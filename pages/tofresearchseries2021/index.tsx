@@ -54,7 +54,7 @@ const Index = (props) => {
     </AuthWrap>
   );
 };
-
+// comment
 export const getStaticProps: GetStaticProps = async () => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];

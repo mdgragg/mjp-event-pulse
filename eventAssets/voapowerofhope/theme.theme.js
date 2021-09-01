@@ -44,6 +44,7 @@ const FONTS = {
     fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
     lineHeight: 'auto',
+    margin: '0'
   },
   get primary() {
     return this.body;

@@ -1,7 +1,7 @@
 import { createTheme } from '@material-ui/core';
 
 const COLORS = {
-  red: '#b71f39',
+  red: '#76201D',
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
@@ -20,28 +20,28 @@ const COLORS = {
 };
 const PALETTE = {
   text: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    primary: COLORS.red,
+    secondary: COLORS.white,
+    tertiary: COLORS.white,
   },
   background: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    primary: COLORS.white,
+    secondary: COLORS.red,
+    tertiary: COLORS.red,
   },
 };
 const FONTS = {
   title: {
     fontFamily: 'Roboto ',
-    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
+    fontSize: '1.25rem',
     letterSpacing: '',
     fontWeight: '800',
-    lineHeight: '3rem',
+    lineHeight: 'auto',
   },
   body: {
     fontFamily: 'Roboto',
     fontWeight: '200',
-    fontSize: 'clamp(1.25rem, 20vw, 1rem)',
+    fontSize: '1rem',
     letterSpacing: '',
     lineHeight: 'auto',
   },
@@ -113,15 +113,16 @@ const BREAKPOINTS = {
 
 const TYPOGRAPHY = {
   h1: {
-    color: COLORS.primary,
+    color: COLORS.red,
     ...FONTS.title,
   },
   h2: {
-    color: COLORS.primary,
+    color: COLORS.red,
     ...FONTS.body,
   },
   h3: {
-    color: COLORS.primary,
+    color: COLORS.red,
+    fontSize: '2rem'
   },
   p: {
     ...FONTS.body,
@@ -137,7 +138,7 @@ export const default_theme = {
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
   heroHeight: '250px',
-  heroBgColor: COLORS.secondary,
+  heroBgColor: COLORS.white,
   headerOpacity: '0.1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',

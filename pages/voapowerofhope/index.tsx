@@ -42,7 +42,12 @@ const VideoComponent = ({ main_event }: any) => (
       href="https://donate.voa.org/site/Donation2;jsessionid=00000000.app30102b?df_id=20451&mfc_pref=T&20451.donation=form1&NONCE_TOKEN=8A2E6B5EE8588215399173CF8A2BFAFC&bbeml=tp-QpGS3s27wkeV6N6tQZs_Ww.j2fj3QvxMVk-J5OeuZ_Isjg.rifUU2_spyEy7P6l-N34XWA.lZlZZhk8dd0qV6dY_VYz_0A"
       className="href"
     >
-      <Button__Big>Yes, I believe hope can change lives</Button__Big>
+      <div style={{ marginTop: '2.5rem' }}>
+        <Center>
+          <p> I believe in the Power of Hope </p>
+          <Button__Big>GIVE HOPE</Button__Big>
+        </Center>
+      </div>
     </a>
   </VideoWrap>
 );

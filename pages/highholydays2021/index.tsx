@@ -19,6 +19,8 @@ import { default_theme } from 'eventAssets/highholydays2021/theme.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import Agenda from 'eventAssets/highholydays2021/Agenda';
 import { Section } from 'components/Sections';
+import { BoxedCounter } from 'components/Counters';
+import PreviousVideos from 'eventAssets/highholydays2021/PreviousVideos';
 
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'highholydays2021';
@@ -30,7 +32,7 @@ const Index = (props) => {
 
   var event_theme = {
     ...default_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
+    header_image: null,
   };
 
   const hasStarted = useCalculateIfStarted(main_event);
@@ -51,20 +53,23 @@ const Index = (props) => {
         <Meta title={event_meta.EventJobName}> </Meta>
         <FlexHero title={event_meta.EventJobName}>
           <div>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '350px',
-                margin: '2rem auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
+            <BoxedCounter event={main_event} prefix={`Join Us Live In`} />
           </div>
           <div>
             <Center>
-              <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-                {main_event.EventName}
-              </h1>
+              <img
+                style={{
+                  width: '100%',
+                  maxWidth: '350px',
+                  margin: '2rem auto',
+                }}
+                src={main_event.LogoLink[0]?.Media?.url || null}
+              />
+              <h1>{main_event.EventName}</h1>
+            </Center>
+          </div>
+          <div>
+            <Center>
               <h2 style={{ margin: 'auto' }}>
                 <i>
                   <DateParse date={main_event.eventStartEnd.StartDateTime} />
@@ -72,24 +77,15 @@ const Index = (props) => {
               </h2>
             </Center>
           </div>
-          <div>
-            <Center>
-              <h2>
-                <Counter__JustNumbers
-                  event={main_event}
-                  afterStarted={'Live Now!'}
-                  afterEnded={'Thank You for Attending'}
-                />
-              </h2>
-            </Center>
-          </div>
         </FlexHero>
         <Body>
           <div
             style={{
+              width: '95%',
               minHeight: '60vh',
               backgroundColor: 'none',
-              margin: '2rem',
+              margin: '2rem auto',
+              maxWidth: '1920px',
             }}
           >
             <PlayerWithChat
@@ -112,7 +108,9 @@ const Index = (props) => {
               }
             />
           </div>
-          <Section>GHello</Section>
+          <Section>
+            <PreviousVideos links={main_event.streamLinks} />
+          </Section>
           {main_event.Description && (
             <Banner__WithPicture
               imgUrl={main_event.LogoLink[0]?.Media?.url || null}
