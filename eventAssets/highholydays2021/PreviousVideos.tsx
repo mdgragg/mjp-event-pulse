@@ -20,7 +20,7 @@ const VideoGallery = styled.div`
 `;
 type props = { [x: string]: any };
 
-const PreviousVideos = (props): props => {
+const PreviousVideos = (props: props) => {
   const { links } = props;
 
   const [videoLinks, setVideoLinks] = useState(null);
