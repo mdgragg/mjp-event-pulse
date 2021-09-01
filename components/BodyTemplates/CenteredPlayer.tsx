@@ -43,24 +43,29 @@ type CenteredPlayer__Props = {
   showing?: boolean;
   hasStarted: boolean;
   style?: {};
+  videoComponent: React.ReactNodes;
 };
 const CenteredPlayer = ({
   videoUrl,
   showing = true,
   hasStarted,
   style = {},
+  videoComponent,
 }: CenteredPlayer__Props) => {
   return (
     <>
       <BodyWrap style={{ ...style }}>
         <VideoBox>
           <div className="video-holder">
-            {showing && (
-              <VideoBox__StickyTop
-                src={videoUrl}
-                isStarted={hasStarted}
-              ></VideoBox__StickyTop>
-            )}
+            {showing &&
+              (videoComponent ? (
+                videoComponent
+              ) : (
+                <VideoBox__StickyTop
+                  src={videoUrl}
+                  isStarted={hasStarted}
+                ></VideoBox__StickyTop>
+              ))}
           </div>
         </VideoBox>
       </BodyWrap>

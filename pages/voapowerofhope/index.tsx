@@ -81,13 +81,18 @@ const Index = (props) => {
             justifyContent: 'center',
           }}
         >
-          <PlayerWithChat
+          <CenteredPlayer
+            hasStarted={true}
+            videoUrl={main_event.streamLinks[0].url}
+            videoComponent={<VideoComponent main_event={main_event} />}
+          />
+          {/* <PlayerWithChat
             chatUrl={main_event.streamLinks[1].url}
             hasStarted={true}
             videoUrl={main_event.streamLinks[0].url}
             children={null}
             videoComponent={<VideoComponent main_event={main_event} />}
-          />
+          /> */}
         </div>
       </BodyWrap>
     </Page>

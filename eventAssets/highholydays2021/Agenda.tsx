@@ -25,6 +25,7 @@ const Agenda = (props) => {
       </div>
       <div>
         <div className="date">Tuesday, September 7 </div>
+        <div className="detail">9:00 AM - Tot Service </div>
         <div className="detail">10:00 AM - Rosh Hashanah </div>
       </div>
       <div>
@@ -33,9 +34,10 @@ const Agenda = (props) => {
       </div>
       <div>
         <div className="date">Thursday, September 16</div>
-        <div className="detail">
-          10:00 AM - Yom Kippur <br /> 4:30PM - Yizkor & Neilah
-        </div>
+        <div className="detail">9:00 AM - Tot Service </div>
+        <div className="detail">10:00 AM - Yom Kippur </div>
+        <div className="detail">1:00PM - Contemplative Music</div>
+        <div className="detail">4:30PM - Yizkor & Neilah</div>
       </div>
     </Wrap>
   );
