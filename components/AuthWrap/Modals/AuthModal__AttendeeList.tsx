@@ -115,7 +115,7 @@ export default function AuthModal__AttendeeList({
               : 'Please enter your information to proceed to the event'}
           </DialogContentText>
           <StyledForm
-            className={`${classes.root} ${formLoading ? 'loading' : false}`}
+            className={`${classes.form} ${formLoading ? 'loading' : false}`}
             noValidate
             onSubmit={(e) => {
               e.preventDefault();

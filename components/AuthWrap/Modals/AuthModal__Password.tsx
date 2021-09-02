@@ -103,7 +103,7 @@ export default function AuthModal__Password({
               </DialogContentText>
             )}
             <StyledForm
-              className={`${classes.root} ${formLoading ? 'loading' : false}`}
+              className={`${classes.form} ${formLoading ? 'loading' : false}`}
               noValidate
               autoComplete="off"
               onSubmit={(e) => {
