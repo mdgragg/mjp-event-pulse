@@ -93,6 +93,10 @@ const Index = (props) => {
             </div>
 
             <BoxedCounter
+              styles={{
+                textColor: event_theme.colors.primary,
+                boxColor: event_theme.colors.white,
+              }}
               event={main_event}
               prefix={<h2>Join Us Live In:</h2>}
             />
