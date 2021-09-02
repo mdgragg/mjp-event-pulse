@@ -24,8 +24,9 @@ const MyFooter = styled.div`
     text-align: center;
     margin: 0 auto;
   }
+
   && .icons-wrap {
-    margin: 0;
+    margin: 0 ;
   }
   && .icons {
     display: flex;
@@ -40,9 +41,15 @@ const MyFooter = styled.div`
   }
   @media all and (max-width: 768px) {
     grid-template-columns: 100%;
+    && .virtual-experiences {
+      font-size: 0.65rem;
+    }
     && .tech-issues {
       display: none;
     }
+    && .icons-wrap {
+    margin: 0 auto;
+  }
   }
 `;
 
@@ -56,6 +63,10 @@ const LogoWrap = styled.div`
     width: 100%;
     margin: 10px auto;
   }
+  @media all and (max-width: 768px) {
+    max-width: 130px;
+   }
+
 `;
 
 const Footer = () => {
@@ -64,7 +75,7 @@ const Footer = () => {
       <div className="tech-issues">
         <a href="/">{`Having Tech Issues?`} </a>
       </div>
-      <div>
+      <div className="virtual-experiences">
         <div>Virtual Experiences Brought To You By</div>
         <a href="https://millsjames.com">
           <LogoWrap>

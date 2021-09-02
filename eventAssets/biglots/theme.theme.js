@@ -10,7 +10,7 @@ export const COLORS = {
   black: '#000000',
   primary: '#FF5600',
   secondary: '#ffffff',
-  tertiary: '',
+  tertiary: '#FF5600',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
@@ -20,12 +20,12 @@ export const COLORS = {
 const PALETTE = {
   text: {
     primary: COLORS.white,
-    secondary: COLORS.secondary,
+    secondary: COLORS.white,
     tertiary: COLORS.tertiary,
   },
   background: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
+    primary: COLORS.orange,
+    secondary: COLORS.orange,
     tertiary: COLORS.tertiary,
   },
 };

@@ -67,7 +67,7 @@ const Before = ({ imgSrc, main_event, counterProps }: Before__Props) => {
           />
         </div>
         <div className="counter counter2">
-          <Counter__JustNumbers event={main_event} />
+          <Counter__JustNumbers event={main_event} prefix={`Join Us Live In`} />
         </div>
       </Inner>
     </Wrap>

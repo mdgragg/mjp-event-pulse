@@ -19,16 +19,16 @@ const BG = styled.div`
   position: relative;
   background-size: 100% auto;
   @media all and (max-width: 768px) {
+    padding: 0.5rem 0;
+    padding-bottom: 50%;
     background-size: cover;
+    height: auto;
+    min-height: unset;
   }
 `;
 
 const Header = styled.div`
   min-height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   @media all and (max-width: 768px) {
     /* height: auto; */
     margin: 2rem auto;
@@ -36,6 +36,7 @@ const Header = styled.div`
 `;
 const Inner = styled.div`
   width: 95%;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
@@ -65,24 +66,26 @@ const Inner = styled.div`
     justify-self: end;
   }
   @media all and (max-width: 1200px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, auto);
-    /* row-gap: 1rem; */
+    padding: 0;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3, min-content);
     && .title > h2 {
-      font-size: 1.5rem;
-      padding: 1rem;
+      font-size: 1.25rem;
+      padding: 0.5rem;
+      margin: 0;
       width: auto;
     }
     && .date {
       grid-row: -1;
+      font-size: 0.85rem;
     }
     && .title {
       grid-row: 2;
     }
     && .logo-holder {
-      width: 60%;
-      max-width: 350px;
-
+      width: 50%;
+      margin: 0;
+      max-width: 250px;
       grid-row: 1;
       justify-self: center;
     }

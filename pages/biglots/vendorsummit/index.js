@@ -46,16 +46,15 @@ const Index = (props) => {
                 height: '90px',
                 width: '90px',
                 padding: '5px',
-                margin: '1rem auto',
+                margin: '0 auto 20px auto',
               }}
             >
               <img
                 style={{ height: 'auto', width: '90%' }}
                 src={main_event.LogoLink[0].Media.url}
               />
+              
             </div>
-            Please Sign In to Join
-            <br />
             <strong> {main_event.EventName}</strong>
           </>
         }
@@ -66,13 +65,7 @@ const Index = (props) => {
           );
         }}
         signInText={
-          <div
-            style={{
-              textAlign: 'left',
-              maxWidth: '450px',
-              margin: '1rem 4rem',
-            }}
-          >
+          <div>
             <p>Please sign in with your information to access the event.</p>
             <p>
               Contact Joey D'Amico at{' '}

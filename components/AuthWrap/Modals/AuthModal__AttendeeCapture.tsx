@@ -109,23 +109,21 @@ export default function AuthModal__AttendeeCapture({
           {title ? (
             <HeaderWrap>{title}</HeaderWrap>
           ) : (
-            <>
-              <h3 style={{ marginBottom: 0 }}>Please Sign In To Enter</h3>{' '}
+            <div>
+              <div>Please Sign In To Join</div>
               <span>{eventToCheck.EventName}</span>
-            </>
+            </div>
           )}
           {headerContent && headerContent}
         </StyledDialogTitle>
 
         <DialogContent>
           <Center>
-            <DialogContentText>
-              {signInText
-                ? signInText
-                : 'Please enter your information to proceed to the event.'}
+            <DialogContentText className={classes.contentText}>
+              {signInText && signInText}
             </DialogContentText>
             <StyledForm
-              className={`${classes.root} ${formLoading ? 'loading' : false}`}
+              className={`${classes.form} ${formLoading ? 'loading' : false}`}
               noValidate
               autoComplete="off"
               onSubmit={(e) => {
