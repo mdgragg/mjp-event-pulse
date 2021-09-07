@@ -55,15 +55,13 @@ const VideoComponent = ({ main_event }: any) => (
 const PLACEHOLD = 'https://placehold.co/';
 const EVENT_URL = 'voapowerofhope';
 const Index = (props) => {
-  const router = useRouter();
-
   const { event_meta, main_event } = props;
 
   var event_theme = {
     ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
-  const hasStartEnd = useCalculateIfStarted(main_event);
+  const hasStartEnd = useCalculateIfStarted(main_event, 30);
 
   return (
     <Page theme={event_theme}>
@@ -81,83 +79,33 @@ const Index = (props) => {
             justifyContent: 'center',
           }}
         >
-          <CenteredPlayer
-            hasStarted={true}
-            videoUrl={main_event.streamLinks[0].url}
-            videoComponent={<VideoComponent main_event={main_event} />}
-          />
-          {/* <PlayerWithChat
-            chatUrl={main_event.streamLinks[1].url}
+          {' '}
+          <PlayerWithChat
+            chatUrl={
+              hasStartEnd.hasStarted ? main_event.streamLinks[1].url : null
+            }
             hasStarted={true}
             videoUrl={main_event.streamLinks[0].url}
             children={null}
             videoComponent={<VideoComponent main_event={main_event} />}
-          /> */}
+          />
         </div>
       </BodyWrap>
     </Page>
   );
 };
 
-export async function getServerSideProps(ctx) {
-  try {
-    let event_data = await getEventMeta(EVENT_URL);
-    let main_event = event_data.events.filter(
-      (ev) => ev.isMainEvent === true
-    )[0];
-    let return_object;
+export async function getStaticProps() {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
-    switch (event_data.eventStatus.EventStatus) {
-      case 'Preview':
-        if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] !== 'true') {
-          return_object = {
-            redirect: {
-              destination: `${EVENT_URL}/preview`,
-              permanent: false,
-            },
-          };
-        } else {
-          return_object = {
-            props: { event_meta: event_data, main_event },
-          };
-        }
-        break;
-      case 'Ended':
-        return_object = {
-          redirect: {
-            destination: `${EVENT_URL}/thank-you`,
-            permanent: false,
-          },
-        };
-        break;
-      case 'Live':
-        return_object = {
-          props: {
-            //meta will be the props for the event
-            event_meta: event_data,
-            main_event,
-          },
-        };
-        break;
-      default:
-        return_object = {
-          redirect: {
-            destination: `/`,
-            permanent: false,
-          },
-          // revalidate: 600,
-        };
-    }
-
-    return return_object;
-  } catch (error) {
-    console.log('[event].js error: ', error);
-    return {
-      redirect: {
-        destination: '/404',
-      },
-    };
-  }
+  return {
+    props: {
+      main_event,
+      event_meta: event_data,
+    },
+    revalidate: 300,
+  };
 }
 
 export default Index;

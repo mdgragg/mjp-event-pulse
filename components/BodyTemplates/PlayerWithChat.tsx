@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop';
 import Fluid__iFrame from '../iFrames/Fluid__iFrame';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
-  grid-template-columns: 8fr 4fr;
+  grid-template-columns: ${(props) =>
+    props.onlyVideo ? '100% 0%' : '66.4% 33.2%'};
+
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   width: auto;
@@ -15,6 +19,8 @@ const BodyWrap = styled.div`
 `;
 const VideoBox = styled.div`
   height: 100%;
+  width: 100%;
+  transition: all 1500ms ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,9 +58,25 @@ const PlayerWithChat = ({
   videoComponent,
   chatComponent,
 }: PlayerWithChat__Props) => {
+  const vidRef = useRef(null);
+  const [onlyVideo, setOnlyVideo] = useState(true);
+
+  useEffect(() => {
+    if (!chatUrl || chatUrl === null) {
+      setOnlyVideo(true);
+    } else {
+      vidRef.current.style.width = '66%';
+      setTimeout(() => {
+        setOnlyVideo(false);
+        vidRef.current.style.transition = 'all 0s';
+        vidRef.current.style.width = '100%';
+      }, 1500);
+    }
+  }, [chatUrl]);
+
   return (
-    <BodyWrap>
-      <VideoBox>
+    <BodyWrap onlyVideo={onlyVideo}>
+      <VideoBox ref={vidRef}>
         <div className="video-holder">
           {videoComponent ? (
             videoComponent
@@ -64,13 +86,15 @@ const PlayerWithChat = ({
         </div>
         <div className="children">{children}</div>
       </VideoBox>
-      <ChatBox>
-        {chatComponent ? (
-          chatComponent
-        ) : (
-          <Fluid__iFrame src={chatUrl}></Fluid__iFrame>
-        )}
-      </ChatBox>
+      {!onlyVideo && (
+        <ChatBox>
+          {chatComponent ? (
+            chatComponent
+          ) : (
+            <Fluid__iFrame src={chatUrl}></Fluid__iFrame>
+          )}
+        </ChatBox>
+      )}
     </BodyWrap>
   );
 };

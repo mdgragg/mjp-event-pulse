@@ -2,15 +2,20 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { calculate_remaining } from '../lib/helpers';
 import useInterval from 'hooks/useInterval';
 import _ from 'lodash';
-const useCalculateIfStarted = (event) => {
+const useCalculateIfStarted = (event: any, offset? : number) => {
   const {
     eventStartEnd: { StartDateTime, EndDateTime },
   } = event;
 
   const calculate = () => {
+    if(!offset){
+      offset = 0;
+    }
+    const calcOffset = offset * 60 * 1000
     const res = calculate_remaining(StartDateTime, EndDateTime);
+
     return {
-      hasStarted: res.total_remaining <= 0,
+      hasStarted: res.total_remaining - calcOffset <= 0 ,
       hasEnded: res.parsed_until_end <= 0,
     };
   };
