@@ -1,6 +1,16 @@
 import { getEventMeta } from '../../lib/api';
 async function GET_SERVERSIDE_PROPS_DEFAULT(ctx: any, EVENT_URL: string) {
   let event_data = await getEventMeta(EVENT_URL);
+
+  if(!event_data || !event_data.events){
+    return {
+   
+      redirect:{
+        destination: `/404`,
+        permanent: false
+      }
+    }
+  }
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let return_object;
 

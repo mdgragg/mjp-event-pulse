@@ -62,7 +62,7 @@ const PlayerWithChat = ({
   const [onlyVideo, setOnlyVideo] = useState(true);
 
   useEffect(() => {
-    if (!chatUrl || chatUrl === null) {
+    if (!chatComponent && (!chatUrl || chatUrl === null)) {
       setOnlyVideo(true);
     } else {
       vidRef.current.style.width = '66%';

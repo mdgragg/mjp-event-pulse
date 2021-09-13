@@ -108,7 +108,7 @@ const Index = (props) => {
               style={{ maxWidth: '900px', width: '95%', margin: '3rem auto' }}
             >
               <Video__StickyTop__WithCountdown
-                showMinutesBefore={30}
+                showMinutesBefore={1000}
                 start={main_event.eventStartEnd.StartDateTime}
                 src={main_event.streamLinks[0].url}
                 showBefore={
