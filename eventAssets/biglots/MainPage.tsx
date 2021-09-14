@@ -31,7 +31,7 @@ const Header = styled.div`
   min-height: 250px;
   @media all and (max-width: 768px) {
     /* height: auto; */
-    margin: 2rem auto;
+    margin: 1rem auto;
   }
 `;
 const Inner = styled.div`
@@ -46,6 +46,7 @@ const Inner = styled.div`
     text-align: center;
     font-family: Futura Bold;
     line-height: 2rem;
+    margin: 1rem;
   }
   && .title > h2 {
     background-color: white;
@@ -55,6 +56,13 @@ const Inner = styled.div`
     padding: 1.5rem;
     text-align: center;
     width: max-content;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+  && .title > h3 {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
     margin: auto;
   }
   && .logo-holder {
@@ -73,8 +81,13 @@ const Inner = styled.div`
       font-size: 1.25rem;
       padding: 0.5rem;
       margin: 0;
+      margin-bottom: 1rem;
       width: auto;
     }
+    && .title > h3 {
+      font-size: 1.25rem;
+    }
+
     && .date {
       grid-row: -1;
       font-size: 0.85rem;
@@ -124,7 +137,8 @@ const MainPage = ({ main_event, hasAuth }) => {
           <div className="date"></div>
           <div className="title">
             <h2>{main_event.EventName}</h2>
-            <div className="date" style={{ margin: '2rem' }}>
+            <h3> Bigger Together: Grow With Us </h3>
+            <div className="date">
               <DateParse
                 date={main_event.eventStartEnd.StartDateTime}
                 format={`dddd, MMMM DD`}
@@ -146,7 +160,7 @@ const MainPage = ({ main_event, hasAuth }) => {
           <Video__StickyTop__WithCountdown
             isStarted={true}
             start={main_event.eventStartEnd.StartDateTime}
-            showMinutesBefore={30}
+            showMinutesBefore={1}
             showBefore={
               <Before
                 imgSrc={main_event?.LogoLink[1]?.Media.url}

@@ -30,7 +30,6 @@ const PALETTE = {
   },
 };
 
-
 export const FONTS = {
   title: {
     fontFamily: 'Futura Bold',
@@ -106,18 +105,18 @@ const TYPOGRAPHY = {
     ...FONTS.title,
     color: COLORS.secondary,
     fontSize: 'clamp(1.25rem, 10vw, 1rem)',
-
   },
   h3: {
+    ...FONTS.title,
     color: COLORS.tertiary,
   },
   h4: {
+    ...FONTS.title,
     fontSize: '1rem',
     color: COLORS.white,
     lineHeight: '2rem',
   },
 };
-
 
 export const BREAKPOINTS = {
   xl: 1920,

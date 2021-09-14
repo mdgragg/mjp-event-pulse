@@ -12,7 +12,7 @@ const StyledPage = styled.div`
   min-height: 100vh;
   z-index: 0;
   min-width: 100vw;
-background-color: ${props => props.theme.palette.background.primary};
+  background-color: ${(props) => props.theme.palette.background.primary};
   /* overflow: hidden; */
 
   h1 {
@@ -32,7 +32,7 @@ background-color: ${props => props.theme.palette.background.primary};
     margin: 0;
   }
   h5 {
-    ${(props) => props.theme.h5}
+    ${(props) => props.theme.typography.h5};
     margin: 0;
   }
 
