@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getEventMeta } from 'lib/api';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Section from 'components/Sections/Section';
 import PlayerWithChat from 'components/BodyTemplates/PlayerWithChat';

@@ -1,15 +1,14 @@
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import Landing from 'eventAssets/toolfair2021/Landing';
-import { toast } from 'react-toastify';
+
 import FullWrap from 'components/FullWrap';
 import useSessionToken from 'hooks/useSessionToken';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { tokenGenerator } from '../../lib/helpers';
-import CustomModal from 'eventAssets/toolfair2021/CustomModal';
 
 export var event_theme = {
   h1: {

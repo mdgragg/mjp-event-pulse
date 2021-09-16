@@ -5,7 +5,6 @@ import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
-import Body from 'components/template1/Body';
 import { Banner__WithPicture } from 'components/Banners';
 import FlexHero from 'components/Heroes/FlexHero';
 import DateParse from 'components/__Assets__/DateParse';

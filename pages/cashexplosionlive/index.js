@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates/index';
 import SignUp from 'eventAssets/cashexplosionlive/SignUp';
 import ThankYou from 'eventAssets/cashexplosionlive/ThankYou';

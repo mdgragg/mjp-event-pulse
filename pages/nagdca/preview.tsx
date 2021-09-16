@@ -1,11 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
-import { Router, useRouter } from 'next/router';
-import cookies from 'next-cookies';
-import _ from 'lodash';
-import { Grid, Button } from '@material-ui/core';
-
+import { useRouter } from 'next/router';
 import Meta from 'components/__GLOBALS__/Meta';
-import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/__GLOBALS__/Login/PreviewLoginPage';
 
 const Preview = ({ EVENT_URL }) => {

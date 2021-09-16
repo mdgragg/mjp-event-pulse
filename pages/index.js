@@ -1,8 +1,7 @@
 // import { gql, useQuery } from '@apollo/client';
 // import withApollo from '../lib/withApollo';
 import { useEffect, useState, useRef } from 'react';
-import EventSearch from 'components/globals/EventSearch';
-import Header from 'components/globals/Header';
+import Header from 'components/__GLOBALS__/Header';
 import Footer from 'components/Footers';
 import Page from 'components/template1/Page';
 import Section from 'components/template1/Section';

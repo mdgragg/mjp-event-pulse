@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import FullWrap from 'components/FullWrap';
 import Body from 'components/template1/Body';

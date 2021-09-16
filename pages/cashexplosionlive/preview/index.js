@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import Meta from 'components/globals/Meta';
-import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
+import Meta from 'components/__GLOBALS__/Meta';
+import PreviewLoginPage from 'components/__GLOBALS__/Login/PreviewLoginPage';
 import { EVENT_URL, event_theme } from '../index';
 
 const Index = (props) => {

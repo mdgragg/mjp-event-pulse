@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import LandingPage from 'eventAssets/biglotstownhall/LandingPage';
 import MainPage from 'eventAssets/biglotstownhall/MainPage';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import { AppContext } from 'context/AppContext';

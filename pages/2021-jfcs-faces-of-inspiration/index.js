@@ -1,4 +1,4 @@
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import JCFS__PAGE from 'eventAssets/2021-jcfs-faces-of-inspiration/JCFS__PAGE';
 

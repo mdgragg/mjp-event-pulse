@@ -1,24 +1,17 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import AuthWrap from 'components/AuthWrap';
+
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
-import Body from 'components/template1/Body';
-import { HeroWithImage } from 'components/Heroes';
-import DateParse from 'components/__Assets__/DateParse';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
+
+import { PlayerWithChat } from 'components/BodyTemplates';
 import Center from 'components/Center';
 import { default_theme } from 'eventAssets/voapowerofhope/theme.theme';
-import { useContext } from 'react';
-import { AppContext } from 'context/AppContext';
+
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
-import { Button__Big, Button__Primary } from 'components/Buttons';
+import { Button__Big } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
-import Before from 'components/LinkBoxes/Before';
 import VOAHeader from 'eventAssets/voapowerofhope/VoaHeader';
 import VideoPlaceholder from 'eventAssets/voapowerofhope/VideoPlaceholder';
 

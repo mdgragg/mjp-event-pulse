@@ -1,24 +1,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
-import Center from 'components/Center';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import { FullPage__SolidColor } from 'components/BodyTemplates';
-import {
-  Banner__ImgBg,
-  Banner__JustImage,
-  Banner__WithPicture,
-} from 'components/Banners';
+import { Banner__WithPicture } from 'components/Banners';
 import { FlexHero, SolidColorHero } from 'components/Heroes';
 import DateParse from 'components/__Assets__/DateParse';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
 import { default_theme } from 'eventAssets/nagdca/theme.theme';
-import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import { BoxedCounter } from 'components/Counters';
 import { Box__XYCentered } from 'components/Boxes';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';

@@ -137,7 +137,7 @@ const MainPage = ({ main_event, hasAuth }) => {
           <div className="date"></div>
           <div className="title">
             <h2>{main_event.EventName}</h2>
-            <h3> Bigger Together: Grow With Us </h3>
+            <h3>Bigger Together: Grow With Us!</h3>
             <div className="date">
               <DateParse
                 date={main_event.eventStartEnd.StartDateTime}
@@ -154,7 +154,6 @@ const MainPage = ({ main_event, hasAuth }) => {
           </div>
         </Inner>
       </Header>
-
       <PlayerBody>
         {true && (
           <Video__StickyTop__WithCountdown

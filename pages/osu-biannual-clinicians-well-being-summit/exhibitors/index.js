@@ -4,7 +4,7 @@ import { Router, useRouter } from 'next/router';
 
 import Body from '../../../components/template1/Body';
 import Section from '../../../components/template1/Section';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import { GET_EXHIBITORS } from 'lib/queries';
 import { useQuery } from '@apollo/client';
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
 import { toast } from 'react-toastify';
 import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import MainPage from 'eventAssets/biglots/MainPage';
@@ -53,14 +53,14 @@ const Index = (props) => {
                 style={{ height: 'auto', width: '90%' }}
                 src={main_event.LogoLink[0].Media.url}
               />
-              
             </div>
             <strong> {main_event.EventName}</strong>
           </>
         }
         successCallback={(creds) => {
           toast.success(
-            `Hello ${creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
+            `Hello ${
+              creds.Attendee.AttendeeFirst ? creds.Attendee.AttendeeFirst : ''
             }, welcome to ${main_event.EventName}`
           );
         }}
