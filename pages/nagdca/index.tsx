@@ -4,7 +4,7 @@ import { getEventMeta } from 'lib/api';
 import Center from 'components/Center';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import { FullPage__SolidColor } from 'components/BodyTemplates';
 import {

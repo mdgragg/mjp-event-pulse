@@ -11,20 +11,14 @@ import FlexHero from 'components/Heroes/FlexHero';
 import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
-import Chat__iFrame from 'components/iFrames/Chat__iFrame';
-import TwoPanel from 'components/TabPanels/TwoPanel';
 import { toast } from 'react-toastify';
 import Center from 'components/Center';
-import { default_theme } from 'eventAssets/highholydays2021/theme.theme';
+import { default_theme } from 'eventAssets/ohsaa2021/ohsaa2021.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
-import Agenda from 'eventAssets/highholydays2021/Agenda';
-import { Section } from 'components/Sections';
-import { BoxedCounter } from 'components/Counters';
-import PreviousVideos from 'eventAssets/highholydays2021/PreviousVideos';
+import BodyWrap from 'components/BodyTemplates/BodyWrap';
 
 const PLACEHOLD = 'https://placehold.co/';
-export const EVENT_URL = 'highholydays2021';
-
+export const EVENT_URL = `ohsaa2021`;
 const Index = (props) => {
   const router = useRouter();
 
@@ -32,7 +26,7 @@ const Index = (props) => {
 
   var event_theme = {
     ...default_theme,
-    header_image: null,
+    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
   const hasStarted = useCalculateIfStarted(main_event);
@@ -52,65 +46,88 @@ const Index = (props) => {
       >
         <Meta title={event_meta.EventJobName}> </Meta>
         <FlexHero>
+          <div style={{ width: '50%', margin: 'auto' }}>
+            <img
+              style={{
+                width: '100%',
+                maxWidth: '130px',
+                height: 'auto',
+                margin: '2rem auto',
+              }}
+              src={main_event.LogoLink[0]?.Media?.url || null}
+            />
+          </div>
           <div>
-            <BoxedCounter event={main_event} prefix={`Join Us Live In`} />
+            <Center>
+              <h1
+                style={{
+                  margin: '0 auto 1rem auto',
+                  width: '80%',
+                  color: default_theme.palette.text.secondary,
+                }}
+              >
+                {`OHSAA SLC \<`}
+                <br />
+                {`  Back to the Future`}
+              </h1>
+              <h2>Virtual Event </h2>
+              <h3
+                style={{
+                  margin: 'auto',
+                }}
+              >
+                <i>
+                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
+                </i>
+              </h3>
+            </Center>
           </div>
           <div>
             <Center>
               <img
                 style={{
+                  maxWidth: '100px',
+                  marginBottom: '1rem',
                   width: '100%',
-                  maxWidth: '350px',
-                  margin: '2rem auto',
+                  height: 'auto',
                 }}
-                src={main_event.LogoLink[0]?.Media?.url || null}
+                src={main_event.LogoLink[1]?.Media?.url || null}
               />
-              <h1>{main_event.EventName}</h1>
-            </Center>
-          </div>
-          <div>
-            <Center>
-              <h2 style={{ margin: 'auto' }}>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
+              <h4>
+                <Counter__JustNumbers
+                  event={main_event}
+                  prefix={`Join Us Live In`}
+                  afterStarted={'Live Now!'}
+                  afterEnded={'Thank You for Attending'}
+                />
+              </h4>
             </Center>
           </div>
         </FlexHero>
-        <Body>
-          <div
-            style={{
-              width: '95%',
-              minHeight: '60vh',
-              backgroundColor: 'none',
-              margin: '2rem auto',
-              maxWidth: '1920px',
-            }}
-          >
-            <PlayerWithChat
-              children={null}
+        <BodyWrap>
+          {main_event.streamLinks.length === 1 ? (
+            <CenteredPlayer
+              showing={true}
               hasStarted={true}
               videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-              chatComponent={
-                <TwoPanel
-                  data={[
-                    // {
-                    //   title: 'Chat',
-                    //   content: (
-                    //     <Chat__iFrame src={main_event.streamLinks[1].url} />
-                    //   ),
-                    // },
-                    { title: 'Agenda', content: <Agenda /> },
-                  ]}
-                />
-              }
             />
-          </div>
-          <Section>
-            <PreviousVideos links={main_event.streamLinks} />
-          </Section>
+          ) : (
+            <div
+              style={{
+                minHeight: '60vh',
+                backgroundColor: 'none',
+                margin: '2rem',
+              }}
+            >
+              <PlayerWithChat
+                children={null}
+                hasStarted={true}
+                videoUrl={main_event.streamLinks[0].url}
+                chatUrl={main_event.streamLinks[1].url}
+              />
+            </div>
+          )}
+
           {main_event.Description && (
             <Banner__WithPicture
               imgUrl={main_event.LogoLink[0]?.Media?.url || null}
@@ -124,7 +141,7 @@ const Index = (props) => {
               {main_event.Description}
             </Banner__WithPicture>
           )}
-        </Body>
+        </BodyWrap>
       </AuthWrap>
     </Page>
   );

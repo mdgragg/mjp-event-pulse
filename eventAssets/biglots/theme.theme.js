@@ -120,10 +120,10 @@ const TYPOGRAPHY = {
 
 export const BREAKPOINTS = {
   xl: 1920,
-  lg: 1600,
-  md: 1200,
+  lg: 1280,
+  md: 960,
   sm: 768,
-  xs: 500,
+  xs: 0,
 };
 
 const GLOBALS = {

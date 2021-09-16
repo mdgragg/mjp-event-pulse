@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import MJP__SVG from '../globals/MJP__SVG';
+import MJP__SVG from '../__GLOBALS__/MJP__SVG';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -26,7 +26,7 @@ const MyFooter = styled.div`
   }
 
   && .icons-wrap {
-    margin: 0 ;
+    margin: 0;
   }
   && .icons {
     display: flex;
@@ -48,8 +48,8 @@ const MyFooter = styled.div`
       display: none;
     }
     && .icons-wrap {
-    margin: 0 auto;
-  }
+      margin: 0 auto;
+    }
   }
 `;
 
@@ -65,8 +65,7 @@ const LogoWrap = styled.div`
   }
   @media all and (max-width: 768px) {
     max-width: 130px;
-   }
-
+  }
 `;
 
 const Footer = () => {

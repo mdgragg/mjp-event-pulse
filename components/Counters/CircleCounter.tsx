@@ -12,8 +12,8 @@ const Wrap = styled.div`
 
 const Title = styled.div`
   text-transform: uppercase;
-  background-color: ${(props) => props.theme.colors.primary};
-  font-family: ${(props) => props.theme.fonts.secondary};
+  background-color: ${(props) => props.theme.palette.secondary};
+  font-family: ${(props) => props.theme.palette.secondary};
   color: ${(props) => props.theme.colors.primary};
   font-size: 1.25rem;
   font-weight: 800;
@@ -29,7 +29,7 @@ const Box = styled.div`
   align-items: center;
   height: auto;
   flex-wrap: wrap;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.palette.text.secondary};
   && > div.box {
     height: 0;
     padding-top: 20%;
@@ -37,8 +37,7 @@ const Box = styled.div`
     min-height: 75px;
     width: 20%;
     margin: 0.5rem;
-    background-color: ${(props) => props.theme.colors.secondary};
-
+    background-color: ${(props) => props.theme.palette.background.secondary};
     border-radius: 100%;
     display: flex;
     flex-direction: column;
@@ -51,14 +50,14 @@ const Box = styled.div`
     position: absolute;
     top: 20%;
     font-weight: 600;
-    font-size: clamp(24px, 6.5vw, 4.5rem);
-    line-height: clamp(24px, 6.5vw, 4.5rem);
+    font-size: clamp(18px, 180%, 3rem);
+    line-height: clamp(12px, 10vw, 2.25rem);
   }
   && .delimiter {
     position: absolute;
-    top: 70%;
-    font-size: clamp(10px, 1.5vw, 1.25rem);
-    line-height: clamp(10px, 1.5vw, 1.25rem);
+    top: 65%;
+    font-size: clamp(1px, 70%, 2.5rem);
+    line-height: clamp(10px, 3vw, 1rem);
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;

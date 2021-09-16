@@ -2,17 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '@material-ui/core';
 
-const defaults = {
-  primary: {
-    fontWeight: 600,
-  },
-  secondary: {},
-  big: {
-    fontWeight: 800,
-  },
-  small: {},
-};
-
 const MakeButtonStyle = (type) => {
   return css`
     transition: all 0.2s ease;
@@ -21,9 +10,9 @@ const MakeButtonStyle = (type) => {
     letter-spacing: ${(props) => props.theme.buttons[type].letterSpacing};
     line-height: ${(props) => props.theme.buttons[type].lineHeight};
     background-color: ${(props) => props.theme.buttons[type].backgroundColor};
-    color: ${(props) => props.theme.buttons[type].fontColor};
+    color: ${(props) => props.theme.buttons[type].color};
     border: ${(props) => props.theme.buttons[type].border};
-    font-weight: ${defaults[type].fontWeight || 600};
+    font-weight: 600;
     padding: 8px 18px;
     margin: 1rem auto;
     @media all and (max-width: 500px) {
@@ -35,7 +24,7 @@ const MakeButtonStyle = (type) => {
 const MakeButtonHoverStyle = () => {
   return css`
     background-color: ${(props) => props.theme.buttons.hover.backgroundColor};
-    color: ${(props) => props.theme.buttons.hover.fontColor};
+    color: ${(props) => props.theme.buttons.hover.color};
   `;
 };
 

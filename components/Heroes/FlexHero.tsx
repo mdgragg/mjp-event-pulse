@@ -1,14 +1,16 @@
+import type { MJxTheme } from 'types/Theme';
 import styled, { keyframes } from 'styled-components';
+
 import { Typography } from '@material-ui/core';
 import Counter from 'components/Counters/Counter';
-import { Fragment } from 'react';
+import { Component, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const HeroHolder = styled.div`
   position: relative;
   width: 100%;
-  min-height: ${(props) => props.theme.heroHeight || '30vh'};
-  background-color: ${(props) => props.theme.heroBgColor};
+  min-height: ${({ theme }) => theme.heroHeight || '30vh'};
+  background-color: ${({ theme }) => theme.heroBgColor};
   color: white;
   display: flex;
   flex-direction: column;
@@ -60,11 +62,19 @@ const HeaderInner = styled.div`
   }
 `;
 
-export default function Hero(props) {
+type FlexHero__Props = {
+  bgImage?: string;
+  columns?: string;
+  styles?: CSSStyleDeclaration;
+  children: React.ReactChild | React.ReactChild[];
+};
+
+export default function Hero(props: FlexHero__Props): React.ReactNode | any {
+  const { bgImage, columns, styles, children } = props;
   return (
-    <HeroHolder bgImage={props.bgImage} style={{ ...props.style }}>
-      <HeaderInner className="header--inner" columns={props.columns}>
-        {props.children}
+    <HeroHolder bgImage={bgImage} style={{ ...styles }}>
+      <HeaderInner className="header--inner" columns={columns}>
+        {children}
       </HeaderInner>
     </HeroHolder>
   );

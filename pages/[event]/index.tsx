@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/globals/Meta';
-import Page from 'components/PageTemplates';
+import Meta from 'components/__GLOBALS__/Meta';
+import ThemedPage from 'components/__GLOBALS__/ThemedPage';
 import Body from 'components/template1/Body';
 import { Banner__WithPicture } from 'components/Banners';
 import FlexHero from 'components/Heroes/FlexHero';
@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import Center from 'components/Center';
 import { default_theme } from 'components/Themes/default.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
+import BodyWrap from 'components/BodyTemplates/BodyWrap';
 
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -32,7 +33,7 @@ const Index = (props) => {
   const [auth, setAuth] = useState(false);
 
   return (
-    <Page theme={event_theme}>
+    <ThemedPage theme={event_theme}>
       <AuthWrap
         eventToCheck={main_event}
         successCallback={(res) => {
@@ -43,8 +44,10 @@ const Index = (props) => {
           );
         }}
       >
-        <Meta title={event_meta.EventJobName}> </Meta>
-        <FlexHero title={event_meta.EventJobName}>
+        <Meta title={main_event.EventName}>
+          <title>{main_event.EventName}</title>
+        </Meta>
+        <FlexHero>
           <div>
             <img
               style={{
@@ -79,7 +82,7 @@ const Index = (props) => {
             </Center>
           </div>
         </FlexHero>
-        <Body>
+        <BodyWrap>
           {main_event.streamLinks.length === 1 ? (
             <div
               style={{
@@ -125,9 +128,9 @@ const Index = (props) => {
               {main_event.Description}
             </Banner__WithPicture>
           )}
-        </Body>
+        </BodyWrap>
       </AuthWrap>
-    </Page>
+    </ThemedPage>
   );
 };
 

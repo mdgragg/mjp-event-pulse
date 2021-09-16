@@ -1,6 +1,7 @@
 import { createTheme } from '@material-ui/core';
+import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
 
-const COLORS = {
+const THEME_COLORS: COLORS = {
   red: '#b71f39',
   orange: '#FF5600',
   yellow: '#eace28',
@@ -18,19 +19,29 @@ const COLORS = {
   offWhite: '#f7f7f7',
   offBlack: '#161616',
 };
-const PALETTE = {
+const THEME_PALETTE: PALETTE = {
   text: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    primary: THEME_COLORS.white,
+    secondary: THEME_COLORS.black,
+    tertiary: THEME_COLORS.white,
+    error: 'red',
+    info: 'blue',
+    success: 'green'
   },
   background: {
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    primary: THEME_COLORS.black,
+    secondary: THEME_COLORS.white,
+    tertiary: THEME_COLORS.orange,
+    error: 'red',
+    info: 'blue',
+    success: 'green'
   },
+  error: 'blue',
+  info: 'blue',
+  success: 'green'
+
 };
-const FONTS = {
+const THEME_FONTS: FONTS = {
   title: {
     fontFamily: 'Roboto ',
     fontSize: 'clamp(1.5rem, 20vw, 2rem)',
@@ -45,9 +56,6 @@ const FONTS = {
     letterSpacing: '',
     lineHeight: 'auto',
   },
-  get primary() {
-    return this.body;
-  }, //default to title
   get secondary() {
     return this.body;
   }, // default to body
@@ -56,23 +64,23 @@ const FONTS = {
   }, // default to body
 };
 
-export const BUTTONS = {
+export const THEME_BUTTONS: BUTTONS = {
   primary: {
     fontFamily: 'Roboto',
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: COLORS.tertiary,
-    fontColor: 'white',
+    backgroundColor: THEME_COLORS.orange,
+    color: 'white',
     border: '',
   },
   secondary: {
-    fontFamily: FONTS.body.fontFamily,
+    fontFamily: THEME_FONTS.body.fontFamily,
     fontSize: '1rem',
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: '',
-    fontColor: '',
+    color: '',
     border: '',
   },
   big: {
@@ -80,8 +88,8 @@ export const BUTTONS = {
     fontSize: '2rem',
     letterSpacing: '2px',
     lineHeight: 'auto',
-    backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    backgroundColor: THEME_COLORS.primary,
+    color: THEME_COLORS.secondary,
     border: '5px solid white',
   },
   small: {
@@ -90,20 +98,16 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: '',
-    fontColor: '',
+    color: '',
     border: '',
-    hover: {
-      fontColor: '',
-      bgColor: '',
-    },
   },
   hover: {
-    fontColor: 'white',
-    backgroundColor: COLORS.secondary,
+    color: 'white',
+    backgroundColor: THEME_COLORS.offBlack,
   },
 };
 
-const BREAKPOINTS = {
+const THEME_BREAKPOINTS : BREAKPOINTS= {
   xl: 1920,
   lg: 1600,
   md: 1200,
@@ -111,33 +115,45 @@ const BREAKPOINTS = {
   xs: 500,
 };
 
-const TYPOGRAPHY = {
+const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h1: {
-    color: COLORS.primary,
-    ...FONTS.title,
+    color: THEME_COLORS.primary,
+    ...THEME_FONTS.title,
   },
   h2: {
-    color: COLORS.primary,
-    ...FONTS.body,
+    color: THEME_COLORS.primary,
+    ...THEME_FONTS.body,
   },
   h3: {
-    color: COLORS.primary,
+    color: THEME_COLORS.primary,
   },
-  p: {
-    ...FONTS.body,
+  h4: {
+    color: THEME_COLORS.primary,
+  },
+  h5: {
+    color: THEME_COLORS.primary,
+  },
+  h6: {
+    color: THEME_COLORS.primary,
+  },
+  body1: {
+    ...THEME_FONTS.body,
+  },
+  body2: {
+    ...THEME_FONTS.body,
   },
 };
 
-export const default_theme = {
-  ...createTheme(),
-  typography: { ...TYPOGRAPHY },
-  colors: { ...COLORS },
-  palette: { ...PALETTE },
-  fonts: { ...FONTS },
-  buttons: { ...BUTTONS },
-  breakpoints: { ...BREAKPOINTS },
+export const default_theme: MJxTheme = {
+  muiTheme:{ ...createTheme()},
+  typography: { ...THEME_TYPOGRAPHY },
+  colors: { ...THEME_COLORS },
+  palette: { ...THEME_PALETTE },
+  fonts: { ...THEME_FONTS },
+  buttons: { ...THEME_BUTTONS },
+  breakpoints: { ...THEME_BREAKPOINTS },
   heroHeight: '250px',
-  heroBgColor: COLORS.secondary,
+  heroBgColor: THEME_COLORS.secondary,
   headerOpacity: '0.1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',

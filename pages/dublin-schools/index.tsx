@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 
 import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import { toast } from 'react-toastify';
 import default_theme from 'eventAssets/dublin-schools/theme.theme';

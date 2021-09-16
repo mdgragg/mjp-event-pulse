@@ -1,11 +1,11 @@
-import Header from 'components/globals/Header';
-import Footer from 'components/globals/Footer';
+import Header from 'components/__GLOBALS__/Header';
+import Footer from 'components/__GLOBALS__/Footer';
 import Page from 'components/template1/Page';
 import Section from 'components/Sections/Section';
 import { default_theme } from 'components/Themes/default.theme';
 import { Button__Primary } from 'components/Buttons';
 import { Grid } from '@material-ui/core';
-import MJP__SVG from '../components/globals/MJP__SVG';
+import MJP__SVG from '../components/__GLOBALS__/MJP__SVG';
 
 const Error_404 = (props) => {
   return (

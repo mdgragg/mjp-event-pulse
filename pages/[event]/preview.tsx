@@ -4,9 +4,9 @@ import cookies from 'next-cookies';
 import _ from 'lodash';
 import { Grid, Button } from '@material-ui/core';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/template1/Page';
-import PreviewLoginPage from 'components/globals/Login/PreviewLoginPage';
+import PreviewLoginPage from 'components/__GLOBALS__/Login/PreviewLoginPage';
 
 const Preview = ({ EVENT_URL }) => {
   const router = useRouter();

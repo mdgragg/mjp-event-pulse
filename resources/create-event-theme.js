@@ -11,8 +11,8 @@ try {
   fs.mkdir(`./eventAssets/${eventUrl}`, (err) => {
     if (err) throw err;
     fs.copyFile(
-      './Components/Themes/default.theme.js',
-      `./eventAssets/${eventUrl}/theme.theme.js`,
+      './Components/__GLOBALS__/mjx.theme.ts',
+      `./eventAssets/${eventUrl}/${eventUrl}.theme.ts`,
       (err) => {
         if (err) throw err;
       }
@@ -22,6 +22,7 @@ try {
   console.log(`Creating asset folder with theme: ${eventUrl}\n\n ----`);
 
   const filesToCopy = ['index.tsx', 'preview.tsx', 'thank-you.tsx'];
+
   fs.mkdir(`./Pages/${eventUrl}`, (err) => {
     if (err) throw err;
     filesToCopy.forEach((file) => {
