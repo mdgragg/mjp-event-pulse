@@ -85,7 +85,9 @@ const Index = (props) => {
             <Center>
               <img
                 style={{
-                  maxWidth: '100px',
+                  backgroundColor: 'white',
+                  padding: '20px',
+                  maxWidth: '140px',
                   marginBottom: '1rem',
                   width: '100%',
                   height: 'auto',
