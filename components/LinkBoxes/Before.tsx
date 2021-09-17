@@ -52,8 +52,14 @@ type Before__Props = {
   imgSrc: string;
   main_event: {};
   [x: string]: any;
+  counterStyles?: any;
 };
-const Before = ({ imgSrc, main_event, counterProps }: Before__Props) => {
+const Before = ({
+  imgSrc,
+  main_event,
+  counterProps,
+  counterStyles,
+}: Before__Props) => {
   // test s
   return (
     <Wrap>
@@ -64,6 +70,7 @@ const Before = ({ imgSrc, main_event, counterProps }: Before__Props) => {
             event={main_event}
             prefix={`Join Us Live In:`}
             {...counterProps}
+            styles={{ ...counterStyles }}
           />
         </div>
         <div className="counter counter2">

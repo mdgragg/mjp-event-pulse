@@ -2,18 +2,22 @@ import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { Grid } from '@material-ui/core';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
-import Body from 'components/template1/Body';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
 import { Banner__WithPicture } from 'components/Banners';
 import MJHero from 'components/Heroes/MJHero';
 import Section from 'components/Sections/Section';
 import ClientOnly from 'components/__Assets__/ClientOnly';
 import PublicChat from 'components/Chat/PublicChat';
-import { default_theme } from '../../components/Themes/default.theme';
+import { mjxTheme } from '../../components/__GLOBALS__/mjx.theme';
+import BodyWrap from 'components/BodyTemplates/BodyWrap';
+import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
+import { Button__Primary } from 'components/Buttons';
+import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
+import Before from 'components/LinkBoxes/Before';
+import SponsorMap from 'eventAssets/tofresearchseries2021/SponsorMap';
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
@@ -21,7 +25,7 @@ const Index = (props) => {
   const { event_meta, main_event, children } = props;
 
   let event_theme = {
-    ...default_theme,
+    ...mjxTheme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
@@ -38,32 +42,44 @@ const Index = (props) => {
 export const PageBody = ({ main_event }) => (
   <>
     <MJHero main_event={main_event} />
-    <Body>
+    <BodyWrap>
       <Section>
-        <Grid container spacing={3}>
-          <Grid item={true} md={8} sm={12} xs={12}>
-            <div
-              style={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <VideoBox__StickyTop
-                isStarted={true}
-                src={main_event.streamLinks[0].url}
+        <div
+          style={{
+            maxWidth: '1920px',
+            margin: 'auto',
+          }}
+        >
+          <PlayerWithChat
+            hasStarted={true}
+            chatUrl={null}
+            chatComponent={<PublicChat slug={main_event.slug} />}
+            videoUrl={main_event.streamLinks[0].url}
+          >
+            <Button__Primary>Hello World!</Button__Primary>
+          </PlayerWithChat>
+        </div>
+      </Section>
+      <hr />
+      <Section>
+        <h2>Player With Countdown Example:</h2>
+        <div
+          style={{
+            maxWidth: '1920px',
+            margin: 'auto',
+          }}
+        >
+          <Video__StickyTop__WithCountdown
+            start={main_event.eventStartEnd.StartDateTime}
+            showBefore={
+              <Before
+                imgSrc={main_event.LogoLink[0].Media.url}
+                main_event={main_event}
+                counterStyles={{ textColor: 'black', titleColor: 'black' }}
               />
-            </div>
-          </Grid>
-          <Grid item md={4}>
-            <ClientOnly>
-              <PublicChat slug={main_event.slug} />
-            </ClientOnly>
-            {/* <FullChat slug={`mjp-demo`} /> */}
-          </Grid>
-        </Grid>
+            }
+          />
+        </div>
       </Section>
       <Banner__WithPicture
         imgUrl={main_event.KeyValue[1]?.value}
@@ -77,7 +93,12 @@ export const PageBody = ({ main_event }) => (
       >
         {main_event.Description && main_event.Description}
       </Banner__WithPicture>
-    </Body>
+      <hr />
+      <Section>
+        <h2>Sponsors Example:</h2>
+        <SponsorMap eventId={147} />
+      </Section>
+    </BodyWrap>
   </>
 );
 

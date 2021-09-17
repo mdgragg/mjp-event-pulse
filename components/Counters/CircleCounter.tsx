@@ -33,8 +33,8 @@ const Box = styled.div`
   && > div.box {
     height: 0;
     padding-top: 20%;
-    min-width: 75px;
-    min-height: 75px;
+    min-width: 100px;
+    min-height: 100px;
     width: 20%;
     margin: 0.5rem;
     background-color: ${(props) => props.theme.palette.background.secondary};
@@ -50,7 +50,7 @@ const Box = styled.div`
     position: absolute;
     top: 20%;
     font-weight: 600;
-    font-size: clamp(18px, 180%, 3rem);
+    font-size: clamp(22px, 195%, 4rem);
     line-height: clamp(12px, 10vw, 2.25rem);
   }
   && .delimiter {

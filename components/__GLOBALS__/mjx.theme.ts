@@ -21,7 +21,7 @@ const THEME_COLORS: COLORS = {
 };
 const THEME_PALETTE: PALETTE = {
   text: {
-    primary: THEME_COLORS.white,
+    primary: THEME_COLORS.black,
     secondary: THEME_COLORS.black,
     tertiary: THEME_COLORS.white,
     error: 'red',
@@ -29,7 +29,7 @@ const THEME_PALETTE: PALETTE = {
     success: 'green'
   },
   background: {
-    primary: THEME_COLORS.black,
+    primary: THEME_COLORS.white,
     secondary: THEME_COLORS.white,
     tertiary: THEME_COLORS.orange,
     error: 'red',
@@ -121,11 +121,12 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
     ...THEME_FONTS.title,
   },
   h2: {
-    color: THEME_COLORS.primary,
-    ...THEME_FONTS.body,
+    color: THEME_COLORS.black,
+    textAlign: 'center',
+    margin: '1rem',
   },
   h3: {
-    color: THEME_COLORS.primary,
+    color: THEME_COLORS.black,
   },
   h4: {
     color: THEME_COLORS.primary,

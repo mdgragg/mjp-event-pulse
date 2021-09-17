@@ -21,20 +21,21 @@ const ChatWrap = styled.div`
   max-width: 450px;
   overflow-x: scroll;
   width: 100%;
-  border: 2px solid ${chat_colors.grey};
-  max-height: 700px;
+  /* border: 2px solid ${chat_colors.grey}; */
+  min-height: 750px;
+  height: 100%;
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 200px;
+  grid-template-rows: 1fr auto;
   background-color: white;
   && button {
     display: inline;
   }
 `;
 const NameInput = styled.div`
-  height: calc(100% - 100px);
   width: 80%;
+  height: 100%;
   margin: auto;
   left: 0;
   right: 0;
@@ -67,7 +68,7 @@ const NameInput = styled.div`
 `;
 const ChatMessages = styled.div`
   overflow-y: scroll;
-  height: calc(700px - 155px);
+  height: calc(100% - 155px);
   background-color: rgba(255, 255, 255, 0.25);
   scroll-behavior: smooth;
   padding: 0.75rem;
@@ -120,10 +121,12 @@ const InputArea = styled.div`
   background-color: ${chat_colors.grey};
   width: 100%;
   padding: 0.5rem;
-  height: 155px;
+  height: 160px;
   transition: all 0.2s ease;
-  h3 {
-    margin: 0;
+  && h3 {
+    font-size: 1rem;
+    margin: 0 0 10px 0;
+    color: black;
   }
   &&.hidden {
     visibility: hidden;
@@ -411,14 +414,16 @@ const PublicChat = ({ slug = 'test-2' }) => {
           {' '}
           Send
         </SubmitChat>
-        <button
-          onClick={() => {
-            sessionStorage.clear();
-            base.post(`${slug}/public-chat`, { data: {} });
-          }}
-        >
-          reset
-        </button>
+        {process.env.NODE_ENV === 'development' && (
+          <button
+            onClick={() => {
+              sessionStorage.clear();
+              base.post(`${slug}/public-chat`, { data: {} });
+            }}
+          >
+            reset
+          </button>
+        )}
       </InputArea>
     </ChatWrap>
   );

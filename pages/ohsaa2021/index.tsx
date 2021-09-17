@@ -59,7 +59,7 @@ const Index = (props) => {
               >
                 {`OHSAA SLC \<`}
                 <br />
-                {`  Back to the Future`}
+                {`back to the future`}
               </h1>
               <h2>Virtual Event </h2>
               <h3
