@@ -136,14 +136,27 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
+  // If you request this page with the preview mode cookies set:
+  // - context.preview will be true
+  // - context.previewData will be the same as
+  //   the argument used for `setPreviewData`.
+  //   get the event job data from our api
+
   try {
-    return GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
+    let event_data = await getEventMeta(EVENT_URL);
+    let main_event = event_data.events.filter(
+      (ev) => ev.isMainEvent === true
+    )[0];
+    return {
+      props: { event_meta: event_data, main_event },
+      revalidate: 500,
+    };
   } catch (error) {
     console.log('[event].js error: ', error);
     return {
       redirect: {
-        destination: '/404',
+        destination: './',
       },
     };
   }
