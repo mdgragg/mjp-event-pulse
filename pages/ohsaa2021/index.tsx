@@ -15,6 +15,8 @@ import Center from 'components/Center';
 import { default_theme } from 'eventAssets/ohsaa2021/ohsaa2021.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
+import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
+import Before from 'components/LinkBoxes/Before';
 
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = `ohsaa2021`;
@@ -94,29 +96,27 @@ const Index = (props) => {
           </div>
         </FlexHero>
         <BodyWrap>
-          {main_event.streamLinks.length === 1 ? (
-            <CenteredPlayer
-              showing={true}
-              hasStarted={true}
-              videoUrl={main_event.streamLinks[0].url}
+          <div
+            style={{
+              maxWidth: '1200px',
+              width: '95%',
+              margin: 'auto',
+              padding: '5% 0',
+            }}
+          >
+            <Video__StickyTop__WithCountdown
+              showBefore={
+                <Before
+                  main_event={main_event}
+                  imgSrc={main_event.LogoLink[1]?.Media?.url}
+                />
+              }
+              showMinutesBefore={15}
+              isStarted={true}
+              start={main_event.eventStartEnd.StartDateTime}
+              src={main_event.streamLinks[0].url}
             />
-          ) : (
-            <div
-              style={{
-                minHeight: '60vh',
-                backgroundColor: 'none',
-                margin: '2rem',
-              }}
-            >
-              <PlayerWithChat
-                children={null}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-                chatUrl={main_event.streamLinks[1].url}
-              />
-            </div>
-          )}
-
+          </div>
           {main_event.Description && (
             <Banner__WithPicture
               imgUrl={main_event.LogoLink[0]?.Media?.url || null}
