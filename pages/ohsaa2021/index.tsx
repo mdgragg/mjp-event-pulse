@@ -45,17 +45,7 @@ const Index = (props) => {
       >
         <Meta title={event_meta.EventJobName}> </Meta>
         <FlexHero>
-          <div style={{ width: '50%', margin: 'auto' }}>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '130px',
-                height: 'auto',
-                margin: '2rem auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
-          </div>
+          <div style={{ width: '50%', margin: 'auto' }}></div>
           <div>
             <Center>
               <h1
