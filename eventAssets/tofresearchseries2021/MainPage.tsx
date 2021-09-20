@@ -91,8 +91,7 @@ const MainPage = ({ main_event }) => {
           <img src={main_event?.HeaderImage?.url} />
           <h1>{main_event.EventName}</h1>
           <div className="date">
-            <strong>Next Showing: </strong>
-            <DateParse date={main_event.eventStartEnd.StartDateTime} />
+            <strong>This Event Has Ended</strong>
           </div>
         </HeroInner>
       </SolidColorHero>
@@ -108,6 +107,12 @@ const MainPage = ({ main_event }) => {
             }}
             prefix={<h2 style={{ fontSize: '2rem' }}>Join the Zoom Webinar</h2>}
             showBefore={
+              <Before
+                src={main_event?.HeaderImage?.url}
+                main_event={main_event}
+              />
+            }
+            showAfter={
               <Before
                 src={main_event?.HeaderImage?.url}
                 main_event={main_event}
