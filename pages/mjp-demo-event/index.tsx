@@ -2,7 +2,15 @@ import { useRouter } from 'next/router';
 
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import { Grid } from '@material-ui/core';
+import {
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  Grid,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import VideoBox__StickyTop from 'components/VideoBoxes/Video__StickyTop';
@@ -18,6 +26,8 @@ import { Button__Primary } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import Before from 'components/LinkBoxes/Before';
 import SponsorMap from 'eventAssets/tofresearchseries2021/SponsorMap';
+import { ExpandMore } from '@material-ui/icons';
+import CaptionAccordion from 'components/Captioning/CaptionAccordion';
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'mjp-demo-event';
 
@@ -56,7 +66,7 @@ export const PageBody = ({ main_event }) => (
             chatComponent={<PublicChat slug={main_event.slug} />}
             videoUrl={main_event.streamLinks[0].url}
           >
-            <Button__Primary>Hello World!</Button__Primary>
+            <CaptionAccordion />
           </PlayerWithChat>
         </div>
       </Section>
