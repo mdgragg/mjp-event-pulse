@@ -70,7 +70,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.orange,
+    backgroundColor: THEME_COLORS.green,
     color: 'white',
     border: '',
   },
@@ -102,8 +102,8 @@ export const THEME_BUTTONS: BUTTONS = {
     border: '',
   },
   hover: {
-    color: 'white',
-    backgroundColor: THEME_COLORS.offBlack,
+    color: THEME_COLORS.white,
+    backgroundColor: THEME_COLORS.yellow,
   },
 };
 
@@ -127,7 +127,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
     margin: '1rem',
   },
   h3: {
-    color: THEME_COLORS.black,
+    color: THEME_COLORS.green,
   },
   h4: {
     color: THEME_COLORS.primary,
