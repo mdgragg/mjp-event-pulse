@@ -34,7 +34,7 @@ const HeroHolder = styled.div`
   }
   @media all and (max-width: 1200px) {
     height: min-content;
-    padding: 2% 0;
+    padding: 5% 0;
   }
 `;
 

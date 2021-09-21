@@ -1,75 +1,36 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
-import Link from 'next/link';
-import Index from 'pages/sccellarauction';
 
 import PasswordOnly from '../Modals/PasswordOnly';
+import { Button__Primary } from 'components/Buttons';
 
 const ThePaper = styled(Paper)`
-  height: 100%;
-  && a {
-    margin: 0;
-    text-decoration: none;
-    color: inherit;
-  }
+  margin: 1rem auto;
+  width: auto;
+  max-width: 350px;
 `;
 
 const SingleEventWrap = styled.div`
   position: relative;
-  background-color: ${(props) => props.theme.blue};
-  color: white;
-  min-height: inherit;
-  height: 100%;
-  width: 350px;
+  min-width: 350px;
+  width: 100%;
   border-radius: 5px;
-  padding: 10px;
+  padding: 1rem;
   transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   && :hover {
-    opacity: 0.9;
     cursor: pointer;
     transform: scale(1.02);
-  }
-  && h3 {
-    margin: 1rem auto;
-    font-size: 1.5rem;
-    max-width: 80%;
-    color: white;
-    text-align: center;
-  }
-
-  && button {
-    background: ${(props) => props.theme.buttonColor || '#1f3c74'};
-    height: 50px;
-    margin: 0 auto;
-    position: absolute;
-    bottom: 3%;
-    left: 0;
-    right: 0;
-    display: block;
-    width: 200px;
-    font-size: 1.25rem;
-    font-weight: 600;
-    border: none;
-    transition: all 0.2s;
-    color: ${(props) => props.theme.buttonTextColor || 'white'};
-    :hover {
-      cursor: pointer;
-      background-color: white;
-      color: ${(props) => props.theme.blue};
-    }
-  }
-  //for the button
-  :after {
-    display: block;
-    height: 50px;
-    content: ' ';
   }
 `;
 
 const EventThumbnail = styled.img`
-  max-width: 100%;
+  max-width: 350px;
+  margin-bottom: 1.5rem;
 `;
 const PlaceholderThumb = styled.div`
   background: rgba(255, 255, 255, 0.25);
@@ -110,7 +71,9 @@ const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
         <h3>{Name}</h3>
 
         <MetaData>{Description}</MetaData>
-        <button onClick={handleLink}>{buttonText || 'Click To Join'}</button>
+        <Button__Primary onClick={handleLink}>
+          {buttonText || 'Click To Join'}{' '}
+        </Button__Primary>
       </SingleEventWrap>
       {/* </a> */}
     </ThePaper>
