@@ -24,7 +24,7 @@ const BreakoutBoard = ({ breakouts }) => {
       <h3>Breakout Sessions</h3>
       <StyledBoard>
         {breakouts.map((b) => (
-          <SingleEvent session={b} buttonText="Join Now" />
+          <SingleEvent session={b} />
         ))}
       </StyledBoard>
     </BoardWrap>

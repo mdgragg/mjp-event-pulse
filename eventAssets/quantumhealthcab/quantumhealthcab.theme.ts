@@ -125,9 +125,12 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
     fontSize: '1rem',
     textAlign: 'center',
     margin: '1rem',
+    
   },
   h3: {
     color: THEME_COLORS.green,
+    fontSize: '1.25rem',
+    lineHeight: '1.25rem'
   },
   h4: {
     color: THEME_COLORS.primary,

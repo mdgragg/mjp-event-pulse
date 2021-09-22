@@ -95,11 +95,10 @@ const AuthWrap = (props: AuthWrapProps) => {
     if (options.includes('canRegister')) {
       return (
         <>
-          <AuthModal__AttendeeListRegister {...ModalProps}>
-            <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
-              {children}
-            </StyledAuthWrap>
-          </AuthModal__AttendeeListRegister>
+          <AuthModal__AttendeeListRegister {...ModalProps} />
+          <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
+            {children}
+          </StyledAuthWrap>
         </>
       );
     }

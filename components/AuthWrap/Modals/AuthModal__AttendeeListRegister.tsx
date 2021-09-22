@@ -9,9 +9,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import attendee_capture from 'lib/fetchCalls/soft_auth';
+import softAuth from 'lib/fetchCalls/soft_auth';
 import { AuthModalProps } from '../AuthWrap__Types';
-import { HeaderWrap, StyledDialogTitle } from './AuthModal__Styles';
+import {
+  DialogErrorText,
+  HeaderWrap,
+  StyledDialogActions,
+  StyledDialogTitle,
+} from './AuthModal__Styles';
 import { useStyles, StyledForm } from './AuthModal__Styles';
 import Center from 'components/Center';
 import { Button__Primary } from 'components/Buttons';
@@ -80,6 +85,7 @@ export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
+      className={classes.modal}
     >
       {
         {
@@ -105,10 +111,13 @@ export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
               values={values}
               setValues={setValues}
               handleChange={handleChange}
+              onBack={() => setFormPanel('signIn')}
               handleRegister={() => setFormPanel('registerConfirm')}
             />
           ),
-          registerConfirm: <RegisterConfirm />,
+          registerConfirm: (
+            <RegisterConfirm returnCallback={() => setFormPanel('signIn')} />
+          ),
         }[formStatus.panel]
       }
     </Dialog>
@@ -150,12 +159,11 @@ function SignInModal({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, eventToCheck.id)
+    return await softAuth(send_values, eventToCheck.id)
       .then((res) => {
         return successCallback(res);
       })
       .catch((err) => {
-        console.log(err);
         if (err === 'You are not authorized for this event') {
           return notRegisteredCallback();
         } else {
@@ -168,7 +176,7 @@ function SignInModal({
   };
   return (
     <>
-      <StyledDialogTitle id="form-dialog-title">
+      <StyledDialogTitle id="form-dialog-title" className={classes.title}>
         {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
         Please Sign In To Enter
       </StyledDialogTitle>
@@ -212,18 +220,26 @@ function SignInModal({
   );
 }
 
-function RegisterModal({ values, setValues, handleChange, handleRegister }) {
+function RegisterModal({
+  values,
+  setValues,
+  handleChange,
+  handleRegister,
+  onBack,
+}) {
   const classes = useStyles();
   return (
     <>
-      <StyledDialogTitle id="form-dialog-title">
+      <StyledDialogTitle id="form-dialog-title" className={classes.title}>
         Register For the Event
       </StyledDialogTitle>
       <DialogContent>
         <Center>
-          <DialogContentText>
-            Please enter your information to proceed to the event
-          </DialogContentText>
+          <DialogErrorText>
+            Uh oh! It doesn't look like you are registered for this event.
+            <br />
+            Please register first.
+          </DialogErrorText>
           <StyledForm
             className={classes.form}
             noValidate
@@ -248,17 +264,19 @@ function RegisterModal({ values, setValues, handleChange, handleRegister }) {
           </StyledForm>
         </Center>
       </DialogContent>
-      <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+      <StyledDialogActions>
+        <Button__Primary onClick={onBack}>Back</Button__Primary>
         <Button__Primary onClick={handleRegister}> Register</Button__Primary>
-      </DialogActions>
+      </StyledDialogActions>
     </>
   );
 }
 
-function RegisterConfirm() {
+function RegisterConfirm({ returnCallback }) {
+  const classes = useStyles();
   return (
     <>
-      <StyledDialogTitle id="form-dialog-title">
+      <StyledDialogTitle id="form-dialog-title" className={classes.title}>
         Register For the Event
       </StyledDialogTitle>
       <DialogContent>
@@ -268,9 +286,7 @@ function RegisterConfirm() {
         </Center>
       </DialogContent>
       <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button__Primary
-          onClick={() => toast.error('This part is not built yet')}
-        >
+        <Button__Primary onClick={returnCallback}>
           Return To Register
         </Button__Primary>
       </DialogActions>

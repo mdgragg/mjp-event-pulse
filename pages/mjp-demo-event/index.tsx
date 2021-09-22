@@ -58,7 +58,6 @@ export const PageBody = ({ main_event }) => (
           style={{
             maxWidth: '1920px',
             margin: 'auto',
-            minHeight: '100vh',
           }}
         >
           <PlayerWithChat
@@ -78,7 +77,6 @@ export const PageBody = ({ main_event }) => (
           style={{
             maxWidth: '1920px',
             margin: 'auto',
-            minHeight: '100vh',
           }}
         >
           <Video__StickyTop__WithCountdown

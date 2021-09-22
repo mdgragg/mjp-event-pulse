@@ -118,3 +118,7 @@ export function transformByCommonAttr(array, field): {} {
     return obj;
   }, {});
 }
+
+export function fakeArray (len) {
+ return Array.from(Array[10]) 
+}

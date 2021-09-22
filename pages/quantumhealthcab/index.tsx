@@ -19,6 +19,7 @@ import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import AgendaBoard from 'components/Agenda/AgendaBoard';
 import { BreakoutBoard } from 'components/BreakoutSessions';
 import { BoxedCounter } from 'components/Counters';
+import BreakoutTimeline from 'eventAssets/quantumhealthcab/BreakoutTimeline';
 
 const PLACEHOLD = 'https://placehold.co/';
 const EVENT_URL = 'quantumhealthcab';
@@ -88,8 +89,14 @@ const Index = (props) => {
           </div>
         </FlexHero>
         <BodyWrap>
-          <div style={{ padding: '3rem 0 6rem 0' }}>
-            <BreakoutBoard breakouts={main_event.BreakoutSessions} />
+          <div
+            style={{
+              padding: '3rem 2% 6rem 2%',
+              maxWidth: '1200px',
+              margin: 'auto',
+            }}
+          >
+            <BreakoutTimeline breakouts={main_event.BreakoutSessions} />
 
             {main_event.Description && (
               <Banner__WithPicture

@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 
 import PasswordOnly from '../Modals/PasswordOnly';
 import { Button__Primary } from 'components/Buttons';
+import { DateParse } from 'components/__Assets__';
 
 const ThePaper = styled(Paper)`
   margin: 1rem auto;
@@ -31,6 +32,7 @@ const SingleEventWrap = styled.div`
 const EventThumbnail = styled.img`
   max-width: 350px;
   margin-bottom: 1.5rem;
+  padding: 2rem;
 `;
 const PlaceholderThumb = styled.div`
   background: rgba(255, 255, 255, 0.25);
@@ -56,7 +58,7 @@ const MetaData = styled.div`
   max-width: 80%;
   margin: auto;
 `;
-const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
+const EventComponent = ({ session, handleLink, buttonText }) => {
   const { Name, Description = '', Link, Thumbnail, Private } = session;
   return (
     <ThePaper>
@@ -69,10 +71,13 @@ const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
         )}
 
         <h3>{Name}</h3>
+        <p>
+          <DateParse format={`MMMM DD, h:mma`} date={session.DateTime} />
+        </p>
 
         <MetaData>{Description}</MetaData>
         <Button__Primary onClick={handleLink}>
-          {buttonText || 'Click To Join'}{' '}
+          {buttonText || `Join ${session.Category}` || 'Click To Join'}
         </Button__Primary>
       </SingleEventWrap>
       {/* </a> */}
@@ -80,7 +85,12 @@ const EventComponent = ({ session, handleLink, Wrap, buttonText }) => {
   );
 };
 
-const SingleEvent = ({ session, buttonText }) => {
+type SingleEvent__Props = {
+  session: any;
+  buttonText?: string;
+};
+
+const SingleEvent = ({ session, buttonText }: SingleEvent__Props) => {
   // const { Name, Description = '', Thumbnail, Private } = session;
 
   const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);

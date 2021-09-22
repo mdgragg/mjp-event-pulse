@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { makeStyles } from '@material-ui/core';
+import {
+  DialogActions,
+  DialogContentText,
+  makeStyles,
+} from '@material-ui/core';
 
 export const ModalWrap = styled.div``;
 
@@ -20,6 +24,10 @@ const HeaderWrap = styled.div`
     width: 95%;
   }
 `;
+const DialogErrorText = styled(DialogContentText)`
+  color: ${({ theme }) => theme.palette.error};
+  font-weight: 600;
+`;
 
 const StyledForm = styled.form`
   &&.loading {
@@ -32,6 +40,15 @@ const Error = styled.div`
   color: white;
   font-size: 1.25rem;
   text-align: center;
+`;
+
+const StyledDialogActions = styled(DialogActions)`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  && button {
+    width: 120px;
+  }
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -66,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.5rem',
     },
   },
+  title: {
+    margin: '5rem auto',
+  },
   contentText: {
     margin: '2rem 2%',
     textAlign: 'left',
@@ -81,4 +101,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export { Error, useStyles, StyledForm, HeaderWrap, StyledDialogTitle };
+export {
+  Error,
+  useStyles,
+  StyledForm,
+  HeaderWrap,
+  StyledDialogTitle,
+  DialogErrorText,
+  StyledDialogActions,
+};

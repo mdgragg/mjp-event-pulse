@@ -2,7 +2,7 @@ import { createTheme } from '@material-ui/core';
 import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, GLOBALS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
 
 const THEME_COLORS: COLORS = {
-  red: '#b71f39',
+  red: 'tomato',
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
@@ -36,7 +36,7 @@ const THEME_PALETTE: PALETTE = {
     info: 'blue',
     success: 'green'
   },
-  error: 'blue',
+  error: THEME_COLORS.red,
   info: 'blue',
   success: 'green'
 
