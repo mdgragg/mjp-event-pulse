@@ -8,6 +8,7 @@ import {
   AuthModal__Password,
   AuthModal__Email,
   AuthModal__AttendeeList,
+  AuthModal__AttendeeListRegister,
 } from './Modals';
 import { tokenGenerator } from 'lib/helpers';
 import { AppContext } from 'context/AppContext';
@@ -88,6 +89,17 @@ const AuthWrap = (props: AuthWrapProps) => {
           <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
             {children}
           </StyledAuthWrap>
+        </>
+      );
+    }
+    if (options.includes('canRegister')) {
+      return (
+        <>
+          <AuthModal__AttendeeListRegister {...ModalProps}>
+            <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
+              {children}
+            </StyledAuthWrap>
+          </AuthModal__AttendeeListRegister>
         </>
       );
     }

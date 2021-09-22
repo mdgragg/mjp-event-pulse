@@ -1,5 +1,7 @@
 import React from 'react';
 
+type AuthOptions = 'emailOnly' | 'canRegister'
+
 export declare interface AuthWrapProps {
   children: React.ReactNode;
   title?: React.ReactNode;
@@ -8,7 +10,7 @@ export declare interface AuthWrapProps {
   signInText?: React.ReactNode | string;
   headerContent?: React.ReactNode;
   otherFields?: Object;
-  options?: {}[];
+  options?: AuthOptions[];
   theme?: any;
 }
 

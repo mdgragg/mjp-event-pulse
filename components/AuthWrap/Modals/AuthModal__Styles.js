@@ -10,15 +10,14 @@ const StyledDialogTitle = styled(DialogTitle)`
   font-weight: 600;
   margin: 0;
   padding: 1rem 0 0 0;
-
 `;
 const HeaderWrap = styled.div`
   width: 70%;
   height: auto;
   margin: auto;
   text-align: center;
-  @media  all and (max-width: 768px){
-  width: 95%;
+  @media all and (max-width: 768px) {
+    width: 95%;
   }
 `;
 
@@ -37,17 +36,18 @@ const Error = styled.div`
 
 const useStyles = makeStyles((theme) => ({
   modal: {
+    '& .MuiDialog-paperWidthSm': {
+      maxWidth: '350px',
+    },
     '& .MuiDialogContent-root div': {
-      maxWidth: '500px',
+      maxWidth: '350px',
     },
     '& .MuiDialogActions-root': {
       padding: '2rem 8px',
-      [theme.breakpoints.down('md')]:{
+      [theme.breakpoints.down('md')]: {
         padding: '0.5rem 8px',
       },
     },
-  
-
   },
   form: {
     '& > *': {
@@ -56,32 +56,29 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiTextField-root': {
       margin: '2% 0',
-    
-      [theme.breakpoints.down('md')]:{
+
+      [theme.breakpoints.down('md')]: {
         margin: '0.25rem 0',
-        
       },
     },
     '& .MuiInput-root input': {
       textAlign: 'center',
       fontSize: '1.5rem',
-   
     },
   },
   contentText: {
     margin: '2rem 2%',
     textAlign: 'left',
-    maxWidth: '450px',
-    [theme.breakpoints.down('md')]:{
+    maxWidth: '350px',
+    [theme.breakpoints.down('md')]: {
       margin: '1% 0',
       fontSize: '0.85rem',
-      '& p' : {
+      '& p': {
         margin: '1% 0',
-        fontSize: '0.85rem'
-      }
-     
+        fontSize: '0.85rem',
+      },
     },
-  }
+  },
 }));
 
 export { Error, useStyles, StyledForm, HeaderWrap, StyledDialogTitle };

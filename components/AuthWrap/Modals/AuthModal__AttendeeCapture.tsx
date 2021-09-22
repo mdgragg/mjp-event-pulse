@@ -71,7 +71,6 @@ export default function AuthModal__AttendeeCapture({
     let result = Object.keys(values).filter(
       (v) => values[v].value === '' && values[v].required
     );
-
     if (result.length > 0) {
       return false;
     }

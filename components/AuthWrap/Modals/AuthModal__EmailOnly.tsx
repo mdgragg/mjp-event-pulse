@@ -20,6 +20,7 @@ import {
   StyledForm,
   useStyles,
 } from './AuthModal__Styles';
+import { Button__Primary } from 'components/Buttons';
 
 export default function AuthModal__EmailOnly({
   open,
@@ -97,6 +98,7 @@ export default function AuthModal__EmailOnly({
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        className={classes.modal}
       >
         <StyledDialogTitle id="form-dialog-title">
           {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
@@ -144,9 +146,7 @@ export default function AuthModal__EmailOnly({
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={handleSumbit} color="primary">
-            Submit
-          </Button>
+          <Button__Primary onClick={handleSumbit}></Button__Primary>
         </DialogActions>
       </Dialog>
     </div>
