@@ -56,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiDialog-paperWidthSm': {
       maxWidth: '350px',
     },
-    '& .MuiDialogContent-root div': {
+    '& .MuiDialogContent-root': {
       maxWidth: '350px',
+      minHeight: '350px',
     },
     '& .MuiDialogActions-root': {
       padding: '2rem 8px',

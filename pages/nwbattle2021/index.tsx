@@ -36,13 +36,16 @@ const Index = (props) => {
           <div
             style={{
               width: '40%',
-              margin: '1rem auto',
-              padding: '4% 0',
+              height: 'auto',
+              paddingTop: '1rem',
+              paddingBottom: '1rem',
+              margin: '6% auto',
               backgroundColor: event_theme.colors.primary,
+              borderRadius: '8px',
             }}
           >
             <img
-              style={{ position: 'relative' }}
+              style={{ position: 'relative', width: '60%' }}
               src={main_event?.LogoLink[0]?.Media?.url}
             />
           </div>

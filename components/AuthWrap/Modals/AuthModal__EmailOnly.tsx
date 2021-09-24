@@ -21,6 +21,7 @@ import {
   useStyles,
 } from './AuthModal__Styles';
 import { Button__Primary } from 'components/Buttons';
+import { check_required } from '.';
 
 export default function AuthModal__EmailOnly({
   open,
@@ -60,21 +61,10 @@ export default function AuthModal__EmailOnly({
     }));
   };
 
-  const check_required = () => {
-    let result = Object.keys(values).filter(
-      (v) => values[v].value === '' && values[v].required
-    );
-
-    if (result.length > 0) {
-      return false;
-    }
-    return true;
-  };
-
   const handleSumbit = async (e) => {
     setFormLoading(true);
     e.preventDefault();
-    if (!check_required()) {
+    if (!check_required(values)) {
       setFormLoading(false);
       return toast.error('You must supply an email');
     }
@@ -146,7 +136,7 @@ export default function AuthModal__EmailOnly({
         </DialogContent>
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button__Primary onClick={handleSumbit}></Button__Primary>
+          <Button__Primary onClick={handleSumbit}>Sign In</Button__Primary>
         </DialogActions>
       </Dialog>
     </div>

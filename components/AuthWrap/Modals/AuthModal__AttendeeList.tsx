@@ -14,6 +14,7 @@ import { AuthModalProps } from '../AuthWrap__Types';
 import { HeaderWrap, StyledDialogTitle } from './AuthModal__Styles';
 import { useStyles, StyledForm } from './AuthModal__Styles';
 import Center from 'components/Center';
+import { check_required } from '.';
 
 const default_fields = {
   AttendeeFirst: {
@@ -65,21 +66,10 @@ export default function AuthModal__AttendeeList({
     }));
   };
 
-  const check_required = () => {
-    let result = Object.keys(values).filter(
-      (v) => values[v].value === '' && values[v].required
-    );
-
-    if (result.length > 0) {
-      return false;
-    }
-    return true;
-  };
-
   const handleSumbit = async (e) => {
     setFormLoading(true);
     e.preventDefault();
-    if (!check_required()) {
+    if (!check_required(values)) {
       setFormLoading(false);
       return toast.error('All fields are required!');
     }
@@ -102,6 +92,7 @@ export default function AuthModal__AttendeeList({
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
+      className={classes.modal}
     >
       <StyledDialogTitle id="form-dialog-title">
         {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}

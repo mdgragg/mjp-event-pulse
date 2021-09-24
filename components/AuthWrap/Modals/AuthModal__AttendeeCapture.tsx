@@ -19,6 +19,7 @@ import {
   useStyles,
 } from './AuthModal__Styles';
 import { Button__Primary } from 'components/Buttons';
+import { check_required } from '.';
 
 export default function AuthModal__AttendeeCapture({
   open,
@@ -67,20 +68,10 @@ export default function AuthModal__AttendeeCapture({
     }));
   };
 
-  const check_required = () => {
-    let result = Object.keys(values).filter(
-      (v) => values[v].value === '' && values[v].required
-    );
-    if (result.length > 0) {
-      return false;
-    }
-    return true;
-  };
-
   const handleSumbit = async (e) => {
     setFormLoading(true);
     e.preventDefault();
-    if (!check_required()) {
+    if (!check_required(values)) {
       setFormLoading(false);
       return toast.error('All fields are required!');
     }

@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import softAuth from 'lib/fetchCalls/soft_auth';
+import attendee_capture from 'lib/fetchCalls/attendee_capture';
 import { AuthModalProps } from '../AuthWrap__Types';
 import {
   DialogErrorText,
@@ -20,7 +20,9 @@ import {
 import { useStyles, StyledForm } from './AuthModal__Styles';
 import Center from 'components/Center';
 import { Button__Primary } from 'components/Buttons';
+import { BoxedCounter } from 'components/Counters';
 import { check_required } from '.';
+import { Typography } from '@material-ui/core';
 
 const default_fields = {
   AttendeeFirst: {
@@ -40,7 +42,7 @@ const default_fields = {
   },
 };
 
-export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
+export default function AuthModal__Register(props: AuthModalProps) {
   const {
     open,
     successCallback,
@@ -51,7 +53,11 @@ export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
   } = props;
 
   const handleClose = () => {
-    toast.error('You must enter your information before joining.');
+    if (formStatus.panel === 'register') {
+      return toast.error('You must enter your information before joining.');
+    } else {
+      return toast.error("You are registered but the event hasn't started yet");
+    }
   };
 
   const classes = useStyles();
@@ -60,7 +66,7 @@ export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
 
   const [formStatus, setFormStatus] = React.useState({
     loading: false,
-    panel: 'signIn',
+    panel: 'register',
   });
 
   const setFormLoading = (value) => {
@@ -81,63 +87,6 @@ export default function AuthModal__AttendeeListRegister(props: AuthModalProps) {
     }));
   };
 
-  return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-      className={classes.modal}
-    >
-      {
-        {
-          signIn: (
-            <SignInModal
-              eventToCheck={eventToCheck}
-              headerContent={headerContent}
-              handleChange={handleChange}
-              signInText={signInText}
-              classes={classes}
-              formStatus={formStatus}
-              setFormLoading={setFormLoading}
-              successCallback={successCallback}
-              notRegisteredCallback={() => {
-                setFormPanel('register');
-              }}
-              values={values}
-              setValues={setValues}
-            />
-          ),
-          register: (
-            <RegisterModal
-              values={values}
-              setValues={setValues}
-              handleChange={handleChange}
-              onBack={() => setFormPanel('signIn')}
-              handleRegister={() => setFormPanel('registerConfirm')}
-            />
-          ),
-          registerConfirm: (
-            <RegisterConfirm returnCallback={() => setFormPanel('signIn')} />
-          ),
-        }[formStatus.panel]
-      }
-    </Dialog>
-  );
-}
-
-function SignInModal({
-  setFormLoading,
-  headerContent,
-  handleChange,
-  values,
-  setValues,
-  signInText,
-  classes,
-  formStatus,
-  notRegisteredCallback,
-  successCallback,
-  eventToCheck,
-}) {
   const handleSubmit = async (e) => {
     setFormLoading(true);
     e.preventDefault();
@@ -149,74 +98,50 @@ function SignInModal({
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await softAuth(send_values, eventToCheck.id)
+    return await attendee_capture(send_values, eventToCheck.id)
       .then((res) => {
-        return successCallback(res);
+        const { AttendeeFirst, AttendeeLast } = res.message.Attendee;
+        setValues((prev) => ({ ...prev, AttendeeFirst, AttendeeLast }));
+        setFormLoading(false);
+        setFormPanel('registerConfirm');
       })
       .catch((err) => {
-        if (err === 'You are not authorized for this event') {
-          return notRegisteredCallback();
-        } else {
-          return toast.error(err);
-        }
-      })
-      .finally(() => {
+        toast.error(err);
         setFormLoading(false);
       });
   };
+
   return (
-    <>
-      <StyledDialogTitle id="form-dialog-title" className={classes.title}>
-        {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
-        Register For The Event
-      </StyledDialogTitle>
-      <DialogContent>
-        <Center>
-          <DialogContentText>
-            {signInText
-              ? signInText
-              : 'Please enter your information register for the event'}
-          </DialogContentText>
-          <StyledForm
-            className={`${classes.form} ${
-              formStatus.loading ? 'loading' : false
-            }`}
-            noValidate
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            {Object.keys(values).map((v) => (
-              <TextField
-                key={`inputs--${v}`}
-                autoFocus
-                margin="normal"
-                id={v}
-                name={v}
-                label={values[v].displayName}
-                value={values[v].value}
-                type="text"
-                onChange={handleChange}
-                required={values[v].required}
-              />
-            ))}
-          </StyledForm>
-        </Center>
-      </DialogContent>
-      <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button__Primary onClick={handleSubmit}> Submit </Button__Primary>
-      </DialogActions>
-    </>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      className={classes.modal}
+    >
+      {
+        {
+          register: (
+            <RegisterModal
+              values={values}
+              setValues={setValues}
+              handleChange={handleChange}
+              handleRegister={handleSubmit}
+            />
+          ),
+          registerConfirm: (
+            <RegisterConfirm
+              values={values}
+              eventToCheck={eventToCheck}
+              returnCallback={() => setFormPanel('register')}
+            />
+          ),
+        }[formStatus.panel]
+      }
+    </Dialog>
   );
 }
 
-function RegisterModal({
-  values,
-  setValues,
-  handleChange,
-  handleRegister,
-  onBack,
-}) {
+function RegisterModal({ values, setValues, handleChange, handleRegister }) {
   const classes = useStyles();
   return (
     <>
@@ -225,11 +150,10 @@ function RegisterModal({
       </StyledDialogTitle>
       <DialogContent>
         <Center>
-          <DialogErrorText>
-            Uh oh! It doesn't look like you aren't registered for this event.
-            <br />
-            Please register first.
-          </DialogErrorText>
+          <p>
+            Please tell us a little about yourself. We will get you all squared
+            away.
+          </p>
           <StyledForm
             className={classes.form}
             noValidate
@@ -255,24 +179,38 @@ function RegisterModal({
         </Center>
       </DialogContent>
       <StyledDialogActions>
-        <Button__Primary onClick={onBack}>Back</Button__Primary>
-        <Button__Primary onClick={handleRegister}> Register</Button__Primary>
+        <Button__Primary onClick={handleRegister}>Register</Button__Primary>
       </StyledDialogActions>
     </>
   );
 }
 
-function RegisterConfirm({ returnCallback }) {
+function RegisterConfirm({ returnCallback, eventToCheck, values }) {
   const classes = useStyles();
   return (
     <>
       <StyledDialogTitle id="form-dialog-title" className={classes.title}>
-        Register For the Event
+        Registration Confirmed!
       </StyledDialogTitle>
+      {values && (
+        <Center>
+          <Typography variant={`overline`}>
+            Thank You{' '}
+            <strong>
+              {' '}
+              {values.AttendeeFirst} {values.AttendeeLast}{' '}
+            </strong>
+          </Typography>
+        </Center>
+      )}
       <DialogContent>
         <Center>
           An admin has been alerted that you'd like to register for the event!
           Please check your emails for a confirmation, then you can login again.
+          <div style={{ margin: '2rem 0' }}>
+            <h3>Please Check Back In </h3>
+            <BoxedCounter event={eventToCheck} />
+          </div>
         </Center>
       </DialogContent>
       <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>

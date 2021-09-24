@@ -20,7 +20,7 @@ const Home = (props) => {
     <Page theme={default_theme}>
       <Header
         title="MJP Events"
-        height={headerHeight}
+        height={`550px`}
         image="https://storage.googleapis.com/mjp-stream-public/Screen%20Shot%202021-05-17%20at%2010.17.24%20AM.png"
       />
       <Section>

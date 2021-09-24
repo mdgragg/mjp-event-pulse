@@ -9,6 +9,7 @@ import {
   AuthModal__Email,
   AuthModal__AttendeeList,
   AuthModal__AttendeeListRegister,
+  AuthModal__Register,
 } from './Modals';
 import { tokenGenerator } from 'lib/helpers';
 import { AppContext } from 'context/AppContext';
@@ -82,6 +83,17 @@ const AuthWrap = (props: AuthWrapProps) => {
     return <>{children}</>;
   }
   if (authType === 'AttendeeFromList') {
+    if (options.includes('registerOnly')) {
+      return (
+        <>
+          <AuthModal__Register {...ModalProps} />
+          <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
+            {children}
+          </StyledAuthWrap>
+        </>
+      );
+    }
+
     if (options.includes('emailOnly')) {
       return (
         <>

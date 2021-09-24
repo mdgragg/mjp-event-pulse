@@ -2,7 +2,7 @@ import { Card } from '@material-ui/core';
 import { Button__Primary } from 'components/Buttons';
 import React from 'react';
 import styled from 'styled-components';
-
+import { TIMELINES } from './timeline';
 const BreakoutWrap = styled.div`
   display: grid;
   grid-auto-rows: auto;
@@ -59,44 +59,11 @@ const StyledTimelineDesc = styled.div`
   }
 `;
 
-const timelines = {
-  30: [
-    { time: '8:45am', description: 'Virtual meeting open to join' },
-    { time: '9:00am - 9:15am', description: 'Welcome and agenda' },
-    { time: '9:15am - 10:30am', description: 'Keynote speaker - Jamil Zaki' },
-    { time: '10:30am - 10:45am', description: 'Break' },
-    {
-      time: '10:45am - 11:30am',
-      description: 'Market Research discussion (Steven Knight)',
-    },
-    {
-      time: '11:30am - 12:30pm',
-      description: 'Break',
-    },
-  ],
-  0: [
-    {
-      time: '12:30pm',
-      description: 'The Future of Navigation with Bill Lahrmann and Dave Luby',
-    },
-  ],
-  31: [
-    {
-      time: '12:30pm',
-      description: 'The Future of Navigation with Bill Lahrmann and Dave Luby',
-    },
-    {
-      time: '1:30pm - 2:30pm',
-      description: 'Discussion with the Product Team',
-    },
-  ],
-  32: [{ time: '2:30pm - 3:00pm', description: 'Wrap Up' }],
-};
 const BreakoutTimeline = ({ breakouts }) => {
   return (
     <BreakoutWrap>
       {breakouts.map((b) => (
-        <SingleBreakout breakout={b} key={b.id} timeline={timelines[b.id]} />
+        <SingleBreakout breakout={b} key={b.id} timeline={TIMELINES[b.id]} />
       ))}
     </BreakoutWrap>
   );
@@ -107,7 +74,7 @@ const SingleBreakout = ({ breakout, timeline }) => (
     <StyledButtonArea>
       <img src={breakout.Thumbnail.url} />
       <h3>{breakout.Name}</h3>
-      <a href={breakout.Link.url}>
+      <a href={breakout.Link.url} target="_blank">
         <Button__Primary>Join {breakout.Category}</Button__Primary>
       </a>
     </StyledButtonArea>
