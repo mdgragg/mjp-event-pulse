@@ -78,7 +78,9 @@ const Index = (props) => {
               />
             </div>
             <div>
-              <h1>{title ? title : main_event.EventName}</h1>
+              <h1 style={{ textTransform: 'capitalize' }}>
+                {title ? title : main_event.EventName}
+              </h1>
               <h3>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </h3>

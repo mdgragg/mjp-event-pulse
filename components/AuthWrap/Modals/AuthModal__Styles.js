@@ -54,10 +54,10 @@ const StyledDialogActions = styled(DialogActions)`
 const useStyles = makeStyles((theme) => ({
   modal: {
     '& .MuiDialog-paperWidthSm': {
-      maxWidth: '350px',
+      maxWidth: '4000px',
     },
     '& .MuiDialogContent-root': {
-      maxWidth: '350px',
+      maxWidth: '400px',
       minHeight: '350px',
     },
     '& .MuiDialogActions-root': {

@@ -57,7 +57,7 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    color: COLORS.secondary,
     border: '',
   },
   secondary: {
@@ -66,7 +66,7 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    color: COLORS.secondary,
     border: '',
   },
   big: {
@@ -75,7 +75,7 @@ export const BUTTONS = {
     letterSpacing: '2px',
     lineHeight: 'auto',
     backgroundColor: COLORS.primary,
-    fontColor: COLORS.secondary,
+    color: COLORS.secondary,
     border: '5px solid white',
   },
   small: {
@@ -84,15 +84,15 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: '',
-    fontColor: '',
+    color: '',
     border: '',
     hover: {
-      fontColor: '',
+      color: '',
       bgColor: '',
     },
   },
   hover: {
-    fontColor: COLORS.orange,
+    color: COLORS.orange,
     backgroundColor: 'white',
   },
 };

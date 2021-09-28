@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getEventMeta } from 'lib/api';
+import { getEventMeta, getEventSpeakers } from 'lib/api';
 import Index, { EVENT_URL } from './index';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
@@ -28,20 +28,20 @@ const TeamPage = (props) => {
     }
   }, []);
 
-  const { event_meta, main_event } = props;
+  const { event_meta, main_event, speaker } = props;
 
   return (
     <Index
       main_event={main_event}
       event_meta={event_meta}
-      title={`Team ${router.query.teamName}`}
+      title={`Team ${speaker.FirstName} ${speaker.LastName}`}
     >
       <Box__XYCentered minHeight={'60vh'}>
         <div style={{ maxWidth: '900px', width: '95%', margin: '3rem auto' }}>
           <LinkBox__StickyTop__WithCountdown
             offset={10}
             start={main_event.eventStartEnd.StartDateTime}
-            link={main_event.streamLinks[0].url}
+            link={speaker.Link}
             showBefore={
               <BoxedCounter
                 styles={{
@@ -65,23 +65,29 @@ const TeamPage = (props) => {
 };
 
 export async function getStaticPaths() {
+  const speakers = await getEventSpeakers(162);
+
   return {
-    paths: [
-      { params: { teamName: 'Ceo' } }, // See the "paths" section below
-    ],
+    paths: speakers.map((speaker) => ({
+      params: { teamName: speaker.LastName.toLowerCase() },
+    })),
     fallback: false, // See the "fallback" section below
   };
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
-  console.log(main_event);
+  const speakers = await getEventSpeakers(162);
+  const theSpeaker = speakers.filter(
+    (s) => s.LastName.toLowerCase() === params.teamName
+  );
   const returnObj: StaticResponse = {
     props: {
       event_meta: event_data,
       main_event,
+      speaker: theSpeaker[0],
     },
     revalidate: 300,
   };

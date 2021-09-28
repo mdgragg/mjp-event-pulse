@@ -10,7 +10,8 @@ const StyledPage = styled.div`
   font-family: ${(props) => props.theme.fonts.body};
   min-height: 100vh;
   z-index: 0;
-  min-width: 100vw;
+  width: 100vw;
+  min-width: 350px;
   background-color: ${(props) => props.theme.palette.background.primary};
   /* overflow: hidden; */
 
