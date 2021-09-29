@@ -22,17 +22,14 @@ const Before = ({ main_event, speaker }) => (
     <h2>
       {speaker.FirstName} {speaker.LastName}
     </h2>
+    <h4>Join {speaker.FirstName} Live In:</h4>
     <div className="hide-sm">
       <BoxedCounter
         event={main_event}
         styles={{
           boxColor: '#0047bb',
         }}
-        prefix={
-          <>
-            <h4>Join {speaker.FirstName} Live In:</h4>
-          </>
-        }
+        prefix={''}
       />
     </div>
   </BeforeWrap>
