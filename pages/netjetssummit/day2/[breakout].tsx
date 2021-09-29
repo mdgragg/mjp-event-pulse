@@ -20,15 +20,8 @@ import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Breakout = (props) => {
-  const router = useRouter();
   const { event_meta, main_event, sub_event, breakout } = props;
-
   const chatLink = breakout.KeyValue.filter((k) => k.key === 'Chat')[0];
-
-  var event_theme = {
-    ...default_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-  };
 
   return (
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventName}>
@@ -46,7 +39,7 @@ const Breakout = (props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const breakouts = await getBreakoutSessions(171);
+  const breakouts = await getBreakoutSessions(172);
 
   return {
     paths: breakouts.map((breakout) => ({
@@ -58,12 +51,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const event_data = await getEventMeta(EVENT_URL);
-  const breakouts = await getBreakoutSessions(171);
+  const breakouts = await getBreakoutSessions(172);
 
   const main_event = event_data.events.filter(
     (ev) => ev.isMainEvent === true
   )[0];
-  const sub_event = event_data.events.filter((ev) => ev.id === '171')[0];
+  const sub_event = event_data.events.filter((ev) => ev.id === '172')[0];
 
   const thisBreakout = breakouts.filter((b) => b.id === params.breakout)[0];
 

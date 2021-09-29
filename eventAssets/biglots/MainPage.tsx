@@ -8,10 +8,11 @@ import { Button__Big } from 'components/Buttons';
 import { CircleCounter } from 'components/Counters';
 import ExternalLink from 'components/Modals/ExternalLink';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
+import VideoGallery from 'components/ListItems/VideoGallery';
 const BG = styled.div`
   background-image: url('${(props) => props.theme.header_image}');
   background-color: ${(props) => props.theme.colors.primary};
-  height: 100vh;
+
   padding: 2rem 0;
   min-height: 1080px;
   width: 100%;
@@ -156,20 +157,23 @@ const MainPage = ({ main_event, hasAuth }) => {
       </Header>
       <PlayerBody>
         {true && (
-          <Video__StickyTop__WithCountdown
-            isStarted={true}
-            start={main_event.eventStartEnd.StartDateTime}
-            showMinutesBefore={1}
-            showBefore={
-              <Before
-                imgSrc={main_event?.LogoLink[1]?.Media.url}
-                main_event={main_event}
-              />
-            }
-            src={main_event.streamLinks[0].url}
-          />
+          <>
+            <Video__StickyTop__WithCountdown
+              isStarted={true}
+              start={main_event.eventStartEnd.StartDateTime}
+              showMinutesBefore={1}
+              showBefore={
+                <Before
+                  imgSrc={main_event?.LogoLink[1]?.Media.url}
+                  main_event={main_event}
+                />
+              }
+              src={main_event.streamLinks[0].url}
+            />
+          </>
         )}
       </PlayerBody>
+      <VideoGallery title={`Other Languages`} links={main_event.streamLinks} />
     </BG>
   );
 };

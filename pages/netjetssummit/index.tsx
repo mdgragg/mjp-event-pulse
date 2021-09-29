@@ -17,36 +17,17 @@ import default_theme from 'eventAssets/netjetssummit/netjetssummit.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import Splash from 'eventAssets/netjetssummit/Splash';
+import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 
-const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = `netjetssummit`;
 
 const Index = (props) => {
   const { event_meta, main_event } = props;
 
-  var event_theme = {
-    ...default_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-  };
-
   return (
-    <ThemedPage theme={event_theme}>
-      <AuthWrap
-        eventToCheck={main_event}
-        successCallback={(res) => {
-          toast.success(
-            `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-            }, welcome to ${main_event.EventName}`
-          );
-        }}
-      >
-        <Meta title={main_event.EventName}>
-          <title>{main_event.EventName}</title>
-        </Meta>
-        <Splash main_event={main_event} />
-      </AuthWrap>
-    </ThemedPage>
+    <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventJobName}>
+      <Splash main_event={main_event} />
+    </EventWrap>
   );
 };
 

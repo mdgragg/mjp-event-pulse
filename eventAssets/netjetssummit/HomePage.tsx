@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Box__XYCentered } from 'components/Boxes';
 import { Card, CardHeader } from '@material-ui/core';
@@ -36,18 +37,22 @@ const HomePage = ({ main_event }) => {
             <SingleDayBox>
               <CardHeader
                 title={`Day 1`}
-                subheader={`Day 1 Details Description`}
+                subheader={`Tuesday, October 5, 2021`}
               />
               <img src={`https://placehold.co/250x250`} />
-              <Button__Primary>Join Day 1</Button__Primary>
+              <Link href={'./day1'}>
+                <Button__Primary>Join Day 1</Button__Primary>
+              </Link>
             </SingleDayBox>
             <SingleDayBox>
               <CardHeader
                 title={`Day 2`}
-                subheader={`Day 2 Details Description`}
+                subheader={`Wendesday, October 6, 2021`}
               />
               <img src={`https://placehold.co/250x250`} />
-              <Button__Primary>Join Day 2</Button__Primary>
+              <Link href={`netjetssummit/day1`}>
+                <Button__Primary>Join Day 2</Button__Primary>
+              </Link>
             </SingleDayBox>
           </DayWrap>
           <LogoBelow>

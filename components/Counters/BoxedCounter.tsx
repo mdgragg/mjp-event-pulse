@@ -34,13 +34,17 @@ const Wrap = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   color: ${(props) =>
-    props.styles?.titleColor || props.theme.palette.background.secondary};
+    props.styles?.textColor || props.theme.palette.text.secondary};
   font-family: ${(props) => props.theme.fonts.body.fontFamily};
+  background-color: ${(props) =>
+    props.styles?.boxColor || props.theme.palette.background.secondary};
   font-size: 1.5rem;
   font-weight: 800;
+  width: max-content;
+  padding: 0.5rem 1rem;
+  margin: auto;
   letter-spacing: 2px;
   /* margin: 1rem auto; */
-  padding: 0.75rem 0;
 `;
 const Box = styled.div`
   font-family: ${(props) => props.theme.fonts.body.fontFamily};

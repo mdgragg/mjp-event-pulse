@@ -108,7 +108,7 @@ const TYPOGRAPHY = {
   },
   h3: {
     ...FONTS.title,
-    color: COLORS.tertiary,
+    color: COLORS.white,
   },
   h4: {
     ...FONTS.title,

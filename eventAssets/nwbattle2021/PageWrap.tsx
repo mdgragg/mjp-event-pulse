@@ -67,9 +67,12 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
               />
             </div>
             <div>
-              <h1 style={{ textTransform: 'capitalize' }}>
-                {title ? title : main_event.EventName}
-              </h1>
+              <img
+                style={{
+                  maxWidth: '450px',
+                }}
+                src={main_event.LogoLink[1]?.Media?.url}
+              />
               <h3>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </h3>

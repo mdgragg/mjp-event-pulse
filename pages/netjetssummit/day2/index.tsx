@@ -12,15 +12,15 @@ import SingleDay from 'eventAssets/netjetssummit/SingleDay';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import EventWrap from 'eventAssets/netjetssummit/EventWrap';
-const PLACEHOLD = 'https://placehold.co/';
 
 const Day1 = (props) => {
+  const router = useRouter();
   const { event_meta, main_event, sub_event } = props;
 
   return (
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventName}>
       <Splash main_event={main_event}>
-        <SingleDay day={sub_event} dayQuery={`day1`} title={`Day 1`} />
+        <SingleDay day={sub_event} dayQuery={`day2`} title={`Day 2`} />
       </Splash>
     </EventWrap>
   );
@@ -29,7 +29,7 @@ const Day1 = (props) => {
 export const getStaticProps: GetStaticProps = async () => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
-  let sub_event = event_data.events.filter((ev) => ev.id === '171')[0];
+  let sub_event = event_data.events.filter((ev) => ev.id === '172')[0];
 
   const returnObj: StaticResponse = {
     props: {

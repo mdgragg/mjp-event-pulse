@@ -1,4 +1,4 @@
-import { Card } from '@material-ui/core';
+import { Card, Typography } from '@material-ui/core';
 import { Button__Primary } from 'components/Buttons';
 import React from 'react';
 import styled from 'styled-components';
@@ -50,6 +50,7 @@ const StyledTimeline = styled.div`
   color: grey;
   && .time {
     font-weight: 600;
+    color: white;
   }
   @media all and (max-width: 1200px) {
     flex-direction: column;
@@ -102,7 +103,9 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
           <SingleBreakoutSession key={b.id}>
             <div className={`time`}>
               <h3>{b.Name}</h3>
-              <DateParse format={`MMM D, hh:mma`} date={b.DateTime} />
+              <Typography variant={`overline`}>
+                <DateParse format={`MMM D, hh:mma`} date={b.DateTime} />
+              </Typography>
             </div>
             <div style={{ margin: '1rem auto' }}>{b.Description}</div>
 

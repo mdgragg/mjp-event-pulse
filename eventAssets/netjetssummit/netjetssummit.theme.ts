@@ -131,6 +131,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   },
   h3: {
     color: THEME_COLORS.black,
+    fontSize: '1.25rem'
   },
   h4: {
     color: THEME_COLORS.primary,

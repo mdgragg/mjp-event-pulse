@@ -11,12 +11,13 @@ const StyledDayWrap = styled.div`
   width: 90vw;
 `;
 
-const SingleDay = ({ day, dayQuery }) => {
+const SingleDay = ({ day, dayQuery, title }) => {
   const router = useRouter();
   const chatUrl = day.KeyValue?.filter((k) => k.key == 'Chat')[0];
 
   return (
     <StyledDayWrap>
+      <h4 style={{ margin: '1rem auto' }}>{title && title} General Session</h4>
       <div style={{ margin: '3rem auto' }}>
         <PlayerWithChat
           styles={{

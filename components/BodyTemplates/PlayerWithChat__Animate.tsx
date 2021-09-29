@@ -57,7 +57,7 @@ type PlayerWithChat__Props = {
   };
 };
 
-const PlayerWithChat = ({
+const PlayerWithChat__Animate = ({
   videoUrl,
   chatUrl,
   hasStarted,
@@ -70,12 +70,20 @@ const PlayerWithChat = ({
   const [onlyVideo, setOnlyVideo] = useState(true);
 
   useEffect(() => {
+    let time;
     if (!chatComponent && (!chatUrl || chatUrl === null)) {
       setOnlyVideo(true);
     } else {
-      setOnlyVideo(false);
+      vidRef.current.style.width = '66%';
+      time = setTimeout(() => {
+        setOnlyVideo(false);
+        vidRef.current.style.transition = 'all 0s';
+        vidRef.current.style.width = '100%';
+      }, 1500);
     }
-    return () => {};
+    return () => {
+      clearTimeout(time);
+    };
   }, [chatUrl]);
 
   return (
@@ -103,4 +111,4 @@ const PlayerWithChat = ({
   );
 };
 
-export default PlayerWithChat;
+export default PlayerWithChat__Animate;

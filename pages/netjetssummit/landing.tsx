@@ -18,6 +18,7 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import Splash from 'eventAssets/netjetssummit/Splash';
 import HomePage from 'eventAssets/netjetssummit/HomePage';
+import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = `netjetssummit`;
@@ -31,23 +32,9 @@ const Index = (props) => {
   };
 
   return (
-    <ThemedPage theme={event_theme}>
-      <AuthWrap
-        eventToCheck={main_event}
-        successCallback={(res) => {
-          toast.success(
-            `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-            }, welcome to ${main_event.EventName}`
-          );
-        }}
-      >
-        <Meta title={main_event.EventName}>
-          <title>{main_event.EventName}</title>
-        </Meta>
-        <HomePage main_event={main_event} />
-      </AuthWrap>
-    </ThemedPage>
+    <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventJobName}>
+      <HomePage main_event={main_event} />
+    </EventWrap>
   );
 };
 

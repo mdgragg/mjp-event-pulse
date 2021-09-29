@@ -8,23 +8,18 @@ import { Box__XYCentered } from 'components/Boxes';
 import Center from 'components/Center';
 import { Counter__JustNumbers } from 'components/Counters';
 import { getEventMeta } from 'lib/api';
-import { Card__Ended } from 'components/Cards';
-
+import { EVENT_URL } from './index';
+import Splash from 'eventAssets/netjetssummit/Splash';
+import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 const ThankYou = ({ event_meta, main_event }) => {
   return (
-    <Page theme={theme}>
-      <FullPage__SolidColor noHero color={theme.colors.secondary}>
-        <Box__XYCentered minHeight={`100vh`}>
-          <Card__Ended />
-        </Box__XYCentered>
-      </FullPage__SolidColor>
-    </Page>
+    <EventWrap eventToCheck={main_event} metaTitle={'This event has ended'}>
+      <Splash main_event={main_event} />
+    </EventWrap>
   );
 };
 
 export async function getServerSideProps(ctx) {
-  const EVENT_URL = ctx.params.event;
-
   try {
     let event_data = await getEventMeta(EVENT_URL);
 

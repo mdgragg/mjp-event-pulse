@@ -19,13 +19,9 @@ const BeforeWrap = styled.div`
 
 const Before = ({ main_event, speaker }) => (
   <BeforeWrap>
-    <img
-      style={{
-        maxWidth: '430px',
-        width: '80%',
-      }}
-      src={main_event.LogoLink[1]?.Media?.url || null}
-    />
+    <h2>
+      {speaker.FirstName} {speaker.LastName}
+    </h2>
     <div className="hide-sm">
       <BoxedCounter
         event={main_event}
@@ -34,7 +30,6 @@ const Before = ({ main_event, speaker }) => (
         }}
         prefix={
           <>
-            <h2>This Event Hasn't Started Yet</h2>
             <h4>Join {speaker.FirstName} Live In:</h4>
           </>
         }
