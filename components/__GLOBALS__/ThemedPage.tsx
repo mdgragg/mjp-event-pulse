@@ -11,6 +11,9 @@ const StyledPage = styled.div`
   min-height: 100vh;
   z-index: 0;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   min-width: 350px;
   background-color: ${(props) => props.theme.palette.background.primary};
   /* overflow: hidden; */
@@ -52,7 +55,7 @@ export const Page = ({ theme, children, showFooter = true }) => {
       <StylesProvider injectFirst>
         <ThemeProvider theme={whole_theme}>
           <StyledPage>
-            {children}
+            <div>{children}</div>
             {showFooter && <Footer />}
           </StyledPage>
         </ThemeProvider>

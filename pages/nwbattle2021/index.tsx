@@ -34,7 +34,7 @@ const Index = ({ event_meta, main_event, title }) => {
       main_event={main_event}
       title={event_meta.EventName}
     >
-      <div>Test</div>
+      <PageBody event_meta={event_meta} main_event={main_event} />
     </PageWrap>
   );
 };

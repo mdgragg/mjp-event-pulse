@@ -9,7 +9,12 @@ const StyledBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Box__XYCentered = ({ minHeight, children }) => {
+
+type Box__XYCentered = {
+  minHeight?: string;
+  children: React.ReactNode;
+};
+const Box__XYCentered = ({ minHeight, children }: Box__XYCentered): any => {
   return <StyledBox minHeight={minHeight}>{children}</StyledBox>;
 };
 

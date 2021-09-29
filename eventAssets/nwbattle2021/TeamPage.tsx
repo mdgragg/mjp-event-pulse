@@ -5,8 +5,6 @@ import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__Sti
 
 const StyledPage = styled.div`
   position: relative;
-
-  min-height: 800px;
 `;
 
 const BeforeWrap = styled.div`
@@ -54,6 +52,7 @@ export const TeamBody = ({ main_event, speaker }) => (
           width: '95%',
           margin: 'auto',
           marginTop: 'clamp(2rem, 6%, 5rem)',
+          marginBottom: 'clamp(2rem, 6%, 5rem)',
         }}
       >
         <LinkBox__StickyTop__WithCountdown
