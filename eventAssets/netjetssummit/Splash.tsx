@@ -10,7 +10,7 @@ const StyledSplash = styled.div`
   background-image: url('${(props) => props.src}');
   background-repeat: no-repeat;
   background-size: 100% auto;
-  background-position: 50% 50%;
+  background-position: 50% 0%;
   max-width: 1920px;
   @media all and (max-width: 768px) {
     background-size: auto 100%;
@@ -21,12 +21,26 @@ const StyledInner = styled.div`
   padding: 3rem;
   background-color: rgba(0, 0, 0, 0);
   color: white;
-  min-width: 550px;
-  min-height: 350px;
+  max-width: 550px;
+  height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  && img {
+    width: 90%;
+  }
+`;
+
+const LogoBelow = styled.div`
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  && img {
+    width: 40%;
+    margin: 0 3rem;
+  }
 `;
 const Splash = ({ main_event }) => {
   return (
@@ -34,12 +48,14 @@ const Splash = ({ main_event }) => {
       <Box__XYCentered>
         <StyledInner>
           <div>
-            <h2>Net Jets 2021</h2>
-            <h2>Join Us Live In</h2>
-          </div>
-          <div>
+            <img src={main_event.LogoLink[0]?.Media?.url} />
+
             <BoxedCounter event={main_event} />
           </div>
+          <LogoBelow>
+            <img src={main_event.LogoLink[1]?.Media?.url} />
+            <img src={main_event.LogoLink[2]?.Media?.url} />
+          </LogoBelow>
         </StyledInner>
       </Box__XYCentered>
     </StyledSplash>
