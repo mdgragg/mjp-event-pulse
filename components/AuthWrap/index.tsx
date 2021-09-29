@@ -104,16 +104,6 @@ const AuthWrap = (props: AuthWrapProps) => {
         </>
       );
     }
-    if (options.includes('canRegister')) {
-      return (
-        <>
-          <AuthModal__AttendeeListRegister {...ModalProps} />
-          <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
-            {children}
-          </StyledAuthWrap>
-        </>
-      );
-    }
     return (
       <>
         <AuthModal__AttendeeList {...ModalProps} />
@@ -137,6 +127,16 @@ const AuthWrap = (props: AuthWrapProps) => {
     return (
       <>
         <AuthModal__AttendeeCapture {...ModalProps} />
+        <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
+          {children}
+        </StyledAuthWrap>
+      </>
+    );
+  }
+  if (authType === 'AttendeeRegister') {
+    return (
+      <>
+        <AuthModal__AttendeeListRegister {...ModalProps} />
         <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
           {children}
         </StyledAuthWrap>

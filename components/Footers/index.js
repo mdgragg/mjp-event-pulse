@@ -5,7 +5,9 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-const MyFooter = styled.div`
+const MyFooter = styled.footer`
+  bottom: 0;
+
   && a {
     color: white;
     margin: 0;

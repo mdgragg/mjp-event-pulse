@@ -1,4 +1,5 @@
 import { createTheme } from '@material-ui/core';
+import MJxTheme from 'types/Theme';
 
 const COLORS = {
   red: '#b71f39',
@@ -11,6 +12,7 @@ const COLORS = {
   white: '#ffffff',
   black: '#000000',
   primary: '#0047bb',
+  darkBlue: '#0047bb',
   secondary: 'white',
   tertiary: '#141b4d',
   info: '',
@@ -23,12 +25,12 @@ const PALETTE = {
   text: {
     primary: COLORS.white,
     secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    tertiary: COLORS.blue,
   },
   background: {
-    primary: COLORS.tertiary,
+    primary: COLORS.offWhite,
     secondary: COLORS.secondary,
-    tertiary: COLORS.tertiary,
+    tertiary: COLORS.white,
   },
 };
 
@@ -38,7 +40,7 @@ const FONTS = {
     fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
     letterSpacing: '',
     fontWeight: '800',
-    lineHeight: '4.5rem',
+    lineHeight: 'clamp(2rem, 7vw, 3rem)',
   },
   body: {
     fontFamily: 'Akzidenz-Grotesque-Bold',
@@ -58,7 +60,7 @@ export const BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: COLORS.tertiary,
+    backgroundColor: COLORS.blue,
     color: 'white',
     border: '',
   },
@@ -67,8 +69,8 @@ export const BUTTONS = {
     fontSize: '1rem',
     letterSpacing: '',
     lineHeight: '',
-    backgroundColor: '',
-    color: '',
+    backgroundColor: COLORS.blue,
+    color: COLORS.tertiary,
     border: '',
   },
   big: {

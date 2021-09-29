@@ -15,6 +15,7 @@ import { HeaderWrap, StyledDialogTitle } from './AuthModal__Styles';
 import { useStyles, StyledForm } from './AuthModal__Styles';
 import Center from 'components/Center';
 import { check_required } from '.';
+import { Button__Primary } from 'components/Buttons';
 
 const default_fields = {
   AttendeeFirst: {
@@ -130,9 +131,9 @@ export default function AuthModal__AttendeeList({
         </Center>
       </DialogContent>
       <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={handleSumbit} color="primary">
+        <Button__Primary onClick={handleSumbit} color="primary">
           Submit
-        </Button>
+        </Button__Primary>
       </DialogActions>
     </Dialog>
   );
