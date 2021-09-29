@@ -13,6 +13,7 @@ const BodyWrap = styled.div`
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   width: auto;
+  ${(props) => props?.styles?.wrap};
   @media all and (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
@@ -35,6 +36,7 @@ const ChatBox = styled.div`
   min-height: 550px;
   max-width: 450px;
   border: 2px solid rgba(203, 203, 203, 0.35);
+  ${(props) => props?.styles?.chat};
   @media all and (max-width: 1000px) {
     max-width: 450px;
     width: 100%;
@@ -45,9 +47,14 @@ type PlayerWithChat__Props = {
   videoUrl: string;
   chatUrl: string;
   hasStarted: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   videoComponent?: React.ReactNode;
   chatComponent?: React.ReactNode;
+  styles?: {
+    wrap?: any;
+    video?: any;
+    chat?: any;
+  };
 };
 
 const PlayerWithChat = ({
@@ -57,25 +64,30 @@ const PlayerWithChat = ({
   children,
   videoComponent,
   chatComponent,
+  styles,
 }: PlayerWithChat__Props) => {
   const vidRef = useRef(null);
   const [onlyVideo, setOnlyVideo] = useState(true);
 
   useEffect(() => {
+    let time;
     if (!chatComponent && (!chatUrl || chatUrl === null)) {
       setOnlyVideo(true);
     } else {
       vidRef.current.style.width = '66%';
-      setTimeout(() => {
+      time = setTimeout(() => {
         setOnlyVideo(false);
         vidRef.current.style.transition = 'all 0s';
         vidRef.current.style.width = '100%';
       }, 1500);
     }
+    return () => {
+      clearTimeout(time);
+    };
   }, [chatUrl]);
 
   return (
-    <BodyWrap onlyVideo={onlyVideo}>
+    <BodyWrap onlyVideo={onlyVideo} styles={styles}>
       <VideoBox ref={vidRef}>
         <div className="video-holder">
           {videoComponent ? (
@@ -87,7 +99,7 @@ const PlayerWithChat = ({
         <div className="children">{children}</div>
       </VideoBox>
       {!onlyVideo && (
-        <ChatBox>
+        <ChatBox styles={styles}>
           {chatComponent ? (
             chatComponent
           ) : (

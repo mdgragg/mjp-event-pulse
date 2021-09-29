@@ -11,6 +11,7 @@ const THEME_COLORS: COLORS = {
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
+  darkBlue: '#02001d',
   primary: 'white',
   secondary: '#1e372f',
   tertiary: '#4f4f4d',
@@ -31,7 +32,7 @@ const THEME_PALETTE: PALETTE = {
   background: {
     primary: THEME_COLORS.white,
     secondary: THEME_COLORS.blue,
-    tertiary: THEME_COLORS.orange,
+    tertiary: THEME_COLORS.darkBlue,
     error: 'red',
     info: 'blue',
     success: 'green'

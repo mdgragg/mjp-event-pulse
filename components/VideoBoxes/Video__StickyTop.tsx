@@ -19,9 +19,9 @@ const VideoBox__StickyTop = ({ src, isStarted }) => {
 
   function calculateFixed(e) {
     if (window.pageYOffset >= offsetVideoHeight && offsetVideoHeight > 0) {
-      wrapperRef?.current.classList.add('fixed');
+      wrapperRef?.current?.classList?.add('fixed');
     } else {
-      wrapperRef?.current.classList.remove('fixed');
+      wrapperRef?.current?.classList?.remove('fixed');
     }
   }
   useEffect(() => {
