@@ -41,7 +41,7 @@ const MyFooter = styled.footer`
     margin: 0 0.25rem;
     font-size: 1.25rem;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     grid-template-columns: 100%;
     && .virtual-experiences {
       font-size: 0.65rem;
@@ -65,7 +65,7 @@ const LogoWrap = styled.div`
     width: 100%;
     margin: 10px auto;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     max-width: 130px;
   }
 `;

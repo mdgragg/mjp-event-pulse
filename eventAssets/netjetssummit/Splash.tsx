@@ -9,11 +9,14 @@ const StyledSplash = styled.div`
   min-height: 100vh;
   background-image: url('${(props) => props.src}');
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
   background-position: 50% 0%;
-  max-width: 1920px;
-  @media all and (max-width: 768px) {
-    background-size: auto 100%;
+
+  @media all and (max-width: 1920px) {
+    background-size: 100% auto;
+  }
+  @media all and (max-width: 1160px) {
+    background-size: cover;
   }
 `;
 
