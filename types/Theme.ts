@@ -71,6 +71,7 @@ type ButtonType = {
   backgroundColor: string;
   color: string;
   border: string;
+  [x: string]: string;
 };
 
 export type BUTTONS = {

@@ -8,20 +8,17 @@ import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/__GLOBALS__/Login/PreviewLoginPage';
 
-const Preview = ({ EVENT_URL }) => {
+const Preview = ({ EVENT_URL, redirectUrl }) => {
   const router = useRouter();
 
-  const MainPage = () => {
-    return (
-      <PreviewLoginPage EVENT_URL={EVENT_URL} redirect={`/${EVENT_URL}`}>
-        <Meta title={'Login'}>
-          <title>Login</title>
-        </Meta>
-      </PreviewLoginPage>
-    );
-  };
-
-  return <MainPage />;
+  return (
+    <PreviewLoginPage EVENT_URL={EVENT_URL} redirect={`${redirectUrl}`}>
+      <Meta title={'Login'}>
+        <title>Login</title>
+      </Meta>
+      <h1>{redirectUrl}</h1>
+    </PreviewLoginPage>
+  );
 };
 
 export async function getServerSideProps(ctx) {
@@ -35,12 +32,12 @@ export async function getServerSideProps(ctx) {
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
       redirect: {
-        destination: './',
+        destination: './landing',
       },
     };
   }
   return {
-    props: { EVENT_URL },
+    props: { EVENT_URL, redirectUrl: ctx.query.resource || '/' },
   };
 }
 
