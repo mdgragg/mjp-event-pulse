@@ -20,6 +20,7 @@ const BeforeWrap = styled.div`
 const Before = ({ main_event, speaker }) => (
   <BeforeWrap>
     <h2>
+      Meeting Host:
       {speaker.FirstName} {speaker.LastName}
     </h2>
     <h4>Join {speaker.FirstName} Live In:</h4>
@@ -48,7 +49,7 @@ export const TeamBody = ({ main_event, speaker }) => (
         }}
       >
         <LinkBox__StickyTop__WithCountdown
-          offset={10}
+          offset={15}
           start={main_event.eventStartEnd.StartDateTime}
           link={speaker.Link}
           showBefore={<Before main_event={main_event} speaker={speaker} />}
