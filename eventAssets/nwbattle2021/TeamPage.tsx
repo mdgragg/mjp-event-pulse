@@ -20,8 +20,7 @@ const BeforeWrap = styled.div`
 const Before = ({ main_event, speaker }) => (
   <BeforeWrap>
     <h2>
-      Meeting Host:
-      {speaker.FirstName} {speaker.LastName}
+      Meeting Host: {speaker.FirstName} {speaker.LastName}
     </h2>
     <h4>Join {speaker.FirstName} Live In:</h4>
     <div className="hide-sm">
