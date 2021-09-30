@@ -44,7 +44,7 @@ const FONTS = {
     fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
     lineHeight: 'auto',
-    margin: '0'
+    margin: '0',
   },
   get primary() {
     return this.body;
@@ -64,7 +64,7 @@ export const BUTTONS = {
     letterSpacing: '2px',
     lineHeight: 'inherit',
     backgroundColor: COLORS.green,
-    fontColor: 'white',
+    color: 'white',
     border: '',
   },
   secondary: {
@@ -73,7 +73,7 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: '',
-    fontColor: '',
+    color: '',
     border: '',
   },
   big: {
@@ -82,9 +82,8 @@ export const BUTTONS = {
     letterSpacing: '2px',
     lineHeight: 'auto',
     backgroundColor: COLORS.red,
-    fontColor: COLORS.white,
+    color: COLORS.white,
     border: '5px solid white',
-
   },
   small: {
     fontFamily: '',
@@ -92,7 +91,7 @@ export const BUTTONS = {
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: '',
-    fontColor: '',
+    color: '',
     border: '',
     hover: {
       fontColor: '',
@@ -100,7 +99,7 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: COLORS.red,
+    color: COLORS.red,
     backgroundColor: COLORS.white,
   },
 };
@@ -136,7 +135,7 @@ const GLOBALS = {
   headerOpacity: '1',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
-}
+};
 
 export const default_theme = {
   ...createTheme(),
@@ -146,7 +145,7 @@ export const default_theme = {
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  ...GLOBALS
+  ...GLOBALS,
 };
 
 export default default_theme;

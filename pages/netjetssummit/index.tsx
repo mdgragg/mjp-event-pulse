@@ -18,6 +18,7 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import Splash from 'eventAssets/netjetssummit/Splash';
 import EventWrap from 'eventAssets/netjetssummit/EventWrap';
+import HomePage from 'eventAssets/netjetssummit/HomePage';
 
 export const EVENT_URL = `netjetssummit`;
 
@@ -27,6 +28,7 @@ const Index = (props) => {
   return (
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventJobName}>
       <Splash main_event={main_event} />
+      {/* <HomePage main_event={main_event} /> */}
     </EventWrap>
   );
 };

@@ -99,7 +99,7 @@ export default function AuthModal__AttendeeList({
         {headerContent && <HeaderWrap>{headerContent}</HeaderWrap>}
         Please Sign In To Enter
       </StyledDialogTitle>
-      <DialogContent>
+      <DialogContent className={classes.contentText}>
         <Center>
           <DialogContentText>
             {signInText

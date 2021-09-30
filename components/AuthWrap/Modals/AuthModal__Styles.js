@@ -14,6 +14,8 @@ const StyledDialogTitle = styled(DialogTitle)`
   font-weight: 600;
   margin: 0;
   padding: 1rem 0 0 0;
+  width: 80%;
+  margin: auto;
 `;
 const HeaderWrap = styled.div`
   width: 70%;
@@ -54,11 +56,11 @@ const StyledDialogActions = styled(DialogActions)`
 const useStyles = makeStyles((theme) => ({
   modal: {
     '& .MuiDialog-paperWidthSm': {
-      maxWidth: '4000px',
+      padding: '0.5rem',
+      maxWidth: '400px',
     },
     '& .MuiDialogContent-root': {
-      maxWidth: '400px',
-      minHeight: '350px',
+      minHeight: '250px',
     },
     '& .MuiDialogActions-root': {
       padding: '2rem 8px',
@@ -89,7 +91,6 @@ const useStyles = makeStyles((theme) => ({
   },
   contentText: {
     margin: '2rem 2%',
-    textAlign: 'left',
     maxWidth: '350px',
     [theme.breakpoints.down('md')]: {
       margin: '1% 0',

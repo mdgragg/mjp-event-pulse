@@ -44,6 +44,7 @@ export const LogoBelow = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   && img {
     width: 40%;
     margin: 0 3rem;

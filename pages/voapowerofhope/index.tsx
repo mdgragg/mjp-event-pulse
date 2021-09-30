@@ -14,6 +14,8 @@ import { Button__Big } from 'components/Buttons';
 import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
 import VOAHeader from 'eventAssets/voapowerofhope/VoaHeader';
 import VideoPlaceholder from 'eventAssets/voapowerofhope/VideoPlaceholder';
+import AuthWrap from 'components/AuthWrap';
+import { toast } from 'react-toastify';
 
 const VideoWrap = styled.div`
   display: flex;
@@ -58,32 +60,57 @@ const Index = (props) => {
 
   return (
     <Page theme={event_theme}>
-      <Meta title={event_meta.EventJobName}> </Meta>
-      <VOAHeader main_event={main_event} />
-      <BodyWrap>
-        <div
-          id="event"
-          style={{
-            width: '90%',
-            minHeight: '80vh',
-            margin: '1rem auto',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          {' '}
-          <PlayerWithChat
-            chatUrl={
-              hasStartEnd.hasStarted ? main_event.streamLinks[1].url : null
-            }
-            hasStarted={true}
-            videoUrl={main_event.streamLinks[0].url}
-            children={null}
-            videoComponent={<VideoComponent main_event={main_event} />}
-          />
-        </div>
-      </BodyWrap>
+      <AuthWrap
+        eventToCheck={main_event}
+        successCallback={(res) => {
+          const a = res.message.Attendee;
+          toast.success(
+            `Hello ${a.AttendeeFirst}, Welcome to ${event_meta.EventJobName}!`
+          );
+        }}
+        headerContent={
+          <div
+            style={{
+              padding: '0.5rem',
+              height: '150px',
+              maxWidth: '250px',
+              margin: 'auto',
+            }}
+          >
+            <img
+              style={{ width: 'auto', height: '100%' }}
+              src={main_event.LogoLink[0].Media.url}
+            ></img>
+          </div>
+        }
+      >
+        <Meta title={event_meta.EventJobName}> </Meta>
+        <VOAHeader main_event={main_event} />
+        <BodyWrap>
+          <div
+            id="event"
+            style={{
+              width: '90%',
+              minHeight: '80vh',
+              margin: '1rem auto',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            {' '}
+            <PlayerWithChat
+              chatUrl={
+                hasStartEnd.hasStarted ? main_event.streamLinks[1].url : null
+              }
+              hasStarted={true}
+              videoUrl={main_event.streamLinks[0].url}
+              children={null}
+              videoComponent={<VideoComponent main_event={main_event} />}
+            />
+          </div>
+        </BodyWrap>
+      </AuthWrap>
     </Page>
   );
 };

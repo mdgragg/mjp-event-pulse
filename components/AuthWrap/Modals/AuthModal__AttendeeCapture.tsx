@@ -20,6 +20,7 @@ import {
 } from './AuthModal__Styles';
 import { Button__Primary } from 'components/Buttons';
 import { check_required } from '.';
+import { Typography } from '@material-ui/core';
 
 export default function AuthModal__AttendeeCapture({
   open,
@@ -61,6 +62,7 @@ export default function AuthModal__AttendeeCapture({
   const handleChange = (e) => {
     e.persist();
     const name = e.target.name;
+
     const prevValue = values[name];
     setValues((prev) => ({
       ...prev,
@@ -100,8 +102,10 @@ export default function AuthModal__AttendeeCapture({
             <HeaderWrap>{title}</HeaderWrap>
           ) : (
             <div>
-              <div>Please Sign In To Join</div>
-              <span>{eventToCheck.EventName}</span>
+              <div>Please Tell Us About Yourself</div>
+              <Typography variant={`overline`}>
+                {eventToCheck.EventName}
+              </Typography>
             </div>
           )}
           {headerContent && headerContent}
@@ -131,6 +135,11 @@ export default function AuthModal__AttendeeCapture({
                   type="text"
                   onChange={handleChange}
                   required={values[v].required}
+                  onKeyUp={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSumbit(e);
+                    }
+                  }}
                 />
               ))}
             </StyledForm>
