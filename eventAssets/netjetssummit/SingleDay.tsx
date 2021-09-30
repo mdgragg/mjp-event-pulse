@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { PlayerWithChat } from 'components/BodyTemplates';
 import styled from 'styled-components';
 import { BreakoutTimeLine } from 'components/BreakoutSessions';
+import { Button__Primary } from 'components/Buttons';
 import Breakouts__ByCategory from 'components/BreakoutSessions/BreakoutTimeline__ByCategory';
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 const StyledDayWrap = styled.div`
   margin: 2rem auto;
   width: 90vw;
@@ -31,7 +32,7 @@ const SingleDay = ({ day, dayQuery, title }) => {
           hasStarted={true}
           videoUrl={day.streamLinks[0].url}
           chatUrl={chatUrl.value}
-        />
+        ></PlayerWithChat>
       </div>
       <Breakouts__ByCategory
         breakouts={day.BreakoutSessions}

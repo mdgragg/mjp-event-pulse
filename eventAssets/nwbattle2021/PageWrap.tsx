@@ -25,7 +25,7 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
     ...default_theme,
   };
   return (
-    <Page theme={event_theme}>
+    <Page theme={event_theme} showFooter={false}>
       <AuthWrap
         headerContent={
           <div
@@ -38,6 +38,13 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
               src={main_event?.LogoLink[1]?.Media?.url}
             />
           </div>
+        }
+        signInText={
+          <>
+            If you are having issues accessing this event, please call
+            614-850-2120 or email{' '}
+            <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
+          </>
         }
         otherFields={{
           Company: {
@@ -92,16 +99,20 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
         {/* <FullPage__SolidColor color={`#f7f7f7`}> */}
         {children && children}
         {/* </FullPage__SolidColor> */}
-        {/* <Banner__WithPicture
+        <Banner__WithPicture
           imgUrl={main_event.LogoLink[0]?.Media?.url || null}
           color={event_theme.colors.primary}
           secondary={`white`}
-          headerText={null}
+          headerText={`Tech Issues?`}
           innerWidth={`450px`}
           buttonText={null}
           buttonLink={main_event.LogoLink[0]?.Link || '#'}
-          style={{ height: '300px' }}
-        ></Banner__WithPicture> */}
+          style={{ height: '600px', marginTop: '6rem', color: 'white' }}
+        >
+          If you are having issues streaming or accessing the event, please call
+          614-850-2120 or email{' '}
+          <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
+        </Banner__WithPicture>
       </AuthWrap>
     </Page>
   );

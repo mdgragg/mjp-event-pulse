@@ -20,14 +20,7 @@ const StyledBanner = styled.div`
   background-repeat: no-repeat;
   margin: 0 auto;
   margin-top: -5px;
-  && h4 {
-    font-size: 2.5rem;
-    color: ${(props) => props.textColor || props.theme.colors.secondary};
-  }
-  && p {
-    font-size: 1.5rem;
-    color: ${(props) => props.textColor || props.theme.colors.secondary};
-  }
+
   && .banner-image {
     width: 80%;
     max-width: 120px;

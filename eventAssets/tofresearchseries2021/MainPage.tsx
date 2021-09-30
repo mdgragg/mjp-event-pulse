@@ -99,6 +99,7 @@ const MainPage = ({ main_event }) => {
         <PlayerBody>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
+            end={main_event.eventStartEnd.EndDateTime}
             offset={10}
             link={{
               href: main_event.streamLinks[0].url,

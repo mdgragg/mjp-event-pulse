@@ -54,7 +54,12 @@ export const PageBody = ({ event_meta, main_event }) => {
           <LinkBox__StickyTop__WithCountdown
             offset={10}
             start={main_event.eventStartEnd.StartDateTime}
-            link={main_event.streamLinks[0].url}
+            end={main_event.eventStartEnd.EndDateTime}
+            link={{
+              href: '#',
+              allowed: false,
+              errorText: 'Please choose a meeting with a host',
+            }}
             showBefore={
               <Before main_event={main_event} event_theme={event_theme} />
             }

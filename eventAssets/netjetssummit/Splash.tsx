@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Box__XYCentered } from 'components/Boxes';
 import { Card } from '@material-ui/core';
 import { BoxedCounter } from 'components/Counters';
+import { useRouter } from 'next/router';
 
 export const StyledSplash = styled.div`
   min-height: 100vh;
@@ -11,7 +12,8 @@ export const StyledSplash = styled.div`
   background-image: url('${(props) => props.src}');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% 0%;
+  background-position: 50% 20%;
+  background-attachment: fixed;
   background-color: ${(props) => props.theme.palette.background.tertiary};
   @media all and (max-width: 1920px) {
     background-size: 100% auto;
@@ -54,12 +56,16 @@ type Splash__Props = {
   noHeader?: boolean;
 };
 const Splash = ({ main_event, children, noHeader }: Splash__Props): any => {
+  const router = useRouter();
   return (
     <StyledSplash src={main_event.HeaderImage.url}>
       <Box__XYCentered>
         <StyledInner>
           {noHeader ? null : (
-            <div>
+            <div
+              onClick={() => router.push('/netjetssummit')}
+              style={{ cursor: 'pointer' }}
+            >
               <img src={main_event.LogoLink[0]?.Media?.url} />
               <BoxedCounter event={main_event} />
             </div>

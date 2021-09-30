@@ -24,6 +24,11 @@ const useStyles = makeStyles({
       minHeight: '350px',
     },
   },
+  actions: {
+    '&  > button': {
+      width: '40%',
+    },
+  },
 });
 
 export default function ExternalLink({
@@ -39,6 +44,14 @@ export default function ExternalLink({
 
   const handleSumbit = async (e) => {
     e.preventDefault();
+
+    if (typeof link === 'string') {
+      return window.open(
+        link,
+        '_blank',
+        'menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes, height=350, width=350'
+      );
+    }
     if (link.allowed) {
       return (window.location.href = link.href);
     }
@@ -69,7 +82,10 @@ export default function ExternalLink({
         </Center>
       </DialogContent>
 
-      <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+      <DialogActions
+        style={{ display: 'flex', justifyContent: 'center' }}
+        className={classes.actions}
+      >
         <Button__Secondary onClick={handleClose} color="primary">
           Cancel
         </Button__Secondary>

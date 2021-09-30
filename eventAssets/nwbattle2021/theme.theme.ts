@@ -24,12 +24,12 @@ const COLORS = {
 const PALETTE = {
   text: {
     primary: COLORS.white,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.blue,
+    secondary: COLORS.primary,
+    tertiary: COLORS.tertiary,
   },
   background: {
     primary: COLORS.offWhite,
-    secondary: COLORS.secondary,
+    secondary: COLORS.white,
     tertiary: COLORS.white,
   },
 };
@@ -65,12 +65,12 @@ export const BUTTONS = {
     border: '',
   },
   secondary: {
-    fontFamily: FONTS.body.fontFamily,
+    fontFamily: 'Avenir',
     fontSize: '1rem',
     letterSpacing: '',
     lineHeight: '',
     backgroundColor: COLORS.blue,
-    color: COLORS.tertiary,
+    color: COLORS.white,
     border: '',
   },
   big: {
@@ -122,8 +122,8 @@ const TYPOGRAPHY = {
     color: COLORS.white,
   },
   h4: {
-    fontSize: '1rem',
-    color: COLORS.primary,
+    fontSize: '2rem',
+    color: COLORS.white,
     lineHeight: '2rem',
   },
 };

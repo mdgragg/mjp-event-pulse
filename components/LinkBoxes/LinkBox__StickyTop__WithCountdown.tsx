@@ -11,6 +11,7 @@ import { PictureAsPdf } from '@material-ui/icons';
 
 export type LinkBox_StickyTop__WithCountdown__Types = {
   start: string;
+  end: string;
   /* Number in minutes */
   offset: number;
   showBefore: React.ReactNode;
@@ -21,6 +22,7 @@ export type LinkBox_StickyTop__WithCountdown__Types = {
 
 const LinkBox__StickyTop__WithCountdown = ({
   start,
+  end,
   offset,
   showBefore,
   showAfter,
@@ -28,7 +30,7 @@ const LinkBox__StickyTop__WithCountdown = ({
   prefix,
 }: LinkBox_StickyTop__WithCountdown__Types) => {
   const startEnd = useCalculateIfStarted(
-    { eventStartEnd: { StartDateTime: start, EndDateTime: start } },
+    { eventStartEnd: { StartDateTime: start, EndDateTime: end } },
     offset
   );
 

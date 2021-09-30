@@ -50,7 +50,6 @@ const StyledTimeline = styled.div`
   color: grey;
   && .time {
     font-weight: 600;
-    color: white;
   }
   @media all and (max-width: 1200px) {
     flex-direction: column;
@@ -104,7 +103,7 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
             <div className={`time`}>
               <h3>{b.Name}</h3>
               <Typography variant={`overline`}>
-                <DateParse format={`MMM D, hh:mma`} date={b.DateTime} />
+                <DateParse format={`MMM D, h:mma`} date={b.DateTime} />
               </Typography>
             </div>
             <div style={{ margin: '1rem auto' }}>{b.Description}</div>

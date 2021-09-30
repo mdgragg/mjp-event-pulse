@@ -12,6 +12,7 @@ const DayWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin: 5rem auto;
 `;
 
 const SingleDayBox = styled(Card)`
@@ -50,7 +51,7 @@ const HomePage = ({ main_event }) => {
                 subheader={`Wendesday, October 6, 2021`}
               />
               <img src={`https://placehold.co/250x250`} />
-              <Link href={`netjetssummit/day1`}>
+              <Link href={`./day2`}>
                 <Button__Primary>Join Day 2</Button__Primary>
               </Link>
             </SingleDayBox>
