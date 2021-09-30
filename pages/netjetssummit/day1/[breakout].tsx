@@ -24,6 +24,7 @@ const Breakout = (props) => {
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventName}>
       <Splash main_event={main_event} noHeader>
         <BreakoutPage
+          day={{ query: 'day2', name: 'Day 2' }}
           name={breakout.Name}
           time={breakout.DateTime}
           video={breakout.Link.url}

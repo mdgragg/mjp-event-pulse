@@ -1,17 +1,9 @@
-import styled, { ThemeContext } from 'styled-components';
-import { useState, useEffect, useRef, useContext } from 'react';
-import {
-  StyledIFrame,
-  StyledPaper,
-  StyledVideoBox,
-  StyledVideoPlaceholder__Wrap,
-} from './VideoBox__Styles';
+import { StyledIFrame, StyledVideoBox } from './VideoBox__Styles';
 
 type VideoBox__Props = {
   src: string;
 };
 const VideoBox = ({ src }: VideoBox__Props) => {
-  const wrapperRef = useRef();
   return (
     <StyledVideoBox>
       <StyledIFrame

@@ -21,10 +21,12 @@ const StyledButtonArea = styled.div`
   }
 `;
 
-const BreakoutPage = ({ name, time, video, chat, attachment }) => {
+const BreakoutPage = ({ day, name, time, video, chat, attachment }) => {
   return (
     <div style={{ width: '90vw', margin: '5rem auto 10rem' }}>
-      <h1>{name}</h1>
+      <h1>
+        {day.name} {name}
+      </h1>
       <Typography variant={`overline`}>
         <div style={{ margin: '1rem auto' }}>
           <DateParse date={time} />
@@ -46,8 +48,8 @@ const BreakoutPage = ({ name, time, video, chat, attachment }) => {
           }}
         >
           <StyledButtonArea>
-            <Link href={'../day1'}>
-              <Button__Primary>Back To Day 1</Button__Primary>
+            <Link href={`../${day.query}`}>
+              <Button__Primary>Back To {day.name}</Button__Primary>
             </Link>
             {attachment && (
               <a download href={attachment} target="_blank">
