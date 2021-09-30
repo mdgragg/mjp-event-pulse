@@ -25,7 +25,7 @@ const PALETTE = {
   text: {
     primary: COLORS.white,
     secondary: COLORS.primary,
-    tertiary: COLORS.tertiary,
+    tertiary: COLORS.blue,
   },
   background: {
     primary: COLORS.offWhite,
@@ -117,6 +117,7 @@ const TYPOGRAPHY = {
   h2: {
     color: COLORS.primary,
     fontSize: 'clamp(1.25rem, 10vw, 1rem)',
+
   },
   h3: {
     color: COLORS.white,

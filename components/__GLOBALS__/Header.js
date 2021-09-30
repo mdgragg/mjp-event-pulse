@@ -43,7 +43,7 @@ const StyledHeader = styled.div`
 const Logo = styled.div`
   width: 450px;
   min-height: inherit;
-  margin: 0;
+  margin: 2rem 0;
   text-align: center;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.75);

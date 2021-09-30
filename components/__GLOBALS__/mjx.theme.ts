@@ -122,11 +122,11 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   },
   h2: {
     color: THEME_COLORS.black,
-    textAlign: 'center',
-    margin: '1rem',
+    textAlign: 'left',
+
   },
   h3: {
-    color: THEME_COLORS.black,
+    color: THEME_COLORS.white,
   },
   h4: {
     color: THEME_COLORS.primary,

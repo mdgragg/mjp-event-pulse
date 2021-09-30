@@ -2,9 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Header from 'components/__GLOBALS__/Header';
 import Footer from 'components/__GLOBALS__/Footer';
-import Page from 'components/template1/Page';
+import Page from '../components/__GLOBALS__/ThemedPage';
 import Section from 'components/Sections/Section';
-import { default_theme } from 'components/Themes/default.theme';
+import default_theme from '../components/__GLOBALS__/mjx.theme';
 import { Button__Primary } from 'components/Buttons';
 import { Grid } from '@material-ui/core';
 import { InfoGrid } from 'components/__GLOBALS__/InfoGrid';
@@ -35,14 +35,13 @@ const Error_404 = (props) => {
                 Mills James builds custom virtual event experiences. To get
                 started building your own brand experience contact us.
               </p>
-              <Link href="https://www.millsjames.com/contact-us/">
+              <a href="https://www.millsjames.com/contact-us/">
                 <Button__Primary>Contact Us</Button__Primary>
-              </Link>
+              </a>
             </div>
           </Grid>
         </Grid>
       </Section>
-      <Footer />
     </Page>
   );
 };

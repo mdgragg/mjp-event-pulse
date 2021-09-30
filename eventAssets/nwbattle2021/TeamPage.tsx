@@ -39,12 +39,15 @@ const Before = ({ main_event, speaker }) => {
       ) : (
         <h2>Meeting Host: {host}</h2>
       )}
-      <h4>Join {speaker.FirstName} Live In:</h4>
+      <Typography variant={`overline`}>
+        Join {speaker.FirstName} Live In:
+      </Typography>
       <div className="hide-sm">
         <BoxedCounter
           event={main_event}
           styles={{
             boxColor: '#0047bb',
+            textColor: 'white',
           }}
           prefix={''}
         />

@@ -109,9 +109,11 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
           buttonLink={main_event.LogoLink[0]?.Link || '#'}
           style={{ height: '600px', marginTop: '6rem', color: 'white' }}
         >
-          If you are having issues streaming or accessing the event, please call
-          614-850-2120 or email{' '}
-          <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
+          <div style={{ margin: '3rem auto' }}>
+            If you are having issues streaming or accessing the event, please
+            call 614-850-2120 or email{' '}
+            <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
+          </div>
         </Banner__WithPicture>
       </AuthWrap>
     </Page>

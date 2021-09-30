@@ -46,6 +46,12 @@ const Title = styled.div`
   letter-spacing: 2px;
   /* margin: 1rem auto; */
 `;
+
+const StyledPrefix = styled(Title)`
+  color: ${(props) =>
+    props.styles?.boxColor || props.theme.palette.background.secondary};
+  background-color: unset;
+`;
 const Box = styled.div`
   font-family: ${(props) => props.theme.fonts.body.fontFamily};
   display: flex;
@@ -138,7 +144,7 @@ const BoxedCounter = ({
   if (obj) {
     return (
       <Wrap {...other}>
-        {prefix && <Title styles={styles}>{prefix}</Title>}
+        {prefix && <StyledPrefix styles={styles}>{prefix}</StyledPrefix>}
         <Box styles={styles}>
           <div className="section">
             <div className="numday box">
