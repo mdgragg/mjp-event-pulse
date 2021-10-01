@@ -1,4 +1,3 @@
-import { getBreakoutSessions } from 'lib/api';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { PlayerWithChat } from 'components/BodyTemplates';

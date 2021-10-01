@@ -1,21 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/__GLOBALS__/Meta';
-import ThemedPage from 'components/__GLOBALS__/ThemedPage';
-import Body from 'components/template1/Body';
-import { Banner__WithPicture } from 'components/Banners';
-import FlexHero from 'components/Heroes/FlexHero';
-import DateParse from 'components/__Assets__/DateParse';
-import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
-import { toast } from 'react-toastify';
-import Center from 'components/Center';
-import { default_theme } from 'components/Themes/default.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
-import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import PageWrap from 'eventAssets/nfsummit/PageWrap';
 export const EVENT_URL = `nfsummit`;
 

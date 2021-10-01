@@ -1,22 +1,12 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { getEventMeta } from 'lib/api';
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import AuthWrap from 'components/AuthWrap';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
-import { FullPage__SolidColor } from 'components/BodyTemplates';
 import { Banner__WithPicture } from 'components/Banners';
 import { FlexHero, SolidColorHero } from 'components/Heroes';
 import DateParse from 'components/__Assets__/DateParse';
 import { toast } from 'react-toastify';
 import { default_theme } from './nfsummit.theme';
 import { BoxedCounter } from 'components/Counters';
-import { Box__XYCentered } from 'components/Boxes';
-import { Video__StickyTop__WithCountdown } from 'components/VideoBoxes';
-import { StaticResponse } from 'types/PageResponses';
-import { GetStaticProps } from 'next';
-import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 
 export const EVENT_URL = `nwbattle2021`;
 
