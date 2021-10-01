@@ -9,7 +9,7 @@ import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 const Breakout = (props) => {
   const { event_meta, main_event, sub_event, breakout } = props;
   const chatLink = breakout.KeyValue.filter((k) => k.key === 'Chat')[0];
-
+  const speaker = breakout.KeyValue.filter((k) => k.key === 'SpeakerTitle')[0];
   return (
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventName}>
       <Splash main_event={main_event} noHeader>

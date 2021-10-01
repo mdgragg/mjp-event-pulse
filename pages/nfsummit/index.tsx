@@ -17,16 +17,11 @@ import { default_theme } from 'components/Themes/default.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import PageWrap from 'eventAssets/nfsummit/PageWrap';
-const EVENT_URL = `nfsummit`;
-const PLACEHOLD = 'https://placehold.co/';
+export const EVENT_URL = `nfsummit`;
 
 const Index = (props) => {
   const router = useRouter();
   const { event_meta, main_event } = props;
-  var event_theme = {
-    ...default_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-  };
 
   const hasStarted = useCalculateIfStarted(main_event);
   const [auth, setAuth] = useState(false);
@@ -34,6 +29,7 @@ const Index = (props) => {
   return (
     <PageWrap event_meta={event_meta} main_event={main_event} title={`Empathy`}>
       <div> stuff hee</div>
+      <div>{JSON.stringify(event_meta)}</div>
     </PageWrap>
   );
 };

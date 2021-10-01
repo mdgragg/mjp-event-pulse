@@ -29,11 +29,19 @@ const BreakoutPage = ({
   chat,
   attachment,
   category,
+  speaker,
 }) => {
   return (
     <div style={{ width: '90vw', margin: '5rem auto 10rem' }}>
       <h1>{category}</h1>
-      <h2>{name} Session</h2>
+      {speaker?.value ? (
+        <h2 style={{ margin: '2rem auto' }}>
+          {speaker.value} - {name} Session
+        </h2>
+      ) : (
+        <h2>{name} Session</h2>
+      )}
+
       <Typography variant={`overline`}>
         <div style={{ margin: '1rem auto' }}>
           <DateParse date={time} />

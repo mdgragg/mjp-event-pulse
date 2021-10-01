@@ -14,16 +14,12 @@ const Breakout = (props) => {
   const { event_meta, main_event, sub_event, breakout } = props;
 
   const chatLink = breakout.KeyValue.filter((k) => k.key === 'Chat')[0];
-
-  var event_theme = {
-    ...default_theme,
-    header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
-  };
-
+  const speaker = breakout.KeyValue.filter((k) => k.key === 'SpeakerTitle')[0];
   return (
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventName}>
       <Splash main_event={main_event} noHeader>
         <BreakoutPage
+          speaker={speaker}
           category={breakout.Category}
           day={{ query: 'day1', name: 'Day 1' }}
           name={breakout.Name}

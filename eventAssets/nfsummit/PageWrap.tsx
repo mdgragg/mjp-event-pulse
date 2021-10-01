@@ -20,13 +20,14 @@ import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__Sti
 
 export const EVENT_URL = `nwbattle2021`;
 
-const PageWrap = ({ event_meta, main_event, title, children }) => {
+const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
   var event_theme = {
     ...default_theme,
   };
   return (
     <Page theme={event_theme} showFooter={false}>
       <AuthWrap
+        eventToCheck={eventToAuth}
         headerContent={
           <div
             style={{
@@ -53,7 +54,6 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
             required: true,
           },
         }}
-        eventToCheck={main_event}
         successCallback={(res) => {
           toast.success(
             `Hello ${
@@ -74,12 +74,7 @@ const PageWrap = ({ event_meta, main_event, title, children }) => {
               />
             </div>
             <div>
-              <img
-                style={{
-                  maxWidth: '450px',
-                }}
-                src={main_event.LogoLink[1]?.Media?.url}
-              />
+              <h1>{main_event.EventName}</h1>
               <h3>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </h3>

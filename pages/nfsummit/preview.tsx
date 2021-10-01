@@ -3,7 +3,7 @@ import { Router, useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import _ from 'lodash';
 import { Grid, Button } from '@material-ui/core';
-
+import { EVENT_URL } from './index';
 import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/template1/Page';
 import PreviewLoginPage from 'components/__GLOBALS__/Login/PreviewLoginPage';
@@ -30,7 +30,7 @@ export async function getServerSideProps(ctx) {
   // - context.previewData will be the same as
   //   the argument used for `setPreviewData`.
   //   get the event job data from our api
-  const EVENT_URL = ctx.query.event;
+
   console.log('dynamic url: ' + EVENT_URL);
   if (ctx.req.cookies[`preview_cookie__${EVENT_URL}`] === 'true') {
     return {
