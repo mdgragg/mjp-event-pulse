@@ -54,6 +54,17 @@ const BreakoutPage = ({
             },
           }}
         >
+          <p
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              width: 'max-content',
+              padding: '8px',
+              margin: '1rem auto',
+            }}
+          >
+            Please enter your name in the chat room at the start of every
+            session you attend.
+          </p>
           <StyledButtonArea>
             <Link href={`../${day.query}`}>
               <Button__Primary>Back To {day.name}</Button__Primary>

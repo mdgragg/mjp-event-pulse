@@ -22,10 +22,12 @@ const StyledSingleCategory = styled(Card)`
 `;
 
 const StyledButtonArea = styled.div`
+  color: white;
   && h3 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
     color: white;
+  }
+  && h3:first-of-type {
+    margin-top: 2rem;
   }
   && img {
     max-width: 200px;
@@ -95,9 +97,17 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
   <StyledSingleCategory>
     <StyledButtonArea>
       <h3>{category}</h3>
-      <h3>
+      <i>
+        <h3>
+          {
+            breakouts[0].KeyValue.filter((k) => k.key === 'SpeakerTitle')[0]
+              .value
+          }
+        </h3>
+      </i>
+      <Typography variant={`overline`}>
         {breakouts.length} {breakouts.length === 1 ? 'Session' : 'Sessions'}
-      </h3>
+      </Typography>
     </StyledButtonArea>
     <StyledTimeline>
       {breakouts &&

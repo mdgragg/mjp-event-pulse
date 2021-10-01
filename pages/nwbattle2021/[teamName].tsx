@@ -13,10 +13,9 @@ const TeamPage = (props) => {
 
   useEffect(() => {
     if (router.isFallback) {
-      router.push('./');
+      router.push('/404');
     }
   }, []);
-
   const { event_meta, main_event, speaker } = props;
 
   return (
@@ -30,30 +29,22 @@ const TeamPage = (props) => {
   );
 };
 
-export async function getStaticPaths() {
-  const speakers = await getEventSpeakers(162);
-
-  return {
-    paths: speakers.map((speaker) => ({
-      params: { teamName: speaker.LastName.toLowerCase() },
-    })),
-    fallback: 'blocking', // See the "fallback" section below
-  };
-}
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 
   const speakers = await getEventSpeakers(162);
-  const theSpeaker = speakers.filter(
+  let theSpeaker = speakers.filter(
     (s) => s.LastName.toLowerCase() === params.teamName
   );
+
+  theSpeaker = theSpeaker[0] || null;
+
   const returnObj: StaticResponse = {
     props: {
       event_meta: event_data,
       main_event,
-      speaker: theSpeaker[0],
+      speaker: theSpeaker,
     },
     revalidate: 300,
   };
@@ -61,4 +52,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return returnObj;
 };
 
+export async function getStaticPaths() {
+  const speakers = await getEventSpeakers(162);
+
+  return {
+    paths: speakers.map((speaker) => ({
+      params: { teamName: speaker.LastName.toLowerCase() },
+    })),
+    fallback: false, // See the "fallback" section below
+  };
+}
 export default TeamPage;
