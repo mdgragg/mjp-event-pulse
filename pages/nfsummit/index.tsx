@@ -27,9 +27,13 @@ const Index = (props) => {
   const [auth, setAuth] = useState(false);
 
   return (
-    <PageWrap event_meta={event_meta} main_event={main_event} title={`Empathy`}>
-      <div> stuff hee</div>
-      <div>{JSON.stringify(event_meta)}</div>
+    <PageWrap
+      eventToAuth={main_event}
+      event_meta={event_meta}
+      main_event={main_event}
+      title={`Empathy`}
+    >
+      <div>Home</div>
     </PageWrap>
   );
 };

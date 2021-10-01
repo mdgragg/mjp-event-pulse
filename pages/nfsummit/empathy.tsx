@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import PageWrap from 'eventAssets/nfsummit/PageWrap';
 import { LinearProgress } from '@material-ui/core';
+import { SingleDay } from 'eventAssets/nfsummit/SingleDay';
 export const EVENT_URL = `nfsummit`;
 
 const Index = (props) => {
@@ -19,10 +20,9 @@ const Index = (props) => {
       event_meta={event_meta}
       main_event={main_event}
       eventToAuth={empathy_session}
-      title={`Empathy`}
+      title={`Empathy Session`}
     >
-      <div> stuff hee</div>
-      <div>{JSON.stringify(empathy_session)}</div>
+      <SingleDay event={empathy_session} />
     </PageWrap>
   );
 };

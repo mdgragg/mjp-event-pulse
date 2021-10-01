@@ -21,7 +21,7 @@ const StyledBoard = styled.div`
 const BreakoutBoard = ({ breakouts }) => {
   return (
     <BoardWrap>
-      <h3>Breakout Sessions</h3>
+      <h2>Breakout Sessions</h2>
       <StyledBoard>
         {breakouts.map((b) => (
           <SingleEvent session={b} />

@@ -15,6 +15,9 @@ const StyledAppBar = styled(AppBar)`
   background-color: ${(props) => props.theme.palette.background.secondary};
   z-index: 999;
   color: ${(props) => props.theme.palette.text.secondary};
+  && .MuiTab-wrapper {
+    font-weight: 800;
+  }
   && .Mui-selected {
     background-color: ${(props) => props.theme.palette.background.tertiary};
     color: ${(props) => props.theme.palette.text.secondary};

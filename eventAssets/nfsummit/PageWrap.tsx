@@ -25,7 +25,7 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
     ...default_theme,
   };
   return (
-    <Page theme={event_theme} showFooter={false}>
+    <Page theme={event_theme}>
       <AuthWrap
         eventToCheck={eventToAuth}
         headerContent={
@@ -62,7 +62,7 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
           );
         }}
       >
-        <Meta title={event_meta.EventJobName}> </Meta>
+        <Meta title={title ? title : event_meta.EventJobName}> </Meta>
         <SolidColorHero color={event_theme.colors.primary}>
           <FlexHero columns={`20% 60% 20%`}>
             <div>
@@ -74,7 +74,7 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
               />
             </div>
             <div>
-              <h1>{main_event.EventName}</h1>
+              <h1>{title ? title : main_event.EventName}</h1>
               <h3>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </h3>

@@ -116,7 +116,7 @@ const TYPOGRAPHY = {
   },
   h2: {
     color: COLORS.primary,
-    fontSize: 'clamp(1.25rem, 10vw, 1rem)',
+    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
 
   },
   h3: {
@@ -133,7 +133,7 @@ const GLOBALS = {
   heroHeight: '240px',
   heroBgColor: COLORS.primary,
   headerOpacity: '1',
-  videoBreakPoint: 700,
+  videoBreakPoint: 1000,
   maxSectionWidth: '1800px',
 };
 
