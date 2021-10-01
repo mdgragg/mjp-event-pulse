@@ -93,43 +93,40 @@ const Breakouts__ByCategory = ({ breakouts, onBreakoutClick }) => {
   );
 };
 
-const SingleCategory = ({ category, breakouts, handleClick }) => (
-  <StyledSingleCategory>
-    <StyledButtonArea>
-      <h3>{category}</h3>
-      <i>
-        <h3>
-          {
-            breakouts[0].KeyValue.filter((k) => k.key === 'SpeakerTitle')[0]
-              .value
-          }
-        </h3>
-      </i>
-      <Typography variant={`overline`}>
-        {breakouts.length} {breakouts.length === 1 ? 'Session' : 'Sessions'}
-      </Typography>
-    </StyledButtonArea>
-    <StyledTimeline>
-      {breakouts &&
-        breakouts.map((b) => (
-          <SingleBreakoutSession key={b.id}>
-            <div className={`time`}>
-              <h3>{b.Name}</h3>
-              <Typography variant={`overline`}>
-                <DateParse format={`MMM D, h:mma`} date={b.DateTime} />
-              </Typography>
-            </div>
-            {b.Description && (
-              <div style={{ margin: '1rem auto' }}>{b.Description}</div>
-            )}
+const SingleCategory = ({ category, breakouts, handleClick }) => {
+  const speakerTitle =
+    breakouts[0].KeyValue.filter((k) => k.key === 'SpeakerTitle')[0] || null;
+  return (
+    <StyledSingleCategory>
+      <StyledButtonArea>
+        <h3>{category}</h3>
+        <i>{speakerTitle?.value && <h3>{speakerTitle.value}</h3>}</i>
+        <Typography variant={`overline`}>
+          {breakouts.length} {breakouts.length === 1 ? 'Session' : 'Sessions'}
+        </Typography>
+      </StyledButtonArea>
+      <StyledTimeline>
+        {breakouts &&
+          breakouts.map((b) => (
+            <SingleBreakoutSession key={b.id}>
+              <div className={`time`}>
+                <h3>{b.Name}</h3>
+                <Typography variant={`overline`}>
+                  <DateParse format={`MMM D, h:mma`} date={b.DateTime} />
+                </Typography>
+              </div>
+              {b.Description && (
+                <div style={{ margin: '1rem auto' }}>{b.Description}</div>
+              )}
 
-            <Button__Primary onClick={() => handleClick(b.id)}>
-              Join
-            </Button__Primary>
-          </SingleBreakoutSession>
-        ))}
-    </StyledTimeline>
-  </StyledSingleCategory>
-);
+              <Button__Primary onClick={() => handleClick(b.id)}>
+                Join
+              </Button__Primary>
+            </SingleBreakoutSession>
+          ))}
+      </StyledTimeline>
+    </StyledSingleCategory>
+  );
+};
 
 export default Breakouts__ByCategory;

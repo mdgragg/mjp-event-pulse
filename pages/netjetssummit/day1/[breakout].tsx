@@ -59,6 +59,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const thisBreakout = breakouts.filter((b) => b.id === params.breakout)[0];
 
+  if (!thisBreakout) {
+    return {
+      notFound: true,
+    };
+  }
   const returnObj: StaticResponse = {
     props: {
       event_meta: event_data,

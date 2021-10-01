@@ -40,6 +40,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   theSpeaker = theSpeaker[0] || null;
 
+  if (!theSpeaker) {
+    return {
+      notFound: true,
+    };
+  }
+
   const returnObj: StaticResponse = {
     props: {
       event_meta: event_data,
@@ -59,7 +65,7 @@ export async function getStaticPaths() {
     paths: speakers.map((speaker) => ({
       params: { teamName: speaker.LastName.toLowerCase() },
     })),
-    fallback: false, // See the "fallback" section below
+    fallback: `blocking`, // See the "fallback" section below
   };
 }
 export default TeamPage;
