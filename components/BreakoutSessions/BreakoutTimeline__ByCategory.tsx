@@ -1,8 +1,6 @@
 import { Card, Typography } from '@material-ui/core';
 import { Button__Primary } from 'components/Buttons';
-import React from 'react';
 import styled from 'styled-components';
-import { TIMELINES } from 'eventAssets/quantumhealthcab/timeline';
 import { transformByCommonAttr } from 'lib/helpers';
 import { DateParse } from 'components/__Assets__';
 const BreakoutWrap = styled.div`
@@ -66,8 +64,8 @@ const SingleBreakoutSession = styled.div`
   min-height: 290px;
   background-color: #f7f7f7;
   border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 0.5rem;
+  margin: 0.5rem;
   width: 98%;
   @media all and (max-width: 1200px) {
     margin: 0.5rem auto;
@@ -95,6 +93,7 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
   <StyledSingleCategory>
     <StyledButtonArea>
       <h3>{category}</h3>
+      <h3>{breakouts.length} Sessions</h3>
     </StyledButtonArea>
     <StyledTimeline>
       {breakouts &&

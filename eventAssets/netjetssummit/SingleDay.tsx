@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { PlayerWithChat } from 'components/BodyTemplates';
 import styled from 'styled-components';

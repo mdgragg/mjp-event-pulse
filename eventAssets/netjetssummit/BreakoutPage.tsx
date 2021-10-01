@@ -21,12 +21,19 @@ const StyledButtonArea = styled.div`
   }
 `;
 
-const BreakoutPage = ({ day, name, time, video, chat, attachment }) => {
+const BreakoutPage = ({
+  day,
+  name,
+  time,
+  video,
+  chat,
+  attachment,
+  category,
+}) => {
   return (
     <div style={{ width: '90vw', margin: '5rem auto 10rem' }}>
-      <h1>
-        {day.name} {name}
-      </h1>
+      <h1>{category}</h1>
+      <h2>{name} Session</h2>
       <Typography variant={`overline`}>
         <div style={{ margin: '1rem auto' }}>
           <DateParse date={time} />
