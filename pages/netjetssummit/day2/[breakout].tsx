@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: breakouts.map((breakout) => ({
       params: { breakout: breakout.id },
     })),
-    fallback: false, // See the "fallback" section below
+    fallback: `blocking`, // See the "fallback" section below
   };
 };
 
