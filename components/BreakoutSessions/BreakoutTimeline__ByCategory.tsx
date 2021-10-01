@@ -7,7 +7,7 @@ const BreakoutWrap = styled.div`
   display: grid;
   grid-auto-rows: auto;
   row-gap: 1.5rem;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding-bottom: 3rem;
 `;
 const StyledSingleCategory = styled(Card)`
@@ -63,6 +63,7 @@ const SingleBreakoutSession = styled.div`
   justify-content: space-between;
   min-height: 120px;
   max-width: 350px;
+  min-width: 220px;
   background-color: #f7f7f7;
   border-radius: 8px;
   padding: 1rem 0.5rem;
@@ -94,7 +95,9 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
   <StyledSingleCategory>
     <StyledButtonArea>
       <h3>{category}</h3>
-      <h3>{breakouts.length} Sessions</h3>
+      <h3>
+        {breakouts.length} {breakouts.length === 1 ? 'Session' : 'Sessions'}
+      </h3>
     </StyledButtonArea>
     <StyledTimeline>
       {breakouts &&
@@ -106,7 +109,9 @@ const SingleCategory = ({ category, breakouts, handleClick }) => (
                 <DateParse format={`MMM D, h:mma`} date={b.DateTime} />
               </Typography>
             </div>
-            <div style={{ margin: '1rem auto' }}>{b.Description}</div>
+            {b.Description && (
+              <div style={{ margin: '1rem auto' }}>{b.Description}</div>
+            )}
 
             <Button__Primary onClick={() => handleClick(b.id)}>
               Join

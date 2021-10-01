@@ -18,22 +18,23 @@ const SingleDay = ({ day, dayQuery, title }) => {
 
   return (
     <StyledDayWrap>
-      <h4 style={{ margin: '1rem auto' }}>{title && title} General Session</h4>
-      <div style={{ margin: '3rem auto' }}>
-        <PlayerWithChat
-          styles={{
-            wrap: {
-              backgroundColor: 'rgba(0,0,0,0)',
-            },
-            chat: {
-              border: '0px',
-            },
-          }}
-          hasStarted={true}
-          videoUrl={day.streamLinks[0].url}
-          chatUrl={chatUrl.value}
-        ></PlayerWithChat>
-      </div>
+      {day.streamLinks.length > 0 && day.streamLinks[0].url ? (
+        <div style={{ margin: '3rem auto' }}>
+          <PlayerWithChat
+            styles={{
+              wrap: {
+                backgroundColor: 'rgba(0,0,0,0)',
+              },
+              chat: {
+                border: '0px',
+              },
+            }}
+            hasStarted={true}
+            videoUrl={day.streamLinks[0].url}
+            chatUrl={chatUrl.value || day.streamLinks[0].url}
+          ></PlayerWithChat>
+        </div>
+      ) : null}
       <Breakouts__ByCategory
         breakouts={day.BreakoutSessions}
         onBreakoutClick={(breakoutId) =>
