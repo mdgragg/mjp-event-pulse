@@ -22,11 +22,15 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
           <div
             style={{
               height: 'auto',
+              width: 'max-content',
+              padding: '10px',
+              margin: '1rem auto 0',
+              backgroundColor: event_theme.colors.primary,
             }}
           >
             <img
-              style={{ width: '80%', maxWidth: '300px' }}
-              src={main_event?.LogoLink[1]?.Media?.url}
+              style={{ width: '80%', maxWidth: '80px' }}
+              src={main_event?.LogoLink[0]?.Media?.url}
             />
           </div>
         }
