@@ -25,7 +25,7 @@ const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
   const router = useRouter();
-  const EVENT_URL = router.query.event;
+
   const { event_meta, main_event } = props;
 
   var event_theme = {

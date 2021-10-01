@@ -37,7 +37,7 @@ export async function getStaticPaths() {
     paths: speakers.map((speaker) => ({
       params: { teamName: speaker.LastName.toLowerCase() },
     })),
-    fallback: false, // See the "fallback" section below
+    fallback: true, // See the "fallback" section below
   };
 }
 
