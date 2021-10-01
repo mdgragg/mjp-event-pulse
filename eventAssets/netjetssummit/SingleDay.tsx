@@ -13,6 +13,7 @@ const StyledDayWrap = styled.div`
 
 const SingleDay = ({ day, dayQuery, title }) => {
   const router = useRouter();
+
   const chatUrl = day.KeyValue?.filter((k) => k.key == 'Chat')[0];
 
   return (

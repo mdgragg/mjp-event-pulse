@@ -19,6 +19,8 @@ import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import Splash from 'eventAssets/netjetssummit/Splash';
 import EventWrap from 'eventAssets/netjetssummit/EventWrap';
 import HomePage from 'eventAssets/netjetssummit/HomePage';
+import { GetStaticProps } from 'next';
+import { StaticResponse } from 'types/PageResponses';
 
 export const EVENT_URL = `netjetssummit`;
 
@@ -33,17 +35,19 @@ const Index = (props) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
-  try {
-    return GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
-  } catch (error) {
-    console.log('[event].js error: ', error);
-    return {
-      redirect: {
-        destination: '/404',
-      },
-    };
-  }
-}
+export const getStaticProps: GetStaticProps = async () => {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+
+  const returnObj: StaticResponse = {
+    props: {
+      event_meta: event_data,
+      main_event,
+    },
+    revalidate: 120,
+  };
+
+  return returnObj;
+};
 
 export default Index;

@@ -25,7 +25,7 @@ const Breakout = (props) => {
       <Splash main_event={main_event} noHeader>
         <BreakoutPage
           category={breakout.Category}
-          day={{ query: 'day2', name: 'Day 2' }}
+          day={{ query: 'day1', name: 'Day 1' }}
           name={breakout.Name}
           time={breakout.DateTime}
           video={breakout.Link.url}

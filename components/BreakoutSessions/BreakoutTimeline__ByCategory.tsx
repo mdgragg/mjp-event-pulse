@@ -61,7 +61,8 @@ const SingleBreakoutSession = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 290px;
+  min-height: 120px;
+  max-width: 350px;
   background-color: #f7f7f7;
   border-radius: 8px;
   padding: 1rem 0.5rem;
