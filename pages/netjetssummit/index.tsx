@@ -31,15 +31,7 @@ const Index = (props) => {
     <EventWrap eventToCheck={main_event} metaTitle={event_meta.EventJobName}>
       <Splash main_event={main_event} />
       {/* <HomePage main_event={main_event} /> */}
-      <br><br>
-      <body>
-        <h2>
-          <a href="/day1">Click here for Day 1</a>
-        <br>
-          <a href="/day2">Click here for Day 2</a>
-        </h2>
-      </body>
-    </EventWrap>
+     </EventWrap>
   );
 };
 
