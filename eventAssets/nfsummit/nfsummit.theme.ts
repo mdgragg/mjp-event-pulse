@@ -14,7 +14,7 @@ const COLORS = {
   primary: '#0047bb',
   darkBlue: '#0047bb',
   secondary: 'white',
-  tertiary: '#141b4d',
+  tertiary: '#0047bb',
   info: '',
   warning: '',
   offWhite: '#f7f7f7',
@@ -36,8 +36,8 @@ const PALETTE = {
 
 const FONTS = {
   title: {
-    fontFamily: 'Akzidenz-Grotesque-Bold',
-    fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+    fontFamily: 'Tiempos',
+    fontSize: 'clamp(1.5rem, 6vw, 3rem)',
     letterSpacing: '',
     fontWeight: '800',
     lineHeight: 'clamp(2rem, 7vw, 3rem)',
@@ -115,8 +115,8 @@ const TYPOGRAPHY = {
     ...FONTS.title,
   },
   h2: {
-    color: COLORS.primary,
-    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
+    color: COLORS.white,
+    fontSize: 'clamp(1.5rem, 14vw, 2rem)',
 
   },
   h3: {

@@ -18,6 +18,7 @@ import default_theme from 'eventAssets/bethestory/bethestory.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Button__Primary } from 'components/Buttons';
+import BodyBg from 'components/BodyTemplates/Body__PictureBg';
 const EVENT_URL = `bethestory`;
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -48,7 +49,7 @@ const Index = (props) => {
         <Meta title={main_event.EventName}>
           <title>{main_event.EventName}</title>
         </Meta>
-        <FlexHero>
+       
           <div>
             <img
               style={{

@@ -7,6 +7,7 @@ import DateParse from 'components/__Assets__/DateParse';
 import { toast } from 'react-toastify';
 import { default_theme } from './nfsummit.theme';
 import { BoxedCounter } from 'components/Counters';
+import BodyBg from 'components/BodyTemplates/Body__PictureBg';
 
 export const EVENT_URL = `nwbattle2021`;
 
@@ -57,36 +58,14 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
         }}
       >
         <Meta title={title ? title : event_meta.EventJobName}> </Meta>
-        <SolidColorHero color={event_theme.colors.primary}>
-          <FlexHero columns={`20% 60% 20%`}>
-            <div>
-              <img
-                style={{
-                  maxWidth: '120px',
-                }}
-                src={main_event.LogoLink[0]?.Media?.url || null}
-              />
-            </div>
-            <div>
-              <h1>{title ? title : main_event.EventName}</h1>
-              <h3>
-                <DateParse date={main_event.eventStartEnd.StartDateTime} />
-              </h3>
-            </div>
-            <div>
-              <BoxedCounter
-                styles={{
-                  textColor: event_theme.colors.primary,
-                  boxColor: event_theme.colors.white,
-                }}
-                event={main_event}
-                prefix={`Join Us Live In`}
-              />
-            </div>
-          </FlexHero>
-        </SolidColorHero>
+        <BodyBg
+          imgSrc={`https://storage.googleapis.com/mjp-stream-public/header-svg.svg`}
+        >
+          {children && children}
+        </BodyBg>
+
         {/* <FullPage__SolidColor color={`#f7f7f7`}> */}
-        {children && children}
+
         {/* </FullPage__SolidColor> */}
         <Banner__WithPicture
           imgUrl={main_event.LogoLink[0]?.Media?.url || null}
@@ -96,7 +75,7 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
           innerWidth={`450px`}
           buttonText={null}
           buttonLink={main_event.LogoLink[0]?.Link || '#'}
-          style={{ height: '600px', marginTop: '6rem', color: 'white' }}
+          style={{ height: '600px', color: 'white' }}
         >
           <div style={{ margin: '3rem auto' }}>
             If you are having issues streaming or accessing the event, please

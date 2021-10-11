@@ -22,7 +22,10 @@ const Index = (props) => {
       eventToAuth={inclusion_session}
       title={`Inclusion Session`}
     >
-      <SingleDay event={inclusion_session} />
+      <SingleDay
+        event={inclusion_session}
+        logoLink={main_event.LogoLink[0].Media.url}
+      />
     </PageWrap>
   );
 };

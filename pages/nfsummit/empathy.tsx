@@ -22,7 +22,10 @@ const Index = (props) => {
       eventToAuth={empathy_session}
       title={`Empathy Session`}
     >
-      <SingleDay event={empathy_session} />
+      <SingleDay
+        event={empathy_session}
+        logoLink={main_event.LogoLink[0].Media.url}
+      />
     </PageWrap>
   );
 };

@@ -22,7 +22,10 @@ const Index = (props) => {
       eventToAuth={resilience_session}
       title={`Resilience Session`}
     >
-      <SingleDay event={resilience_session} />
+      <SingleDay
+        event={resilience_session}
+        logoLink={main_event.LogoLink[0].Media.url}
+      />
     </PageWrap>
   );
 };
