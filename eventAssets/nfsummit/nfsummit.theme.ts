@@ -120,7 +120,8 @@ const TYPOGRAPHY = {
 
   },
   h3: {
-    color: COLORS.white,
+    color: COLORS.blue,
+    ...FONTS.title,
   },
   h4: {
     fontSize: '2rem',
