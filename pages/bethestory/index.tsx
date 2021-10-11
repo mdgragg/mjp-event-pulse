@@ -49,7 +49,7 @@ const Index = (props) => {
         <Meta title={main_event.EventName}>
           <title>{main_event.EventName}</title>
         </Meta>
-       
+        <FlexHero>
           <div>
             <img
               style={{
