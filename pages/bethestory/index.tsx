@@ -51,14 +51,16 @@ const Index = (props) => {
         </Meta>
         <FlexHero>
           <div>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '350px',
-                margin: '2rem auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
+            <a href={main_event.LogoLink[0]?.Link} target="_blank">
+              <img
+                style={{
+                  width: '100%',
+                  maxWidth: '350px',
+                  margin: '2rem auto',
+                }}
+                src={main_event.LogoLink[0]?.Media?.url || null}
+              />
+            </a>
           </div>
           <div>
             <Center>
@@ -68,9 +70,6 @@ const Index = (props) => {
                   <DateParse date={main_event.eventStartEnd.StartDateTime} />
                 </i>
               </h2>
-              <a href={main_event.LogoLink[0]?.Link} target="_blank">
-                <Button__Primary>Donate Now</Button__Primary>
-              </a>
             </Center>
           </div>
           <div>
@@ -93,6 +92,7 @@ const Index = (props) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              paddingBottom: '30vh',
             }}
           >
             <CenteredPlayer

@@ -116,7 +116,7 @@ const TYPOGRAPHY = {
   },
   h2: {
     color: COLORS.white,
-    fontSize: 'clamp(1.5rem, 14vw, 2rem)',
+    fontSize: 'clamp(1.5rem, 6vw, 3rem)',
 
   },
   h3: {

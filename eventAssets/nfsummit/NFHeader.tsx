@@ -7,11 +7,15 @@ const HeadWrap = styled.div`
   grid-template-columns: 30% 70%;
   padding: 2%;
   max-width: 1600px;
+  width: 100%;
   margin: auto;
   text-align: left;
   && img.logo {
     max-width: 120px;
     margin: 0 0 2rem 0;
+  }
+  @media all and (max-width: 1200px) {
+    grid-template-columns: 1fr;
   }
 `;
 

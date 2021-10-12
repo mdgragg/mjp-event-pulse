@@ -27,7 +27,7 @@ export const StyledInner = styled.div`
   background-color: rgba(0, 0, 0, 0);
   color: white;
   width: 100%;
-  min-width: 765px;
+  /* min-width: 765px; */
   min-height: 100vh;
   text-align: center;
   display: flex;

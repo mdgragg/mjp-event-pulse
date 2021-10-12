@@ -64,15 +64,12 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
           {children && children}
         </BodyBg>
 
-        {/* <FullPage__SolidColor color={`#f7f7f7`}> */}
-
-        {/* </FullPage__SolidColor> */}
         <Banner__WithPicture
           imgUrl={main_event.LogoLink[0]?.Media?.url || null}
           color={event_theme.colors.primary}
           secondary={`white`}
           headerText={`Tech Issues?`}
-          innerWidth={`450px`}
+          innerWidth={`80%`}
           buttonText={null}
           buttonLink={main_event.LogoLink[0]?.Link || '#'}
           style={{ height: '600px', color: 'white' }}

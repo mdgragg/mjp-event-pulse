@@ -12,7 +12,7 @@ const BodyWrap = styled.div`
 
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
-  width: auto;
+  width: 100%;
   ${(props) => props?.styles?.wrap};
   @media all and (max-width: 1000px) {
     grid-template-columns: 1fr;

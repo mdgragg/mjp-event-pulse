@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     '& .MuiDialog-paperWidthSm': {
       padding: '0.5rem',
+      width: '100%',
       maxWidth: '400px',
     },
     '& .MuiDialogContent-root': {

@@ -148,7 +148,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
 };
 
 const THEME_GLOBALS :GLOBALS = {
-  heroHeight: '300px',
+  heroHeight: '280px',
   heroBgColor: THEME_COLORS.white,
   headerOpacity: '0',
   videoBreakPoint: 700,

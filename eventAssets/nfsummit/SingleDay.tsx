@@ -9,6 +9,7 @@ import { Replacer } from 'components/__Assets__';
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown';
 import LinkBox from 'components/LinkBoxes/LinkBox';
 import { Button__Primary } from 'components/Buttons';
+import ExternalLinkButton from 'components/LinkBoxes/ExternalLinkButton';
 
 const PageWrap = styled.div``;
 
@@ -16,6 +17,22 @@ const VideoWrap = styled.div`
   padding: 2%;
   max-width: 1600px;
   margin: auto;
+`;
+
+const StyledLinkBox = styled.div`
+  text-align: left;
+  margin: 0;
+  && h3 {
+    margin: 0;
+    color: white;
+  }
+  && button {
+    background-color: white;
+    color: ${(props) => props.theme.palette.text.tertiary};
+    font-weight: 800;
+    font-size: 1.5rem;
+    padding: 0.5rem 3rem;
+  }
 `;
 
 const TabbedChat = ({ chatUrl, pollUrl }) => {
@@ -41,7 +58,7 @@ export const SingleDay = ({ event, logoLink }) => {
     (s) => s.Service === 'PollEverywhere'
   )[0].url;
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   return (
     <PageWrap>
@@ -62,22 +79,7 @@ export const SingleDay = ({ event, logoLink }) => {
               chatComponent={<TabbedChat chatUrl={chatUrl} pollUrl={pollUrl} />}
             />
           }
-          showIfFalse={
-            <div style={{ maxWidth: '900px', margin: 'auto' }}>
-              <LinkBox
-                link={{
-                  allowed: false,
-                  href: zoomUrl,
-                  errorText: 'This event has not started yet!',
-                }}
-                prefix={`Click Below To Join the Zoom Session`}
-              >
-                <h3 style={{ width: '80%', margin: '2rem auto' }}>
-                  Please click below to join today's event
-                </h3>
-              </LinkBox>
-            </div>
-          }
+          showIfFalse={<SummitLink zoomUrl={zoomUrl} />}
         />
       </VideoWrap>
       <Button__Primary onClick={() => setChecked(!checked)}>
@@ -87,3 +89,17 @@ export const SingleDay = ({ event, logoLink }) => {
     </PageWrap>
   );
 };
+
+const SummitLink = ({ zoomUrl }) => (
+  <StyledLinkBox>
+    <h3>Please click below to join today's event</h3>
+    <ExternalLinkButton
+      text={`Join`}
+      link={{
+        allowed: false,
+        href: zoomUrl,
+        errorText: 'This event has not started yet!',
+      }}
+    />
+  </StyledLinkBox>
+);
