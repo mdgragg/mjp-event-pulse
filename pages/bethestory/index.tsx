@@ -50,7 +50,6 @@ const Index = (props) => {
             <p>Please tell us a little bit about yourself before joining.</p>
           </div>
         }
-        options={['emailOnly']}
         eventToCheck={main_event}
         successCallback={({ message }) => {
           toast.success(`Hello!, welcome to ${main_event.EventName}`);
