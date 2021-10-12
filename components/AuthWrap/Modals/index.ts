@@ -4,6 +4,7 @@ import AuthModal__Password from './AuthModal__Password';
 import AuthModal__AttendeeList from './AuthModal__AttendeeList';
 import AuthModal__AttendeeListRegister from './AuthModal__AttendeeListRegister';
 import AuthModal__Register from './AuthModal__Register';
+import AuthModal__AttendeeCapture__EmailOnly from './AuthModal__AttendeeCapture__EmailOnly';
 import { AuthModalInputOptions } from '../AuthWrap__Types';
 
 

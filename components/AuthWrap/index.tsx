@@ -13,6 +13,7 @@ import {
 } from './Modals';
 import { tokenGenerator } from 'lib/helpers';
 import { AppContext } from 'context/AppContext';
+import AuthModal__AttendeeCapture__EmailOnly from './Modals/AuthModal__AttendeeCapture__EmailOnly';
 
 const StyledAuthWrap = styled.div`
   &&.blurred {
@@ -93,7 +94,6 @@ const AuthWrap = (props: AuthWrapProps) => {
         </>
       );
     }
-
     if (options.includes('emailOnly')) {
       return (
         <>
@@ -124,6 +124,16 @@ const AuthWrap = (props: AuthWrapProps) => {
     );
   }
   if (authType === 'CaptureNewAttendees') {
+    if (options.includes('emailOnly')) {
+      return (
+        <>
+          <AuthModal__AttendeeCapture__EmailOnly {...ModalProps} />
+          <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
+            {children}
+          </StyledAuthWrap>
+        </>
+      );
+    }
     return (
       <>
         <AuthModal__AttendeeCapture {...ModalProps} />

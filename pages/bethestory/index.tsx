@@ -24,16 +24,12 @@ const EVENT_URL = `bethestory`;
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
-  const router = useRouter();
   const { event_meta, main_event } = props;
 
   var event_theme = {
     ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
-
-  const hasStarted = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useState(false);
 
   return (
     <ThemedPage theme={event_theme}>
@@ -54,13 +50,10 @@ const Index = (props) => {
             <p>Please tell us a little bit about yourself before joining.</p>
           </div>
         }
+        options={['emailOnly']}
         eventToCheck={main_event}
-        successCallback={(res) => {
-          toast.success(
-            `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-            }, welcome to ${main_event.EventName}`
-          );
+        successCallback={({ message }) => {
+          toast.success(`Hello!, welcome to ${main_event.EventName}`);
         }}
       >
         <Meta title={main_event.EventName}>
