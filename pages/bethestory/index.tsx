@@ -19,6 +19,7 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Button__Primary } from 'components/Buttons';
 import BodyBg from 'components/BodyTemplates/Body__PictureBg';
+import { Typography } from '@material-ui/core';
 const EVENT_URL = `bethestory`;
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -37,6 +38,22 @@ const Index = (props) => {
   return (
     <ThemedPage theme={event_theme}>
       <AuthWrap
+        title={
+          <div style={{ maxWidth: '220px', margin: 'auto' }}>
+            <img
+              src={main_event.LogoLink[1].Media.url}
+              style={{ width: '100%', height: 'auto' }}
+            />
+            <Typography variant={`overline`}>
+              {main_event.EventName} <br />
+              <DateParse
+                format={`dddd MMM DD, YYYY`}
+                date={main_event.eventStartEnd.StartDateTime}
+              />
+            </Typography>
+            <p>Please tell us a little bit about yourself before joining.</p>
+          </div>
+        }
         eventToCheck={main_event}
         successCallback={(res) => {
           toast.success(
