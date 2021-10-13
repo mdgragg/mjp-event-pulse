@@ -43,7 +43,7 @@ const FONTS = {
     lineHeight: 'clamp(2rem, 7vw, 3rem)',
   },
   body: {
-    fontFamily: 'Akzidenz-Grotesque-Bold',
+    fontFamily: 'Avenir',
     fontWeight: '200',
     fontSize: '',
     letterSpacing: '',
@@ -58,7 +58,6 @@ export const BUTTONS = {
   primary: {
     fontFamily: 'Avenir',
     fontSize: '0.85rem',
-    letterSpacing: '2px',
     lineHeight: 'inherit',
     backgroundColor: COLORS.blue,
     color: 'white',
@@ -117,6 +116,7 @@ const TYPOGRAPHY = {
   h2: {
     color: COLORS.white,
     fontSize: 'clamp(1.5rem, 6vw, 3rem)',
+    fontFamily: 'Avenir',
 
   },
   h3: {
