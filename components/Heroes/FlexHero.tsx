@@ -11,7 +11,6 @@ const HeroHolder = styled.div`
   width: 100%;
   min-height: ${({ theme }) => theme.heroHeight || '30vh'};
   background-color: ${({ theme }) => theme.heroBgColor};
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
