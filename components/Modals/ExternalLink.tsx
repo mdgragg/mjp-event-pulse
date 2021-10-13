@@ -20,7 +20,6 @@ export declare type ExternalLink__Props = {
 const useStyles = makeStyles({
   root: {
     '& .MuiPaper-root': {
-      padding: ' 2rem',
       minHeight: '350px',
     },
   },
@@ -53,7 +52,15 @@ export default function ExternalLink({
       );
     }
     if (link.allowed) {
-      return (window.location.href = link.href);
+      if (link.newWindow) {
+        return window.open(
+          link.href,
+          '_blank',
+          `menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes, height=400, width=350`
+        );
+      } else {
+        return (window.location.href = link.href);
+      }
     }
     toast.error(link.errorText || 'This link is not allowed');
     return handleClose();

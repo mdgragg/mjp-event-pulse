@@ -42,13 +42,6 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
             <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
           </>
         }
-        otherFields={{
-          Company: {
-            displayName: 'Company',
-            value: '',
-            required: true,
-          },
-        }}
         successCallback={(res) => {
           toast.success(
             `Hello ${

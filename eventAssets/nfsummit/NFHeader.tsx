@@ -20,7 +20,7 @@ const HeadWrap = styled.div`
 `;
 
 const UnderText = styled.div`
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 6vw, 3rem);
 `;
 const NFHeader = ({ logoLink, headerText }) => {
   return (
@@ -29,7 +29,6 @@ const NFHeader = ({ logoLink, headerText }) => {
         <img src={logoLink} className={`logo`} />
         <h1>NF Leader Summit</h1>
         <UnderText>{headerText.slice(12)}</UnderText>
-        <h2>October 26 - 28, 2021</h2>
       </div>
       <div></div>
     </HeadWrap>

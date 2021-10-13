@@ -63,7 +63,7 @@ const Index = (props) => {
             <a href={main_event.LogoLink[0]?.Link} target="_blank">
               <img
                 style={{
-                  width: '100%',
+                  width: '80%',
                   maxWidth: '350px',
                   margin: '2rem auto',
                 }}

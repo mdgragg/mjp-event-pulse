@@ -23,7 +23,7 @@ const StyledLinkBox = styled.div`
   text-align: left;
   margin: 0;
   && h3 {
-    margin: 0;
+    margin: 1rem 0;
     color: white;
   }
   && button {
@@ -40,7 +40,7 @@ const TabbedChat = ({ chatUrl, pollUrl }) => {
     <SimpleTabs
       data={[
         { title: 'Chat', content: <Chat__iFrame src={chatUrl} /> },
-        { title: 'Polling', content: <Chat__iFrame src={pollUrl} /> },
+        // { title: 'Polling', content: <Chat__iFrame src={pollUrl} /> },
       ]}
     ></SimpleTabs>
   );
@@ -92,11 +92,12 @@ export const SingleDay = ({ event, logoLink }) => {
 
 const SummitLink = ({ zoomUrl }) => (
   <StyledLinkBox>
-    <h3>Please click below to join today's event</h3>
+    <h3>Please click below to join today's event.</h3>
     <ExternalLinkButton
       text={`Join`}
       link={{
-        allowed: false,
+        allowed: true,
+        newWindow: true,
         href: zoomUrl,
         errorText: 'This event has not started yet!',
       }}
