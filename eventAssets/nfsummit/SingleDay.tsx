@@ -65,7 +65,7 @@ export const SingleDay = ({ event, logoLink }) => {
       <NFHeader logoLink={logoLink} headerText={event.EventName} />
       <VideoWrap>
         <Replacer
-          decider={checked}
+          decider={true}
           showIfTrue={
             <PlayerWithChat
               videoUrl={videoUrl}
@@ -82,9 +82,7 @@ export const SingleDay = ({ event, logoLink }) => {
           showIfFalse={<SummitLink zoomUrl={zoomUrl} />}
         />
       </VideoWrap>
-      <Button__Primary onClick={() => setChecked(!checked)}>
-        {checked ? 'Show Day 2 ' : 'Show Day 1'}
-      </Button__Primary>
+
       {/* <BreakoutBoard breakouts={event.BreakoutSessions} /> */}
     </PageWrap>
   );
