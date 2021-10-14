@@ -20,7 +20,7 @@ const Index = (props) => {
       event_meta={event_meta}
       main_event={main_event}
       eventToAuth={resilience_session}
-      title={`Resilience Session`}
+      title={`Resiliency Session`}
     >
       <SingleDay
         event={resilience_session}
