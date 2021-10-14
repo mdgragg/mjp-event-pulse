@@ -32,7 +32,7 @@ const VideoComponent = ({ main_event }: any) => (
       showMinutesBefore={30}
       showBefore={<VideoPlaceholder main_event={main_event} />}
     ></Video__StickyTop__WithCountdown>
-    <a
+    {/* <a
       style={{ margin: 'auto' }}
       href="https://donate.voa.org/site/Donation2;jsessionid=00000000.app30102b?df_id=20451&mfc_pref=T&20451.donation=form1&NONCE_TOKEN=8A2E6B5EE8588215399173CF8A2BFAFC&bbeml=tp-QpGS3s27wkeV6N6tQZs_Ww.j2fj3QvxMVk-J5OeuZ_Isjg.rifUU2_spyEy7P6l-N34XWA.lZlZZhk8dd0qV6dY_VYz_0A"
       className="href"
@@ -43,7 +43,7 @@ const VideoComponent = ({ main_event }: any) => (
           <Button__Big>GIVE HOPE</Button__Big>
         </Center>
       </div>
-    </a>
+    </a> */}
   </VideoWrap>
 );
 
