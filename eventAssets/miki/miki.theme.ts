@@ -2,11 +2,11 @@ import { createTheme } from '@material-ui/core';
 import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, GLOBALS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
 
 const THEME_COLORS: COLORS = {
-  red: '#e83821',
+  red: '#c00000',
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
-  blue: '#1e2c60',
+  blue: '#1f3764',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
@@ -70,7 +70,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.orange,
+    backgroundColor: THEME_COLORS.blue,
     color: 'white',
     border: '',
   },

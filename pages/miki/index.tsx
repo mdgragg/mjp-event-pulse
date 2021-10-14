@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
@@ -18,12 +18,15 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { BoxedCounter, CircleCounter } from 'components/Counters';
 import { Clock } from 'components/__Assets__';
+import MikiPage from 'eventAssets/miki/MikiPage';
+import { tokenGenerator } from 'lib/helpers';
+import { useSessionToken } from 'hooks';
+import { AppContext } from 'context/AppContext';
+import MikiAuth__Modal from 'eventAssets/miki/MikiAuth__Modal';
 
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = `miki`;
 const Index = (props) => {
-  const router = useRouter();
-
   const { event_meta, main_event } = props;
 
   var event_theme = {
@@ -31,111 +34,28 @@ const Index = (props) => {
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
-  const hasStarted = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useState(false);
+  const [hasToken, handleSetToken] = useSessionToken(
+    tokenGenerator(main_event)
+  );
+
+  const {
+    setAuth,
+    state: { hasAuth },
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    if (hasToken) {
+      setAuth(true);
+    }
+  }, [hasToken]);
 
   return (
     <ThemedPage theme={event_theme}>
-      <AuthWrap
-        eventToCheck={main_event}
-        successCallback={(res) => {
-          toast.success(
-            `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-            }, welcome to ${main_event.EventName}`
-          );
-        }}
-      >
-        <Meta title={main_event.EventName}>
-          <title>{main_event.EventName}</title>
-        </Meta>
-        <FlexHero columns={`20% 60% 20%`}>
-          <div>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '250px',
-                margin: '2rem auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
-            <br />
-            <Clock format={`dddd MMMM DD`} />
-            <br />
-            <Clock format={`h:mm a zz`} />
-          </div>
-          <div>
-            <Center>
-              <img
-                style={{
-                  width: '100%',
-                  maxWidth: '450px',
-                  margin: '0.5rem auto',
-                }}
-                src={main_event.LogoLink[1]?.Media?.url || null}
-              />
-              <h1>{main_event.EventName}</h1>
-              <h2>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
-            </Center>
-          </div>
-          <div>
-            <Center>
-              <CircleCounter event={main_event} />
-            </Center>
-          </div>
-        </FlexHero>
-        <BodyWrap>
-          {main_event.streamLinks.length === 1 ? (
-            <div
-              style={{
-                minHeight: '60vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}
-            >
-              <CenteredPlayer
-                showing={true}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-              />
-            </div>
-          ) : (
-            <div
-              style={{
-                minHeight: '60vh',
-                backgroundColor: 'none',
-                margin: '2rem',
-              }}
-            >
-              <PlayerWithChat
-                children={null}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-                chatUrl={main_event.streamLinks[1].url}
-              />
-            </div>
-          )}
-
-          {main_event.Description && (
-            <Banner__WithPicture
-              imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-              color={'black'}
-              secondary={`white`}
-              headerText={`About This Event`}
-              innerWidth={`650px`}
-              buttonText={`Learn More`}
-              buttonLink={main_event.LogoLink[0]?.Link || '#'}
-            >
-              {main_event.Description}
-            </Banner__WithPicture>
-          )}
-        </BodyWrap>
-      </AuthWrap>
+      {hasAuth ? (
+        <MikiPage main_event={main_event} event_meta={event_meta} />
+      ) : (
+        <MikiAuth__Modal main_event={main_event} />
+      )}
     </ThemedPage>
   );
 };
