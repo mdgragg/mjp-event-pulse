@@ -1,15 +1,15 @@
+import { StaticResponse } from 'types/PageResponses';
 import { getEventMeta } from '../../lib/api';
 async function GET_SERVERSIDE_PROPS_DEFAULT(ctx: any, EVENT_URL: string) {
   let event_data = await getEventMeta(EVENT_URL);
 
-  if(!event_data || !event_data.events){
+  if (!event_data || !event_data.events) {
     return {
-   
-      redirect:{
+      redirect: {
         destination: `/404`,
-        permanent: false
-      }
-    }
+        permanent: false,
+      },
+    };
   }
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
   let return_object;
@@ -59,4 +59,19 @@ async function GET_SERVERSIDE_PROPS_DEFAULT(ctx: any, EVENT_URL: string) {
   return return_object;
 }
 
-export { GET_SERVERSIDE_PROPS_DEFAULT };
+const GET_STATIC_PROPS_DEFAULT = async (EVENT_URL) => {
+  let event_data = await getEventMeta(EVENT_URL);
+  let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
+
+  const returnObj: StaticResponse = {
+    props: {
+      event_meta: event_data,
+      main_event,
+    },
+    revalidate: 300,
+  };
+
+  return returnObj;
+};
+
+export { GET_SERVERSIDE_PROPS_DEFAULT, GET_STATIC_PROPS_DEFAULT };

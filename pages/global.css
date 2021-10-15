@@ -95,6 +95,10 @@
   src: url('../public/static/fonts/Futura/FuturaStd-Bold.otf');
   font-family: 'Futura Bold';
 }
+@font-face {
+  src: url('../public/static/fonts/Montserrat.ttf');
+  font-family: 'Montserrat';
+}
 
 @font-face {
   src: url('../public/static/fonts/AceSans-Bold.otf');

@@ -38,7 +38,9 @@ const StyledPage = styled.div`
     margin: 0;
     ${(props) => props.theme.typography.h5};
   }
-
+  p {
+    ${(props) => props.theme.typography.body1};
+  }
   a {
     text-decoration: none;
     color: unset;

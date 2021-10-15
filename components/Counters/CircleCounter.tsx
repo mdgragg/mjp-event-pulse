@@ -5,7 +5,7 @@ import { Event__Type } from 'types/Events__Types';
 const Wrap = styled.div`
   /* padding: 15px; */
   width: 100%;
-  max-width: 800px;
+  max-width: 400px;
   margin: auto;
   text-align: center;
 `;
@@ -13,12 +13,13 @@ const Wrap = styled.div`
 const Title = styled.div`
   text-transform: uppercase;
   background-color: ${(props) => props.theme.palette.secondary};
-  font-family: ${(props) => props.theme.palette.secondary};
-  color: ${(props) => props.theme.colors.primary};
-  font-size: 1.25rem;
+  ${(props) => props.theme.typography.h2};
+  color: ${(props) => props.theme.palette.background.secondary};
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: 2px;
   margin: 1rem auto;
+  text-align: center;
   padding: 0.75rem 0;
 `;
 
@@ -33,10 +34,9 @@ const Box = styled.div`
   && > div.box {
     height: 0;
     padding-top: 20%;
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 70px;
+    min-height: 70px;
     width: 20%;
-    margin: 0.5rem;
     background-color: ${(props) => props.theme.palette.background.secondary};
     border-radius: 100%;
     display: flex;
@@ -48,15 +48,15 @@ const Box = styled.div`
 
   && .digit {
     position: absolute;
-    top: 20%;
+    top: 16%;
     font-weight: 600;
-    font-size: clamp(22px, 195%, 4rem);
+    font-size: clamp(16px, 155%, 5rem);
     line-height: clamp(12px, 10vw, 2.25rem);
   }
   && .delimiter {
     position: absolute;
     top: 65%;
-    font-size: clamp(1px, 70%, 2.5rem);
+    font-size: clamp(1px, 60%, 2.5rem);
     line-height: clamp(10px, 3vw, 1rem);
     font-weight: 800;
     letter-spacing: 2px;
