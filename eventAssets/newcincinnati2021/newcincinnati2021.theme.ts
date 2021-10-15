@@ -5,7 +5,7 @@ const THEME_COLORS: COLORS = {
   red: 'tomato',
   orange: '#FF5600',
   yellow: '#eace28',
-  green: '#97d700',
+  green: '#8bc53f',
   blue: '#1e2c60',
   indigo: '#0d2f49',
   violet: '#4b1f59',
@@ -70,7 +70,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.orange,
+    backgroundColor: THEME_COLORS.green,
     color: 'white',
     border: '',
   },
@@ -103,7 +103,7 @@ export const THEME_BUTTONS: BUTTONS = {
   },
   hover: {
     color: 'white',
-    backgroundColor: THEME_COLORS.offBlack,
+    backgroundColor: THEME_COLORS.violet,
   },
 };
 

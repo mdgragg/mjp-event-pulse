@@ -40,6 +40,14 @@ const Index = (props) => {
   return (
     <ThemedPage theme={event_theme}>
       <AuthWrap
+        headerContent={
+          <div style={{ maxWidth: '160px', margin: '1rem auto' }}>
+            <img
+              style={{ width: '80%', margin: 'auto' }}
+              src={main_event.LogoLink[0]?.Media?.url}
+            />
+          </div>
+        }
         eventToCheck={main_event}
         successCallback={({ message }) => {
           toast.success(

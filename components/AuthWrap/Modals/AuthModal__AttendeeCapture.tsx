@@ -97,6 +97,7 @@ export default function AuthModal__AttendeeCapture({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
+        {headerContent && headerContent}
         <StyledDialogTitle id="form-dialog-title">
           {title ? (
             <HeaderWrap>{title}</HeaderWrap>
@@ -108,7 +109,6 @@ export default function AuthModal__AttendeeCapture({
               </Typography>
             </div>
           )}
-          {headerContent && headerContent}
         </StyledDialogTitle>
 
         <DialogContent>

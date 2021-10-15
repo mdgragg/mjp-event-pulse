@@ -5,7 +5,7 @@ const THEME_COLORS: COLORS = {
   red: '#e83821',
   orange: '#FF5600',
   yellow: '#eace28',
-  green: '#97d700',
+  green: '#8bc53f',
   blue: '#1f3764',
   indigo: '#0d2f49',
   violet: '#5602b7',
@@ -70,7 +70,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.blue,
+    backgroundColor: THEME_COLORS.red,
     color: 'white',
     border: '',
   },
@@ -88,7 +88,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '2rem',
     letterSpacing: '2px',
     lineHeight: 'auto',
-    backgroundColor: THEME_COLORS.primary,
+    backgroundColor: THEME_COLORS.violet,
     color: THEME_COLORS.secondary,
     border: '5px solid white',
   },
@@ -103,7 +103,7 @@ export const THEME_BUTTONS: BUTTONS = {
   },
   hover: {
     color: 'white',
-    backgroundColor: THEME_COLORS.offBlack,
+    backgroundColor: THEME_COLORS.blue,
   },
 };
 
