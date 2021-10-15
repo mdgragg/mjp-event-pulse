@@ -40,7 +40,7 @@ export var event_theme = {
   headerBgColor: 'white',
   maxSectionWidth: '1800px',
 };
-
+// test
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = 'cashexplosionlive';
 
