@@ -13,15 +13,19 @@ import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
 import Center from 'components/Center';
-import default_theme from 'eventAssets/mjp-demo-event/demo_theme';
+import default_theme from 'eventAssets/activistsandagitators/activistsandagitators.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
+import SplashHero from 'components/Heroes/SplashHero';
+import { CircleCounter } from 'components/Counters';
+import HeaderContent from 'eventAssets/activistsandagitators/HeaderContent';
+import { CaptionAccordion } from 'components/Captioning';
 
 const PLACEHOLD = 'https://placehold.co/';
-
+export const EVENT_URL = `activistsandagitators`;
 const Index = (props) => {
   const router = useRouter();
-  const EVENT_URL = router.query.event;
+
   const { event_meta, main_event } = props;
 
   var event_theme = {
@@ -35,6 +39,18 @@ const Index = (props) => {
   return (
     <ThemedPage theme={event_theme}>
       <AuthWrap
+        headerContent={
+          <div style={{ margin: '1rem auto', textAlign: 'center' }}>
+            <img
+              style={{
+                width: '100%',
+                maxWidth: '200px',
+                margin: ' auto',
+              }}
+              src={main_event.LogoLink[0]?.Media?.url || null}
+            />
+          </div>
+        }
         eventToCheck={main_event}
         successCallback={({ message }) => {
           toast.success(
@@ -49,73 +65,25 @@ const Index = (props) => {
         <Meta title={main_event.EventName}>
           <title>{main_event.EventName}</title>
         </Meta>
-        <FlexHero>
-          <div>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '350px',
-                margin: '2rem auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
-          </div>
-          <div>
-            <Center>
-              <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-                {main_event.EventName}
-              </h1>
-              <h2 style={{ margin: 'auto' }}>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
-            </Center>
-          </div>
-          <div>
-            <Center>
-              <h2>
-                <Counter__JustNumbers
-                  event={main_event}
-                  afterStarted={'Live Now!'}
-                  afterEnded={'Thank You for Attending'}
-                />
-              </h2>
-            </Center>
-          </div>
-        </FlexHero>
+        <SplashHero>
+          <HeaderContent main_event={main_event} />
+        </SplashHero>
         <BodyWrap>
-          {main_event.streamLinks.length === 1 ? (
-            <div
-              style={{
-                minHeight: '60vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-              }}
+          <div
+            style={{
+              minHeight: '100vh',
+              backgroundColor: 'none',
+              margin: '2rem',
+            }}
+          >
+            <PlayerWithChat
+              hasStarted={true}
+              videoUrl={main_event.streamLinks[0].url}
+              chatUrl={main_event.streamLinks[1].url}
             >
-              <CenteredPlayer
-                showing={true}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-              />
-            </div>
-          ) : (
-            <div
-              style={{
-                minHeight: '60vh',
-                backgroundColor: 'none',
-                margin: '2rem',
-              }}
-            >
-              <PlayerWithChat
-                children={null}
-                hasStarted={true}
-                videoUrl={main_event.streamLinks[0].url}
-                chatUrl={main_event.streamLinks[1].url}
-              />
-            </div>
-          )}
+              <CaptionAccordion />
+            </PlayerWithChat>
+          </div>
 
           {main_event.Description && (
             <Banner__WithPicture
@@ -137,8 +105,6 @@ const Index = (props) => {
 };
 
 export async function getServerSideProps(ctx) {
-  const EVENT_URL = ctx.params.event;
-
   try {
     return GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
   } catch (error) {

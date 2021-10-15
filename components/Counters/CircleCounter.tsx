@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useCalculateRemaining from '../../hooks/useCalculateRemaining';
 import { Event__Type } from 'types/Events__Types';
+import SingleDigit from 'components/Heroes/SingleDigit';
 const Wrap = styled.div`
   /* padding: 15px; */
   width: 100%;
@@ -63,22 +64,6 @@ const Box = styled.div`
     text-transform: uppercase;
   }
 `;
-
-const SingleDigit = ({ number, delimiter }) => {
-  const delim_obj = {
-    hours: number === 1 ? 'hour' : 'hours',
-    days: number === 1 ? 'day' : 'days',
-    minutes: 'min',
-    seconds: 'sec',
-  };
-
-  return (
-    <div className="box">
-      <div className="digit"> {number} </div>
-      <div className="delimiter"> {delim_obj[delimiter]}</div>
-    </div>
-  );
-};
 
 type CircleCounter__Props = {
   event: Event__Type;

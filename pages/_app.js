@@ -10,8 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-dropzone-uploader/dist/styles.css';
 
 import AppContextProvider from '../context/AppContext';
-import { GlobalStyle } from 'components/__GLOBALS__/GlobalStyle';
-import './global.css';
+import { GlobalStyle } from '../src/styles/GlobalStyle';
+import '../src/styles/global.css';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
