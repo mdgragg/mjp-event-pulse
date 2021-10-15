@@ -42,10 +42,12 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
             <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
           </>
         }
-        successCallback={(res) => {
+        successCallback={({ message }) => {
           toast.success(
             `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
+              message.Attendee.AttendeeFirst
+                ? message.Attendee.AttendeeFirst
+                : ''
             }, welcome to ${main_event.EventName}`
           );
         }}

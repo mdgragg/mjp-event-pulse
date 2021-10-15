@@ -41,10 +41,12 @@ const Index = (props) => {
     <ThemedPage theme={event_theme}>
       <AuthWrap
         eventToCheck={main_event}
-        successCallback={(res) => {
+        successCallback={({ message }) => {
           toast.success(
             `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
+              message.Attendee.AttendeeFirst
+                ? message.Attendee.AttendeeFirst
+                : ''
             }, welcome to ${main_event.EventName}`
           );
         }}

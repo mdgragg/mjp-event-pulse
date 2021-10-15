@@ -2,7 +2,7 @@ import { createTheme } from '@material-ui/core';
 import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, GLOBALS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
 
 const THEME_COLORS: COLORS = {
-  red: '#c00000',
+  red: '#e83821',
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
