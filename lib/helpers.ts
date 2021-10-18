@@ -25,8 +25,8 @@ export function getKeyValue(keyValue) {
 export function calcHasStarted(eventStartEnd: EventStartEnd__Type): boolean {
   const now: Date = new Date();
   const hasStarted =
-    Date.parse(eventStartEnd.StartDateTime) < Date.parse(now.toString()) &&
-    Date.parse(eventStartEnd.EndDateTime) > Date.parse(now.toString());
+    Date.parse(eventStartEnd.StartDateTime as string) < Date.parse(now.toString()) &&
+    Date.parse(eventStartEnd.EndDateTime as string) > Date.parse(now.toString());
 
   return hasStarted;
 }

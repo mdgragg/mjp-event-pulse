@@ -1,6 +1,6 @@
 export type EventStartEnd__Type = {
-  StartDateTime: Date;
-  EndDateTime:  Date ;
+  StartDateTime: Date | string;
+  EndDateTime:  Date | string;
 };
 
 export interface Event_Job {
