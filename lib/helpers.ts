@@ -27,7 +27,7 @@ export function calcHasStarted(eventStartEnd: EventStartEnd__Type): boolean {
   const hasStarted =
     Date.parse(eventStartEnd.StartDateTime as string) < Date.parse(now.toString()) &&
     Date.parse(eventStartEnd.EndDateTime as string) > Date.parse(now.toString());
-
+// test
   return hasStarted;
 }
 
