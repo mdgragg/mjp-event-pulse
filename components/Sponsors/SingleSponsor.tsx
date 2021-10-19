@@ -13,6 +13,9 @@ const SingleSponsorStyle = styled.div`
   align-items: center;
   position: relative;
   max-width: 350px;
+  min-width: 250px;
+  min-height: 120px;
+  padding: 1rem;
   &&.withLink:hover .title {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.8);
@@ -50,7 +53,11 @@ const Title = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   opacity: 0;
+  &&.show {
+    opacity: 1;
+  }
 
   && .button {
     transition: all 0.2s ease;
@@ -74,7 +81,11 @@ const MyButton = styled(Button__Secondary)`
 const SingleSponsor = ({ sponsor }) => {
   return (
     <SingleSponsorStyle className={sponsor.SponsorLink ? 'withLink' : ''}>
-      {sponsor.Logo?.url && <Image src={sponsor.Logo.url} />}
+      {sponsor.Logo?.url ? (
+        <Image src={sponsor.Logo.url} />
+      ) : (
+        <Title className="title show">{sponsor.SponsorName}</Title>
+      )}
       <Title className="title">
         {sponsor.SponsorName}
         {sponsor.SponsorLink && (

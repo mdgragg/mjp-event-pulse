@@ -12,7 +12,7 @@ const YWCA_SponsorMap = ({ eventId }) => {
         'Community',
         'Ally',
         'Empowerment',
-        'Event Host ',
+        'Event Host',
       ]}
     />
   );
