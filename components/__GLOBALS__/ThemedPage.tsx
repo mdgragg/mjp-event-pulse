@@ -15,6 +15,7 @@ const StyledPage = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-width: 350px;
+
   background-color: ${(props) => props.theme.palette.background.primary};
   /* overflow: hidden; */
 
