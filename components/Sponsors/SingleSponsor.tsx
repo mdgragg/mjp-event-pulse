@@ -74,7 +74,7 @@ const MyButton = styled(Button__Secondary)`
 const SingleSponsor = ({ sponsor }) => {
   return (
     <SingleSponsorStyle className={sponsor.SponsorLink ? 'withLink' : ''}>
-      <Image src={sponsor.Logo.url} />
+      {sponsor.Logo?.url && <Image src={sponsor.Logo.url} />}
       <Title className="title">
         {sponsor.SponsorName}
         {sponsor.SponsorLink && (
