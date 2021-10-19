@@ -126,7 +126,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
 
   },
   h3: {
-    color: THEME_COLORS.white,
+    color: THEME_COLORS.orange,
   },
   h4: {
     color: THEME_COLORS.primary,

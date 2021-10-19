@@ -1,6 +1,9 @@
 import SponsorMap from 'components/Sponsors/SponsorMap';
 import React from 'react';
 
+
+
+
 const YWCA_SponsorMap = ({ eventId }) => {
   return (
     <SponsorMap
