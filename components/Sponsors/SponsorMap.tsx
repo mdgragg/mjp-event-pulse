@@ -43,14 +43,15 @@ const SponsorMap = ({ eventId, tiers }: SponsorMap) => {
   } else if (data) {
     return (
       <StyledMap>
-        {tiers.map((tier, index) => (
+        {tiers?.map((tier, index) => (
           <SingleTier key={`sponsor-${tier}--${index}`}>
-            <Tier>{tier}</Tier>
+            <Tier>{tier} Sponsors</Tier>
             <hr />
             <SponsorWrap>
-              {data[tier].map((sponsor) => (
-                <SingleSponsor sponsor={sponsor} key={sponsor.id} />
-              ))}
+              {data[tier] &&
+                data[tier].map((sponsor) => (
+                  <SingleSponsor sponsor={sponsor} key={sponsor.id} />
+                ))}
             </SponsorWrap>
           </SingleTier>
         ))}

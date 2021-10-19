@@ -20,6 +20,8 @@ import SplashHero from 'components/Heroes/SplashHero';
 import { CircleCounter } from 'components/Counters';
 import HeaderContent from 'eventAssets/activistsandagitators/HeaderContent';
 import { CaptionAccordion } from 'components/Captioning';
+import AuthHeaderContent from '../../eventAssets/activistsandagitators/AuthHeaderContent';
+import YWCA_SponsorMap from 'eventAssets/activistsandagitators/YWCA_SponsorMap';
 
 const PLACEHOLD = 'https://placehold.co/';
 export const EVENT_URL = `activistsandagitators`;
@@ -40,17 +42,20 @@ const Index = (props) => {
     <ThemedPage theme={event_theme}>
       <AuthWrap
         headerContent={
-          <div style={{ margin: '1rem auto', textAlign: 'center' }}>
-            <img
-              style={{
-                width: '100%',
-                maxWidth: '200px',
-                margin: ' auto',
-              }}
-              src={main_event.LogoLink[0]?.Media?.url || null}
-            />
-          </div>
+          <AuthHeaderContent logo={main_event.LogoLink[0]?.Media?.url} />
         }
+        otherFields={{
+          Company: {
+            required: false,
+            value: '',
+            displayName: 'Company',
+          },
+          NoAttendees: {
+            required: true,
+            value: '',
+            displayName: 'Number of People Watching With You',
+          },
+        }}
         eventToCheck={main_event}
         successCallback={({ message }) => {
           toast.success(
@@ -84,20 +89,7 @@ const Index = (props) => {
               <CaptionAccordion />
             </PlayerWithChat>
           </div>
-
-          {main_event.Description && (
-            <Banner__WithPicture
-              imgUrl={main_event.LogoLink[0]?.Media?.url || null}
-              color={'black'}
-              secondary={`white`}
-              headerText={`About This Event`}
-              innerWidth={`650px`}
-              buttonText={`Learn More`}
-              buttonLink={main_event.LogoLink[0]?.Link || '#'}
-            >
-              {main_event.Description}
-            </Banner__WithPicture>
-          )}
+          <YWCA_SponsorMap eventId={main_event.id} />
         </BodyWrap>
       </AuthWrap>
     </ThemedPage>
