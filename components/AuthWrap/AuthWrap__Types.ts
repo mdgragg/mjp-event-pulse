@@ -23,7 +23,7 @@ export declare interface AuthWrapProps {
   options?: AuthOptions[];
   theme?: any;
   // string for the email confirmation (registration only)
-  bodyHTML: string
+  bodyHTML?: string
 }
 
 export declare interface AuthModalProps {
