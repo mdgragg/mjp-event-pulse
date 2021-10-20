@@ -1,4 +1,7 @@
 steps:
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'gs://mybucket/results.zip', 'previous_results.zip']
+  # operations that use previous_results.zip and produce new_results.zip
   - name: node:12.20.1
     entrypoint: npm
     args: ['run', 'create-env']
@@ -16,3 +19,5 @@ steps:
       - 'FB_MEASUREMENT_ID=${_FB_MEASUREMENT_ID}'
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy']
+  - name: gcr.io/cloud-builders/gsutil
+    args: ['cp', 'new_results.zip', 'gs://mybucket/results.zip']

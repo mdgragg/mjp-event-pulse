@@ -18,7 +18,7 @@ import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Replacer } from 'components/__Assets__';
 
-export const EVENT_URL = `worthington-industries-investor-day-2021`;
+export const EVENT_URL = `worthingtoninvestorday`;
 
 const PLACEHOLD = 'https://placehold.co/';
 
