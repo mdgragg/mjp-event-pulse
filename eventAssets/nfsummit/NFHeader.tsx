@@ -28,7 +28,7 @@ const NFHeader = ({ logoLink, headerText }) => {
       <div>
         <img src={logoLink} className={`logo`} />
         <h1>NF Leader Summit</h1>
-        <UnderText>{headerText.slice(12)}</UnderText>
+        {headerText && <UnderText>{headerText.slice(12)}</UnderText>}
       </div>
       <div></div>
     </HeadWrap>

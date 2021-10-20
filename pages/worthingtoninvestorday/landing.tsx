@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import Center from 'components/Center';
 import default_theme from 'eventAssets/worthington-industries-investor-day-2021/worthington-industries-investor-day-2021.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
-import BodyWrap from 'components/BodyTemplates/BodyWrap';
+
 import { Replacer } from 'components/__Assets__';
 import WIBodyWrap from 'eventAssets/worthington-industries-investor-day-2021/WIBodyWrap';
 
@@ -37,36 +37,10 @@ const Index = (props) => {
 
   return (
     <ThemedPage theme={event_theme}>
-      <AuthWrap
-        headerContent={
-          <img
-            style={{ maxWidth: '220px', margin: '1rem auto' }}
-            src={main_event.LogoLink[0].Media.url}
-          />
-        }
-        options={['registerOnly']}
-        bodyHTML={`<p>Thank you for registering for the virtual Worthington Industries Investor & Analyst Day Nov. 10, 2021 at 9:30 ET.  If you have any questions, please contact Investor Relations Officer Marcus Rogier at <a href='mailto:investors@worthingtonindustries.com'>investors@worthingtonindustries.com</a>. </p><p>Presentations will be provided by President & CEO Andy Rose and other members of the executive management team.  A Q&A session will be held following the presentations.</p><p>We look forward to you joining us on Nov. 10.</p>`}
-        eventToCheck={main_event}
-        otherFields={{
-          Company: {
-            displayName: 'Company',
-            required: true,
-            value: '',
-          },
-        }}
-        successCallback={(res) => {
-          toast.success(
-            `Hello ${
-              res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
-            }, welcome to ${main_event.EventName}`
-          );
-        }}
-      >
-        <Meta title={main_event.EventName}>
-          <title>{main_event.EventName}</title>
-        </Meta>
-        <WIBodyWrap main_event={main_event} />
-      </AuthWrap>
+      <Meta title={main_event.EventName}>
+        <title>{main_event.EventName}</title>
+      </Meta>
+      <WIBodyWrap main_event={main_event} />
     </ThemedPage>
   );
 };

@@ -3,23 +3,31 @@ import { useRouter } from 'next/router';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import PageWrap from 'eventAssets/nfsummit/PageWrap';
+import { LinearProgress } from '@material-ui/core';
+import { SingleDay } from 'eventAssets/nfsummit/SingleDay';
 export const EVENT_URL = `nfsummit`;
 
 const Index = (props) => {
   const router = useRouter();
   const { event_meta, main_event } = props;
 
-  const hasStarted = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useState(false);
+  const inclusion_session = event_meta.events.filter((e) => e.id === '175')[0];
 
+  if (!inclusion_session) {
+    return <LinearProgress />;
+  }
   return (
     <PageWrap
-      eventToAuth={main_event}
       event_meta={event_meta}
       main_event={main_event}
-      title={`Empathy`}
+      eventToAuth={main_event}
+      title={`Inclusion Session`}
     >
-      <div>Home</div>
+      <SingleDay
+        hideName={true}
+        event={inclusion_session}
+        logoLink={main_event.LogoLink[0].Media.url}
+      />
     </PageWrap>
   );
 };

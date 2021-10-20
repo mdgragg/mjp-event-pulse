@@ -6,7 +6,7 @@ const THEME_COLORS: COLORS = {
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#97d700',
-  blue: '#1c3d7c',
+  blue: '#244284',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
@@ -16,13 +16,13 @@ const THEME_COLORS: COLORS = {
   tertiary: '#4f4f4d',
   info: '',
   warning: '',
-  offWhite: '#f7f7f7',
+  offWhite: '#53565a',
   offBlack: '#161616',
 };
 const THEME_PALETTE: PALETTE = {
   text: {
-    primary: THEME_COLORS.black,
-    secondary: THEME_COLORS.black,
+    primary: THEME_COLORS.blue,
+    secondary: THEME_COLORS.white,
     tertiary: THEME_COLORS.white,
     error: 'red',
     info: 'blue',
@@ -30,7 +30,7 @@ const THEME_PALETTE: PALETTE = {
   },
   background: {
     primary: THEME_COLORS.white,
-    secondary: THEME_COLORS.white,
+    secondary: THEME_COLORS.blue,
     tertiary: THEME_COLORS.orange,
     error: 'red',
     info: 'blue',
@@ -43,14 +43,14 @@ const THEME_PALETTE: PALETTE = {
 };
 const THEME_FONTS: FONTS = {
   title: {
-    fontFamily: 'Roboto ',
+    fontFamily: 'Din Regular',
     fontSize: 'clamp(1.5rem, 20vw, 2rem)',
     letterSpacing: '',
     fontWeight: '800',
     lineHeight: '3rem',
   },
   body: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Arial',
     fontWeight: '200',
     fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
@@ -117,7 +117,7 @@ const THEME_BREAKPOINTS : BREAKPOINTS= {
 
 const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h1: {
-    color: THEME_COLORS.primary,
+    color: THEME_COLORS.offWhite,
     ...THEME_FONTS.title,
   },
   h2: {
@@ -146,9 +146,10 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
 };
 
 const THEME_GLOBALS :GLOBALS = {
-  heroHeight: '250px',
-  heroBgColor: THEME_COLORS.black,
-  headerOpacity: '0.1',
+  heroHeight: '450px',
+  heroBgColor: THEME_COLORS.white,
+  bodyBgColor: THEME_COLORS.offBlack,
+  headerOpacity: '0',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
 } 

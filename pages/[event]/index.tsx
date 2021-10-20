@@ -16,6 +16,7 @@ import Center from 'components/Center';
 import default_theme from 'eventAssets/mjp-demo-event/demo_theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
+import { Typography } from '@material-ui/core';
 
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -62,14 +63,10 @@ const Index = (props) => {
           </div>
           <div>
             <Center>
-              <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
-                {main_event.EventName}
-              </h1>
-              <h2 style={{ margin: 'auto' }}>
-                <i>
-                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
-                </i>
-              </h2>
+              <h1>{main_event.EventName}</h1>
+              <Typography variant={`overline`}>
+                <DateParse date={main_event.eventStartEnd.StartDateTime} />
+              </Typography>
             </Center>
           </div>
           <div>
