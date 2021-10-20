@@ -1,4 +1,5 @@
 import React from 'react';
+import { Email } from 'types/AttendeeCapture';
 
 type AuthOptions = 'emailOnly' | 'canRegister' | 'registerOnly'
 
@@ -23,7 +24,7 @@ export declare interface AuthWrapProps {
   options?: AuthOptions[];
   theme?: any;
   // string for the email confirmation (registration only)
-  bodyHTML?: string
+  emailOptions?: Email
 }
 
 export declare interface AuthModalProps {

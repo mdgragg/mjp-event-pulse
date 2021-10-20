@@ -23,6 +23,7 @@ import { Button__Primary } from 'components/Buttons';
 import { BoxedCounter } from 'components/Counters';
 import { check_required } from '.';
 import { Typography } from '@material-ui/core';
+import { Email } from 'types/AttendeeCapture';
 
 const default_fields = {
   AttendeeFirst: {
@@ -43,7 +44,7 @@ const default_fields = {
 };
 
 declare interface AuthModalRegisterProps extends AuthModalProps {
-  bodyHTML: string;
+  emailOptions: Email;
 }
 
 export default function AuthModal__Register(props: AuthModalRegisterProps) {
@@ -54,7 +55,7 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
     headerContent,
     signInText = null,
     otherFields = {},
-    bodyHTML,
+    emailOptions,
   } = props;
 
   const handleClose = () => {
@@ -106,7 +107,7 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
     return await attendee_register(
       {
         ...send_values,
-        bodyHTML,
+        ...emailOptions,
         url: `https://mjvirtualevents.com/worthingtoninvestorday`,
       },
       eventToCheck.id
