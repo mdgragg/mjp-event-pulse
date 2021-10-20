@@ -37,6 +37,7 @@ const AuthWrap = (props: AuthWrapProps) => {
     title,
     eventToCheck,
     successCallback = () => {},
+    bodyHTML,
     // this is to tell the child it has authorized
     options = [],
     signInText = null,
@@ -87,7 +88,7 @@ const AuthWrap = (props: AuthWrapProps) => {
     if (options.includes('registerOnly')) {
       return (
         <>
-          <AuthModal__Register {...ModalProps} />
+          <AuthModal__Register {...ModalProps} bodyHTML={bodyHTML} />
           <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
             {children}
           </StyledAuthWrap>

@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import attendee_capture from 'lib/fetchCalls/attendee_capture';
+import { attendee_register } from 'lib/fetchCalls/attendee_register';
 import { AuthModalProps } from '../AuthWrap__Types';
 import {
   DialogErrorText,
@@ -42,7 +42,11 @@ const default_fields = {
   },
 };
 
-export default function AuthModal__Register(props: AuthModalProps) {
+declare interface AuthModalRegisterProps extends AuthModalProps {
+  bodyHTML: string;
+}
+
+export default function AuthModal__Register(props: AuthModalRegisterProps) {
   const {
     open,
     successCallback,
@@ -50,6 +54,7 @@ export default function AuthModal__Register(props: AuthModalProps) {
     headerContent,
     signInText = null,
     otherFields = {},
+    bodyHTML,
   } = props;
 
   const handleClose = () => {
@@ -98,7 +103,14 @@ export default function AuthModal__Register(props: AuthModalProps) {
 
     Object.keys(values).map((v) => (send_values[v] = values[v].value));
 
-    return await attendee_capture(send_values, eventToCheck.id)
+    return await attendee_register(
+      {
+        ...send_values,
+        bodyHTML,
+        url: `https://mjvirtualevents.com/worthingtoninvestorday`,
+      },
+      eventToCheck.id
+    )
       .then((res) => {
         const { AttendeeFirst, AttendeeLast } = res.message.Attendee;
         setValues((prev) => ({ ...prev, AttendeeFirst, AttendeeLast }));
@@ -118,6 +130,7 @@ export default function AuthModal__Register(props: AuthModalProps) {
       aria-labelledby="form-dialog-title"
       className={classes.modal}
     >
+      {headerContent && headerContent}
       {
         {
           register: (
@@ -126,6 +139,7 @@ export default function AuthModal__Register(props: AuthModalProps) {
               setValues={setValues}
               handleChange={handleChange}
               handleRegister={handleSubmit}
+              eventToCheck={eventToCheck}
             />
           ),
           registerConfirm: (
@@ -141,19 +155,22 @@ export default function AuthModal__Register(props: AuthModalProps) {
   );
 }
 
-function RegisterModal({ values, setValues, handleChange, handleRegister }) {
+function RegisterModal({
+  values,
+  setValues,
+  handleChange,
+  handleRegister,
+  eventToCheck,
+}) {
   const classes = useStyles();
   return (
     <>
       <StyledDialogTitle id="form-dialog-title" className={classes.title}>
-        Register For the Event
+        Register For the Event <br />
+        <Typography variant={`overline`}>{eventToCheck.EventName}</Typography>
       </StyledDialogTitle>
       <DialogContent>
         <Center>
-          <p>
-            Please tell us a little about yourself. We will get you all squared
-            away.
-          </p>
           <StyledForm
             className={classes.form}
             noValidate
@@ -205,8 +222,8 @@ function RegisterConfirm({ returnCallback, eventToCheck, values }) {
       )}
       <DialogContent>
         <Center>
-          An admin has been alerted that you'd like to register for the event!
-          Please check your emails for a confirmation, then you can login again.
+          Please check your email inbox for a confirmation. <br /> When the
+          event starts, you can return back to this page and log in.
           <div style={{ margin: '2rem 0' }}>
             <h3>Please Check Back In </h3>
             <BoxedCounter event={eventToCheck} />

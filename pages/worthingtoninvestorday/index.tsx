@@ -13,7 +13,7 @@ import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates';
 import { toast } from 'react-toastify';
 import Center from 'components/Center';
-import { default_theme } from 'components/Themes/default.theme';
+import default_theme from 'eventAssets/worthington-industries-investor-day-2021/worthington-industries-investor-day-2021.theme';
 import { GET_SERVERSIDE_PROPS_DEFAULT } from 'src/page_responses/default';
 import BodyWrap from 'components/BodyTemplates/BodyWrap';
 import { Replacer } from 'components/__Assets__';
@@ -37,7 +37,14 @@ const Index = (props) => {
   return (
     <ThemedPage theme={event_theme}>
       <AuthWrap
+        headerContent={
+          <img
+            style={{ maxWidth: '220px', margin: '1rem auto' }}
+            src={main_event.LogoLink[0].Media.url}
+          />
+        }
         options={['registerOnly']}
+        bodyHTML={`<p>Thank you for registering for the virtual Worthington Industries Investor & Analyst Day Nov. 10, 2021 at 9:30 ET.  If you have any questions, please contact Investor Relations Officer Marcus Rogier at <a href='mailto:investors@worthingtonindustries.com'>investors@worthingtonindustries.com</a>. </p><p>Presentations will be provided by President & CEO Andy Rose and other members of the executive management team.  A Q&A session will be held following the presentations.</p><p>We look forward to you joining us on Nov. 10.</p>`}
         eventToCheck={main_event}
         otherFields={{
           Company: {
@@ -96,7 +103,7 @@ const Index = (props) => {
           {main_event.streamLinks.length === 1 ? (
             <div
               style={{
-                minHeight: '60vh',
+                minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
