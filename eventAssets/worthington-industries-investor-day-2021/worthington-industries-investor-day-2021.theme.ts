@@ -121,20 +121,23 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
     ...THEME_FONTS.title,
   },
   h2: {
+    fontFamily: 'Din Regular',
     color: THEME_COLORS.black,
-    textAlign: 'center',
-    margin: '1rem',
   },
   h3: {
+    fontFamily: 'Din Regular',
     color: THEME_COLORS.black,
   },
   h4: {
+    fontFamily: 'Din Regular',
     color: THEME_COLORS.primary,
   },
   h5: {
+    fontFamily: 'Din Regular',
     color: THEME_COLORS.primary,
   },
   h6: {
+    fontFamily: 'Din Regular',
     color: THEME_COLORS.primary,
   },
   body1: {

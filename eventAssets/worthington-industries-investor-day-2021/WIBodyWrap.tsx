@@ -32,7 +32,7 @@ const WIBodyWrap = ({ main_event }) => {
           </Center>
         </div>
         <div>
-          <BoxedCounter event={main_event} />
+          <BoxedCounter event={main_event} prefix={`Join Us Live In`} />
         </div>
       </FlexHero>
       <BodyWrap>
