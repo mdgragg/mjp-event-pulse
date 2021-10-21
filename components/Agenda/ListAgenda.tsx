@@ -58,9 +58,11 @@ const ListAgenda = ({ data }) => {
             <Item key={`${item.title}--${index}`}>
               <hr />
               <div className="title--wrap">
-                <Item__Time>
-                  <DateParse date={item.start} format={`h:mma`} />
-                </Item__Time>
+                {item.start && (
+                  <Item__Time>
+                    <DateParse date={item.start} format={`h:mma`} />
+                  </Item__Time>
+                )}
                 <Item__Title> {item.title}</Item__Title>
               </div>
               <SubItem key={`${item.presenter}--single-speaker`}>

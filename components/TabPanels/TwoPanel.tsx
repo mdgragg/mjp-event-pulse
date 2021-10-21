@@ -20,7 +20,7 @@ const StyledAppBar = styled(AppBar)`
   }
   && .Mui-selected {
     background-color: ${(props) => props.theme.palette.background.tertiary};
-    color: ${(props) => props.theme.palette.text.secondary};
+    color: ${(props) => props.theme.palette.text.tertiary};
   }
   && .MuiTabs-indicator {
     background-color: ${(props) => props.theme.palette.text.secondary};
