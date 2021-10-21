@@ -108,7 +108,6 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
       {
         ...send_values,
         ...emailOptions,
-        url: `https://mjvirtualevents.com/worthingtoninvestorday`,
       },
       eventToCheck.id
     )
