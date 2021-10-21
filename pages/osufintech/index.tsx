@@ -72,7 +72,7 @@ const Index = (props) => {
             <Center>
             <div style={{maxWidth: '500px', margin: 'auto'}}>
               <h1>{main_event.EventName}</h1>
-              <Typography variant={`overline`} style={{color: 'tomato', fontWeight: '800'}}>
+              <Typography variant={`overline`} style={{color: 'tomato', fontWeight: 800}}>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </Typography>
             </div>
