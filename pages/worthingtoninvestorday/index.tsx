@@ -51,6 +51,7 @@ const Index = (props) => {
             replyTo: 'investors@worthingtonindustries.com',
             name: main_event.EventName,
           },
+          url: `https://ir.worthingtonindustries.com/events-and-presentations/events/event-details/2021/Virtual-Investor--Analyst-Day/default.aspx`,
           bodyHTML: `<p>Thank you for registering for the virtual Worthington Industries Investor & Analyst Day Nov. 10, 2021 at 9:30 ET.  If you have any questions, please contact Investor Relations Officer Marcus Rogier at <a href='mailto:investors@worthingtonindustries.com'>investors@worthingtonindustries.com</a>. </p><p>Presentations will be provided by President & CEO Andy Rose and other members of the executive management team.  A Q&A session will be held following the presentations.</p><p>We look forward to you joining us on Nov. 10.</p>`,
         }}
         eventToCheck={main_event}
