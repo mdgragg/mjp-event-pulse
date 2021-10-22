@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { calculate_remaining } from '../lib/helpers';
+
 const useCalculateRemaining = (event) => {
   const {
     eventStartEnd: { StartDateTime, EndDateTime },

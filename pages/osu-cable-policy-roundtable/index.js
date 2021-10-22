@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
+import { useCalculateIfStarted } from 'hooks';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 
 import Body from 'components/template1/Body';
@@ -34,46 +34,7 @@ const Index = (props) => {
     ...event_theme,
     bgImage: main_event.KeyValue[0]?.value || 'https://placehold.co/1920x860',
   };
-  const calculateIfStarted = () => {
-    let now = new Date();
-    const parsed_event_start = Date.parse(
-      main_event.eventStartEnd.StartDateTime
-    );
-
-    let calc_time = parsed_event_start - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const calculateIfEnded = () => {
-    let now = new Date();
-    const parsed_event_end = Date.parse(main_event.eventStartEnd.EndDateTime);
-
-    let calc_time = parsed_event_end - now;
-
-    if (calc_time <= 0) {
-      return true;
-    }
-    return false;
-  };
-
-  const [hasStarted, setStarted] = useState(calculateIfStarted());
-  const [hasEnded, setEnded] = useState(calculateIfEnded());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStarted(calculateIfStarted());
-      setEnded(calculateIfEnded());
-      if (calculateIfEnded() && !hasEnded) {
-        window.location.reload();
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  });
+  const hasStartEnd = useCalculateIfStarted(main_event);
 
   const MainPage = () => {
     return (
@@ -82,8 +43,8 @@ const Index = (props) => {
 
         <Body>
           <CABLE
-            hasStarted={hasStarted}
-            hasEnded={hasEnded}
+            hasStarted={hasStartEnd.hasStarted}
+            hasEnded={hasStartEnd.hasEnded}
             theme={event_theme}
             speakers={speakers}
             metadata={main_event}

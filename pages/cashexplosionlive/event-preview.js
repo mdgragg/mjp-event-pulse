@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Wrap from 'eventAssets/cashexplosionlive/Wrap';
 import { event_theme, Decider } from './index';

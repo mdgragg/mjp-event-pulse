@@ -1,6 +1,6 @@
 import base from 'lib/firebase/base';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { Button__Primary } from '../Buttons';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ export const chat_colors = {
 
 var badwordsArray = require('badwords/array');
 
-const SubmitChat = styled(Button)``;
+const SubmitChat = styled(Button__Primary)``;
 
 const ChatWrap = styled.div`
   margin: auto;
@@ -21,20 +21,21 @@ const ChatWrap = styled.div`
   max-width: 450px;
   overflow-x: scroll;
   width: 100%;
-  border: 2px solid ${chat_colors.grey};
-  max-height: 700px;
+  /* border: 2px solid ${chat_colors.grey}; */
+  min-height: 750px;
+  height: 100%;
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 200px;
+  grid-template-rows: 1fr auto;
   background-color: white;
   && button {
     display: inline;
   }
 `;
 const NameInput = styled.div`
-  height: calc(100% - 100px);
   width: 80%;
+  height: 100%;
   margin: auto;
   left: 0;
   right: 0;
@@ -43,22 +44,31 @@ const NameInput = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 100;
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-align: center;
   top: 0%;
   && .choose-name {
     color: #181818;
   }
+  && input::placeholder {
+    color: ${chat_colors.grey};
+  }
   && input {
+    border: none;
+    background-color: white;
+    border-bottom: 1px solid black;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.25rem;
     width: 100%;
-    padding: 0.75rem;
+    padding: 1rem;
+  }
+  && input::selection {
+    outline: none;
   }
 `;
 const ChatMessages = styled.div`
   overflow-y: scroll;
-  height: calc(700px - 155px);
+  height: calc(100% - 155px);
   background-color: rgba(255, 255, 255, 0.25);
   scroll-behavior: smooth;
   padding: 0.75rem;
@@ -111,10 +121,12 @@ const InputArea = styled.div`
   background-color: ${chat_colors.grey};
   width: 100%;
   padding: 0.5rem;
-  height: 155px;
+  height: 160px;
   transition: all 0.2s ease;
-  h3 {
-    margin: 0;
+  && h3 {
+    font-size: 1rem;
+    margin: 0 0 10px 0;
+    color: black;
   }
   &&.hidden {
     visibility: hidden;
@@ -132,7 +144,7 @@ const InputArea = styled.div`
     color: white;
     width: 100px;
     margin: 0 1rem 0 0;
-    background-color: ${() => chat_colors.blue};
+    background-color: ${chat_colors.blue};
   }
   &&.sending {
     opacity: 0.9;
@@ -339,10 +351,13 @@ const PublicChat = ({ slug = 'test-2' }) => {
     <ChatWrap>
       {name === null ? (
         <NameInput>
-          <h3 className="choose-name">Please Choose A Display Name</h3>
-          <input ref={nameRef} type="text" />
+          <input
+            ref={nameRef}
+            type="text"
+            placeholder="Please choose a display name..."
+          />
           <br />
-          <Button onClick={setTheName}>Join the Chat</Button>
+          <Button__Primary onClick={setTheName}>Join the Chat</Button__Primary>
         </NameInput>
       ) : null}
 
@@ -399,14 +414,16 @@ const PublicChat = ({ slug = 'test-2' }) => {
           {' '}
           Send
         </SubmitChat>
-        <button
-          onClick={() => {
-            sessionStorage.clear();
-            base.post(`${slug}/public-chat`, { data: {} });
-          }}
-        >
-          reset
-        </button>
+        {process.env.NODE_ENV === 'development' && (
+          <button
+            onClick={() => {
+              sessionStorage.clear();
+              base.post(`${slug}/public-chat`, { data: {} });
+            }}
+          >
+            reset
+          </button>
+        )}
       </InputArea>
     </ChatWrap>
   );

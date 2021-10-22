@@ -2,14 +2,14 @@ import { useRouter } from 'next/router';
 import { getEventMeta } from 'lib/api';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates/index';
 import Body from 'components/template1/Body';
 
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import { Banner__WithPicture } from 'components/Banners/';
 import FlexHero from 'components/Heroes/FlexHero';
 import DHLBody from 'eventAssets/dhl-virtual-town-hall/Body';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
 
 export const EVENT_URL = 'dhl-virtual-town-hall';
@@ -78,8 +78,7 @@ const Index = (props) => {
             >
               <Counter__JustNumbers
                 prefix={'Starts In'}
-                start={main_event.eventStartEnd.StartDateTime}
-                end={main_event.eventStartEnd.EndDateTime}
+                event={main_event}
                 afterStarted={'Live Now!'}
                 afterEnded={'Thank You for Attending'}
               />
@@ -101,7 +100,7 @@ const Index = (props) => {
           Agenda items can go here or it can be deleted
         </BannerWithPicture> */}
         {main_event.Description && (
-          <BannerWithPicture
+          <Banner__WithPicture
             style={{ fontFamily: 'Delivery', color: event_theme.primary }}
             imgUrl={main_event.LogoLink[0]?.Media?.url || null}
             color={event_theme.secondary}
@@ -111,7 +110,7 @@ const Index = (props) => {
             textColor={event_theme.primary}
           >
             {main_event.Description}
-          </BannerWithPicture>
+          </Banner__WithPicture>
         )}
         <div
           style={{

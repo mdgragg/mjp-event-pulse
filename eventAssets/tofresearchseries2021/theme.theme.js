@@ -1,5 +1,5 @@
 export const COLORS = {
-  red: '#b71f39',
+  red: 'rbga(173,33,28)',
   orange: '#FF5600',
   yellow: '',
   green: '#97d700',
@@ -17,15 +17,31 @@ export const COLORS = {
   offBlack: '#161616',
 };
 
+const PALETTE = {
+  text: {
+    primary: COLORS.secondary,
+    secondary: COLORS.white,
+    tertiary: COLORS.tertiary,
+  },
+  background: {
+    primary: COLORS.white,
+    secondary: COLORS.secondary,
+    tertiary: COLORS.tertiary,
+  },
+};
+
+
 export const FONTS = {
   title: { fontFamily: '', fontSize: '', letterSpacing: '', lineHeight: '' },
   body: {
-    fontFamily: 'Futura Bold',
+    fontFamily: 'Avenir',
     fontSize: '',
     letterSpacing: '',
     lineHeight: '',
   },
-  primary: '', //default to title
+  get primary() {
+    this.body;
+  }, //default to title
   secondary: '', // default to body
   tertiary: '', // default to body
 };
@@ -33,10 +49,10 @@ export const FONTS = {
 export const BUTTONS = {
   primary: {
     fontFamily: FONTS.body.fontFamily,
-    fontSize: '',
+    fontSize: '1.5rem',
     letterSpacing: '',
     lineHeight: '',
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.tertiary,
     fontColor: COLORS.primary,
     border: '',
   },
@@ -50,13 +66,13 @@ export const BUTTONS = {
     border: '',
   },
   big: {
-    fontFamily: 'Futura Bold',
-    fontSize: '2rem',
-    letterSpacing: '2px',
+    fontFamily: 'Avenir',
+    fontSize: '2.5rem',
+    letterSpacing: '0px',
     lineHeight: 'auto',
     backgroundColor: COLORS.secondary,
     fontColor: COLORS.primary,
-    border: '5px solid white',
+    border: '0px solid white',
   },
   small: {
     fontFamily: '',
@@ -72,8 +88,8 @@ export const BUTTONS = {
     },
   },
   hover: {
-    fontColor: COLORS.tertiary,
-    backgroundColor: COLORS.primary,
+    fontColor: COLORS.primary,
+    backgroundColor: COLORS.secondary,
   },
 };
 
@@ -84,15 +100,33 @@ export const BREAKPOINTS = {
   sm: 768,
   xs: 500,
 };
+const TYPOGRAPHY = {
+  h1: {
+    color: COLORS.tertiary,
+  },
+  h2: {
+    color: COLORS.tertiary,
+  },
+  h3: {
+    color: COLORS.tertiary,
+  },
+};
+
+const GLOBALS = {
+  heroHeight: '240px',
+  heroBgColor: COLORS.primary,
+  headerOpacity: '1',
+  videoBreakPoint: 700,
+  maxSectionWidth: '1800px',
+};
 
 export var event_theme = {
   colors: { ...COLORS },
+  typography: { ...TYPOGRAPHY },
+  palette: { ...PALETTE },
   fonts: { ...FONTS },
   buttons: { ...BUTTONS },
   breakpoints: { ...BREAKPOINTS },
-  heroBgColor: COLORS.primary,
-  heroHeight: '500px',
-  headerOpacity: '0.75',
-  videoBreakPoint: 0,
-  maxSectionWidth: '1800px',
+  ...GLOBALS
+
 };

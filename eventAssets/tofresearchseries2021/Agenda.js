@@ -1,17 +1,20 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TwoPanel from 'components/TabPanels/TwoPanel';
-import SpineSession from './Agenda/SpineSession';
+import agenda from './Agenda/agenda.json';
+import DateParse from 'components/__Assets__/DateParse';
+// http://events.r20.constantcontact.com/register/event?llr=dmu7d7cab&oeidk=a07ehvrwj2ga36ae5cf&showPage=true
 const TheAgenda = styled.div`
-  min-height: 880px;
+  min-height: 100%;
   font-size: 1rem;
-  max-width: 550px;
+  /* max-width: 550px; */
   margin: auto;
-  background-color: #f7f7f7;
+  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const SingleScheduleDay = styled.div`
   padding: 1rem 0 3rem 0;
+  text-align: left;
 `;
 const Item = styled.ul`
   && .title--wrap {
@@ -29,9 +32,6 @@ const Item__Time = styled.div`
 `;
 const Item__Title = styled.div`
   display: inline;
-  /* color: white;
-  background-color: ${(props) => props.theme.red};
-  padding: 3px; */
 `;
 const SubItem = styled.li`
   list-style: none;
@@ -49,21 +49,25 @@ const SubItem = styled.li`
 const ListAgenda = ({ data }) => {
   return (
     <SingleScheduleDay>
-      {data.map((item) => (
-        <Item key={item.time}>
-          <div className="title--wrap">
-            <Item__Time>{item.time}pm</Item__Time>
-            <Item__Title> {item.title}</Item__Title>
-          </div>
-
-          {item.speakers.map((spk) => (
-            <SubItem key={`${spk.name}--single-speaker`}>
-              {spk.name} <span className="title">{spk.title}</span>
-            </SubItem>
-          ))}
-          <hr />
-        </Item>
-      ))}
+      {data.items.map((item, index) => {
+        if (!item.title) {
+          return null;
+        } else {
+          return (
+            <Item key={`${item.title}--${index}`}>
+              <div className="title--wrap">
+                <Item__Time>
+                  <DateParse date={item.start} format={`h:mma`} />
+                </Item__Time>
+                <Item__Title> {item.title}</Item__Title>
+              </div>
+              <SubItem key={`${item.presenter}--single-speaker`}>
+                {item.presenter}
+              </SubItem>
+            </Item>
+          );
+        }
+      })}
     </SingleScheduleDay>
   );
 };
@@ -71,24 +75,64 @@ const ListAgenda = ({ data }) => {
 const tab_data = [
   {
     title: 'Spine Session',
-    content: <h2>Spine Session Agenda</h2>,
+    content: (
+      <>
+        <h2>Spine Agenda</h2>
+        <ListAgenda data={agenda[0]} />
+      </>
+    ),
   },
-  { title: 'Foot & Ankle Session', content: <h2>Foot & Ankle Agenda</h2> },
   {
-    title: 'Neurology/ Pain Management Session',
-    content: <h2>Pain Mgmt Session Agenda</h2>,
+    title: 'Foot & Ankle Session',
+    content: (
+      <>
+        <h2>Foot & Ankle Agenda</h2>
+        <ListAgenda data={agenda[1]} />
+      </>
+    ),
+  },
+  {
+    title: 'Neurology/ Pain Mgmt Session',
+    content: (
+      <>
+        <h2>Neurology/ Pain Mgmt Agenda</h2>
+        <ListAgenda data={agenda[2]} />
+      </>
+    ),
   },
   {
     title: 'Upper Extremity Session',
-    content: <h2>Upper Extremity Sessions Agenda</h2>,
+    content: (
+      <>
+        <h2>Upper Extremity Agenda</h2>
+        <ListAgenda data={agenda[3]} />
+      </>
+    ),
   },
-  { title: 'Knee Session', content: <h2>Knee Session Agenda</h2> },
-  { title: 'Hip Session', content: <h2>Hip Session Agenda</h2> },
+  {
+    title: 'Knee Session',
+    content: (
+      <>
+        <h2>Knee Session Agenda</h2>
+        <ListAgenda data={agenda[4]} />
+      </>
+    ),
+  },
+  {
+    title: 'Hip Session',
+    content: (
+      <>
+        <h2>Hip Session Agenda</h2>
+        <ListAgenda data={agenda[5]} />
+      </>
+    ),
+  },
 ];
-const Agenda = ({ main_event }) => {
+const Agenda = ({ initialTab }) => {
+  const tabData = useEffect(() => {});
   return (
     <TheAgenda>
-      <TwoPanel data={tab_data}></TwoPanel>
+      <TwoPanel data={tab_data} initialTab={initialTab}></TwoPanel>
     </TheAgenda>
   );
 };

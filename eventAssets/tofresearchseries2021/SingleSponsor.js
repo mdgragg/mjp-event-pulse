@@ -12,7 +12,8 @@ const SingleSponsorStyle = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  &&:hover .title {
+  max-width: 350px;
+  &&.withLink:hover .title {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
@@ -24,11 +25,18 @@ const SingleSponsorStyle = styled.div`
   }
   &&:hover img {
     transform: scale(1.1);
+  }
+  &&.withLink:hover img {
     filter: blur(6px);
   }
+
   && p {
     font-weight: 600;
     transform: skew(-8deg, 0);
+    text-align: center;
+    padding: 1rem 0;
+    width: 80%;
+    margin: auto;
     color: ${(props) => props.theme.colors.secondary};
   }
 `;
@@ -65,15 +73,17 @@ const MyButton = styled(Button__Secondary)`
 `;
 const SingleSponsor = ({ sponsor }) => {
   return (
-    <SingleSponsorStyle>
+    <SingleSponsorStyle className={sponsor.SponsorLink ? 'withLink' : ''}>
       <Image src={sponsor.Logo.url} />
       <Title className="title">
         {sponsor.SponsorName}
-        <div class="button">
-          <Link href={sponsor?.SponsorLink || '#'} passHref>
-            <MyButton className="btn">Visit</MyButton>
-          </Link>
-        </div>
+        {sponsor.SponsorLink && (
+          <div className="button">
+            <a href={sponsor?.SponsorLink}>
+              <MyButton className="btn">Visit</MyButton>
+            </a>
+          </div>
+        )}
       </Title>
       {sponsor.Description && <p>{sponsor.Description}</p>}
     </SingleSponsorStyle>

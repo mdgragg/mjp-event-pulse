@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import App from 'next/app';
 import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
-import client from 'lib/withApollo';
+import { client } from '../lib/withApollo';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,8 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-dropzone-uploader/dist/styles.css';
 
 import AppContextProvider from '../context/AppContext';
-import { GlobalStyle } from 'components/globals/GlobalStyle';
-import './global.css';
+import { GlobalStyle } from '../src/styles/GlobalStyle';
+import '../src/styles/global.css';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
@@ -20,7 +20,7 @@ import cookies from 'next-cookies';
 import detectIE from '../lib/utils/detectIE';
 import * as gtag from '../lib/analytics';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 

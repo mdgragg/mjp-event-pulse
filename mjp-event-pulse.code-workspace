@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "folders": [
     {
       "path": "."
@@ -28,35 +27,3 @@
     "peacock.color": "#0e161f"
   }
 }
-=======
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"workbench.editorAssociations": {},
-			"workbench.colorCustomizations": {
-				"titleBar.activeBackground": "#0e161f",
-				"activityBar.background": "#1e2f42",
-				"titleBar.inactiveBackground": "#0e161f99",
-				"titleBar.activeForeground": "#e7e7e7",
-				"dropdown.background": "#000000",
-				"terminal.background": "#1d1d27",
-				"activityBar.activeBackground": "#1e2f42",
-				"activityBar.activeBorder": "#99466d",
-				"activityBar.foreground": "#e7e7e7",
-				"activityBar.inactiveForeground": "#e7e7e799",
-				"activityBarBadge.background": "#99466d",
-				"activityBarBadge.foreground": "#e7e7e7",
-				"statusBar.background": "#0e161f",
-				"statusBar.foreground": "#e7e7e7",
-				"statusBarItem.hoverBackground": "#1e2f42",
-				"titleBar.inactiveForeground": "#e7e7e799"
-			},
-			"peacock.color": "#0e161f",
-		
-	}
-	
-}
->>>>>>> 56feff84f1e5cc6306afedbb556d4a2ea492bb81

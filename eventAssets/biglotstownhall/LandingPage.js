@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 
 const Page = styled.div`
   height: 100vh;
-  background-color: ${(props) => props.theme.orange};
+  background-color: ${(props) => props.theme.colors.orange};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ const Inner = styled.div`
     background-color: white;
     font-size: 2rem;
     font-family: 'Futura Bold';
-    color: ${(props) => props.theme.orange};
+    color: ${(props) => props.theme.colors.orange};
     padding: 1.5rem;
     text-align: center;
   }
@@ -26,7 +26,7 @@ const LandingPage = ({ main_event }) => {
     <Page>
       <Inner>
         <h2>Big Lots</h2>
-        <h2>Q1 Virtual Town Hall</h2>
+        <h2>Q2 Virtual Town Hall</h2>
         <div
           style={{
             fontSize: '1rem',
@@ -36,10 +36,15 @@ const LandingPage = ({ main_event }) => {
             lineHeight: '2rem',
           }}
         >
-          <i>Friday, May 28 | 10:30 a.m. (EDT)</i>
+          <i>
+            <DateParse
+              date={main_event.eventStartEnd.StartDateTime}
+            ></DateParse>{' '}
+          </i>
+          <br />
           <Counter__JustNumbers
-            start={main_event.eventStartEnd.StartDateTime}
-            end={main_event.eventStartEnd.EndDateTime}
+            prefix={`Join Us In:`}
+            event={main_event}
             afterEnded={
               <div>
                 This Event Has Ended <br /> Thank You For Attending!

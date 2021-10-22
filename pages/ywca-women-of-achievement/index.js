@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getEventMeta } from 'lib/api';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Section from 'components/Sections/Section';
 import PlayerWithChat from 'components/BodyTemplates/PlayerWithChat';
@@ -11,62 +11,36 @@ import YWCA_Body from 'eventAssets/ywca-women-of-achievement/YWCA_Body';
 import AfterEnded from 'eventAssets/ywca-women-of-achievement/AfterEnded';
 import YWCA_STYLE from 'eventAssets/ywca-women-of-achievement/YWCA_STYLE';
 import { toast } from 'react-toastify';
-import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
+import { Banner__ImgBg } from 'components/Banners';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
 
 import AuthWrap from 'components/AuthWrap';
-export var event_theme = {
-  h1: {
-    fontSize: '5rem',
-  },
-  primaryColor: '#181818',
-  secondaryColor: '#97d700',
-  heroHeight: '200px',
-  green: '#97d700',
-  grey: '#181818',
-  white: null,
-  blue: '#1e2c60',
-  red: '#e41936',
-  orange: '#fa4616',
-  fontFamily: 'Akzidenz-Grotesque-Bold',
-  headerOpacity: '0.75',
-  videoBreakPoint: 700,
-  buttonInfoColor: null,
-  buttonSuccessColor: null,
-  buttonDangerColor: 'tomato',
-  buttonColor: null,
-  headerFont: 'Futura Bold',
-  headerFontColor: 'white',
-  headerBgColor: 'white',
-  maxSectionWidth: '1800px',
-};
+import event_theme from 'eventAssets/ywca-women-of-achievement/theme.theme';
 
 export const EVENT_URL = 'ywca-women-of-achievement';
 const PLACEHOLD = 'https://placehold.co/';
 
 const Index = (props) => {
   const { event_meta, main_event } = props;
-  event_theme = {
+  let theme = {
     ...event_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   };
 
   const hasStartEnd = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useState(false);
 
   return (
     <AuthWrap
-      event_to_check={main_event}
-      callback={(res) => {
+      eventToCheck={main_event}
+      successCallback={(res) => {
         toast.success(
           `Hello ${
             res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
           }, welcome to ${main_event.EventName}`
         );
       }}
-      render={(value) => setAuth(value)}
     >
-      <Page theme={event_theme}>
+      <Page theme={theme}>
         <Meta title={event_meta.EventJobName}> </Meta>
         <YWCA_STYLE>
           <Body>
@@ -78,7 +52,7 @@ const Index = (props) => {
                 <PlayerWithChat
                   videoUrl={main_event.streamLinks[0].url}
                   chatUrl={main_event.streamLinks[1].url}
-                  showing={auth}
+                  showing={true}
                   hasStarted={true}
                 />
               )}
@@ -86,7 +60,7 @@ const Index = (props) => {
             <Section>
               <YWCA_Body main_event={main_event} hasStartEnd={hasStartEnd} />
             </Section>
-            <Banner_ImgBg
+            <Banner__ImgBg
               imgSrc={
                 'https://storage.googleapis.com/mjp-stream-public/ywca-women-of-achievement/WOA2015-1861bw-1400x791.jpg'
               }
@@ -110,7 +84,7 @@ const Index = (props) => {
                   style={{ height: '80px', width: 'auto', margin: '2rem auto' }}
                 />
               </div>
-            </Banner_ImgBg>
+            </Banner__ImgBg>
           </Body>
         </YWCA_STYLE>
       </Page>

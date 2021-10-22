@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import { template1Theme } from '../Themes/template1.theme';
+import { default_theme } from '../Themes/default.theme';
 import { StylesProvider, createMuiTheme } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -51,7 +51,7 @@ Router.onRouteChangeComplete = () => {
 };
 
 const Page = (props) => {
-  const whole_theme = { ...template1Theme, ...props.theme };
+  const whole_theme = { ...default_theme, ...props.theme };
   //Material ui style provider for this theme
 
   return (

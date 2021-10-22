@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useGetSponsors from '../../queryHooks/useGetSponsors';
+import useGetSponsors from 'hooks/queryHooks/useGetSponsors';
 import SingleSponsor from './SingleSponsor';
 
 const StyledMap = styled.div`
@@ -16,6 +16,9 @@ const Tier = styled.h3`
 
 const SingleTier = styled.div`
   margin: 6rem auto;
+  && hr {
+    color: ${(props) => props.theme.colors.primary};
+  }
 `;
 
 const SponsorWrap = styled.div`
@@ -34,16 +37,13 @@ const SponsorMap = ({ eventId }) => {
     return <div>{err}</div>;
   } else if (data) {
     return (
-      // title
-      //series presenting
-
       <StyledMap>
         <SingleTier>
           <Tier>Title Sponsor</Tier>
           <hr />
           <SponsorWrap>
             {data['Title'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -53,7 +53,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Series Presenting'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -63,7 +63,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Presenting'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -73,7 +73,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Gold'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -83,7 +83,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Silver'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>
@@ -93,7 +93,7 @@ const SponsorMap = ({ eventId }) => {
           <hr />
           <SponsorWrap>
             {data['Bronze'].map((sponsor) => (
-              <SingleSponsor sponsor={sponsor} />
+              <SingleSponsor sponsor={sponsor} key={sponsor.id} />
             ))}
           </SponsorWrap>
         </SingleTier>

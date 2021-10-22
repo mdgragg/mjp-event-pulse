@@ -6,7 +6,7 @@ import { getEventMeta } from 'lib/api';
 
 import { Grid } from '@material-ui/core';
 
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/template1/Page';
 
 import Body from 'components/template1/Body';

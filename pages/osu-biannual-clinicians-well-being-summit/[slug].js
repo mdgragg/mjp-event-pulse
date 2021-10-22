@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { event_theme } from './index';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import { Grid, Button } from '@material-ui/core';
 import Page from '../../components/template1/Page';
 import Body from '../../components/template1/Body';

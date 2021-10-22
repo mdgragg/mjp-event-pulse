@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParse from 'components/assets/DateParse';
+import DateParse from 'components/__Assets__/DateParse';
 import Banner_ImgBg from 'components/Banners/Banner_ImgBg';
 import GameShow__Body from './GameShow__Body';
 const Header = styled.div`
@@ -118,8 +118,7 @@ function GameShow__ThankYou({ main_event, showVid = true }) {
           <div className="counter">
             <Counter__JustNumbers
               prefix="Join Us Live In:"
-              start={start}
-              end={end}
+              event={main_event}
               afterStarted={`Live Now!`}
               afterEnded={`This Event Has Ended`}
             />

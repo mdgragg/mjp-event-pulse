@@ -113,7 +113,7 @@ const SpeakerMap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 90%;
+  max-width: 98%;
   margin: 3rem auto;
 
   && .single-ambassador {
@@ -201,7 +201,7 @@ const MainVideoSection = styled.div`
 `;
 const MultiVideoSection = styled.div`
   /* min-height: 40vh; */
-  margin: 5rem auto;
+  margin: 10rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,7 +234,7 @@ const MultiVideoSection = styled.div`
   }
 `;
 const BGHR = styled.hr`
-  height: 80px;
+  height: 250px;
   margin: 0;
   background: ${(props) => props.theme.darkGreen}
     url('${(props) => props.theme.bgImage}');

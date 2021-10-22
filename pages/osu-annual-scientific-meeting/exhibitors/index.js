@@ -1,20 +1,14 @@
 import React from 'react';
-import { event_theme } from '../index';
+import { default_theme } from 'components/Themes/default.theme';
 import { Router, useRouter } from 'next/router';
-import EventSearch from '../../../components/template1/EventSearch';
 import Body from '../../../components/template1/Body';
 import Section from '../../../components/template1/Section';
-import Meta from 'components/globals/Meta';
-import { getEventExhibitors } from 'lib/api';
+import Meta from 'components/__GLOBALS__/Meta';
 import { useQuery } from '@apollo/client';
-
-import Link from 'next/link';
-
+import { GET_EXHIBITORS } from 'lib/queries';
 import Page from '../../../components/template1/Page';
-import { gql } from 'apollo-boost';
 import styled from 'styled-components';
-import withApollo from 'lib/withApollo';
-import ClientOnly from 'components/assets/ClientOnly';
+import ClientOnly from 'components/__Assets__/ClientOnly';
 
 const ExhibitorLink = styled.div`
   && {
@@ -37,25 +31,7 @@ const ExhibitorLink = styled.div`
     background-color: #e2e2e2;
   }
 `;
-export const GET_EXHIBITORS = gql`
-  query ($slug: String!) {
-    events(where: { event_job: { eventUrl_eq: $slug } }) {
-      exhibitors {
-        id
-        ExhibitName
-        Company
-        FirstName
-        LastName
-        Email
-        Attachments {
-          name
-          url
-          size
-        }
-      }
-    }
-  }
-`;
+
 const ExhibitorPage = (props) => {
   const { data, loading, error } = useQuery(GET_EXHIBITORS, {
     variables: { slug: 'osu-annual-scientific-meeting' },
@@ -65,7 +41,7 @@ const ExhibitorPage = (props) => {
   const event = data;
 
   return (
-    <Page theme={event_theme}>
+    <Page theme={default_theme}>
       <Meta title="Exhibitors"> </Meta>
       <Body>
         <Section>

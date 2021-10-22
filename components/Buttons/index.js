@@ -4,24 +4,22 @@ import { Button } from '@material-ui/core';
 
 const MakeButtonStyle = (type) => {
   return css`
+    /* spread all the properties from the theme  */
+    ${(props) => props.theme.buttons[type]}
     transition: all 0.2s ease;
-    font-family: ${(props) => props.theme.buttons[type].fontFamily};
-    font-size: ${(props) => props.theme.buttons[type].fontSize};
-    letter-spacing: ${(props) => props.theme.buttons[type].letterSpacing};
-    line-height: ${(props) => props.theme.buttons[type].lineHeight};
-    background-color: ${(props) => props.theme.buttons[type].backgroundColor};
-    color: ${(props) => props.theme.buttons[type].fontColor};
-    border: ${(props) => props.theme.buttons[type].border};
+    font-weight: 600;
+    padding: 8px 18px;
+    margin: 1rem auto;
     @media all and (max-width: 500px) {
       font-size: 1rem;
     }
   `;
 };
 
-const MakeButtonHoverStyle = (type) => {
+const MakeButtonHoverStyle = () => {
   return css`
     background-color: ${(props) => props.theme.buttons.hover.backgroundColor};
-    color: ${(props) => props.theme.buttons.hover.fontColor};
+    color: ${(props) => props.theme.buttons.hover.color};
   `;
 };
 
@@ -48,7 +46,7 @@ const StyledButton__Big = styled(Button)`
 `;
 
 const Button__Primary = (props) => {
-  return <StyledButton__Primary {...props}></StyledButton__Primary>;
+  return <StyledButton__Primary {...props} />;
 };
 
 const Button__Secondary = (props) => {

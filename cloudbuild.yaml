@@ -9,5 +9,10 @@ steps:
       - 'NEXT_PUBLIC_STRAPI_API_URL=${_NEXT_PUBLIC_STRAPI_API_URL}'
       - 'NEXT_PUBLIC_GOOGLE_ANALYTICS=${_NEXT_PUBLIC_GOOGLE_ANALYTICS}'
       - 'NEXT_PUBLIC_TEST_VAR=${_NEXT_PUBLIC_TEST_VAR}'
+      - 'FB_API_KEY=${_FB_API_KEY}'
+      - 'FB_DATABASE_URL=${_FB_DATABASE_URL}'
+      - 'FB_MESSAGING_SENDER_ID=${_FB_MESSAGING_SENDER_ID}'
+      - 'FB_APP_ID=${_FB_APP_ID}'
+      - 'FB_MEASUREMENT_ID=${_FB_MEASUREMENT_ID}'
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy']

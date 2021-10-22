@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Page from 'components/PageTemplates';
-import LoginPage from 'components/globals/Login/LoginPage';
+import LoginPage from 'components/__GLOBALS__/Login/LoginPage';
 const Login = (props) => {
   return (
     <Page>
@@ -9,8 +8,6 @@ const Login = (props) => {
     </Page>
   );
 };
-
-Login.propTypes = {};
 
 export default Login;
 

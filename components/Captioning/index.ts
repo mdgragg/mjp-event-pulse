@@ -1,0 +1,1 @@
+export { default as CaptionAccordion } from './CaptionAccordion'

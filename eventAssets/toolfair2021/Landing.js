@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers';
-import DateParser from 'components/assets/DateParse';
+import DateParser from 'components/__Assets__/DateParse';
 import Video__StickyTop from 'components/VideoBoxes/Video__StickyTop';
-import BannerWithPicture from 'components/Banners/BannerWithPicture';
+import { Banner__WithPicture } from 'components/Banners';
 
 const ThePage = styled.div`
   color: white;
@@ -107,8 +107,7 @@ const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
 
           <div className="counter">
             <Counter__JustNumbers
-              start={event_meta.eventStartEnd.StartDateTime}
-              end={event_meta.eventStartEnd.EndDateTime}
+              event={event_meta}
               afterEnded={` `}
               afterStarted={<div>Live Now!</div>}
             />
@@ -117,10 +116,10 @@ const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
       </Header>
       <Body>
         <div className="player">
-          {hasAuth && <Video__StickyTop src={event_meta.streamLinks[0].url} />}
+          {true && <Video__StickyTop src={event_meta.streamLinks[0].url} />}
         </div>
       </Body>
-      <BannerWithPicture
+      <Banner__WithPicture
         imgUrl={event_meta?.LogoLink[0].Media?.url}
         color={'black'}
         secondary={`white`}
@@ -130,7 +129,7 @@ const Landing = ({ event_meta, hasAuth, hasStartEnd }) => {
         buttonLink={`https://www.mactools.com/en-us`}
       >
         {event_meta.Description && event_meta.Description}
-      </BannerWithPicture>
+      </Banner__WithPicture>
     </ThePage>
   );
 };

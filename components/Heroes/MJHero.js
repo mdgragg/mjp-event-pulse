@@ -1,49 +1,54 @@
 import React, { useContext } from 'react';
 import CircleCounter from '../Counters/CircleCounter';
-import DateParse from '../assets/DateParse';
+import DateParse from '../__Assets__/DateParse';
 import styled from 'styled-components';
 import { ThemeContext } from 'styled-components';
-const Hero = styled.div`
+const HeroWrap = styled.div`
   min-height: 550px;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 4rem auto;
+  position: relative;
+`;
+const HeroContent = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  && h1 {
-    font-size: 3rem;
-    color: white;
-  }
+  background-color: rgba(0, 0, 0, 0.6);
   && .inner {
+    display: grid;
+    grid-template-rows: auto 200px;
+    justify-content: center;
+    align-items: center;
     text-align: center;
   }
 `;
-
-const BGImage = styled.img`
+const BGImage = styled.div`
   position: fixed;
-  height: auto;
+  top: 0;
+  height: 550px;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
+  background-image: url('${(props) => props.theme.header_image}');
 `;
 const MJHero = ({ main_event }) => {
-  const themeContext = useContext(ThemeContext);
-
   return (
-    <Hero>
-      <div className="inner">
-        <h1>{main_event.EventName}</h1>
-        <span style={{ color: 'white' }}>
-          {' '}
-          <DateParse date={main_event.eventStartEnd.StartDateTime} />
-        </span>
-        <div style={{ margin: '3rem auto' }}>
-          <CircleCounter event={main_event} />
+    <HeroWrap>
+      <BGImage />
+      <HeroContent>
+        <div className="inner">
+          <div>
+            <h1>{main_event.EventName}</h1>
+            <span style={{ color: 'white' }}>
+              <DateParse date={main_event.eventStartEnd.StartDateTime} />
+            </span>
+          </div>
+          <div style={{ margin: '2rem auto' }}>
+            <CircleCounter event={main_event} />
+          </div>
         </div>
-      </div>
-      <BGImage src={themeContext.header_image} />
-    </Hero>
+      </HeroContent>
+    </HeroWrap>
   );
 };
 

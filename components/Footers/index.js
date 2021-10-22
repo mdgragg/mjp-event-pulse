@@ -1,29 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import MJP__SVG from '../globals/MJP__SVG';
+import MJP__SVG from '../__GLOBALS__/MJP__SVG';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import { Typography } from '@material-ui/core';
 
-const MyFooter = styled.div`
+const MyFooter = styled.footer`
+  font-size: 0.75rem;
+  font-family: Avenir;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 3rem 0 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  align-items: center;
+  justify-content: center;
   && a {
     color: white;
     margin: 0;
     padding: 0;
   }
-  font-family: Avenir;
-  width: 100%;
-  background-color: black;
-  color: white;
-  padding: 2rem 0;
-  display: grid;
-  grid-template-columns: repeat(3, 33%);
-  align-items: center;
-  justify-content: center;
   && > div {
     text-align: center;
     margin: 0 auto;
   }
+
   && .icons-wrap {
     margin: 0;
   }
@@ -38,10 +41,16 @@ const MyFooter = styled.div`
     margin: 0 0.25rem;
     font-size: 1.25rem;
   }
-  @media all and (max-width: 768px) {
+  @media all and (max-width: 1000px) {
     grid-template-columns: 100%;
+    && .virtual-experiences {
+      font-size: 0.65rem;
+    }
     && .tech-issues {
       display: none;
+    }
+    && .icons-wrap {
+      margin: 0 auto;
     }
   }
 `;
@@ -56,16 +65,23 @@ const LogoWrap = styled.div`
     width: 100%;
     margin: 10px auto;
   }
+  @media all and (max-width: 1000px) {
+    max-width: 130px;
+  }
 `;
 
 const Footer = () => {
   return (
     <MyFooter>
       <div className="tech-issues">
-        <a href="/">{`Having Tech Issues?`} </a>
+        <a href="/">Having Tech Issues? </a>
       </div>
-      <div>
-        <div>Virtual Experiences Brought To You By</div>
+      <div className="virtual-experiences">
+        <div>
+          <Typography variant="overline">
+            Virtual Experiences Brought To You By
+          </Typography>
+        </div>
         <a href="https://millsjames.com">
           <LogoWrap>
             <MJP__SVG />

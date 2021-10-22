@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { event_theme } from '../index';
 import { useRouter } from 'next/router';
 import Body from '../../../components/template1/Body';
 import Section from '../../../components/template1/Section';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import { getExhibitorMeta } from '../../../lib/api';
-import { FormControl, InputLabel, Select } from '@material-ui/core';
-import { DropzoneArea } from 'material-ui-dropzone';
-import Dropzone from 'react-dropzone-uploader';
+import { InputLabel, Select } from '@material-ui/core';
+
 import Page from '../../../components/template1/Page';
-import Uploader from '../../../components/globals/Uploader';
+import Uploader from '../../../components/__GLOBALS__/Uploader';
 
 import styled from 'styled-components';
-import {
-  Button,
-  Paper,
-  Snackbar,
-  IconButton,
-  CircularProgress,
-} from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { Paper } from '@material-ui/core';
 
 const ExhibitorForm = styled(Paper)`
   && {

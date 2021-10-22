@@ -1,29 +1,17 @@
 import base from 'lib/firebase/base';
 import { fireBaseApp as fb } from 'lib/firebase/base';
-import cookies from 'next-cookies';
-import ReactCSSTransitionGroup from 'react-transition-group';
-import React, { useEffect, setState, useRef } from 'react';
-import { fetchAPI } from 'lib/api/';
+
+import React, { useEffect } from 'react';
+import { fetchAPI } from 'lib/api';
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
-import {
-  ArrowRight,
-  BackspaceOutlined,
-  Backup,
-  KeyboardArrowLeft,
-} from '@material-ui/icons';
+
 import Page from 'components/template1/Page';
 import Body from 'components/template1/Body';
 import Section from 'components/template1/Section';
 import Footer from 'components/template1/Footer';
-import LoggedIn from 'components/template1/ChatBox/LoggedIn';
-import LogInBox from 'components/template1/ChatBox/LogInBox';
-import PublicChat from 'components/template1/ChatBox/PublicChat';
-import ChatNav from 'components/template1/ChatBox/ChatNav';
-import ChatErrorBox from 'components/template1/ChatBox/ChatErrorBox';
 import { event_theme } from '../index';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { BackButton } from 'components/template1/Elements/';
 
 const SingleExhibitor = (props) => {

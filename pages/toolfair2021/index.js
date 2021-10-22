@@ -1,15 +1,14 @@
 import _ from 'lodash';
 import { getEventMeta } from 'lib/api';
-import Meta from 'components/globals/Meta';
+import Meta from 'components/__GLOBALS__/Meta';
 import Page from 'components/PageTemplates';
 import Body from 'components/template1/Body';
 import Landing from 'eventAssets/toolfair2021/Landing';
-import { toast } from 'react-toastify';
+
 import FullWrap from 'components/FullWrap';
-import useHasAuthorized from 'hooks/useHasAuthorized';
+import useSessionToken from 'hooks/useSessionToken';
 import useCalculateIfStarted from 'hooks/useCalculateIfStarted';
-import { token_generator } from '../../lib/helpers';
-import CustomModal from 'eventAssets/toolfair2021/CustomModal';
+import { tokenGenerator } from '../../lib/helpers';
 
 export var event_theme = {
   h1: {
@@ -48,11 +47,11 @@ const Index = (props) => {
   };
 
   const hasStartEnd = useCalculateIfStarted(main_event);
-  const [auth, setAuth] = useHasAuthorized(token_generator(main_event));
+  const [hasToken, handlSetToken] = useSessionToken(tokenGenerator(main_event));
 
   return (
     <>
-      <CustomModal
+      {/* <CustomModal
         fields={{
           AttendeeFirst: {
             displayName: 'First Name',
@@ -70,25 +69,25 @@ const Index = (props) => {
             required: true,
           },
         }}
-        open={!auth}
+        open={!hasToken}
         headerContent={<img src={main_event.LogoLink[0].Media.url} />}
         event_meta={main_event}
         callback={(res) => {
-          setAuth(true);
+          handlSetToken(true);
           toast.success(
             `Hello ${
               res.Attendee.AttendeeFirst ? res.Attendee.AttendeeFirst : ''
             }, welcome to ${main_event.EventName}`
           );
         }}
-      />
-      <FullWrap className={auth ? '' : 'blurred'}>
+      /> */}
+      <FullWrap>
         <Page theme={event_theme}>
           <Meta title={event_meta.EventJobName}> </Meta>
           <Body>
             <Landing
               event_meta={main_event}
-              hasAuth={auth}
+              hasAuth={true}
               hasStartEnd={hasStartEnd}
             />
           </Body>
