@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import React, { useEffect, useState } from 'react';
-import TwoPanel from 'components/TabPanels/TwoPanel';
-import { ListAgenda, ListAgenda__Loading } from './ListAgenda';
-import useGetAgenda from 'hooks/queryHooks/useGetAgenda';
+import styled from 'styled-components'
+import React, { useEffect, useState } from 'react'
+import TwoPanel from 'components/TabPanels/TwoPanel'
+import { ListAgenda, ListAgenda__Loading } from './ListAgenda'
+import useGetAgenda from 'hooks/queryHooks/useGetAgenda'
 // http://events.r20.constantcontact.com/register/event?llr=dmu7d7cab&oeidk=a07ehvrwj2ga36ae5cf&showPage=true
 const TheAgenda = styled.div`
   min-height: 100%;
@@ -12,39 +12,38 @@ const TheAgenda = styled.div`
   /* max-width: 550px; */
   margin: auto;
   background-color: ${(props) => props.theme.colors.primary};
-`;
+`
 
 const makeTabData = (data) => {
   return data
     .filter((d) => {
       if (!d.options.displayOnPage) {
-        return false;
+        return false
       }
-      return true;
+      return true
     })
     .map((d) => {
       return {
-        title: d.name,
+        title: d.tabName,
         content: <ListAgenda data={d} />,
         options: d.options,
-      };
-    });
-};
+      }
+    })
+}
 const Agenda__MultiTab = ({ eventUrl }) => {
-  const { error, loading, data } = useGetAgenda(eventUrl);
+  const { error, loading, data } = useGetAgenda(eventUrl)
 
-  const [tabData, setTabData] = useState([]);
-  let [initialTab, setInitialTab] = useState(0);
+  const [tabData, setTabData] = useState([])
+  let [initialTab, setInitialTab] = useState(0)
 
   useEffect(() => {
     if (data && !error) {
-      const newTabData = makeTabData(data);
-      console.log({ newTabData });
-      setTabData(newTabData);
-      let calcInitialTab = data.findIndex((d) => d.options.defaultTab === true);
-      setInitialTab(calcInitialTab);
+      const newTabData = makeTabData(data)
+      setTabData(newTabData)
+      let calcInitialTab = data.findIndex((d) => d.options.defaultTab === true)
+      setInitialTab(calcInitialTab)
     }
-  }, [data, error, loading]);
+  }, [data, error, loading])
 
   return (
     <TheAgenda>
@@ -59,7 +58,7 @@ const Agenda__MultiTab = ({ eventUrl }) => {
         <TwoPanel data={tabData} initialTab={initialTab}></TwoPanel>
       )}
     </TheAgenda>
-  );
-};
+  )
+}
 
-export default Agenda__MultiTab;
+export default Agenda__MultiTab

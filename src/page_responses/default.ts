@@ -60,6 +60,7 @@ async function GET_SERVERSIDE_PROPS_DEFAULT(ctx: any, EVENT_URL: string) {
 }
 
 const GET_STATIC_PROPS_DEFAULT = async (EVENT_URL) => {
+
   let event_data = await getEventMeta(EVENT_URL);
   let main_event = event_data.events.filter((ev) => ev.isMainEvent === true)[0];
 

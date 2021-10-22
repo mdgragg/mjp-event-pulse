@@ -23,6 +23,7 @@ const Index = (props) => {
       title={`Resiliency Session`}
     >
       <SingleDay
+        hideName={false}
         event={resilience_session}
         logoLink={main_event.LogoLink[0].Media.url}
       />

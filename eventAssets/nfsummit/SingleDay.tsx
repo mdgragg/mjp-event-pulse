@@ -45,7 +45,7 @@ const TabbedChat = ({ chatUrl, pollUrl }) => {
     ></SimpleTabs>
   );
 };
-export const SingleDay = ({ event, logoLink }) => {
+export const SingleDay = ({ event, logoLink, hideName }) => {
   const chatUrl = event.streamLinks.filter((s) => s.Service === 'Chat')[0].url;
   const videoUrl = event.streamLinks.filter((s) => s.Service === 'Vimeo')[0]
     .url;
@@ -62,7 +62,10 @@ export const SingleDay = ({ event, logoLink }) => {
 
   return (
     <PageWrap>
-      <NFHeader logoLink={logoLink} headerText={event.EventName} />
+      <NFHeader
+        logoLink={logoLink}
+        headerText={hideName ? null : event.EventName}
+      />
       <VideoWrap>
         <Replacer
           decider={true}

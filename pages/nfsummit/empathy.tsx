@@ -23,6 +23,7 @@ const Index = (props) => {
       title={`Empathy Session`}
     >
       <SingleDay
+        hideName={false}
         event={empathy_session}
         logoLink={main_event.LogoLink[0].Media.url}
       />

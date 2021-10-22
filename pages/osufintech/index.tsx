@@ -13,24 +13,20 @@ import Counter__JustNumbers from 'components/Counters/Counter__JustNumbers'
 import { CenteredPlayer, PlayerWithChat } from 'components/BodyTemplates'
 import { toast } from 'react-toastify'
 import Center from 'components/Center'
-import default_theme from 'eventAssets/activistsandagitators/activistsandagitators.theme'
+import default_theme from 'eventAssets/osufintech/osufintech.theme'
 import {
   GET_SERVERSIDE_PROPS_DEFAULT,
   GET_STATIC_PROPS_DEFAULT,
 } from 'src/page_responses/default'
 import BodyWrap from 'components/BodyTemplates/BodyWrap'
-import SplashHero from 'components/Heroes/SplashHero'
-import { CircleCounter } from 'components/Counters'
-import HeaderContent from 'eventAssets/activistsandagitators/HeaderContent'
-import { CaptionAccordion } from 'components/Captioning'
-import AuthHeaderContent from '../../eventAssets/activistsandagitators/AuthHeaderContent'
-import YWCA_SponsorMap from 'eventAssets/activistsandagitators/YWCA_SponsorMap'
-
+import { Typography } from '@material-ui/core'
+import { BoxedCounter } from 'components/Counters'
+import Agenda__MultiTab from 'components/Agenda/Agenda__MultiTab'
+export const EVENT_URL = `osufintech`
 const PLACEHOLD = 'https://placehold.co/'
-export const EVENT_URL = `activistsandagitators`
+
 const Index = (props) => {
   const router = useRouter()
-
   const { event_meta, main_event } = props
 
   var event_theme = {
@@ -44,21 +40,6 @@ const Index = (props) => {
   return (
     <ThemedPage theme={event_theme}>
       <AuthWrap
-        headerContent={
-          <AuthHeaderContent logo={main_event.LogoLink[0]?.Media?.url} />
-        }
-        otherFields={{
-          Company: {
-            required: false,
-            value: '',
-            displayName: 'Company',
-          },
-          NoAttendees: {
-            required: true,
-            value: '',
-            displayName: 'Number of People Watching With You',
-          },
-        }}
         eventToCheck={main_event}
         successCallback={({ message }) => {
           toast.success(
@@ -73,9 +54,37 @@ const Index = (props) => {
         <Meta title={main_event.EventName}>
           <title>{main_event.EventName}</title>
         </Meta>
-        <SplashHero>
-          <HeaderContent main_event={main_event} />
-        </SplashHero>
+        <FlexHero>
+          <div>
+            <img
+              style={{
+                backgroundColor: 'white',
+                padding: '20px',
+                borderRadius: '5px',
+                width: '100%',
+                maxWidth: '350px',
+                margin: '2rem auto',
+              }}
+              src={main_event.LogoLink[0]?.Media?.url || null}
+            />
+          </div>
+          <div>
+            <Center>
+              <div style={{ maxWidth: '500px', margin: 'auto' }}>
+                <h1>FinTech</h1>
+                <Typography
+                  variant={`overline`}
+                  style={{ color: 'tomato', fontWeight: 800 }}
+                >
+                  <DateParse date={main_event.eventStartEnd.StartDateTime} />
+                </Typography>
+              </div>
+            </Center>
+          </div>
+          <div>
+            <BoxedCounter event={main_event} prefix={'Join Us Live In'} />
+          </div>
+        </FlexHero>
         <BodyWrap>
           <div
             style={{
@@ -85,28 +94,35 @@ const Index = (props) => {
             }}
           >
             <PlayerWithChat
+              children={null}
               hasStarted={true}
               videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-            >
-              <CaptionAccordion />
-            </PlayerWithChat>
+              chatUrl={null}
+              chatComponent={<Agenda__MultiTab eventUrl={'osufintech'} />}
+            />
           </div>
-          <YWCA_SponsorMap eventId={main_event.id} />
+
+          {main_event.Description && (
+            <Banner__WithPicture
+              imgUrl={main_event.LogoLink[0]?.Media?.url || null}
+              color={'black'}
+              secondary={`white`}
+              headerText={`About This Event`}
+              innerWidth={`650px`}
+              buttonText={`Learn More`}
+              buttonLink={main_event.LogoLink[0]?.Link || '#'}
+            >
+              {main_event.Description}
+            </Banner__WithPicture>
+          )}
         </BodyWrap>
       </AuthWrap>
     </ThemedPage>
   )
 }
 
-export async function getStaticProps() {
-  try {
-    return GET_STATIC_PROPS_DEFAULT(EVENT_URL)
-  } catch (error) {
-    return {
-      notFound: true,
-    }
-  }
+export async function getStaticProps(ctx) {
+  return GET_STATIC_PROPS_DEFAULT(EVENT_URL)
 }
 
 export default Index

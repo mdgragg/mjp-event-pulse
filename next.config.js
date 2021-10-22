@@ -24,6 +24,11 @@ module.exports = {
         destination: '/alliancedatainvestorevent/thank-you',
         permanent: true,
       },
+      {
+        source: '/worthington-industries-investor-day-2021',
+        destination: '/worthingtoninvestorday',
+        permanent: true,
+      },
     ];
   },
 };

@@ -23,6 +23,7 @@ const Index = (props) => {
       title={`Inclusion Session`}
     >
       <SingleDay
+        hideName={false}
         event={inclusion_session}
         logoLink={main_event.LogoLink[0].Media.url}
       />

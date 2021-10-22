@@ -30,7 +30,7 @@ const UnderPic = styled.div`
 const NewBanner = (props) => {
   return (
     <BanWrap>
-      <StyledText>Be the Calm in the chaos</StyledText>
+      <StyledText>INNOVATE LIKE AN ENTREPRENEUR</StyledText>
       <UnderPic />
     </BanWrap>
   );

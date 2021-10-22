@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <main>
+      <div class="card__header">
+        <h2>You've Registered for {{event.EventName}}.</h2>
+      </div>
+      <div class="card__content">
+        <p>Hey {{attendee.AttendeeFirst}}!</p>
+        <p>
+          Thanks for registering for {{event.EventName}}. We will see you online
+          at {{formatDate event.eventStartEnd.StartDateTime "h:mma"}} on
+          {{formatDate event.eventStartEnd.StartDateTime "MMMM DD, YYYY"}}.
+        </p>
+
+        <div class="calendar">
+          <div class="calendar__header">
+            {{formatDate event.eventStartEnd.StartDateTime "MMM"}}
+          </div>
+          <div class="calendar__body">
+            {{formatDate event.eventStartEnd.StartDateTime "D"}}
+          </div>
+        </div>
+        <div class="card__footer">
+          <p>
+            We have included a reminder attached to this email for your
+            convenience.
+          </p>
+          <a href="{{ url }}">
+            <button class="btn">Learn More</button>
+          </a>
+        </div>
+      </div>
+    </main>
+    <div
+      data-role="module-unsubscribe"
+      class="module"
+      role="module"
+      data-type="unsubscribe"
+      style="
+        color: #444444;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 16px 16px 16px 16px;
+        text-align: Center;
+      "
+      data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"
+    >
+      <p style="font-size: 12px; line-height: 20px">
+        <a
+          class="Unsubscribe--unsubscribeLink"
+          href="{{{unsubscribe}}}"
+          target="_blank"
+          style="font-family: sans-serif; text-decoration: none"
+        >
+          Unsubscribe
+        </a>
+        -
+        <a
+          href="{{{unsubscribe_preferences}}}"
+          target="_blank"
+          class="Unsubscribe--unsubscribePreferences"
+          style="font-family: sans-serif; text-decoration: none"
+        >
+          Unsubscribe Preferences
+        </a>
+      </p>
+    </div>
+    <style>
+      :root {
+        --shadow: 0px 0px 14px -12px;
+        --radius: 6px;
+        --success: #0084f5;
+      }
+      *,
+      *::after {
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      html,
+      body {
+        background-color: #f7f7f7;
+        padding: 3rem;
+      }
+      .btn {
+        border: none;
+        padding: 0.5rem 1rem;
+        margin: 1rem auto;
+        width: 150px;
+        background-color: var(--success);
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+
+      main {
+        background-color: white;
+
+        box-shadow: var(--shadow);
+        max-width: 500px;
+        min-height: 550px;
+        margin: auto;
+        border-radius: var(--radius);
+      }
+
+      .card__header {
+        border-top-left-radius: var(--radius);
+        border-top-right-radius: var(--radius);
+        background-color: var(--success);
+        color: white;
+        padding: 0.5rem 2rem;
+      }
+      .card__content {
+        font-size: 1.5rem;
+        padding: 2rem;
+      }
+      .card__footer {
+        text-align: center;
+      }
+      .calendar {
+        box-shadow: var(--shadow);
+        margin: 2rem auto 4rem;
+        text-align: center;
+        width: 180px;
+        height: 180px;
+        border-radius: var(--radius);
+      }
+      .calendar__header {
+        border-top-left-radius: var(--radius);
+        border-top-right-radius: var(--radius);
+        background-color: tomato;
+        padding: 6px;
+        font-size: 2rem;
+        color: white;
+      }
+      .calendar__body {
+        padding-top: 20px;
+        font-size: 4.5rem;
+        font-weight: 400;
+        height: 100%;
+      }
+    </style>
+  </body>
+</html>

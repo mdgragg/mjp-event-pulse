@@ -1,4 +1,7 @@
 steps:
+  # - name: gcr.io/cloud-builders/gsutil
+  #   args: ['cp', 'gs://app-cache/saved.zip', 'previous_results.zip']
+  # operations that use previous_results.zip and produce saved.zip
   - name: node:12.20.1
     entrypoint: npm
     args: ['run', 'create-env']
@@ -16,3 +19,6 @@ steps:
       - 'FB_MEASUREMENT_ID=${_FB_MEASUREMENT_ID}'
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy']
+    timeout: 1200s
+  # - name: gcr.io/cloud-builders/gsutil
+  #   args: ['cp', 'saved.zip', 'gs://app-cache/saved.zip']
