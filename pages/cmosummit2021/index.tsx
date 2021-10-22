@@ -66,22 +66,22 @@ const Index = (props) => {
         <div>
           <Center>
             <h1>{main_event.EventName}</h1>
-<<<<<<< HEAD
-            <Typography variant={`overline`}>
-=======
             <Typography variant={`h5`}>
->>>>>>> 53fa2c056193e1225bbcbbff76dfe6f88f7db0fb
               <DateParse date={main_event.eventStartEnd.StartDateTime} />
             </Typography>
           </Center>
         </div>
         <div>
           <Center>
-            <BoxedCounter event={main_event} />
+            <BoxedCounter
+              event={main_event}
+              styles={{ boxColor: 'rgba(0,0,0,0)' }}
+            />
           </Center>
         </div>
       </FlexHero>
-      <CmoWrap main_event={main_event} /> {/* </AuthWrap> */}
+      <CmoWrap main_event={main_event} theme={event_theme} /> 
+      {/* </AuthWrap> */}
     </ThemedPage>
   )
 }

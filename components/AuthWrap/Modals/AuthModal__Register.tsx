@@ -1,29 +1,29 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { toast } from 'react-toastify';
-import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components';
-import { attendee_register } from 'lib/fetchCalls/attendee_register';
-import { AuthModalProps } from '../AuthWrap__Types';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import { toast } from 'react-toastify'
+import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
+import { attendee_register } from 'lib/fetchCalls/attendee_register'
+import { AuthModalProps } from '../AuthWrap__Types'
 import {
   DialogErrorText,
   HeaderWrap,
   StyledDialogActions,
   StyledDialogTitle,
-} from './AuthModal__Styles';
-import { useStyles, StyledForm } from './AuthModal__Styles';
-import Center from 'components/Center';
-import { Button__Primary } from 'components/Buttons';
-import { BoxedCounter } from 'components/Counters';
-import { check_required } from '.';
-import { Typography } from '@material-ui/core';
-import { Email } from 'types/AttendeeCapture';
+} from './AuthModal__Styles'
+import { useStyles, StyledForm } from './AuthModal__Styles'
+import Center from 'components/Center'
+import { Button__Primary } from 'components/Buttons'
+import { BoxedCounter } from 'components/Counters'
+import { check_required } from '.'
+import { Typography } from '@material-ui/core'
+import { Email } from 'types/AttendeeCapture'
 
 const default_fields = {
   AttendeeFirst: {
@@ -41,68 +41,78 @@ const default_fields = {
     value: '',
     required: true,
   },
-};
+}
 
 declare interface AuthModalRegisterProps extends AuthModalProps {
-  emailOptions: Email;
+  emailOptions: Email
+  allowClose: boolean
+  setOpen: (value: boolean) => void
 }
 
 export default function AuthModal__Register(props: AuthModalRegisterProps) {
   const {
     open,
+    setOpen,
     successCallback,
     eventToCheck,
     headerContent,
     signInText = null,
     otherFields = {},
     emailOptions,
-  } = props;
+    allowClose,
+  } = props
 
   const handleClose = () => {
-    if (formStatus.panel === 'register') {
-      return toast.error('You must enter your information before joining.');
+    if (allowClose) {
+      return setOpen(false)
     } else {
-      return toast.error("You are registered but the event hasn't started yet");
+      if (formStatus.panel === 'register') {
+        return toast.error('You must enter your information before joining.')
+      } else {
+        return toast.error(
+          "You are registered but the event hasn't started yet"
+        )
+      }
     }
-  };
+  }
 
-  const classes = useStyles();
-  const init = { ...default_fields, ...otherFields };
-  const [values, setValues] = React.useState(init);
+  const classes = useStyles()
+  const init = { ...default_fields, ...otherFields }
+  const [values, setValues] = React.useState(init)
 
   const [formStatus, setFormStatus] = React.useState({
     loading: false,
     panel: 'register',
-  });
+  })
 
   const setFormLoading = (value) => {
-    setFormStatus((prev) => ({ ...prev, loading: value }));
-  };
+    setFormStatus((prev) => ({ ...prev, loading: value }))
+  }
 
   const setFormPanel = (value) => {
-    setFormStatus((prev) => ({ ...prev, panel: value }));
-  };
+    setFormStatus((prev) => ({ ...prev, panel: value }))
+  }
 
   const handleChange = (e) => {
-    e.persist();
-    const name = e.target.name;
-    const prevValue = values[name];
+    e.persist()
+    const name = e.target.name
+    const prevValue = values[name]
     setValues((prev) => ({
       ...prev,
       [name]: { ...prevValue, value: e.target.value },
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    setFormLoading(true);
-    e.preventDefault();
+    setFormLoading(true)
+    e.preventDefault()
     if (!check_required(values)) {
-      setFormLoading(false);
-      return toast.error('All fields are required!');
+      setFormLoading(false)
+      return toast.error('All fields are required!')
     }
-    const send_values = {};
+    const send_values = {}
 
-    Object.keys(values).map((v) => (send_values[v] = values[v].value));
+    Object.keys(values).map((v) => (send_values[v] = values[v].value))
 
     return await attendee_register(
       {
@@ -112,16 +122,16 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
       eventToCheck.id
     )
       .then((res) => {
-        const { AttendeeFirst, AttendeeLast } = res.message.Attendee;
-        setValues((prev) => ({ ...prev, AttendeeFirst, AttendeeLast }));
-        setFormLoading(false);
-        setFormPanel('registerConfirm');
+        const { AttendeeFirst, AttendeeLast } = res.message.Attendee
+        setValues((prev) => ({ ...prev, AttendeeFirst, AttendeeLast }))
+        setFormLoading(false)
+        setFormPanel('registerConfirm')
       })
       .catch((err) => {
-        toast.error(err);
-        setFormLoading(false);
-      });
-  };
+        toast.error(err)
+        setFormLoading(false)
+      })
+  }
 
   return (
     <Dialog
@@ -152,7 +162,7 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
         }[formStatus.panel]
       }
     </Dialog>
-  );
+  )
 }
 
 function RegisterModal({
@@ -162,7 +172,7 @@ function RegisterModal({
   handleRegister,
   eventToCheck,
 }) {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       <StyledDialogTitle id="form-dialog-title" className={classes.title}>
@@ -175,7 +185,7 @@ function RegisterModal({
             className={classes.form}
             noValidate
             onSubmit={(e) => {
-              e.preventDefault();
+              e.preventDefault()
             }}
           >
             {Object.keys(values).map((v) => (
@@ -199,11 +209,11 @@ function RegisterModal({
         <Button__Primary onClick={handleRegister}>Register</Button__Primary>
       </StyledDialogActions>
     </>
-  );
+  )
 }
 
 function RegisterConfirm({ returnCallback, eventToCheck, values }) {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       <StyledDialogTitle id="form-dialog-title" className={classes.title}>
@@ -236,5 +246,5 @@ function RegisterConfirm({ returnCallback, eventToCheck, values }) {
         </Button__Primary>
       </DialogActions>
     </>
-  );
+  )
 }

@@ -15,7 +15,7 @@ const THEME_COLORS: COLORS = {
   orange: '#FF5600',
   yellow: '#eace28',
   green: '#00a651',
-  blue: '#1e2c60',
+  blue: '#32aab5',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
@@ -39,7 +39,7 @@ const THEME_PALETTE: PALETTE = {
   },
   background: {
     primary: THEME_COLORS.white,
-    secondary: THEME_COLORS.none,
+    secondary: THEME_COLORS.green,
     tertiary: THEME_COLORS.orange,
     error: 'red',
     info: 'blue',

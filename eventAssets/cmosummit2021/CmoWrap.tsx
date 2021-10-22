@@ -14,8 +14,11 @@ const StyledInner = styled.div`
   max-width: 1200px;
   margin: auto;
   padding: 5rem 0;
+  @media all and (max-width: 1200px) {
+    max-width: 95vw;
+  }
 `
-const CmoWrap = ({ main_event }) => {
+const CmoWrap = ({ main_event, theme }) => {
   return (
     <>
       <StyledWrap>
@@ -32,8 +35,8 @@ const CmoWrap = ({ main_event }) => {
             showBefore={<CmoBefore main_event={main_event} />}
           />
         </StyledInner>
+        <CmoRegisterBanner main_event={main_event} theme={theme} />
       </StyledWrap>{' '}
-      <CmoRegisterBanner />
     </>
   )
 }
