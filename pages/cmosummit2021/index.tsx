@@ -66,7 +66,11 @@ const Index = (props) => {
         <div>
           <Center>
             <h1>{main_event.EventName}</h1>
+<<<<<<< HEAD
             <Typography variant={`overline`}>
+=======
+            <Typography variant={`h5`}>
+>>>>>>> 53fa2c056193e1225bbcbbff76dfe6f88f7db0fb
               <DateParse date={main_event.eventStartEnd.StartDateTime} />
             </Typography>
           </Center>

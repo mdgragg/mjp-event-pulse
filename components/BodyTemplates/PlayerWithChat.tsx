@@ -8,7 +8,15 @@ const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: ${(props) =>
+<<<<<<< HEAD
     props.onlyVideo ? '100% 0%' : '66% 360px'};
+=======
+<<<<<<< HEAD
+    props.onlyVideo ? '100% 0%' : '70% 300px'};
+=======
+    props.onlyVideo ? '100% 0%' : '66% 360px'};
+>>>>>>> staging
+>>>>>>> 53fa2c056193e1225bbcbbff76dfe6f88f7db0fb
 
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;

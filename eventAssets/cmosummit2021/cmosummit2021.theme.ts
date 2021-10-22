@@ -14,14 +14,14 @@ const THEME_COLORS: COLORS = {
   red: 'tomato',
   orange: '#FF5600',
   yellow: '#eace28',
-  green: 'rgb(73,163,90)',
+  green: '#00a651',
   blue: '#1e2c60',
   indigo: '#0d2f49',
   violet: '#5602b7',
   white: '#ffffff',
   black: '#000000',
-  primary: 'white',
-  secondary: '#1e372f',
+  primary: '#00a651',
+  secondary: '#30abb6',
   tertiary: '#4f4f4d',
   info: '',
   warning: '',
@@ -31,7 +31,7 @@ const THEME_COLORS: COLORS = {
 const THEME_PALETTE: PALETTE = {
   text: {
     primary: THEME_COLORS.black,
-    secondary: THEME_COLORS.green,
+    secondary: THEME_COLORS.white,
     tertiary: THEME_COLORS.white,
     error: 'red',
     info: 'blue',
@@ -39,7 +39,7 @@ const THEME_PALETTE: PALETTE = {
   },
   background: {
     primary: THEME_COLORS.white,
-    secondary: THEME_COLORS.white,
+    secondary: THEME_COLORS.none,
     tertiary: THEME_COLORS.orange,
     error: 'red',
     info: 'blue',
@@ -52,7 +52,7 @@ const THEME_PALETTE: PALETTE = {
 const THEME_FONTS: FONTS = {
   title: {
     fontFamily: 'Roboto ',
-    fontSize: 'clamp(1.5rem, 20vw, 2rem)',
+    fontSize: 'clamp(3rem, 20vw, 1.5rem)',
     letterSpacing: '',
     fontWeight: '800',
     lineHeight: '3rem',
@@ -78,7 +78,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.orange,
+    backgroundColor: THEME_COLORS.green,
     color: 'white',
     border: '',
   },
@@ -125,7 +125,7 @@ const THEME_BREAKPOINTS: BREAKPOINTS = {
 
 const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h1: {
-    color: THEME_COLORS.black,
+    color: THEME_COLORS.white,
     ...THEME_FONTS.title,
   },
   h2: {
@@ -139,7 +139,12 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
     color: THEME_COLORS.primary,
   },
   h5: {
-    color: THEME_COLORS.primary,
+    color: THEME_COLORS.white,
+    background: THEME_COLORS.primary,
+    margin: 'auto',
+    marginTop: '10px',
+    padding: '10px 5px',
+    maxWidth: '450px',
   },
   h6: {
     color: THEME_COLORS.primary,
@@ -154,8 +159,8 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
 
 const THEME_GLOBALS: GLOBALS = {
   heroHeight: '550px',
-  heroBgColor: THEME_COLORS.white,
-  headerOpacity: '0.3',
+  heroBgColor: THEME_COLORS.black,
+  headerOpacity: '0.4',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
 }

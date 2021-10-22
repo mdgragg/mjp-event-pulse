@@ -1,6 +1,7 @@
 import { BoxedCounter } from 'components/Counters'
 import styled, { ThemeContext } from 'styled-components'
 import React, { useContext } from 'react'
+import MJxTheme from 'types/Theme'
 
 const StyledBefore = styled.div`
   && .text {
@@ -11,7 +12,7 @@ const StyledBefore = styled.div`
 `
 
 const CmoBefore = ({ main_event }) => {
-  const theme = useContext(ThemeContext)
+  const theme: MJxTheme = useContext(ThemeContext)
 
   return (
     <StyledBefore>
