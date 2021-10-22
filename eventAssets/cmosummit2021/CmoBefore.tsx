@@ -1,25 +1,27 @@
-import { BoxedCounter } from 'components/Counters';
-import styled from 'styled-components';
-import React from 'react';
+import { BoxedCounter } from 'components/Counters'
+import styled, { ThemeContext } from 'styled-components'
+import React, { useContext } from 'react'
 
 const StyledBefore = styled.div`
- && .text {}
-
+  && .text {
+    text-align: center;
+    margin: 3rem auto;
+    text-transform: capitalize;
+  }
 `
 
-const CmoBefore = ({main_event}) => {
-    return (
-        <StyledBefore>
-            <div className="text">This event hasn't started yet</div>
-           <BoxedCounter 
-             styles={{
-                 boxColor: 'blue'
-             }}
-             event={main_event}
-           />
+const CmoBefore = ({ main_event }) => {
+  const theme = useContext(ThemeContext)
 
-        </StyledBefore>
-    );
-};
+  return (
+    <StyledBefore>
+      <div className="text">This event hasn't started yet</div>
+      <BoxedCounter
+        event={main_event}
+        styles={{ boxColor: theme.colors.green, textColor: 'white' }}
+      />
+    </StyledBefore>
+  )
+}
 
-export default CmoBefore;
+export default CmoBefore

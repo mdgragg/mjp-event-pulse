@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import DateParse from 'components/__Assets__/DateParse';
-import { LoadingDiv, LoadingImage } from 'components/Loading';
+import React from 'react'
+import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
+import DateParse from 'components/__Assets__/DateParse'
+import { LoadingDiv, LoadingImage } from 'components/Loading'
 const SingleScheduleDay = styled.div`
   padding: 1rem 3rem;
   text-align: left;
-`;
+`
 const Item = styled.ul`
   margin: 0;
   padding: 0;
@@ -22,21 +23,24 @@ const Item = styled.ul`
     margin: 1rem auto 0rem auto;
     line-height: auto;
   }
-`;
+`
 const Item__Time = styled.div`
   display: inline;
   font-weight: 800;
   margin-right: 0.5rem;
-`;
+  color: ${(props) => props.theme.palette.text.tertiary};
+`
 const Item__Title = styled.div`
   display: inline;
-`;
+  font-weight: 800;
+  color: ${(props) => props.theme.palette.text.tertiary};
+`
 const SubItem = styled.li`
   list-style: none;
   margin: 0 0 1rem 0rem;
   font-size: 1rem;
-  line-height: 1rem;
-  font-weight: 800;
+  line-height: 1.25rem;
+  font-weight: 200;
   padding: 0;
   color: ${(props) => props.theme.colors.grey || 'rgb(50,50,50)'};
   && span.title {
@@ -44,7 +48,7 @@ const SubItem = styled.li`
     font-weight: 200;
     display: block;
   }
-`;
+`
 
 const ListAgenda = ({ data }) => {
   return (
@@ -52,8 +56,9 @@ const ListAgenda = ({ data }) => {
       <h3>{data.name} Agenda</h3>
       {data?.items.map((item, index) => {
         if (!item.title) {
-          return null;
+          return null
         } else {
+          const itemHtml = item.presenter.replace(/\\/gi, '<br />')
           return (
             <Item key={`${item.title}--${index}`}>
               <hr />
@@ -65,19 +70,24 @@ const ListAgenda = ({ data }) => {
                 )}
                 <Item__Title> {item.title}</Item__Title>
               </div>
-              <SubItem key={`${item.presenter}--single-speaker`}>
-                {item.presenter}
+              <SubItem>
+                <ReactMarkdown
+                  children={item.presenter}
+                  components={{
+                    p: ({ node, ...props }) => <div {...props} />,
+                  }}
+                />
               </SubItem>
             </Item>
-          );
+          )
         }
       })}
     </SingleScheduleDay>
-  );
-};
+  )
+}
 
 const ListAgenda__Loading = ({ number = 10 }) => {
-  const number_array = Array.from(Array(number).keys());
+  const number_array = Array.from(Array(number).keys())
 
   return (
     <SingleScheduleDay>
@@ -89,8 +99,8 @@ const ListAgenda__Loading = ({ number = 10 }) => {
         </React.Fragment>
       ))}
     </SingleScheduleDay>
-  );
-};
+  )
+}
 
-export { ListAgenda__Loading, ListAgenda };
-export default ListAgenda;
+export { ListAgenda__Loading, ListAgenda }
+export default ListAgenda

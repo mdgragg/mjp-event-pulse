@@ -1,5 +1,14 @@
-import { createTheme } from '@material-ui/core';
-import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, GLOBALS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
+import { createTheme } from '@material-ui/core'
+import type {
+  BREAKPOINTS,
+  BUTTONS,
+  COLORS,
+  FONTS,
+  GLOBALS,
+  MJxTheme,
+  PALETTE,
+  TYPOGRAPHY,
+} from 'types/Theme'
 
 const THEME_COLORS: COLORS = {
   red: 'tomato',
@@ -18,7 +27,7 @@ const THEME_COLORS: COLORS = {
   warning: '',
   offWhite: '#f7f7f7',
   offBlack: '#161616',
-};
+}
 const THEME_PALETTE: PALETTE = {
   text: {
     primary: THEME_COLORS.black,
@@ -26,7 +35,7 @@ const THEME_PALETTE: PALETTE = {
     tertiary: THEME_COLORS.white,
     error: 'red',
     info: 'blue',
-    success: 'green'
+    success: 'green',
   },
   background: {
     primary: THEME_COLORS.white,
@@ -34,13 +43,12 @@ const THEME_PALETTE: PALETTE = {
     tertiary: THEME_COLORS.orange,
     error: 'red',
     info: 'blue',
-    success: 'green'
+    success: 'green',
   },
   error: THEME_COLORS.red,
   info: 'blue',
-  success: 'green'
-
-};
+  success: 'green',
+}
 const THEME_FONTS: FONTS = {
   title: {
     fontFamily: 'Roboto ',
@@ -57,12 +65,12 @@ const THEME_FONTS: FONTS = {
     lineHeight: 'auto',
   },
   get secondary() {
-    return this.body;
+    return this.body
   }, // default to body
   get tertiary() {
-    return this.body;
+    return this.body
   }, // default to body
-};
+}
 
 export const THEME_BUTTONS: BUTTONS = {
   primary: {
@@ -105,15 +113,15 @@ export const THEME_BUTTONS: BUTTONS = {
     color: 'white',
     backgroundColor: THEME_COLORS.offBlack,
   },
-};
+}
 
-const THEME_BREAKPOINTS : BREAKPOINTS= {
+const THEME_BREAKPOINTS: BREAKPOINTS = {
   xl: 1920,
   lg: 1600,
   md: 1200,
   sm: 768,
   xs: 500,
-};
+}
 
 const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h1: {
@@ -123,7 +131,6 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h2: {
     color: THEME_COLORS.black,
     textAlign: 'left',
-
   },
   h3: {
     color: THEME_COLORS.black,
@@ -143,25 +150,25 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   body2: {
     ...THEME_FONTS.body,
   },
-};
+}
 
-const THEME_GLOBALS :GLOBALS = {
-  heroHeight: '350px',
+const THEME_GLOBALS: GLOBALS = {
+  heroHeight: '550px',
   heroBgColor: THEME_COLORS.white,
   headerOpacity: '0.3',
   videoBreakPoint: 700,
   maxSectionWidth: '1800px',
-} 
+}
 
 export const mjxTheme: MJxTheme = {
-  muiTheme:{ ...createTheme()},
+  muiTheme: { ...createTheme() },
   typography: { ...THEME_TYPOGRAPHY },
   colors: { ...THEME_COLORS },
   palette: { ...THEME_PALETTE },
   fonts: { ...THEME_FONTS },
   buttons: { ...THEME_BUTTONS },
   breakpoints: { ...THEME_BREAKPOINTS },
-  ...THEME_GLOBALS
-};
+  ...THEME_GLOBALS,
+}
 
-export default mjxTheme;
+export default mjxTheme
