@@ -46,13 +46,13 @@ const default_fields = {
 declare interface AuthModalRegisterProps extends AuthModalProps {
   emailOptions: Email
   allowClose: boolean
-  setOpen: (value: boolean) => void
+  setOpen?: (value: boolean) => void
 }
 
 export default function AuthModal__Register(props: AuthModalRegisterProps) {
   const {
     open,
-    setOpen,
+    setOpen = () => {},
     successCallback,
     eventToCheck,
     headerContent,

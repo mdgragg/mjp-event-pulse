@@ -14,6 +14,7 @@ import {
 import { tokenGenerator } from 'lib/helpers'
 import { AppContext } from 'context/AppContext'
 import AuthModal__AttendeeCapture__EmailOnly from './Modals/AuthModal__AttendeeCapture__EmailOnly'
+import { toast } from 'react-toastify'
 
 const StyledAuthWrap = styled.div`
   &&.blurred {
@@ -89,7 +90,11 @@ const AuthWrap = (props: AuthWrapProps) => {
     if (options.includes('registerOnly')) {
       return (
         <>
-          <AuthModal__Register {...ModalProps} emailOptions={emailOptions} />
+          <AuthModal__Register
+            {...ModalProps}
+            emailOptions={emailOptions}
+            allowClose={false}
+          />
           <StyledAuthWrap className={hasAuth ? '' : 'blurred'}>
             {children}
           </StyledAuthWrap>
