@@ -25,6 +25,7 @@ import HeaderContent from 'eventAssets/activistsandagitators/HeaderContent'
 import { CaptionAccordion } from 'components/Captioning'
 import AuthHeaderContent from '../../eventAssets/activistsandagitators/AuthHeaderContent'
 import YWCA_SponsorMap from 'eventAssets/activistsandagitators/YWCA_SponsorMap'
+import ButtonArea from 'eventAssets/activistsandagitators/ButtonArea'
 
 const PLACEHOLD = 'https://placehold.co/'
 export const EVENT_URL = `activistsandagitators`
@@ -89,7 +90,11 @@ const Index = (props) => {
               videoUrl={main_event.streamLinks[0].url}
               chatUrl={main_event.streamLinks[1].url}
             >
-              <CaptionAccordion />
+              <div>
+                <CaptionAccordion />
+                {/* Buttons */}
+                <ButtonArea main_event={main_event} />
+              </div>
             </PlayerWithChat>
           </div>
           <YWCA_SponsorMap eventId={main_event.id} />

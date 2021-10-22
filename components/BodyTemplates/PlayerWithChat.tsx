@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop';
-import Fluid__iFrame from '../iFrames/Fluid__iFrame';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop'
+import Fluid__iFrame from '../iFrames/Fluid__iFrame'
+import { useEffect } from 'react'
+import { useRef } from 'react'
 const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: ${(props) =>
-<<<<<<< HEAD
-    props.onlyVideo ? '100% 0%' : '70% 300px'};
-=======
     props.onlyVideo ? '100% 0%' : '66% 360px'};
->>>>>>> staging
 
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
@@ -22,7 +18,7 @@ const BodyWrap = styled.div`
   @media all and (max-width: 1200px) {
     grid-template-columns: 1fr;
   }
-`;
+`
 const VideoBox = styled.div`
   height: 100%;
   width: 100%;
@@ -33,7 +29,7 @@ const VideoBox = styled.div`
   && .children {
     margin-top: 2rem;
   }
-`;
+`
 
 const ChatBox = styled.div`
   height: 100%;
@@ -46,20 +42,20 @@ const ChatBox = styled.div`
     width: 100%;
     margin: 0 auto;
   }
-`;
+`
 type PlayerWithChat__Props = {
-  videoUrl: string;
-  chatUrl: string;
-  hasStarted: boolean;
-  children?: React.ReactNode;
-  videoComponent?: React.ReactNode;
-  chatComponent?: React.ReactNode;
+  videoUrl: string
+  chatUrl: string
+  hasStarted: boolean
+  children?: React.ReactNode
+  videoComponent?: React.ReactNode
+  chatComponent?: React.ReactNode
   styles?: {
-    wrap?: any;
-    video?: any;
-    chat?: any;
-  };
-};
+    wrap?: any
+    video?: any
+    chat?: any
+  }
+}
 
 const PlayerWithChat = ({
   videoUrl,
@@ -70,17 +66,17 @@ const PlayerWithChat = ({
   chatComponent,
   styles,
 }: PlayerWithChat__Props) => {
-  const vidRef = useRef(null);
-  const [onlyVideo, setOnlyVideo] = useState(true);
+  const vidRef = useRef(null)
+  const [onlyVideo, setOnlyVideo] = useState(true)
 
   useEffect(() => {
     if (!chatComponent && (!chatUrl || chatUrl === null)) {
-      setOnlyVideo(true);
+      setOnlyVideo(true)
     } else {
-      setOnlyVideo(false);
+      setOnlyVideo(false)
     }
-    return () => {};
-  }, [chatUrl]);
+    return () => {}
+  }, [chatUrl])
 
   return (
     <BodyWrap onlyVideo={onlyVideo} styles={styles}>
@@ -104,7 +100,7 @@ const PlayerWithChat = ({
         </ChatBox>
       )}
     </BodyWrap>
-  );
-};
+  )
+}
 
-export default PlayerWithChat;
+export default PlayerWithChat
