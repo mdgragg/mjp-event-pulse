@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import DateParse from 'components/__Assets__/DateParse'
 import { LoadingDiv, LoadingImage } from 'components/Loading'
 const SingleScheduleDay = styled.div`
-  padding: 1rem 3rem;
+  padding: 1rem;
   text-align: left;
 `
 const Item = styled.ul`
@@ -28,12 +28,12 @@ const Item__Time = styled.div`
   display: inline;
   font-weight: 800;
   margin-right: 0.5rem;
-  color: ${(props) => props.theme.palette.text.tertiary};
+  color: #3e3e3e;
 `
 const Item__Title = styled.div`
   display: inline;
   font-weight: 800;
-  color: ${(props) => props.theme.palette.text.tertiary};
+  color: #3e3e3e;
 `
 const SubItem = styled.li`
   list-style: none;
@@ -42,7 +42,7 @@ const SubItem = styled.li`
   line-height: 1.25rem;
   font-weight: 200;
   padding: 0;
-  color: ${(props) => props.theme.colors.grey || 'rgb(50,50,50)'};
+  color: ${(props) => props.theme.colors.grey || '#3e3e3e'};
   && span.title {
     color: ${(props) => props.theme.colors.secondary};
     font-weight: 200;

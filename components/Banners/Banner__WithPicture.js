@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import React from 'react';
-import { Button__Primary } from '../Buttons';
-import { Typography, FormControl, Button, Input } from '@material-ui/core';
+import styled from 'styled-components'
+import React from 'react'
+import { Button__Primary } from '../Buttons'
+import { Typography, FormControl, Button, Input } from '@material-ui/core'
 
 const StyledBanner = styled.div`
   height: auto;
@@ -10,7 +10,7 @@ const StyledBanner = styled.div`
   flex-direction: space-around;
   align-items: center;
   justify-content: center;
-  text-align: center;
+
   width: 100%;
   left: 0;
   background-color: ${(props) => props.color || props.theme.colors.primary};
@@ -23,14 +23,14 @@ const StyledBanner = styled.div`
 
   && .banner-image {
     width: 80%;
-    max-width: 120px;
+    max-width: 420px;
     margin: 2rem auto;
     display: block;
   }
-`;
+`
 
 const Banner = (props) => {
-  const { headerText, innerWidth, style, children, buttonText, imgUrl } = props;
+  const { headerText, innerWidth, style, children, buttonText, imgUrl } = props
   return (
     <StyledBanner style={{ ...props.style }} {...props}>
       <div
@@ -41,15 +41,13 @@ const Banner = (props) => {
         <p>{props.children}</p>
         {props.buttonText && (
           <a href={props.buttonLink}>
-            <Button__Primary className="btn">
-              {props.buttonText}
-            </Button__Primary>
+            <Button__Primary>{props.buttonText}</Button__Primary>
           </a>
         )}
         {props.imgUrl && <img className="banner-image" src={props.imgUrl} />}
       </div>
     </StyledBanner>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

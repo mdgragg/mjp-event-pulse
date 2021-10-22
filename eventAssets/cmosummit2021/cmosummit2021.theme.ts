@@ -151,6 +151,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   },
   body1: {
     ...THEME_FONTS.body,
+    color: 'white',
   },
   body2: {
     ...THEME_FONTS.body,

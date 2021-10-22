@@ -22,6 +22,7 @@ import BodyWrap from 'components/BodyTemplates/BodyWrap'
 import { Typography } from '@material-ui/core'
 import { BoxedCounter } from 'components/Counters'
 import Agenda__MultiTab from 'components/Agenda/Agenda__MultiTab'
+import ReactMarkdown from 'react-markdown'
 export const EVENT_URL = `osufintech`
 const PLACEHOLD = 'https://placehold.co/'
 
@@ -72,6 +73,7 @@ const Index = (props) => {
             <Center>
               <div style={{ maxWidth: '500px', margin: 'auto' }}>
                 <h1>FinTech</h1>
+                <Typography variant={`h4`}>{main_event.EventName}</Typography>
                 <Typography
                   variant={`overline`}
                   style={{ color: 'tomato', fontWeight: 800 }}
@@ -104,15 +106,14 @@ const Index = (props) => {
 
           {main_event.Description && (
             <Banner__WithPicture
-              imgUrl={main_event.LogoLink[0]?.Media?.url || null}
               color={'black'}
               secondary={`white`}
               headerText={`About This Event`}
-              innerWidth={`650px`}
+              innerWidth={`765px`}
               buttonText={`Learn More`}
               buttonLink={main_event.LogoLink[0]?.Link || '#'}
             >
-              {main_event.Description}
+              <ReactMarkdown children={main_event.Description} />
             </Banner__WithPicture>
           )}
         </BodyWrap>

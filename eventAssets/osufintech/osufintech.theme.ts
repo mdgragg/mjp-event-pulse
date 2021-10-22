@@ -78,7 +78,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.orange,
+    backgroundColor: THEME_COLORS.red,
     color: 'white',
     border: '',
   },
@@ -145,6 +145,7 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   },
   body1: {
     ...THEME_FONTS.body,
+    color: 'white',
   },
   body2: {
     ...THEME_FONTS.body,
