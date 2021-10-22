@@ -3,23 +3,25 @@ import styled from 'styled-components';
 import React from 'react';
 
 const StyledBefore = styled.div`
- && .text {}
+  && .text {
+    text-align: center;
+  }
+`;
 
-`
-
-const CmoBefore = ({main_event}) => {
-    return (
-        <StyledBefore>
-            <div className="text">This event hasn't started yet</div>
-           <BoxedCounter 
-             styles={{
-                 boxColor: 'blue'
-             }}
-             event={main_event}
-           />
-
-        </StyledBefore>
-    );
+const CmoBefore = ({ main_event }) => {
+  return (
+    <StyledBefore>
+      <div className="text">This event hasn't started yet</div>
+      <BoxedCounter
+        className="counter"
+        styles={{
+          boxColor: 'white',
+          textColor: 'green',
+        }}
+        event={main_event}
+      />
+    </StyledBefore>
+  );
 };
 
 export default CmoBefore;

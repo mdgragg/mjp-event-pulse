@@ -20,6 +20,7 @@ import { Typography } from '@material-ui/core';
 import { BoxedCounter } from 'components/Counters';
 import CmoWrap from 'eventAssets/cmosummit2021/CmoWrap';
 export const EVENT_URL = 'cmosummit2021';
+import styled from 'styled-components';
 
 const PLACEHOLD = 'https://placehold.co/';
 
@@ -66,31 +67,24 @@ const Index = (props) => {
           <div>
             <Center>
               <h1>{main_event.EventName}</h1>
-              <Typography variant={`overline`}>
+              <Typography variant={`h5`}>
                 <DateParse date={main_event.eventStartEnd.StartDateTime} />
               </Typography>
             </Center>
           </div>
           <div>
             <Center>
-              <BoxedCounter
-              event={main_event}
-              />
-
+              <BoxedCounter event={main_event} />
             </Center>
           </div>
         </FlexHero>
-        <CmoWrap
-          main_event={main_event}
-        /> 
+        <CmoWrap main_event={main_event} /> 
       </AuthWrap>
     </ThemedPage>
   );
 };
 
 export async function getServerSideProps(ctx) {
-  
-
   try {
     return GET_SERVERSIDE_PROPS_DEFAULT(ctx, EVENT_URL);
   } catch (error) {
