@@ -1,9 +1,9 @@
-import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import Footer from '../Footers';
-import { mjxTheme } from './mjx.theme';
-import { StylesProvider } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react'
+import styled, { ThemeProvider } from 'styled-components'
+import Footer from '../Footers'
+import { mjxTheme } from './mjx.theme'
+import { StylesProvider } from '@material-ui/core'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 const StyledPage = styled.div`
   color: ${(props) => props.theme.fontColor};
@@ -47,10 +47,10 @@ const StyledPage = styled.div`
     color: unset;
     font-weight: 600;
   }
-`;
+`
 
 export const Page = ({ theme, children, showFooter = true }) => {
-  const whole_theme = { ...mjxTheme, ...theme };
+  const whole_theme = { ...mjxTheme, ...theme }
   //Material ui style provider for this theme
 
   return (
@@ -64,7 +64,7 @@ export const Page = ({ theme, children, showFooter = true }) => {
         </ThemeProvider>
       </StylesProvider>
     </CssBaseline>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

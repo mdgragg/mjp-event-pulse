@@ -8,13 +8,18 @@ const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: ${(props) =>
-    props.onlyVideo ? '100% 0%' : '66.4% 33.2%'};
+<<<<<<< HEAD
+    props.onlyVideo ? '100% 0%' : '70% 300px'};
+=======
+    props.onlyVideo ? '100% 0%' : '66% 360px'};
+>>>>>>> staging
 
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   width: 100%;
+  justify-content: center;
   ${(props) => props?.styles?.wrap};
-  @media all and (max-width: 1000px) {
+  @media all and (max-width: 1200px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -24,7 +29,6 @@ const VideoBox = styled.div`
   transition: all 1500ms ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
   && .children {
     margin-top: 2rem;
