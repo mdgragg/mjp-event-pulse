@@ -1,27 +1,28 @@
-import { BoxedCounter } from 'components/Counters';
-import styled from 'styled-components';
-import React from 'react';
+import { BoxedCounter } from 'components/Counters'
+import styled, { ThemeContext } from 'styled-components'
+import React, { useContext } from 'react'
+import MJxTheme from 'types/Theme'
 
 const StyledBefore = styled.div`
   && .text {
     text-align: center;
+    margin: 3rem auto;
+    text-transform: capitalize;
   }
-`;
+`
 
 const CmoBefore = ({ main_event }) => {
+  const theme: MJxTheme = useContext(ThemeContext)
+
   return (
     <StyledBefore>
       <div className="text">This event hasn't started yet</div>
       <BoxedCounter
-        className="counter"
-        styles={{
-          boxColor: 'white',
-          textColor: 'green',
-        }}
         event={main_event}
+        styles={{ boxColor: theme.colors.green, textColor: 'white' }}
       />
     </StyledBefore>
-  );
-};
+  )
+}
 
-export default CmoBefore;
+export default CmoBefore

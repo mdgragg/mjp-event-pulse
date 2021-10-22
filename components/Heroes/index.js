@@ -5,3 +5,7 @@ import MJHero from './MJHero';
 import SolidColorHero from './SolidColorHero';
 
 export { FlexHero, Hero, HeroWithImage, MJHero, SolidColorHero };
+
+import React from 'react';
+import PropTypes from 'prop-types';
+
