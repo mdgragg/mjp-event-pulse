@@ -1,22 +1,14 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+import { Button } from '@material-ui/core'
 import MJxTheme from 'types/Theme'
-
-const Button = styled.div`
-  && .text {
-    text-align: center;
-    margin: 3rem auto;
-    text-transform: capitalize;
-  }
-`
 
 const ButtonArea = ({ main_event }) => {
   const theme: MJxTheme = useContext(ThemeContext)
   return (
     <div>
-      <Button>
-        <div className="text">Button</div>
-      </Button>
+      <Button variant="contained">Donate Now</Button>
+      <Button variant="contained">Learn More</Button>
     </div>
   )
 }
