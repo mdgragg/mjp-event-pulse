@@ -22,6 +22,7 @@ const CmoWrap = ({ main_event, theme }) => {
   return (
     <>
       <StyledWrap>
+        <CmoRegisterBanner main_event={main_event} theme={theme} />
         <StyledInner>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
@@ -35,7 +36,6 @@ const CmoWrap = ({ main_event, theme }) => {
             showBefore={<CmoBefore main_event={main_event} />}
           />
         </StyledInner>
-        <CmoRegisterBanner main_event={main_event} theme={theme} />
       </StyledWrap>{' '}
     </>
   )

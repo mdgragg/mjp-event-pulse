@@ -8,7 +8,7 @@ const BodyWrap = styled.div`
   min-height: 50vh;
   display: grid;
   grid-template-columns: ${(props) =>
-    props.onlyVideo ? '100% 0%' : '66% 360px'};
+    props.onlyVideo ? '100% 0%' : '66% 380px'};
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   width: 100%;
