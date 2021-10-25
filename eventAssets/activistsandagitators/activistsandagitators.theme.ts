@@ -79,7 +79,7 @@ export const THEME_BUTTONS: BUTTONS = {
     fontSize: '0.85rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
-    backgroundColor: THEME_COLORS.violet,
+    backgroundColor: THEME_COLORS.orange,
     color: 'white',
     border: '',
   },

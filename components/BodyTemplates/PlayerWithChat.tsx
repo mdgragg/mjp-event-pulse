@@ -28,6 +28,11 @@ const VideoBox = styled.div`
   && .children {
     margin-top: 2rem;
   }
+
+  @media all and (max-width: 1200px) {
+    width: 96vw;
+    margin: auto;
+  }
 `
 
 const ChatBox = styled.div`
@@ -36,7 +41,7 @@ const ChatBox = styled.div`
   max-width: 450px;
   border: 2px solid rgba(203, 203, 203, 0.35);
   ${(props) => props?.styles?.chat};
-  @media all and (max-width: 1000px) {
+  @media all and (max-width: 1200px) {
     max-width: 450px;
     width: 100%;
     margin: 0 auto;

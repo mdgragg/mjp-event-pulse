@@ -23,6 +23,8 @@ import { Typography } from '@material-ui/core'
 import { BoxedCounter } from 'components/Counters'
 import Agenda__MultiTab from 'components/Agenda/Agenda__MultiTab'
 import ReactMarkdown from 'react-markdown'
+import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown'
+import Fintech_Before from 'eventAssets/osufintech/Fintech_Before'
 export const EVENT_URL = `osufintech`
 const PLACEHOLD = 'https://placehold.co/'
 
@@ -90,9 +92,9 @@ const Index = (props) => {
         <BodyWrap>
           <div
             style={{
-              minHeight: '100vh',
+              minHeight: '70vh',
               backgroundColor: 'none',
-              margin: '2rem',
+              margin: '4rem auto',
             }}
           >
             <PlayerWithChat
@@ -100,6 +102,19 @@ const Index = (props) => {
               hasStarted={true}
               videoUrl={main_event.streamLinks[0].url}
               chatUrl={null}
+              videoComponent={
+                <LinkBox__StickyTop__WithCountdown
+                  link={{
+                    allowed: true,
+                    newWindow: true,
+                    href: main_event.streamLinks[1].url,
+                  }}
+                  start={main_event.eventStartEnd.StartDateTime}
+                  end={main_event.eventStartEnd.EndDateTime}
+                  offset={30}
+                  showBefore={<Fintech_Before main_event={main_event} />}
+                />
+              }
               chatComponent={<Agenda__MultiTab eventUrl={'osufintech'} />}
             />
           </div>
@@ -122,8 +137,14 @@ const Index = (props) => {
   )
 }
 
-export async function getStaticProps(ctx) {
-  return GET_STATIC_PROPS_DEFAULT(EVENT_URL)
+export async function getStaticProps() {
+  try {
+    return GET_STATIC_PROPS_DEFAULT(EVENT_URL)
+  } catch (error) {
+    return {
+      notFound: true,
+    }
+  }
 }
 
 export default Index

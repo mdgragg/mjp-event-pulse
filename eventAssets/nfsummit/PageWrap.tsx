@@ -1,20 +1,20 @@
-import AuthWrap from 'components/AuthWrap';
-import Meta from 'components/__GLOBALS__/Meta';
-import Page from 'components/PageTemplates';
-import { Banner__WithPicture } from 'components/Banners';
-import { FlexHero, SolidColorHero } from 'components/Heroes';
-import DateParse from 'components/__Assets__/DateParse';
-import { toast } from 'react-toastify';
-import { default_theme } from './nfsummit.theme';
-import { BoxedCounter } from 'components/Counters';
-import BodyBg from 'components/BodyTemplates/Body__PictureBg';
+import AuthWrap from 'components/AuthWrap'
+import Meta from 'components/__GLOBALS__/Meta'
+import Page from 'components/PageTemplates'
+import { Banner__WithPicture } from 'components/Banners'
+import { FlexHero, SolidColorHero } from 'components/Heroes'
+import DateParse from 'components/__Assets__/DateParse'
+import { toast } from 'react-toastify'
+import { default_theme } from './nfsummit.theme'
+import { BoxedCounter } from 'components/Counters'
+import BodyBg from 'components/BodyTemplates/Body__PictureBg'
 
-export const EVENT_URL = `nwbattle2021`;
+export const EVENT_URL = `nwbattle2021`
 
 const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
   var event_theme = {
     ...default_theme,
-  };
+  }
   return (
     <Page theme={event_theme}>
       <AuthWrap
@@ -48,11 +48,11 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
               message.Attendee.AttendeeFirst
                 ? message.Attendee.AttendeeFirst
                 : ''
-            }, welcome to ${main_event.EventName}`
-          );
+            }, welcome to Nationwide NF Leader Summit`
+          )
         }}
       >
-        <Meta title={title ? title : event_meta.EventJobName}> </Meta>
+        <Meta title={`NF Leader Summit`}> </Meta>
         <BodyBg
           imgSrc={`https://storage.googleapis.com/mjp-stream-public/header-svg.svg`}
         >
@@ -77,7 +77,7 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
         </Banner__WithPicture>
       </AuthWrap>
     </Page>
-  );
-};
+  )
+}
 
-export default PageWrap;
+export default PageWrap
