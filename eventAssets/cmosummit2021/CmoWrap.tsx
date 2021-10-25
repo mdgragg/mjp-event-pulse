@@ -14,11 +14,15 @@ const StyledInner = styled.div`
   max-width: 1200px;
   margin: auto;
   padding: 5rem 0;
+  @media all and (max-width: 1200px) {
+    max-width: 95vw;
+  }
 `
-const CmoWrap = ({ main_event }) => {
+const CmoWrap = ({ main_event, theme }) => {
   return (
     <>
       <StyledWrap>
+        <CmoRegisterBanner main_event={main_event} theme={theme} />
         <StyledInner>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
@@ -33,7 +37,6 @@ const CmoWrap = ({ main_event }) => {
           />
         </StyledInner>
       </StyledWrap>{' '}
-      <CmoRegisterBanner />
     </>
   )
 }

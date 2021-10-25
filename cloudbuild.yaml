@@ -1,3 +1,4 @@
+timeout: 1200s
 steps:
   # - name: gcr.io/cloud-builders/gsutil
   #   args: ['cp', 'gs://app-cache/saved.zip', 'previous_results.zip']
@@ -19,6 +20,5 @@ steps:
       - 'FB_MEASUREMENT_ID=${_FB_MEASUREMENT_ID}'
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy']
-    timeout: 1200s
   # - name: gcr.io/cloud-builders/gsutil
   #   args: ['cp', 'saved.zip', 'gs://app-cache/saved.zip']

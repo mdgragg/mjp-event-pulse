@@ -73,11 +73,15 @@ const Index = (props) => {
         </div>
         <div>
           <Center>
-            <BoxedCounter event={main_event} />
+            <BoxedCounter
+              event={main_event}
+              styles={{ boxColor: 'rgba(0,0,0,0)' }}
+            />
           </Center>
         </div>
       </FlexHero>
-      <CmoWrap main_event={main_event} /> {/* </AuthWrap> */}
+      <CmoWrap main_event={main_event} theme={event_theme} /> 
+      {/* </AuthWrap> */}
     </ThemedPage>
   )
 }
