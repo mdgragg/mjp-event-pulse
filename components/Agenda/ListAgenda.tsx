@@ -48,6 +48,9 @@ const SubItem = styled.li`
     font-weight: 200;
     display: block;
   }
+  && ul {
+    padding: 5px;
+  }
 `
 
 const ListAgenda = ({ data }) => {
