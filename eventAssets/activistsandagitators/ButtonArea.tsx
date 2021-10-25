@@ -22,15 +22,12 @@ const ButtonArea = ({ main_event }) => {
   return (
     <Wrap>
       <div className="buttons">
-        <Button__Primary
-          className="button"
+        <a
           href="https://www.ywcacolumbus.org/get-involved/donate-now/donate-now-activists-and-agitators/"
+          target="_blank"
         >
-          Donate Now
-        </Button__Primary>
-        <Button__Primary className="button" variant="contained" href=" ">
-          Learn More
-        </Button__Primary>
+          <Button__Primary className="button">Donate Now</Button__Primary>
+        </a>
       </div>
     </Wrap>
   )
