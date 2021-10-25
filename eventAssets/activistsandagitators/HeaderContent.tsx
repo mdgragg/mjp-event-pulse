@@ -1,16 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { DateParse } from 'components/__Assets__';
-import { CircleCounter } from 'components/Counters';
-import Center from 'components/Center';
+import React from 'react'
+import styled from 'styled-components'
+import { DateParse } from 'components/__Assets__'
+import { CircleCounter } from 'components/Counters'
+import Center from 'components/Center'
 
 const Wrap = styled.div`
   && > div {
     margin: 2rem auto;
     text-align: center;
   }
-`;
+  p {
+    margin: auto;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    color: #ffe428;
+    font-weight: 600;
+  }
+`
 const HeaderContent = ({ main_event }) => {
   return (
     <Wrap>
@@ -26,10 +32,17 @@ const HeaderContent = ({ main_event }) => {
       </div>
       <div>
         <Center>
-          <h1 style={{ margin: 'auto', fontSize: '3rem', width: '80%' }}>
+          <h1
+            style={{
+              margin: 'auto',
+              fontSize: '3rem',
+              fontWeight: 'bold',
+              width: '80%',
+            }}
+          >
             {main_event.EventName}
           </h1>
-          <p style={{ margin: 'auto' }}>
+          <p style={{}}>
             <DateParse date={main_event.eventStartEnd.StartDateTime} />
           </p>
         </Center>
@@ -40,9 +53,9 @@ const HeaderContent = ({ main_event }) => {
         </Center>
       </div>
     </Wrap>
-  );
-};
+  )
+}
 
-HeaderContent.propTypes = {};
+HeaderContent.propTypes = {}
 
-export default HeaderContent;
+export default HeaderContent

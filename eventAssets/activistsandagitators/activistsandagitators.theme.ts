@@ -1,10 +1,19 @@
-import { createTheme } from '@material-ui/core';
-import type { BREAKPOINTS, BUTTONS, COLORS, FONTS, GLOBALS, MJxTheme, PALETTE, TYPOGRAPHY } from 'types/Theme';
+import { createTheme } from '@material-ui/core'
+import type {
+  BREAKPOINTS,
+  BUTTONS,
+  COLORS,
+  FONTS,
+  GLOBALS,
+  MJxTheme,
+  PALETTE,
+  TYPOGRAPHY,
+} from 'types/Theme'
 
 const THEME_COLORS: COLORS = {
   red: '#ed1745',
   orange: '#ef4824',
-  yellow: '#eace28',
+  yellow: '#ffe428',
   green: '#97d700',
   blue: '#1e2c60',
   indigo: '#0d2f49',
@@ -18,7 +27,7 @@ const THEME_COLORS: COLORS = {
   warning: '',
   offWhite: '#f7f7f7',
   offBlack: '#161616',
-};
+}
 const THEME_PALETTE: PALETTE = {
   text: {
     primary: THEME_COLORS.black,
@@ -26,21 +35,21 @@ const THEME_PALETTE: PALETTE = {
     tertiary: THEME_COLORS.white,
     error: 'red',
     info: 'blue',
-    success: 'green'
+    success: 'green',
   },
   background: {
     primary: THEME_COLORS.white,
-    secondary: 'linear-gradient(180deg, rgba(237,23,69,1) 0%, rgba(238,37,59,1) 18%, rgba(239,72,36,1) 50%, rgba(48,35,91,1) 81%)',
+    secondary:
+      'linear-gradient(190deg, rgba(252,11,27,1) 50%, rgba(142,21,30,1) 70%,  rgba(11,2,65,1) 90%)',
     tertiary: THEME_COLORS.orange,
     error: 'red',
     info: 'blue',
-    success: 'green'
+    success: 'green',
   },
   error: THEME_COLORS.red,
   info: 'blue',
-  success: 'green'
-
-};
+  success: 'green',
+}
 const THEME_FONTS: FONTS = {
   title: {
     fontFamily: 'Roboto',
@@ -55,15 +64,14 @@ const THEME_FONTS: FONTS = {
     fontSize: 'clamp(1.25rem, 20vw, 1rem)',
     letterSpacing: '',
     lineHeight: 'auto',
-
   },
   get secondary() {
-    return this.body;
+    return this.body
   }, // default to body
   get tertiary() {
-    return this.body;
+    return this.body
   }, // default to body
-};
+}
 
 export const THEME_BUTTONS: BUTTONS = {
   primary: {
@@ -106,15 +114,15 @@ export const THEME_BUTTONS: BUTTONS = {
     color: 'white',
     backgroundColor: THEME_COLORS.offBlack,
   },
-};
+}
 
-const THEME_BREAKPOINTS : BREAKPOINTS= {
+const THEME_BREAKPOINTS: BREAKPOINTS = {
   xl: 1920,
   lg: 1600,
   md: 1200,
   sm: 768,
   xs: 500,
-};
+}
 
 const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   h1: {
@@ -123,7 +131,6 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   },
   h2: {
     color: THEME_COLORS.black,
-
   },
   h3: {
     color: THEME_COLORS.orange,
@@ -140,30 +147,30 @@ const THEME_TYPOGRAPHY: TYPOGRAPHY = {
   body1: {
     ...THEME_FONTS.body,
     color: 'white',
-
   },
   body2: {
     ...THEME_FONTS.body,
   },
-};
+}
 
-const THEME_GLOBALS :GLOBALS = {
+const THEME_GLOBALS: GLOBALS = {
   heroHeight: '250px',
-  heroBgColor: 'linear-gradient(180deg, rgba(237,23,69,1) 0%, rgba(238,37,59,1) 18%, rgba(239,72,36,1) 50%, rgba(48,35,91,1) 81%)',
+  heroBgColor:
+    'linear-gradient(180deg, rgba(237,23,69,1) 0%, rgba(238,37,59,1) 18%, rgba(239,72,36,1) 50%, rgba(48,35,91,1) 81%)',
   headerOpacity: '0.1',
   videoBreakPoint: 100000,
   maxSectionWidth: '1800px',
-} 
+}
 
 export const mjxTheme: MJxTheme = {
-  muiTheme:{ ...createTheme()},
+  muiTheme: { ...createTheme() },
   typography: { ...THEME_TYPOGRAPHY },
   colors: { ...THEME_COLORS },
   palette: { ...THEME_PALETTE },
   fonts: { ...THEME_FONTS },
   buttons: { ...THEME_BUTTONS },
   breakpoints: { ...THEME_BREAKPOINTS },
-  ...THEME_GLOBALS
-};
+  ...THEME_GLOBALS,
+}
 
-export default mjxTheme;
+export default mjxTheme

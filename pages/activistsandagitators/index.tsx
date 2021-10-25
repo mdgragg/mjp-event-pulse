@@ -92,7 +92,6 @@ const Index = (props) => {
             >
               <div>
                 <CaptionAccordion />
-                {/* Buttons */}
                 <ButtonArea main_event={main_event} />
               </div>
             </PlayerWithChat>
