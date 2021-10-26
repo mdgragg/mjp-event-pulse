@@ -60,19 +60,29 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
         </BodyBg>
 
         <Banner__WithPicture
-          imgUrl={main_event.LogoLink[0]?.Media?.url || null}
           color={event_theme.colors.primary}
           secondary={`white`}
           headerText={`Tech Issues?`}
           innerWidth={`80%`}
           buttonText={null}
           buttonLink={main_event.LogoLink[0]?.Link || '#'}
-          style={{ height: '600px', color: 'white' }}
+          style={{ height: '600px', color: 'white', textAlign: 'center' }}
         >
-          <div style={{ margin: '3rem auto' }}>
+          <div
+            style={{
+              margin: '3rem auto',
+              textAlign: 'center',
+              maxWidth: '500px',
+            }}
+          >
             If you are having issues streaming or accessing the event, please
             call 614-850-2120 or email{' '}
             <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
+            <br />
+            <img
+              style={{ margin: '2rem auto' }}
+              src={main_event.LogoLink[0]?.Media?.url || null}
+            />
           </div>
         </Banner__WithPicture>
       </AuthWrap>
