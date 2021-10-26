@@ -9,23 +9,22 @@ import styled from 'styled-components'
 
 const StyledBanner = styled.div`
   background-color: ${(props) => props.theme.colors.blue};
-  min-height: 450px;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: -2rem;
   && button {
     background-color: white;
     color: ${(props) => props.theme.colors.blue};
-    padding: 0.5rem 2rem;
+    padding: 1rem 3rem;
   }
 `
 
 const StyledTitle = styled.div`
   font-size: clamp(1rem, 5vw, 3.5rem);
   color: white;
-  margin: 2rem auto;
+  margin: 1rem auto;
   text-align: center;
 `
 const CmoRegisterBanner = ({ main_event, theme }) => {
@@ -46,6 +45,18 @@ const CmoRegisterBanner = ({ main_event, theme }) => {
         successCallback={() => toast.success('Success')}
         theme={theme}
         open={registerOpen}
+        otherFields={{
+          Company: {
+            displayName: 'Company',
+            required: true,
+            value: '',
+          },
+          Title: {
+            displayName: 'Title',
+            required: true,
+            value: '',
+          },
+        }}
       />
     </StyledBanner>
   )

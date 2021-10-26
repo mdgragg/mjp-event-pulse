@@ -2,6 +2,7 @@ import { BoxedCounter } from 'components/Counters'
 import styled, { ThemeContext } from 'styled-components'
 import React, { useContext } from 'react'
 import MJxTheme from 'types/Theme'
+import Fluid__iFrame from 'components/iFrames/Fluid__iFrame'
 
 const StyledBefore = styled.div`
   text-align: center;
@@ -31,6 +32,10 @@ const StyledBefore = styled.div`
 const CmoBefore = ({ main_event }) => {
   const theme: MJxTheme = useContext(ThemeContext)
 
+  const sizzleUrl =
+    main_event.streamLinks.filter((l) => l.Service === 'Sizzle')[0]?.url ||
+    `https://www.facebook.com`
+  return <Fluid__iFrame src={sizzleUrl} />
   return (
     <StyledBefore>
       <img className="logo" src={main_event.LogoLink[0].Media.url} />

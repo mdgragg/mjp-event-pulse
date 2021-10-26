@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
-import useCalculateIfStarted from 'hooks/useCalculateIfStarted'
 import AuthWrap from 'components/AuthWrap'
 import Meta from 'components/__GLOBALS__/Meta'
 import ThemedPage from 'components/__GLOBALS__/ThemedPage'
@@ -20,17 +17,12 @@ import ButtonArea from 'eventAssets/activistsandagitators/ButtonArea'
 const PLACEHOLD = 'https://placehold.co/'
 export const EVENT_URL = `activistsandagitators`
 const Index = (props) => {
-  const router = useRouter()
-
   const { event_meta, main_event } = props
 
   var event_theme = {
     ...default_theme,
     header_image: main_event?.HeaderImage?.url || PLACEHOLD + '1920x1080',
   }
-
-  const hasStarted = useCalculateIfStarted(main_event)
-  const [auth, setAuth] = useState(false)
 
   return (
     <ThemedPage theme={event_theme}>

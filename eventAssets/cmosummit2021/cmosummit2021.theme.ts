@@ -75,7 +75,7 @@ const THEME_FONTS: FONTS = {
 export const THEME_BUTTONS: BUTTONS = {
   primary: {
     fontFamily: 'Roboto',
-    fontSize: '0.85rem',
+    fontSize: '1rem',
     letterSpacing: '2px',
     lineHeight: 'inherit',
     backgroundColor: THEME_COLORS.green,
