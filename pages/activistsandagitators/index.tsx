@@ -2,7 +2,7 @@ import AuthWrap from 'components/AuthWrap'
 import Meta from 'components/__GLOBALS__/Meta'
 import ThemedPage from 'components/__GLOBALS__/ThemedPage'
 
-import { PlayerWithChat } from 'components/BodyTemplates'
+import { PlayerWithChat } from 'components/BodyTemplates/V2'
 import { toast } from 'react-toastify'
 import default_theme from 'eventAssets/activistsandagitators/activistsandagitators.theme'
 import { GET_STATIC_PROPS_DEFAULT } from 'src/page_responses/default'
