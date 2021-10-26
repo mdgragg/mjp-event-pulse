@@ -64,11 +64,12 @@ const Index = (props) => {
         <Meta title={main_event.EventName}>
           <title>{main_event.EventName}</title>
         </Meta>
-        <SplashHero>
+        <SplashHero anchorLink={'#main'}>
           <HeaderContent main_event={main_event} />
         </SplashHero>
         <BodyWrap>
           <div
+            id={'main'}
             style={{
               minHeight: '100vh',
               backgroundColor: 'none',
@@ -79,11 +80,12 @@ const Index = (props) => {
               hasStarted={true}
               videoUrl={main_event.streamLinks[0].url}
               chatUrl={main_event.streamLinks[1].url}
-            ></PlayerWithChat>
-            <div>
-              <CaptionAccordion />
-              <ButtonArea main_event={main_event} />
-            </div>
+            >
+              <div>
+                <CaptionAccordion captionId={'4926755'} />
+                <ButtonArea main_event={main_event} />
+              </div>
+            </PlayerWithChat>
           </div>
           <YWCA_SponsorMap eventId={main_event.id} />
         </BodyWrap>

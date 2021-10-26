@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import VideoBox__StickyTop from '../VideoBoxes/Video__StickyTop'
-import Fluid__iFrame from '../iFrames/Fluid__iFrame'
+import VideoBox__StickyTop from '../../VideoBoxes/Video__StickyTop'
+import Fluid__iFrame from '../../iFrames/Fluid__iFrame'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 const BodyWrap = styled.div`

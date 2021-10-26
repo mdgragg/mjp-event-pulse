@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Button } from '@material-ui/core'
 import MJxTheme from 'types/Theme'
-import { Button__Secondary } from 'components/Buttons'
+import { Button__Primary, Button__Secondary } from 'components/Buttons'
 
 const Wrap = styled.div`
   div {
@@ -10,7 +10,7 @@ const Wrap = styled.div`
   }
   .button {
     margin: 1rem;
-    background: #ef4824;
+
     max-width: 300px;
     width: 100%;
     color: white;
@@ -22,16 +22,12 @@ const ButtonArea = ({ main_event }) => {
   return (
     <Wrap>
       <div className="buttons">
-        <Button
-          className="button"
-          variant="contained"
+        <a
           href="https://www.ywcacolumbus.org/get-involved/donate-now/donate-now-activists-and-agitators/"
+          target="_blank"
         >
-          Donate Now
-        </Button>
-        <Button className="button" variant="contained" href=" ">
-          Learn More
-        </Button>
+          <Button__Primary className="button">Donate Now</Button__Primary>
+        </a>
       </div>
     </Wrap>
   )
