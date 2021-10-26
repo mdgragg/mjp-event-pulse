@@ -79,12 +79,11 @@ const Index = (props) => {
               hasStarted={true}
               videoUrl={main_event.streamLinks[0].url}
               chatUrl={main_event.streamLinks[1].url}
-            >
-              <div>
-                <CaptionAccordion />
-                <ButtonArea main_event={main_event} />
-              </div>
-            </PlayerWithChat>
+            ></PlayerWithChat>
+            <div>
+              <CaptionAccordion />
+              <ButtonArea main_event={main_event} />
+            </div>
           </div>
           <YWCA_SponsorMap eventId={main_event.id} />
         </BodyWrap>

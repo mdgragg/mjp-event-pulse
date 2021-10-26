@@ -32,7 +32,7 @@ const VideoBox = styled.div`
 
 const ChatBox = styled.div`
   height: 100%;
-  min-height: 550px;
+  min-height: 450px;
   max-width: 450px;
   border: 2px solid rgba(203, 203, 203, 0.35);
   ${(props) => props?.styles?.chat};
