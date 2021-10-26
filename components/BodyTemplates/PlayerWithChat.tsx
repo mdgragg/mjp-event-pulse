@@ -9,12 +9,9 @@ const BodyWrap = styled.div`
   display: grid;
   grid-template-columns: ${(props) =>
     props.onlyVideo ? '100% 0%' : '66% 380px'};
-  grid-template-rows: 100% 100%;
   background-color: ${(props) => props.theme.palette.background.primary};
   gap: 2rem;
   width: 100%;
-  max-width: 1900px;
-  margin: auto;
   justify-content: center;
   ${(props) => props?.styles?.wrap};
   @media all and (max-width: 1200px) {
@@ -39,11 +36,11 @@ const VideoBox = styled.div`
 `
 
 const ChatBox = styled.div`
-  height: clamp(550px, 100%, 700px);
+  height: 100%;
+  min-height: 550px;
   max-width: 450px;
   border: 2px solid rgba(203, 203, 203, 0.35);
   ${(props) => props?.styles?.chat};
-
   @media all and (max-width: 1200px) {
     max-width: 450px;
     width: 100%;
@@ -95,6 +92,7 @@ const PlayerWithChat = ({
             <VideoBox__StickyTop isStarted={hasStarted} src={videoUrl} />
           )}
         </div>
+        <div className="children">{children}</div>
       </VideoBox>
       {!onlyVideo && (
         <ChatBox styles={styles}>
@@ -105,8 +103,6 @@ const PlayerWithChat = ({
           )}
         </ChatBox>
       )}
-      <div className="children">{children}</div>
-      <div> After Chat</div>
     </BodyWrap>
   )
 }
