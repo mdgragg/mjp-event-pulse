@@ -122,7 +122,9 @@ export default function AuthModal__Register(props: AuthModalRegisterProps) {
       eventToCheck.id
     )
       .then((res) => {
-        const { AttendeeFirst, AttendeeLast } = res.message.Attendee
+        console.log(res)
+        toast.success(res.message)
+        const { AttendeeFirst, AttendeeLast } = res.Attendee
         setValues((prev) => ({ ...prev, AttendeeFirst, AttendeeLast }))
         setFormLoading(false)
         setFormPanel('registerConfirm')
