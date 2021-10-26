@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Box__XYCentered } from 'components/Boxes';
-import { BoxedCounter } from 'components/Counters';
-import { useRouter } from 'next/router';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Box__XYCentered } from 'components/Boxes'
+import { BoxedCounter } from 'components/Counters'
+import { useRouter } from 'next/router'
 
 export const StyledSplash = styled.div`
   min-height: 100vh;
@@ -15,12 +15,12 @@ export const StyledSplash = styled.div`
   background-attachment: fixed;
   background-color: ${(props) => props.theme.palette.background.tertiary};
   @media all and (max-width: 1920px) {
-    background-size: 120% auto;
+    background-size: cover;
   }
   @media all and (max-width: 1160px) {
     background-size: cover;
   }
-`;
+`
 
 export const StyledInner = styled.div`
   /* padding: 3rem; */
@@ -37,15 +37,15 @@ export const StyledInner = styled.div`
     width: 65%;
     max-width: 350px;
   }
-`;
+`
 
 type BodyBg__Props = {
-  imgSrc: any;
-  children?: React.ReactNode;
-  footerComponent?: React.ReactNode;
-};
+  imgSrc: any
+  children?: React.ReactNode
+  footerComponent?: React.ReactNode
+}
 const BodyBg = ({ imgSrc, children, footerComponent }: BodyBg__Props): any => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <StyledSplash src={imgSrc}>
       <Box__XYCentered>
@@ -55,9 +55,9 @@ const BodyBg = ({ imgSrc, children, footerComponent }: BodyBg__Props): any => {
         </StyledInner>
       </Box__XYCentered>
     </StyledSplash>
-  );
-};
+  )
+}
 
-BodyBg.propTypes = {};
+BodyBg.propTypes = {}
 
-export default BodyBg;
+export default BodyBg

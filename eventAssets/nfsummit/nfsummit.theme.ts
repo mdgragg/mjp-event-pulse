@@ -1,5 +1,5 @@
-import { createTheme } from '@material-ui/core';
-import MJxTheme from 'types/Theme';
+import { createTheme } from '@material-ui/core'
+import MJxTheme from 'types/Theme'
 
 const COLORS = {
   red: '#b71f39',
@@ -19,7 +19,7 @@ const COLORS = {
   warning: '',
   offWhite: '#f7f7f7',
   offBlack: '#161616',
-};
+}
 
 const PALETTE = {
   text: {
@@ -32,7 +32,7 @@ const PALETTE = {
     secondary: COLORS.white,
     tertiary: COLORS.white,
   },
-};
+}
 
 const FONTS = {
   title: {
@@ -50,9 +50,9 @@ const FONTS = {
     lineHeight: '',
   },
   get special() {
-    return this.title;
+    return this.title
   }, //default to title
-};
+}
 
 export const BUTTONS = {
   primary: {
@@ -65,9 +65,10 @@ export const BUTTONS = {
   },
   secondary: {
     fontFamily: 'Avenir',
-    fontSize: '1rem',
+    fontSize: '0.85rem',
     letterSpacing: '',
     lineHeight: '',
+    textTransform: 'unset',
     backgroundColor: COLORS.blue,
     color: COLORS.white,
     border: '',
@@ -98,7 +99,7 @@ export const BUTTONS = {
     color: COLORS.primary,
     backgroundColor: '#f7f7f7',
   },
-};
+}
 
 const BREAKPOINTS = {
   xl: 1920,
@@ -106,7 +107,7 @@ const BREAKPOINTS = {
   md: 1200,
   sm: 768,
   xs: 500,
-};
+}
 
 const TYPOGRAPHY = {
   h1: {
@@ -117,7 +118,6 @@ const TYPOGRAPHY = {
     color: COLORS.white,
     fontSize: 'clamp(1.5rem, 6vw, 3rem)',
     fontFamily: 'Avenir',
-
   },
   h3: {
     color: COLORS.blue,
@@ -128,7 +128,7 @@ const TYPOGRAPHY = {
     color: COLORS.white,
     lineHeight: '2rem',
   },
-};
+}
 
 const GLOBALS = {
   heroHeight: '240px',
@@ -136,7 +136,7 @@ const GLOBALS = {
   headerOpacity: '1',
   videoBreakPoint: 1000,
   maxSectionWidth: '1800px',
-};
+}
 
 export const default_theme = {
   ...createTheme(),
@@ -147,6 +147,6 @@ export const default_theme = {
   typography: { ...TYPOGRAPHY },
   breakpoints: { ...BREAKPOINTS },
   ...GLOBALS,
-};
+}
 
-export default default_theme;
+export default default_theme

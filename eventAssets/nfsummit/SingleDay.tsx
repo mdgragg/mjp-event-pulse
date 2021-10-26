@@ -15,7 +15,7 @@ const PageWrap = styled.div``
 
 const VideoWrap = styled.div`
   padding: 2%;
-  max-width: 1920px;
+  max-width: 1600px;
   margin: auto;
 `
 
@@ -67,7 +67,7 @@ export const SingleDay = ({ event, logoLink, hideName }) => {
       />
       <VideoWrap>
         <Replacer
-          decider={true}
+          decider={false}
           showIfTrue={
             <PlayerWithChat
               videoUrl={videoUrl}
