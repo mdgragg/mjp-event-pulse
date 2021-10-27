@@ -43,12 +43,10 @@ const Index = (props) => {
           },
         }}
         eventToCheck={main_event}
-        successCallback={({ message }) => {
+        successCallback={({ Attendee }) => {
           toast.success(
             `Hello ${
-              message.Attendee.AttendeeFirst
-                ? message.Attendee.AttendeeFirst
-                : ''
+              Attendee.AttendeeFirst ? Attendee.AttendeeFirst : ''
             }, welcome to ${main_event.EventName}`
           )
         }}
@@ -78,8 +76,8 @@ const Index = (props) => {
                 <ButtonArea main_event={main_event} />
               </div>
             </PlayerWithChat>
+            <YWCA_SponsorMap eventId={main_event.id} />
           </div>
-          <YWCA_SponsorMap eventId={main_event.id} />
         </BodyWrap>
       </AuthWrap>
     </ThemedPage>

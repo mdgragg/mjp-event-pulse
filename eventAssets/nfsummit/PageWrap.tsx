@@ -42,12 +42,10 @@ const PageWrap = ({ event_meta, main_event, title, children, eventToAuth }) => {
             <a href={`mailto:nwsupport@mjp.com`}>nwsupport@mjp.com</a>
           </>
         }
-        successCallback={({ message }) => {
+        successCallback={({ Attendee }) => {
           toast.success(
             `Hello ${
-              message.Attendee.AttendeeFirst
-                ? message.Attendee.AttendeeFirst
-                : ''
+              Attendee.AttendeeFirst ? Attendee.AttendeeFirst : ''
             }, welcome to Nationwide NF Leader Summit`
           )
         }}
