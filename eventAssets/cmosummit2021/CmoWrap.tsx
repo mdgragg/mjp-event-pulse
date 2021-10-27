@@ -24,7 +24,7 @@ const CmoWrap = ({ main_event, theme, eventUrl }) => {
     <>
       <StyledWrap>
         <CmoRegisterBanner main_event={main_event} theme={theme} />
-        <CmoAgenda eventUrl={eventUrl} />
+        {/* <CmoAgenda eventUrl={eventUrl} /> */}
         <StyledInner>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
