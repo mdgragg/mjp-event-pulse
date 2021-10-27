@@ -30,8 +30,9 @@ const PostEvent = (props) => {
             >
               <div
                 style={{
-                  marginBottom: '2rem',
+                  marginBottom: '1.5rem',
                   maxWidth: '500px',
+                  width: '80%',
                   textAlign: 'center',
                   fontWeight: 800,
                 }}
@@ -40,15 +41,14 @@ const PostEvent = (props) => {
                 <p
                   style={{
                     textAlign: 'center',
-                    margin: '2rem auto',
+                    margin: '1rem auto',
                     color: 'black',
                   }}
                 >
-                  This event has ended, but we appreciate your input. <br />{' '}
-                  Please fill out the survey below to help us improve.
+                  This event has ended, but we appreciate your input.
                 </p>
                 <Button__Primary onClick={() => setState({ boxPanel: 'form' })}>
-                  Fill It Out{' '}
+                  Fill Out Our Survey
                 </Button__Primary>
               </div>
             </LinkBox>

@@ -73,7 +73,7 @@ const Index = (props) => {
           >
             {
               <Replacer
-                decider={true}
+                decider={false}
                 showIfTrue={
                   <PlayerWithChat
                     hasStarted={true}
