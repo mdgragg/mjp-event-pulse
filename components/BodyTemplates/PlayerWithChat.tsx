@@ -21,7 +21,7 @@ const BodyWrap = styled.div`
 const VideoBox = styled.div`
   height: 100%;
   width: 100%;
-  transition: all 1500ms ease;
+  transition: all 800ms ease;
   display: flex;
   flex-direction: column;
 
@@ -37,8 +37,9 @@ const VideoBox = styled.div`
 
 const ChatBox = styled.div`
   height: 100%;
-  min-height: 550px;
-  max-width: 450px;
+  min-height: 650px;
+  max-height: 850px;
+  max-width: 400px;
   border: 2px solid rgba(203, 203, 203, 0.35);
   ${(props) => props?.styles?.chat};
   @media all and (max-width: 1200px) {
