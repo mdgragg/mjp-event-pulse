@@ -80,8 +80,12 @@ const Index = (props) => {
           </Center>
         </div>
       </FlexHero>
-      <CmoWrap main_event={main_event} theme={event_theme} /> 
-      {/* </AuthWrap> */}
+      <CmoWrap
+        main_event={main_event}
+        theme={event_theme}
+        eventUrl={event_meta.eventUrl}
+      />
+       {/* </AuthWrap> */}
     </ThemedPage>
   )
 }
