@@ -13,6 +13,11 @@ import { CaptionAccordion } from 'components/Captioning'
 import AuthHeaderContent from '../../eventAssets/activistsandagitators/AuthHeaderContent'
 import YWCA_SponsorMap from 'eventAssets/activistsandagitators/YWCA_SponsorMap'
 import ButtonArea from 'eventAssets/activistsandagitators/ButtonArea'
+import { Replacer } from 'components/__Assets__'
+import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown'
+import LinkBox from 'components/LinkBoxes/LinkBox'
+import Fluid__iFrame from 'components/iFrames/Fluid__iFrame'
+import PostEvent from 'eventAssets/activistsandagitators/PostEvent'
 
 const PLACEHOLD = 'https://placehold.co/'
 export const EVENT_URL = `activistsandagitators`
@@ -66,16 +71,25 @@ const Index = (props) => {
               margin: '2rem',
             }}
           >
-            <PlayerWithChat
-              hasStarted={true}
-              videoUrl={main_event.streamLinks[0].url}
-              chatUrl={main_event.streamLinks[1].url}
-            >
-              <div>
-                <CaptionAccordion captionId={'4926755'} />
-                <ButtonArea main_event={main_event} />
-              </div>
-            </PlayerWithChat>
+            {
+              <Replacer
+                decider={true}
+                showIfTrue={
+                  <PlayerWithChat
+                    hasStarted={true}
+                    videoUrl={main_event.streamLinks[0].url}
+                    chatUrl={main_event.streamLinks[1].url}
+                  >
+                    <div>
+                      <CaptionAccordion captionId={'4926755'} />
+                      <ButtonArea main_event={main_event} />
+                    </div>
+                  </PlayerWithChat>
+                }
+                showIfFalse={<PostEvent />}
+              />
+            }
+
             <YWCA_SponsorMap eventId={main_event.id} />
           </div>
         </BodyWrap>
