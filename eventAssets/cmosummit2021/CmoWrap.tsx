@@ -4,6 +4,7 @@ import LinkBox from 'components/LinkBoxes/LinkBox'
 import LinkBox__StickyTop__WithCountdown from 'components/LinkBoxes/LinkBox__StickyTop__WithCountdown'
 import CmoBefore from './CmoBefore'
 import CmoRegisterBanner from './CmoRegisterBanner'
+import CmoAgenda from './CmoAgenda'
 
 const StyledWrap = styled.div`
   background-color: #f7f7f7;
@@ -18,11 +19,12 @@ const StyledInner = styled.div`
     max-width: 95vw;
   }
 `
-const CmoWrap = ({ main_event, theme }) => {
+const CmoWrap = ({ main_event, theme, eventUrl }) => {
   return (
     <>
       <StyledWrap>
         <CmoRegisterBanner main_event={main_event} theme={theme} />
+        <CmoAgenda eventUrl={eventUrl} />
         <StyledInner>
           <LinkBox__StickyTop__WithCountdown
             start={main_event.eventStartEnd.StartDateTime}
